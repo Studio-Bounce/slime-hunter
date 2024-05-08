@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17865306, g: 0.22369696, b: 0.30563658, a: 1}
+  m_IndirectSpecularColor: {r: 0.17865293, g: 0.22369717, b: 0.30563724, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11468,7 +11468,7 @@ Transform:
   m_GameObject: {fileID: 532694877}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 7.314145, y: 8.286308, z: -3.0665407}
+  m_LocalPosition: {x: 6.460169, y: 8.286308, z: -3.9205172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26205,7 +26205,7 @@ Transform:
   m_GameObject: {fileID: 1236889753}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 7.314145, y: 8.286308, z: -3.0665407}
+  m_LocalPosition: {x: 6.460169, y: 8.286308, z: -3.9205172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -42605,7 +42605,7 @@ MonoBehaviour:
   dashDistance: 5
   dashDuration: 0.2
   groundDistanceCheck: 1.1
-  jumpForce: 5
+  jumpForce: 7.5
 --- !u!54 &2042248624
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded = true;
     private bool isJump = false;
     public float groundDistanceCheck = 0.1f;
-    public float jumpForce = 5f;
+    public float jumpForce = 20f;
 
     void Start()
     {
