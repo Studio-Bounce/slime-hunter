@@ -9,6 +9,11 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private bool isDashing = false;
 
+    private bool isGrounded = true;
+    private bool isJump = false;
+    public float groundDistanceCheck = 0.1f;
+    public float jumpForce = 5f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -24,6 +29,7 @@ public class PlayerController : MonoBehaviour
                 Dash();
             }
         }
+        CheckJump();
     }
 
     void MovePlayer()
@@ -33,10 +39,11 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         // Calculate movement direction
-        Vector3 movement = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+        Vector2 direction = new Vector3(horizontalInput, verticalInput).normalized;
 
         // Move the player
-        rb.velocity = movement * moveSpeed;
+        Vector2 movement = moveSpeed * direction;
+        rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.y);
     }
 
     void Dash()
@@ -45,6 +52,25 @@ public class PlayerController : MonoBehaviour
         Vector3 dashTarget = transform.position + dashDirection * dashDistance;
 
         StartCoroutine(PerformDash(dashTarget));
+    }
+
+    // Naive jump that triggers once on fall
+    void CheckJump()
+    {
+        // Check is grounded
+        RaycastHit hit;
+
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, groundDistanceCheck);
+  
+        // Reset jump if grounded
+        if (isGrounded) isJump = false;
+
+        // Jump once when off ledge
+        if (!isGrounded && !isJump)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            isJump = true;
+        }
     }
 
     System.Collections.IEnumerator PerformDash(Vector3 target)
