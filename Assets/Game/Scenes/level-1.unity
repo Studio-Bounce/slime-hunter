@@ -119625,6 +119625,10 @@ MonoBehaviour:
   isDashing: 0
   isGrounded: 1
   isJump: 0
+  isRotating: 0
+  cameraTransform: {fileID: 1236889755}
+  rotationDuration: 0.3
+  rotationIncrement: 45
   boxCastSize: {x: 0.5, y: 1, z: 0.5}
   boxCastDistance: 1.1
 --- !u!54 &2042248624
