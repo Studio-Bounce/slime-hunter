@@ -1,4 +1,6 @@
+using System;
 using System.ComponentModel;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,8 +16,11 @@ public class PlayerController : MonoBehaviour
     [ReadOnly] public bool isGrounded = true;
     [ReadOnly] public bool isJump = false;
 
-    
-    
+    [Header("Camera Handling")]
+    [ReadOnly] public bool isRotating = false;
+    public Transform cameraTransform;
+    public float rotationDuration = 0.3f;
+    public float rotationIncrement = 45f;
 
     [Header("Grounded Checks")]
     public Vector3 boxCastSize = Vector3.one;
@@ -23,6 +28,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Debug.Assert(cameraTransform != null);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -36,20 +42,42 @@ public class PlayerController : MonoBehaviour
                 Dash();
             }
         }
+        RotateCamera();
         CheckJump();
+    }
+
+    private void RotateCamera()
+    {
+        if (isRotating) return;
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            StartCoroutine(PerformCameraRotate(rotationIncrement));
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            StartCoroutine(PerformCameraRotate(-rotationIncrement));
+        }
+        
     }
 
     void MovePlayer()
     {
+        // Get forward based on camera
+        Vector3 cameraToPlayer = (transform.position - cameraTransform.position);
+        Vector2 forwardDirection = new Vector2(cameraToPlayer.x, cameraToPlayer.z);
+        forwardDirection.Normalize();
+        Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
+
         // Input handling
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         // Calculate movement direction
-        Vector2 direction = new Vector3(horizontalInput, verticalInput).normalized;
+        Vector2 direction = forwardDirection * verticalInput + rightDirection*horizontalInput;
+        //if (direction == Vector2.zero) return;
 
         // Move the player
-        Vector2 movement = moveSpeed * direction;
+        Vector2 movement = moveSpeed * direction.normalized;
         rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.y);
     }
 
@@ -82,12 +110,14 @@ public class PlayerController : MonoBehaviour
 
     System.Collections.IEnumerator PerformDash(Vector3 target)
     {
+        Func<float, float> EaseOut = t => 1f - Mathf.Pow(1f - t, 2);
         isDashing = true;
         float startTime = Time.time;
         Vector3 startPosition = transform.position;
 
         while (Time.time < startTime + dashDuration)
         {
+
             float t = (Time.time - startTime) / dashDuration;
             rb.MovePosition(Vector3.Lerp(startPosition, target, t));
             yield return null;
@@ -95,6 +125,30 @@ public class PlayerController : MonoBehaviour
 
         isDashing = false;
     }
+
+    System.Collections.IEnumerator PerformCameraRotate(float angle)
+    {
+        Func<float, float> EaseOut = t => 1f - Mathf.Pow(1f - t, 3);
+
+        isRotating = true;
+        float startTime = Time.time;
+        Quaternion startRotation = cameraTransform.localRotation;
+        Quaternion targetRotation = Quaternion.Euler(startRotation.eulerAngles.x, startRotation.eulerAngles.y + angle, startRotation.eulerAngles.z);
+        Debug.Log($"{cameraTransform.localRotation.eulerAngles}:{targetRotation.eulerAngles}");
+
+        while (Time.time < startTime + rotationDuration)
+        {
+
+            float t = (Time.time - startTime) / rotationDuration;
+            t = EaseOut(t);
+            cameraTransform.localRotation = Quaternion.Lerp(startRotation, targetRotation, t);
+            yield return null;
+        }
+        cameraTransform.localRotation = targetRotation;
+
+        isRotating = false;
+    }
+
 
     private void OnDrawGizmos()
     {
