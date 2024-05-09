@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using UnityEngine;
 
@@ -14,8 +15,11 @@ public class PlayerController : MonoBehaviour
     [ReadOnly] public bool isGrounded = true;
     [ReadOnly] public bool isJump = false;
 
-    
-    
+    [Header("Camera Handling")]
+    [ReadOnly] public bool isRotating = false;
+    public Transform cameraTransform;
+    public float rotationDuration = 0.3f;
+    public float rotationIncrement = 45f;
 
     [Header("Grounded Checks")]
     public Vector3 boxCastSize = Vector3.one;
@@ -23,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Debug.Assert(cameraTransform != null);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -36,7 +41,22 @@ public class PlayerController : MonoBehaviour
                 Dash();
             }
         }
+        RotateCamera();
         CheckJump();
+    }
+
+    private void RotateCamera()
+    {
+        if (isRotating) return;
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            StartCoroutine(PerformCameraRotate(rotationIncrement));
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            StartCoroutine(PerformCameraRotate(-rotationIncrement));
+        }
+        
     }
 
     void MovePlayer()
@@ -82,12 +102,14 @@ public class PlayerController : MonoBehaviour
 
     System.Collections.IEnumerator PerformDash(Vector3 target)
     {
+        Func<float, float> EaseOut = t => 1f - Mathf.Pow(1f - t, 2);
         isDashing = true;
         float startTime = Time.time;
         Vector3 startPosition = transform.position;
 
         while (Time.time < startTime + dashDuration)
         {
+
             float t = (Time.time - startTime) / dashDuration;
             rb.MovePosition(Vector3.Lerp(startPosition, target, t));
             yield return null;
@@ -95,6 +117,30 @@ public class PlayerController : MonoBehaviour
 
         isDashing = false;
     }
+
+    System.Collections.IEnumerator PerformCameraRotate(float angle)
+    {
+        Func<float, float> EaseOut = t => 1f - Mathf.Pow(1f - t, 3);
+
+        isRotating = true;
+        float startTime = Time.time;
+        Quaternion startRotation = cameraTransform.localRotation;
+        Quaternion targetRotation = Quaternion.Euler(startRotation.eulerAngles.x, startRotation.eulerAngles.y + angle, startRotation.eulerAngles.z);
+        Debug.Log($"{cameraTransform.localRotation.eulerAngles}:{targetRotation.eulerAngles}");
+
+        while (Time.time < startTime + rotationDuration)
+        {
+
+            float t = (Time.time - startTime) / rotationDuration;
+            t = EaseOut(t);
+            cameraTransform.localRotation = Quaternion.Lerp(startRotation, targetRotation, t);
+            yield return null;
+        }
+        cameraTransform.localRotation = targetRotation;
+
+        isRotating = false;
+    }
+
 
     private void OnDrawGizmos()
     {
