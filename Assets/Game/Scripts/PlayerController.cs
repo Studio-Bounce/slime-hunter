@@ -1,18 +1,25 @@
+using System.ComponentModel;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Movement Properties")]
     public float moveSpeed = 5f; // Adjust this to change movement speed
     public float dashDistance = 5f; // Adjust this to change dash distance
     public float dashDuration = 0.2f; // Adjust this to change dash duration
+    public float jumpForce = 20f;
 
     private Rigidbody rb;
-    private bool isDashing = false;
+    [ReadOnly] public bool isDashing = false;
+    [ReadOnly] public bool isGrounded = true;
+    [ReadOnly] public bool isJump = false;
 
-    private bool isGrounded = true;
-    private bool isJump = false;
-    public float groundDistanceCheck = 0.1f;
-    public float jumpForce = 20f;
+    
+    
+
+    [Header("Grounded Checks")]
+    public Vector3 boxCastSize = Vector3.one;
+    public float boxCastDistance = 1f;
 
     void Start()
     {
@@ -60,7 +67,7 @@ public class PlayerController : MonoBehaviour
         // Check is grounded
         RaycastHit hit;
 
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, groundDistanceCheck);
+        isGrounded = Physics.BoxCast(transform.position, boxCastSize / 2f, Vector3.down, out hit, Quaternion.identity, boxCastDistance);
   
         // Reset jump if grounded
         if (isGrounded) isJump = false;
@@ -87,5 +94,14 @@ public class PlayerController : MonoBehaviour
         }
 
         isDashing = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+
+        Vector3 startPos = new Vector3(transform.position.x, transform.position.y-boxCastDistance / 2f, transform.position.z);
+
+        Gizmos.DrawWireCube(startPos, new Vector3(boxCastSize.x, boxCastDistance, boxCastSize.z));
     }
 }

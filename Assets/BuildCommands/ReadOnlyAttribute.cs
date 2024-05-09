@@ -17,9 +17,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Project.Build.Commands
+public class ReadOnlyAttribute : PropertyAttribute
 {
-    public class ReadOnlyAttribute : PropertyAttribute
-    {
-    }
 }
