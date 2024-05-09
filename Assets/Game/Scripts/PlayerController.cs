@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -61,15 +62,22 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
+        // Get forward based on camera
+        Vector3 cameraToPlayer = (transform.position - cameraTransform.position);
+        Vector2 forwardDirection = new Vector2(cameraToPlayer.x, cameraToPlayer.z);
+        forwardDirection.Normalize();
+        Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
+
         // Input handling
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         // Calculate movement direction
-        Vector2 direction = new Vector3(horizontalInput, verticalInput).normalized;
+        Vector2 direction = forwardDirection * verticalInput + rightDirection*horizontalInput;
+        //if (direction == Vector2.zero) return;
 
         // Move the player
-        Vector2 movement = moveSpeed * direction;
+        Vector2 movement = moveSpeed * direction.normalized;
         rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.y);
     }
 
