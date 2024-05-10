@@ -14,6 +14,7 @@
 //CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //DEALINGS IN THE SOFTWARE.
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -126,8 +127,8 @@ namespace Project.Build.Commands
 			string outputPath = System.IO.Path.GetDirectoryName(report.summary.outputPath);
 			string assetPath = GetBuildCommandPath();
 
-			string butler = "\'" + Application.dataPath + assetPath + "Editor/Butler/butler.exe\'";
-			string pushFolder = "\"" + outputPath + "\"";
+			string butler = Application.dataPath + assetPath + "Editor/Butler/butler.exe";
+			string pushFolder = outputPath;
 
 			string platform = "";
 			switch(report.summary.platform)
@@ -165,19 +166,61 @@ namespace Project.Build.Commands
 			string command = "& " + butler + " -v";
 			if (IsIL2CPPEnabled())
 			{
-				command += " --ignore \'" + Application.productName + "_BackUpThisFolder_ButDontShipItWithYourGame\'";
+				command += " --ignore " + Application.productName + "_BackUpThisFolder_ButDontShipItWithYourGame";
 			}
 			foreach (var ignore in buildData.ignore)
 			{
-				command += " --ignore \'" + ignore + "\'";
+				command += " --ignore " + ignore;
 			}
-			command  += " push \'" + pushFolder + "\' " + buildData.studioName + "/" + buildData.projectName + ":" + platform + " --userversion " + buildData.buildNumber;
-			//command = "-NoExit -Command " + command;
-			command = "-Command " + command;
-			System.Diagnostics.Process process = System.Diagnostics.Process.Start("powershell.exe", command);
-			process.WaitForExit();
-			process.Close();
-		}
+			command  += " push " + pushFolder + " " + buildData.studioName + "/" + buildData.projectName + ":" + platform + " --userversion " + buildData.buildNumber;
+            //command = "-NoExit -Command " + command;
+            //command = "-Command " + command;
+            //System.Diagnostics.Process process = System.Diagnostics.Process.Start("powershell.exe", command);
+            //process.WaitForExit();
+            //process.Close();
+
+
+            Debug.Log($"Uploading to itch.io: {command}");
+            try
+            {
+                using (System.Diagnostics.Process process = new System.Diagnostics.Process())
+                {
+                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = "powershell.exe",
+                        Arguments = $"-Command {command}",
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                        //CreateNoWindow = true
+                    };
+
+                    process.StartInfo = startInfo;
+                    process.Start();
+
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+
+                    process.WaitForExit();
+
+                    if (process.ExitCode != 0)
+                    {
+                        // Handle error
+                        Debug.LogError($"Upload Error occurred: {error}");
+                    }
+                    else
+                    {
+                        // Handle success
+                        Debug.Log($"Upload Success: {output}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Upload Exception occurred: {ex.Message}");
+            }
+            
+        }
 
 		public void OnPostprocessBuild(BuildReport report)
 		{

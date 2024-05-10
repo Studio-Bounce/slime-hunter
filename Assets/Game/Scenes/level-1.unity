@@ -49921,7 +49921,6 @@ GameObject:
   m_Component:
   - component: {fileID: 840863851}
   - component: {fileID: 840863854}
-  - component: {fileID: 840863853}
   - component: {fileID: 840863855}
   m_Layer: 0
   m_Name: cm
@@ -49945,33 +49944,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1236889755}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &840863853
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 840863850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0
-  m_LookaheadSmoothing: 0
-  m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
-  m_ScreenX: 0.5
-  m_ScreenY: 0.5
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
-  m_BiasX: 0
-  m_BiasY: 0
-  m_CenterOnActivate: 1
 --- !u!114 &840863854
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -49997,10 +49969,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0
-  m_LookaheadSmoothing: 0
-  m_LookaheadIgnoreY: 0
-  m_XDamping: 0.4
+  m_LookaheadTime: 0.3
+  m_LookaheadSmoothing: 5
+  m_LookaheadIgnoreY: 1
+  m_XDamping: 0.5
   m_YDamping: 0.5
   m_ZDamping: 0.5
   m_TargetMovementOnly: 1
@@ -61245,6 +61217,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
 --- !u!1 &1098533907
 GameObject:
   m_ObjectHideFlags: 0
@@ -119737,8 +119710,16 @@ MonoBehaviour:
   moveSpeed: 5
   dashDistance: 5
   dashDuration: 0.2
-  groundDistanceCheck: 1.1
   jumpForce: 7.5
+  isDashing: 0
+  isGrounded: 1
+  isJump: 0
+  isRotating: 0
+  cameraTransform: {fileID: 1236889755}
+  rotationDuration: 0.7
+  rotationIncrement: 45
+  boxCastSize: {x: 0.5, y: 1, z: 0.5}
+  boxCastDistance: 1.1
 --- !u!54 &2042248624
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -125558,7 +125539,6 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 2042248622}
   - {fileID: 1716862135}
-  - {fileID: 1097453672}
   - {fileID: 532694882}
   - {fileID: 1236889755}
   - {fileID: 74121993}
