@@ -10,8 +10,8 @@ public class Weapon : MonoBehaviour
 
     void Start()
     {
-        Debug.Assert(handPivot != null);
-        Debug.Assert(weaponSO != null);
+        Debug.Assert(handPivot != null, "Requires hand location for weapon");
+        Debug.Assert(weaponSO != null, "Requires weaponSO");
     }
 
     // Update is called once per frame

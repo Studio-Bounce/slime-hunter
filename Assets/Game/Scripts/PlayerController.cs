@@ -1,9 +1,18 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Properties")]
+    public Animator animator;
+    private int blendSpeedHash;
+    private PlayerInputActions _inputActions;
+    private InputAction _moveAction;
+
+    public float maximumSpeed = 5f;
+    public float rotationSpeed = 5f;
+
     public float moveSpeed = 5f; // Adjust this to change movement speed
     public float dashDistance = 5f; // Adjust this to change dash distance
     public float dashDuration = 0.2f; // Adjust this to change dash duration
@@ -22,26 +31,35 @@ public class PlayerController : MonoBehaviour
 
     [Header("Grounded Checks")]
     public Vector3 boxCastSize = Vector3.one;
+    public float boxCastYOffset = 0f;
     public float boxCastDistance = 1f;
+
+    private void Awake()
+    {
+        _inputActions = new PlayerInputActions();
+    }
+
+    private void OnEnable()
+    {
+        _moveAction = _inputActions.Player.Move;
+        _moveAction.Enable();
+    }
 
     void Start()
     {
+        Debug.Assert(animator != null);
         Debug.Assert(cameraTransform != null);
         rb = GetComponent<Rigidbody>();
+
+        blendSpeedHash = Animator.StringToHash("blendSpeed");
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (!isDashing)
-        {
-            MovePlayer();
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                Dash();
-            }
-        }
+        Dash();
+        MovePlayer();
         RotateCamera();
-        CheckJump();
+        Jump();
     }
 
     private void RotateCamera()
@@ -60,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
+        if (isDashing) return;
         // Get forward based on camera
         Vector3 cameraToPlayer = (transform.position - cameraTransform.position);
         Vector2 forwardDirection = new Vector2(cameraToPlayer.x, cameraToPlayer.z);
@@ -67,39 +86,49 @@ public class PlayerController : MonoBehaviour
         Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
 
         // Input handling
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        Vector2 moveInput = _moveAction.ReadValue<Vector2>();
 
-        // Calculate movement direction
-        Vector2 direction = forwardDirection * verticalInput + rightDirection * horizontalInput;
+        // Calculate movement direction based on forward
+        Vector2 direction = (forwardDirection * moveInput.y + rightDirection * moveInput.x).normalized;
 
         // Rotate the player to look at the movement direction
         if (direction != Vector2.zero)
         {
-            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+            transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y), Vector3.up);
+            //Quaternion toRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y), Vector3.up);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
-        // Move the player
-        Vector2 movement = moveSpeed * direction.normalized;
-        rb.velocity = new Vector3(movement.x, rb.velocity.y, movement.y);
+        // Set move animation based on input
+        animator.SetFloat(blendSpeedHash, direction.magnitude, 0.05f, Time.deltaTime);
+    }
+
+    private void OnAnimatorMove()
+    {
+        // Move the player based off of root motion
+        Vector2 movement = moveSpeed * new Vector2(animator.deltaPosition.x, animator.deltaPosition.z);
+        Debug.Log($"movement: {movement}");
+        transform.position += new Vector3(movement.x, 0, movement.y);
     }
 
     void Dash()
     {
-        Vector3 dashDirection = rb.velocity.normalized;
-        Vector3 dashTarget = transform.position + dashDirection * dashDistance;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Vector3 dashDirection = rb.velocity.normalized;
+            Vector3 dashTarget = transform.position + dashDirection * dashDistance;
 
-        StartCoroutine(PerformDash(dashTarget));
+            StartCoroutine(PerformDash(dashTarget));
+        }
     }
 
     // Naive jump that triggers once on fall
-    void CheckJump()
+    void Jump()
     {
         // Check is grounded
         RaycastHit hit;
 
-        isGrounded = Physics.BoxCast(transform.position, boxCastSize / 2f, Vector3.down, out hit, Quaternion.identity, boxCastDistance);
+        isGrounded = Physics.BoxCast(transform.position + new Vector3(0, boxCastYOffset, 0), boxCastSize / 2f, Vector3.down, out hit, Quaternion.identity, boxCastDistance);
 
         // Reset jump if grounded
         if (isGrounded) isJump = false;
@@ -158,8 +187,10 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
 
-        Vector3 startPos = new Vector3(transform.position.x, transform.position.y - boxCastDistance / 2f, transform.position.z);
+        Vector3 startPos = new Vector3(transform.position.x, transform.position.y+boxCastYOffset, transform.position.z);
 
-        Gizmos.DrawWireCube(startPos, new Vector3(boxCastSize.x, boxCastDistance, boxCastSize.z));
+        Gizmos.DrawWireCube(startPos, new Vector3(boxCastSize.x, boxCastSize.y, boxCastSize.z));
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(startPos, startPos + Vector3.down*boxCastDistance);
     }
 }

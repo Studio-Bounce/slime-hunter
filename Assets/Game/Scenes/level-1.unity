@@ -28081,17 +28081,21 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: f47c7d0c4a8e16440b5aae4d4564483c, type: 2}
     - target: {fileID: 5866666021909216657, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
         type: 3}
-      propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-        'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-        'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Idle'\n\tFrom
-        animation clip 'CrouchWalk'"
+      propertyPath: m_CullingMode
+      value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 5866666021909216657, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5866666021909216657, guid: 0d0c5be203bd64e4fba091b0de9ab88c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -32189,7 +32193,7 @@ Transform:
   m_GameObject: {fileID: 532694877}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 5.8227797, y: 7.335308, z: -4.557906}
+  m_LocalPosition: {x: 6.250372, y: 7.2863083, z: -4.6303144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73906,7 +73910,7 @@ Transform:
   m_GameObject: {fileID: 1236889753}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 5.8227797, y: 7.335308, z: -4.557906}
+  m_LocalPosition: {x: 6.250372, y: 7.2863083, z: -4.6303144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -104702,12 +104706,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1644086216}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &1648015552 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1128598318768362571, guid: 1859842f9c528344e8e9dad23c67d251,
-    type: 3}
-  m_PrefabInstance: {fileID: 5336877324569475997}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1654000040
 GameObject:
   m_ObjectHideFlags: 0
@@ -127950,6 +127948,7 @@ GameObject:
   - component: {fileID: 2042248619}
   - component: {fileID: 2042248624}
   - component: {fileID: 2042248623}
+  - component: {fileID: 2042248625}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -127989,11 +127988,10 @@ Transform:
   m_GameObject: {fileID: 2042248618}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.049, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 1648015552}
   - {fileID: 694888468}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128009,7 +128007,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 858d39f79f1b96f4e90cef3a8ad2a9cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  animator: {fileID: 2042248625}
+  maximumSpeed: 5
+  rotationSpeed: 2000
+  moveSpeed: 3
   dashDistance: 5
   dashDuration: 0.2
   jumpForce: 7.5
@@ -128020,8 +128021,9 @@ MonoBehaviour:
   cameraTransform: {fileID: 1236889755}
   rotationDuration: 1
   rotationIncrement: 90
-  boxCastSize: {x: 0.3, y: 1, z: 0.3}
-  boxCastDistance: 0.1
+  boxCastSize: {x: 0.3, y: 0.1, z: 0.3}
+  boxCastYOffset: 0.1
+  boxCastDistance: 0.2
 --- !u!54 &2042248624
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -128049,6 +128051,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!95 &2042248625
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042248618}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 0d0c5be203bd64e4fba091b0de9ab88c, type: 3}
+  m_Controller: {fileID: 9100000, guid: f47c7d0c4a8e16440b5aae4d4564483c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2044218539
 GameObject:
   m_ObjectHideFlags: 0
@@ -133926,12 +133949,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2042248622}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1128598318768362571, guid: 1859842f9c528344e8e9dad23c67d251,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.895
       objectReference: {fileID: 0}
     - target: {fileID: 1128598318768362571, guid: 1859842f9c528344e8e9dad23c67d251,
         type: 3}
@@ -133951,17 +133974,17 @@ PrefabInstance:
     - target: {fileID: 1128598318768362571, guid: 1859842f9c528344e8e9dad23c67d251,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1128598318768362571, guid: 1859842f9c528344e8e9dad23c67d251,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1128598318768362571, guid: 1859842f9c528344e8e9dad23c67d251,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1128598318768362571, guid: 1859842f9c528344e8e9dad23c67d251,
         type: 3}
@@ -133994,6 +134017,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 410087041}
   - {fileID: 832575519}
+  - {fileID: 5336877324569475997}
   - {fileID: 2042248622}
   - {fileID: 1716862135}
   - {fileID: 532694882}
