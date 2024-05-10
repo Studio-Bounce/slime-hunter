@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Properties")]
@@ -37,6 +38,9 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _inputActions = new PlayerInputActions();
+        rb = GetComponent<Rigidbody>();
+
+        blendSpeedHash = Animator.StringToHash("blendSpeed");
     }
 
     private void OnEnable()
@@ -47,11 +51,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Debug.Assert(animator != null);
         Debug.Assert(cameraTransform != null);
-        rb = GetComponent<Rigidbody>();
-
-        blendSpeedHash = Animator.StringToHash("blendSpeed");
     }
 
     void FixedUpdate()
