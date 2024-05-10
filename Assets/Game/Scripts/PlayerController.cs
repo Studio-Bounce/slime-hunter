@@ -1,6 +1,4 @@
 using System;
-using System.ComponentModel;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -57,7 +55,7 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(PerformCameraRotate(-rotationIncrement));
         }
-        
+
     }
 
     void MovePlayer()
@@ -73,8 +71,14 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         // Calculate movement direction
-        Vector2 direction = forwardDirection * verticalInput + rightDirection*horizontalInput;
-        //if (direction == Vector2.zero) return;
+        Vector2 direction = forwardDirection * verticalInput + rightDirection * horizontalInput;
+
+        // Rotate the player to look at the movement direction
+        if (direction != Vector2.zero)
+        {
+            float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+        }
 
         // Move the player
         Vector2 movement = moveSpeed * direction.normalized;
@@ -96,7 +100,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
 
         isGrounded = Physics.BoxCast(transform.position, boxCastSize / 2f, Vector3.down, out hit, Quaternion.identity, boxCastDistance);
-  
+
         // Reset jump if grounded
         if (isGrounded) isJump = false;
 
@@ -154,7 +158,7 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
 
-        Vector3 startPos = new Vector3(transform.position.x, transform.position.y-boxCastDistance / 2f, transform.position.z);
+        Vector3 startPos = new Vector3(transform.position.x, transform.position.y - boxCastDistance / 2f, transform.position.z);
 
         Gizmos.DrawWireCube(startPos, new Vector3(boxCastSize.x, boxCastDistance, boxCastSize.z));
     }
