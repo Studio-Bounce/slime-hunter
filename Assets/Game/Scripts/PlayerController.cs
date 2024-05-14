@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Debug.Assert(cameraTransform != null, "Can't find main camera");
+        Debug.Assert(cameraTransform != null, "Missing camera transform");
     }
 
     void FixedUpdate()
