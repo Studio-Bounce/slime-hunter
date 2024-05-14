@@ -107,7 +107,6 @@ public class PlayerController : MonoBehaviour
     {
         // Move the player based off of root motion
         Vector2 movement = moveSpeed * new Vector2(animator.deltaPosition.x, animator.deltaPosition.z);
-        Debug.Log($"movement: {movement}");
         transform.position += new Vector3(movement.x, 0, movement.y);
     }
 
