@@ -9,49 +9,47 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     private int blendSpeedHash;
     private PlayerInputActions _inputActions;
-    private InputAction _moveAction;
+    private PlayerInputActions.PlayerActions _playerActions;
 
     public float maximumSpeed = 5f;
     public float rotationSpeed = 5f;
-
-    public float moveSpeed = 5f; // Adjust this to change movement speed
-    public float dashDistance = 5f; // Adjust this to change dash distance
-    public float dashDuration = 0.2f; // Adjust this to change dash duration
+    public float moveSpeed = 5f;
+    public float dashDistance = 5f;
+    public float dashDuration = 0.2f;
     public float jumpForce = 20f;
 
-    private Rigidbody rb;
-    [ReadOnly] public bool isDashing = false;
-    [ReadOnly] public bool isGrounded = true;
-    [ReadOnly] public bool isJump = false;
+    private bool isDashing = false;
+    private bool isGrounded = true;
+    private bool isJump = true;
 
     [Header("Camera Handling")]
-    [ReadOnly] public bool isRotating = false;
     public Transform cameraTransform;
     public float rotationDuration = 0.3f;
     public float rotationIncrement = 45f;
+    private bool isRotating = false;
 
     [Header("Grounded Checks")]
     public Vector3 boxCastSize = Vector3.one;
     public float boxCastYOffset = 0f;
     public float boxCastDistance = 1f;
 
+    // Other
+    // Currently only really using for gravity, consider removing?
+    private Rigidbody rb;
+
     private void Awake()
     {
         _inputActions = new PlayerInputActions();
+        _inputActions.Enable();
+        _playerActions = _inputActions.Player;
+
         rb = GetComponent<Rigidbody>();
-
         blendSpeedHash = Animator.StringToHash("blendSpeed");
-    }
-
-    private void OnEnable()
-    {
-        _moveAction = _inputActions.Player.Move;
-        _moveAction.Enable();
     }
 
     void Start()
     {
-        Debug.Assert(cameraTransform != null);
+        Debug.Assert(cameraTransform != null, "Can't find main camera");
     }
 
     void FixedUpdate()
@@ -62,14 +60,20 @@ public class PlayerController : MonoBehaviour
         Jump();
     }
 
+    private void Attack()
+    {
+
+    }
+
     private void RotateCamera()
     {
         if (isRotating) return;
-        if (Input.GetKeyDown(KeyCode.Z))
+
+        if (_playerActions.Rotate.ReadValue<float>() < 0)
         {
             StartCoroutine(PerformCameraRotate(rotationIncrement));
         }
-        else if (Input.GetKeyDown(KeyCode.C))
+        else if (_playerActions.Rotate.ReadValue<float>() > 0)
         {
             StartCoroutine(PerformCameraRotate(-rotationIncrement));
         }
@@ -86,7 +90,7 @@ public class PlayerController : MonoBehaviour
         Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
 
         // Input handling
-        Vector2 moveInput = _moveAction.ReadValue<Vector2>();
+        Vector2 moveInput = _playerActions.Move.ReadValue<Vector2>();
 
         // Calculate movement direction based on forward
         Vector2 direction = (forwardDirection * moveInput.y + rightDirection * moveInput.x).normalized;

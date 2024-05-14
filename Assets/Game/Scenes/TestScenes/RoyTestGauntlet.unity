@@ -32887,7 +32887,7 @@ GameObject:
   - component: {fileID: 532694878}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33038,7 +33038,7 @@ Transform:
   m_GameObject: {fileID: 532694877}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 38.729263, y: 7.4984202, z: 86.94298}
+  m_LocalPosition: {x: 16.673803, y: 7.738422, z: 114.587524}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75060,6 +75060,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184583240}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1186061651 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1283715696}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1186193339
 GameObject:
   m_ObjectHideFlags: 0
@@ -78962,7 +78968,7 @@ Transform:
   m_GameObject: {fileID: 1236889753}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 38.729263, y: 7.4984202, z: 86.94298}
+  m_LocalPosition: {x: 16.673803, y: 7.738422, z: 114.587524}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -134487,6 +134493,7 @@ GameObject:
   - component: {fileID: 2042248619}
   - component: {fileID: 2042248624}
   - component: {fileID: 2042248623}
+  - component: {fileID: 2042248626}
   - component: {fileID: 2042248625}
   m_Layer: 0
   m_Name: Player
@@ -134527,7 +134534,7 @@ Transform:
   m_GameObject: {fileID: 2042248618}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.79, y: 1.26, z: 92.24}
+  m_LocalPosition: {x: 10.68, y: 1.5, z: 119.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -134553,10 +134560,6 @@ MonoBehaviour:
   dashDistance: 5
   dashDuration: 0.2
   jumpForce: 7.5
-  isDashing: 0
-  isGrounded: 1
-  isJump: 0
-  isRotating: 0
   cameraTransform: {fileID: 1236889755}
   rotationDuration: 1
   rotationIncrement: 90
@@ -134611,6 +134614,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2042248626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042248618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb773333b1e5f4048a3f1f990813e33a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handPivot: {fileID: 1186061651}
+  handPivotOffset: {x: 0.05, y: 0, z: 0}
+  handPivotForward: {x: 0, y: 0, z: 1}
+  weaponSO: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
 --- !u!1 &2044218539
 GameObject:
   m_ObjectHideFlags: 0

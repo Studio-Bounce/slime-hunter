@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1128598318768362571}
   - component: {fileID: 624395019098989243}
-  - component: {fileID: 3860057376207564881}
   m_Layer: 0
   m_Name: Hammer
   m_TagString: Untagged
@@ -49,24 +48,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.7, y: 0.5, z: 0.5}
-  m_Center: {x: 0, y: 0, z: 1.45}
---- !u!114 &3860057376207564881
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7285824344911898120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb773333b1e5f4048a3f1f990813e33a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Center: {x: 0, y: 0, z: 1.43}
 --- !u!1001 &151223464277071175
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98,27 +85,27 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: fde111bfa1dbb4242889365271956ed7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde111bfa1dbb4242889365271956ed7,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde111bfa1dbb4242889365271956ed7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde111bfa1dbb4242889365271956ed7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde111bfa1dbb4242889365271956ed7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fde111bfa1dbb4242889365271956ed7,
         type: 3}
@@ -133,7 +120,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: fde111bfa1dbb4242889365271956ed7,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fde111bfa1dbb4242889365271956ed7,
         type: 3}
