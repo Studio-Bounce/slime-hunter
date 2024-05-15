@@ -7,6 +7,8 @@ public class WeaponSO : ScriptableObject
     public int damage;
     public int swingSpeed;
     public int range;
+    public int knockback;
+    public LayerMask hitLayers;
     public GameObject weaponModel;
     public AudioClip hitSound;
 }

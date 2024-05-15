@@ -7,5 +7,6 @@ public class Weapon : DamageDealer
     public void Setup(WeaponSO weaponSO)
     {
         damage = weaponSO.damage;
+        hitLayers = weaponSO.hitLayers;
     }
 }

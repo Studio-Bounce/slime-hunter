@@ -2,24 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(BoxCollider))]
 public class DamageDealer : MonoBehaviour
 {
     public LayerMask hitLayers;
     public int damage;
     private bool active = true;
 
+    BoxCollider collider;
+
     private void Start()
     {
-        Debug.Log("Weapon Start");
+        collider = GetComponent<BoxCollider>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger Enter");
+        if (!active) return;
         if ((hitLayers.value & (1 << other.gameObject.layer)) > 0)
         {
-            Debug.Log("Hit Enemy");
             ITakeDamage damageReceiver = other.gameObject.GetComponent<ITakeDamage>();
             damageReceiver?.TakeDamage(damage);
         }
