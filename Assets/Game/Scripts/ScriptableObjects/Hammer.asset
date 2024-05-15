@@ -13,9 +13,17 @@ MonoBehaviour:
   m_Name: Hammer
   m_EditorClassIdentifier: 
   weaponName: Hammer
-  damage: 10
-  swingSpeed: 0
-  range: 0
+  damage:
+    value: 10
+    knockback: 10
+    direction: {x: 0, y: 0, z: 0}
+    element: 0
+  swingSpeed: 10
+  range: 10
+  knockback: 10
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 128
   weaponModel: {fileID: 7285824344911898120, guid: 1859842f9c528344e8e9dad23c67d251,
     type: 3}
   hitSound: {fileID: 0}

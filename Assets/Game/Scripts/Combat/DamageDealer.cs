@@ -6,14 +6,16 @@ using UnityEngine;
 public class DamageDealer : MonoBehaviour
 {
     public LayerMask hitLayers;
-    public int damage;
+
+    public Damage damage;
+
     private bool active = true;
 
-    BoxCollider collider;
+    BoxCollider boxCollider;
 
     private void Start()
     {
-        collider = GetComponent<BoxCollider>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -21,6 +23,7 @@ public class DamageDealer : MonoBehaviour
         if (!active) return;
         if ((hitLayers.value & (1 << other.gameObject.layer)) > 0)
         {
+            damage.direction = (other.transform.position - transform.position).normalized;
             ITakeDamage damageReceiver = other.gameObject.GetComponent<ITakeDamage>();
             damageReceiver?.TakeDamage(damage);
         }

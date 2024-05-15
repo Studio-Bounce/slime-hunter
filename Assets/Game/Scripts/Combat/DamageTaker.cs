@@ -5,25 +5,21 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class DamageTaker : MonoBehaviour, ITakeDamage
 {
+    public int health = 100;
+
     public void Death()
     {
-        throw new System.NotImplementedException();
+       //Destroy(gameObject);
     }
 
-    public void TakeDamage(int value)
+    public void TakeDamage(Damage damage)
     {
-        throw new System.NotImplementedException();
-    }
+        health -= damage.value;
+        transform.position = transform.position + damage.direction*damage.knockback;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (health <= 0)
+        {
+            Death();
+        }
     }
 }

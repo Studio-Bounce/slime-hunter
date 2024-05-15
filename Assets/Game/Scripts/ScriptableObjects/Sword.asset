@@ -13,9 +13,17 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   weaponName: Sword
-  damage: 10
-  swingSpeed: 0
-  range: 0
+  damage:
+    value: 10
+    knockback: 10
+    direction: {x: 0, y: 0, z: 0}
+    element: 0
+  swingSpeed: 10
+  range: 10
+  knockback: 10
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 128
   weaponModel: {fileID: 7029180468595197948, guid: 67a0056a73bcfba41905c1a3e2e4ddab,
     type: 3}
   hitSound: {fileID: 0}

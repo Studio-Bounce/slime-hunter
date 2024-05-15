@@ -3,6 +3,6 @@ using UnityEngine.Events;
 
 public interface ITakeDamage
 {
-    void TakeDamage(int value);
+    void TakeDamage(Damage damage);
     void Death();
 }

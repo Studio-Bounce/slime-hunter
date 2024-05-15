@@ -64,8 +64,6 @@ public class WeaponController : MonoBehaviour
         Vector2 clickPosition = Mouse.current.position.ReadValue();
         Vector2 currentScreenPos = Camera.main.WorldToScreenPoint(transform.position);
         Vector2 direction = (clickPosition - currentScreenPos).normalized;
-
-        Debug.Log("Click direction: " + direction);
         transform.forward = new Vector3(direction.x, 0, direction.y);
 
         _animator.SetTrigger(attackTriggerHash);

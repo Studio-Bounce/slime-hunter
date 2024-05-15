@@ -4,10 +4,9 @@ using UnityEngine;
 public class WeaponSO : ScriptableObject
 {
     public string weaponName;
-    public int damage;
+    public Damage damage;
     public int swingSpeed;
     public int range;
-    public int knockback;
     public LayerMask hitLayers;
     public GameObject weaponModel;
     public AudioClip hitSound;
