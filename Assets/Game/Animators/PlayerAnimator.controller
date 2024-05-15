@@ -48,10 +48,10 @@ AnimatorState:
   m_TimeParameterActive: 0
   m_Motion: {fileID: -2342568883941598487}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: blendSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: blendSpeed
 --- !u!206 &-2342568883941598487
 BlendTree:
   m_ObjectHideFlags: 1
@@ -111,7 +111,7 @@ AnimatorController:
   m_AnimatorParameters:
   - m_Name: blendSpeed
     m_Type: 1
-    m_DefaultFloat: 0
+    m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
