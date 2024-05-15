@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc55e73ce4a8f4418809250d2064544, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  weaponName: 
-  damage: 0
-  fireRate: 0
-  projectilePrefab: {fileID: 0}
-  fireSound: {fileID: 0}
+  weaponName: Sword
+  damage: 40
+  weaponModel: {fileID: 0}
+  hitSound: {fileID: 0}
