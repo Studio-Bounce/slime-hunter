@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     public float jumpForce = 20f;
+    private Vector2 moveInput = Vector2.zero;
 
     private bool isDashing = false;
     private bool isGrounded = false;
@@ -50,30 +51,28 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Debug.Assert(cameraTransform != null, "Missing camera transform");
+
+        _playerActions.Dash.performed += Dash;
+        _playerActions.Rotate.performed += RotateCamera;
     }
 
     void FixedUpdate()
     {
-        Dash();
         MovePlayer();
-        RotateCamera();
-        Jump();
+        CheckJump();
     }
 
-    private void Attack()
-    {
-
-    }
-
-    private void RotateCamera()
+    private void RotateCamera(InputAction.CallbackContext context)
     {
         if (isRotating) return;
 
-        if (_playerActions.Rotate.ReadValue<float>() < 0)
+        float rotateDir = context.ReadValue<float>();
+
+        if (rotateDir < 0)
         {
             StartCoroutine(PerformCameraRotate(rotationIncrement));
         }
-        else if (_playerActions.Rotate.ReadValue<float>() > 0)
+        else if (rotateDir > 0)
         {
             StartCoroutine(PerformCameraRotate(-rotationIncrement));
         }
@@ -114,9 +113,9 @@ public class PlayerController : MonoBehaviour
         transform.position += new Vector3(movement.x, 0, movement.y);
     }
 
-    void Dash()
+    void Dash(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!isDashing)
         {
             Vector3 dashDirection = rb.velocity.normalized;
             Vector3 dashTarget = transform.position + dashDirection * dashDistance;
@@ -126,7 +125,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Naive jump that triggers once when nothing is below
-    void Jump()
+    void CheckJump()
     {
         // Check is grounded
         var groundCollisions = Physics.OverlapBox(transform.position + new Vector3(0, boxYOffset, 0), overlapBoxSize / 2f, Quaternion.identity, groundLayer);
