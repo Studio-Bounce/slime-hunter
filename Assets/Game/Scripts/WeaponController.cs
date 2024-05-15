@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Weapon : MonoBehaviour
+public class WeaponController : MonoBehaviour
 {
+    [Tooltip("Assumes the weapons prefab handle is at positioned at origin (0,0,0)")]
     public Transform handPivot;
     public Vector3 handPivotOffset;
     public Vector3 handPivotForward;
@@ -29,10 +30,12 @@ public class Weapon : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
-
-        Gizmos.DrawSphere(handPivot.position + handPivotOffset, 0.03f);
-        Gizmos.DrawRay(handPivot.position + handPivotOffset, handPivotForward);
+        if (!Application.isPlaying)
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(handPivot.position + handPivotOffset, 0.03f);
+            Gizmos.DrawRay(handPivot.position + handPivotOffset, handPivotForward);
+        }
     }
 #endif
 }

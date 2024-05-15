@@ -60,6 +60,7 @@ public class EnemyGauntlet : MonoBehaviour
 
     }
 
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if (!active)
@@ -82,4 +83,5 @@ public class EnemyGauntlet : MonoBehaviour
         // Draw the square using Handles.DrawSolidRectangleWithOutline
         Handles.DrawSolidRectangleWithOutline(new Vector3[] { topLeft, topRight, bottomRight, bottomLeft }, new Color(1, 0, 0, 0.05f), Color.red);
     }
+#endif
 }

@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 20f;
 
     private bool isDashing = false;
-    private bool isGrounded = true;
+    private bool isGrounded = false;
     private bool isJump = true;
 
     [Header("Camera Handling")]
@@ -29,9 +29,9 @@ public class PlayerController : MonoBehaviour
     private bool isRotating = false;
 
     [Header("Grounded Checks")]
-    public Vector3 boxCastSize = Vector3.one;
-    public float boxCastYOffset = 0f;
-    public float boxCastDistance = 1f;
+    public LayerMask groundLayer;
+    public Vector3 overlapBoxSize = Vector3.one;
+    public float boxYOffset = 0f;
 
     // Other
     // Currently only really using for gravity, consider removing?
@@ -125,16 +125,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Naive jump that triggers once on fall
+    // Naive jump that triggers once when nothing is below
     void Jump()
     {
         // Check is grounded
-        RaycastHit hit;
-
-        isGrounded = Physics.BoxCast(transform.position + new Vector3(0, boxCastYOffset, 0), boxCastSize / 2f, Vector3.down, out hit, Quaternion.identity, boxCastDistance);
+        var groundCollisions = Physics.OverlapBox(transform.position + new Vector3(0, boxYOffset, 0), overlapBoxSize / 2f, Quaternion.identity, groundLayer);
+        isGrounded = groundCollisions.Length > 0;
 
         // Reset jump if grounded
-        if (isGrounded) isJump = false;
+        if (isGrounded)
+        {
+            isJump = false;
+        }
 
         // Jump once when off ledge
         if (!isGrounded && !isJump)
@@ -190,10 +192,7 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
 
-        Vector3 startPos = new Vector3(transform.position.x, transform.position.y+boxCastYOffset, transform.position.z);
-
-        Gizmos.DrawWireCube(startPos, new Vector3(boxCastSize.x, boxCastSize.y, boxCastSize.z));
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawLine(startPos, startPos + Vector3.down*boxCastDistance);
+        Vector3 startPos = new Vector3(transform.position.x, transform.position.y+boxYOffset, transform.position.z);
+        Gizmos.DrawWireCube(startPos, new Vector3(overlapBoxSize.x, overlapBoxSize.y, overlapBoxSize.z));
     }
 }

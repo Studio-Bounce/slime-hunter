@@ -6969,7 +6969,7 @@ GameObject:
   - component: {fileID: 102492417}
   - component: {fileID: 102492416}
   - component: {fileID: 102492415}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33038,7 +33038,7 @@ Transform:
   m_GameObject: {fileID: 532694877}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 16.673803, y: 7.738422, z: 114.587524}
+  m_LocalPosition: {x: 16.619877, y: 8.121421, z: 114.5336}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72070,6 +72070,51 @@ Transform:
   - {fileID: 626427958}
   m_Father: {fileID: 395650600}
   m_LocalEulerAnglesHint: {x: 0, y: 38.029, z: 0}
+--- !u!1 &1147218263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1147218265}
+  - component: {fileID: 1147218264}
+  m_Layer: 0
+  m_Name: TimeScaler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1147218264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147218263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cfe1292f998a94449af4594dfc59de5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeScale: 1
+--- !u!4 &1147218265
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147218263}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.081177, y: 1.7101744, z: 119.82777}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1148385000
 GameObject:
   m_ObjectHideFlags: 0
@@ -78968,7 +79013,7 @@ Transform:
   m_GameObject: {fileID: 1236889753}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 16.673803, y: 7.738422, z: 114.587524}
+  m_LocalPosition: {x: 16.619877, y: 8.121421, z: 114.5336}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -112159,7 +112204,7 @@ GameObject:
   - component: {fileID: 1654811182}
   - component: {fileID: 1654811181}
   - component: {fileID: 1654811180}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -134534,7 +134579,7 @@ Transform:
   m_GameObject: {fileID: 2042248618}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.68, y: 1.5, z: 119.83}
+  m_LocalPosition: {x: 10.68, y: 1.883, z: 119.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -134563,9 +134608,11 @@ MonoBehaviour:
   cameraTransform: {fileID: 1236889755}
   rotationDuration: 1
   rotationIncrement: 90
-  boxCastSize: {x: 0.5, y: 0.1, z: 0.5}
-  boxCastYOffset: 0.1
-  boxCastDistance: 0.2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  overlapBoxSize: {x: 0.4, y: 0.4, z: 0.2}
+  boxYOffset: -0.2
 --- !u!54 &2042248624
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134627,7 +134674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handPivot: {fileID: 1186061651}
-  handPivotOffset: {x: 0.05, y: 0, z: 0}
+  handPivotOffset: {x: 0.07, y: -0.02, z: 0}
   handPivotForward: {x: 0, y: 0, z: 1}
   weaponSO: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
 --- !u!1 &2044218539
@@ -140901,3 +140948,4 @@ SceneRoots:
   - {fileID: 1287131487}
   - {fileID: 1993352847}
   - {fileID: 1135625262}
+  - {fileID: 1147218265}
