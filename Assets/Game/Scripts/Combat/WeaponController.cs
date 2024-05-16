@@ -31,18 +31,24 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         Debug.Assert(handPivot != null, "Requires hand location for weapon");
+
+        // Spawn Initial Weapon
+        InitializeHandPivot();
+        InstantiateWeapon(availableWeapons[0]);
+
+        // Setup input callbacks
+        _playerActions.Attack.performed += Attack;
+        _playerActions.CycleWeapon.performed += CycleWeapon;
+    }
+
+    private void InitializeHandPivot()
+    {
         // Create new pivot transform as a child so we don't influence the original hand rotation
         GameObject newPivot = new GameObject("HandPivot");
         newPivot.transform.SetParent(handPivot.transform);
         newPivot.transform.localPosition = Vector3.zero;
         handPivot = newPivot.transform;
         handPivot.forward = handPivotForward;
-        // Spawn Weapon
-        InstantiateWeapon(availableWeapons[0]);
-
-        // Setup input callbacks
-        _playerActions.Attack.performed += Attack;
-        _playerActions.CycleWeapon.performed += CycleWeapon;
     }
 
     // WIP: Should instantiate all weapons to begin with and disable as needed
