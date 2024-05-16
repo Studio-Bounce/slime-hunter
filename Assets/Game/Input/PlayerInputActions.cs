@@ -62,6 +62,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CycleWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""654322b9-a2a6-46a4-ab64-9eb3be1dfe0a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -174,6 +183,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51a88637-52ad-404b-bd60-e1205ba4259e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +218,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_CycleWeapon = m_Player.FindAction("CycleWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -263,6 +284,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_Rotate;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_CycleWeapon;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -271,6 +293,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @CycleWeapon => m_Wrapper.m_Player_CycleWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -292,6 +315,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @CycleWeapon.started += instance.OnCycleWeapon;
+            @CycleWeapon.performed += instance.OnCycleWeapon;
+            @CycleWeapon.canceled += instance.OnCycleWeapon;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -308,6 +334,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @CycleWeapon.started -= instance.OnCycleWeapon;
+            @CycleWeapon.performed -= instance.OnCycleWeapon;
+            @CycleWeapon.canceled -= instance.OnCycleWeapon;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -340,5 +369,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnCycleWeapon(InputAction.CallbackContext context);
     }
 }

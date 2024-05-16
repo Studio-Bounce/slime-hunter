@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     public float boxYOffset = 0f;
 
     // Other
-    // Currently only really using for gravity, consider removing?
+    // Currently using for jump and dash. Consider not using rb?
     private Rigidbody rb;
 
     private void Awake()
@@ -117,11 +117,27 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDashing)
         {
-            Vector3 dashDirection = rb.velocity.normalized;
-            Vector3 dashTarget = transform.position + dashDirection * dashDistance;
+            Vector3 dashTarget = transform.position + transform.forward * dashDistance;
 
             StartCoroutine(PerformDash(dashTarget));
         }
+    }
+
+    System.Collections.IEnumerator PerformDash(Vector3 target)
+    {
+        isDashing = true;
+        float startTime = Time.time;
+        Vector3 startPosition = transform.position;
+
+        while (Time.time < startTime + dashDuration)
+        {
+
+            float t = (Time.time - startTime) / dashDuration;
+            rb.MovePosition(Vector3.Lerp(startPosition, target, t));
+            yield return null;
+        }
+
+        isDashing = false;
     }
 
     // Naive jump that triggers once when nothing is below
@@ -146,24 +162,6 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    System.Collections.IEnumerator PerformDash(Vector3 target)
-    {
-        Func<float, float> EaseOut = t => 1f - Mathf.Pow(1f - t, 2);
-        isDashing = true;
-        float startTime = Time.time;
-        Vector3 startPosition = transform.position;
-
-        while (Time.time < startTime + dashDuration)
-        {
-
-            float t = (Time.time - startTime) / dashDuration;
-            rb.MovePosition(Vector3.Lerp(startPosition, target, t));
-            yield return null;
-        }
-
-        isDashing = false;
-    }
-
     System.Collections.IEnumerator PerformCameraRotate(float angle)
     {
         Func<float, float> EaseOut = t => 1f - Mathf.Pow(1f - t, 3);
@@ -172,7 +170,6 @@ public class PlayerController : MonoBehaviour
         float startTime = Time.time;
         Quaternion startRotation = cameraTransform.localRotation;
         Quaternion targetRotation = Quaternion.Euler(startRotation.eulerAngles.x, startRotation.eulerAngles.y + angle, startRotation.eulerAngles.z);
-        Debug.Log($"{cameraTransform.localRotation.eulerAngles}:{targetRotation.eulerAngles}");
 
         while (Time.time < startTime + rotationDuration)
         {

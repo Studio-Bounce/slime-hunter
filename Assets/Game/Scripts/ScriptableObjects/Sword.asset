@@ -15,12 +15,11 @@ MonoBehaviour:
   weaponName: Sword
   damage:
     value: 10
-    knockback: 10
+    knockback: 2
     direction: {x: 0, y: 0, z: 0}
     element: 0
   swingSpeed: 10
   range: 10
-  knockback: 10
   hitLayers:
     serializedVersion: 2
     m_Bits: 128
