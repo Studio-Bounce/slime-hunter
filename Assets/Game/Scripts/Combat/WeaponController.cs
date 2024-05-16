@@ -79,10 +79,20 @@ public class WeaponController : MonoBehaviour
 
     void Attack(InputAction.CallbackContext context)
     {
+        // Get vector from player to mouse click
         Vector2 clickPosition = Mouse.current.position.ReadValue();
         Vector2 currentScreenPos = Camera.main.WorldToScreenPoint(transform.position);
-        Vector2 direction = (clickPosition - currentScreenPos).normalized;
-        transform.forward = new Vector3(direction.x, 0, direction.y);
+        Vector2 clickDirection = (clickPosition - currentScreenPos).normalized;
+
+        // Align to camera forward
+        Vector3 cameraToPlayer = (transform.position - Camera.main.transform.position);
+        Vector2 forwardDirection = new Vector2(cameraToPlayer.x, cameraToPlayer.z);
+        forwardDirection.Normalize();
+        Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
+
+        Vector2 finalDirection = (forwardDirection * clickDirection.y + rightDirection * clickDirection.x).normalized;
+
+        transform.forward = new Vector3(finalDirection.x, 0, finalDirection.y);
 
         _animator.SetTrigger(attackTriggerHash);
     }
