@@ -31,10 +31,14 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         Debug.Assert(handPivot != null, "Requires hand location for weapon");
-        if (availableWeapons[0] != null)
-        {
-            InstantiateWeapon(availableWeapons[0]);
-        }
+        // Create new pivot transform as a child so we don't influence the original hand rotation
+        GameObject newPivot = new GameObject("HandPivot");
+        newPivot.transform.SetParent(handPivot.transform);
+        newPivot.transform.localPosition = Vector3.zero;
+        handPivot = newPivot.transform;
+        handPivot.forward = handPivotForward;
+        // Spawn Weapon
+        InstantiateWeapon(availableWeapons[0]);
 
         // Setup input callbacks
         _playerActions.Attack.performed += Attack;
@@ -47,9 +51,8 @@ public class WeaponController : MonoBehaviour
     {
         if (weaponSO == null) return;
         _currentWeaponPrefab = Instantiate(weaponSO.weaponModel, handPivot);
-        _currentWeaponPrefab.transform.forward = handPivotForward;
+        _currentWeaponPrefab.transform.forward = handPivot.forward;
         _currentWeaponPrefab.transform.position += handPivotOffset;
-
         Weapon weaponComponent = _currentWeaponPrefab.AddComponent<Weapon>( );
         weaponComponent?.Setup(weaponSO);
     }
@@ -81,12 +84,18 @@ public class WeaponController : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        if (!Application.isPlaying)
+        Gizmos.color = Color.blue;
+
+        Vector3 pivotWithOffset = handPivot.position + handPivotOffset;
+        Gizmos.DrawWireSphere(pivotWithOffset, 0.03f);
+        Gizmos.DrawSphere(pivotWithOffset, 0.01f);
+
+        if (Application.isPlaying)
         {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(handPivot.position + handPivotOffset, 0.03f);
-            Gizmos.DrawSphere(handPivot.position + handPivotOffset, 0.01f);
-            Gizmos.DrawRay(handPivot.position + handPivotOffset, handPivotForward);
+            Gizmos.DrawRay(pivotWithOffset, handPivot.forward);
+        } else
+        {
+            Gizmos.DrawRay(pivotWithOffset, handPivotForward);
         }
     }
 #endif
