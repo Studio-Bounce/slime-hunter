@@ -15,16 +15,11 @@ public class WeaponController : MonoBehaviour
     private int _equippedWeaponIndex;
     private GameObject _currentWeaponPrefab;
 
-    private PlayerInputActions _inputActions;
-    private PlayerInputActions.PlayerActions _playerActions;
     private Animator _animator;
     private readonly int attackTriggerHash = Animator.StringToHash("Attack");
 
     private void Awake()
     {
-        _inputActions = new PlayerInputActions();
-        _inputActions.Enable();
-        _playerActions = _inputActions.Player;
         _animator = GetComponent<Animator>();
     }
 
@@ -35,10 +30,6 @@ public class WeaponController : MonoBehaviour
         // Spawn Initial Weapon
         InitializeHandPivot();
         InstantiateWeapon(availableWeapons[0]);
-
-        // Setup input callbacks
-        _playerActions.Attack.performed += Attack;
-        _playerActions.CycleWeapon.performed += CycleWeapon;
     }
 
     private void InitializeHandPivot()
@@ -63,7 +54,7 @@ public class WeaponController : MonoBehaviour
         weaponComponent?.Setup(weaponSO);
     }
 
-    private void CycleWeapon(InputAction.CallbackContext context)
+    public void CycleWeapon(InputAction.CallbackContext context)
     {
         // Cycle equipped
         _equippedWeaponIndex = _equippedWeaponIndex == availableWeapons.Length-1 ? 
@@ -77,7 +68,7 @@ public class WeaponController : MonoBehaviour
         InstantiateWeapon(availableWeapons[_equippedWeaponIndex]);
     }
 
-    void Attack(InputAction.CallbackContext context)
+    public void Attack(InputAction.CallbackContext context)
     {
         // Get vector from player to mouse click
         Vector2 clickPosition = Mouse.current.position.ReadValue();
@@ -101,7 +92,6 @@ public class WeaponController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-
         Vector3 pivotWithOffset = handPivot.position + handPivotOffset;
         Gizmos.DrawWireSphere(pivotWithOffset, 0.03f);
         Gizmos.DrawSphere(pivotWithOffset, 0.01f);

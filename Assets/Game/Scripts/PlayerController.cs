@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,8 +9,6 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Properties")]
     public Animator animator;
     private int blendSpeedHash;
-    private PlayerInputActions _inputActions;
-    private PlayerInputActions.PlayerActions _playerActions;
 
     public float maximumSpeed = 5f;
     public float rotationSpeed = 5f;
@@ -17,8 +16,8 @@ public class PlayerController : MonoBehaviour
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     public float jumpForce = 20f;
-    private Vector2 moveInput = Vector2.zero;
 
+    private Vector2 moveDirection = Vector2.zero;
     private bool isDashing = false;
     private bool isGrounded = false;
     private bool isJump = true;
@@ -40,10 +39,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        _inputActions = new PlayerInputActions();
-        _inputActions.Enable();
-        _playerActions = _inputActions.Player;
-
         rb = GetComponent<Rigidbody>();
         blendSpeedHash = Animator.StringToHash("blendSpeed");
     }
@@ -51,18 +46,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Debug.Assert(cameraTransform != null, "Missing camera transform");
-
-        _playerActions.Dash.performed += Dash;
-        _playerActions.Rotate.performed += RotateCamera;
     }
 
     void FixedUpdate()
     {
-        MovePlayer();
         CheckJump();
     }
 
-    private void RotateCamera(InputAction.CallbackContext context)
+    public void RotateCamera(InputAction.CallbackContext context)
     {
         if (isRotating) return;
 
@@ -79,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void MovePlayer()
+    public void MovePlayer(InputAction.CallbackContext context)
     {
         if (isDashing) return;
         // Get forward based on camera
@@ -89,22 +80,29 @@ public class PlayerController : MonoBehaviour
         Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
 
         // Input handling
-        Vector2 moveInput = _playerActions.Move.ReadValue<Vector2>();
+        Vector2 moveInput = context.ReadValue<Vector2>();
 
         // Calculate movement direction based on forward
-        Vector2 direction = (forwardDirection * moveInput.y + rightDirection * moveInput.x).normalized;
+        moveDirection = (forwardDirection * moveInput.y + rightDirection * moveInput.x).normalized;
 
         // Rotate the player to look at the movement direction
-        if (direction != Vector2.zero)
+        if (moveDirection != Vector2.zero)
         {
-            transform.rotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y), Vector3.up);
+            transform.rotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, moveDirection.y), Vector3.up); // Snap
             //Quaternion toRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y), Vector3.up);
             //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
         // Set move animation based on input
-        animator.SetFloat(blendSpeedHash, direction.magnitude, 0.05f, Time.deltaTime);
+        animator.SetFloat(blendSpeedHash, moveDirection.magnitude);
     }
+
+    public void StopMove(InputAction.CallbackContext context)
+    {
+        Debug.Log("Movement Cancelled");
+        animator.SetFloat(blendSpeedHash, 0);
+    }
+
 
     private void OnAnimatorMove()
     {
@@ -113,7 +111,7 @@ public class PlayerController : MonoBehaviour
         transform.position += new Vector3(movement.x, 0, movement.y);
     }
 
-    void Dash(InputAction.CallbackContext context)
+    public void Dash(InputAction.CallbackContext context)
     {
         if (!isDashing)
         {
@@ -141,7 +139,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Naive jump that triggers once when nothing is below
-    void CheckJump()
+    private void CheckJump()
     {
         // Check is grounded
         var groundCollisions = Physics.OverlapBox(transform.position + new Vector3(0, boxYOffset, 0), overlapBoxSize / 2f, Quaternion.identity, groundLayer);
@@ -156,10 +154,15 @@ public class PlayerController : MonoBehaviour
         // Jump once when off ledge
         if (!isGrounded && !isJump)
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isJump = true;
+            Jump();
         }
         
+    }
+
+    private void Jump()
+    {
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        isJump = true;
     }
 
     System.Collections.IEnumerator PerformCameraRotate(float angle)
@@ -184,12 +187,12 @@ public class PlayerController : MonoBehaviour
         isRotating = false;
     }
 
-
+#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-
         Vector3 startPos = new Vector3(transform.position.x, transform.position.y+boxYOffset, transform.position.z);
         Gizmos.DrawWireCube(startPos, new Vector3(overlapBoxSize.x, overlapBoxSize.y, overlapBoxSize.z));
     }
+#endif
 }
