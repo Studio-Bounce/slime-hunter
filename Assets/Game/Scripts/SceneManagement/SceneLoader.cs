@@ -19,6 +19,7 @@ public class SceneLoader : Singleton<SceneLoader>
     {
         if (SceneManager.GetSceneByName(sceneName).isLoaded == false)
         {
+
             if (showLoadingScreen)
             {
                 UIManager.Instance.SetLoadMenu(true);

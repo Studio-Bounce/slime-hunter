@@ -21,13 +21,13 @@ public class PauseMenu : Menu
     private void Unpause()
     {
         UIManager.Instance.SetPauseMenu(false);
-        Debug.Log("UNPAUSE");
 
         Time.timeScale = 1;
     }
 
     private void ReturnMainMenu()
     {
+        Time.timeScale = 1;
         UIManager.Instance.SetPauseMenu(false);
         SceneLoader.Instance.UnloadScene(playSceneName);
         UIManager.Instance.SetMainMenu(true);
