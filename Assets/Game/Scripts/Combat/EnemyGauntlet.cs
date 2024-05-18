@@ -51,7 +51,6 @@ public class EnemyGauntlet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         { 
-            Debug.Log("Trigger entered with object tagged as '" + collisionTag + "'");
             if (active)
             {
                 Invoke("SpawnWalls", spawnDelay);

@@ -99,7 +99,6 @@ public class PlayerController : MonoBehaviour
 
     public void StopMove(InputAction.CallbackContext context)
     {
-        Debug.Log("Movement Cancelled");
         animator.SetFloat(blendSpeedHash, 0);
     }
 
