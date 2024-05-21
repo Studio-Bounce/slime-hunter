@@ -5,9 +5,10 @@ using UnityEngine.UIElements;
 
 public class Editor : MonoBehaviour
 {
-
     UIDocument document = null;
     Button basicSlimeSpawnerBtn = null;
+
+    [SerializeField] GameObject basicSlimePrefab;
 
     private void Awake()
     {
@@ -26,7 +27,7 @@ public class Editor : MonoBehaviour
 
     private void SpawnBasicSlime()
     {
-        Debug.Log("Spawn Slime");
+        LevelEditorManager.Instance.StandbyToSpawn(basicSlimePrefab);
     }
 
     private void OnDestroy()
