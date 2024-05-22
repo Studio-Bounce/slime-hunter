@@ -13,11 +13,15 @@ public class MainMenu : Menu
     {
        SceneLoader.Instance.LoadScene(menuSceneName);//load menu scene
         VisualElement root = uiDocument.rootVisualElement;
-        Button btnPlay = root.Q<Button>("btnPlay");
-        Button btnQuit = root.Q<Button>("btnQuit");
 
-        btnPlay.clicked += StartGame;
-        btnQuit.clicked += QuitGame;
+
+         Label lblPlay = root.Q<Label>("lblPlay");
+        Label lblQuit = root.Q<Label>("lblQuit");
+
+
+         lblPlay.RegisterCallback<ClickEvent>(ev => StartGame());
+        lblQuit.RegisterCallback<ClickEvent>(ev => QuitGame());
+
     }
 
     private void StartGame()
