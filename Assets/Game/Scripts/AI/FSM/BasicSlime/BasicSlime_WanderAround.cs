@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BasicSlime_WanderAround : BasicSlime_BaseState
 {
-    [SerializeField] float speed = 1.0f;
-
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Enable wandering, disable seeking
@@ -15,7 +13,7 @@ public class BasicSlime_WanderAround : BasicSlime_BaseState
         fsm.seekSteeringBehaviour.gameObject.SetActive(false);
 
         fsm.slimeAgent.reachedGoal = false;
-        fsm.slimeAgent.maxSpeed = speed;
+        fsm.slimeAgent.maxSpeed = fsm.wanderSpeed;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
