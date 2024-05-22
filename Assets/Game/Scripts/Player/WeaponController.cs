@@ -23,8 +23,8 @@ public class WeaponController : MonoBehaviour
     public VisualEffect weaponVFX;
     public AnimationClip baseAttackClip;
 
+    Weapon _weaponComponent;
     private AnimatorOverrideController _overrideAnimatorController;
-    private RuntimeAnimatorController _originalAnimatorController;
     private int _equippedWeaponIndex = 0;
     private GameObject _currentWeaponPrefab;
     private Animator _animator;
@@ -35,7 +35,6 @@ public class WeaponController : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
-        _originalAnimatorController = _animator.runtimeAnimatorController;
         _overrideAnimatorController = new AnimatorOverrideController(_animator.runtimeAnimatorController);
     }
 
@@ -45,13 +44,7 @@ public class WeaponController : MonoBehaviour
 
         // Spawn Initial Weapon
         InitializeHandPivot();
-        InitializeVFX();
         InstantiateWeapon(availableWeapons[_equippedWeaponIndex]);
-    }
-
-    private void InitializeVFX()
-    {
-        weaponVFX.transform.SetParent(handPivot.transform, false);
     }
 
     private void Update()
@@ -76,15 +69,15 @@ public class WeaponController : MonoBehaviour
     }
 
     // WIP: Should instantiate all weapons to begin with and disable as needed
-    // BUG: Pivot isn't correct if switching while moving
     private void InstantiateWeapon(WeaponSO weaponSO)
     {
         if (weaponSO == null) return;
         _currentWeaponPrefab = Instantiate(weaponSO.weaponModel, handPivot);
         _currentWeaponPrefab.transform.forward = handPivot.forward;
         _currentWeaponPrefab.transform.position += handPivotOffset;
-        Weapon weaponComponent = _currentWeaponPrefab.AddComponent<Weapon>( );
-        weaponComponent?.Setup(weaponSO);
+        _weaponComponent = _currentWeaponPrefab.AddComponent<Weapon>( );
+        _weaponComponent?.Setup(weaponSO);
+        _weaponComponent.active = false;
         SetupWeaponAnimations(weaponSO);
     }
 
@@ -126,7 +119,6 @@ public class WeaponController : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
-        PlayAttackVFX(availableWeapons[_equippedWeaponIndex]);
         // Get vector from player to mouse click
         Vector2 clickPosition = Mouse.current.position.ReadValue();
         Vector2 currentScreenPos = Camera.main.WorldToScreenPoint(transform.position);
@@ -144,6 +136,18 @@ public class WeaponController : MonoBehaviour
 
         _animator.SetTrigger(attackTriggerHash);
         //StartCoroutine(ApplyAttackCurve());
+    }
+
+    public void EnableAttack()
+    {
+        weaponVFX.transform.position = handPivot.transform.position;
+        weaponVFX.transform.forward = handPivotForward;
+        PlayAttackVFX(availableWeapons[_equippedWeaponIndex]);
+        _weaponComponent.active = true;
+    }
+    public void DisableAttack()
+    {
+        _weaponComponent.active = false;
     }
 
     private void PlayAttackVFX(WeaponSO weaponSO)

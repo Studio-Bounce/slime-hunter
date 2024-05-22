@@ -9,7 +9,7 @@ public class DamageDealer : MonoBehaviour
 
     public Damage damage;
 
-    private bool active = true;
+    public bool active = true;
 
     BoxCollider boxCollider;
 
