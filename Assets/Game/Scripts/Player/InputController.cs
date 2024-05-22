@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.WebSockets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using InputContext = UnityEngine.InputSystem.InputAction.CallbackContext;
@@ -22,7 +23,7 @@ public class InputController : MonoBehaviour
         _UIActions = _inputActions.UI;
     }
 
-    void Start()
+    private void Start()
     {
         _playerController = GetComponent<PlayerController>();
         _weaponController = GetComponent<WeaponController>();

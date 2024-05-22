@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TimeScaler : MonoBehaviour
 {
+    [Range(0.0f, 5.0f)]
     public float timeScale = 1f;
 
     void Update()

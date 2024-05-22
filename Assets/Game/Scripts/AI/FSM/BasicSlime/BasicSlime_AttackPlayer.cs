@@ -6,7 +6,6 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 {
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("In attack");
         fsm.seekSteeringBehaviour.target = fsm.playerTransform.position;
         fsm.slimeAgent.reachedGoal = false;
         fsm.slimeAgent.maxSpeed = fsm.attackSpeed;

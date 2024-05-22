@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewWeapon", menuName = "Weapons/Weapon")]
@@ -10,4 +11,5 @@ public class WeaponSO : ScriptableObject
     public LayerMask hitLayers;
     public GameObject weaponModel;
     public AudioClip hitSound;
+    public List<AnimationClip> attackMoves;
 }

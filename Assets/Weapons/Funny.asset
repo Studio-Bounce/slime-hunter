@@ -19,10 +19,12 @@ MonoBehaviour:
     direction: {x: 0, y: 0, z: 0}
     element: 0
   swingSpeed: 10
-  range: 10
+  range: 5
   hitLayers:
     serializedVersion: 2
     m_Bits: 128
   weaponModel: {fileID: 5784571176224258707, guid: a87906d7d89e6e34b820b6830d1ff939,
     type: 3}
   hitSound: {fileID: 0}
+  attackMoves:
+  - {fileID: -203655887218126122, guid: 30f3f2b3eaec8464daa5d259269fe981, type: 3}
