@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 1
   target: {x: 0, y: 0, z: 0}
-  useMouseInput: 1
+  useMouseInput: 0
   steeringAgent: {fileID: 0}
   performStuckDetection: 0
   stopThreshold: 0.15
@@ -193,8 +193,13 @@ MonoBehaviour:
   seekSteeringBehaviour: {fileID: 8433862984451030069}
   wanderSteeringBehaviour: {fileID: 386777113257166750}
   slimeAgent: {fileID: 0}
-  seekDistance: 8
   playerTransform: {fileID: 0}
+  cooldownTime: 3
+  seekDistance: 10
+  wanderSpeed: 1
+  chaseSpeed: 2
+  attackSpeed: 10
+  attackRadius: 5
 --- !u!1 &8843669738811188421
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,15 +246,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weight: 1
   target: {x: 0, y: 0, z: 0}
-  useMouseInput: 1
+  useMouseInput: 0
   steeringAgent: {fileID: 0}
   performStuckDetection: 0
   stopThreshold: 0.15
   cacheLength: 10
   cacheInterval: 0.25
   stuckThreshold: 0.01
-  wanderDistance: 1
-  wanderRadius: 0.5
+  wanderDistance: 3
+  wanderRadius: 1.5
   wanderJitter: 20
 --- !u!1001 &6891582375880887506
 PrefabInstance:

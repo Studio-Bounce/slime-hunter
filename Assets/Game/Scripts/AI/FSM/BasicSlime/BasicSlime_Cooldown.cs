@@ -8,8 +8,6 @@ public class BasicSlime_Cooldown : BasicSlime_BaseState
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("In cooldown");
-
         // Stop the agent
         fsm.slimeAgent.reachedGoal = true;
         // Disable seeking & wandering
