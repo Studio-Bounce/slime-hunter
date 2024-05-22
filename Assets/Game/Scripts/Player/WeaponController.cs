@@ -1,23 +1,42 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.VFX;
 
 [RequireComponent(typeof(Animator))]
 public class WeaponController : MonoBehaviour
 {
-    [Tooltip("Assumes the weapons prefab handle is at positioned at origin (0,0,0)")]
+    [Header("Positioning")]
+    [Tooltip("Assumes the weapons prefab handle is at positioned at origin (0,0,0) and point towards Z+")]
     public Transform handPivot;
     public Vector3 handPivotOffset;
     public Vector3 handPivotForward;
     public WeaponSO[] availableWeapons = new WeaponSO[3];
-    private int _equippedWeaponIndex;
-    private GameObject _currentWeaponPrefab;
 
+    [Header("Animations/Visuals")]
+    public AnimationCurve animationSpeedCurve;
+    [Tooltip("A GameObject that has a Visual Effect component")]
+    public VisualEffect weaponVFX;
+    public AnimationClip baseAttackClip;
+
+    private AnimatorOverrideController _overrideAnimatorController;
+    private RuntimeAnimatorController _originalAnimatorController;
+    private int _equippedWeaponIndex = 0;
+    private GameObject _currentWeaponPrefab;
     private Animator _animator;
     private readonly int attackTriggerHash = Animator.StringToHash("Attack");
+    private readonly int attackStateHash = Animator.StringToHash("Attack");
+
 
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _originalAnimatorController = _animator.runtimeAnimatorController;
+        _overrideAnimatorController = new AnimatorOverrideController(_animator.runtimeAnimatorController);
     }
 
     void Start()
@@ -26,12 +45,29 @@ public class WeaponController : MonoBehaviour
 
         // Spawn Initial Weapon
         InitializeHandPivot();
-        InstantiateWeapon(availableWeapons[0]);
+        InitializeVFX();
+        InstantiateWeapon(availableWeapons[_equippedWeaponIndex]);
     }
 
+    private void InitializeVFX()
+    {
+        weaponVFX.transform.SetParent(handPivot.transform, false);
+    }
+
+    private void Update()
+    {
+        _animator.speed = 1.0f;
+        if (_animator.GetCurrentAnimatorStateInfo(0).shortNameHash == attackStateHash)
+        {
+            float animationTime = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            _animator.speed = animationSpeedCurve.Evaluate(animationTime);
+        }
+    }
+
+    // Creates a new child GameObject to use as pivot transform so we don't influence the original hand rotation
+    // This is incase you pick the hand bone itself to be the pivot
     private void InitializeHandPivot()
     {
-        // Create new pivot transform as a child so we don't influence the original hand rotation
         GameObject newPivot = new GameObject("HandPivot");
         newPivot.transform.SetParent(handPivot.transform);
         newPivot.transform.localPosition = Vector3.zero;
@@ -49,6 +85,29 @@ public class WeaponController : MonoBehaviour
         _currentWeaponPrefab.transform.position += handPivotOffset;
         Weapon weaponComponent = _currentWeaponPrefab.AddComponent<Weapon>( );
         weaponComponent?.Setup(weaponSO);
+        SetupWeaponAnimations(weaponSO);
+    }
+
+    // Replace base attack animation with weapon animations
+    private void SetupWeaponAnimations(WeaponSO weaponSO)
+    {
+        foreach (AnimationClip move in weaponSO.attackMoves)
+        {
+            _overrideAnimatorController[baseAttackClip.name] = move;
+        }
+        _animator.runtimeAnimatorController = _overrideAnimatorController;
+    }
+
+    private AnimationClip GetAnimationClipByName(RuntimeAnimatorController controller, string clipName)
+    {
+        foreach (AnimationClip clip in controller.animationClips)
+        {
+            if (clip.name == clipName)
+            {
+                return clip;
+            }
+        }
+        return null;
     }
 
     public void CycleWeapon(InputAction.CallbackContext context)
@@ -67,6 +126,7 @@ public class WeaponController : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
+        PlayAttackVFX(availableWeapons[_equippedWeaponIndex]);
         // Get vector from player to mouse click
         Vector2 clickPosition = Mouse.current.position.ReadValue();
         Vector2 currentScreenPos = Camera.main.WorldToScreenPoint(transform.position);
@@ -83,12 +143,20 @@ public class WeaponController : MonoBehaviour
         transform.forward = new Vector3(finalDirection.x, 0, finalDirection.y);
 
         _animator.SetTrigger(attackTriggerHash);
+        //StartCoroutine(ApplyAttackCurve());
+    }
+
+    private void PlayAttackVFX(WeaponSO weaponSO)
+    {
+        weaponVFX.Play();
     }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.blue;
+        // Weapon Positioning
+        Gizmos.color = new Color(0, 0, 1);
+
         Vector3 pivotWithOffset = handPivot.position + handPivotOffset;
         Gizmos.DrawWireSphere(pivotWithOffset, 0.03f);
         Gizmos.DrawSphere(pivotWithOffset, 0.01f);
@@ -99,6 +167,17 @@ public class WeaponController : MonoBehaviour
         } else
         {
             Gizmos.DrawRay(pivotWithOffset, handPivotForward);
+        }
+
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward);
+
+        // Weapon Attack
+        Handles.color = new Color(1, 0, 1, 0.1f);
+        if (availableWeapons[0] != null)
+        {
+            float attackAngle = 90f;
+            Vector3 attackStart = Quaternion.AngleAxis(-attackAngle / 2, transform.up) * transform.forward;
+            Handles.DrawSolidArc(transform.position, transform.up, attackStart, attackAngle, availableWeapons[0].range);
         }
     }
 #endif

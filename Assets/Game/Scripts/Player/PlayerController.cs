@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private int blendSpeedHash;
 
     public float maximumSpeed = 5f;
-    public float rotationSpeed = 5f;
+    //public float rotationSpeed = 5f;
     public float moveSpeed = 5f;
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
