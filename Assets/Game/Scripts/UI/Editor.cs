@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,6 +21,7 @@ public class Editor : MonoBehaviour
     {
         if (document == null)
             return;
+        document.rootVisualElement.style.display = DisplayStyle.Flex;
 
         VisualElement root = document.rootVisualElement;
         basicSlimeSpawnerBtn = root.Q<Button>("btnBasicSlime");
@@ -35,5 +37,9 @@ public class Editor : MonoBehaviour
     {
         if (basicSlimeSpawnerBtn != null)
             basicSlimeSpawnerBtn.clicked -= SpawnBasicSlime;
+
+        if (document == null)
+            document.rootVisualElement.style.display = DisplayStyle.None;
+
     }
 }
