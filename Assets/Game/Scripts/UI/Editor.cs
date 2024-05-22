@@ -9,6 +9,7 @@ public class Editor : MonoBehaviour
     Button basicSlimeSpawnerBtn = null;
 
     [SerializeField] GameObject basicSlimePrefab;
+    [SerializeField] GameObject basicSlimePreviewPrefab;
 
     private void Awake()
     {
@@ -27,7 +28,7 @@ public class Editor : MonoBehaviour
 
     private void SpawnBasicSlime()
     {
-        LevelEditorManager.Instance.StandbyToSpawn(basicSlimePrefab);
+        LevelEditorManager.Instance.StandbyToSpawn(basicSlimePrefab, basicSlimePreviewPrefab);
     }
 
     private void OnDestroy()
