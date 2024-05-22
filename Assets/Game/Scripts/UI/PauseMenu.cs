@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 public class PauseMenu : Menu
 {
     public string playSceneName;
+    public string menuSceneName;//Main menu Scene
+
 
     void Start()
     {
@@ -31,5 +33,6 @@ public class PauseMenu : Menu
         UIManager.Instance.SetPauseMenu(false);
         SceneLoader.Instance.UnloadScene(playSceneName);
         UIManager.Instance.SetMainMenu(true);
+        SceneLoader.Instance.LoadScene(menuSceneName);//load menu scene
     }
 }

@@ -7,9 +7,11 @@ using UnityEngine.UIElements;
 public class MainMenu : Menu
 {
     public string playSceneName;
+    public string menuSceneName;//Main menu Scene
 
     void Start()
     {
+       SceneLoader.Instance.LoadScene(menuSceneName);//load menu scene
         VisualElement root = uiDocument.rootVisualElement;
         Button btnPlay = root.Q<Button>("btnPlay");
         Button btnQuit = root.Q<Button>("btnQuit");
@@ -20,6 +22,7 @@ public class MainMenu : Menu
 
     private void StartGame()
     {
+        SceneLoader.Instance.UnloadScene(menuSceneName);//unload menu
         SceneLoader.Instance.LoadScene(playSceneName);
         UIManager.Instance.SetMainMenu(false);
     }
