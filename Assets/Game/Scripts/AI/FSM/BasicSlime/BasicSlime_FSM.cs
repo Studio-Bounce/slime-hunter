@@ -7,6 +7,7 @@ public class BasicSlime_FSM : FSM
     public readonly int ChasePlayerStateName = Animator.StringToHash("ChasePlayer");
     public readonly int WanderAroundStateName = Animator.StringToHash("WanderAround");
     public readonly int AttackPlayerStateName = Animator.StringToHash("AttackPlayer");
+    public readonly int CooldownStateName = Animator.StringToHash("Cooldown");
 
     public SeekSteeringBehaviour seekSteeringBehaviour;
     public WanderSteeringBehaviour wanderSteeringBehaviour;
@@ -14,6 +15,7 @@ public class BasicSlime_FSM : FSM
     public SteeringAgent slimeAgent;
     public Transform playerTransform;
 
+    public float cooldownTime = 3.0f;
     public float seekDistance = 20.0f;
     public float wanderSpeed = 1.0f;
     public float chaseSpeed = 5.0f;
