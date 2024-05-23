@@ -2,20 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
+// Damage Dealer uses OnTriggerEnter to detect & deal damage.
+// OnTriggerEnter needs rigidbody to trigger.
+[RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class DamageDealer : MonoBehaviour
 {
     public LayerMask hitLayers;
-
     public Damage damage;
 
+    // Active damage dealer deals damage. Inactive does not.
     public bool active = true;
-
-    BoxCollider boxCollider;
 
     private void Start()
     {
-        boxCollider = GetComponent<BoxCollider>();
+        // Ensure the rigid body is kinematic
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

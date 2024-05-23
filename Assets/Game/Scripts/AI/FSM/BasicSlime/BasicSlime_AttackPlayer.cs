@@ -15,6 +15,13 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         fsm.seekSteeringBehaviour.gameObject.SetActive(true);
         fsm.wanderSteeringBehaviour.enabled = false;
         fsm.wanderSteeringBehaviour.gameObject.SetActive(false);
+
+        // Change slime material (color)
+        if (fsm.slimeOuterMesh.materials.Length > 0)
+        {
+            Material[] mats = { fsm.attackMat };
+            fsm.slimeOuterMesh.materials = mats;
+        }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -26,6 +33,16 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         if (fsm.slimeAgent.reachedGoal || targetDistance < 0.8f)
         {
             fsm.ChangeState(fsm.CooldownStateName);
+        }
+    }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        // Revert slime material (color)
+        if (fsm.slimeOuterMesh.materials.Length > 0)
+        {
+            Material[] mats = { fsm.defaultMat };
+            fsm.slimeOuterMesh.materials = mats;
         }
     }
 }

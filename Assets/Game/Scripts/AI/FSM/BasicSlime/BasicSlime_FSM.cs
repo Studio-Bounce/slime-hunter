@@ -15,6 +15,15 @@ public class BasicSlime_FSM : FSM
     public SteeringAgent slimeAgent;
     public Transform playerTransform;
 
+    public SkinnedMeshRenderer slimeOuterMesh;
+
+    [Header("Slime Materials")]
+    public Material defaultMat;
+    public Material chaseMat;
+    public Material attackMat;
+
+    [Header("Slime Attributes")]
+    [Tooltip("Attributes which change the slime's combat behaviour.")]
     public float cooldownTime = 3.0f;
     public float seekDistance = 20.0f;
     public float wanderSpeed = 1.0f;
