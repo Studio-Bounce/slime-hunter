@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (!isDashing && Time.time > lastDashTime)
+        if (!isDashing && Time.time > lastDashTime + dashCooldown)
         {
             StartCoroutine(PerformDash(transform.forward * dashDistance));
         }
@@ -171,7 +171,6 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         characterController.Move(Vector3.up * jumpForce);
         isJump = true;
     }
