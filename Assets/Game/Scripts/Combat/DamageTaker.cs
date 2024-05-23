@@ -26,7 +26,6 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     public void TakeDamage(Damage damage)
     {
         health -= damage.value;
-        Debug.Log("Taking damage of " + damage.value + " -- health = " + health);
         StartCoroutine(ApplyKnockback(damage));
 
         if (health <= 0)

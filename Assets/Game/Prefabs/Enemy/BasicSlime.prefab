@@ -157,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77dd3ea3c9005a54395fbe90b86a583a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 40
 --- !u!114 &1030678316373288018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,12 +197,16 @@ MonoBehaviour:
   wanderSteeringBehaviour: {fileID: 386777113257166750}
   slimeAgent: {fileID: 0}
   playerTransform: {fileID: 0}
+  slimeOuterMesh: {fileID: 2201507902128942745}
+  defaultMat: {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
+  chaseMat: {fileID: 2100000, guid: 80e2ba57f9633224a99ab18d4537e0bd, type: 2}
+  attackMat: {fileID: 2100000, guid: 54086adf35a39a34f93097e070b5c598, type: 2}
   cooldownTime: 3
   seekDistance: 10
   wanderSpeed: 1
   chaseSpeed: 2
   attackSpeed: 10
-  attackRadius: 5
+  attackRadius: 3.5
 --- !u!1 &8843669738811188421
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +386,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 772ae3dc15e833f40999ac3cb2013fa2, type: 3}
+--- !u!137 &2201507902128942745 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4696834868240540235, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6891582375880887506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6352724013957278521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 772ae3dc15e833f40999ac3cb2013fa2,
