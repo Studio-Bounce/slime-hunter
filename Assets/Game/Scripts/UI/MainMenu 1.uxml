@@ -1,0 +1,14 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; background-image: none; background-color: rgba(255, 255, 255, 0); justify-content: center;">
+        <ui:VisualElement name="VisualElement" style="justify-content: center; align-items: center; -unity-text-align: upper-left;">
+            <ui:Label tabindex="-1" text="Slime Hunter" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255);" />
+            <ui:Button text="Start" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnPlay" style="margin-top: 2px; margin-right: 2px; margin-bottom: 2px; margin-left: 2px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
+            <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnQuit" style="margin-top: 2px; margin-right: 2px; margin-bottom: 2px; margin-left: 2px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px;" />
+            <ui:Button text="Continue" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 150px;" />
+            <ui:Button text="New Game" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 150px;" />
+            <ui:Button text="Setting" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 150px;" />
+            <ui:Button text="Development Team" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 150px;" />
+            <ui:Button text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 150px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
