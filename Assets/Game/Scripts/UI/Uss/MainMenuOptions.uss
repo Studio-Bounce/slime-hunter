@@ -1,13 +1,33 @@
 
+.option-slot {
+    
+}
+
+
 .menu-button {
 	transition-property: all;
     transition-duration: 0.2s;
 	color: white;
+	opacity:0.5;
 
  
 }
 
-.menu-button::hover {
+.option-slot:hover .menu-button{
 	
-	color: #42B7F5;
+	color: white;
+	opacity:1; 
+
+}
+
+.menu-button-deco {
+	transition-property: all;
+    transition-duration: 0.2s;
+	color: white;
+	opacity:0;
+ 
+}
+
+.option-slot:hover .menu-button-deco {
+    opacity: 1;
 }
