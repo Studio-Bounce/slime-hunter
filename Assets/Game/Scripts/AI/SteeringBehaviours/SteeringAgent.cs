@@ -53,6 +53,10 @@ public class SteeringAgent : MonoBehaviour
     {
         Vector3 steeringForce = CalculateSteeringForce();
         //steeringForce.y = 0.0f;
+        if (characterController != null && characterController.enabled && useGravity)
+        {
+            characterController.Move(Physics.gravity * Time.deltaTime);
+        }
 
         if (reachedGoal)
         {
@@ -74,15 +78,13 @@ public class SteeringAgent : MonoBehaviour
             // Movement
             if (!useRootMotion)
             {
-                if (agentRigidbody != null)
+                if (agentRigidbody != null && !agentRigidbody.isKinematic)
                 {
                     agentRigidbody.velocity = velocity;
                 }
-                else if (characterController != null)
+                else if (characterController != null && characterController.enabled)
                 {
                     characterController.Move(velocity * Time.deltaTime);
-                    if (useGravity)
-                        characterController.Move(Physics.gravity * Time.deltaTime);
                 }
                 else
                 {
