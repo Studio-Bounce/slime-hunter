@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
+    public float dashCooldown = 0.5f;
     public float jumpForce = 20f;
 
     private Vector2 moveDirection = Vector2.zero;
@@ -37,6 +38,8 @@ public class PlayerController : MonoBehaviour
     // Used for jump, dash, and gravity
     CharacterController characterController;
     InputController inputController;
+
+    private float lastDashTime = 0.0f;
 
     private void Awake()
     {
@@ -86,11 +89,14 @@ public class PlayerController : MonoBehaviour
 
     public void MovePlayer()
     {
-        if (isDashing) return;
+        if (isDashing)
+        {
+            return;
+        }
 
         Vector2 moveInput = inputController.movement;
         // Set move animation based on input
-        animator.SetFloat(blendSpeedHash, moveDirection.magnitude);
+        animator.SetFloat(blendSpeedHash, moveInput.magnitude);
         if (moveInput == Vector2.zero)
             return;
 
@@ -115,30 +121,31 @@ public class PlayerController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (!isDashing)
+        if (!isDashing && Time.time > lastDashTime)
         {
-            Debug.Log("DASH!");
-            Vector3 dashTarget = transform.position + transform.forward * dashDistance;
-
-
-            //StartCoroutine(PerformDash(dashTarget));
+            StartCoroutine(PerformDash(transform.forward * dashDistance));
         }
     }
 
-    IEnumerator PerformDash(Vector3 target)
+    IEnumerator PerformDash(Vector3 dashVector)
     {
         isDashing = true;
+
+        // Dash follows the curve of y^3 = x from 0 to 1
+        // Provides a quick action in beginning which then slows
+        float dashProgress = 0.0f;
         float startTime = Time.time;
         Vector3 startPosition = transform.position;
 
-        while (Time.time < startTime + dashDuration)
+        while (dashProgress <= 1.0f)
         {
-
-            float t = (Time.time - startTime) / dashDuration;
+            dashProgress = (Time.time - startTime) / dashDuration;
+            transform.position = startPosition + dashVector * dashProgress;
             yield return null;
         }
-
+        
         isDashing = false;
+        lastDashTime = Time.time;
     }
 
     // Naive jump that triggers once when nothing is below
