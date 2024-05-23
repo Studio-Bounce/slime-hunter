@@ -1,0 +1,13 @@
+
+.menu-button {
+	transition-property: all;
+    transition-duration: 0.2s;
+	color: white;
+
+ 
+}
+
+.menu-button::hover {
+	
+	color: #42B7F5;
+}
