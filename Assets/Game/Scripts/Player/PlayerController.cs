@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,11 +11,11 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     private int blendSpeedHash;
 
-    public float maximumSpeed = 5f;
     //public float rotationSpeed = 5f;
     public float moveSpeed = 5f;
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
+    public float dashCooldown = 0.5f;
     public float jumpForce = 20f;
 
     private Vector2 moveDirection = Vector2.zero;
@@ -29,28 +30,44 @@ public class PlayerController : MonoBehaviour
     private bool isRotating = false;
 
     [Header("Grounded Checks")]
+    public bool useGravity = true;
     public LayerMask groundLayer;
     public Vector3 overlapBoxSize = Vector3.one;
     public float boxYOffset = 0f;
 
-    // Other
-    // Currently using for jump and dash. Consider not using rb?
-    private Rigidbody rb;
+    // Used for jump, dash, and gravity
+    CharacterController characterController;
+    InputController inputController;
+
+    private float lastDashTime = 0.0f;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
         blendSpeedHash = Animator.StringToHash("blendSpeed");
     }
 
     void Start()
     {
+        characterController = GetComponent<CharacterController>();
+        inputController = GetComponent<InputController>();
         Debug.Assert(cameraTransform != null, "Missing camera transform");
     }
 
     void FixedUpdate()
     {
         CheckJump();
+    }
+
+    private void Update()
+    {
+        // Gravity simulation
+        if (characterController != null && characterController.enabled && useGravity)
+        {
+            characterController.Move(Physics.gravity * Time.deltaTime);
+        }
+
+        // Movement
+        MovePlayer();
     }
 
     public void RotateCamera(InputAction.CallbackContext context)
@@ -70,17 +87,24 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void MovePlayer(InputAction.CallbackContext context)
+    public void MovePlayer()
     {
-        if (isDashing) return;
+        if (isDashing)
+        {
+            return;
+        }
+
+        Vector2 moveInput = inputController.movement;
+        // Set move animation based on input
+        animator.SetFloat(blendSpeedHash, moveInput.magnitude);
+        if (moveInput == Vector2.zero)
+            return;
+
         // Get forward based on camera
         Vector3 cameraToPlayer = (transform.position - cameraTransform.position);
         Vector2 forwardDirection = new Vector2(cameraToPlayer.x, cameraToPlayer.z);
         forwardDirection.Normalize();
         Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
-
-        // Input handling
-        Vector2 moveInput = context.ReadValue<Vector2>();
 
         // Calculate movement direction based on forward
         moveDirection = (forwardDirection * moveInput.y + rightDirection * moveInput.x).normalized;
@@ -89,52 +113,39 @@ public class PlayerController : MonoBehaviour
         if (moveDirection != Vector2.zero)
         {
             transform.rotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, moveDirection.y), Vector3.up); // Snap
-            //Quaternion toRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.y), Vector3.up);
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
-        // Set move animation based on input
-        animator.SetFloat(blendSpeedHash, moveDirection.magnitude);
-    }
-
-    public void StopMove(InputAction.CallbackContext context)
-    {
-        animator.SetFloat(blendSpeedHash, 0);
-    }
-
-
-    private void OnAnimatorMove()
-    {
-        // Move the player based off of root motion
-        Vector2 movement = moveSpeed * new Vector2(animator.deltaPosition.x, animator.deltaPosition.z);
-        transform.position += new Vector3(movement.x, 0, movement.y);
+        // Move
+        characterController.Move(moveSpeed * Time.deltaTime * new Vector3(moveDirection.x, 0, moveDirection.y));
     }
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (!isDashing)
+        if (!isDashing && Time.time > lastDashTime + dashCooldown)
         {
-            Vector3 dashTarget = transform.position + transform.forward * dashDistance;
-
-            StartCoroutine(PerformDash(dashTarget));
+            StartCoroutine(PerformDash(transform.forward * dashDistance));
         }
     }
 
-    System.Collections.IEnumerator PerformDash(Vector3 target)
+    IEnumerator PerformDash(Vector3 dashVector)
     {
         isDashing = true;
+
+        // Dash follows the curve of y^3 = x from 0 to 1
+        // Provides a quick action in beginning which then slows
+        float dashProgress = 0.0f;
         float startTime = Time.time;
         Vector3 startPosition = transform.position;
 
-        while (Time.time < startTime + dashDuration)
+        while (dashProgress <= 1.0f)
         {
-
-            float t = (Time.time - startTime) / dashDuration;
-            rb.MovePosition(Vector3.Lerp(startPosition, target, t));
+            dashProgress = (Time.time - startTime) / dashDuration;
+            transform.position = startPosition + dashVector * dashProgress;
             yield return null;
         }
-
+        
         isDashing = false;
+        lastDashTime = Time.time;
     }
 
     // Naive jump that triggers once when nothing is below
@@ -160,11 +171,11 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        characterController.Move(Vector3.up * jumpForce);
         isJump = true;
     }
 
-    System.Collections.IEnumerator PerformCameraRotate(float angle)
+    IEnumerator PerformCameraRotate(float angle)
     {
         Func<float, float> EaseOut = t => 1f - Mathf.Pow(1f - t, 3);
 
@@ -192,6 +203,9 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Vector3 startPos = new Vector3(transform.position.x, transform.position.y+boxYOffset, transform.position.z);
         Gizmos.DrawWireCube(startPos, new Vector3(overlapBoxSize.x, overlapBoxSize.y, overlapBoxSize.z));
+
+        // Dash direction
+        DebugExtension.DrawArrow(transform.position, transform.forward, Color.blue);
     }
 #endif
 }

@@ -15,6 +15,8 @@ public class InputController : MonoBehaviour
     private PlayerInputActions.PlayerActions _playerActions;
     private PlayerInputActions.UIActions _UIActions;
 
+    public Vector2 movement = Vector2.zero;
+
     private void Awake()
     {
         _inputActions = new PlayerInputActions();
@@ -39,8 +41,8 @@ public class InputController : MonoBehaviour
 
     private void SetupPlayerControls()
     {
-        _playerActions.Move.performed += _playerController.MovePlayer;
-        _playerActions.Move.canceled += _playerController.StopMove;
+        _playerActions.Move.performed += TrackMovement;
+        _playerActions.Move.canceled += StopMovement;
         _playerActions.Dash.performed += _playerController.Dash;
         _playerActions.Rotate.performed += _playerController.RotateCamera;
         _playerActions.Attack.performed += _weaponController.Attack;
@@ -59,10 +61,20 @@ public class InputController : MonoBehaviour
         Time.timeScale = 0;
     }
 
+    private void TrackMovement(InputContext context)
+    {
+        movement = context.ReadValue<Vector2>();
+    }
+
+    private void StopMovement(InputContext context)
+    {
+        movement = Vector2.zero;
+    }
+
     private void DisablePlayerControls()
     {
-        _playerActions.Move.performed -= _playerController.MovePlayer;
-        _playerActions.Move.canceled -= _playerController.StopMove;
+        _playerActions.Move.performed -= TrackMovement;
+        _playerActions.Move.canceled -= StopMovement;
         _playerActions.Dash.performed -= _playerController.Dash;
         _playerActions.Rotate.performed -= _playerController.RotateCamera;
         _playerActions.Attack.performed -= _weaponController.Attack;
