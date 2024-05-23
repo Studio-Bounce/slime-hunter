@@ -34,5 +34,6 @@ public class PauseMenu : Menu
         SceneLoader.Instance.UnloadScene(playSceneName);
         UIManager.Instance.SetMainMenu(true);
         SceneLoader.Instance.LoadScene(menuSceneName);//load menu scene
+        UIManager.Instance.SetHUDMenu(false);//unload HUD
     }
 }

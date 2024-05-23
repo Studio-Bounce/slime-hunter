@@ -8,6 +8,8 @@ public class UIManager : Singleton<UIManager>
     public Menu loadMenu;
     public Menu mainMenu;
     public Menu pauseMenu;
+    public Menu HUDMenu;//riccio's test
+ 
 
     public void SetPauseMenu(bool active)
     {
@@ -23,6 +25,11 @@ public class UIManager : Singleton<UIManager>
     {
         mainMenu.SetVisible(active);
     }
+
+    public void SetHUDMenu(bool active)
+    {
+        HUDMenu.SetVisible(active);
+    }//riccio's test
 
     public void ShowUI(Menu menuOBJ)
     {

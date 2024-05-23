@@ -434,6 +434,7 @@ MonoBehaviour:
   loadMenu: {fileID: 1687697183}
   mainMenu: {fileID: 1577727803}
   pauseMenu: {fileID: 1179840936}
+  HUDMenu: {fileID: 1498221639}
 --- !u!1 &1179840934
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: 4e1433707955c884c969a50848da7077, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 352255e35d5826a459a94a384c782344,
+  sourceAsset: {fileID: 9197481963319205126, guid: 07634f6335ef0de4fac6b6f2ff5df7ce,
     type: 3}
   m_SortingOrder: 0
 --- !u!1 &1577727799
