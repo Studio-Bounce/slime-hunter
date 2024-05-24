@@ -62,11 +62,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8529491203750411947}
+  - component: {fileID: 2767975063603732144}
   - component: {fileID: 3801100224341897558}
   - component: {fileID: 2869985602088549266}
   - component: {fileID: 4646127613627469845}
   - component: {fileID: 1030678316373288018}
   - component: {fileID: 6347398221826499309}
+  - component: {fileID: 4347139268971403823}
   m_Layer: 7
   m_Name: BasicSlime
   m_TagString: Untagged
@@ -92,6 +94,27 @@ Transform:
   - {fileID: 6957836529911761091}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!135 &2767975063603732144
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8820871006783578033}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &3801100224341897558
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -139,7 +162,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.5
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -202,11 +225,24 @@ MonoBehaviour:
   chaseMat: {fileID: 2100000, guid: 80e2ba57f9633224a99ab18d4537e0bd, type: 2}
   attackMat: {fileID: 2100000, guid: 54086adf35a39a34f93097e070b5c598, type: 2}
   cooldownTime: 3
-  seekDistance: 10
+  seekDistance: 5
   wanderSpeed: 1
   chaseSpeed: 2
   attackSpeed: 10
-  attackRadius: 3.5
+  attackRadius: 2
+--- !u!114 &4347139268971403823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8820871006783578033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
 --- !u!1 &8843669738811188421
 GameObject:
   m_ObjectHideFlags: 0

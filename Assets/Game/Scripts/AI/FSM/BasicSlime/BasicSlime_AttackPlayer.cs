@@ -22,6 +22,9 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             Material[] mats = { fsm.attackMat };
             fsm.slimeOuterMesh.materials = mats;
         }
+
+        // Make the weapon active
+        fsm.gameObject.GetComponent<EnemyWeapon>().ActivateWeapon();
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -44,5 +47,8 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             Material[] mats = { fsm.defaultMat };
             fsm.slimeOuterMesh.materials = mats;
         }
+
+        // Make the weapon inactive
+        fsm.gameObject.GetComponent<EnemyWeapon>().DeactivateWeapon();
     }
 }

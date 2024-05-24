@@ -2,23 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// DamageDealer needs a trigger collider and rigidbody to be able to call OnTriggerEnter.
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class DamageDealer : MonoBehaviour
 {
-    protected LayerMask hitLayers;
-    protected Damage damage;
+    public LayerMask hitLayers;
+    public Damage damage;
 
     // Active damage dealer deals damage. Inactive does not.
-    protected bool active = false;
+    public bool active = false;
 
     private void Start()
     {
         // Ensure the rigid body is kinematic
         Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-        }
+        rb.isKinematic = true;
     }
 
     private void OnTriggerEnter(Collider other)

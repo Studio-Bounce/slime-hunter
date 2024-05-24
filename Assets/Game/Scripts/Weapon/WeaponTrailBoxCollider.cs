@@ -37,18 +37,18 @@ public class WeaponTrailBoxCollider : MonoBehaviour
             BoxCollider collider =  arcPart.AddComponent<BoxCollider>();
             collider.isTrigger = true;
             _colliders.Add(collider);
-            arcPart.AddComponent<Weapon>();
+            //arcPart.AddComponent<Weapon>();
         }
     }
 
-    private void SetWeapon(WeaponSO weaponSO)
-    {
-        foreach (BoxCollider collider in _colliders)
-        {
-            Weapon weapon = collider.gameObject.GetComponent<Weapon>();
-            weapon.Setup(weaponSO);
-        }
-    }
+    //private void SetWeapon(WeaponSO weaponSO)
+    //{
+    //    foreach (BoxCollider collider in _colliders)
+    //    {
+    //        Weapon weapon = collider.gameObject.GetComponent<Weapon>();
+    //        weapon.Setup(weaponSO);
+    //    }
+    //}
 
     private void SetupBoxArc(float angle, float radius, float height)
     {
