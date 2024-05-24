@@ -181,7 +181,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 40
-  slimeMaterials: []
+  normalEye: {fileID: 8580069880333395135}
+  attackEye: {fileID: 2369544507332571313}
+  deathEye: {fileID: 7049523281270179399}
+  damageEyeTimer: 0.25
 --- !u!114 &1030678316373288018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +226,7 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   slimeOuterMesh: {fileID: 2201507902128942745}
   weapon: {fileID: 0}
+  slimeEnemy: {fileID: 0}
   defaultMat: {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
   chaseMat: {fileID: 2100000, guid: 80e2ba57f9633224a99ab18d4537e0bd, type: 2}
   attackMat: {fileID: 2100000, guid: 54086adf35a39a34f93097e070b5c598, type: 2}
@@ -430,9 +434,27 @@ SkinnedMeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 6891582375880887506}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &2369544507332571313 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -53619314171823005, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6891582375880887506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6352724013957278521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6891582375880887506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7049523281270179399 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4501103441120955029, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6891582375880887506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8580069880333395135 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2932223447192168557, guid: 772ae3dc15e833f40999ac3cb2013fa2,
     type: 3}
   m_PrefabInstance: {fileID: 6891582375880887506}
   m_PrefabAsset: {fileID: 0}

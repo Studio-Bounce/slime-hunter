@@ -20,6 +20,14 @@ public class Enemy : DamageTaker, ITakeDamage
     [SerializeField] float damageEyeTimer = 1.0f;
     private bool freezeEyeChange = false;
 
+    protected override void Start()
+    {
+        base.Start();
+        normalEye.enabled = true;
+        attackEye.enabled = false;
+        deathEye.enabled = false;
+    }
+
     public override void TakeDamage(Damage damage)
     {
         base.TakeDamage(damage);
