@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Properties")]
     public Animator animator;
     private int blendSpeedHash;
+    private int dashHash;
 
     //public float rotationSpeed = 5f;
     public float moveSpeed = 5f;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         blendSpeedHash = Animator.StringToHash("blendSpeed");
+        dashHash = Animator.StringToHash("isDashing");
     }
 
     void Start()
@@ -130,6 +132,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator PerformDash(Vector3 dashVector)
     {
         isDashing = true;
+        animator.SetBool(dashHash, isDashing);
 
         // Dash follows the curve of y^3 = x from 0 to 1
         // Provides a quick action in beginning which then slows
@@ -145,6 +148,7 @@ public class PlayerController : MonoBehaviour
         }
         
         isDashing = false;
+        animator.SetBool(dashHash, isDashing);
         lastDashTime = Time.time;
     }
 

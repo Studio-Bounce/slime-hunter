@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3962386327113607608}
-  - component: {fileID: 2900476555374332001}
   m_Layer: 0
   m_Name: FunnyWeapon
   m_TagString: Untagged
@@ -33,27 +32,6 @@ Transform:
   - {fileID: 4268448195935110796}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2900476555374332001
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5784571176224258707}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.22, y: 0.26, z: 1.46}
-  m_Center: {x: 0, y: 0, z: 0.64}
 --- !u!1001 &4374730789940879719
 PrefabInstance:
   m_ObjectHideFlags: 0
