@@ -23,7 +23,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
         Destroy(gameObject);
     }
 
-    public void TakeDamage(Damage damage)
+    public virtual void TakeDamage(Damage damage)
     {
         health -= damage.value;
         StartCoroutine(ApplyKnockback(damage));

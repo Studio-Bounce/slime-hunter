@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 40
+  slimeMaterials: []
 --- !u!114 &1030678316373288018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,11 +222,12 @@ MonoBehaviour:
   slimeAgent: {fileID: 0}
   playerTransform: {fileID: 0}
   slimeOuterMesh: {fileID: 2201507902128942745}
+  weapon: {fileID: 0}
   defaultMat: {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
   chaseMat: {fileID: 2100000, guid: 80e2ba57f9633224a99ab18d4537e0bd, type: 2}
   attackMat: {fileID: 2100000, guid: 54086adf35a39a34f93097e070b5c598, type: 2}
   cooldownTime: 3
-  seekDistance: 5
+  seekDistance: 6
   wanderSpeed: 1
   chaseSpeed: 2
   attackSpeed: 10
