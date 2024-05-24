@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
@@ -19,11 +20,12 @@ public class WeaponController : MonoBehaviour
 
     [Header("Animations/Visuals")]
     public AnimationCurve animationSpeedCurve;
+    public WeaponTrailMeshCollider trailCollider;
+
     [Tooltip("A GameObject that has a Visual Effect component")]
     public VisualEffect weaponVFX;
     public AnimationClip baseAttackClip;
 
-    Weapon _weaponComponent;
     private AnimatorOverrideController _overrideAnimatorController;
     private int _equippedWeaponIndex = 0;
     private GameObject _currentWeaponPrefab;
@@ -75,32 +77,19 @@ public class WeaponController : MonoBehaviour
         _currentWeaponPrefab = Instantiate(weaponSO.weaponModel, handPivot);
         _currentWeaponPrefab.transform.forward = handPivot.forward;
         _currentWeaponPrefab.transform.position += handPivotOffset;
-        _weaponComponent = _currentWeaponPrefab.AddComponent<Weapon>( );
+        Weapon _weaponComponent = _currentWeaponPrefab.AddComponent<Weapon>( );
         _weaponComponent?.Setup(weaponSO);
-        _weaponComponent.active = false;
         SetupWeaponAnimations(weaponSO);
     }
 
     // Replace base attack animation with weapon animations
     private void SetupWeaponAnimations(WeaponSO weaponSO)
     {
-        foreach (AnimationClip move in weaponSO.attackMoves)
+        foreach (AttackMove move in weaponSO.attackMoves)
         {
-            _overrideAnimatorController[baseAttackClip.name] = move;
+            _overrideAnimatorController[baseAttackClip.name] = move.clip;
         }
         _animator.runtimeAnimatorController = _overrideAnimatorController;
-    }
-
-    private AnimationClip GetAnimationClipByName(RuntimeAnimatorController controller, string clipName)
-    {
-        foreach (AnimationClip clip in controller.animationClips)
-        {
-            if (clip.name == clipName)
-            {
-                return clip;
-            }
-        }
-        return null;
     }
 
     public void CycleWeapon(InputAction.CallbackContext context)
@@ -131,28 +120,20 @@ public class WeaponController : MonoBehaviour
         Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
 
         Vector2 finalDirection = (forwardDirection * clickDirection.y + rightDirection * clickDirection.x).normalized;
-
         transform.forward = new Vector3(finalDirection.x, 0, finalDirection.y);
 
         _animator.SetTrigger(attackTriggerHash);
-        //StartCoroutine(ApplyAttackCurve());
     }
 
     public void EnableAttack()
     {
         weaponVFX.transform.position = handPivot.transform.position;
         weaponVFX.transform.forward = handPivotForward;
-        PlayAttackVFX(availableWeapons[_equippedWeaponIndex]);
-        _weaponComponent.active = true;
+        weaponVFX.Play();
+        trailCollider.Attack(availableWeapons[_equippedWeaponIndex]);
     }
     public void DisableAttack()
     {
-        _weaponComponent.active = false;
-    }
-
-    private void PlayAttackVFX(WeaponSO weaponSO)
-    {
-        weaponVFX.Play();
     }
 
 #if UNITY_EDITOR
@@ -176,13 +157,13 @@ public class WeaponController : MonoBehaviour
         Gizmos.DrawLine(transform.position, transform.position + transform.forward);
 
         // Weapon Attack
-        Handles.color = new Color(1, 0, 1, 0.1f);
-        if (availableWeapons[0] != null)
-        {
-            float attackAngle = 90f;
-            Vector3 attackStart = Quaternion.AngleAxis(-attackAngle / 2, transform.up) * transform.forward;
-            Handles.DrawSolidArc(transform.position, transform.up, attackStart, attackAngle, availableWeapons[0].range);
-        }
+        //Handles.color = new Color(1, 0, 1, 0.1f);
+        //if (availableWeapons[0] != null)
+        //{
+        //    float attackAngle = 90f;
+        //    Vector3 attackStart = Quaternion.AngleAxis(-attackAngle / 2, transform.up) * transform.forward;
+        //    Handles.DrawSolidArc(transform.position, transform.up, attackStart, attackAngle, availableWeapons[0].range);
+        //}
     }
 #endif
 }

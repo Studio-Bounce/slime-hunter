@@ -2,16 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Damage Dealer uses OnTriggerEnter to detect & deal damage.
-// OnTriggerEnter needs rigidbody to trigger.
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class DamageDealer : MonoBehaviour
 {
-    public LayerMask hitLayers;
-    public Damage damage;
+    protected LayerMask hitLayers;
+    protected Damage damage;
 
     // Active damage dealer deals damage. Inactive does not.
-    public bool active = true;
+    protected bool active = false;
 
     private void Start()
     {

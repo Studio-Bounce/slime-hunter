@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(Animator), typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Properties")]

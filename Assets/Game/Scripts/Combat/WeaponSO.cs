@@ -1,5 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+[Serializable]
+public struct AttackMove
+{
+    public AnimationClip clip;
+}
 
 [CreateAssetMenu(fileName = "NewWeapon", menuName = "Weapons/Weapon")]
 public class WeaponSO : ScriptableObject
@@ -11,5 +18,5 @@ public class WeaponSO : ScriptableObject
     public LayerMask hitLayers;
     public GameObject weaponModel;
     public AudioClip hitSound;
-    public List<AnimationClip> attackMoves;
+    public List<AttackMove> attackMoves;
 }
