@@ -17,6 +17,7 @@ public class BasicSlime_FSM : FSM
 
     public SkinnedMeshRenderer slimeOuterMesh;
     public EnemyWeapon weapon;
+    public Enemy slimeEnemy;
 
     [Header("Slime Materials")]
     public Material defaultMat;
@@ -36,6 +37,7 @@ public class BasicSlime_FSM : FSM
     {
         slimeAgent = GetComponent<SteeringAgent>();
         weapon = GetComponent<EnemyWeapon>();
+        slimeEnemy = GetComponent<Enemy>();
         playerTransform = GameObject.FindWithTag("Player")?.transform;
         UnityEngine.Assertions.Assert.IsNotNull(playerTransform, "GameObject with tag 'Player' not found!");
     }

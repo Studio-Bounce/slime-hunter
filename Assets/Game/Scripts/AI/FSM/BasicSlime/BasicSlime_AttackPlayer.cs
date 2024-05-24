@@ -25,6 +25,9 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 
         // Make the weapon active
         fsm.weapon.ActivateWeapon();
+
+        // Change eye
+        fsm.slimeEnemy.SetEye(EnemyEye.ATTACK);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -49,5 +52,8 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 
         // Make the weapon inactive
         fsm.weapon.DeactivateWeapon();
+
+        // Change eye
+        fsm.slimeEnemy.SetEye(EnemyEye.NORMAL);
     }
 }
