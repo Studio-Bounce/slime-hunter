@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,14 +17,34 @@ public class Enemy : DamageTaker, ITakeDamage
     [SerializeField] SkinnedMeshRenderer attackEye;
     [SerializeField] SkinnedMeshRenderer deathEye;
 
+    [SerializeField] float damageEyeTimer = 1.0f;
+    private bool freezeEyeChange = false;
+
     public override void TakeDamage(Damage damage)
     {
         base.TakeDamage(damage);
+        StartCoroutine(ChangeEyeToDamage());
+    }
 
+    IEnumerator ChangeEyeToDamage()
+    {
+        SetEye(EnemyEye.DEATH);
+        freezeEyeChange = true;
+        yield return new WaitForSeconds(damageEyeTimer);
+        freezeEyeChange = false;
     }
 
     public void SetEye(EnemyEye enemyEye)
     {
+        StartCoroutine(ChangeEye(enemyEye));
+    }
+
+    IEnumerator ChangeEye(EnemyEye enemyEye)
+    {
+        while (freezeEyeChange)
+        {
+            yield return null;
+        }
         normalEye.enabled = (enemyEye == EnemyEye.NORMAL);
         attackEye.enabled = (enemyEye == EnemyEye.ATTACK);
         deathEye.enabled = (enemyEye == EnemyEye.DEATH);
