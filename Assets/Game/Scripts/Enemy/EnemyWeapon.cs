@@ -6,10 +6,16 @@ public class EnemyWeapon : DamageDealer
 {
     [SerializeField] WeaponSO slimeHitWeapon;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         damage = slimeHitWeapon.damage;
         hitLayers = slimeHitWeapon.hitLayers;
+    }
+
+    public bool DidAttackLand()
+    {
+        return attackDetected;
     }
 
     public void ActivateWeapon()

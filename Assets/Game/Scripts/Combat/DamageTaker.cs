@@ -13,7 +13,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
     CharacterController characterController;
 
-    private void Start()
+    protected virtual void Start()
     {
         characterController = GetComponent<CharacterController>();
     }

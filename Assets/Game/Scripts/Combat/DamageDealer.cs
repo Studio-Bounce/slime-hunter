@@ -6,17 +6,25 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class DamageDealer : MonoBehaviour
 {
-    public LayerMask hitLayers;
-    public Damage damage;
+    protected LayerMask hitLayers;
+    protected Damage damage;
 
     // Active damage dealer deals damage. Inactive does not.
-    public bool active = false;
+    protected bool active = false;
+    // attackDetected can be used by child classes to do something on attack
+    protected bool attackDetected = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         // Ensure the rigid body is kinematic
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
+    }
+
+    protected virtual void Update()
+    {
+        if (!active)
+            attackDetected = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -27,6 +35,7 @@ public class DamageDealer : MonoBehaviour
             damage.direction = (other.transform.position - transform.position).normalized;
             ITakeDamage damageReceiver = other.gameObject.GetComponent<ITakeDamage>();
             damageReceiver?.TakeDamage(damage);
+            attackDetected = true;
         }
     }
 

@@ -24,7 +24,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         }
 
         // Make the weapon active
-        fsm.gameObject.GetComponent<EnemyWeapon>().ActivateWeapon();
+        fsm.weapon.ActivateWeapon();
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -32,8 +32,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         float targetDistance = Vector3.Distance(fsm.slimeAgent.transform.position, fsm.seekSteeringBehaviour.target);
 
         // Once attack is complete, go to rest state
-        // HACK: Get rid of the 0.8f. With attack animation, detect attack completion on animation completion
-        if (fsm.slimeAgent.reachedGoal || targetDistance < 0.8f)
+        if (fsm.slimeAgent.reachedGoal || fsm.weapon.DidAttackLand())
         {
             fsm.ChangeState(fsm.CooldownStateName);
         }
@@ -49,6 +48,6 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         }
 
         // Make the weapon inactive
-        fsm.gameObject.GetComponent<EnemyWeapon>().DeactivateWeapon();
+        fsm.weapon.DeactivateWeapon();
     }
 }

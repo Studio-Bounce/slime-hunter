@@ -14,8 +14,9 @@ public class WeaponTrailMeshCollider : DamageDealer
     private int _vertexCount;
     private bool _isAttack = false;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         _vertexCount = meshResolution + 2;
         _collider = GetComponent<MeshCollider>();
         _SetupArcMesh();
@@ -23,8 +24,9 @@ public class WeaponTrailMeshCollider : DamageDealer
         _collider.isTrigger = true;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (liveReload) _SetupArcMesh();
     }
 
