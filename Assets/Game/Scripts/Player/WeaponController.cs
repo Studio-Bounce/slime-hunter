@@ -77,8 +77,10 @@ public class WeaponController : MonoBehaviour
         _currentWeaponPrefab = Instantiate(weaponSO.weaponModel, handPivot);
         _currentWeaponPrefab.transform.forward = handPivot.forward;
         _currentWeaponPrefab.transform.position += handPivotOffset;
-        Weapon _weaponComponent = _currentWeaponPrefab.AddComponent<Weapon>( );
-        _weaponComponent?.Setup(weaponSO);
+        //Weapon _weaponComponent = _currentWeaponPrefab.AddComponent<Weapon>( );
+        //_weaponComponent?.Setup(weaponSO);
+        // The weapon trail needs to know current weapon's settings
+        trailCollider.SetupWeaponSettings(weaponSO);
         SetupWeaponAnimations(weaponSO);
     }
 
@@ -130,8 +132,9 @@ public class WeaponController : MonoBehaviour
         weaponVFX.transform.position = handPivot.transform.position;
         weaponVFX.transform.forward = handPivotForward;
         weaponVFX.Play();
-        trailCollider.Attack(availableWeapons[_equippedWeaponIndex]);
+        trailCollider.Attack();
     }
+
     public void DisableAttack()
     {
     }

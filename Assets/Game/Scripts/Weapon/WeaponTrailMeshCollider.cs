@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
 public class WeaponTrailMeshCollider : DamageDealer
 {
     [Header("Hitboxing")]
@@ -15,8 +14,9 @@ public class WeaponTrailMeshCollider : DamageDealer
     private int _vertexCount;
     private bool _isAttack = false;
 
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         _vertexCount = meshResolution + 2;
         _collider = GetComponent<MeshCollider>();
         _SetupArcMesh();
@@ -24,16 +24,21 @@ public class WeaponTrailMeshCollider : DamageDealer
         _collider.isTrigger = true;
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         if (liveReload) _SetupArcMesh();
     }
 
-    public void Attack(WeaponSO weaponSO)
+    public void SetupWeaponSettings(WeaponSO weaponSO)
     {
         damage = weaponSO.damage;
         hitLayers = weaponSO.hitLayers;
         arcRadius = weaponSO.range;
+    }
+
+    public void Attack()
+    {
         UpdateArcMesh();
         if (!_isAttack) StartCoroutine(ActiveAttack(0.5f));
     }
