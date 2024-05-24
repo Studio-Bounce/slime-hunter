@@ -5,8 +5,21 @@ using UnityEngine.UIElements;
 
 public class LoadMenu : Menu
 {
+    [SerializeField] float rotationSpeed = 100.0f;
+    VisualElement spinner;
+
     void Start()
     {
         VisualElement root = uiDocument.rootVisualElement;
+        spinner = root.Q<VisualElement>("loadSpinner");
+    }
+
+    private void Update()
+    {
+        if (spinner != null)
+        {
+            Vector3 rotation = spinner.transform.rotation.eulerAngles + new Vector3(0, 0, rotationSpeed * Time.deltaTime);
+            spinner.transform.rotation = Quaternion.Euler(rotation);
+        }
     }
 }
