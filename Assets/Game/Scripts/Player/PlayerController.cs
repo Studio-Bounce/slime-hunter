@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     private int blendSpeedHash;
     private int dashHash;
+    private int attackHash = Animator.StringToHash("Attack");
 
     //public float rotationSpeed = 5f;
     public float moveSpeed = 5f;
+    public float moveSpeedOnAttack = 2f;
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 0.5f;
@@ -118,7 +120,12 @@ public class PlayerController : MonoBehaviour
         }
 
         // Move
-        characterController.Move(moveSpeed * Time.deltaTime * new Vector3(moveDirection.x, 0, moveDirection.y));
+        float _moveSpeed = moveSpeed;
+        if (animator.GetCurrentAnimatorStateInfo(0).shortNameHash == attackHash)
+        {
+            _moveSpeed = moveSpeedOnAttack;
+        }
+        characterController.Move(_moveSpeed * Time.deltaTime * new Vector3(moveDirection.x, 0, moveDirection.y));
     }
 
     public void Dash(InputAction.CallbackContext context)
