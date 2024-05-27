@@ -9,6 +9,7 @@ public struct AttackMove
     public float duration;
     public float range;
     public float animationOffset;
+    public Vector2 direction;
 }
 
 [CreateAssetMenu(fileName = "NewWeapon", menuName = "Weapons/Weapon")]
