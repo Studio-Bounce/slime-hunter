@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Animator), typeof(CharacterController))]
+[RequireComponent(typeof(Animator), typeof(CharacterController), typeof(WeaponController))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Properties")]
@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
 
     //public float rotationSpeed = 5f;
     public float moveSpeed = 5f;
-    public float moveSpeedOnAttack = 2f;
+    public float slowDownMultiplierOnAttack = 0.3f;
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 0.5f;
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     // Used for jump, dash, and gravity
     CharacterController characterController;
     InputController inputController;
+    WeaponController weaponController;
 
     private float lastDashTime = 0.0f;
 
@@ -54,6 +55,8 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         inputController = GetComponent<InputController>();
+        weaponController = GetComponent<WeaponController>();
+
         Debug.Assert(cameraTransform != null, "Missing camera transform");
     }
 
@@ -114,17 +117,17 @@ public class PlayerController : MonoBehaviour
         moveDirection = (forwardDirection * moveInput.y + rightDirection * moveInput.x).normalized;
 
         // Rotate the player to look at the movement direction
-        if (moveDirection != Vector2.zero)
+        float _moveSpeed = moveSpeed;
+        if (weaponController.isAttack)
+        {
+            _moveSpeed *= slowDownMultiplierOnAttack;
+        } 
+        else if (moveDirection != Vector2.zero) // Only rotate to movement when not attacking
         {
             transform.rotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, moveDirection.y), Vector3.up); // Snap
         }
 
         // Move
-        float _moveSpeed = moveSpeed;
-        if (animator.GetCurrentAnimatorStateInfo(0).shortNameHash == attackHash)
-        {
-            _moveSpeed = moveSpeedOnAttack;
-        }
         characterController.Move(_moveSpeed * Time.deltaTime * new Vector3(moveDirection.x, 0, moveDirection.y));
     }
 
