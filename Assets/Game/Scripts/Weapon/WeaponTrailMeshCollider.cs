@@ -9,7 +9,7 @@ public class WeaponTrailMeshCollider : DamageDealer
     public float arcRadius = 1;
     public int meshResolution = 3;
     public bool liveReload = false;
-    [Tooltip("Ensure that this value is low enough to prevent double attacks.")]
+    [Tooltip("Ensure that this value matches animation and is low enough to prevent double attacks.")]
     public float attackDuration = 0.5f;
 
     private MeshCollider _collider;

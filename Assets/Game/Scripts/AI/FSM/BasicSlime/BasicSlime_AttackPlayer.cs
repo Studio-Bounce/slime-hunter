@@ -32,6 +32,12 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        // If enemy eye is normal, change it to attack
+        if (fsm.slimeEnemy.GetEnemyEye() == EnemyEye.NORMAL)
+        {
+            fsm.slimeEnemy.SetEye(EnemyEye.ATTACK);
+        }
+
         // Once attack is complete, go to rest state
         if (fsm.slimeAgent.reachedGoal || fsm.weapon.DidAttackLand())
         {
