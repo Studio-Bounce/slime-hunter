@@ -32,8 +32,6 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        float targetDistance = Vector3.Distance(fsm.slimeAgent.transform.position, fsm.seekSteeringBehaviour.target);
-
         // Once attack is complete, go to rest state
         if (fsm.slimeAgent.reachedGoal || fsm.weapon.DidAttackLand())
         {

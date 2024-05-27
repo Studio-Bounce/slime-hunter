@@ -180,7 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77dd3ea3c9005a54395fbe90b86a583a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 40
+  health: 50
+  damageDelay: 0.5
+  knockbackTime: 0.2
   normalEye: {fileID: 8580069880333395135}
   attackEye: {fileID: 2369544507332571313}
   deathEye: {fileID: 7049523281270179399}
@@ -231,11 +233,11 @@ MonoBehaviour:
   chaseMat: {fileID: 2100000, guid: 80e2ba57f9633224a99ab18d4537e0bd, type: 2}
   attackMat: {fileID: 2100000, guid: 54086adf35a39a34f93097e070b5c598, type: 2}
   cooldownTime: 3
-  seekDistance: 6
+  seekDistance: 8
   wanderSpeed: 1
   chaseSpeed: 2
   attackSpeed: 10
-  attackRadius: 2
+  attackRadius: 3
 --- !u!114 &4347139268971403823
 MonoBehaviour:
   m_ObjectHideFlags: 0

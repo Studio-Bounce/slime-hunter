@@ -14,6 +14,8 @@ public class BasicSlime_WanderAround : BasicSlime_BaseState
 
         fsm.slimeAgent.reachedGoal = false;
         fsm.slimeAgent.maxSpeed = fsm.wanderSpeed;
+
+        fsm.slimeEnemy.SetEye(EnemyEye.NORMAL);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
