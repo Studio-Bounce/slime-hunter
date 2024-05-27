@@ -16,6 +16,7 @@ public class Enemy : DamageTaker, ITakeDamage
     [SerializeField] SkinnedMeshRenderer normalEye;
     [SerializeField] SkinnedMeshRenderer attackEye;
     [SerializeField] SkinnedMeshRenderer deathEye;
+    private EnemyEye eye;
 
     [SerializeField] float damageEyeTimer = 1.0f;
     private bool freezeEyeChange = false;
@@ -40,6 +41,7 @@ public class Enemy : DamageTaker, ITakeDamage
         freezeEyeChange = true;
         yield return new WaitForSeconds(damageEyeTimer);
         freezeEyeChange = false;
+        SetEye(EnemyEye.NORMAL);
     }
 
     public void SetEye(EnemyEye enemyEye)
@@ -53,8 +55,14 @@ public class Enemy : DamageTaker, ITakeDamage
         {
             yield return null;
         }
+        eye = enemyEye;
         normalEye.enabled = (enemyEye == EnemyEye.NORMAL);
         attackEye.enabled = (enemyEye == EnemyEye.ATTACK);
         deathEye.enabled = (enemyEye == EnemyEye.DEATH);
+    }
+
+    public EnemyEye GetEnemyEye()
+    {
+        return eye;
     }
 }

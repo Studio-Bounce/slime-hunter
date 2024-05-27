@@ -10,7 +10,11 @@ using UnityEngine;
 public class DamageTaker : MonoBehaviour, ITakeDamage
 {
     public int health = 100;
+    [Tooltip("Damage delay ensures that multiple damages do not get registered in a short interval")]
+    public float damageDelay = 0.5f;
+    public float knockbackTime = 0.25f;
 
+    float lastDamageTime = 0;
     CharacterController characterController;
 
     protected virtual void Start()
@@ -25,8 +29,15 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
     public virtual void TakeDamage(Damage damage)
     {
+        // Prevents accidental double damage
+        if (Time.time < lastDamageTime + damageDelay)
+        {
+            return;
+        }
+
         health -= damage.value;
         StartCoroutine(ApplyKnockback(damage));
+        lastDamageTime = Time.time;
 
         if (health <= 0)
         {
@@ -34,15 +45,25 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
         }
     }
 
-    // DamageTaker does not have RigidBody. So, knockback uses transform translate.
     private IEnumerator ApplyKnockback(Damage damage)
     {
         Vector3 knockbackVec = damage.direction * damage.knockback;
         knockbackVec.y = 0;
-        if (characterController != null && characterController.enabled)
-            characterController.Move(knockbackVec);
-        else
-            transform.Translate(knockbackVec);
-        yield return null;
+
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = startPosition + knockbackVec;
+        float timeElapsed = 0.0f;
+        while (timeElapsed < knockbackTime)
+        {
+            // Lerp knockback
+            Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, timeElapsed / knockbackTime);
+            if (characterController != null && characterController.enabled)
+                characterController.Move(newPosition - transform.position);
+            else
+                transform.Translate(newPosition - transform.position);
+
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
     }
 }

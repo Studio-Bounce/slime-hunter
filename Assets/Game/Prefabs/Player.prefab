@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  damageDelay: 0.5
+  knockbackTime: 0.25
 --- !u!114 &2463496225978856163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1901138044527206527}
   moveSpeed: 5
+  moveSpeedOnAttack: 2
   dashDistance: 3
   dashDuration: 0.2
   dashCooldown: 0.25
@@ -241,7 +244,7 @@ GameObject:
   - component: {fileID: 5234145860677525546}
   - component: {fileID: 3124412393425886821}
   - component: {fileID: 8536796487223862311}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: TrailMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,19 +327,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7f69d7d97456a41befd77507afab60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  damage:
-    value: 0
-    knockback: 0
-    direction: {x: 0, y: 0, z: 0}
-    element: 0
-  active: 0
   arcAngle: 90
   arcRadius: 1
   meshResolution: 3
   liveReload: 0
+  attackDuration: 0.2
 --- !u!1 &8217618643164897953
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +343,7 @@ GameObject:
   - component: {fileID: 4634531651538540312}
   - component: {fileID: 5920165869425359411}
   - component: {fileID: 2533987784087368092}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: vfxgraph-slash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
