@@ -18,6 +18,8 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     public float damageDelay = 0.5f;
     public float knockbackTime = 0.25f;
 
+    protected bool isInKnockback = false;
+
     float lastDamageTime = 0;
     CharacterController characterController;
 
@@ -41,12 +43,12 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
         }
 
         health -= damage.value;
-        StartCoroutine(ApplyKnockback(damage));
         lastDamageTime = Time.time;
         if (slider != null)
         {
             slider.value = ((float) health / maxHealth);
         }
+        StartCoroutine(ApplyKnockback(damage));
 
         if (health <= 0)
         {
@@ -56,6 +58,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
     private IEnumerator ApplyKnockback(Damage damage)
     {
+        isInKnockback = true;
         Vector3 knockbackVec = damage.direction * damage.knockback;
         knockbackVec.y = 0;
 
@@ -74,5 +77,6 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+        isInKnockback = false;
     }
 }
