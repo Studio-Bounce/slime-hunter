@@ -22,6 +22,8 @@ public class BasicSlime_ChasePlayer : BasicSlime_BaseState
             Material[] mats = { fsm.chaseMat };
             fsm.slimeOuterMesh.materials = mats;
         }
+
+        fsm.slimeEnemy.SetEye(EnemyEye.NORMAL);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

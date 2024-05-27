@@ -10,7 +10,10 @@ using UnityEngine;
 public class DamageTaker : MonoBehaviour, ITakeDamage
 {
     public int health = 100;
+    [Tooltip("Damage delay ensures that multiple damages do not get registered in a short interval")]
+    public float damageDelay = 0.5f;
 
+    float lastDamageTime = 0;
     CharacterController characterController;
 
     protected virtual void Start()
@@ -25,8 +28,15 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
     public virtual void TakeDamage(Damage damage)
     {
+        // Prevents accidental double damage
+        if (Time.time < lastDamageTime + damageDelay)
+        {
+            return;
+        }
+
         health -= damage.value;
         StartCoroutine(ApplyKnockback(damage));
+        lastDamageTime = Time.time;
 
         if (health <= 0)
         {
