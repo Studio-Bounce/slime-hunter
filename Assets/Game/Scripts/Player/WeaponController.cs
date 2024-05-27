@@ -25,6 +25,7 @@ public class WeaponController : MonoBehaviour
     public VisualEffect weaponVFX;
     public AnimationClip baseAttackClip;
 
+    // Weapon&Animation
     private AnimatorOverrideController _overrideAnimatorController;
     private int _equippedWeaponIndex = 0;
     private GameObject _currentWeaponPrefab;
@@ -32,6 +33,14 @@ public class WeaponController : MonoBehaviour
     private readonly int attackTriggerHash = Animator.StringToHash("Attack");
     private readonly int attackStateHash = Animator.StringToHash("Attack");
 
+    public bool isAttack = false;
+    private int _attackMoveIndex;
+
+    public WeaponSO CurrentWeapon
+    {
+        get { return availableWeapons[_equippedWeaponIndex]; }
+        set { availableWeapons[_equippedWeaponIndex] = value; }
+    }
 
     private void Awake()
     {
@@ -45,7 +54,7 @@ public class WeaponController : MonoBehaviour
 
         // Spawn Initial Weapon
         InitializeHandPivot();
-        InstantiateWeapon(availableWeapons[_equippedWeaponIndex]);
+        InstantiateWeapon(CurrentWeapon);
     }
 
     private void Update()
@@ -56,6 +65,16 @@ public class WeaponController : MonoBehaviour
             float animationTime = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
             _animator.speed = animationSpeedCurve.Evaluate(animationTime);
         }
+    }
+
+    public void EnableAttack()
+    {
+
+    }
+
+    public void DisableAttack()
+    {
+
     }
 
     // Creates a new child GameObject to use as pivot transform so we don't influence the original hand rotation
@@ -76,8 +95,6 @@ public class WeaponController : MonoBehaviour
         _currentWeaponPrefab = Instantiate(weaponSO.weaponModel, handPivot);
         _currentWeaponPrefab.transform.forward = handPivot.forward;
         _currentWeaponPrefab.transform.position += handPivotOffset;
-        //Weapon _weaponComponent = _currentWeaponPrefab.AddComponent<Weapon>( );
-        //_weaponComponent?.Setup(weaponSO);
         // The weapon trail needs to know current weapon's settings
         trailCollider.SetupWeaponSettings(weaponSO);
         SetupWeaponAnimations(weaponSO);
@@ -104,11 +121,12 @@ public class WeaponController : MonoBehaviour
             Destroy(_currentWeaponPrefab);
         }
 
-        InstantiateWeapon(availableWeapons[_equippedWeaponIndex]);
+        InstantiateWeapon(CurrentWeapon);
     }
 
     public void Attack(InputAction.CallbackContext context)
     {
+        if (isAttack) return;
         // Get vector from player to mouse click
         Vector2 clickPosition = Mouse.current.position.ReadValue();
         Vector2 currentScreenPos = Camera.main.WorldToScreenPoint(transform.position);
@@ -120,22 +138,26 @@ public class WeaponController : MonoBehaviour
         forwardDirection.Normalize();
         Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
 
-        Vector2 finalDirection = (forwardDirection * clickDirection.y + rightDirection * clickDirection.x).normalized;
-        transform.forward = new Vector3(finalDirection.x, 0, finalDirection.y);
+        Vector2 attackDirection = (forwardDirection * clickDirection.y + rightDirection * clickDirection.x).normalized;
+        Vector3 finalDir = new Vector3(attackDirection.x, 0, attackDirection.y);
+
+        StartCoroutine(RunAttack(CurrentWeapon.attackMoves[_attackMoveIndex], finalDir));
+    }
+
+    private IEnumerator RunAttack(AttackMove attackMove, Vector3 direction)
+    {
+        isAttack = true;
+        transform.forward = direction;
+        weaponVFX.transform.forward = direction;
+        trailCollider.transform.forward = direction;
 
         _animator.SetTrigger(attackTriggerHash);
-    }
-
-    public void EnableAttack()
-    {
-        weaponVFX.transform.position = handPivot.transform.position;
-        weaponVFX.transform.forward = handPivotForward;
+        yield return new WaitForSeconds(attackMove.animationOffset);
         weaponVFX.Play();
         trailCollider.Attack();
-    }
+        yield return new WaitForSeconds(attackMove.duration);
 
-    public void DisableAttack()
-    {
+        isAttack = false;
     }
 
 #if UNITY_EDITOR
@@ -157,15 +179,6 @@ public class WeaponController : MonoBehaviour
         }
 
         Gizmos.DrawLine(transform.position, transform.position + transform.forward);
-
-        // Weapon Attack
-        //Handles.color = new Color(1, 0, 1, 0.1f);
-        //if (availableWeapons[0] != null)
-        //{
-        //    float attackAngle = 90f;
-        //    Vector3 attackStart = Quaternion.AngleAxis(-attackAngle / 2, transform.up) * transform.forward;
-        //    Handles.DrawSolidArc(transform.position, transform.up, attackStart, attackAngle, availableWeapons[0].range);
-        //}
     }
 #endif
 }

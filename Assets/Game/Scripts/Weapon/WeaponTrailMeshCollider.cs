@@ -9,8 +9,6 @@ public class WeaponTrailMeshCollider : DamageDealer
     public float arcRadius = 1;
     public int meshResolution = 3;
     public bool liveReload = false;
-    [Tooltip("Ensure that this value matches animation and is low enough to prevent double attacks.")]
-    public float attackDuration = 0.5f;
 
     private MeshCollider _collider;
     private int _vertexCount;
@@ -39,10 +37,10 @@ public class WeaponTrailMeshCollider : DamageDealer
         arcRadius = weaponSO.range;
     }
 
-    public void Attack()
+    public void Attack(float duration = 0.5f)
     {
         UpdateArcMesh();
-        if (!_isAttack) StartCoroutine(ActiveAttack(attackDuration));
+        if (!_isAttack) StartCoroutine(ActiveAttack(duration));
     }
 
     IEnumerator ActiveAttack(float duration)
