@@ -17,7 +17,7 @@ public class InputController : MonoBehaviour
 
     public Vector2 movement = Vector2.zero;
 
-    public const float INPUT_QUEUE_DELAY = .5f;
+    public const float INPUT_QUEUE_DELAY = .4f;
     private Dictionary<System.Action<InputContext>, InputContext> QueuedInputMap = new Dictionary<System.Action<InputContext>, InputContext>();
 
     private void Awake()
@@ -66,7 +66,6 @@ public class InputController : MonoBehaviour
         _playerActions.Dash.performed += _playerController.Dash;
         _playerActions.Rotate.performed += _playerController.RotateCamera;
         _playerActions.Attack.performed += e => StartCoroutine(QueueInput(_weaponController.Attack, e));
-        //_playerActions.Attack.performed += _weaponController.Attack;
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
     }
 
