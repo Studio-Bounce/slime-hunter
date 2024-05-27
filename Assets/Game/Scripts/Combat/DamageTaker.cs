@@ -65,7 +65,8 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
         while (timeElapsed < knockbackTime)
         {
             // Lerp knockback
-            Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, timeElapsed / knockbackTime);
+            float t = EasingFunctions.EaseOutCubic(timeElapsed / knockbackTime);
+            Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, t);
             if (characterController != null && characterController.enabled)
                 characterController.Move(newPosition - transform.position);
             else

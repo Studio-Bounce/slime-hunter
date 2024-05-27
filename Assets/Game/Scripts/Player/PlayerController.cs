@@ -191,8 +191,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PerformCameraRotate(float angle)
     {
-        Func<float, float> EaseOut = t => 1f - Mathf.Pow(1f - t, 3);
-
         isRotating = true;
         float startTime = Time.time;
         Quaternion startRotation = cameraTransform.localRotation;
@@ -202,7 +200,7 @@ public class PlayerController : MonoBehaviour
         {
 
             float t = (Time.time - startTime) / rotationDuration;
-            t = EaseOut(t);
+            t = EasingFunctions.EaseOutCubic(t);
             cameraTransform.localRotation = Quaternion.Lerp(startRotation, targetRotation, t);
             yield return null;
         }
