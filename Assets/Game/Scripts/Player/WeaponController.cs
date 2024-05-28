@@ -18,10 +18,7 @@ public class WeaponController : MonoBehaviour
     public WeaponSO[] availableWeapons = new WeaponSO[3];
 
     [Header("Animations/Visuals")]
-    public AnimationCurve animationSpeedCurve;
     public WeaponTrail trailCollider;
-
-    [Tooltip("A GameObject that has a Visual Effect component")]
     public AnimationClip baseAttackClip;
 
     // Weapon&Animation
@@ -29,10 +26,13 @@ public class WeaponController : MonoBehaviour
     private int _equippedWeaponIndex = 0;
     private GameObject _currentWeaponPrefab;
     private Animator _animator;
-    private readonly int attackTriggerHash = Animator.StringToHash("Attack");
+
+    private readonly int attackStartTriggerHash = Animator.StringToHash("AttackStart");
+    private readonly int attackEndTriggerHash = Animator.StringToHash("AttackEnd");
     private readonly int attackStateHash = Animator.StringToHash("Attack");
     private readonly int baseStateHash = Animator.StringToHash("Locomotion");
 
+    [HideInInspector, NonSerialized]
     public bool isAttack = false;
     private int _attackMoveIndex = 0;
 
@@ -60,15 +60,9 @@ public class WeaponController : MonoBehaviour
     private void Update()
     {
         _animator.speed = 1.0f;
-        //if (_animator.GetCurrentAnimatorStateInfo(0).shortNameHash == attackStateHash)
-        //{
-        //    float animationTime = _animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        //    _animator.speed = animationSpeedCurve.Evaluate(animationTime);
-        //}
     }
 
     public void EnableAttack() {}
-
     public void DisableAttack() {}
 
     // Creates a new child GameObject to use as pivot transform so we don't influence the original hand rotation
@@ -82,7 +76,7 @@ public class WeaponController : MonoBehaviour
         handPivot.forward = handPivotForward;
     }
 
-    // WIP: Should instantiate all weapons to begin with and disable as needed
+    // WIP: Should pool all weapons to begin with and disable as needed
     private void InstantiateWeapon(WeaponSO weaponSO)
     {
         if (weaponSO == null) return;
@@ -144,6 +138,9 @@ public class WeaponController : MonoBehaviour
         {
             _animator.CrossFade(baseStateHash, 0.0f);
         }
+        _animator.ResetTrigger(attackEndTriggerHash);
+        _animator.ResetTrigger(attackStartTriggerHash);
+
         SetupAttackAnimation(move);
         // Increment combo
         _attackMoveIndex = _attackMoveIndex < CurrentWeapon.attackMoves.Count-1 ? _attackMoveIndex+1 : 0;
@@ -151,11 +148,21 @@ public class WeaponController : MonoBehaviour
         transform.forward = direction;
         trailCollider.transform.forward = direction;
         // Start attack 
-        _animator.SetTrigger(attackTriggerHash);
+        _animator.SetTrigger(attackStartTriggerHash);
         yield return new WaitForSeconds(move.animationOffset);
-        trailCollider.Attack(move);
-        yield return new WaitForSeconds(move.duration);
+        // In case attack is interrupted at this point
+        if (isAttack)
+        {
+            trailCollider.Attack(move);
+            yield return new WaitForSeconds(move.duration);
+            isAttack = false;
+        }
+    }
+
+    public void InterruptAttack()
+    {
         isAttack = false;
+        _animator.SetTrigger(attackEndTriggerHash);
     }
 
 #if UNITY_EDITOR

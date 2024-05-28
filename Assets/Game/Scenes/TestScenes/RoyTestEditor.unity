@@ -348,10 +348,8 @@ MonoBehaviour:
     type: 3}
   basicSlimePreviewPrefab: {fileID: 392323323981360913, guid: f14f850f821ec864ba0e4667da16143e,
     type: 3}
-  rabbitSlimePrefab: {fileID: 8223826132166210976, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
-    type: 3}
-  rabbitSlimePreviewPrefab: {fileID: 3663717533752572683, guid: 7984715cda413df4789c7f95b9ee9376,
-    type: 3}
+  rabbitSlimePrefab: {fileID: 0}
+  rabbitSlimePreviewPrefab: {fileID: 0}
 --- !u!1 &136594373
 GameObject:
   m_ObjectHideFlags: 0
@@ -6035,7 +6033,7 @@ Transform:
   m_GameObject: {fileID: 775544181}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 4.353355, y: 6.238417, z: -19.882933}
+  m_LocalPosition: {x: 4.123725, y: 5.000001, z: -21.123726}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6124,7 +6122,7 @@ Transform:
   m_GameObject: {fileID: 823012860}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 4.353355, y: 6.238417, z: -19.882933}
+  m_LocalPosition: {x: 4.123725, y: 5.000001, z: -21.123726}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11786,7 +11784,7 @@ VisualEffect:
       m_Array:
       - m_Value: 1
         m_Name: Flip
-        m_Overridden: 0
+        m_Overridden: 1
 --- !u!4 &1598439280
 Transform:
   m_ObjectHideFlags: 0
@@ -11796,7 +11794,7 @@ Transform:
   m_GameObject: {fileID: 1598439277}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.85, y: 0, z: -14.64}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11839,6 +11837,16 @@ PrefabInstance:
         type: 3}
       propertyPath: animationSpeedCurve.m_Curve.Array.data[3].outSlope
       value: 0.11944922
+      objectReference: {fileID: 0}
+    - target: {fileID: 5760338420974404415, guid: 7c19e2e033650b243b9b77976b3424a8,
+        type: 3}
+      propertyPath: dashDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5760338420974404415, guid: 7c19e2e033650b243b9b77976b3424a8,
+        type: 3}
+      propertyPath: dashDuration
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5760338420974404415, guid: 7c19e2e033650b243b9b77976b3424a8,
         type: 3}

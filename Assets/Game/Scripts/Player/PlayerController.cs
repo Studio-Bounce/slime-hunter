@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     private int blendSpeedHash;
     private int dashHash;
-    private int attackHash = Animator.StringToHash("Attack");
 
     //public float rotationSpeed = 5f;
     public float moveSpeed = 5f;
@@ -133,7 +132,7 @@ public class PlayerController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (!isDashing && Time.time > lastDashTime + dashCooldown)
+        if (!isDashing && Time.time > lastDashTime + dashCooldown && !weaponController.isAttack)
         {
             StartCoroutine(PerformDash(transform.forward * dashDistance));
         }
@@ -153,6 +152,9 @@ public class PlayerController : MonoBehaviour
         while (dashProgress <= 1.0f)
         {
             dashProgress = (Time.time - startTime) / dashDuration;
+
+            dashProgress = EasingFunctions.EaseOutCubic(dashProgress);
+
             transform.position = startPosition + dashVector * dashProgress;
             yield return null;
         }
