@@ -16,11 +16,14 @@ public class Enemy : DamageTaker, ITakeDamage
     [SerializeField] SkinnedMeshRenderer normalEye;
     [SerializeField] SkinnedMeshRenderer attackEye;
     [SerializeField] SkinnedMeshRenderer deathEye;
-    private EnemyEye eye;
+    EnemyEye eye;
 
     [SerializeField] float damageEyeTimer = 1.0f;
-    private bool freezeEyeChange = false;
-    private TrailRenderer trailRenderer;
+    bool freezeEyeChange = false;
+    TrailRenderer trailRenderer;
+
+    [SerializeField] ParticleSystem hitParticles;
+    [SerializeField] float hitParticlesDuration = 1.0f;
 
     protected override void Start()
     {
@@ -35,11 +38,19 @@ public class Enemy : DamageTaker, ITakeDamage
     protected void OriginalTakeDamage(Damage damage)
     {
         base.TakeDamage(damage);
+        if (hitParticles != null)
+        {
+            StartCoroutine(ShowHitParticles());
+        }
     }
 
     public override void TakeDamage(Damage damage)
     {
         base.TakeDamage(damage);
+        if (hitParticles != null)
+        {
+            StartCoroutine(ShowHitParticles());
+        }
         StartCoroutine(DisableTrailOnKnockback());
         StartCoroutine(ChangeEyeToDamage());
     }
@@ -60,10 +71,23 @@ public class Enemy : DamageTaker, ITakeDamage
         if (trailRenderer != null)
         {
             trailRenderer.enabled = true;
+
             // Wait for a frame to ensure the trail is cleared
             yield return null;
-            // Restore the original trail time
-            trailRenderer.time = trailTime;
+
+            // Restore the original trail time (Frame has changed so do another null check)
+            if (trailRenderer != null)
+                trailRenderer.time = trailTime;
+        }
+    }
+
+    IEnumerator ShowHitParticles()
+    {
+        if (hitParticles != null)
+        {
+            hitParticles.Play();
+            yield return new WaitForSeconds(hitParticlesDuration);
+            hitParticles.Stop();
         }
     }
 
