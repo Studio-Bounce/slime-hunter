@@ -61,7 +61,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
         }
     }
 
-    private IEnumerator ApplyKnockback(Damage damage)
+    protected IEnumerator ApplyKnockback(Damage damage)
     {
         isInKnockback = true;
         Vector3 knockbackVec = damage.direction * damage.knockback;

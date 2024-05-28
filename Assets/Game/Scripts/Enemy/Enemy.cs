@@ -39,7 +39,6 @@ public class Enemy : DamageTaker, ITakeDamage
 
     public override void TakeDamage(Damage damage)
     {
-        Debug.Log("HERE");
         base.TakeDamage(damage);
         StartCoroutine(DisableTrailOnKnockback());
         StartCoroutine(ChangeEyeToDamage());

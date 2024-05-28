@@ -434,7 +434,7 @@ MonoBehaviour:
   loadMenu: {fileID: 1687697185}
   mainMenu: {fileID: 1577727803}
   pauseMenu: {fileID: 1179840936}
-  HUDMenu: {fileID: 1498221639}
+  HUDMenu: {fileID: 1498221641}
 --- !u!1 &1179840934
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1498221638}
   - component: {fileID: 1498221640}
-  - component: {fileID: 1498221639}
+  - component: {fileID: 1498221641}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -533,19 +533,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 976020910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1498221639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1498221637}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd40d19e9478a694f973dcb03b0d9bce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showOnStart: 0
 --- !u!114 &1498221640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,6 +550,19 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: 07eeeaac34b2d83429416f32725e6e1d,
     type: 3}
   m_SortingOrder: 0
+--- !u!114 &1498221641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498221637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d5a088599988534c8c6a8f1aa124bdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showOnStart: 0
 --- !u!1 &1577727799
 GameObject:
   m_ObjectHideFlags: 0
