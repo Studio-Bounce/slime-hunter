@@ -7,9 +7,12 @@ public class Editor : MonoBehaviour
 {
     UIDocument document = null;
     Button basicSlimeSpawnerBtn = null;
+    Button rabbitSlimeSpawnerBtn = null;
 
     [SerializeField] GameObject basicSlimePrefab;
     [SerializeField] GameObject basicSlimePreviewPrefab;
+    [SerializeField] GameObject rabbitSlimePrefab;
+    [SerializeField] GameObject rabbitSlimePreviewPrefab;
 
     private void Awake()
     {
@@ -24,11 +27,18 @@ public class Editor : MonoBehaviour
         VisualElement root = document.rootVisualElement;
         basicSlimeSpawnerBtn = root.Q<Button>("btnBasicSlime");
         basicSlimeSpawnerBtn.clicked += SpawnBasicSlime;
+        rabbitSlimeSpawnerBtn = root.Q<Button>("btnRabbitSlime");
+        rabbitSlimeSpawnerBtn.clicked += SpawnRabbitSlime;
     }
 
     private void SpawnBasicSlime()
     {
         LevelEditorManager.Instance.StandbyToSpawn(basicSlimePrefab, basicSlimePreviewPrefab);
+    }
+
+    private void SpawnRabbitSlime()
+    {
+        LevelEditorManager.Instance.StandbyToSpawn(rabbitSlimePrefab, rabbitSlimePreviewPrefab);
     }
 
     private void OnDestroy()
