@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // DamageTaker does not need rigidbody. Its collider triggers the collider of DamageDealer.
 // There's no OnTriggerEnter here because of absence of rigidbody.
@@ -10,9 +11,14 @@ using UnityEngine;
 public class DamageTaker : MonoBehaviour, ITakeDamage
 {
     public int health = 100;
+    [SerializeField] Slider slider;
+    private int maxHealth = 0;
+
     [Tooltip("Damage delay ensures that multiple damages do not get registered in a short interval")]
     public float damageDelay = 0.5f;
     public float knockbackTime = 0.25f;
+
+    protected bool isInKnockback = false;
 
     float lastDamageTime = 0;
     CharacterController characterController;
@@ -20,6 +26,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     protected virtual void Start()
     {
         characterController = GetComponent<CharacterController>();
+        maxHealth = health;
     }
 
     public void Death()
@@ -36,8 +43,12 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
         }
 
         health -= damage.value;
-        StartCoroutine(ApplyKnockback(damage));
         lastDamageTime = Time.time;
+        if (slider != null)
+        {
+            slider.value = ((float) health / maxHealth);
+        }
+        StartCoroutine(ApplyKnockback(damage));
 
         if (health <= 0)
         {
@@ -47,6 +58,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
     private IEnumerator ApplyKnockback(Damage damage)
     {
+        isInKnockback = true;
         Vector3 knockbackVec = damage.direction * damage.knockback;
         knockbackVec.y = 0;
 
@@ -56,7 +68,8 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
         while (timeElapsed < knockbackTime)
         {
             // Lerp knockback
-            Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, timeElapsed / knockbackTime);
+            float t = EasingFunctions.EaseOutCubic(timeElapsed / knockbackTime);
+            Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, t);
             if (characterController != null && characterController.enabled)
                 characterController.Move(newPosition - transform.position);
             else
@@ -65,5 +78,6 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+        isInKnockback = false;
     }
 }

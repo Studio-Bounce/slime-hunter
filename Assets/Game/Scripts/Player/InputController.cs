@@ -17,6 +17,9 @@ public class InputController : MonoBehaviour
 
     public Vector2 movement = Vector2.zero;
 
+    public const float INPUT_QUEUE_DELAY = .4f;
+    private Dictionary<System.Action<InputContext>, InputContext> QueuedInputMap = new Dictionary<System.Action<InputContext>, InputContext>();
+
     private void Awake()
     {
         _inputActions = new PlayerInputActions();
@@ -39,13 +42,30 @@ public class InputController : MonoBehaviour
         DisableUIControls();
     }
 
+    // Give leniency to player input when timing is important
+    IEnumerator QueueInput(System.Action<InputContext> inputCallback, InputContext e)
+    {
+        if (!QueuedInputMap.ContainsKey(inputCallback))
+        {
+            QueuedInputMap.Add(inputCallback, e);
+            float timer = 0;
+            while (timer < INPUT_QUEUE_DELAY)
+            {
+                inputCallback(e);
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            QueuedInputMap.Remove(inputCallback);
+        }
+    }
+
     private void SetupPlayerControls()
     {
         _playerActions.Move.performed += TrackMovement;
         _playerActions.Move.canceled += StopMovement;
         _playerActions.Dash.performed += _playerController.Dash;
         _playerActions.Rotate.performed += _playerController.RotateCamera;
-        _playerActions.Attack.performed += _weaponController.Attack;
+        _playerActions.Attack.performed += e => StartCoroutine(QueueInput(_weaponController.Attack, e));
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
     }
 

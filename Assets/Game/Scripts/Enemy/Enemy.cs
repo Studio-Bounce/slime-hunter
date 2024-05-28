@@ -20,10 +20,12 @@ public class Enemy : DamageTaker, ITakeDamage
 
     [SerializeField] float damageEyeTimer = 1.0f;
     private bool freezeEyeChange = false;
+    private TrailRenderer trailRenderer;
 
     protected override void Start()
     {
         base.Start();
+        trailRenderer = GetComponent<TrailRenderer>();
         normalEye.enabled = true;
         attackEye.enabled = false;
         deathEye.enabled = false;
@@ -32,7 +34,31 @@ public class Enemy : DamageTaker, ITakeDamage
     public override void TakeDamage(Damage damage)
     {
         base.TakeDamage(damage);
+        StartCoroutine(DisableTrailOnKnockback());
         StartCoroutine(ChangeEyeToDamage());
+    }
+
+    IEnumerator DisableTrailOnKnockback()
+    {
+        float trailTime = 0;
+        if (trailRenderer != null)
+        {
+            trailTime = trailRenderer.time;
+            trailRenderer.time = 0;  // to clear trail history
+            trailRenderer.enabled = false;
+        }
+        while (isInKnockback)
+        {
+            yield return null;
+        }
+        if (trailRenderer != null)
+        {
+            trailRenderer.enabled = true;
+            // Wait for a frame to ensure the trail is cleared
+            yield return null;
+            // Restore the original trail time
+            trailRenderer.time = trailTime;
+        }
     }
 
     IEnumerator ChangeEyeToDamage()

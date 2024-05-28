@@ -1,29 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
-public class WeaponTrailMeshCollider : DamageDealer
+public class WeaponTrail : DamageDealer
 {
     [Header("Hitboxing")]
     public float arcAngle = 90;
     public float arcRadius = 1;
     public int meshResolution = 3;
     public bool liveReload = false;
-    [Tooltip("Ensure that this value matches animation and is low enough to prevent double attacks.")]
-    public float attackDuration = 0.5f;
 
     private MeshCollider _collider;
     private int _vertexCount;
     private bool _isAttack = false;
 
+    // Visual
+    public VisualEffect weaponVFX;
+
     protected override void Start()
     {
         base.Start();
+        Debug.Assert(weaponVFX != null, "Requires a VisualEffect");
         _vertexCount = meshResolution + 2;
         _collider = GetComponent<MeshCollider>();
-        _SetupArcMesh();
         _collider.convex = true;
         _collider.isTrigger = true;
+
+        _SetupArcMesh();
+        _SetupVFX();
     }
 
     protected override void Update()
@@ -39,15 +44,26 @@ public class WeaponTrailMeshCollider : DamageDealer
         arcRadius = weaponSO.range;
     }
 
-    public void Attack()
+    public void Attack(AttackMove move)
     {
         UpdateArcMesh();
-        if (!_isAttack) StartCoroutine(ActiveAttack(attackDuration));
+
+        if (move.direction.x < 0)
+        {
+            weaponVFX.transform.localScale = new Vector3(-1, transform.localScale.x, transform.localScale.z);
+        }
+        else if (move.direction.x >= 0)
+        {
+            weaponVFX.transform.localScale = new Vector3(1, transform.localScale.x, transform.localScale.z);
+        }
+
+        if (!_isAttack) StartCoroutine(ActiveAttack(move.duration));
     }
 
     IEnumerator ActiveAttack(float duration)
     {
         active = true;
+        weaponVFX.Play();
         yield return new WaitForSeconds(duration);
         active = false;
     }
@@ -67,6 +83,14 @@ public class WeaponTrailMeshCollider : DamageDealer
         }
         mesh.vertices = vertices;
         _collider.sharedMesh = mesh;
+    }
+
+    private void _SetupVFX()
+    {
+        weaponVFX = Instantiate(weaponVFX.gameObject).GetComponent<VisualEffect>();
+
+        weaponVFX.transform.SetParent(transform);
+        weaponVFX.transform.localPosition = Vector3.zero;
     }
 
     private void _SetupArcMesh()

@@ -6,6 +6,10 @@ using UnityEngine;
 public struct AttackMove
 {
     public AnimationClip clip;
+    public float duration;
+    public float range;
+    public float animationOffset;
+    public Vector2 direction;
 }
 
 [CreateAssetMenu(fileName = "NewWeapon", menuName = "Weapons/Weapon")]
