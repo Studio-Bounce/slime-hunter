@@ -18,10 +18,12 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     public float damageDelay = 0.5f;
     public float knockbackTime = 0.25f;
 
+    protected CharacterController characterController;
     protected bool isInKnockback = false;
+    // Slime invincibility can depend on Slime's state (in FSM). Hence, its public
+    [HideInInspector] public bool isInvincible = false;
 
     float lastDamageTime = 0;
-    CharacterController characterController;
 
     protected virtual void Start()
     {
@@ -42,13 +44,16 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
             return;
         }
 
-        health -= damage.value;
+        if (!isInvincible)
+        {
+            health -= damage.value;
+            StartCoroutine(ApplyKnockback(damage));
+        }
         lastDamageTime = Time.time;
         if (slider != null)
         {
             slider.value = ((float) health / maxHealth);
         }
-        StartCoroutine(ApplyKnockback(damage));
 
         if (health <= 0)
         {
