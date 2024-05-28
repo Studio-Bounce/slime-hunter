@@ -12,12 +12,12 @@ public class BasicSlime_FSM : FSM
     public SeekSteeringBehaviour seekSteeringBehaviour;
     public WanderSteeringBehaviour wanderSteeringBehaviour;
 
-    public SteeringAgent slimeAgent;
-    public Transform playerTransform;
+    [HideInInspector] public SteeringAgent slimeAgent;
+    [HideInInspector] public Transform playerTransform;
 
     public SkinnedMeshRenderer slimeOuterMesh;
-    public EnemyWeapon weapon;
-    public Enemy slimeEnemy;
+    [HideInInspector] public EnemyWeapon weapon;
+    [HideInInspector] public Enemy slimeEnemy;
 
     [Header("Slime Materials")]
     public Material defaultMat;
@@ -33,7 +33,7 @@ public class BasicSlime_FSM : FSM
     public float attackSpeed = 10.0f;
     public float attackRadius = 2.0f;
 
-    private void Start()
+    protected virtual void Start()
     {
         slimeAgent = GetComponent<SteeringAgent>();
         weapon = GetComponent<EnemyWeapon>();

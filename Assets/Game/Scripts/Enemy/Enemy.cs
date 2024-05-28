@@ -31,8 +31,15 @@ public class Enemy : DamageTaker, ITakeDamage
         deathEye.enabled = false;
     }
 
+    // Used in child classes to call the original TakeDamage method
+    protected void OriginalTakeDamage(Damage damage)
+    {
+        base.TakeDamage(damage);
+    }
+
     public override void TakeDamage(Damage damage)
     {
+        Debug.Log("HERE");
         base.TakeDamage(damage);
         StartCoroutine(DisableTrailOnKnockback());
         StartCoroutine(ChangeEyeToDamage());
