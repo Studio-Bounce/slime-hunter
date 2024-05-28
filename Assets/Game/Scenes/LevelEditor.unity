@@ -1412,7 +1412,7 @@ PrefabInstance:
     - target: {fileID: 8529491203750411947, guid: b940c09142173ff479a8f04c83ee9b5d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.27
+      value: -8.07
       objectReference: {fileID: 0}
     - target: {fileID: 8529491203750411947, guid: b940c09142173ff479a8f04c83ee9b5d,
         type: 3}
@@ -1512,7 +1512,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 1
+  m_Time: 0.3
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -1578,7 +1578,7 @@ TrailRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 1
+  m_MinVertexDistance: 0.2
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
