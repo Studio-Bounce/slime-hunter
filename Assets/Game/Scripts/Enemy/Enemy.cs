@@ -22,8 +22,11 @@ public class Enemy : DamageTaker, ITakeDamage
     bool freezeEyeChange = false;
     TrailRenderer trailRenderer;
 
+    [Header("Hit Feedback")]
     [SerializeField] ParticleSystem hitParticles;
     [SerializeField] float hitParticlesDuration = 1.0f;
+    [SerializeField] SkinnedMeshRenderer slimeOuterBody;
+    [SerializeField] float flashDuration = 0.2f;
 
     protected override void Start()
     {
@@ -35,24 +38,24 @@ public class Enemy : DamageTaker, ITakeDamage
     }
 
     // Used in child classes to call the original TakeDamage method
-    protected void OriginalTakeDamage(Damage damage)
+    protected void BaseEnemyTakeDamage(Damage damage)
     {
         base.TakeDamage(damage);
-        if (hitParticles != null)
+        if (!isInvincible)
         {
             StartCoroutine(ShowHitParticles());
+            StartCoroutine(FlashSlime());
         }
     }
 
     public override void TakeDamage(Damage damage)
     {
-        base.TakeDamage(damage);
-        if (hitParticles != null)
+        BaseEnemyTakeDamage(damage);
+        if (!isInvincible)
         {
-            StartCoroutine(ShowHitParticles());
+            StartCoroutine(DisableTrailOnKnockback());
+            StartCoroutine(ChangeEyeToDamage());
         }
-        StartCoroutine(DisableTrailOnKnockback());
-        StartCoroutine(ChangeEyeToDamage());
     }
 
     IEnumerator DisableTrailOnKnockback()
@@ -88,6 +91,22 @@ public class Enemy : DamageTaker, ITakeDamage
             hitParticles.Play();
             yield return new WaitForSeconds(hitParticlesDuration);
             hitParticles.Stop();
+        }
+    }
+
+    IEnumerator FlashSlime()
+    {
+        if (slimeOuterBody != null)
+        {
+            Color slimeColor = slimeOuterBody.materials[0].color;
+
+            // Change color to white for a short duration
+            slimeOuterBody.materials[0].color = Color.white;
+
+            yield return new WaitForSeconds(flashDuration);
+
+            // Revert color
+            slimeOuterBody.materials[0].color = slimeColor;
         }
     }
 
