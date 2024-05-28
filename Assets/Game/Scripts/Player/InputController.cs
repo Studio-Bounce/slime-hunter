@@ -43,29 +43,34 @@ public class InputController : MonoBehaviour
     }
 
     // Give leniency to player input when timing is important
-    IEnumerator QueueInput(System.Action<InputContext> inputCallback, InputContext e)
+    private void QueueInput(System.Action<InputContext> inputCallback, InputContext e)
     {
         if (!QueuedInputMap.ContainsKey(inputCallback))
         {
-            QueuedInputMap.Add(inputCallback, e);
-            float timer = 0;
-            while (timer < INPUT_QUEUE_DELAY)
-            {
-                inputCallback(e);
-                timer += Time.deltaTime;
-                yield return null;
-            }
-            QueuedInputMap.Remove(inputCallback);
+            StartCoroutine(QueueInputCoroutine(inputCallback, e));
         }
+    }
+
+    IEnumerator QueueInputCoroutine(System.Action<InputContext> inputCallback, InputContext e)
+    {
+        QueuedInputMap.Add(inputCallback, e);
+        float timer = 0;
+        while (timer < INPUT_QUEUE_DELAY)
+        {
+            inputCallback(e);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        QueuedInputMap.Remove(inputCallback);
     }
 
     private void SetupPlayerControls()
     {
         _playerActions.Move.performed += TrackMovement;
         _playerActions.Move.canceled += StopMovement;
-        _playerActions.Dash.performed += _playerController.Dash;
+        _playerActions.Dash.performed += e => QueueInput(_playerController.Dash, e);
         _playerActions.Rotate.performed += _playerController.RotateCamera;
-        _playerActions.Attack.performed += e => StartCoroutine(QueueInput(_weaponController.Attack, e));
+        _playerActions.Attack.performed += e => QueueInput(_weaponController.Attack, e);
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
     }
 
