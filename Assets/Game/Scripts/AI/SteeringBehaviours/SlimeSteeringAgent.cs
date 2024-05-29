@@ -14,8 +14,11 @@ public class SlimeSteeringAgent : SteeringAgent
     {
         base.Update();
         ComputeYMovement();
-
-        animator.SetBool(IsMoving, velocity.magnitude != 0);
+        
+        if (beBouncy)
+        {
+            animator.SetBool(IsMoving, velocity.magnitude != 0);
+        }
     }
 
     private void ComputeYMovement()

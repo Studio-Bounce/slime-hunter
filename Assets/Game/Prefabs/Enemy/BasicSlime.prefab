@@ -5273,7 +5273,7 @@ GameObject:
   - component: {fileID: 3801100224341897558}
   - component: {fileID: 2869985602088549266}
   - component: {fileID: 4646127613627469845}
-  - component: {fileID: 1030678316373288018}
+  - component: {fileID: 3662461099208768734}
   - component: {fileID: 6347398221826499309}
   - component: {fileID: 4347139268971403823}
   - component: {fileID: 1921320453934310837}
@@ -5404,7 +5404,7 @@ MonoBehaviour:
   slimeOuterBody: {fileID: 2201507902128942745}
   flashDuration: 0.2
   flashColor: {r: 1, g: 1, b: 1, a: 0.47058824}
---- !u!114 &1030678316373288018
+--- !u!114 &3662461099208768734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5413,7 +5413,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8820871006783578033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9afc5742ffffb347b92c66350c91386, type: 3}
+  m_Script: {fileID: 11500000, guid: d0037d49733e33746bd0344335b90345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   summingMethod: 0
@@ -5424,8 +5424,11 @@ MonoBehaviour:
   angularDampeningTime: 5
   deadZone: 10
   reachedGoal: 0
+  animator: {fileID: 1065457560711704899}
   useRootMotion: 0
   useGravity: 1
+  beBouncy: 0
+  bounceForce: 5
 --- !u!114 &6347398221826499309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10646,7 +10649,7 @@ PrefabInstance:
     - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 93.53924
+      value: 89.45539
       objectReference: {fileID: 0}
     - target: {fileID: 8699541509210442394, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
@@ -10658,6 +10661,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 772ae3dc15e833f40999ac3cb2013fa2, type: 3}
+--- !u!95 &1065457560711704899 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6891582375880887506}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &2201507902128942745 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 4696834868240540235, guid: 772ae3dc15e833f40999ac3cb2013fa2,

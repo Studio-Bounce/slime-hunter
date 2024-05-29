@@ -5329,7 +5329,7 @@ GameObject:
   - component: {fileID: 2551075839813808404}
   - component: {fileID: 7761326875015192849}
   - component: {fileID: 8100604837490706534}
-  - component: {fileID: 697148500810308947}
+  - component: {fileID: 8400284841796279740}
   - component: {fileID: 267308195683594635}
   - component: {fileID: 3359904442406818763}
   - component: {fileID: 6785253409571859297}
@@ -5463,7 +5463,7 @@ MonoBehaviour:
   dodgeSpeed: 2.5
   dodgeTime: 0.5
   isDodging: 0
---- !u!114 &697148500810308947
+--- !u!114 &8400284841796279740
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5472,7 +5472,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8223826132166210976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9afc5742ffffb347b92c66350c91386, type: 3}
+  m_Script: {fileID: 11500000, guid: d0037d49733e33746bd0344335b90345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   summingMethod: 0
@@ -5483,8 +5483,11 @@ MonoBehaviour:
   angularDampeningTime: 5
   deadZone: 10
   reachedGoal: 0
+  animator: {fileID: 2403758375320863911}
   useRootMotion: 0
   useGravity: 1
+  beBouncy: 1
+  bounceForce: 5
 --- !u!114 &267308195683594635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10664,6 +10667,12 @@ PrefabInstance:
 --- !u!137 &1112610852234478933 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -53619314171823005, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8084322144036485430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2403758375320863911 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 772ae3dc15e833f40999ac3cb2013fa2,
     type: 3}
   m_PrefabInstance: {fileID: 8084322144036485430}
   m_PrefabAsset: {fileID: 0}
