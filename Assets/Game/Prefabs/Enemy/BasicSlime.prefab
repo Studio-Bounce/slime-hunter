@@ -5427,8 +5427,9 @@ MonoBehaviour:
   animator: {fileID: 1065457560711704899}
   useRootMotion: 0
   useGravity: 1
-  beBouncy: 0
-  bounceForce: 5
+  upVelocity: 0
+  forceStopMovement: 0
+  slimeModel: {fileID: 4299574497244987521}
 --- !u!114 &6347398221826499309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10649,7 +10650,7 @@ PrefabInstance:
     - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 89.45539
+      value: 89.4554
       objectReference: {fileID: 0}
     - target: {fileID: 8699541509210442394, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
@@ -10676,6 +10677,12 @@ SkinnedMeshRenderer:
 --- !u!137 &2369544507332571313 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -53619314171823005, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6891582375880887506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4299574497244987521 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7208285609052654675, guid: 772ae3dc15e833f40999ac3cb2013fa2,
     type: 3}
   m_PrefabInstance: {fileID: 6891582375880887506}
   m_PrefabAsset: {fileID: 0}

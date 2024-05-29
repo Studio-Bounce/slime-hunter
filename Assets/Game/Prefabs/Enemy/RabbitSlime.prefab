@@ -5486,8 +5486,9 @@ MonoBehaviour:
   animator: {fileID: 2403758375320863911}
   useRootMotion: 0
   useGravity: 1
-  beBouncy: 1
-  bounceForce: 5
+  upVelocity: 0
+  forceStopMovement: 0
+  slimeModel: {fileID: 1457391365548324197}
 --- !u!114 &267308195683594635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10667,6 +10668,12 @@ PrefabInstance:
 --- !u!137 &1112610852234478933 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -53619314171823005, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8084322144036485430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1457391365548324197 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7208285609052654675, guid: 772ae3dc15e833f40999ac3cb2013fa2,
     type: 3}
   m_PrefabInstance: {fileID: 8084322144036485430}
   m_PrefabAsset: {fileID: 0}

@@ -29,10 +29,11 @@ public class SteeringAgent : MonoBehaviour
     public Animator animator;
     public bool useRootMotion = true;
     public bool useGravity = true;
-    protected float upVelocity = 0;
+    public float upVelocity = 0;
 
     protected CharacterController characterController;
     protected Rigidbody agentRigidbody;
+    protected bool forceStopMovement = false;
 
     protected virtual void Start()
     {
@@ -111,6 +112,9 @@ public class SteeringAgent : MonoBehaviour
 
     private void MoveWithVelocity(Vector3 velocity)
     {
+        if (forceStopMovement)
+            return;
+
         if (agentRigidbody != null && !agentRigidbody.isKinematic)
         {
             agentRigidbody.velocity = velocity;
