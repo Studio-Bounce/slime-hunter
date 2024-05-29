@@ -20,7 +20,6 @@ public class Enemy : DamageTaker, ITakeDamage
 
     [SerializeField] float damageEyeTimer = 1.0f;
     bool freezeEyeChange = false;
-    TrailRenderer trailRenderer;
 
     [Header("Hit Feedback")]
     [SerializeField] ParticleSystem hitParticles;
@@ -38,7 +37,6 @@ public class Enemy : DamageTaker, ITakeDamage
     protected override void Start()
     {
         base.Start();
-        trailRenderer = GetComponent<TrailRenderer>();
         normalEye.enabled = true;
         attackEye.enabled = false;
         deathEye.enabled = false;
@@ -65,7 +63,6 @@ public class Enemy : DamageTaker, ITakeDamage
         BaseEnemyTakeDamage(damage);
         if (!isInvincible)
         {
-            StartCoroutine(DisableTrailOnKnockback());
             StartCoroutine(ChangeEyeToDamage());
         }
     }
@@ -93,39 +90,6 @@ public class Enemy : DamageTaker, ITakeDamage
     public EnemyEye GetEnemyEye()
     {
         return eye;
-    }
-
-    IEnumerator DisableTrailOnKnockback()
-    {
-        float trailTime = 0;
-        if (trailRenderer != null)
-        {
-            trailTime = trailRenderer.time;
-            trailRenderer.time = 0;  // to clear trail history
-            trailRenderer.enabled = false;
-        }
-        while (isInKnockback)
-        {
-            // Check if the GameObject has been destroyed
-            if (trailRenderer == null || trailRenderer.gameObject == null)
-            {
-                yield break;
-            }
-            yield return null;
-        }
-        if (trailRenderer != null)
-        {
-            trailRenderer.enabled = true;
-
-            // Wait for a frame to ensure the trail is cleared
-            yield return null;
-
-            // Restore the original trail time (Frame has changed so do another null check)
-            if (trailRenderer != null && trailRenderer.gameObject != null)
-            {
-                trailRenderer.time = trailTime;
-            }
-        }
     }
 
     IEnumerator ShowHitParticles()
