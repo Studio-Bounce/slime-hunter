@@ -11,33 +11,35 @@ public class SteeringAgent : MonoBehaviour
     };
     public SummingMethod summingMethod = SummingMethod.WeightedAverage;
 
+    [Header("Agent Attributes")]
     public float mass = 1.0f;
     public float maxSpeed = 1.0f;
     public float maxForce = 10.0f;
 
     public Vector3 velocity = Vector3.zero;
 
-    private List<SteeringBehaviourBase> steeringBehaviours = new List<SteeringBehaviourBase>();
+    protected List<SteeringBehaviourBase> steeringBehaviours = new List<SteeringBehaviourBase>();
 
     public float angularDampeningTime = 5.0f;
     public float deadZone = 10.0f;
 
-    public bool reachedGoal = false;
+    [HideInInspector] public bool reachedGoal = false;
 
-    // Animation
+    [Header("Animation")]
+    public Animator animator;
     public bool useRootMotion = true;
     public bool useGravity = true;
-    public bool beBouncy = false;
-    public float bounceForce = 5.0f;
-    private float upVelocity = 0.0f;
+    protected float upVelocity = 0;
 
-    private Animator animator;
-    private CharacterController characterController;
-    private Rigidbody agentRigidbody;
+    protected CharacterController characterController;
+    protected Rigidbody agentRigidbody;
 
-    private void Start()
+    protected virtual void Start()
     {
-        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
         if (animator == null)
         {
             useRootMotion = false;
@@ -52,12 +54,12 @@ public class SteeringAgent : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         Vector3 steeringForce = CalculateSteeringForce();
 
-        // Y-direction movement
-        if (characterController != null && characterController.enabled)
+        // Y movement
+        if (!useRootMotion && characterController != null && characterController.enabled)
         {
             if (useGravity)
             {
@@ -71,46 +73,22 @@ public class SteeringAgent : MonoBehaviour
 
             characterController.Move(new Vector3(0, upVelocity * Time.deltaTime, 0));
         }
-
         // XZ movement
         if (reachedGoal)
         {
             velocity = Vector3.zero;
-            if (animator != null)
-                animator.SetFloat("Speed", 0.0f);
         }
         else
         {
             Vector3 acceleration = steeringForce / mass;
             velocity += (acceleration * Time.deltaTime);
             velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
-            //transform.position += velocity * Time.deltaTime;
-
-            float speed = velocity.magnitude;
-            if (animator != null)
-                animator.SetFloat("Speed", speed);
 
             // Movement
             if (!useRootMotion)
             {
                 MoveWithVelocity(velocity);
             }
-            if (beBouncy && speed > 0)
-            {
-#if UNITY_EDITOR
-                if (characterController == null || !characterController.enabled)
-                {
-                    Debug.LogWarning("No character controller. Can not be bouncy!");
-                }
-#endif
-
-                // Shoot it up
-                if (characterController.isGrounded)
-                {
-                    upVelocity += bounceForce;
-                }
-            }
-
 
             // Rotation
             if (velocity.magnitude > 0.0f)

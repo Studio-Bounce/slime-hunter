@@ -1681,10 +1681,15 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1030678316373288018, guid: b940c09142173ff479a8f04c83ee9b5d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8820871006783578033, guid: b940c09142173ff479a8f04c83ee9b5d,
+        type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 1932561876}
   m_SourcePrefab: {fileID: 100100000, guid: b940c09142173ff479a8f04c83ee9b5d, type: 3}
 --- !u!1 &1108365343
 GameObject:
@@ -2471,12 +2476,49 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1840430344}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &1847213532 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1065457560711704899, guid: b940c09142173ff479a8f04c83ee9b5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1078543021}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1898487699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6144532255685469683, guid: 7c19e2e033650b243b9b77976b3424a8,
     type: 3}
   m_PrefabInstance: {fileID: 1640256222}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1932561866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8820871006783578033, guid: b940c09142173ff479a8f04c83ee9b5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1078543021}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1932561876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932561866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0037d49733e33746bd0344335b90345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  summingMethod: 0
+  mass: 1
+  maxSpeed: 1
+  maxForce: 10
+  velocity: {x: 0, y: 0, z: 0}
+  angularDampeningTime: 5
+  deadZone: 10
+  reachedGoal: 0
+  animator: {fileID: 1847213532}
+  useRootMotion: 0
+  useGravity: 1
+  beBouncy: 1
+  bounceForce: 5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
