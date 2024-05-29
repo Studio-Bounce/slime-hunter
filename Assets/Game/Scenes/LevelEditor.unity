@@ -1826,41 +1826,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2463496225978856163, guid: 7c19e2e033650b243b9b77976b3424a8,
-        type: 3}
-      propertyPath: handPivotOffset.z
-      value: -0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2463496225978856163, guid: 7c19e2e033650b243b9b77976b3424a8,
-        type: 3}
-      propertyPath: animationSpeedCurve.m_Curve.Array.data[2].time
-      value: 0.9264201
-      objectReference: {fileID: 0}
-    - target: {fileID: 2463496225978856163, guid: 7c19e2e033650b243b9b77976b3424a8,
-        type: 3}
-      propertyPath: animationSpeedCurve.m_Curve.Array.data[2].value
-      value: 0.99121094
-      objectReference: {fileID: 0}
-    - target: {fileID: 2463496225978856163, guid: 7c19e2e033650b243b9b77976b3424a8,
-        type: 3}
-      propertyPath: animationSpeedCurve.m_Curve.Array.data[3].inSlope
-      value: 0.11944922
-      objectReference: {fileID: 0}
-    - target: {fileID: 2463496225978856163, guid: 7c19e2e033650b243b9b77976b3424a8,
-        type: 3}
-      propertyPath: animationSpeedCurve.m_Curve.Array.data[3].outSlope
-      value: 0.11944922
-      objectReference: {fileID: 0}
     - target: {fileID: 5760338420974404415, guid: 7c19e2e033650b243b9b77976b3424a8,
         type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 823012863}
-    - target: {fileID: 5760338420974404415, guid: 7c19e2e033650b243b9b77976b3424a8,
-        type: 3}
-      propertyPath: slowDownMultiplierOnAttack
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 6144532255685469683, guid: 7c19e2e033650b243b9b77976b3424a8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1909,11 +1879,6 @@ PrefabInstance:
     - target: {fileID: 6144532255685469683, guid: 7c19e2e033650b243b9b77976b3424a8,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6144532255685469683, guid: 7c19e2e033650b243b9b77976b3424a8,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
