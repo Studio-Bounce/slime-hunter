@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XInput;
 
 [RequireComponent(typeof(Animator), typeof(CharacterController), typeof(WeaponController))]
 public class PlayerController : MonoBehaviour
@@ -134,7 +135,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDashing && Time.time > lastDashTime + dashCooldown && !weaponController.isAttack)
         {
-            StartCoroutine(PerformDash(transform.forward * dashDistance));
+            StartCoroutine(PerformDash(inputController.GetMoveDirectionFromCamera() * dashDistance));
         }
     }
 
