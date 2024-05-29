@@ -18,10 +18,11 @@ public class WeaponController : MonoBehaviour
     public WeaponSO[] availableWeapons = new WeaponSO[3];
 
     [Header("Animations/Visuals")]
-    public WeaponTrail trailCollider;
+    public WeaponTrail weaponTrail;
     public AnimationClip baseAttackClip;
 
     // Weapon&Animation
+    [HideInInspector, NonSerialized] public AttackState currentAttackState = AttackState.INACTIVE;
     private AnimatorOverrideController _overrideAnimatorController;
     private int _equippedWeaponIndex = 0;
     private GameObject _currentWeaponPrefab;
@@ -31,10 +32,26 @@ public class WeaponController : MonoBehaviour
     private readonly int attackEndTriggerHash = Animator.StringToHash("AttackEnd");
     private readonly int attackStateHash = Animator.StringToHash("Attack");
     private readonly int baseStateHash = Animator.StringToHash("Locomotion");
-
-    [HideInInspector, NonSerialized]
-    public bool isAttack = false;
     private int _attackMoveIndex = 0;
+
+    public enum AttackState
+    {
+        WIND_UP,
+        ACTIVE,
+        WIND_DOWN, // This state should be interruptable
+        INACTIVE
+    }
+
+    public bool IsAttack()
+    {
+        return currentAttackState != AttackState.INACTIVE;
+    }
+
+    public bool IsInterruptable()
+    {
+        return currentAttackState == AttackState.INACTIVE ||
+            currentAttackState == AttackState.WIND_DOWN;
+    }
 
     public WeaponSO CurrentWeapon
     {
@@ -84,7 +101,7 @@ public class WeaponController : MonoBehaviour
         _currentWeaponPrefab.transform.forward = handPivot.forward;
         _currentWeaponPrefab.transform.position += handPivotOffset;
         // The weapon trail needs to know current weapon's settings
-        trailCollider.SetupWeaponSettings(weaponSO);
+        weaponTrail.SetupWeaponSettings(weaponSO);
     }
 
     // Replace base attack animation with weapon animations
@@ -112,8 +129,7 @@ public class WeaponController : MonoBehaviour
 
     public bool Attack(InputAction.CallbackContext context)
     {
-        if (isAttack) return false;
-        isAttack = true;
+        if (!InterruptAttack()) return false;
         // Get vector from player to mouse click
         Vector2 clickPosition = Mouse.current.position.ReadValue();
         Vector2 currentScreenPos = Camera.main.WorldToScreenPoint(transform.position);
@@ -135,36 +151,40 @@ public class WeaponController : MonoBehaviour
 
     private IEnumerator PerformAttack(AttackMove move, Vector3 direction)
     {
-        // Interrupt current animation and apply new animation
-        if (_animator.GetCurrentAnimatorStateInfo(0).shortNameHash == attackStateHash)
-        {
-            _animator.CrossFade(baseStateHash, 0.0f);
-        }
-        _animator.ResetTrigger(attackEndTriggerHash);
-        _animator.ResetTrigger(attackStartTriggerHash);
-
+        currentAttackState = AttackState.WIND_UP;
         SetupAttackAnimation(move);
         // Increment combo
         _attackMoveIndex = _attackMoveIndex < CurrentWeapon.attackMoves.Count-1 ? _attackMoveIndex+1 : 0;
         // Rotate player towards attack
         transform.forward = direction;
-        trailCollider.transform.forward = direction;
+        weaponTrail.transform.forward = direction;
         // Start attack 
         _animator.SetTrigger(attackStartTriggerHash);
         yield return new WaitForSeconds(move.animationOffset);
-        // In case attack is interrupted at this point
-        if (isAttack)
+        currentAttackState = AttackState.ACTIVE;
+        weaponTrail.Attack(move);
+        yield return new WaitForSeconds(move.duration);
+        currentAttackState = AttackState.WIND_DOWN;
+        yield return new WaitForSeconds(move.clip.length - (move.animationOffset + move.duration));
+        if (currentAttackState == AttackState.WIND_DOWN)
         {
-            trailCollider.Attack(move);
-            yield return new WaitForSeconds(move.duration);
-            isAttack = false;
+            _attackMoveIndex = 0;
+            currentAttackState = AttackState.INACTIVE;
         }
     }
 
-    public void InterruptAttack()
+    // Interrupt current attack animation
+    public bool InterruptAttack()
     {
-        isAttack = false;
-        _animator.SetTrigger(attackEndTriggerHash);
+        if (IsInterruptable()) {
+            if (_animator.GetCurrentAnimatorStateInfo(0).shortNameHash == attackStateHash)
+            {
+                _animator.CrossFade(baseStateHash, 0.0f);
+            }
+            _animator.SetTrigger(attackEndTriggerHash);
+            return true;
+        }
+        return false;
     }
 
 #if UNITY_EDITOR

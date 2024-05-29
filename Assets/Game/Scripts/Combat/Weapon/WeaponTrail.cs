@@ -13,11 +13,10 @@ public class WeaponTrail : DamageDealer
 
     private MeshCollider _collider;
     private int _vertexCount;
-    private bool _isAttack = false;
 
     public uint framesToPause = 0;
-
     private readonly string flipVFXParameter = "Flip";
+    private WeaponSO currentWeaponSO;
 
     // Visual
     public VisualEffect weaponVFX;
@@ -43,22 +42,32 @@ public class WeaponTrail : DamageDealer
 
     public void SetupWeaponSettings(WeaponSO weaponSO)
     {
+        currentWeaponSO = weaponSO;
         damage = weaponSO.damage;
         hitLayers = weaponSO.hitLayers;
         arcRadius = weaponSO.range;
-
-        weaponVFX.transform.localScale = new Vector3(weaponSO.range/3, 1, weaponSO.range/3); // WIP: Hardcoded /3 as base VFX is roughly 3 units large
     }
 
     public void Attack(AttackMove move)
     {
-        UpdateArcMesh();
-
-        // FIXME: For Testing
-        _framesToPause = framesToPause;
+        // WIP: Hardcoded /3 as base VFX is roughly 3 units large
+        float attackRange = (currentWeaponSO.range / 3) * move.rangeMultiplier;
+        arcRadius = attackRange;
+        // VFX
+        weaponVFX.transform.localScale = new Vector3(attackRange, 1, attackRange);
         weaponVFX.SetBool(flipVFXParameter, move.direction.x < 0);
-
-        if (!_isAttack) StartCoroutine(ActiveAttack(move.duration));
+        float verticalRotation = 0;
+        if (move.direction.y > 0)
+        {
+            verticalRotation = -90;
+        }
+        else if (move.direction.y < 0)
+        {
+            verticalRotation = 90;
+        }
+        weaponVFX.transform.rotation = Quaternion.Euler(weaponVFX.transform.rotation.eulerAngles.x, weaponVFX.transform.rotation.eulerAngles.y, verticalRotation);
+        UpdateArcMesh();
+        StartCoroutine(ActiveAttack(move.duration));
     }
 
     IEnumerator ActiveAttack(float duration)
