@@ -11,30 +11,35 @@ public class SteeringAgent : MonoBehaviour
     };
     public SummingMethod summingMethod = SummingMethod.WeightedAverage;
 
+    [Header("Agent Attributes")]
     public float mass = 1.0f;
     public float maxSpeed = 1.0f;
     public float maxForce = 10.0f;
 
     public Vector3 velocity = Vector3.zero;
 
-    private List<SteeringBehaviourBase> steeringBehaviours = new List<SteeringBehaviourBase>();
+    protected List<SteeringBehaviourBase> steeringBehaviours = new List<SteeringBehaviourBase>();
 
     public float angularDampeningTime = 5.0f;
     public float deadZone = 10.0f;
 
-    public bool reachedGoal = false;
+    [HideInInspector] public bool reachedGoal = false;
 
-    // Animation
+    [Header("Animation")]
+    public Animator animator;
     public bool useRootMotion = true;
     public bool useGravity = true;
 
-    private Animator animator;
-    private CharacterController characterController;
-    private Rigidbody agentRigidbody;
+    protected CharacterController characterController;
+    protected Rigidbody agentRigidbody;
+    protected bool forceStopMovement = false;
 
-    private void Start()
+    protected virtual void Start()
     {
-        animator = GetComponent<Animator>();
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
         if (animator == null)
         {
             useRootMotion = false;
@@ -49,49 +54,31 @@ public class SteeringAgent : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         Vector3 steeringForce = CalculateSteeringForce();
-        //steeringForce.y = 0.0f;
-        if (characterController != null && characterController.enabled && useGravity)
+
+        // Y movement
+        if (!useRootMotion && characterController != null && characterController.enabled && useGravity)
         {
             characterController.Move(Physics.gravity * Time.deltaTime);
         }
-
+        // XZ movement
         if (reachedGoal)
         {
             velocity = Vector3.zero;
-            if (animator != null)
-                animator.SetFloat("Speed", 0.0f);
         }
         else
         {
             Vector3 acceleration = steeringForce / mass;
-            velocity = velocity + (acceleration * Time.deltaTime);
+            velocity += (acceleration * Time.deltaTime);
             velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
-            //transform.position += velocity * Time.deltaTime;
-
-            float speed = velocity.magnitude;
-            if (animator != null)
-                animator.SetFloat("Speed", speed);
 
             // Movement
             if (!useRootMotion)
             {
-                if (agentRigidbody != null && !agentRigidbody.isKinematic)
-                {
-                    agentRigidbody.velocity = velocity;
-                }
-                else if (characterController != null && characterController.enabled)
-                {
-                    characterController.Move(velocity * Time.deltaTime);
-                }
-                else
-                {
-                    transform.position += (velocity * Time.deltaTime);
-                }
+                MoveWithVelocity(velocity);
             }
-
 
             // Rotation
             if (velocity.magnitude > 0.0f)
@@ -109,6 +96,25 @@ public class SteeringAgent : MonoBehaviour
                                                           Time.deltaTime * angularDampeningTime);
                 }
             }
+        }
+    }
+
+    private void MoveWithVelocity(Vector3 velocity)
+    {
+        if (forceStopMovement)
+            return;
+
+        if (agentRigidbody != null && !agentRigidbody.isKinematic)
+        {
+            agentRigidbody.velocity = velocity;
+        }
+        else if (characterController != null && characterController.enabled)
+        {
+            characterController.Move(velocity * Time.deltaTime);
+        }
+        else
+        {
+            transform.position += (velocity * Time.deltaTime);
         }
     }
 

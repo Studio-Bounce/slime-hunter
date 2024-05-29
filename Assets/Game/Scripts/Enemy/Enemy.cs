@@ -27,6 +27,13 @@ public class Enemy : DamageTaker, ITakeDamage
     [SerializeField] float hitParticlesDuration = 1.0f;
     [SerializeField] SkinnedMeshRenderer slimeOuterBody;
     [SerializeField] float flashDuration = 0.2f;
+    [SerializeField] Color flashColor;
+
+    [Header("Death")]
+    [SerializeField] GameObject slimeModel;
+    [SerializeField] ParticleSystem deathParticles;
+    [SerializeField] float deathDelay = 3.5f;
+    protected bool isAlive = true;
 
     protected override void Start()
     {
@@ -35,11 +42,16 @@ public class Enemy : DamageTaker, ITakeDamage
         normalEye.enabled = true;
         attackEye.enabled = false;
         deathEye.enabled = false;
+        isAlive = true;
     }
 
     // Used in child classes to call the original TakeDamage method
     protected void BaseEnemyTakeDamage(Damage damage)
     {
+        if (!isAlive)
+        {
+            return;
+        }
         base.TakeDamage(damage);
         if (!isInvincible)
         {
@@ -58,6 +70,31 @@ public class Enemy : DamageTaker, ITakeDamage
         }
     }
 
+    public override void Death()
+    {
+        isAlive = false;
+
+        // Hide visible meshes / UI
+        slimeModel.SetActive(false);
+        healthSlider.gameObject.SetActive(false);
+
+        // Stop movement
+        GetComponent<SlimeSteeringAgent>().enabled = false;
+
+        deathParticles.Play();
+        Destroy(gameObject, deathDelay);
+    }
+
+    public void SetEye(EnemyEye enemyEye)
+    {
+        StartCoroutine(ChangeEye(enemyEye));
+    }
+
+    public EnemyEye GetEnemyEye()
+    {
+        return eye;
+    }
+
     IEnumerator DisableTrailOnKnockback()
     {
         float trailTime = 0;
@@ -69,6 +106,11 @@ public class Enemy : DamageTaker, ITakeDamage
         }
         while (isInKnockback)
         {
+            // Check if the GameObject has been destroyed
+            if (trailRenderer == null || trailRenderer.gameObject == null)
+            {
+                yield break;
+            }
             yield return null;
         }
         if (trailRenderer != null)
@@ -79,8 +121,10 @@ public class Enemy : DamageTaker, ITakeDamage
             yield return null;
 
             // Restore the original trail time (Frame has changed so do another null check)
-            if (trailRenderer != null)
+            if (trailRenderer != null && trailRenderer.gameObject != null)
+            {
                 trailRenderer.time = trailTime;
+            }
         }
     }
 
@@ -101,7 +145,7 @@ public class Enemy : DamageTaker, ITakeDamage
             Color slimeColor = slimeOuterBody.materials[0].color;
 
             // Change color to white for a short duration
-            slimeOuterBody.materials[0].color = Color.white;
+            slimeOuterBody.materials[0].color = flashColor;
 
             yield return new WaitForSeconds(flashDuration);
 
@@ -119,11 +163,6 @@ public class Enemy : DamageTaker, ITakeDamage
         SetEye(EnemyEye.NORMAL);
     }
 
-    public void SetEye(EnemyEye enemyEye)
-    {
-        StartCoroutine(ChangeEye(enemyEye));
-    }
-
     IEnumerator ChangeEye(EnemyEye enemyEye)
     {
         while (freezeEyeChange)
@@ -134,10 +173,5 @@ public class Enemy : DamageTaker, ITakeDamage
         normalEye.enabled = (enemyEye == EnemyEye.NORMAL);
         attackEye.enabled = (enemyEye == EnemyEye.ATTACK);
         deathEye.enabled = (enemyEye == EnemyEye.DEATH);
-    }
-
-    public EnemyEye GetEnemyEye()
-    {
-        return eye;
     }
 }

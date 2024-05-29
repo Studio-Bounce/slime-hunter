@@ -26,7 +26,7 @@ public class RabbitEnemy : Enemy
     {
         base.BaseEnemyTakeDamage(damage);
 
-        if (isInvincible)
+        if (isInvincible && isAlive)
         {
             // Dodge
             // HACK: FSM state change happening outside of actual FSM (fixme)

@@ -10,9 +10,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Collider))]
 public class DamageTaker : MonoBehaviour, ITakeDamage
 {
-    protected bool isAlive = true;
     public int health = 100;
-    [SerializeField] Slider slider;
+    [SerializeField] protected Slider healthSlider;
     private int maxHealth = 0;
 
     [Tooltip("Damage delay ensures that multiple damages do not get registered in a short interval")]
@@ -30,14 +29,12 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     {
         characterController = GetComponent<CharacterController>();
         maxHealth = health;
-        isAlive = true;
     }
 
-    public void Death()
+    public virtual void Death()
     {
-        isAlive = false;
         // Little delay in death prevents bugs from coroutines
-        Destroy(gameObject, 0.25f);
+        Destroy(gameObject, 0.2f);
     }
 
     public virtual void TakeDamage(Damage damage)
@@ -54,9 +51,9 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
             StartCoroutine(ApplyKnockback(damage));
         }
         lastDamageTime = Time.time;
-        if (slider != null)
+        if (healthSlider != null)
         {
-            slider.value = ((float) health / maxHealth);
+            healthSlider.value = ((float) health / maxHealth);
         }
 
         if (health <= 0)
