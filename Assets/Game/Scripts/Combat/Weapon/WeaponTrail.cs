@@ -54,10 +54,9 @@ public class WeaponTrail : DamageDealer
     {
         UpdateArcMesh();
 
-        // For Testing
+        // FIXME: For Testing
         _framesToPause = framesToPause;
         weaponVFX.SetBool(flipVFXParameter, move.direction.x < 0);
-        Debug.Log(weaponVFX.GetBool(flipVFXParameter));
 
         if (!_isAttack) StartCoroutine(ActiveAttack(move.duration));
     }
