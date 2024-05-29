@@ -21,13 +21,13 @@ public class StatusEffectManager : MonoBehaviour
 
     void Update()
     {
-        for (int i = activeEffects.Count - 1; i >= 0; i--)
+
+        foreach (var effect in activeEffects)
         {
-            if (activeEffects[i].UpdateEffect(damageTaker))
+            if (effect.UpdateEffect(damageTaker))
             {
-                activeEffects[i].EndEffect(damageTaker);
-                activeEffects.RemoveAt(i);
-                
+                effect.EndEffect(damageTaker);
+                activeEffects.Remove(effect);
             }
         }
     }
