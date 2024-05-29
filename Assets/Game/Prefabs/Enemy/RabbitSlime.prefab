@@ -5003,7 +5003,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.25}
+  m_AnchoredPosition: {x: 0, y: 2}
   m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7116629300482943659
@@ -5486,8 +5486,6 @@ MonoBehaviour:
   animator: {fileID: 2403758375320863911}
   useRootMotion: 0
   useGravity: 1
-  upVelocity: 0
-  forceStopMovement: 0
   slimeModel: {fileID: 1457391365548324197}
 --- !u!114 &267308195683594635
 MonoBehaviour:

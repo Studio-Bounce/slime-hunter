@@ -29,7 +29,6 @@ public class SteeringAgent : MonoBehaviour
     public Animator animator;
     public bool useRootMotion = true;
     public bool useGravity = true;
-    public float upVelocity = 0;
 
     protected CharacterController characterController;
     protected Rigidbody agentRigidbody;
@@ -60,19 +59,9 @@ public class SteeringAgent : MonoBehaviour
         Vector3 steeringForce = CalculateSteeringForce();
 
         // Y movement
-        if (!useRootMotion && characterController != null && characterController.enabled)
+        if (!useRootMotion && characterController != null && characterController.enabled && useGravity)
         {
-            if (useGravity)
-            {
-                upVelocity += Physics.gravity.y * Time.deltaTime;
-            }
-
-            if (characterController.isGrounded & upVelocity < 0)
-            {
-                upVelocity = 0.0f;
-            }
-
-            characterController.Move(new Vector3(0, upVelocity * Time.deltaTime, 0));
+            characterController.Move(Physics.gravity * Time.deltaTime);
         }
         // XZ movement
         if (reachedGoal)
