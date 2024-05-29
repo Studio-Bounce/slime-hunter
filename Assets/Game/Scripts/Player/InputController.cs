@@ -22,6 +22,11 @@ public class InputController : MonoBehaviour
     public float inputQueueDelay = .3f;
     private Dictionary<Func<InputContext, bool>, InputContext> QueuedInputMap = new Dictionary<Func<InputContext, bool>, InputContext>();
 
+    // Need to store the function to properly add and removed callbacks to inputs
+    // WIP: Find a cleaner solution?
+    Action<InputContext> attackQueuedAction;
+    Action<InputContext> dashQueuedAction;
+
     private void Awake()
     {
         _inputActions = new PlayerInputActions();
@@ -34,6 +39,9 @@ public class InputController : MonoBehaviour
     {
         _playerController = GetComponent<PlayerController>();
         _weaponController = GetComponent<WeaponController>();
+        attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
+        dashQueuedAction = e => QueueInput(_playerController.Dash, e);
+
         SetupPlayerControls();
         SetupUIControls();
     }
@@ -89,9 +97,9 @@ public class InputController : MonoBehaviour
     {
         _playerActions.Move.performed += TrackMovement;
         _playerActions.Move.canceled += StopMovement;
-        _playerActions.Dash.performed += e => QueueInput(_playerController.Dash, e);
+        _playerActions.Dash.performed += dashQueuedAction;
         _playerActions.Rotate.performed += _playerController.RotateCamera;
-        _playerActions.Attack.performed += e => QueueInput(_weaponController.Attack, e);
+        _playerActions.Attack.performed += attackQueuedAction;
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
     }
 
@@ -121,9 +129,9 @@ public class InputController : MonoBehaviour
     {
         _playerActions.Move.performed -= TrackMovement;
         _playerActions.Move.canceled -= StopMovement;
-        _playerActions.Dash.performed -= e => QueueInput(_playerController.Dash, e);
+        _playerActions.Dash.performed -= dashQueuedAction;
         _playerActions.Rotate.performed -= _playerController.RotateCamera;
-        _playerActions.Attack.performed -= e => QueueInput(_weaponController.Attack, e);
+        _playerActions.Attack.performed -= attackQueuedAction;
         _playerActions.CycleWeapon.performed -= _weaponController.CycleWeapon;
     }
 
