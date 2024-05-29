@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     public float dashCooldown = 0.5f;
     public float jumpForce = 20f;
 
-    private Vector2 moveDirection = Vector2.zero;
     private bool isDashing = false;
     private bool isGrounded = false;
     private bool isJump = true;
@@ -103,39 +102,29 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat(blendSpeedHash, moveInput.magnitude);
         if (moveInput == Vector2.zero)
             return;
+
         // Interrupt any attack release animation
-        if (!weaponController.isAttack)
-        {
-            weaponController.InterruptAttack();
-        }
+        weaponController.InterruptAttack();
 
-        // Get forward based on camera
-        Vector3 cameraToPlayer = (transform.position - cameraTransform.position);
-        Vector2 forwardDirection = new Vector2(cameraToPlayer.x, cameraToPlayer.z);
-        forwardDirection.Normalize();
-        Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
-
-        // Calculate movement direction based on forward
-        moveDirection = (forwardDirection * moveInput.y + rightDirection * moveInput.x).normalized;
-
+        Vector3 moveDirection = inputController.GetMoveDirectionFromCamera();
         // Rotate the player to look at the movement direction
         float _moveSpeed = moveSpeed;
-        if (weaponController.isAttack)
+        if (!weaponController.IsInterruptable())
         {
             _moveSpeed *= slowDownMultiplierOnAttack;
         } 
-        else if (moveDirection != Vector2.zero) // Only rotate to movement when not attacking
+        else if (moveDirection != Vector3.zero) // Only rotate to movement when not attacking
         {
-            transform.rotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, moveDirection.y), Vector3.up); // Snap
+            transform.rotation = Quaternion.LookRotation(moveDirection, Vector3.up); // Snap
         }
 
         // Move
-        characterController.Move(_moveSpeed * Time.deltaTime * new Vector3(moveDirection.x, 0, moveDirection.y));
+        characterController.Move(_moveSpeed * Time.deltaTime * moveDirection);
     }
 
     public bool Dash(InputAction.CallbackContext context)
     {
-        if (!isDashing && Time.time > lastDashTime + dashCooldown && !weaponController.isAttack)
+        if (!isDashing && Time.time > lastDashTime + dashCooldown && !weaponController.IsAttack())
         {
             Vector3 dashDirection = inputController.GetMoveDirectionFromCamera();
             dashDirection = dashDirection == Vector3.zero ? transform.forward : dashDirection;
