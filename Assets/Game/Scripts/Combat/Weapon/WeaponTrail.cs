@@ -50,10 +50,9 @@ public class WeaponTrail : DamageDealer
 
     public void Attack(AttackMove move)
     {
-        // WIP: Hardcoded /3 as base VFX is roughly 3 units large
-        float attackRange = (currentWeaponSO.range / 3) * move.rangeMultiplier;
-        arcRadius = attackRange;
+        arcRadius = currentWeaponSO.range * move.rangeMultiplier;
         // VFX
+        float attackRange = (currentWeaponSO.range / 3) * move.rangeMultiplier; // WIP: Hardcoded /3 as base VFX is roughly 3 units large
         weaponVFX.transform.localScale = new Vector3(attackRange, 1, attackRange);
         weaponVFX.SetBool(flipVFXParameter, move.direction.x < 0);
         float verticalRotation = 0;
