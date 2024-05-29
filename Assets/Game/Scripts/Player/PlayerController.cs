@@ -131,12 +131,14 @@ public class PlayerController : MonoBehaviour
         characterController.Move(_moveSpeed * Time.deltaTime * new Vector3(moveDirection.x, 0, moveDirection.y));
     }
 
-    public void Dash(InputAction.CallbackContext context)
+    public bool Dash(InputAction.CallbackContext context)
     {
         if (!isDashing && Time.time > lastDashTime + dashCooldown && !weaponController.isAttack)
         {
             StartCoroutine(PerformDash(inputController.GetMoveDirectionFromCamera() * dashDistance));
+            return true;
         }
+        return false;
     }
 
     IEnumerator PerformDash(Vector3 dashVector)

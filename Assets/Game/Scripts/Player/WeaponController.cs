@@ -110,9 +110,9 @@ public class WeaponController : MonoBehaviour
         InstantiateWeapon(CurrentWeapon);
     }
 
-    public void Attack(InputAction.CallbackContext context)
+    public bool Attack(InputAction.CallbackContext context)
     {
-        if (isAttack) return;
+        if (isAttack) return false;
         isAttack = true;
         // Get vector from player to mouse click
         Vector2 clickPosition = Mouse.current.position.ReadValue();
@@ -129,6 +129,8 @@ public class WeaponController : MonoBehaviour
         Vector3 finalDir = new Vector3(attackDirection.x, 0, attackDirection.y);
 
         StartCoroutine(PerformAttack(CurrentWeapon.attackMoves[_attackMoveIndex], finalDir));
+
+        return true;
     }
 
     private IEnumerator PerformAttack(AttackMove move, Vector3 direction)
