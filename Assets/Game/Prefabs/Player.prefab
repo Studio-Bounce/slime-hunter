@@ -34,7 +34,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.68, y: 1.883, z: 119.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5126069991169466018}
   - {fileID: 3714991541221691825}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
-  slider: {fileID: 0}
+  healthSlider: {fileID: 0}
   damageDelay: 0.5
   knockbackTime: 0.25
   isInvincible: 0
@@ -140,13 +140,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handPivot: {fileID: 6421113581951288961}
-  handPivotOffset: {x: 0.06, y: -0.02, z: 0}
+  handPivotOffset: {x: 0.06, y: -0.02, z: -0.15}
   handPivotForward: {x: 0, y: 0, z: 1}
   availableWeapons:
   - {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
   - {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
   - {fileID: 11400000, guid: 99cedeb06ace0a541a4b2160b3e72dbe, type: 2}
-  trailCollider: {fileID: 8536796487223862311}
+  weaponTrail: {fileID: 8536796487223862311}
   baseAttackClip: {fileID: -203655887218126122, guid: 368a8195de7259c4b90d8c64c0c4c8e2,
     type: 3}
 --- !u!114 &5760338420974404415
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1901138044527206527}
   moveSpeed: 5
-  slowDownMultiplierOnAttack: 0.3
+  slowDownMultiplierOnAttack: 0.1
   dashDistance: 3
   dashDuration: 0.2
   dashCooldown: 0.25
@@ -190,6 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {x: 0, y: 0}
+  inputQueueDelay: 0.3
 --- !u!1 &1605626183069265781
 GameObject:
   m_ObjectHideFlags: 0
