@@ -27,6 +27,7 @@ public class Enemy : DamageTaker, ITakeDamage
     [SerializeField] float hitParticlesDuration = 1.0f;
     [SerializeField] SkinnedMeshRenderer slimeOuterBody;
     [SerializeField] float flashDuration = 0.2f;
+    [SerializeField] Color flashColor;
 
     protected override void Start()
     {
@@ -69,6 +70,11 @@ public class Enemy : DamageTaker, ITakeDamage
         }
         while (isInKnockback)
         {
+            // Check if the GameObject has been destroyed
+            if (trailRenderer == null || trailRenderer.gameObject == null)
+            {
+                yield break;
+            }
             yield return null;
         }
         if (trailRenderer != null)
@@ -79,8 +85,10 @@ public class Enemy : DamageTaker, ITakeDamage
             yield return null;
 
             // Restore the original trail time (Frame has changed so do another null check)
-            if (trailRenderer != null)
+            if (trailRenderer != null && trailRenderer.gameObject != null)
+            {
                 trailRenderer.time = trailTime;
+            }
         }
     }
 
@@ -101,7 +109,7 @@ public class Enemy : DamageTaker, ITakeDamage
             Color slimeColor = slimeOuterBody.materials[0].color;
 
             // Change color to white for a short duration
-            slimeOuterBody.materials[0].color = Color.white;
+            slimeOuterBody.materials[0].color = flashColor;
 
             yield return new WaitForSeconds(flashDuration);
 

@@ -37,7 +37,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     {
         isAlive = false;
         // Little delay in death prevents bugs from coroutines
-        Destroy(gameObject, 0.25f);
+        Destroy(gameObject, 0.2f);
     }
 
     public virtual void TakeDamage(Damage damage)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net.WebSockets;
@@ -18,8 +19,13 @@ public class InputController : MonoBehaviour
 
     public Vector2 movement = Vector2.zero;
 
-    public const float INPUT_QUEUE_DELAY = .4f;
-    private Dictionary<System.Action<InputContext>, InputContext> QueuedInputMap = new Dictionary<System.Action<InputContext>, InputContext>();
+    public float inputQueueDelay = .3f;
+    private Dictionary<Func<InputContext, bool>, InputContext> QueuedInputMap = new Dictionary<Func<InputContext, bool>, InputContext>();
+
+    // Need to store the function to properly add and removed callbacks to inputs
+    // WIP: Find a cleaner solution?
+    Action<InputContext> attackQueuedAction;
+    Action<InputContext> dashQueuedAction;
 
     private void Awake()
     {
@@ -33,6 +39,9 @@ public class InputController : MonoBehaviour
     {
         _playerController = GetComponent<PlayerController>();
         _weaponController = GetComponent<WeaponController>();
+        attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
+        dashQueuedAction = e => QueueInput(_playerController.Dash, e);
+
         SetupPlayerControls();
         SetupUIControls();
     }
@@ -57,7 +66,8 @@ public class InputController : MonoBehaviour
     }
 
     // Give leniency to player input when timing is important
-    private void QueueInput(System.Action<InputContext> inputCallback, InputContext e)
+    // Callback should return bool to check if the input had succeeded
+    private void QueueInput(Func<InputContext, bool> inputCallback, InputContext e)
     {
         if (!QueuedInputMap.ContainsKey(inputCallback))
         {
@@ -65,15 +75,20 @@ public class InputController : MonoBehaviour
         }
     }
 
-    IEnumerator QueueInputCoroutine(System.Action<InputContext> inputCallback, InputContext e)
+    IEnumerator QueueInputCoroutine(Func<InputContext, bool> inputCallback, InputContext e)
     {
         QueuedInputMap.Add(inputCallback, e);
         float timer = 0;
-        while (timer < INPUT_QUEUE_DELAY)
+        while (timer < inputQueueDelay)
         {
-            inputCallback(e);
-            timer += Time.deltaTime;
-            yield return null;
+            if (inputCallback(e))
+            {
+                timer = inputQueueDelay;
+            } else
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
         }
         QueuedInputMap.Remove(inputCallback);
     }
@@ -82,9 +97,9 @@ public class InputController : MonoBehaviour
     {
         _playerActions.Move.performed += TrackMovement;
         _playerActions.Move.canceled += StopMovement;
-        _playerActions.Dash.performed += e => QueueInput(_playerController.Dash, e);
+        _playerActions.Dash.performed += dashQueuedAction;
         _playerActions.Rotate.performed += _playerController.RotateCamera;
-        _playerActions.Attack.performed += e => QueueInput(_weaponController.Attack, e);
+        _playerActions.Attack.performed += attackQueuedAction;
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
     }
 
@@ -114,9 +129,9 @@ public class InputController : MonoBehaviour
     {
         _playerActions.Move.performed -= TrackMovement;
         _playerActions.Move.canceled -= StopMovement;
-        _playerActions.Dash.performed -= _playerController.Dash;
+        _playerActions.Dash.performed -= dashQueuedAction;
         _playerActions.Rotate.performed -= _playerController.RotateCamera;
-        _playerActions.Attack.performed -= _weaponController.Attack;
+        _playerActions.Attack.performed -= attackQueuedAction;
         _playerActions.CycleWeapon.performed -= _weaponController.CycleWeapon;
     }
 
