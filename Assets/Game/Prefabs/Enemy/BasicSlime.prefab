@@ -5403,6 +5403,7 @@ MonoBehaviour:
   hitParticlesDuration: 1
   slimeOuterBody: {fileID: 2201507902128942745}
   flashDuration: 0.2
+  flashColor: {r: 1, g: 1, b: 1, a: 0.47058824}
 --- !u!114 &1030678316373288018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10645,7 +10646,7 @@ PrefabInstance:
     - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 89.4554
+      value: 93.53924
       objectReference: {fileID: 0}
     - target: {fileID: 8699541509210442394, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
