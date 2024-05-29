@@ -27,6 +27,9 @@ public class SteeringAgent : MonoBehaviour
     // Animation
     public bool useRootMotion = true;
     public bool useGravity = true;
+    public bool beBouncy = false;
+    public float bounceForce = 5.0f;
+    private float upVelocity = 0.0f;
 
     private Animator animator;
     private CharacterController characterController;
@@ -52,12 +55,24 @@ public class SteeringAgent : MonoBehaviour
     private void Update()
     {
         Vector3 steeringForce = CalculateSteeringForce();
-        //steeringForce.y = 0.0f;
-        if (characterController != null && characterController.enabled && useGravity)
+
+        // Y-direction movement
+        if (characterController != null && characterController.enabled)
         {
-            characterController.Move(Physics.gravity * Time.deltaTime);
+            if (useGravity)
+            {
+                upVelocity += Physics.gravity.y * Time.deltaTime;
+            }
+
+            if (characterController.isGrounded & upVelocity < 0)
+            {
+                upVelocity = 0.0f;
+            }
+
+            characterController.Move(new Vector3(0, upVelocity * Time.deltaTime, 0));
         }
 
+        // XZ movement
         if (reachedGoal)
         {
             velocity = Vector3.zero;
@@ -67,7 +82,7 @@ public class SteeringAgent : MonoBehaviour
         else
         {
             Vector3 acceleration = steeringForce / mass;
-            velocity = velocity + (acceleration * Time.deltaTime);
+            velocity += (acceleration * Time.deltaTime);
             velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
             //transform.position += velocity * Time.deltaTime;
 
@@ -78,17 +93,21 @@ public class SteeringAgent : MonoBehaviour
             // Movement
             if (!useRootMotion)
             {
-                if (agentRigidbody != null && !agentRigidbody.isKinematic)
+                MoveWithVelocity(velocity);
+            }
+            if (beBouncy && speed > 0)
+            {
+#if UNITY_EDITOR
+                if (characterController == null || !characterController.enabled)
                 {
-                    agentRigidbody.velocity = velocity;
+                    Debug.LogWarning("No character controller. Can not be bouncy!");
                 }
-                else if (characterController != null && characterController.enabled)
+#endif
+
+                // Shoot it up
+                if (characterController.isGrounded)
                 {
-                    characterController.Move(velocity * Time.deltaTime);
-                }
-                else
-                {
-                    transform.position += (velocity * Time.deltaTime);
+                    upVelocity += bounceForce;
                 }
             }
 
@@ -109,6 +128,22 @@ public class SteeringAgent : MonoBehaviour
                                                           Time.deltaTime * angularDampeningTime);
                 }
             }
+        }
+    }
+
+    private void MoveWithVelocity(Vector3 velocity)
+    {
+        if (agentRigidbody != null && !agentRigidbody.isKinematic)
+        {
+            agentRigidbody.velocity = velocity;
+        }
+        else if (characterController != null && characterController.enabled)
+        {
+            characterController.Move(velocity * Time.deltaTime);
+        }
+        else
+        {
+            transform.position += (velocity * Time.deltaTime);
         }
     }
 
