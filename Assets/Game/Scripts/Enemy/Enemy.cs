@@ -65,7 +65,7 @@ public class Enemy : DamageTaker, ITakeDamage
         BaseEnemyTakeDamage(damage);
         if (!isInvincible)
         {
-            StartCoroutine(DisableTrailOnKnockback());
+            //StartCoroutine(DisableTrailOnKnockback());
             StartCoroutine(ChangeEyeToDamage());
         }
     }
