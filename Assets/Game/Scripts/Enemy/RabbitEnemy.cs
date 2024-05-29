@@ -10,6 +10,7 @@ public class RabbitEnemy : Enemy
 
     RabbitSlime_FSM fsm;
     Transform playerTransform;
+    TrailRenderer trailRenderer;
 
     // Used by FSM states
     [HideInInspector] public bool isDodging = false;
@@ -17,6 +18,7 @@ public class RabbitEnemy : Enemy
     protected override void Start()
     {
         base.Start();
+        trailRenderer = GetComponent<TrailRenderer>();
         fsm = GetComponent<RabbitSlime_FSM>();
         playerTransform = GameObject.FindWithTag("Player")?.transform;
         UnityEngine.Assertions.Assert.IsNotNull(playerTransform, "GameObject with tag 'Player' not found!");
@@ -61,6 +63,7 @@ public class RabbitEnemy : Enemy
 
     IEnumerator ApplyDodge(Vector3 dodgeDirection)
     {
+        trailRenderer.enabled = true;
         Vector3 startPosition = transform.position;
         Vector3 endPosition = startPosition + dodgeDirection;
         float timeElapsed = 0.0f;
@@ -78,6 +81,7 @@ public class RabbitEnemy : Enemy
             yield return null;
         }
         isDodging = false;
+        trailRenderer.enabled = false;
     }
 
 }
