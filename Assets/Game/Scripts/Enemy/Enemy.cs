@@ -29,6 +29,12 @@ public class Enemy : DamageTaker, ITakeDamage
     [SerializeField] float flashDuration = 0.2f;
     [SerializeField] Color flashColor;
 
+    [Header("Death")]
+    [SerializeField] GameObject slimeModel;
+    [SerializeField] ParticleSystem deathParticles;
+    [SerializeField] float deathDelay = 3.5f;
+    protected bool isAlive = true;
+
     protected override void Start()
     {
         base.Start();
@@ -36,11 +42,16 @@ public class Enemy : DamageTaker, ITakeDamage
         normalEye.enabled = true;
         attackEye.enabled = false;
         deathEye.enabled = false;
+        isAlive = true;
     }
 
     // Used in child classes to call the original TakeDamage method
     protected void BaseEnemyTakeDamage(Damage damage)
     {
+        if (!isAlive)
+        {
+            return;
+        }
         base.TakeDamage(damage);
         if (!isInvincible)
         {
@@ -57,6 +68,31 @@ public class Enemy : DamageTaker, ITakeDamage
             StartCoroutine(DisableTrailOnKnockback());
             StartCoroutine(ChangeEyeToDamage());
         }
+    }
+
+    public override void Death()
+    {
+        isAlive = false;
+
+        // Hide visible meshes / UI
+        slimeModel.SetActive(false);
+        healthSlider.gameObject.SetActive(false);
+
+        // Stop movement
+        GetComponent<SlimeSteeringAgent>().enabled = false;
+
+        deathParticles.Play();
+        Destroy(gameObject, deathDelay);
+    }
+
+    public void SetEye(EnemyEye enemyEye)
+    {
+        StartCoroutine(ChangeEye(enemyEye));
+    }
+
+    public EnemyEye GetEnemyEye()
+    {
+        return eye;
     }
 
     IEnumerator DisableTrailOnKnockback()
@@ -127,11 +163,6 @@ public class Enemy : DamageTaker, ITakeDamage
         SetEye(EnemyEye.NORMAL);
     }
 
-    public void SetEye(EnemyEye enemyEye)
-    {
-        StartCoroutine(ChangeEye(enemyEye));
-    }
-
     IEnumerator ChangeEye(EnemyEye enemyEye)
     {
         while (freezeEyeChange)
@@ -142,10 +173,5 @@ public class Enemy : DamageTaker, ITakeDamage
         normalEye.enabled = (enemyEye == EnemyEye.NORMAL);
         attackEye.enabled = (enemyEye == EnemyEye.ATTACK);
         deathEye.enabled = (enemyEye == EnemyEye.DEATH);
-    }
-
-    public EnemyEye GetEnemyEye()
-    {
-        return eye;
     }
 }
