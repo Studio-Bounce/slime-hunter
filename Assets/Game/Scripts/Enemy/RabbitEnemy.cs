@@ -70,7 +70,7 @@ public class RabbitEnemy : Enemy
         while (timeElapsed < dodgeTime)
         {
             // Lerp knockback
-            float t = EasingFunctions.EaseOutCubic(timeElapsed / dodgeTime);
+            float t = EasingFunctions.EaseOutQuart(timeElapsed / dodgeTime);
             Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, t);
             if (characterController != null && characterController.enabled)
                 characterController.Move(newPosition - transform.position);
