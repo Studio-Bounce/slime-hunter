@@ -96,16 +96,18 @@ public class PlayerController : MonoBehaviour
 
     public void MovePlayer()
     {
-        if (isDashing)
-        {
-            return;
-        }
+        if (isDashing) return;
 
         Vector2 moveInput = inputController.movement;
         // Set move animation based on input
         animator.SetFloat(blendSpeedHash, moveInput.magnitude);
         if (moveInput == Vector2.zero)
             return;
+        // Interrupt any attack release animation
+        if (!weaponController.isAttack)
+        {
+            weaponController.InterruptAttack();
+        }
 
         // Get forward based on camera
         Vector3 cameraToPlayer = (transform.position - cameraTransform.position);

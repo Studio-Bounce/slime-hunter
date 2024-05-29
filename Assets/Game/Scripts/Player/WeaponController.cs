@@ -135,12 +135,7 @@ public class WeaponController : MonoBehaviour
 
     private IEnumerator PerformAttack(AttackMove move, Vector3 direction)
     {
-        // Interrupt current animation and apply new animation
-        if (_animator.GetCurrentAnimatorStateInfo(0).shortNameHash == attackStateHash)
-        {
-            _animator.CrossFade(baseStateHash, 0.0f);
-        }
-
+        InterruptAttack();
         SetupAttackAnimation(move);
         // Increment combo
         _attackMoveIndex = _attackMoveIndex < CurrentWeapon.attackMoves.Count-1 ? _attackMoveIndex+1 : 0;
@@ -155,10 +150,16 @@ public class WeaponController : MonoBehaviour
         isAttack = false;
         // WIP: Hardcoded combo reset .1 seconds after attack
         yield return new WaitForSeconds(0.1f);
-        if (isAttack == false)
+    }
+
+    // Interrupt current attack animation
+    public void InterruptAttack()
+    {
+        if (_animator.GetCurrentAnimatorStateInfo(0).shortNameHash == attackStateHash)
         {
-            _attackMoveIndex = 0;
+            _animator.CrossFade(baseStateHash, 0.0f);
         }
+        _animator.SetTrigger(attackEndTriggerHash);
     }
 
 #if UNITY_EDITOR
