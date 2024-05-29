@@ -18,7 +18,7 @@ public class WeaponController : MonoBehaviour
     public WeaponSO[] availableWeapons = new WeaponSO[3];
 
     [Header("Animations/Visuals")]
-    public WeaponTrail trailCollider;
+    public WeaponTrail weaponTrail;
     public AnimationClip baseAttackClip;
 
     // Weapon&Animation
@@ -84,7 +84,7 @@ public class WeaponController : MonoBehaviour
         _currentWeaponPrefab.transform.forward = handPivot.forward;
         _currentWeaponPrefab.transform.position += handPivotOffset;
         // The weapon trail needs to know current weapon's settings
-        trailCollider.SetupWeaponSettings(weaponSO);
+        weaponTrail.SetupWeaponSettings(weaponSO);
     }
 
     // Replace base attack animation with weapon animations
@@ -140,31 +140,25 @@ public class WeaponController : MonoBehaviour
         {
             _animator.CrossFade(baseStateHash, 0.0f);
         }
-        _animator.ResetTrigger(attackEndTriggerHash);
-        _animator.ResetTrigger(attackStartTriggerHash);
 
         SetupAttackAnimation(move);
         // Increment combo
         _attackMoveIndex = _attackMoveIndex < CurrentWeapon.attackMoves.Count-1 ? _attackMoveIndex+1 : 0;
         // Rotate player towards attack
         transform.forward = direction;
-        trailCollider.transform.forward = direction;
+        weaponTrail.transform.forward = direction;
         // Start attack 
         _animator.SetTrigger(attackStartTriggerHash);
         yield return new WaitForSeconds(move.animationOffset);
-        // In case attack is interrupted at this point
-        if (isAttack)
-        {
-            trailCollider.Attack(move);
-            yield return new WaitForSeconds(move.duration);
-            isAttack = false;
-        }
-    }
-
-    public void InterruptAttack()
-    {
+        weaponTrail.Attack(move);
+        yield return new WaitForSeconds(move.duration);
         isAttack = false;
-        _animator.SetTrigger(attackEndTriggerHash);
+        // WIP: Hardcoded combo reset .1 seconds after attack
+        yield return new WaitForSeconds(0.1f);
+        if (isAttack == false)
+        {
+            _attackMoveIndex = 0;
+        }
     }
 
 #if UNITY_EDITOR

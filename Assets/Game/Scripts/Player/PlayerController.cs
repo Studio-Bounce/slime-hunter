@@ -135,7 +135,10 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDashing && Time.time > lastDashTime + dashCooldown && !weaponController.isAttack)
         {
-            StartCoroutine(PerformDash(inputController.GetMoveDirectionFromCamera() * dashDistance));
+            Vector3 dashDirection = inputController.GetMoveDirectionFromCamera();
+            dashDirection = dashDirection == Vector3.zero ? transform.forward : dashDirection;
+
+            StartCoroutine(PerformDash(dashDirection * dashDistance));
             return true;
         }
         return false;
