@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
 
     public bool Dash(InputAction.CallbackContext context)
     {
-        if (!isDashing && Time.time > lastDashTime + dashCooldown && !weaponController.IsAttack())
+        if (!isDashing && Time.time > lastDashTime + dashCooldown && weaponController.IsInterruptable())
         {
             Vector3 dashDirection = inputController.GetMoveDirectionFromCamera();
             dashDirection = dashDirection == Vector3.zero ? transform.forward : dashDirection;
