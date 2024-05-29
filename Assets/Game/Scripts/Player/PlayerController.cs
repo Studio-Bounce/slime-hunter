@@ -106,7 +106,7 @@ public class PlayerController : MonoBehaviour
         // Interrupt any attack release animation
         weaponController.InterruptAttack();
 
-        Vector3 moveDirection = inputController.GetMoveDirectionFromCamera();
+        Vector3 moveDirection = Utils.DirectionToCameraForward(transform.position,moveInput);
         // Rotate the player to look at the movement direction
         float _moveSpeed = moveSpeed;
         if (!weaponController.IsInterruptable())
@@ -126,7 +126,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDashing && Time.time > lastDashTime + dashCooldown && weaponController.IsInterruptable())
         {
-            Vector3 dashDirection = inputController.GetMoveDirectionFromCamera();
+            weaponController.ResetCombo();
+            Vector3 dashDirection = Utils.DirectionToCameraForward(transform.position, inputController.movement);
             dashDirection = dashDirection == Vector3.zero ? transform.forward : dashDirection;
 
             StartCoroutine(PerformDash(dashDirection * dashDistance));

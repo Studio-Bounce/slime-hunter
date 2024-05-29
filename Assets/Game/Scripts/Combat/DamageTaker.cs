@@ -65,17 +65,19 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     protected IEnumerator ApplyKnockback(Damage damage)
     {
         isInKnockback = true;
-        Vector3 knockbackVec = damage.direction * damage.knockback;
-        knockbackVec.y = 0;
-
+        Vector3 knockbackVec = damage.direction * damage.knockback * GameManager.GLOBAL_KNOCKBACK_MULTIPLIER;
         Vector3 startPosition = transform.position;
         Vector3 endPosition = startPosition + knockbackVec;
         float timeElapsed = 0.0f;
         while (timeElapsed < knockbackTime)
         {
             // Lerp knockback
-            float t = EasingFunctions.EaseOutCubic(timeElapsed / knockbackTime);
+            float normalizedTime = timeElapsed / knockbackTime;
+            float t = EasingFunctions.EaseOutCubic(normalizedTime);
             Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, t);
+            //float lerpedY = Mathf.Sin(normalizedTime * Mathf.PI)*Mathf.Log(damage.knockback);
+            //newPosition = new Vector3(newPosition.x, lerpedY, newPosition.z);
+
             if (characterController != null && characterController.enabled)
                 characterController.Move(newPosition - transform.position);
             else
