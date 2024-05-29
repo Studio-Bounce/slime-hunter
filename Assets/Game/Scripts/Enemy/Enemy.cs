@@ -16,11 +16,17 @@ public class Enemy : DamageTaker, ITakeDamage
     [SerializeField] SkinnedMeshRenderer normalEye;
     [SerializeField] SkinnedMeshRenderer attackEye;
     [SerializeField] SkinnedMeshRenderer deathEye;
-    private EnemyEye eye;
+    EnemyEye eye;
 
     [SerializeField] float damageEyeTimer = 1.0f;
-    private bool freezeEyeChange = false;
-    private TrailRenderer trailRenderer;
+    bool freezeEyeChange = false;
+    TrailRenderer trailRenderer;
+
+    [Header("Hit Feedback")]
+    [SerializeField] ParticleSystem hitParticles;
+    [SerializeField] float hitParticlesDuration = 1.0f;
+    [SerializeField] SkinnedMeshRenderer slimeOuterBody;
+    [SerializeField] float flashDuration = 0.2f;
 
     protected override void Start()
     {
@@ -32,16 +38,24 @@ public class Enemy : DamageTaker, ITakeDamage
     }
 
     // Used in child classes to call the original TakeDamage method
-    protected void OriginalTakeDamage(Damage damage)
+    protected void BaseEnemyTakeDamage(Damage damage)
     {
         base.TakeDamage(damage);
+        if (!isInvincible)
+        {
+            StartCoroutine(ShowHitParticles());
+            StartCoroutine(FlashSlime());
+        }
     }
 
     public override void TakeDamage(Damage damage)
     {
-        base.TakeDamage(damage);
-        StartCoroutine(DisableTrailOnKnockback());
-        StartCoroutine(ChangeEyeToDamage());
+        BaseEnemyTakeDamage(damage);
+        if (!isInvincible)
+        {
+            StartCoroutine(DisableTrailOnKnockback());
+            StartCoroutine(ChangeEyeToDamage());
+        }
     }
 
     IEnumerator DisableTrailOnKnockback()
@@ -60,10 +74,39 @@ public class Enemy : DamageTaker, ITakeDamage
         if (trailRenderer != null)
         {
             trailRenderer.enabled = true;
+
             // Wait for a frame to ensure the trail is cleared
             yield return null;
-            // Restore the original trail time
-            trailRenderer.time = trailTime;
+
+            // Restore the original trail time (Frame has changed so do another null check)
+            if (trailRenderer != null)
+                trailRenderer.time = trailTime;
+        }
+    }
+
+    IEnumerator ShowHitParticles()
+    {
+        if (hitParticles != null)
+        {
+            hitParticles.Play();
+            yield return new WaitForSeconds(hitParticlesDuration);
+            hitParticles.Stop();
+        }
+    }
+
+    IEnumerator FlashSlime()
+    {
+        if (slimeOuterBody != null)
+        {
+            Color slimeColor = slimeOuterBody.materials[0].color;
+
+            // Change color to white for a short duration
+            slimeOuterBody.materials[0].color = Color.white;
+
+            yield return new WaitForSeconds(flashDuration);
+
+            // Revert color
+            slimeOuterBody.materials[0].color = slimeColor;
         }
     }
 

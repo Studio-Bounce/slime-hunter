@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XInput;
 
 [RequireComponent(typeof(Animator), typeof(CharacterController), typeof(WeaponController))]
 public class PlayerController : MonoBehaviour
@@ -11,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     private int blendSpeedHash;
     private int dashHash;
-    private int attackHash = Animator.StringToHash("Attack");
 
     //public float rotationSpeed = 5f;
     public float moveSpeed = 5f;
@@ -133,9 +133,9 @@ public class PlayerController : MonoBehaviour
 
     public void Dash(InputAction.CallbackContext context)
     {
-        if (!isDashing && Time.time > lastDashTime + dashCooldown)
+        if (!isDashing && Time.time > lastDashTime + dashCooldown && !weaponController.isAttack)
         {
-            StartCoroutine(PerformDash(transform.forward * dashDistance));
+            StartCoroutine(PerformDash(inputController.GetMoveDirectionFromCamera() * dashDistance));
         }
     }
 
@@ -153,6 +153,9 @@ public class PlayerController : MonoBehaviour
         while (dashProgress <= 1.0f)
         {
             dashProgress = (Time.time - startTime) / dashDuration;
+
+            dashProgress = EasingFunctions.EaseOutCubic(dashProgress);
+
             transform.position = startPosition + dashVector * dashProgress;
             yield return null;
         }

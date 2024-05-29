@@ -24,7 +24,7 @@ public class RabbitEnemy : Enemy
 
     public override void TakeDamage(Damage damage)
     {
-        base.OriginalTakeDamage(damage);
+        base.BaseEnemyTakeDamage(damage);
 
         if (isInvincible)
         {

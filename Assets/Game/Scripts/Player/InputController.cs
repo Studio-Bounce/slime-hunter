@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.WebSockets;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using InputContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 
@@ -42,30 +43,48 @@ public class InputController : MonoBehaviour
         DisableUIControls();
     }
 
+    public Vector3 GetMoveDirectionFromCamera()
+    {
+        // Get forward based on camera
+        Vector3 cameraToPlayer = (transform.position - Camera.main.transform.position);
+        Vector2 forwardDirection = new Vector2(cameraToPlayer.x, cameraToPlayer.z);
+        forwardDirection.Normalize();
+        Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
+
+        // Calculate movement direction based on forward
+        Vector2 direction2D = (forwardDirection * movement.y + rightDirection * movement.x).normalized;
+        return new Vector3(direction2D.x, 0, direction2D.y);
+    }
+
     // Give leniency to player input when timing is important
-    IEnumerator QueueInput(System.Action<InputContext> inputCallback, InputContext e)
+    private void QueueInput(System.Action<InputContext> inputCallback, InputContext e)
     {
         if (!QueuedInputMap.ContainsKey(inputCallback))
         {
-            QueuedInputMap.Add(inputCallback, e);
-            float timer = 0;
-            while (timer < INPUT_QUEUE_DELAY)
-            {
-                inputCallback(e);
-                timer += Time.deltaTime;
-                yield return null;
-            }
-            QueuedInputMap.Remove(inputCallback);
+            StartCoroutine(QueueInputCoroutine(inputCallback, e));
         }
+    }
+
+    IEnumerator QueueInputCoroutine(System.Action<InputContext> inputCallback, InputContext e)
+    {
+        QueuedInputMap.Add(inputCallback, e);
+        float timer = 0;
+        while (timer < INPUT_QUEUE_DELAY)
+        {
+            inputCallback(e);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        QueuedInputMap.Remove(inputCallback);
     }
 
     private void SetupPlayerControls()
     {
         _playerActions.Move.performed += TrackMovement;
         _playerActions.Move.canceled += StopMovement;
-        _playerActions.Dash.performed += _playerController.Dash;
+        _playerActions.Dash.performed += e => QueueInput(_playerController.Dash, e);
         _playerActions.Rotate.performed += _playerController.RotateCamera;
-        _playerActions.Attack.performed += e => StartCoroutine(QueueInput(_weaponController.Attack, e));
+        _playerActions.Attack.performed += e => QueueInput(_weaponController.Attack, e);
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
     }
 

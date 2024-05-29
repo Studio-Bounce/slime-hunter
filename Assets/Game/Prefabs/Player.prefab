@@ -126,6 +126,7 @@ MonoBehaviour:
   slider: {fileID: 0}
   damageDelay: 0.5
   knockbackTime: 0.25
+  isInvincible: 0
 --- !u!114 &2463496225978856163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,52 +146,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
   - {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
   - {fileID: 11400000, guid: 99cedeb06ace0a541a4b2160b3e72dbe, type: 2}
-  animationSpeedCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.028045654
-      value: 0.8961487
-      inSlope: 5.9310493
-      outSlope: 5.9310493
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.20940991
-      value: 1.971829
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.6791667
-      value: 1
-      inSlope: Infinity
-      outSlope: Infinity
-      tangentMode: 103
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   trailCollider: {fileID: 8536796487223862311}
   baseAttackClip: {fileID: -203655887218126122, guid: 368a8195de7259c4b90d8c64c0c4c8e2,
     type: 3}
-  isAttack: 0
 --- !u!114 &5760338420974404415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +289,7 @@ MonoBehaviour:
   arcRadius: 1
   meshResolution: 3
   liveReload: 0
+  framesToPause: 4
   weaponVFX: {fileID: 1560174599449287195, guid: feea3f1c554c3a6489e0bc69747341d6,
     type: 3}
 --- !u!1001 &4659479598651636041

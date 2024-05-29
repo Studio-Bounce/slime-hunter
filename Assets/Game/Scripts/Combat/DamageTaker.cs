@@ -10,6 +10,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Collider))]
 public class DamageTaker : MonoBehaviour, ITakeDamage
 {
+    protected bool isAlive = true;
     public int health = 100;
     [SerializeField] Slider slider;
     private int maxHealth = 0;
@@ -29,11 +30,14 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     {
         characterController = GetComponent<CharacterController>();
         maxHealth = health;
+        isAlive = true;
     }
 
     public void Death()
     {
-        Destroy(gameObject);
+        isAlive = false;
+        // Little delay in death prevents bugs from coroutines
+        Destroy(gameObject, 0.25f);
     }
 
     public virtual void TakeDamage(Damage damage)
