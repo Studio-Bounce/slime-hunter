@@ -15323,6 +15323,8 @@ MonoBehaviour:
   chaseSpeed: 5
   attackSpeed: 10
   attackRadius: 4
+  attackProximity: 1
+  slimeAnimator: {fileID: 2403758375320863911}
 --- !u!114 &3359904442406818763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20471,7 +20473,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 2bd3748fcf5aefd4884e523c6db8a90f, type: 2}
+      objectReference: {fileID: 9100000, guid: 421f99bf9ea12ad4387715fcc4b0fe35, type: 2}
     - target: {fileID: 6427321115966553525, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalRotation.y
