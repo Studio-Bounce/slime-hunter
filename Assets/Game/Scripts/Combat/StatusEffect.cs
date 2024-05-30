@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class StatusEffect : ScriptableObject
 {
+    public Sprite icon;
     public string effectName;
     public float duration = 1;
     public float tickInterval = 1;
@@ -27,7 +28,6 @@ public abstract class StatusEffect : ScriptableObject
 
     public bool UpdateEffect(DamageTaker taker)
     {
-        OnStartEffect(taker);
         timeRemaining -= Time.deltaTime;
         tickTimer += Time.deltaTime;
 

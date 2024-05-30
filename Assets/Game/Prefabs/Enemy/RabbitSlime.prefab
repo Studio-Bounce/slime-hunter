@@ -15135,6 +15135,7 @@ GameObject:
   - component: {fileID: 267308195683594635}
   - component: {fileID: 3359904442406818763}
   - component: {fileID: 6785253409571859297}
+  - component: {fileID: 614397070389318196}
   m_Layer: 7
   m_Name: RabbitSlime
   m_TagString: Untagged
@@ -15448,6 +15449,23 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &614397070389318196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223826132166210976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f58dac856cdbf4187b0ae9f688ac30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusBarPrefab: {fileID: 6282667672108503733, guid: ea642a1a7f9f513448fe26f6b9ebcf7e,
+    type: 3}
+  showStatusBar: 1
+  activeEffects: []
+  effectsToRemove: []
 --- !u!1 &8920867933339097928
 GameObject:
   m_ObjectHideFlags: 0

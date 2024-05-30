@@ -12,7 +12,7 @@ public class StunEffect : StatusEffect
 
     protected override void OnUpdateEffect(DamageTaker taker)
     {
-        Debug.Log($"[{taker.gameObject.name}] stun tick");
+        //Debug.Log($"[{taker.gameObject.name}] stun tick");
     }
 
     protected override void OnEndEffect(DamageTaker taker)

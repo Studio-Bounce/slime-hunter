@@ -13,6 +13,8 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     public int health = 100;
     [SerializeField] protected Slider healthSlider;
     private int maxHealth = 0;
+    [HideInInspector, ReadOnly]
+    public bool isAlive = true;
 
     [Tooltip("Damage delay ensures that multiple damages do not get registered in a short interval")]
     public float damageDelay = 0.5f;
@@ -37,6 +39,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     public virtual void Death()
     {
         // Little delay in death prevents bugs from coroutines
+        isAlive = false;
         Destroy(gameObject, 0.2f);
     }
 
