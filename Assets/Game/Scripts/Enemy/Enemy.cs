@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public enum EnemyEye
 {
@@ -26,7 +27,7 @@ public class Enemy : DamageTaker
     [SerializeField] float hitParticlesDuration = 1.0f;
     [SerializeField] SkinnedMeshRenderer slimeOuterBody;
     [SerializeField] float flashDuration = 0.2f;
-    [SerializeField] Color flashColor;
+    [SerializeField][ColorUsage(true, true)] Color flashColor;
 
     [Header("Death")]
     [SerializeField] GameObject slimeModel;
