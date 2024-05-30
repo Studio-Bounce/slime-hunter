@@ -28,7 +28,6 @@ public abstract class StatusEffect : ScriptableObject
 
     public bool UpdateEffect(DamageTaker taker)
     {
-        OnStartEffect(taker);
         timeRemaining -= Time.deltaTime;
         tickTimer += Time.deltaTime;
 

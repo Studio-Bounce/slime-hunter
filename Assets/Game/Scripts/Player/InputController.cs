@@ -7,11 +7,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using InputContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 
-[RequireComponent(typeof(PlayerController), typeof(WeaponController))]
+[RequireComponent(typeof(PlayerController), typeof(WeaponController), typeof(SpellController))]
 public class InputController : MonoBehaviour
 {
     private PlayerController _playerController;
     private WeaponController _weaponController;
+    private SpellController _spellController;
 
     private PlayerInputActions _inputActions;
     private PlayerInputActions.PlayerActions _playerActions;
@@ -39,6 +40,7 @@ public class InputController : MonoBehaviour
     {
         _playerController = GetComponent<PlayerController>();
         _weaponController = GetComponent<WeaponController>();
+        _spellController = GetComponent<SpellController>();
         attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
         dashQueuedAction = e => QueueInput(_playerController.Dash, e);
 

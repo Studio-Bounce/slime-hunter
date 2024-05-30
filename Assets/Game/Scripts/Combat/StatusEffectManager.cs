@@ -48,8 +48,9 @@ public class StatusEffectManager : MonoBehaviour
             if (effect.UpdateEffect(damageTaker))
             {
                 effect.EndEffect(damageTaker);
-                statusBar.RemoveStatusEffect(effect);
                 effectsToRemove.Add(effect);
+
+                if (showStatusBar) statusBar.RemoveStatusEffect(effect);
             }
         }
 
@@ -58,6 +59,11 @@ public class StatusEffectManager : MonoBehaviour
             activeEffects.Remove(effect);
         }
         effectsToRemove.Clear();
+
+        if (!damageTaker.isAlive)
+        {
+            statusBar.gameObject.SetActive(false);
+        }
     }
 
     public void AddEffect(StatusEffect newEffect)
@@ -66,6 +72,7 @@ public class StatusEffectManager : MonoBehaviour
         effectInstance.Initialize();
         effectInstance.StartEffect(damageTaker);
         activeEffects.Add(effectInstance);
-        statusBar.AddStatusEffect(effectInstance);
+
+        if (showStatusBar) statusBar.AddStatusEffect(effectInstance);
     }
 }

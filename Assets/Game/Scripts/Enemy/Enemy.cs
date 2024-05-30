@@ -33,7 +33,6 @@ public class Enemy : DamageTaker
     [SerializeField] GameObject slimeModel;
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] float deathDelay = 3.5f;
-    protected bool isAlive = true;
 
     protected override void Start()
     {
@@ -78,7 +77,6 @@ public class Enemy : DamageTaker
 
         // Stop movement
         GetComponent<SlimeSteeringAgent>().enabled = false;
-
         deathParticles.Play();
         Destroy(gameObject, deathDelay);
     }

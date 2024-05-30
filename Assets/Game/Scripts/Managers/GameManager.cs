@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -25,6 +27,18 @@ public class GameManager : Singleton<GameManager>
     }
 
     public event Action<int> OnPlayerHealthChange;
+
+    private void Awake()
+    {
+        if (screenCanvas == null)
+        {
+            GameObject canvasObject = new GameObject("ScreenCanvas");
+            canvasObject.transform.SetParent(null, false);
+            screenCanvas = canvasObject.AddComponent<Canvas>();
+            screenCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            canvasObject.AddComponent<GraphicRaycaster>();
+        }
+    }
 
     private void OnDestroy()
     {

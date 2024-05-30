@@ -55,7 +55,7 @@ public class StatusBar : MonoBehaviour
             statusBarRoot.anchoredPosition = Camera.main.WorldToScreenPoint(ownerTransform.position);
         } else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }
