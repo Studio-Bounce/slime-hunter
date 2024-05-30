@@ -11,6 +11,9 @@ public class GameManager : Singleton<GameManager>
     public Player playerRef;
     public readonly int playerMaxHealth = 100;
     private int playerHealth = 100;
+
+    public Canvas screenCanvas;
+
     public int PlayerHealth
     {
         get { return playerHealth; }
