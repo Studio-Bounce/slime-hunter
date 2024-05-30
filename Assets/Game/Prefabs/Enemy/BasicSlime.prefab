@@ -15205,8 +15205,8 @@ MonoBehaviour:
   hitParticles: {fileID: 2665899475135253320}
   hitParticlesDuration: 1
   slimeOuterBody: {fileID: 2201507902128942745}
-  flashDuration: 0.2
-  flashColor: {r: 1, g: 1, b: 1, a: 0.47058824}
+  flashDuration: 0.1
+  flashColor: {r: 2.5193918, g: 2.5193918, b: 2.5193918, a: 0.47058824}
   slimeModel: {fileID: 6008567685828587907}
   deathParticles: {fileID: 7219281769877467878}
   deathDelay: 3.5
@@ -20451,6 +20451,11 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6427321115966553525, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0
+      objectReference: {fileID: 0}
     - target: {fileID: 6440824974522327981, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_Layer
@@ -20473,8 +20478,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 85.85868
+      value: 89.4554
       objectReference: {fileID: 0}
     - target: {fileID: 8699541509210442394, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}

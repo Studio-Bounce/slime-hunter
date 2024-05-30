@@ -14713,7 +14713,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
+  - {fileID: 2100000, guid: 9b51f12647bacb941af0e076cfd256c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15261,8 +15261,8 @@ MonoBehaviour:
   hitParticles: {fileID: 8893717935379414992}
   hitParticlesDuration: 1
   slimeOuterBody: {fileID: 3539770233314810749}
-  flashDuration: 0.2
-  flashColor: {r: 1, g: 1, b: 1, a: 0.47058824}
+  flashDuration: 0.1
+  flashColor: {r: 2.5193918, g: 2.5193918, b: 2.5193918, a: 0.47058824}
   slimeModel: {fileID: 9002733011280807015}
   deathParticles: {fileID: 4469707161624757012}
   deathDelay: 3.5
