@@ -5,6 +5,7 @@ using static WeaponController;
 
 public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 {
+    readonly int ToIdleAnimation = Animator.StringToHash("toIdle");
     readonly int AttackChargeAnimation = Animator.StringToHash("attackChargeUp");
     readonly int AttackReachedAnimation = Animator.StringToHash("attackReached");
 
@@ -101,6 +102,9 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 
         // Change eye
         fsm.slimeEnemy.SetEye(EnemyEye.NORMAL);
+
+        // Ensure the attack animation sequence has been completed
+        fsm.slimeAnimator.SetTrigger(ToIdleAnimation);
     }
 
     void UpdateSteeringBehaviours()
