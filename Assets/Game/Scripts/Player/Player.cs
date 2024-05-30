@@ -5,10 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 public class Player : DamageTaker
 {
+    private void Awake()
+    {
+        GameManager.Instance.playerRef = this;
+    }
+
     protected override void Start()
     {
         base.Start();
-
         // Ensures that base.health does not change as per damage
         isInvincible = true;
     }

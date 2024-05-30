@@ -52,19 +52,6 @@ public class InputController : MonoBehaviour
         DisableUIControls();
     }
 
-    public Vector3 GetMoveDirectionFromCamera()
-    {
-        // Get forward based on camera
-        Vector3 cameraToPlayer = (transform.position - Camera.main.transform.position);
-        Vector2 forwardDirection = new Vector2(cameraToPlayer.x, cameraToPlayer.z);
-        forwardDirection.Normalize();
-        Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
-
-        // Calculate movement direction based on forward
-        Vector2 direction2D = (forwardDirection * movement.y + rightDirection * movement.x).normalized;
-        return new Vector3(direction2D.x, 0, direction2D.y);
-    }
-
     // Give leniency to player input when timing is important
     // Callback should return bool to check if the input had succeeded
     private void QueueInput(Func<InputContext, bool> inputCallback, InputContext e)

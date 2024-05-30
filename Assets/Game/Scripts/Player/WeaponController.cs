@@ -136,15 +136,8 @@ public class WeaponController : MonoBehaviour
         Vector2 clickDirection = (clickPosition - currentScreenPos).normalized;
 
         // Align to camera forward
-        Vector3 cameraToPlayer = (transform.position - Camera.main.transform.position);
-        Vector2 forwardDirection = new Vector2(cameraToPlayer.x, cameraToPlayer.z);
-        forwardDirection.Normalize();
-        Vector2 rightDirection = new Vector2(forwardDirection.y, -forwardDirection.x);
-
-        Vector2 attackDirection = (forwardDirection * clickDirection.y + rightDirection * clickDirection.x).normalized;
-        Vector3 finalDir = new Vector3(attackDirection.x, 0, attackDirection.y);
-
-        StartCoroutine(PerformAttack(CurrentWeapon.attackMoves[_attackMoveIndex], finalDir));
+        Vector3 attackDirection = Utils.DirectionToCameraForward(transform.position, clickDirection);
+        StartCoroutine(PerformAttack(CurrentWeapon.attackMoves[_attackMoveIndex], attackDirection));
 
         return true;
     }
@@ -173,6 +166,11 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+    public void ResetCombo()
+    {
+        _attackMoveIndex = 0;
+    }
+
     // Interrupt current attack animation
     public bool InterruptAttack()
     {
@@ -181,7 +179,6 @@ public class WeaponController : MonoBehaviour
             {
                 _animator.CrossFade(baseStateHash, 0.0f);
             }
-            _animator.SetTrigger(attackEndTriggerHash);
             return true;
         }
         return false;

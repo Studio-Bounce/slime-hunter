@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-public static class EasingFunctions
+public static class Easing
 {
     public static readonly Func<float, float> Linear = t => t;
 
