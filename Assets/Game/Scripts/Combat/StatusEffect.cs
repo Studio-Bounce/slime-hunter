@@ -5,9 +5,10 @@ public abstract class StatusEffect : ScriptableObject
     public string effectName;
     public float duration = 1;
     public float tickInterval = 1;
+    private float tickTimer = 0;
 
     private float timeRemaining;
-    private float tickTime = 0;
+    
 
     public void Initialize()
     {
@@ -19,16 +20,21 @@ public abstract class StatusEffect : ScriptableObject
         OnStartEffect(taker);
     }
 
+    public void Reset()
+    {
+        timeRemaining = duration;
+    }
+
     public bool UpdateEffect(DamageTaker taker)
     {
         OnStartEffect(taker);
         timeRemaining -= Time.deltaTime;
-        tickTime += Time.deltaTime;
+        tickTimer += Time.deltaTime;
 
-        if (tickTime >= tickInterval)
+        if (tickTimer >= tickInterval)
         {
             OnUpdateEffect(taker);
-            tickTime = 0f;
+            tickTimer = 0f;
         }
 
         return timeRemaining <= 0f;

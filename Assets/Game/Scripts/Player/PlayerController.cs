@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
         {
             dashProgress = (Time.time - startTime) / dashDuration;
 
-            dashProgress = EasingFunctions.EaseOutCubic(dashProgress);
+            dashProgress = Easing.EaseOutCubic(dashProgress);
 
             transform.position = startPosition + dashVector * dashProgress;
             yield return null;
@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour
         {
 
             float t = (Time.time - startTime) / rotationDuration;
-            t = EasingFunctions.EaseOutCubic(t);
+            t = Easing.EaseOutCubic(t);
             cameraTransform.localRotation = Quaternion.Lerp(startRotation, targetRotation, t);
             yield return null;
         }

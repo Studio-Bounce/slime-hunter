@@ -10,7 +10,7 @@ public enum EnemyEye
 };
 
 [RequireComponent(typeof(SphereCollider))]
-public class Enemy : DamageTaker, ITakeDamage
+public class Enemy : DamageTaker
 {
     [Header("Slime Eyes")]
     [SerializeField] SkinnedMeshRenderer normalEye;

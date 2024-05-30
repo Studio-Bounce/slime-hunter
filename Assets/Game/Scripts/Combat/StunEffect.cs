@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "StatusEffects/StunEffect")]
+[CreateAssetMenu(menuName = "StatusEffect/StunEffect")]
 public class StunEffect : StatusEffect
 {
-    protected override void OnEndEffect(DamageTaker taker)
-    {
-        throw new System.NotImplementedException();
-    }
-
     protected override void OnStartEffect(DamageTaker taker)
     {
-        throw new System.NotImplementedException();
+        Debug.Log($"[{taker.gameObject.name}] is stunned");
     }
 
     protected override void OnUpdateEffect(DamageTaker taker)
     {
-        throw new System.NotImplementedException();
+        Debug.Log($"[{taker.gameObject.name}] stun tick");
+    }
+
+    protected override void OnEndEffect(DamageTaker taker)
+    {
+        Debug.Log($"[{taker.gameObject.name}] is no longer stunned");
     }
 }

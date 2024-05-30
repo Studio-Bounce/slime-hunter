@@ -6,7 +6,9 @@ public class StatusEffectManager : MonoBehaviour
 {
     private DamageTaker damageTaker;
 
-    private List<StatusEffect> activeEffects = new List<StatusEffect>();
+    public List<StatusEffect> activeEffects = new List<StatusEffect>();
+    public List<StatusEffect> effectsToRemove = new List<StatusEffect>();
+
 
 
     private void Start()
@@ -21,15 +23,20 @@ public class StatusEffectManager : MonoBehaviour
 
     void Update()
     {
-
         foreach (var effect in activeEffects)
         {
             if (effect.UpdateEffect(damageTaker))
             {
                 effect.EndEffect(damageTaker);
-                activeEffects.Remove(effect);
+                effectsToRemove.Add(effect);
             }
         }
+
+        foreach (var effect in effectsToRemove)
+        {
+            activeEffects.Remove(effect);
+        }
+        effectsToRemove.Clear();
     }
 
     public void AddEffect(StatusEffect newEffect)
