@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class RabbitSlime_AttackPlayer : BasicSlime_AttackPlayer
 {
-    public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // If enemy eye is normal, change it to attack
-        if (fsm.slimeEnemy.GetEnemyEye() == EnemyEye.NORMAL)
-        {
-            fsm.slimeEnemy.SetEye(EnemyEye.ATTACK);
-        }
+        base.OnStateEnter(animator, stateInfo, layerIndex);
 
-        // Once attack is complete, go to wander state
-        if (fsm.slimeAgent.reachedGoal || fsm.weapon.DidAttackLand())
-        {
-            fsm.ChangeState(fsm.WanderAroundStateName);
-        }
+        nextStateName = fsm.WanderAroundStateName;
     }
 }

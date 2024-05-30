@@ -20,8 +20,11 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
     };
     AttackState attackState;
 
+    protected int nextStateName = 0;
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        nextStateName = fsm.CooldownStateName;
         attackState = AttackState.CHARGE_UP;
         UpdateSteeringBehaviours();
 
@@ -77,7 +80,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
                 bool animationFinished = ((animationHash != ChargeUpState) && (animationHash != MoveState) && (animationHash != HeadAttackState));
                 if (animationFinished && (fsm.slimeAgent.reachedGoal || fsm.weapon.DidAttackLand()))
                 {
-                    fsm.ChangeState(fsm.CooldownStateName);
+                    fsm.ChangeState(nextStateName);
                 }
                 break;
         }
