@@ -17,7 +17,7 @@ MonoBehaviour:
     value: 10
     knockback: 1
     direction: {x: 0, y: 0, z: 0}
-    element: 0
+    effect: {fileID: 0}
   swingSpeed: 10
   range: 3
   hitLayers:
@@ -39,6 +39,6 @@ MonoBehaviour:
     rangeMultiplier: 1
   - clip: {fileID: -203655887218126122, guid: 26b8362ba6b3b3947bfe28a26b606f92, type: 3}
     animationOffset: 0.5
-    duration: 0.7
+    duration: 0.6
     direction: {x: -1, y: 0}
     rangeMultiplier: 1.5
