@@ -16,6 +16,11 @@ public class Menu : MonoBehaviour
         SetVisible(showOnStart);
     }
 
+    public virtual void Load()
+    {
+
+    }
+
     public void Show()
     {
         uiDocument.rootVisualElement.style.display = DisplayStyle.Flex;

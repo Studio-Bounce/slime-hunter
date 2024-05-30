@@ -17,7 +17,7 @@ MonoBehaviour:
     value: 10
     knockback: 50
     direction: {x: 0, y: 0, z: 0}
-    element: 0
+    effect: {fileID: 11400000, guid: 27b1c2fdf168fd74489886712184bfc1, type: 2}
   swingSpeed: 10
   range: 5
   hitLayers:
