@@ -7,21 +7,15 @@ using UnityEngine.UIElements;
 public class MainMenu : Menu
 {
     public string playSceneName;
-    public string menuSceneName;//Main menu Scene
+    public string menuSceneName; //Main menu Scene
 
     void Start()
     {
-       SceneLoader.Instance.LoadScene(menuSceneName);//load menu scene
         VisualElement root = uiDocument.rootVisualElement;
-
-
-         Label lblPlay = root.Q<Label>("lblPlay");
+        Label lblPlay = root.Q<Label>("lblPlay");
         Label lblQuit = root.Q<Label>("lblQuit");
-
-
-         lblPlay.RegisterCallback<ClickEvent>(ev => StartGame());
+        lblPlay.RegisterCallback<ClickEvent>(ev => StartGame());
         lblQuit.RegisterCallback<ClickEvent>(ev => QuitGame());
-
     }
 
     private void StartGame()
@@ -30,7 +24,6 @@ public class MainMenu : Menu
         SceneLoader.Instance.LoadScene(playSceneName);
         UIManager.Instance.SetMainMenu(false);
         UIManager.Instance.SetHUDMenu(true);
-    
     }
 
     private void QuitGame()
