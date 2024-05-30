@@ -23,10 +23,7 @@ public class SceneLoader : Singleton<SceneLoader>
             if (showLoadingScreen)
             {
                 UIManager.Instance.SetLoadMenu(true);
-                //MenuManager.Instance.ShowMenu(MenuManager.Instance.LoadingScreenClassifier);
             }
-
-            yield return new WaitForSeconds(loadDelay);
 
             Application.backgroundLoadingPriority = ThreadPriority.Low;
 
@@ -42,10 +39,9 @@ public class SceneLoader : Singleton<SceneLoader>
 
             Application.backgroundLoadingPriority = ThreadPriority.Normal;
 
-            yield return new WaitForSeconds(loadDelay);
-
             if (showLoadingScreen)
             {
+                yield return new WaitForSeconds(loadDelay);
                 UIManager.Instance.SetLoadMenu(false);
             }
         }
