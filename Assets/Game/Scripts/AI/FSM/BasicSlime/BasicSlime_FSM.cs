@@ -23,6 +23,7 @@ public class BasicSlime_FSM : FSM
     public Material defaultMat;
     public Material chaseMat;
     public Material attackMat;
+    public float attackGlowIntensity = 2.0f;
 
     [Header("Slime Attributes")]
     [Tooltip("Attributes which change the slime's combat behaviour.")]
