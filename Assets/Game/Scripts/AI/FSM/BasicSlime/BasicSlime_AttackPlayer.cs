@@ -32,9 +32,22 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         // Change slime material (color)
         if (fsm.slimeOuterMesh.materials.Length > 0)
         {
-            Material[] mats = { fsm.attackMat };
+            Material redGlow = fsm.attackMat;
+            // Ensure the material has an emission property
+            if (redGlow.HasProperty("_EmissionColor"))
+            {
+                // Enable the emission keyword
+                redGlow.EnableKeyword("_EMISSION");
+
+                // Set the HDR emission color
+                Color finalEmissionColor = redGlow.color;
+                redGlow.SetColor("_EmissionColor", finalEmissionColor);
+            }
+            Material[] mats = { redGlow };
             fsm.slimeOuterMesh.materials = mats;
         }
+        fsm.StartCoroutine(IncreaseEmissionIntensity(10));
+
 
         // Make the weapon active
         fsm.weapon.ActivateWeapon();
@@ -44,6 +57,23 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 
         // Attack animation
         fsm.slimeAnimator.SetTrigger(AttackChargeAnimation);
+    }
+
+    IEnumerator IncreaseEmissionIntensity(int steps)
+    {
+        float intensity = 0.0f;
+        float intensityDelta = fsm.attackGlowIntensity / steps;
+        float deltaTime = 1.0f / steps;
+        while (steps > 0)
+        {
+            --steps;
+            intensity += intensityDelta;
+
+            Color finalEmissionColor = fsm.attackMat.color * intensity;
+            fsm.slimeOuterMesh.materials[0].SetColor("_EmissionColor", finalEmissionColor);
+
+            yield return new WaitForSeconds(deltaTime);
+        }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
