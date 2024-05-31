@@ -16,7 +16,7 @@ public class Trail : MonoBehaviour
     [Header("Shader")]
     public Material mat;
     public int alphaReductionSteps = 10;
-    public string shaderVarRef;
+    public readonly string shaderVarRef = "_Alpha";
 
     bool isTrailActive;
     bool isFirstShadow;
