@@ -71,6 +71,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Spell1"",
+                    ""type"": ""Button"",
+                    ""id"": ""bddeb657-4115-40ca-a465-fc0dd7a1e47f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -194,6 +203,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""CycleWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d8420954-7a3d-4da0-a6b6-0fd46c080e15"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Spell1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -258,6 +278,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_CycleWeapon = m_Player.FindAction("CycleWeapon", throwIfNotFound: true);
+        m_Player_Spell1 = m_Player.FindAction("Spell1", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -327,6 +348,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Rotate;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_CycleWeapon;
+    private readonly InputAction m_Player_Spell1;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -336,6 +358,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @CycleWeapon => m_Wrapper.m_Player_CycleWeapon;
+        public InputAction @Spell1 => m_Wrapper.m_Player_Spell1;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -360,6 +383,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CycleWeapon.started += instance.OnCycleWeapon;
             @CycleWeapon.performed += instance.OnCycleWeapon;
             @CycleWeapon.canceled += instance.OnCycleWeapon;
+            @Spell1.started += instance.OnSpell1;
+            @Spell1.performed += instance.OnSpell1;
+            @Spell1.canceled += instance.OnSpell1;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -379,6 +405,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CycleWeapon.started -= instance.OnCycleWeapon;
             @CycleWeapon.performed -= instance.OnCycleWeapon;
             @CycleWeapon.canceled -= instance.OnCycleWeapon;
+            @Spell1.started -= instance.OnSpell1;
+            @Spell1.performed -= instance.OnSpell1;
+            @Spell1.canceled -= instance.OnSpell1;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -458,6 +487,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnCycleWeapon(InputAction.CallbackContext context);
+        void OnSpell1(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
