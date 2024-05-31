@@ -16,6 +16,9 @@ GameObject:
   - component: {fileID: 2463496225978856163}
   - component: {fileID: 5760338420974404415}
   - component: {fileID: 6635435559847510778}
+  - component: {fileID: 1276497373221949065}
+  - component: {fileID: 8001832260985019667}
+  - component: {fileID: 133212583615146192}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -124,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   healthSlider: {fileID: 0}
+  isAlive: 1
   damageDelay: 0.5
   knockbackTime: 0.25
   isInvincible: 0
@@ -191,6 +195,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement: {x: 0, y: 0}
   inputQueueDelay: 0.3
+--- !u!114 &1276497373221949065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972491070015094324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f58dac856cdbf4187b0ae9f688ac30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statusBarPrefab: {fileID: 6282667672108503733, guid: ea642a1a7f9f513448fe26f6b9ebcf7e,
+    type: 3}
+  showStatusBar: 1
+  activeEffects: []
+  effectsToRemove: []
+--- !u!114 &8001832260985019667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972491070015094324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c13dd9c19000524681981923137cb00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &133212583615146192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972491070015094324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac444490285e9641824a238609b92c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeTime: 0.2
+  meshfreshRate: 0.025
+  meshDestroyDelay: 0.15
+  playerModel: {fileID: 5505832874139599896}
+  mat: {fileID: 2100000, guid: c05ea85d9a0e4e24d8c08daea614544f, type: 2}
+  alphaReductionSteps: 10
+  shaderVarRef: _Alpha
 --- !u!1 &1605626183069265781
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +691,12 @@ PrefabInstance:
 --- !u!4 &5126069991169466018 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4659479598651636041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5505832874139599896 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
     type: 3}
   m_PrefabInstance: {fileID: 4659479598651636041}
   m_PrefabAsset: {fileID: 0}
