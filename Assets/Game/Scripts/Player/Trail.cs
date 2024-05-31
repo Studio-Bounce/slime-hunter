@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Trail : MonoBehaviour
 {
@@ -10,26 +11,26 @@ public class Trail : MonoBehaviour
     [Header("Mesh")]
     public float meshfreshRate = 0.1f;
     public float meshDestroyDelay = 3f;
-    public GameObject ghostPlayer;
+    public GameObject playerModel;
 
     [Header("Shader")]
     public Material mat;
+    public int alphaReductionSteps = 10;
     public string shaderVarRef;
-    public float shaderVarRate;
-    public float shaderVarRefreshrate = 0.05f;
 
+    bool isTrailActive;
+    bool isFirstShadow;
 
-    private bool isTrailActive;
-    private SkinnedMeshRenderer[] skinnedMeshRenderers;
-    
-    void Update()
+    public bool InitiateTrail(InputAction.CallbackContext context)
     {
-        if(Input.GetKeyDown (KeyCode.Space) && !isTrailActive)
+        if (!isTrailActive)
         {
             isTrailActive = true;
+            isFirstShadow = true;
             StartCoroutine(ActivateTrail(activeTime));
-            
+            return true;
         }
+        return false;
     }
 
     IEnumerator ActivateTrail (float timeActive)
@@ -38,28 +39,29 @@ public class Trail : MonoBehaviour
         {
             timeActive -= meshfreshRate;
 
-            if(skinnedMeshRenderers == null)
-                skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
-
-            for(int i=0; i<skinnedMeshRenderers.Length; i++)
+            if (isFirstShadow)
             {
-                //GameObject gObj = new GameObject();
-                //gObj.transform.SetPositionAndRotation(PositionToSpawn.position, PositionToSpawn.rotation);
+                // Avoid showing 1st shadow. It is generally at the player position itself -- looks bad
+                isFirstShadow = false;
+            }
+            else
+            {
+                GameObject gObj = Instantiate(playerModel, transform.position, transform.rotation);
 
-                //MeshRenderer mr = gObj.AddComponent<MeshRenderer>();
-                //MeshFilter mf = gObj.AddComponent<MeshFilter>();
+                SkinnedMeshRenderer[] skinnedMeshRenderers = gObj.GetComponentsInChildren<SkinnedMeshRenderer>();
 
-                //Mesh mesh = new Mesh();
-                //skinnedMeshRenderers[i].BakeMesh(mesh);
+                if (skinnedMeshRenderers.Length > 0)
+                {
+                    SkinnedMeshRenderer skinnedMeshRenderer = skinnedMeshRenderers[skinnedMeshRenderers.Length - 1];
 
-                //mf.mesh = mesh;
-                //mr.material = mat;
-                GameObject gObj = Instantiate(ghostPlayer, transform.position, transform.rotation);
-                SkinnedMeshRenderer skinnedMeshRenderer = gObj.GetComponentInChildren<SkinnedMeshRenderer>();
+                    // Apply trail material
+                    Material[] trailMats = { mat, mat, mat, mat, mat };
+                    skinnedMeshRenderer.materials = trailMats;
 
-                StartCoroutine(AnimateMaterialFloat(skinnedMeshRenderer, 0, shaderVarRate, shaderVarRefreshrate));
+                    StartCoroutine(AnimateMaterialFloat(skinnedMeshRenderer));
+                }
 
-                Destroy(gObj, meshDestroyDelay);
+                Destroy(gObj, meshDestroyDelay + 0.01f);
             }
 
             yield return new WaitForSeconds(meshfreshRate);
@@ -68,11 +70,16 @@ public class Trail : MonoBehaviour
 
         isTrailActive = false;
     }
-    IEnumerator AnimateMaterialFloat (SkinnedMeshRenderer skinnedMeshRenderer, float goal, float rate, float refreshRate)
+
+    IEnumerator AnimateMaterialFloat (SkinnedMeshRenderer skinnedMeshRenderer)
     {
         float valueToAnimate = mat.GetFloat(shaderVarRef);
+        // The alpha value will be reduced in alphaReductionSteps steps
+        float goal = 0;
+        float rate = valueToAnimate / alphaReductionSteps;
+        float refreshRate = meshDestroyDelay / alphaReductionSteps;
 
-        while (valueToAnimate > goal)
+        while (valueToAnimate > goal && skinnedMeshRenderer != null && skinnedMeshRenderer.gameObject != null)
         {
             valueToAnimate -= rate;
             foreach (Material mat in skinnedMeshRenderer.materials)
