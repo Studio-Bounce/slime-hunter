@@ -10375,8 +10375,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 4.1404376, y: 0.0000019073486, z: -12.644163}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8000001, y: 0.8000001, z: 0.8000001}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8627754859399159517}
   - {fileID: 6421530765237850260}
@@ -10490,8 +10490,8 @@ MonoBehaviour:
   slimeModel: {fileID: 9002733011280807015}
   deathParticles: {fileID: 4469707161624757012}
   deathDelay: 3.5
-  dodgeSpeed: 5
-  dodgeTime: 0.5
+  dodgeSpeed: 2
+  dodgeTime: 0.2
   isDodging: 0
 --- !u!114 &8400284841796279740
 MonoBehaviour:
