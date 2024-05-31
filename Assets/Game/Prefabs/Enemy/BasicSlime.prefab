@@ -15196,6 +15196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 50
   healthSlider: {fileID: 468285249103592050}
+  isAlive: 1
   damageDelay: 0.5
   knockbackTime: 0.2
   isInvincible: 0
@@ -15258,11 +15259,11 @@ MonoBehaviour:
   defaultMat: {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
   chaseMat: {fileID: 2100000, guid: 80e2ba57f9633224a99ab18d4537e0bd, type: 2}
   attackMat: {fileID: 2100000, guid: 54086adf35a39a34f93097e070b5c598, type: 2}
-  cooldownTime: 3
+  cooldownTime: 2
   seekDistance: 8
   wanderSpeed: 1
-  chaseSpeed: 2
-  attackSpeed: 10
+  chaseSpeed: 3
+  attackSpeed: 12
   attackRadius: 5
   attackProximity: 1
   slimeAnimator: {fileID: 1065457560711704899}
