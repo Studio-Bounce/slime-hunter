@@ -20,22 +20,16 @@ public class PlayerController : MonoBehaviour
     public float dashDuration = 0.2f;
     public float dashCooldown = 0.5f;
 
+    public bool useGravity = true;
+
     private bool isDashing = false;
-    private bool isGrounded = false;
-    private bool isJumping = false;
+    public bool isJumping = false;  // public to allow access to Trail
 
     [Header("Camera Handling")]
     public Transform cameraTransform;
     public float rotationDuration = 0.3f;
     public float rotationIncrement = 45f;
     private bool isRotating = false;
-
-    [Header("Grounded Checks")]
-    public bool useGravity = true;
-    public LayerMask groundLayer;
-    public Vector3 overlapBoxSize = Vector3.one;
-    public float boxYOffset = 0f;
-    private float yVelocity = 0f;
 
     // Used for jump, dash, and gravity
     CharacterController characterController;
@@ -61,7 +55,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        isGrounded = characterController.isGrounded;
         // Gravity simulation
         if (characterController != null && characterController.enabled && useGravity)
         {
@@ -122,7 +115,8 @@ public class PlayerController : MonoBehaviour
     // -------------------- Dash Mechanism --------------------
     public bool Dash(InputAction.CallbackContext context)
     {
-        if (!isDashing && Time.time > lastDashTime + dashCooldown && weaponController.IsInterruptable())
+        // Dashing while jumping is not allowed
+        if (!isDashing && !isJumping && Time.time > lastDashTime + dashCooldown && weaponController.IsInterruptable())
         {
             weaponController.ResetCombo();
             Vector3 dashDirection = Utils.DirectionToCameraForward(transform.position, inputController.movement);
@@ -164,7 +158,8 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(float upForce, float jumpDuration, Vector3 target)
     {
-        if (!isJumping)
+        // Jumping while dashing is not allowed
+        if (!isJumping && !isDashing)
         {
             // Orient towards target
             transform.LookAt(target);
@@ -220,10 +215,6 @@ public class PlayerController : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Vector3 startPos = new Vector3(transform.position.x, transform.position.y+boxYOffset, transform.position.z);
-        Gizmos.DrawWireCube(startPos, new Vector3(overlapBoxSize.x, overlapBoxSize.y, overlapBoxSize.z));
-
         // Dash direction
         DebugExtension.DrawArrow(transform.position, transform.forward, Color.blue);
     }
