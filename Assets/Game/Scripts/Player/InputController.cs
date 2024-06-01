@@ -13,6 +13,7 @@ public class InputController : MonoBehaviour
     private PlayerController _playerController;
     private WeaponController _weaponController;
     private SpellController _spellController;
+    private Trail _trail;
 
     private PlayerInputActions _inputActions;
     private PlayerInputActions.PlayerActions _playerActions;
@@ -41,8 +42,10 @@ public class InputController : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
         _weaponController = GetComponent<WeaponController>();
         _spellController = GetComponent<SpellController>();
+        _trail = GetComponent<Trail>();
         attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
         dashQueuedAction = e => QueueInput(_playerController.Dash, e);
+        dashQueuedAction += e => QueueInput(_trail.InitiateTrail, e);
 
         SetupPlayerControls();
         SetupUIControls();
