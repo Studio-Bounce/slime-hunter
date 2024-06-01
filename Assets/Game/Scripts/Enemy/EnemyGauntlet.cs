@@ -5,7 +5,7 @@ using System.Collections;
 
 public class EnemyGauntlet : MonoBehaviour
 {
-    [Header("Bounds")]
+    [Header("Gauntlet Bounds")]
     public Vector2 boundSize;
     public float boundHeight = 3f;
     public string collisionTag = "Player";
@@ -15,23 +15,23 @@ public class EnemyGauntlet : MonoBehaviour
     public float boundSpawnDelay = 0f;
     public bool active = true;
 
-    private BoxCollider boxCollider;
+    private BoxCollider _boxCollider;
 
     [Header("Gauntlet Enemy Waves")]
     public List<EnemyWave> enemyWaves = new List<EnemyWave>();
 
     private void Awake()
     {
-        boxCollider = gameObject.AddComponent<BoxCollider>();
+        _boxCollider = gameObject.AddComponent<BoxCollider>();
     }
 
     private void Start()
     {
-        Debug.Assert(wallPrefab != null);
+        Debug.Assert(wallPrefab != null, "Requires a prefab wall");
 
-        boxCollider.isTrigger = true;
-        boxCollider.center = new Vector3(boxCollider.center.x, boundHeight / 4, boxCollider.center.z);
-        boxCollider.size = new Vector3(boundSize.x - colliderOffset, boundHeight / 2, boundSize.y - colliderOffset);
+        _boxCollider.isTrigger = true;
+        _boxCollider.center = new Vector3(_boxCollider.center.x, boundHeight / 4, _boxCollider.center.z);
+        _boxCollider.size = new Vector3(boundSize.x - colliderOffset, boundHeight / 2, boundSize.y - colliderOffset);
     }
 
     private void SpawnWalls()
@@ -60,25 +60,79 @@ public class EnemyGauntlet : MonoBehaviour
             if (active)
             {
                 Invoke("SpawnWalls", boundSpawnDelay);
+                StartCoroutine(StartEnemySpawn());
             }
         }
 
     }
 
-    private void StartEnemySpawn()
-    {
-
-    }
-    IEnumerator RunSpawning()
+    IEnumerator StartEnemySpawn()
     {
         foreach (EnemyWave wave in enemyWaves)
         {
             for (int i = 0; i < wave.totalEnemies; i++)
             {
                 EnemySpawnProperties enemy = wave.RollEnemy();
+
+                switch (enemy.spawnLocation)
+                {
+                    case SpawnLocation.RANDOM_BORDER:
+                        SpawnAtBorder(enemy);
+                        break;
+                    case SpawnLocation.RANDOM_INNER:
+                        SpawnAtInner(enemy);
+                        break;
+                    default:
+                        break;
+                }
+
+                yield return new WaitForSeconds(wave.spawnInterval);
             }
         }
         yield return null;
+    }
+
+    private void SpawnAtBorder(EnemySpawnProperties enemy)
+    {
+        // Select a random border location
+        int border = Random.Range(0, 4); // 0 = top, 1 = right, 2 = bottom, 3 = left
+        float x = 0f;
+        float y = 0f;
+        Vector2 innerBound = new Vector2(boundSize.x/2 - colliderOffset, boundSize.y/2 - colliderOffset);
+        switch (border)
+        {
+            case 0: // Top border
+                x = Random.Range(-innerBound.x, innerBound.x);
+                y = innerBound.y;
+                break;
+            case 1: // Right border
+                x = innerBound.x;
+                y = Random.Range(-innerBound.y, innerBound.y);
+                break;
+            case 2: // Bottom border
+                x = Random.Range(-innerBound.x, innerBound.x);
+                y = -innerBound.y;
+                break;
+            case 3: // Left border
+                x = -innerBound.x;
+                y = Random.Range(-innerBound.y, innerBound.y);
+                break;
+        }
+        Vector3 borderPosition = transform.position + new Vector3(x, 0, y);
+        // Instantiate the object at the border position
+        Instantiate(enemy.enemyPrefab, borderPosition, Quaternion.identity);
+        //Instantiate(enemy.enemyPrefab);
+    }
+
+    private void SpawnAtInner(EnemySpawnProperties enemy)
+    {
+        Vector2 innerBound = new Vector2(boundSize.x/2 - colliderOffset, boundSize.y/2 - colliderOffset);
+        // Generate a random position within the specified area
+        float randomX = Random.Range(-innerBound.x, innerBound.x);
+        float randomY = Random.Range(-innerBound.y, innerBound.y);
+        Vector3 randomPosition = transform.position + new Vector3(randomX, 0, randomY);
+        // Instantiate the enemy at that location
+        Instantiate(enemy.enemyPrefab, randomPosition, Quaternion.identity);
     }
 
 #if UNITY_EDITOR
