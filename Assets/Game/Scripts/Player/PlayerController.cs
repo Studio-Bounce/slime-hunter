@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XInput;
 
@@ -22,8 +23,8 @@ public class PlayerController : MonoBehaviour
 
     public bool useGravity = true;
 
-    private bool isDashing = false;
-    public bool isJumping = false;  // public to allow access to Trail
+    public bool isDashing = false;  // public to allow access to Trail
+    private bool isJumping = false;
 
     [Header("Camera Handling")]
     public Transform cameraTransform;
@@ -35,6 +36,7 @@ public class PlayerController : MonoBehaviour
     CharacterController characterController;
     InputController inputController;
     WeaponController weaponController;
+    Trail trail;
 
     private float lastDashTime = 0.0f;
 
@@ -49,6 +51,7 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         inputController = GetComponent<InputController>();
         weaponController = GetComponent<WeaponController>();
+        trail = GetComponent<Trail>();
 
         Debug.Assert(cameraTransform != null, "Missing camera transform");
     }
@@ -122,7 +125,10 @@ public class PlayerController : MonoBehaviour
             Vector3 dashDirection = Utils.DirectionToCameraForward(transform.position, inputController.movement);
             dashDirection = dashDirection == Vector3.zero ? transform.forward : dashDirection;
 
+            isDashing = true;
+            trail.InitiateTrail();
             StartCoroutine(PerformDash(dashDirection * dashDistance));
+
             return true;
         }
         return false;
@@ -130,7 +136,6 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PerformDash(Vector3 dashVector)
     {
-        isDashing = true;
         animator.SetBool(dashHash, isDashing);
 
         // Dash follows the curve of y^3 = x from 0 to 1
@@ -142,16 +147,32 @@ public class PlayerController : MonoBehaviour
         while (dashProgress <= 1.0f)
         {
             dashProgress = (Time.time - startTime) / dashDuration;
-
             dashProgress = Easing.EaseOutCubic(dashProgress);
 
+            // Dash is very quick. As a result, it can pass through colliders
+            // We need to detect and stop dash if this happens
+            if (CheckForwardCollisions())
+            {
+                break;
+            }
+
             transform.position = startPosition + dashVector * dashProgress;
+
             yield return null;
         }
         
         isDashing = false;
         animator.SetBool(dashHash, isDashing);
         lastDashTime = Time.time;
+    }
+
+    bool CheckForwardCollisions()
+    {
+        if (Physics.Raycast(transform.position, transform.forward, out _, 1.0f))
+        {
+            return true;
+        }
+        return false;
     }
 
     // -------------------- Jump Mechanism --------------------
