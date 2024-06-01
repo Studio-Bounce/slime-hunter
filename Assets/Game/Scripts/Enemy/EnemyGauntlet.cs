@@ -1,18 +1,24 @@
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.UIElements;
+using System.Collections.Generic;
+using System.Collections;
 
 public class EnemyGauntlet : MonoBehaviour
 {
+    [Header("Bounds")]
     public Vector2 boundSize;
-    private float height = 5f;
+    public float boundHeight = 3f;
     public string collisionTag = "Player";
     public GameObject wallPrefab;
     public float wallWidth = 2f;
-    public float spawnDelay = 0f;
+    public float colliderOffset;
+    public float boundSpawnDelay = 0f;
     public bool active = true;
-    
-    BoxCollider boxCollider;
+
+    private BoxCollider boxCollider;
+
+    [Header("Gauntlet Enemy Waves")]
+    public List<EnemyWave> enemyWaves = new List<EnemyWave>();
 
     private void Awake()
     {
@@ -24,8 +30,8 @@ public class EnemyGauntlet : MonoBehaviour
         Debug.Assert(wallPrefab != null);
 
         boxCollider.isTrigger = true;
-        boxCollider.center = new Vector3(boxCollider.center.x, height / 2, boxCollider.center.z);
-        boxCollider.size = new Vector3(boundSize.x, height, boundSize.y);
+        boxCollider.center = new Vector3(boxCollider.center.x, boundHeight / 4, boxCollider.center.z);
+        boxCollider.size = new Vector3(boundSize.x - colliderOffset, boundHeight / 2, boundSize.y - colliderOffset);
     }
 
     private void SpawnWalls()
@@ -39,7 +45,7 @@ public class EnemyGauntlet : MonoBehaviour
             Vector3 directionalOffset = new Vector3(positionOffset.x * sideDirection.y, 0, positionOffset.y * sideDirection.x);
             GameObject wall = Instantiate(wallPrefab, transform.position + directionalOffset, Quaternion.identity);
 
-            wall.transform.localScale = new Vector3(sideDirection.x == 0 ? boundSize.y : boundSize.x , height, wallWidth);
+            wall.transform.localScale = new Vector3(sideDirection.x == 0 ? boundSize.y : boundSize.x , boundHeight, wallWidth);
             wall.transform.rotation = Quaternion.Euler(new Vector3(0, (rotationOffset*sideDirection).magnitude, 0));
 
             // Rotate 90 deg to next side
@@ -53,10 +59,26 @@ public class EnemyGauntlet : MonoBehaviour
         { 
             if (active)
             {
-                Invoke("SpawnWalls", spawnDelay);
+                Invoke("SpawnWalls", boundSpawnDelay);
             }
         }
 
+    }
+
+    private void StartEnemySpawn()
+    {
+
+    }
+    IEnumerator RunSpawning()
+    {
+        foreach (EnemyWave wave in enemyWaves)
+        {
+            for (int i = 0; i < wave.totalEnemies; i++)
+            {
+                EnemySpawnProperties enemy = wave.RollEnemy();
+            }
+        }
+        yield return null;
     }
 
 #if UNITY_EDITOR
@@ -80,7 +102,20 @@ public class EnemyGauntlet : MonoBehaviour
         Vector3 bottomRight = position + new Vector3(halfWidth, 0, -halfLength);
 
         // Draw the square using Handles.DrawSolidRectangleWithOutline
+        Handles.DrawSolidRectangleWithOutline(new Vector3[] { topLeft, topRight, bottomRight, bottomLeft }, Color.clear, Color.red);
+
+        halfWidth = (boundSize.x - colliderOffset) / 2f;
+        halfLength = (boundSize.y - colliderOffset) / 2f;
+
+        // Calculate the four corners of the rect
+        topLeft = position + new Vector3(-halfWidth, 0, halfLength);
+        topRight = position + new Vector3(halfWidth, 0, halfLength);
+        bottomLeft = position + new Vector3(-halfWidth, 0, -halfLength);
+        bottomRight = position + new Vector3(halfWidth, 0, -halfLength);
+
         Handles.DrawSolidRectangleWithOutline(new Vector3[] { topLeft, topRight, bottomRight, bottomLeft }, new Color(1, 0, 0, 0.05f), Color.red);
+
+
     }
 #endif
 }
