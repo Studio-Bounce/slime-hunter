@@ -21,9 +21,16 @@ public class Trail : MonoBehaviour
     bool isTrailActive;
     bool isFirstShadow;
 
+    PlayerController playerController;
+
+    private void Start()
+    {
+        playerController = GetComponent<PlayerController>();
+    }
+
     public bool InitiateTrail(InputAction.CallbackContext context)
     {
-        if (!isTrailActive)
+        if (!isTrailActive && !playerController.isJumping)
         {
             isTrailActive = true;
             isFirstShadow = true;
