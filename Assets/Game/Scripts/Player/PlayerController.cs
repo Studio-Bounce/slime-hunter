@@ -19,23 +19,17 @@ public class PlayerController : MonoBehaviour
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 0.5f;
-    public float jumpForce = 20f;
+
+    public bool useGravity = true;
 
     private bool isDashing = false;
-    private bool isGrounded = false;
-    private bool isJump = true;
+    public bool isJumping = false;  // public to allow access to Trail
 
     [Header("Camera Handling")]
     public Transform cameraTransform;
     public float rotationDuration = 0.3f;
     public float rotationIncrement = 45f;
     private bool isRotating = false;
-
-    [Header("Grounded Checks")]
-    public bool useGravity = true;
-    public LayerMask groundLayer;
-    public Vector3 overlapBoxSize = Vector3.one;
-    public float boxYOffset = 0f;
 
     // Used for jump, dash, and gravity
     CharacterController characterController;
@@ -57,11 +51,6 @@ public class PlayerController : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
 
         Debug.Assert(cameraTransform != null, "Missing camera transform");
-    }
-
-    void FixedUpdate()
-    {
-        CheckJump();
     }
 
     private void Update()
@@ -93,9 +82,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    // -------------------- Movement Mechanism --------------------
     public void MovePlayer()
     {
-        if (isDashing) return;
+        if (isDashing || isJumping) return;
 
         Vector2 moveInput = inputController.movement;
         // Set move animation based on input
@@ -122,9 +112,11 @@ public class PlayerController : MonoBehaviour
         characterController.Move(_moveSpeed * Time.deltaTime * moveDirection);
     }
 
+    // -------------------- Dash Mechanism --------------------
     public bool Dash(InputAction.CallbackContext context)
     {
-        if (!isDashing && Time.time > lastDashTime + dashCooldown && weaponController.IsInterruptable())
+        // Dashing while jumping is not allowed
+        if (!isDashing && !isJumping && Time.time > lastDashTime + dashCooldown && weaponController.IsInterruptable())
         {
             weaponController.ResetCombo();
             Vector3 dashDirection = Utils.DirectionToCameraForward(transform.position, inputController.movement);
@@ -162,31 +154,42 @@ public class PlayerController : MonoBehaviour
         lastDashTime = Time.time;
     }
 
-    // Naive jump that triggers once when nothing is below
-    private void CheckJump()
+    // -------------------- Jump Mechanism --------------------
+
+    public void Jump(float upForce, float jumpDuration, Vector3 target)
     {
-        // Check is grounded
-        var groundCollisions = Physics.OverlapBox(transform.position + new Vector3(0, boxYOffset, 0), overlapBoxSize / 2f, Quaternion.identity, groundLayer);
-        isGrounded = groundCollisions.Length > 0;
-
-        // Reset jump if grounded
-        if (isGrounded)
+        // Jumping while dashing is not allowed
+        if (!isJumping && !isDashing)
         {
-            isJump = false;
+            // Orient towards target
+            transform.LookAt(target);
+            StartCoroutine(SmoothJump(upForce, jumpDuration, target));
         }
-
-        // Jump once when off ledge
-        if (!isGrounded && !isJump)
-        {
-            Jump();
-        }
-        
     }
-
-    private void Jump()
+    IEnumerator SmoothJump(float upForce, float jumpDuration, Vector3 target)
     {
-        characterController.Move(Vector3.up * jumpForce);
-        isJump = true;
+        isJumping = true;
+        useGravity = false;
+        float timeElapsed = 0f;
+        Vector3 initialPosition = transform.position;
+
+        while (timeElapsed < jumpDuration)
+        {
+            timeElapsed += Time.deltaTime;
+            float t = timeElapsed / jumpDuration;
+
+            Vector3 currentPosition = Vector3.Lerp(initialPosition, target, t);
+            // Calculate the current height using a parabolic curve
+            float currentHeight = Mathf.Lerp(0, upForce, t) - (t * t * upForce);
+
+            Vector3 moveDirection = (currentPosition - transform.position) + Vector3.up * currentHeight;
+            characterController.Move(moveDirection);
+
+            yield return null;
+        }
+
+        useGravity = true;
+        isJumping = false;
     }
 
     IEnumerator PerformCameraRotate(float angle)
@@ -212,10 +215,6 @@ public class PlayerController : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Vector3 startPos = new Vector3(transform.position.x, transform.position.y+boxYOffset, transform.position.z);
-        Gizmos.DrawWireCube(startPos, new Vector3(overlapBoxSize.x, overlapBoxSize.y, overlapBoxSize.z));
-
         // Dash direction
         DebugExtension.DrawArrow(transform.position, transform.forward, Color.blue);
     }
