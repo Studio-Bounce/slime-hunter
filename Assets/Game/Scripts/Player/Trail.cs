@@ -28,9 +28,9 @@ public class Trail : MonoBehaviour
         playerController = GetComponent<PlayerController>();
     }
 
-    public bool InitiateTrail(InputAction.CallbackContext context)
+    public bool InitiateTrail()
     {
-        if (!isTrailActive && !playerController.isJumping)
+        if (!isTrailActive)
         {
             isTrailActive = true;
             isFirstShadow = true;
@@ -42,7 +42,7 @@ public class Trail : MonoBehaviour
 
     IEnumerator ActivateTrail (float timeActive)
     {
-        while (timeActive > 0) 
+        while (timeActive > 0 && playerController.isDashing) 
         {
             timeActive -= meshfreshRate;
 
