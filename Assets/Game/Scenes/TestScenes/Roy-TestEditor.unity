@@ -566,9 +566,17 @@ MonoBehaviour:
         type: 3}
       spawnWeight: 2
       spawnLocation: 0
-    totalEnemies: 4
-    spawnInterval: 2
-    delayOnComplete: 0
+    totalEnemies: 2
+    spawnInterval: 1
+    delayOnComplete: 2
+  - enemiesInWave:
+    - enemyPrefab: {fileID: 8223826132166210976, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
+        type: 3}
+      spawnWeight: 2
+      spawnLocation: 0
+    totalEnemies: 2
+    spawnInterval: 1
+    delayOnComplete: 2
 --- !u!4 &296403864
 Transform:
   m_ObjectHideFlags: 0
