@@ -187,7 +187,8 @@ public class PlayerController : MonoBehaviour
 
     bool CheckForwardCollisions()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out _, 1.0f))
+        // Dash detection happens at 1/3rd of the player height
+        if (Physics.Raycast(transform.position + characterController.height * 0.33f * Vector3.up, transform.forward, out _, 1.0f))
         {
             return true;
         }
@@ -256,7 +257,8 @@ public class PlayerController : MonoBehaviour
     private void OnDrawGizmos()
     {
         // Dash direction
-        DebugExtension.DrawArrow(transform.position, transform.forward, Color.blue);
+        float height = (characterController != null) ? characterController.height : 1.5f;
+        DebugExtension.DrawArrow(transform.position + height * 0.33f * Vector3.up, transform.forward, Color.magenta);
     }
 #endif
 }
