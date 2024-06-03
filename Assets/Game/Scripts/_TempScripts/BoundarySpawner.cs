@@ -28,7 +28,8 @@ public class BoundarySpawner : MonoBehaviour
         {
             GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Plane);
             wall.transform.SetPositionAndRotation(transform.position + distance * wallPositions[i],
-                                                  Quaternion.Euler(wallRotations[i]));
+                                                  transform.rotation);
+            wall.transform.Rotate(wallRotations[i]);
 
             // In unity, plane length by default is 10x10
             float scale = 2 * distance / 10f;
