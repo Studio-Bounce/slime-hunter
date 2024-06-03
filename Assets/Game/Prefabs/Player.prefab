@@ -165,8 +165,6 @@ MonoBehaviour:
   handPivotForward: {x: 0, y: 0, z: 1}
   availableWeapons:
   - {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
-  - {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-  - {fileID: 11400000, guid: 99cedeb06ace0a541a4b2160b3e72dbe, type: 2}
   weaponTrail: {fileID: 8536796487223862311}
   baseAttackClip: {fileID: -203655887218126122, guid: 368a8195de7259c4b90d8c64c0c4c8e2,
     type: 3}
@@ -188,7 +186,7 @@ MonoBehaviour:
   dashDistance: 3
   dashDuration: 0.2
   dashCooldown: 0.25
-  dashStaminaUse: 10
+  dashStaminaUse: 25
   useGravity: 1
   isDashing: 0
   cameraTransform: {fileID: 0}
