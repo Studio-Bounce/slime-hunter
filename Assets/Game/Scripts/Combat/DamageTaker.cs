@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 // DamageTaker does not need rigidbody. Its collider triggers the collider of DamageDealer.
@@ -29,6 +30,9 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
     float lastDamageTime = 0;
 
+    // Events
+    public UnityEvent onDeathEvent;
+
     protected virtual void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -40,6 +44,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     {
         // Little delay in death prevents bugs from coroutines
         isAlive = false;
+        onDeathEvent.Invoke();
         Destroy(gameObject, 0.2f);
     }
 
@@ -53,7 +58,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
         if (!isInvincible)
         {
-            health -= damage.value;
+            health -= (int)damage.value;
 
             if (damage.effect != null)
             {
