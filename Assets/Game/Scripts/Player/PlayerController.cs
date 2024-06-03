@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 0.5f;
+    public int dashStaminaUse = 10;
 
     public bool useGravity = true;
 
@@ -119,7 +120,11 @@ public class PlayerController : MonoBehaviour
     public bool Dash(InputAction.CallbackContext context)
     {
         // Dashing while jumping is not allowed
-        if (!isDashing && !isJumping && Time.time > lastDashTime + dashCooldown && weaponController.IsInterruptable())
+        if (!isDashing &&
+            !isJumping &&
+            (Time.time > lastDashTime + dashCooldown) &&
+            weaponController.IsInterruptable() &&
+            (GameManager.Instance.PlayerStamina >= dashStaminaUse))
         {
             weaponController.ResetCombo();
             Vector3 dashDirection = Utils.DirectionToCameraForward(transform.position, inputController.movement);
@@ -144,6 +149,9 @@ public class PlayerController : MonoBehaviour
         float startTime = Time.time;
         Vector3 startPosition = transform.position;
 
+        // Dash shouldn't use stamina if dash is not possible. Hence, this check.
+        bool staminaUsed = false;
+
         while (dashProgress <= 1.0f)
         {
             dashProgress = (Time.time - startTime) / dashDuration;
@@ -154,6 +162,17 @@ public class PlayerController : MonoBehaviour
             if (CheckForwardCollisions())
             {
                 break;
+            }
+            else if (!staminaUsed)
+            {
+                staminaUsed = true;
+                // Stamina might have been changed by some other action.
+                // Just confirm that player has enough stamina for dashing
+                if (GameManager.Instance.PlayerStamina < dashStaminaUse)
+                {
+                    break;
+                }
+                GameManager.Instance.PlayerStamina -= dashStaminaUse;
             }
 
             transform.position = startPosition + dashVector * dashProgress;
