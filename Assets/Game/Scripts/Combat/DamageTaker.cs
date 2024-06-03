@@ -53,7 +53,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
         if (!isInvincible)
         {
-            health -= damage.value;
+            health -= (int)damage.value;
 
             if (damage.effect != null)
             {

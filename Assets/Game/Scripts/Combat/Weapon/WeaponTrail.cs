@@ -43,6 +43,7 @@ public class WeaponTrail : DamageDealer
     public void SetupWeaponSettings(WeaponSO weaponSO)
     {
         currentWeaponSO = weaponSO;
+
         damage = weaponSO.damage;
         hitLayers = weaponSO.hitLayers;
         arcRadius = weaponSO.range;
@@ -50,10 +51,15 @@ public class WeaponTrail : DamageDealer
 
     public void Attack(AttackMove move)
     {
+        // Update weapon damage on attack
+        damage.value = (int)(currentWeaponSO.damage.value * move.damageMultiplier);
+        // Update weapon knockback on attack
+        damage.knockback = currentWeaponSO.damage.knockback * move.knockbackMultiplier;
+        // Update weapon range on attack
         arcRadius = currentWeaponSO.range * move.rangeMultiplier;
-        // VFX
         float attackRange = (currentWeaponSO.range / 3) * move.rangeMultiplier; // WIP: Hardcoded /3 as base VFX is roughly 3 units large
         weaponVFX.transform.localScale = new Vector3(attackRange, 1, attackRange);
+        // VFX Direction
         weaponVFX.SetBool(flipVFXParameter, move.direction.x < 0);
         float verticalRotation = 0;
         if (move.direction.y > 0)
@@ -64,6 +70,7 @@ public class WeaponTrail : DamageDealer
         {
             verticalRotation = 90;
         }
+
         weaponVFX.transform.rotation = Quaternion.Euler(weaponVFX.transform.rotation.eulerAngles.x, weaponVFX.transform.rotation.eulerAngles.y, verticalRotation);
         UpdateArcMesh();
         StartCoroutine(ActiveAttack(move.duration));

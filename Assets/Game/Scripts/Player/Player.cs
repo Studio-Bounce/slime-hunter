@@ -22,7 +22,7 @@ public class Player : DamageTaker
         // For player, we want to change GameManager.PlayerHealth
         base.TakeDamage(damage);
 
-        GameManager.Instance.PlayerHealth -= damage.value;
+        GameManager.Instance.PlayerHealth -= (int)damage.value;
         StartCoroutine(ApplyKnockback(damage));
     }
 }
