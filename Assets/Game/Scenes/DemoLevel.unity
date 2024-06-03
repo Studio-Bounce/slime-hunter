@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17865337, g: 0.22369754, b: 0.30563766, a: 1}
+  m_IndirectSpecularColor: {r: 0.17865293, g: 0.22369717, b: 0.30563724, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8246,6 +8246,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1668784534}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &457939252 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4646127613627469845, guid: b940c09142173ff479a8f04c83ee9b5d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1516587957}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dd3ea3c9005a54395fbe90b86a583a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &461492828 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3165402009599274624, guid: 7fb92bea66179f54f9b2ee3043cd0b41,
@@ -33311,7 +33323,7 @@ PrefabInstance:
     - target: {fileID: 8529491203750411947, guid: b940c09142173ff479a8f04c83ee9b5d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.88
+      value: 6.06
       objectReference: {fileID: 0}
     - target: {fileID: 8529491203750411947, guid: b940c09142173ff479a8f04c83ee9b5d,
         type: 3}
@@ -37951,13 +37963,28 @@ MonoBehaviour:
       spawnLocation: 0
     totalEnemies: 2
     spawnInterval: 2
-    delayOnComplete: 3
+    delayOnComplete: 2
+  - enemiesInWave:
+    - enemyPrefab: {fileID: 457939252}
+      spawnWeight: 3
+      spawnLocation: 0
+    - enemyPrefab: {fileID: 8100604837490706534, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
+        type: 3}
+      spawnWeight: 2
+      spawnLocation: 0
+    totalEnemies: 4
+    spawnInterval: 2
+    delayOnComplete: 2
   - enemiesInWave:
     - enemyPrefab: {fileID: 8100604837490706534, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
         type: 3}
-      spawnWeight: 1
+      spawnWeight: 4
       spawnLocation: 0
-    totalEnemies: 2
+    - enemyPrefab: {fileID: 8100604837490706534, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
+        type: 3}
+      spawnWeight: 2
+      spawnLocation: 0
+    totalEnemies: 5
     spawnInterval: 2
     delayOnComplete: 3
 --- !u!4 &1856952892
