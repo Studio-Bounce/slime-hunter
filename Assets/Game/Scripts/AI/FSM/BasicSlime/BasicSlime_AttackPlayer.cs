@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicSlime_AttackPlayer : BasicSlime_BaseState
@@ -155,9 +154,22 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             fsm.slimeAgent.maxSpeed = fsm.attackSpeed;
             fsm.seekSteeringBehaviour.enabled = true;
             fsm.seekSteeringBehaviour.gameObject.SetActive(true);
-            fsm.seekSteeringBehaviour.target = fsm.playerTransform.position;
+            fsm.seekSteeringBehaviour.target = GetSlimeTargetConsideringBoundary();
             fsm.wanderSteeringBehaviour.enabled = false;
             fsm.wanderSteeringBehaviour.gameObject.SetActive(false);
         }
+    }
+
+    Vector3 GetSlimeTargetConsideringBoundary()
+    {
+        Vector3 lineDirection = fsm.playerTransform.position - fsm.transform.position;
+        Ray ray = new(fsm.transform.position, lineDirection);
+        int layerMask = 1 << 9;  // 9th layer is EnemyBoundary
+        if (Physics.Raycast(ray, out RaycastHit hit, lineDirection.magnitude, layerMask))
+        {
+            // Little offset, just so that the target is not directly on the wall
+            return (hit.point - 0.5f * lineDirection.normalized);
+        }
+        return fsm.playerTransform.position;
     }
 }
