@@ -1,7 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.Events;
 using UnityEngine.VFX;
 
 public enum EnemyEye
@@ -34,6 +33,9 @@ public class Enemy : DamageTaker
     [SerializeField] GameObject slimeModel;
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] float deathDelay = 3.5f;
+
+    // Events
+    public UnityEvent onDeathEvent;
 
     protected override void Start()
     {
@@ -70,6 +72,9 @@ public class Enemy : DamageTaker
 
     public override void Death()
     {
+        // Trigger events
+        onDeathEvent.Invoke();
+
         isAlive = false;
 
         // Hide visible meshes / UI
