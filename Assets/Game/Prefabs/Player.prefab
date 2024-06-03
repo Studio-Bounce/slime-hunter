@@ -188,6 +188,7 @@ MonoBehaviour:
   dashDistance: 3
   dashDuration: 0.2
   dashCooldown: 0.25
+  dashStaminaUse: 10
   useGravity: 1
   isDashing: 0
   cameraTransform: {fileID: 0}
@@ -221,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusBarPrefab: {fileID: 6282667672108503733, guid: ea642a1a7f9f513448fe26f6b9ebcf7e,
     type: 3}
-  showStatusBar: 1
+  showStatusBar: 0
   activeEffects: []
   effectsToRemove: []
 --- !u!114 &8001832260985019667

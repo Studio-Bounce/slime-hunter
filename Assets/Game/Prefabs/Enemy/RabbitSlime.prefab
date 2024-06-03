@@ -10478,6 +10478,9 @@ MonoBehaviour:
   damageDelay: 0.3
   knockbackTime: 0.25
   isInvincible: 0
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   normalEye: {fileID: 6377116420226650459}
   attackEye: {fileID: 1112610852234478933}
   deathEye: {fileID: 5640311663750280099}
@@ -10490,9 +10493,6 @@ MonoBehaviour:
   slimeModel: {fileID: 9002733011280807015}
   deathParticles: {fileID: 4469707161624757012}
   deathDelay: 3.5
-  onDeathEvent:
-    m_PersistentCalls:
-      m_Calls: []
   dodgeSpeed: 2
   dodgeTime: 0.2
   isDodging: 0
@@ -10693,7 +10693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusBarPrefab: {fileID: 6282667672108503733, guid: ea642a1a7f9f513448fe26f6b9ebcf7e,
     type: 3}
-  showStatusBar: 1
+  showStatusBar: 0
   activeEffects: []
   effectsToRemove: []
 --- !u!1001 &8084322144036485430

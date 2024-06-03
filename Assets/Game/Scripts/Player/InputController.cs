@@ -102,8 +102,16 @@ public class InputController : MonoBehaviour
     // Temp, may have global UI controls?
     private void Pause(InputContext context)
     {
-        UIManager.Instance.SetPauseMenu(true);
-        Time.timeScale = 0;
+        if (UIManager.Instance.pauseMenu.IsVisible)
+        {
+            UIManager.Instance.SetPauseMenu(false);
+            Time.timeScale = 1;
+        }
+        else
+        {
+            UIManager.Instance.SetPauseMenu(true);
+            Time.timeScale = 0;
+        }
     }
 
     private void TrackMovement(InputContext context)
