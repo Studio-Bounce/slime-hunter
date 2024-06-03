@@ -10478,6 +10478,9 @@ MonoBehaviour:
   damageDelay: 0.3
   knockbackTime: 0.25
   isInvincible: 0
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   normalEye: {fileID: 6377116420226650459}
   attackEye: {fileID: 1112610852234478933}
   deathEye: {fileID: 5640311663750280099}
@@ -10490,9 +10493,6 @@ MonoBehaviour:
   slimeModel: {fileID: 9002733011280807015}
   deathParticles: {fileID: 4469707161624757012}
   deathDelay: 3.5
-  onDeathEvent:
-    m_PersistentCalls:
-      m_Calls: []
   dodgeSpeed: 2
   dodgeTime: 0.2
   isDodging: 0
@@ -10541,7 +10541,7 @@ MonoBehaviour:
   weapon: {fileID: 0}
   slimeEnemy: {fileID: 0}
   defaultMat: {fileID: 2100000, guid: 162f61ffdabb50c43850c43146a531ae, type: 2}
-  chaseMat: {fileID: 2100000, guid: c6ad72156d00c6c45872d7fd4076b054, type: 2}
+  chaseMat: {fileID: 2100000, guid: 162f61ffdabb50c43850c43146a531ae, type: 2}
   attackMat: {fileID: 2100000, guid: 54086adf35a39a34f93097e070b5c598, type: 2}
   attackGlowIntensity: 3
   cooldownTime: 0.7
