@@ -45,7 +45,6 @@ public class InputController : MonoBehaviour
         _trail = GetComponent<Trail>();
         attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
         dashQueuedAction = e => QueueInput(_playerController.Dash, e);
-        dashQueuedAction += e => QueueInput(_trail.InitiateTrail, e);
 
         SetupPlayerControls();
         SetupUIControls();
