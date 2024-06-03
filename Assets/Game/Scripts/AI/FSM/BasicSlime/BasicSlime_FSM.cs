@@ -33,6 +33,8 @@ public class BasicSlime_FSM : FSM
     public float chaseSpeed = 5.0f;
     public float attackSpeed = 10.0f;
     public float attackRadius = 2.0f;
+    [Tooltip("Time taken in reaching full emission before attack")]
+    public float attackEmissionTime = 1.0f;
     [Tooltip("How far can the slime hit while on rest?")]
     public float attackProximity = 0.5f;
     public Animator slimeAnimator;
