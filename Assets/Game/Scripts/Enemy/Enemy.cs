@@ -34,9 +34,6 @@ public class Enemy : DamageTaker
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] float deathDelay = 3.5f;
 
-    // Events
-    public UnityEvent onDeathEvent;
-
     protected override void Start()
     {
         base.Start();

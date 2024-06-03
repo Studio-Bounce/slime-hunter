@@ -131,6 +131,9 @@ MonoBehaviour:
   damageDelay: 0.5
   knockbackTime: 0.25
   isInvincible: 0
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2463496225978856163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,16 +174,11 @@ MonoBehaviour:
   dashDistance: 3
   dashDuration: 0.2
   dashCooldown: 0.25
-  jumpForce: 7.5
+  useGravity: 1
+  isDashing: 0
   cameraTransform: {fileID: 0}
   rotationDuration: 1
   rotationIncrement: 90
-  useGravity: 1
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  overlapBoxSize: {x: 0.3, y: 0.4, z: 0.2}
-  boxYOffset: -0.2
 --- !u!114 &6635435559847510778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,7 +240,6 @@ MonoBehaviour:
   playerModel: {fileID: 5505832874139599896}
   mat: {fileID: 2100000, guid: c05ea85d9a0e4e24d8c08daea614544f, type: 2}
   alphaReductionSteps: 10
-  shaderVarRef: _Alpha
 --- !u!1 &1605626183069265781
 GameObject:
   m_ObjectHideFlags: 0
