@@ -86,8 +86,6 @@ public class EnemyGauntlet : MonoBehaviour
         {
             waveCounter++;
             enemyWaveHandler.Reset();
-            Debug.Log($"{waveCounter}:{enemyWaveHandler.Completed}:{enemyWaveHandler.Completed}");
-
         }
     }
 
@@ -103,7 +101,6 @@ public class EnemyGauntlet : MonoBehaviour
         {
             Vector3 directionalOffset = new Vector3(positionOffset.x * sideDirection.y, -boundHeight, positionOffset.y * sideDirection.x);
             GameObject wall = _wallObjectPool[i];
-            Debug.Log(transform.position);
             wall.transform.position = transform.position + directionalOffset;
             wall.transform.localScale = new Vector3(sideDirection.x == 0 ? boundSize.y : boundSize.x , boundHeight, wallWidth);
             wall.transform.rotation = Quaternion.Euler(new Vector3(0, (rotationOffset*sideDirection).magnitude, 0));
@@ -157,14 +154,13 @@ public class EnemyGauntlet : MonoBehaviour
 
             _wallObjectPool[i].SetActive(false);
         }
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log(other.gameObject.name);
             if (active)
             {
                 StartCoroutine(SpawnWalls()); // Will also start enemy spawning

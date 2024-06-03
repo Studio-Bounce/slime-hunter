@@ -17,12 +17,22 @@ public class Player : DamageTaker
         isInvincible = true;
     }
 
+    public override void Death()
+    {
+        // Trigger events
+        onDeathEvent.Invoke();
+        GameManager.Instance.PlayerHealth = 100;
+    }
+
     public override void TakeDamage(Damage damage)
     {
         // For player, we want to change GameManager.PlayerHealth
         base.TakeDamage(damage);
 
-        GameManager.Instance.PlayerHealth -= damage.value;
-        StartCoroutine(ApplyKnockback(damage));
+        GameManager.Instance.PlayerHealth -= (int)damage.value;
+        if (GameManager.Instance.PlayerHealth <= 0)
+        {
+            Death();
+        }
     }
 }

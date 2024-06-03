@@ -34,9 +34,6 @@ public class Enemy : DamageTaker
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] float deathDelay = 3.5f;
 
-    // Events
-    public UnityEvent onDeathEvent;
-
     protected override void Start()
     {
         base.Start();
@@ -80,6 +77,12 @@ public class Enemy : DamageTaker
         // Hide visible meshes / UI
         slimeModel.SetActive(false);
         healthSlider.gameObject.SetActive(false);
+
+        // Ensure the enemy doesn't give damage after dying
+        if (TryGetComponent<SphereCollider>(out var sphereCollider))
+        {
+            sphereCollider.enabled = false;
+        }
 
         // Stop movement
         GetComponent<SlimeSteeringAgent>().enabled = false;

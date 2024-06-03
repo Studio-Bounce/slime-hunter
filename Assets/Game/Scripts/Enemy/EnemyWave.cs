@@ -12,7 +12,7 @@ public enum SpawnLocation
 [System.Serializable]
 public struct EnemySpawnProperties
 {
-    public Enemy enemyPrefab;
+    public GameObject enemyPrefab;
     public float spawnWeight; // A value between 0 and 1
     public SpawnLocation spawnLocation;
 }
@@ -118,7 +118,7 @@ public class EnemyWave : MonoBehaviour
         return properties.enemiesInWave[0];
     }
 
-    private void SpawnAtBorder(Enemy enemy)
+    private void SpawnAtBorder(GameObject enemy)
     {
         // Select a random border location
         int border = Random.Range(0, 4); // 0 = top, 1 = right, 2 = bottom, 3 = left
@@ -145,20 +145,20 @@ public class EnemyWave : MonoBehaviour
         }
         Vector3 borderPosition = transform.position + new Vector3(x, 0, y);
         // Instantiate the object at the border position
-        Enemy enemyRef = Instantiate(enemy, borderPosition, Quaternion.identity);
+        Enemy enemyRef = Instantiate(enemy, borderPosition, Quaternion.identity).GetComponent<Enemy>();
         enemyRef.onDeathEvent.AddListener(() => totalDeaths++);
 
         spawnedEnemies.Add(enemyRef);
     }
 
-    private void SpawnAtInner(Enemy enemy)
+    private void SpawnAtInner(GameObject enemy)
     {
         // Generate a random position within the specified area
         float randomX = Random.Range(-bounds.x, bounds.x);
         float randomY = Random.Range(-bounds.y, bounds.y);
         Vector3 randomPosition = transform.position + new Vector3(randomX, 0, randomY);
         // Instantiate the enemy at that location
-        Enemy enemyRef = Instantiate(enemy, randomPosition, Quaternion.identity);
+        Enemy enemyRef = Instantiate(enemy, randomPosition, Quaternion.identity).GetComponent<Enemy>();
         enemyRef.onDeathEvent.AddListener(() => totalDeaths++);
     }
 }
