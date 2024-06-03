@@ -21,7 +21,7 @@ public class Player : DamageTaker
     {
         // Trigger events
         onDeathEvent.Invoke();
-        health = 100;
+        GameManager.Instance.PlayerHealth = 100;
     }
 
     public override void TakeDamage(Damage damage)
@@ -30,6 +30,9 @@ public class Player : DamageTaker
         base.TakeDamage(damage);
 
         GameManager.Instance.PlayerHealth -= (int)damage.value;
-        StartCoroutine(ApplyKnockback(damage));
+        if (GameManager.Instance.PlayerHealth <= 0)
+        {
+            Death();
+        }
     }
 }
