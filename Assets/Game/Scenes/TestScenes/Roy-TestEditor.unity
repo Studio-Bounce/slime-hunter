@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17865306, g: 0.22369696, b: 0.30563658, a: 1}
+  m_IndirectSpecularColor: {r: 0.17865337, g: 0.22369754, b: 0.30563766, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 296403864}
   - component: {fileID: 296403863}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: Gauntlet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -562,7 +562,7 @@ MonoBehaviour:
   active: 1
   enemyWaves:
   - enemiesInWave:
-    - enemyPrefab: {fileID: 8820871006783578033, guid: b940c09142173ff479a8f04c83ee9b5d,
+    - enemyPrefab: {fileID: 4646127613627469845, guid: b940c09142173ff479a8f04c83ee9b5d,
         type: 3}
       spawnWeight: 2
       spawnLocation: 0
@@ -570,7 +570,7 @@ MonoBehaviour:
     spawnInterval: 1
     delayOnComplete: 2
   - enemiesInWave:
-    - enemyPrefab: {fileID: 8223826132166210976, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
+    - enemyPrefab: {fileID: 8100604837490706534, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
         type: 3}
       spawnWeight: 2
       spawnLocation: 0
@@ -586,7 +586,7 @@ Transform:
   m_GameObject: {fileID: 296403862}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.49, y: 0, z: -8.86}
+  m_LocalPosition: {x: -1.49, y: 7.5, z: -8.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

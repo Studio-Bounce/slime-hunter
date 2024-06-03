@@ -76,8 +76,6 @@ public class EnemyGauntlet : MonoBehaviour
 
         if (!enemyWaveHandler.Started)
         {
-            Debug.Log("Started");
-
             Vector2 innerBounds = boundSize;
             innerBounds.x = innerBounds.x / 2 - colliderOffset;
             innerBounds.y = innerBounds.y / 2 - colliderOffset;
@@ -98,13 +96,14 @@ public class EnemyGauntlet : MonoBehaviour
         yield return new WaitForSeconds(boundSpawnDelay);
 
         Vector2Int sideDirection = new Vector2Int(1, 0);
-        Vector2 positionOffset = new Vector3(boundSize.x / 2, boundSize.y / 2);
+        Vector2 positionOffset = new Vector2(boundSize.x / 2, boundSize.y / 2);
         Vector2Int rotationOffset = new Vector2Int(0, 90);
 
         for (int i = 0; i < _wallObjectPool.Length; i++)
         {
             Vector3 directionalOffset = new Vector3(positionOffset.x * sideDirection.y, -boundHeight, positionOffset.y * sideDirection.x);
             GameObject wall = _wallObjectPool[i];
+            Debug.Log(transform.position);
             wall.transform.position = transform.position + directionalOffset;
             wall.transform.localScale = new Vector3(sideDirection.x == 0 ? boundSize.y : boundSize.x , boundHeight, wallWidth);
             wall.transform.rotation = Quaternion.Euler(new Vector3(0, (rotationOffset*sideDirection).magnitude, 0));
@@ -117,8 +116,8 @@ public class EnemyGauntlet : MonoBehaviour
         // Animate
         float timeElapsed = 0;
         float animationTime = 1;
-        float startHeight = -boundHeight/2;
-        float endHeight = 0;
+        float startHeight = transform.position.y - boundHeight/2;
+        float endHeight = transform.position.y;
         
         while (timeElapsed < animationTime)
         {
@@ -158,61 +157,20 @@ public class EnemyGauntlet : MonoBehaviour
 
             _wallObjectPool[i].SetActive(false);
         }
+        Destroy(this);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-        { 
+        {
+            Debug.Log(other.gameObject.name);
             if (active)
             {
                 StartCoroutine(SpawnWalls()); // Will also start enemy spawning
             }
         }
 
-    }
-
-    private void SpawnAtBorder(EnemySpawnProperties enemy)
-    {
-        // Select a random border location
-        int border = Random.Range(0, 4); // 0 = top, 1 = right, 2 = bottom, 3 = left
-        float x = 0f;
-        float y = 0f;
-        Vector2 innerBound = new Vector2(boundSize.x/2 - colliderOffset, boundSize.y/2 - colliderOffset);
-        switch (border)
-        {
-            case 0: // Top border
-                x = Random.Range(-innerBound.x, innerBound.x);
-                y = innerBound.y;
-                break;
-            case 1: // Right border
-                x = innerBound.x;
-                y = Random.Range(-innerBound.y, innerBound.y);
-                break;
-            case 2: // Bottom border
-                x = Random.Range(-innerBound.x, innerBound.x);
-                y = -innerBound.y;
-                break;
-            case 3: // Left border
-                x = -innerBound.x;
-                y = Random.Range(-innerBound.y, innerBound.y);
-                break;
-        }
-        Vector3 borderPosition = transform.position + new Vector3(x, 0, y);
-        // Instantiate the object at the border position
-        Instantiate(enemy.enemyPrefab, borderPosition, Quaternion.identity);
-        //Instantiate(enemy.enemyPrefab);
-    }
-
-    private void SpawnAtInner(EnemySpawnProperties enemy)
-    {
-        Vector2 innerBound = new Vector2(boundSize.x/2 - colliderOffset, boundSize.y/2 - colliderOffset);
-        // Generate a random position within the specified area
-        float randomX = Random.Range(-innerBound.x, innerBound.x);
-        float randomY = Random.Range(-innerBound.y, innerBound.y);
-        Vector3 randomPosition = transform.position + new Vector3(randomX, 0, randomY);
-        // Instantiate the enemy at that location
-        Instantiate(enemy.enemyPrefab, randomPosition, Quaternion.identity);
     }
 
 #if UNITY_EDITOR

@@ -12,7 +12,7 @@ public enum SpawnLocation
 [System.Serializable]
 public struct EnemySpawnProperties
 {
-    public GameObject enemyPrefab;
+    public Enemy enemyPrefab;
     public float spawnWeight; // A value between 0 and 1
     public SpawnLocation spawnLocation;
 }
@@ -31,12 +31,13 @@ public class EnemyWave : MonoBehaviour
 {
     private EnemyWaveProperties properties;
     private float _totalWeight;
-    private List<GameObject> spawnedEnemies = new List<GameObject>();
+    private List<Enemy> spawnedEnemies = new List<Enemy>();
     private bool isStart = false;
     private float timer = 0;
     private int enemySpawnCount = 0;
     private Vector2 bounds;
     private bool isComplete = false;
+    private int totalDeaths = 0;
 
     public bool Completed { get { return isComplete; } }
     public bool Started { get { return isStart; } }
@@ -67,6 +68,9 @@ public class EnemyWave : MonoBehaviour
             enemySpawnCount++;
         } else
         {
+            // Don't complete unless all enemies killed
+            if (totalDeaths < properties.totalEnemies) return;
+
             if (Utils.CheckTimer(ref timer, properties.delayOnComplete))
             {
                 isComplete = true;
@@ -81,6 +85,7 @@ public class EnemyWave : MonoBehaviour
         spawnedEnemies.Clear();
         timer = 0;
         enemySpawnCount = 0;
+        totalDeaths = 0;
         isStart = false;
         isComplete = false;
     }
@@ -113,7 +118,7 @@ public class EnemyWave : MonoBehaviour
         return properties.enemiesInWave[0];
     }
 
-    private void SpawnAtBorder(GameObject enemy)
+    private void SpawnAtBorder(Enemy enemy)
     {
         // Select a random border location
         int border = Random.Range(0, 4); // 0 = top, 1 = right, 2 = bottom, 3 = left
@@ -140,16 +145,20 @@ public class EnemyWave : MonoBehaviour
         }
         Vector3 borderPosition = transform.position + new Vector3(x, 0, y);
         // Instantiate the object at the border position
-        spawnedEnemies.Add(Instantiate(enemy, borderPosition, Quaternion.identity));
+        Enemy enemyRef = Instantiate(enemy, borderPosition, Quaternion.identity);
+        enemyRef.onDeathEvent.AddListener(() => totalDeaths++);
+
+        spawnedEnemies.Add(enemyRef);
     }
 
-    private void SpawnAtInner(GameObject enemy)
+    private void SpawnAtInner(Enemy enemy)
     {
         // Generate a random position within the specified area
         float randomX = Random.Range(-bounds.x, bounds.x);
         float randomY = Random.Range(-bounds.y, bounds.y);
         Vector3 randomPosition = transform.position + new Vector3(randomX, 0, randomY);
         // Instantiate the enemy at that location
-        Instantiate(enemy, randomPosition, Quaternion.identity);
+        Enemy enemyRef = Instantiate(enemy, randomPosition, Quaternion.identity);
+        enemyRef.onDeathEvent.AddListener(() => totalDeaths++);
     }
 }
