@@ -145,7 +145,7 @@ public class EnemyWave : MonoBehaviour
         }
         Vector3 borderPosition = transform.position + new Vector3(x, 0, y);
         // Instantiate the object at the border position
-        Enemy enemyRef = Instantiate(enemy, borderPosition, Quaternion.identity).GetComponent<Enemy>();
+        Enemy enemyRef = Instantiate(enemy, borderPosition, Quaternion.identity, transform).GetComponent<Enemy>();
         enemyRef.onDeathEvent.AddListener(() => totalDeaths++);
 
         spawnedEnemies.Add(enemyRef);
@@ -158,7 +158,7 @@ public class EnemyWave : MonoBehaviour
         float randomY = Random.Range(-bounds.y, bounds.y);
         Vector3 randomPosition = transform.position + new Vector3(randomX, 0, randomY);
         // Instantiate the enemy at that location
-        Enemy enemyRef = Instantiate(enemy, randomPosition, Quaternion.identity).GetComponent<Enemy>();
+        Enemy enemyRef = Instantiate(enemy, randomPosition, Quaternion.identity, transform).GetComponent<Enemy>();
         enemyRef.onDeathEvent.AddListener(() => totalDeaths++);
     }
 }
