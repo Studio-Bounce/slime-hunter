@@ -31,14 +31,20 @@ MonoBehaviour:
     animationOffset: 0
     duration: 0.3
     direction: {x: 0, y: 0}
+    damageMultiplier: 1
     rangeMultiplier: 1
+    knockbackMultiplier: 1
   - clip: {fileID: -203655887218126122, guid: 9a561e5270d33e94c8269d1b9af88d9c, type: 3}
     animationOffset: 0
     duration: 0.3
     direction: {x: -1, y: 0}
+    damageMultiplier: 1
     rangeMultiplier: 1
+    knockbackMultiplier: 1
   - clip: {fileID: -203655887218126122, guid: 26b8362ba6b3b3947bfe28a26b606f92, type: 3}
     animationOffset: 0.4
-    duration: 0.6
+    duration: 0.5
     direction: {x: -1, y: 0}
+    damageMultiplier: 2
     rangeMultiplier: 1.5
+    knockbackMultiplier: 5
