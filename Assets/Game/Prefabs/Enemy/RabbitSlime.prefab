@@ -10472,7 +10472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f42e066d3cfa0504d9b18c7df0a89954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 60
+  health: 40
   healthSlider: {fileID: 3423954784740395929}
   isAlive: 1
   damageDelay: 0.3
@@ -10490,6 +10490,9 @@ MonoBehaviour:
   slimeModel: {fileID: 9002733011280807015}
   deathParticles: {fileID: 4469707161624757012}
   deathDelay: 3.5
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
   dodgeSpeed: 2
   dodgeTime: 0.2
   isDodging: 0
@@ -10541,12 +10544,13 @@ MonoBehaviour:
   chaseMat: {fileID: 2100000, guid: c6ad72156d00c6c45872d7fd4076b054, type: 2}
   attackMat: {fileID: 2100000, guid: 54086adf35a39a34f93097e070b5c598, type: 2}
   attackGlowIntensity: 3
-  cooldownTime: 1
+  cooldownTime: 0.7
   seekDistance: 10
   wanderSpeed: 4
   chaseSpeed: 10
   attackSpeed: 20
   attackRadius: 4
+  attackEmissionTime: 1
   attackProximity: 1
   slimeAnimator: {fileID: 2403758375320863911}
 --- !u!114 &3359904442406818763
