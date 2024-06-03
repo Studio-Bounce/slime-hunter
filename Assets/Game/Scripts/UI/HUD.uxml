@@ -6,8 +6,8 @@
         <ui:VisualElement name="Left" style="flex-grow: 0; height: auto; width: 30%;">
             <ui:VisualElement name="Blank_Lefttop" style="flex-grow: 0; height: 79%;" />
             <ui:VisualElement name="StatusArea" style="flex-grow: 1; flex-direction: row;">
-                <ui:VisualElement name="weaponSwitchArea" style="flex-grow: 0; width: 138px; padding-top: 3%; padding-bottom: 6%; padding-left: 8%; padding-right: 0; height: 237px;">
-                    <ui:VisualElement name="Upper" style="flex-grow: 0; height: 76px; flex-direction: row;">
+                <ui:VisualElement name="weaponSwitchArea" style="flex-grow: 0; width: 138px; padding-top: 3%; padding-bottom: 6%; padding-left: 8%; padding-right: 0; height: 237px; opacity: 1;">
+                    <ui:VisualElement name="Upper" style="flex-grow: 0; height: 76px; flex-direction: row; opacity: 0;">
                         <ui:VisualElement name="SwitchButton" style="flex-grow: 0; width: 84px; padding-top: 0; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/SwitchIcon.png?fileID=2800000&amp;guid=873b31db068d81a428229c9a42b317e9&amp;type=3#SwitchIcon&quot;); -unity-background-scale-mode: scale-to-fit; margin-top: 41%; margin-left: 1%; margin-right: 0; margin-bottom: 0; position: absolute; height: 38px;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="WeaponIconSlot" style="flex-grow: 0; margin-right: 0; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/UnionSwordicon.png?fileID=2800000&amp;guid=c7e11ca42c0dc374ab1663ca0890c22a&amp;type=3#UnionSwordicon&quot;); -unity-background-scale-mode: scale-to-fit; height: 91px; position: absolute; width: 73px; top: 100px; left: 51px;" />
@@ -36,7 +36,7 @@
                 </ui:VisualElement>
                 <ui:Label tabindex="-1" text="Then Choose the left top button and click on ground to generate enemies." parse-escape-sequences="true" display-tooltip-when-elided="true" name="content" style="-unity-text-align: upper-right; padding-right: 41px; font-size: 15px; flex-direction: column; align-items: stretch; flex-wrap: nowrap; white-space: normal; padding-left: 58px; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); -unity-font-style: normal; color: rgb(255, 255, 255);" />
             </ui:VisualElement>
-            <ui:VisualElement name="SpellContainer" style="flex-grow: 0; height: 30%; padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; flex-direction: row; -unity-background-scale-mode: scale-to-fit;">
+            <ui:VisualElement name="SpellContainer" style="flex-grow: 0; height: 30%; padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; flex-direction: row; -unity-background-scale-mode: scale-to-fit; opacity: 0;">
                 <ui:VisualElement name="DefensiveSkill" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/Group%2021skill.png?fileID=2800000&amp;guid=0c6528e91f9f7aa46ad847ea84d10691&amp;type=3#Group 21skill&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 67px; width: 68px; top: 204px; left: 162px;">
                     <ui:VisualElement name="CD" class="SkillCD" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/Group%2022skillcd.png?fileID=2800000&amp;guid=e2cfcd10895c7ae4c9e877ac541e642e&amp;type=3#Group 22skillcd&quot;);" />
                     <ui:Label tabindex="-1" text="24s" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; align-items: center; height: 100%; width: 100%; margin-right: 2px; margin-top: 2px; position: absolute; color: rgb(255, 255, 255); font-size: 15px; -unity-font-style: bold;" />
