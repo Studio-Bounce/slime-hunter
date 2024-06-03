@@ -78,6 +78,12 @@ public class Enemy : DamageTaker
         slimeModel.SetActive(false);
         healthSlider.gameObject.SetActive(false);
 
+        // Ensure the enemy doesn't give damage after dying
+        if (TryGetComponent<SphereCollider>(out var sphereCollider))
+        {
+            sphereCollider.enabled = false;
+        }
+
         // Stop movement
         GetComponent<SlimeSteeringAgent>().enabled = false;
         deathParticles.Play();

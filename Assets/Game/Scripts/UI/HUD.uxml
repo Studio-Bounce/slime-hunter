@@ -14,7 +14,7 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="Bars" style="flex-grow: 1; padding-top: 20%; padding-right: 17%; padding-bottom: 6%; padding-left: 2%;">
                     <ui:VisualElement name="Stamina" style="flex-grow: 1; flex-direction: row;">
-                        <ui:ProgressBar name="StaminaBar" class="stamina-progressbar" style="align-self: center; width: 262px; position: absolute; top: 11px; left: 20px; height: 20px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgb(0, 0, 0); border-left-color: rgba(142, 142, 142, 0); border-right-color: rgba(142, 142, 142, 0); border-top-color: rgba(142, 142, 142, 0); border-bottom-color: rgba(142, 142, 142, 0); scale: 1 0.8;" />
+                        <ui:ProgressBar name="StaminaBar" high-value="1" class="stamina-progressbar" style="align-self: center; width: 262px; position: absolute; top: 11px; left: 20px; height: 20px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgb(0, 0, 0); border-left-color: rgba(142, 142, 142, 0); border-right-color: rgba(142, 142, 142, 0); border-top-color: rgba(142, 142, 142, 0); border-bottom-color: rgba(142, 142, 142, 0); scale: 1 0.8;" />
                         <ui:VisualElement name="Stamina_Deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/Group%2018.png?fileID=2800000&amp;guid=b5494845e8ab7a449bd9568703f2a209&amp;type=3#Group 18&quot;); position: absolute; height: 20px; width: 280px; top: 13px; left: 14px;" />
                         <ui:VisualElement name="Stamina_Icon" style="flex-grow: 0; width: 38px; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/Stamina.png?fileID=2800000&amp;guid=05186b8933707184f951e94fa38454d7&amp;type=3#Stamina&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 34px; top: 4px; left: -1px;" />
                     </ui:VisualElement>
@@ -50,5 +50,5 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="Red_Alert" class="redalert" style="flex-grow: 1; position: absolute; height: 1080px; width: 1920px; -unity-background-scale-mode: scale-and-crop; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Rectangle%2047playersttacked.png?fileID=2800000&amp;guid=000297ea16efd484185e1cd60150cb9f&amp;type=3#Rectangle 47playersttacked&quot;); -unity-background-image-tint-color: rgb(255, 255, 255);" />
+    <ui:VisualElement name="Red_Alert" class="redalert" style="flex-grow: 1; position: absolute; height: 1080px; width: 1920px; -unity-background-scale-mode: scale-and-crop; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Rectangle%2047playersttacked.png?fileID=2800000&amp;guid=000297ea16efd484185e1cd60150cb9f&amp;type=3#Rectangle 47playersttacked&quot;); -unity-background-image-tint-color: rgb(255, 255, 255); opacity: 0;" />
 </ui:UXML>
