@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static WeaponController;
 
 public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 {
@@ -63,7 +62,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
     {
         float intensity = 0.0f;
         float intensityDelta = fsm.attackGlowIntensity / steps;
-        float deltaTime = 1.0f / steps;
+        float deltaTime = fsm.attackEmissionTime / steps;
         while (steps > 0)
         {
             --steps;
