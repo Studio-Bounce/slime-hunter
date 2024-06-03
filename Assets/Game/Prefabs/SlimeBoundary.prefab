@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5848472373967369700}
   - component: {fileID: 5501472797998793482}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeBoundary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32c8ac7e396b48d4cbf9c8e9489e645a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 1
   distance: 10
   includeLayers:
     serializedVersion: 2
