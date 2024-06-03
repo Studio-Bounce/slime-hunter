@@ -64,6 +64,7 @@ public class BoundarySpawner : MonoBehaviour
     {
         for (int i = 0; i < wallColliders.Length; i++)
         {
+            
             wallColliders[i].enabled = value;
         }
         active = value;
