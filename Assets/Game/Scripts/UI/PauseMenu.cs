@@ -15,9 +15,12 @@ public class PauseMenu : Menu
         VisualElement root = uiDocument.rootVisualElement;
         Button btnUnpause = root.Q<Button>("btnUnpause");
         Button btnBackMainMenu = root.Q<Button>("btnBackMainMenu");
+        Button btnQuit = root.Q<Button>("btnQuit");
+
 
         btnUnpause.clicked += Unpause;
         btnBackMainMenu.clicked += ReturnMainMenu;
+        btnQuit.clicked += () => Application.Quit();
     }
 
     private void Unpause()

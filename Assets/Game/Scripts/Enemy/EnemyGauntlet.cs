@@ -46,7 +46,7 @@ public class EnemyGauntlet : MonoBehaviour
         // Instantiate all walls ahead of time
         for (int i = 0; i < _wallObjectPool.Length; i++)
         {
-            _wallObjectPool[i] = Instantiate(wallPrefab);
+            _wallObjectPool[i] = Instantiate(wallPrefab, transform);
             _wallObjectPool[i].SetActive(false);
         }
 
@@ -164,6 +164,7 @@ public class EnemyGauntlet : MonoBehaviour
             if (active)
             {
                 StartCoroutine(SpawnWalls()); // Will also start enemy spawning
+                _boxCollider.enabled = false;
             }
         }
 

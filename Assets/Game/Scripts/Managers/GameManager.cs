@@ -14,8 +14,8 @@ public class GameManager : Singleton<GameManager>
     public readonly int PlayerMaxStamina = 100;
 
     public Player playerRef;
-    private int playerHealth = 100;
-    private int playerStamina = 100;
+    public int playerHealth = 100;
+    public int playerStamina = 100;
     [Tooltip("Amount of Stamina increase per second (max: 100)")]
     public int staminaIncreaseRate = 15;
 
@@ -63,11 +63,11 @@ public class GameManager : Singleton<GameManager>
 
     IEnumerator IncreaseStamina()
     {
-        while (gameObject.activeSelf)
+        while (true)
         {
             if (PlayerStamina < PlayerMaxStamina)
             {
-                PlayerStamina += staminaIncreaseRate;
+                PlayerStamina = Mathf.Min(PlayerStamina + staminaIncreaseRate, PlayerMaxStamina);
             }
             yield return new WaitForSeconds(1.0f);
         }
@@ -75,6 +75,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnDestroy()
     {
+        StopAllCoroutines();
         Instance.OnPlayerHealthChange = null;
         Instance.OnPlayerStaminaChange = null;
     }
