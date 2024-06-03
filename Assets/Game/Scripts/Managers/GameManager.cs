@@ -9,10 +9,15 @@ public class GameManager : Singleton<GameManager>
 {
     // Global Variables
     public static readonly float GLOBAL_KNOCKBACK_MULTIPLIER = 0.25f;
+    
+    public readonly int PlayerMaxHealth = 100;
+    public readonly int PlayerMaxStamina = 100;
 
     public Player playerRef;
-    public readonly int playerMaxHealth = 100;
-    private int playerHealth = 100;
+    public int playerHealth = 100;
+    public int playerStamina = 100;
+    [Tooltip("Amount of Stamina increase per second (max: 100)")]
+    public int staminaIncreaseRate = 1;
 
     public Canvas screenCanvas;
 
@@ -25,8 +30,18 @@ public class GameManager : Singleton<GameManager>
             OnPlayerHealthChange?.Invoke(playerHealth);
         }
     }
+    public int PlayerStamina
+    {
+        get { return playerStamina; }
+        set
+        {
+            playerStamina = value;
+            OnPlayerStaminaChange?.Invoke(playerStamina);
+        }
+    }
 
     public event Action<int> OnPlayerHealthChange;
+    public event Action<int> OnPlayerStaminaChange;
 
     private void Awake()
     {
@@ -40,8 +55,27 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private void Start()
+    {
+        // Constantly increase stamina
+        StartCoroutine(IncreaseStamina());
+    }
+
+    IEnumerator IncreaseStamina()
+    {
+        while (gameObject.activeSelf)
+        {
+            if (PlayerStamina < PlayerMaxStamina)
+            {
+                PlayerStamina += staminaIncreaseRate;
+            }
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
     private void OnDestroy()
     {
         Instance.OnPlayerHealthChange = null;
+        Instance.OnPlayerStaminaChange = null;
     }
 }
