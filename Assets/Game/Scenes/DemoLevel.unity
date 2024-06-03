@@ -30243,33 +30243,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1448871114}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1438877710 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5454184540754536763, guid: 46ba51d16e62ece4cb4115d899d1379f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3942515579862079720}
-  m_PrefabAsset: {fileID: 0}
---- !u!65 &1438877715
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438877710}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 3.726281, y: 0.75136805, z: 1.0621443}
-  m_Center: {x: 0.1306969, y: -0.0074031353, z: 0.4522929}
 --- !u!1001 &1438900106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38431,11 +38404,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boundSize: {x: 21.2, y: 16.5}
-  boundHeight: 4
+  boundHeight: 6
   collisionTag: Player
   wallPrefab: {fileID: 5454184540754536763, guid: 46ba51d16e62ece4cb4115d899d1379f,
     type: 3}
-  wallWidth: 1
+  wallWidth: 3
   colliderOffset: 3
   boundSpawnDelay: 0
   active: 1
@@ -43739,7 +43712,7 @@ PrefabInstance:
     - target: {fileID: 4081582539588073045, guid: 46ba51d16e62ece4cb4115d899d1379f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.26
+      value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: 4081582539588073045, guid: 46ba51d16e62ece4cb4115d899d1379f,
         type: 3}
@@ -43799,11 +43772,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5454184540754536763, guid: 46ba51d16e62ece4cb4115d899d1379f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1438877715}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46ba51d16e62ece4cb4115d899d1379f, type: 3}
 --- !u!1001 &4466933137700829110
 PrefabInstance:
