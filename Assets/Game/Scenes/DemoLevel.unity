@@ -3994,6 +3994,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1350049999}
+        m_TargetAssemblyTypeName: BoundarySpawner, Assembly-CSharp
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   layerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -29211,6 +29223,96 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 445038472}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1350049998
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 833117742069371905, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerBoundary
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501472797998793482, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: active
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5501472797998793482, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: distance
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848472373967369700, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848472373967369700, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848472373967369700, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 118.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848472373967369700, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848472373967369700, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848472373967369700, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848472373967369700, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848472373967369700, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848472373967369700, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5848472373967369700, guid: ef2734421a7da1941955e66503538a8e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ef2734421a7da1941955e66503538a8e, type: 3}
+--- !u!114 &1350049999 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5501472797998793482, guid: ef2734421a7da1941955e66503538a8e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1350049998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32c8ac7e396b48d4cbf9c8e9489e645a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1377425894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43697,7 +43799,6 @@ SceneRoots:
   - {fileID: 960654946}
   - {fileID: 775544186}
   - {fileID: 93394994}
-  - {fileID: 1640256222}
   - {fileID: 1598439280}
   - {fileID: 74121993}
   - {fileID: 1711772478}
@@ -43724,5 +43825,7 @@ SceneRoots:
   - {fileID: 6848099573282801749}
   - {fileID: 231727129}
   - {fileID: 283636660}
+  - {fileID: 1640256222}
+  - {fileID: 1350049998}
   - {fileID: 255854732}
   - {fileID: 1856952892}

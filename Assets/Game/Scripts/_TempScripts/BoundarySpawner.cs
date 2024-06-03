@@ -5,11 +5,13 @@ using UnityEngine;
 // Use for spawning a boundary for wandering slimes 
 public class BoundarySpawner : MonoBehaviour
 {
+    [SerializeField] bool active = true;
     [SerializeField] float distance = 5.0f;
-
     [Header("Collision properties")]
     [SerializeField] LayerMask includeLayers;
     [SerializeField] LayerMask excludeLayers;
+
+    private MeshCollider[] wallColliders = new MeshCollider[4];
 
     void Start()
     {
@@ -42,10 +44,11 @@ public class BoundarySpawner : MonoBehaviour
             // Make it child
             wall.transform.parent = transform;
 
-            MeshCollider meshCollider = wall.GetComponent<MeshCollider>();
-            meshCollider.convex = true;
-            meshCollider.includeLayers = includeLayers;
-            meshCollider.excludeLayers = excludeLayers;
+            MeshCollider _collider = wall.GetComponent<MeshCollider>();
+            wallColliders[i] = _collider;
+            _collider.convex = true;
+            _collider.includeLayers = includeLayers;
+            _collider.excludeLayers = excludeLayers;
 
             // Remove mesh renderer
             MeshRenderer meshRenderer = wall.GetComponent<MeshRenderer>();
@@ -54,18 +57,30 @@ public class BoundarySpawner : MonoBehaviour
                 Destroy(meshRenderer);
             }
         }
+        SetActive(active);
+    }
+
+    public void SetActive(bool value)
+    {
+        for (int i = 0; i < wallColliders.Length; i++)
+        {
+            wallColliders[i].enabled = value;
+        }
+        active = value;
     }
 
     private void OnDrawGizmos()
     {
+        Color _color = active ? Color.white : Color.black;
+
         Vector3 forwardVec = transform.forward;
         Vector3 backwardVec = new(-forwardVec.x, forwardVec.y, -forwardVec.z);
         Vector3 rotated1 = new(-forwardVec.z, forwardVec.y, forwardVec.x);
         Vector3 rotated2 = new(forwardVec.z, forwardVec.y, -forwardVec.x);
 
-        DebugExtension.DebugArrow(transform.position, forwardVec * distance);
-        DebugExtension.DebugArrow(transform.position, backwardVec * distance);
-        DebugExtension.DebugArrow(transform.position, rotated1 * distance);
-        DebugExtension.DebugArrow(transform.position, rotated2 * distance);
+        DebugExtension.DebugArrow(transform.position, forwardVec * distance, _color);
+        DebugExtension.DebugArrow(transform.position, backwardVec * distance, _color);
+        DebugExtension.DebugArrow(transform.position, rotated1 * distance, _color);
+        DebugExtension.DebugArrow(transform.position, rotated2 * distance, _color);
     }
 }
