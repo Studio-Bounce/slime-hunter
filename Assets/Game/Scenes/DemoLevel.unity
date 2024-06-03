@@ -1783,6 +1783,7 @@ GameObject:
   - component: {fileID: 93394994}
   - component: {fileID: 93394993}
   - component: {fileID: 93394995}
+  - component: {fileID: 93394996}
   m_Layer: 5
   m_Name: EditorUIDocument
   m_TagString: Untagged
@@ -1842,6 +1843,19 @@ MonoBehaviour:
     type: 3}
   rabbitSlimePreviewPrefab: {fileID: 3663717533752572683, guid: 7984715cda413df4789c7f95b9ee9376,
     type: 3}
+--- !u!114 &93394996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 93394992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd40d19e9478a694f973dcb03b0d9bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showOnStart: 0
 --- !u!4 &94995371 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7149662004304412239, guid: 0e331f250de3c374c868e6db28388f40,
@@ -3935,6 +3949,90 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 239193402}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &255854729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 255854732}
+  - component: {fileID: 255854731}
+  - component: {fileID: 255854730}
+  m_Layer: 0
+  m_Name: DoorUITrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &255854730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255854729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f62814ffbdab84682282e60517433a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 93394996}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: Show
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!65 &255854731
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255854729}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 3, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &255854732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255854729}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.38131243, z: 0, w: 0.9244462}
+  m_LocalPosition: {x: 7.5, y: 1.5, z: 112.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 44.83, z: 0}
 --- !u!1001 &258816305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43552,4 +43650,5 @@ SceneRoots:
   - {fileID: 6848099573282801749}
   - {fileID: 231727129}
   - {fileID: 283636660}
+  - {fileID: 255854732}
   - {fileID: 1856952892}
