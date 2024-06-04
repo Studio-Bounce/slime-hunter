@@ -60,7 +60,7 @@ public class StatusEffectManager : MonoBehaviour
         }
         effectsToRemove.Clear();
 
-        if (!damageTaker.isAlive)
+        if (!damageTaker.isAlive && showStatusBar)
         {
             statusBar.gameObject.SetActive(false);
         }

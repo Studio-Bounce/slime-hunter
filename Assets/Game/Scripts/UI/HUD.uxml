@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Game/Scripts/UI/Uss/ProgressBar.uss?fileID=7433441132597879392&amp;guid=0fdab442c7ffa024e8faa0924c8217d2&amp;type=3#ProgressBar" />
-    <Style src="project://database/Assets/Game/Scripts/UI/Uss/SkillCD.uss?fileID=7433441132597879392&amp;guid=221c6915abb9f9744a49ca7c683d18a2&amp;type=3#SkillCD" />
-    <Style src="project://database/Assets/Game/Scripts/UI/Uss/Damage.uss?fileID=7433441132597879392&amp;guid=37c76dbc6d95c6041934135cae8ea696&amp;type=3#Damage" />
+    <Style src="project://database/Assets/Game/Scripts/UI/USS/ProgressBar.uss?fileID=7433441132597879392&amp;guid=0fdab442c7ffa024e8faa0924c8217d2&amp;type=3#ProgressBar" />
+    <Style src="project://database/Assets/Game/Scripts/UI/USS/SkillCD.uss?fileID=7433441132597879392&amp;guid=221c6915abb9f9744a49ca7c683d18a2&amp;type=3#SkillCD" />
+    <Style src="project://database/Assets/Game/Scripts/UI/USS/Damage.uss?fileID=7433441132597879392&amp;guid=37c76dbc6d95c6041934135cae8ea696&amp;type=3#Damage" />
     <ui:VisualElement name="Background" style="flex-grow: 1; background-image: none; -unity-background-scale-mode: scale-to-fit; background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgba(255, 255, 255, 0.24); align-self: auto; align-items: stretch; flex-direction: row; color: rgb(27, 27, 27); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
         <ui:VisualElement name="Left" style="flex-grow: 0; height: auto; width: 30%;">
             <ui:VisualElement name="Blank_Lefttop" style="flex-grow: 0; height: 79%;" />
@@ -29,7 +29,7 @@
         <ui:VisualElement name="Blank_Centre" style="flex-grow: 0; width: 50%;" />
         <ui:VisualElement name="Right" style="flex-grow: 0; width: 20%;">
             <ui:VisualElement name="MiniMapContainer" style="flex-grow: 0; height: 20%; -unity-text-align: upper-right; -unity-background-scale-mode: scale-to-fit; background-image: none; align-self: stretch; align-items: stretch; padding-right: 0; margin-left: 0; margin-top: 16px; margin-bottom: 16px; padding-bottom: 0; padding-left: 0;" />
-            <ui:VisualElement name="ItemContainer" style="flex-grow: 0; height: 50%; padding-left: 0; padding-top: 0; padding-bottom: 0; padding-right: 0;">
+            <ui:VisualElement name="ItemContainer" style="flex-grow: 0; height: 50%; padding-left: 0; padding-top: 0; padding-bottom: 0; padding-right: 0; display: none;">
                 <ui:VisualElement style="flex-grow: 0; flex-direction: row-reverse; -unity-text-align: lower-right; align-self: flex-end;">
                     <ui:Label tabindex="-1" text="Arriving at the final area" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Quest-Name" style="-unity-text-align: upper-right; padding-right: 41px; font-size: 20px; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); -unity-font-style: bold; color: rgb(255, 255, 255); flex-grow: 1; flex-shrink: 1; transform-origin: right;" />
                     <ui:VisualElement name="VisualElement" style="width: 30px; -unity-background-scale-mode: scale-to-fit; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/Group%2023.png?fileID=2800000&amp;guid=691d61749127acd44a6061c05c5ec094&amp;type=3#Group 23&quot;); flex-grow: 1; align-self: auto; align-items: auto; height: 28px; margin-top: 6px; transform-origin: right;" />

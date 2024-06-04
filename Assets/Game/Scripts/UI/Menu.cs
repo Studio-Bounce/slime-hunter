@@ -9,6 +9,8 @@ public class Menu : MonoBehaviour
     protected UIDocument uiDocument;
     public bool showOnStart = true;
 
+    public bool IsVisible { get { return uiDocument.rootVisualElement.style.display == DisplayStyle.Flex; } }
+
     // Start is called before the first frame update
     void Awake()
     {

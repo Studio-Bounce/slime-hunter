@@ -11,8 +11,9 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement Properties")]
     public Animator animator;
-    private int blendSpeedHash;
-    private int dashHash;
+    private int blendSpeedHash = Animator.StringToHash("blendSpeed");
+    private int dashBoolash = Animator.StringToHash("isDashing");
+    private int jumpTriggerHash = Animator.StringToHash("Jump");
 
     //public float rotationSpeed = 5f;
     public float moveSpeed = 5f;
@@ -43,8 +44,6 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        blendSpeedHash = Animator.StringToHash("blendSpeed");
-        dashHash = Animator.StringToHash("isDashing");
     }
 
     void Start()
@@ -141,7 +140,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PerformDash(Vector3 dashVector)
     {
-        animator.SetBool(dashHash, isDashing);
+        animator.SetBool(dashBoolash, isDashing);
 
         // Dash follows the curve of y^3 = x from 0 to 1
         // Provides a quick action in beginning which then slows
@@ -181,7 +180,7 @@ public class PlayerController : MonoBehaviour
         }
         
         isDashing = false;
-        animator.SetBool(dashHash, isDashing);
+        animator.SetBool(dashBoolash, isDashing);
         lastDashTime = Time.time;
     }
 
@@ -209,6 +208,8 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator SmoothJump(float upForce, float jumpDuration, Vector3 target)
     {
+        animator.SetTrigger(jumpTriggerHash);
+
         isJumping = true;
         useGravity = false;
         float timeElapsed = 0f;

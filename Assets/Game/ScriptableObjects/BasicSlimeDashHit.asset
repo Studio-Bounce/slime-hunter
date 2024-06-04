@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: BasicSlimeDashHit
   damage:
-    value: 5
+    value: 20
     knockback: 0
     direction: {x: 0, y: 0, z: 0}
-    element: 0
+    effect: {fileID: 0}
   swingSpeed: 0
   range: 0
   hitLayers:

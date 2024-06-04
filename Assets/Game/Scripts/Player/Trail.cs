@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Trail : MonoBehaviour
 {
@@ -54,6 +55,7 @@ public class Trail : MonoBehaviour
             else
             {
                 GameObject gObj = Instantiate(playerModel, transform.position, transform.rotation);
+                SceneManager.MoveGameObjectToScene(gObj, gameObject.scene);
 
                 SkinnedMeshRenderer[] skinnedMeshRenderers = gObj.GetComponentsInChildren<SkinnedMeshRenderer>();
 
