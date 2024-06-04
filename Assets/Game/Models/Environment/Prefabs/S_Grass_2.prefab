@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1581229962722807323}
   - component: {fileID: 207913171333706208}
   - component: {fileID: 2995493983834539714}
-  - component: {fileID: 5969586695791253152}
   m_Layer: 0
   m_Name: S_Grass_2
   m_TagString: Untagged
@@ -84,15 +83,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5969586695791253152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6864097680398489218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 751055f80a6ef694c8a00d45abf49c22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
