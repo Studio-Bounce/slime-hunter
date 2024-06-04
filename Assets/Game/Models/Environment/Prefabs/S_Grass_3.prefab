@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2345317079564462545}
   - component: {fileID: 4007978119363089962}
   - component: {fileID: 2085083994853187848}
-  - component: {fileID: 4841923865386453613}
+  - component: {fileID: -5727834718576228960}
   m_Layer: 0
   m_Name: S_Grass_3
   m_TagString: Untagged
@@ -84,22 +84,15 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!205 &4841923865386453613
-LODGroup:
+--- !u!114 &-5727834718576228960
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7656041618208239944}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.0697335, y: 0.5084226, z: -0.06835544}
-  m_Size: 1
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.047579758
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 2085083994853187848}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 751055f80a6ef694c8a00d45abf49c22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
