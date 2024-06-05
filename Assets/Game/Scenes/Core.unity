@@ -155,6 +155,7 @@ Transform:
   - {fileID: 436524885}
   - {fileID: 1222843759}
   - {fileID: 1444939305}
+  - {fileID: 1031717569}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &436524884
@@ -527,6 +528,51 @@ MonoBehaviour:
   mainMenu: {fileID: 1577727803}
   pauseMenu: {fileID: 1179840936}
   HUDMenu: {fileID: 1498221641}
+--- !u!1 &1031717568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1031717569}
+  - component: {fileID: 1031717570}
+  m_Layer: 0
+  m_Name: CanvasManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1031717569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031717568}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 146768978}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1031717570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031717568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac4f68068b95bc49a55d66104e66e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenCanvas: {fileID: 1122067127}
 --- !u!1 &1122067124
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,6 +784,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRef: {fileID: 0}
+  playerHealth: 100
+  playerStamina: 100
   staminaIncreaseRate: 15
   screenCanvas: {fileID: 1122067127}
 --- !u!1 &1444939304
