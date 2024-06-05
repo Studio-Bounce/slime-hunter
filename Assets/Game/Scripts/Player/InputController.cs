@@ -13,6 +13,7 @@ public class InputController : MonoBehaviour
     private PlayerController _playerController;
     private WeaponController _weaponController;
     private SpellController _spellController;
+    private Trail _trail;
 
     private PlayerInputActions _inputActions;
     private PlayerInputActions.PlayerActions _playerActions;
@@ -41,6 +42,7 @@ public class InputController : MonoBehaviour
         _playerController = GetComponent<PlayerController>();
         _weaponController = GetComponent<WeaponController>();
         _spellController = GetComponent<SpellController>();
+        _trail = GetComponent<Trail>();
         attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
         dashQueuedAction = e => QueueInput(_playerController.Dash, e);
 
@@ -100,8 +102,16 @@ public class InputController : MonoBehaviour
     // Temp, may have global UI controls?
     private void Pause(InputContext context)
     {
-        UIManager.Instance.SetPauseMenu(true);
-        Time.timeScale = 0;
+        if (UIManager.Instance.pauseMenu.IsVisible)
+        {
+            UIManager.Instance.SetPauseMenu(false);
+            Time.timeScale = 1;
+        }
+        else
+        {
+            UIManager.Instance.SetPauseMenu(true);
+            Time.timeScale = 0;
+        }
     }
 
     private void TrackMovement(InputContext context)

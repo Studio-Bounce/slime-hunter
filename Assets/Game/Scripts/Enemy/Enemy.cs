@@ -1,7 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
+using UnityEngine.Events;
+using UnityEngine.VFX;
 
 public enum EnemyEye
 {
@@ -23,8 +23,8 @@ public class Enemy : DamageTaker
     bool freezeEyeChange = false;
 
     [Header("Hit Feedback")]
-    [SerializeField] ParticleSystem hitParticles;
-    [SerializeField] float hitParticlesDuration = 1.0f;
+    [SerializeField] VisualEffect hitVFX;
+    [SerializeField] float hitVFXDuration = 1.0f;
     [SerializeField] SkinnedMeshRenderer slimeOuterBody;
     [SerializeField] float flashDuration = 0.2f;
     [SerializeField][ColorUsage(true, true)] Color flashColor;
@@ -69,11 +69,20 @@ public class Enemy : DamageTaker
 
     public override void Death()
     {
+        // Trigger events
+        onDeathEvent.Invoke();
+
         isAlive = false;
 
         // Hide visible meshes / UI
         slimeModel.SetActive(false);
         healthSlider.gameObject.SetActive(false);
+
+        // Ensure the enemy doesn't give damage after dying
+        if (TryGetComponent<SphereCollider>(out var sphereCollider))
+        {
+            sphereCollider.enabled = false;
+        }
 
         // Stop movement
         GetComponent<SlimeSteeringAgent>().enabled = false;
@@ -93,11 +102,11 @@ public class Enemy : DamageTaker
 
     IEnumerator ShowHitParticles()
     {
-        if (hitParticles != null)
+        if (hitVFX != null)
         {
-            hitParticles.Play();
-            yield return new WaitForSeconds(hitParticlesDuration);
-            hitParticles.Stop();
+            hitVFX.Play();
+            yield return new WaitForSeconds(hitVFXDuration);
+            hitVFX.Stop();
         }
     }
 

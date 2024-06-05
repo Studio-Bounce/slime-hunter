@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static WeaponController;
 
 public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 {
@@ -32,9 +30,22 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         // Change slime material (color)
         if (fsm.slimeOuterMesh.materials.Length > 0)
         {
-            Material[] mats = { fsm.attackMat };
+            Material redGlow = fsm.attackMat;
+            // Ensure the material has an emission property
+            if (redGlow.HasProperty("_EmissionColor"))
+            {
+                // Enable the emission keyword
+                redGlow.EnableKeyword("_EMISSION");
+
+                // Set the HDR emission color
+                Color finalEmissionColor = redGlow.color;
+                redGlow.SetColor("_EmissionColor", finalEmissionColor);
+            }
+            Material[] mats = { redGlow };
             fsm.slimeOuterMesh.materials = mats;
         }
+        fsm.StartCoroutine(IncreaseEmissionIntensity(10));
+
 
         // Make the weapon active
         fsm.weapon.ActivateWeapon();
@@ -44,6 +55,23 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 
         // Attack animation
         fsm.slimeAnimator.SetTrigger(AttackChargeAnimation);
+    }
+
+    IEnumerator IncreaseEmissionIntensity(int steps)
+    {
+        float intensity = 0.0f;
+        float intensityDelta = fsm.attackGlowIntensity / steps;
+        float deltaTime = fsm.attackEmissionTime / steps;
+        while (steps > 0)
+        {
+            --steps;
+            intensity += intensityDelta;
+
+            Color finalEmissionColor = fsm.attackMat.color * intensity;
+            fsm.slimeOuterMesh.materials[0].SetColor("_EmissionColor", finalEmissionColor);
+
+            yield return new WaitForSeconds(deltaTime);
+        }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -126,9 +154,22 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             fsm.slimeAgent.maxSpeed = fsm.attackSpeed;
             fsm.seekSteeringBehaviour.enabled = true;
             fsm.seekSteeringBehaviour.gameObject.SetActive(true);
-            fsm.seekSteeringBehaviour.target = fsm.playerTransform.position;
+            fsm.seekSteeringBehaviour.target = GetSlimeTargetConsideringBoundary();
             fsm.wanderSteeringBehaviour.enabled = false;
             fsm.wanderSteeringBehaviour.gameObject.SetActive(false);
         }
+    }
+
+    Vector3 GetSlimeTargetConsideringBoundary()
+    {
+        Vector3 lineDirection = fsm.playerTransform.position - fsm.transform.position;
+        Ray ray = new(fsm.transform.position, lineDirection);
+        int layerMask = 1 << 9;  // 9th layer is EnemyBoundary
+        if (Physics.Raycast(ray, out RaycastHit hit, lineDirection.magnitude, layerMask))
+        {
+            // Little offset, just so that the target is not directly on the wall
+            return (hit.point - 0.5f * lineDirection.normalized);
+        }
+        return fsm.playerTransform.position;
     }
 }

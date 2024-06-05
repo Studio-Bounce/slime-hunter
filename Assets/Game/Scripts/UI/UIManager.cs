@@ -9,7 +9,6 @@ public class UIManager : Singleton<UIManager>
     public Menu mainMenu;
     public Menu pauseMenu;
     public Menu HUDMenu;//riccio's test
- 
 
     public void SetPauseMenu(bool active)
     {
