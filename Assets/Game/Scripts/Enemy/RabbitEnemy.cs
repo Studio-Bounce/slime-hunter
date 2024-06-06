@@ -5,12 +5,12 @@ using UnityEngine;
 public class RabbitEnemy : Enemy
 {
     [Header("Slime Dodge")]
-    [SerializeField] float dodgeSpeed = 5.0f;
+    [SerializeField] float dodgeDistance = 5.0f;
     [SerializeField] float dodgeTime = 1.0f;
 
     RabbitSlime_FSM fsm;
     Transform playerTransform;
-    TrailRenderer trailRenderer;
+    Trail slimeTrail;
 
     // Used by FSM states
     [HideInInspector] public bool isDodging = false;
@@ -18,7 +18,9 @@ public class RabbitEnemy : Enemy
     protected override void Start()
     {
         base.Start();
-        trailRenderer = GetComponent<TrailRenderer>();
+
+        slimeTrail = GetComponent<Trail>();
+        slimeTrail.activeTime = dodgeTime;
         fsm = GetComponent<RabbitSlime_FSM>();
         playerTransform = GameObject.FindWithTag("Player")?.transform;
         UnityEngine.Assertions.Assert.IsNotNull(playerTransform, "GameObject with tag 'Player' not found!");
@@ -58,19 +60,19 @@ public class RabbitEnemy : Enemy
         dodgeDirection += playerToSlime;
         dodgeDirection.Normalize();
 
-        StartCoroutine(ApplyDodge(dodgeDirection * dodgeSpeed));
+        StartCoroutine(ApplyDodge(dodgeDirection * dodgeDistance));
     }
 
     IEnumerator ApplyDodge(Vector3 dodgeDirection)
     {
-        trailRenderer.enabled = true;
+        slimeTrail.InitiateTrail();
         Vector3 startPosition = transform.position;
         Vector3 endPosition = startPosition + dodgeDirection;
         float timeElapsed = 0.0f;
         while (timeElapsed < dodgeTime)
         {
             // Lerp knockback
-            float t = Easing.EaseOutQuart(timeElapsed / dodgeTime);
+            float t = Easing.EaseOutCubic(timeElapsed / dodgeTime);
             Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, t);
             if (characterController != null && characterController.enabled)
                 characterController.Move(newPosition - transform.position);
@@ -81,7 +83,6 @@ public class RabbitEnemy : Enemy
             yield return null;
         }
         isDodging = false;
-        trailRenderer.enabled = false;
     }
 
 }
