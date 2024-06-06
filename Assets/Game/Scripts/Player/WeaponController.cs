@@ -53,7 +53,7 @@ public class WeaponController : MonoBehaviour
             currentAttackState == AttackState.WIND_DOWN;
     }
 
-    public bool IsDodgeInterruptable()
+    public bool IsDashInterruptable()
     {
         return currentAttackState != AttackState.WIND_UP;
     }
@@ -184,6 +184,16 @@ public class WeaponController : MonoBehaviour
             {
                 _animator.CrossFade(baseStateHash, 0.0f);
             }
+            return true;
+        }
+        return false;
+    }
+
+    public bool DashInterruptAttack()
+    {
+        if (IsDashInterruptable())
+        {
+            weaponTrail.Deactivate();
             return true;
         }
         return false;

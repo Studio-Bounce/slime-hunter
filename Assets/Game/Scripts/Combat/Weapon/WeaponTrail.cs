@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -78,10 +79,24 @@ public class WeaponTrail : DamageDealer
 
     IEnumerator ActiveAttack(float duration)
     {
+        Debug.Log("Activate VFX");
+
         active = true;
         weaponVFX.Play();
-        yield return new WaitForSeconds(duration);
+        float _timer = 0.0f;
+        while (_timer < duration && active)
+        {
+            _timer += Time.deltaTime;
+            yield return null;
+        }
         active = false;
+    }
+
+    public void Deactivate()
+    {
+        active = false;
+        weaponVFX.Stop();
+        Debug.Log("Deactivate VFX");
     }
 
     private void UpdateArcMesh()

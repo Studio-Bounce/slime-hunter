@@ -37,7 +37,7 @@ Transform:
   m_GameObject: {fileID: 972491070015094324}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.68, y: 1.883, z: 119.83}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -90,8 +90,8 @@ CharacterController:
   m_Height: 1.5
   m_Radius: 0.25
   m_SlopeLimit: 45
-  m_StepOffset: 0.2
-  m_SkinWidth: 0.08
+  m_StepOffset: 0.6
+  m_SkinWidth: 0.1
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.75, z: 0}
 --- !u!95 &1901138044527206527
@@ -148,6 +148,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: EventSpawner, Assembly-CSharp
+        m_MethodName: Respawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2463496225978856163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +177,8 @@ MonoBehaviour:
   handPivotForward: {x: 0, y: 0, z: 1}
   availableWeapons:
   - {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
+  - {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
+  - {fileID: 11400000, guid: 99cedeb06ace0a541a4b2160b3e72dbe, type: 2}
   weaponTrail: {fileID: 8536796487223862311}
   baseAttackClip: {fileID: -203655887218126122, guid: 368a8195de7259c4b90d8c64c0c4c8e2,
     type: 3}
@@ -183,15 +197,16 @@ MonoBehaviour:
   animator: {fileID: 1901138044527206527}
   moveSpeed: 5
   slowDownMultiplierOnAttack: 0.1
-  dashDistance: 3
+  dashDistance: 2.5
   dashDuration: 0.2
   dashCooldown: 0.25
   dashStaminaUse: 25
   useGravity: 1
   isDashing: 0
   cameraTransform: {fileID: 0}
-  rotationDuration: 1
-  rotationIncrement: 90
+  rotationDuration: 0.7
+  rotationIncrement: 60
+  rotationRange: {x: -60, y: 60}
 --- !u!114 &6635435559847510778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,11 +263,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeTime: 0.2
-  meshfreshRate: 0.025
-  meshDestroyDelay: 0.15
+  meshfreshRate: 0.015
+  meshDestroyDelay: 0.1
   playerModel: {fileID: 5505832874139599896}
   mat: {fileID: 2100000, guid: c05ea85d9a0e4e24d8c08daea614544f, type: 2}
-  alphaReductionSteps: 10
+  alphaReductionSteps: 15
 --- !u!2083052967 &1494307534359424848
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -759,6 +774,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 8859387927635039925, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -37.44
       objectReference: {fileID: 0}
     - target: {fileID: 8953972740105248388, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
         type: 3}
