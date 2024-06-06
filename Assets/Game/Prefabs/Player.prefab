@@ -160,6 +160,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  slowDownOnHitMultiplier: 0.2
+  slowDownOnHitFrames: 5
 --- !u!114 &2463496225978856163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +267,11 @@ MonoBehaviour:
   activeTime: 0.2
   meshfreshRate: 0.015
   meshDestroyDelay: 0.1
-  playerModel: {fileID: 5505832874139599896}
+  model: {fileID: 0}
+  trailType: 0
+  ignoreLightingLayer:
+    serializedVersion: 2
+    m_Bits: 0
   mat: {fileID: 2100000, guid: c05ea85d9a0e4e24d8c08daea614544f, type: 2}
   alphaReductionSteps: 15
 --- !u!2083052967 &1494307534359424848
@@ -441,11 +447,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7f69d7d97456a41befd77507afab60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _framesToPause: 0
   arcAngle: 90
   arcRadius: 1
   meshResolution: 3
   liveReload: 0
-  framesToPause: 4
   weaponVFX: {fileID: 1560174599449287195, guid: feea3f1c554c3a6489e0bc69747341d6,
     type: 3}
 --- !u!1001 &4659479598651636041
@@ -799,12 +805,6 @@ PrefabInstance:
 --- !u!4 &5126069991169466018 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4659479598651636041}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5505832874139599896 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
     type: 3}
   m_PrefabInstance: {fileID: 4659479598651636041}
   m_PrefabAsset: {fileID: 0}
