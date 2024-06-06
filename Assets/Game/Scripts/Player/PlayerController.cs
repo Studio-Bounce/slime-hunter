@@ -44,10 +44,6 @@ public class PlayerController : MonoBehaviour
 
     private float lastDashTime = 0.0f;
 
-    private void Awake()
-    {
-    }
-
     void Start()
     {
         characterController = GetComponent<CharacterController>();
