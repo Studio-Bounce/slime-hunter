@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
         if (!isDashing &&
             !isJumping &&
             (Time.time > lastDashTime + dashCooldown) &&
-            weaponController.IsInterruptable() &&
+            weaponController.IsDodgeInterruptable() &&
             (GameManager.Instance.PlayerStamina >= dashStaminaUse))
         {
             weaponController.ResetCombo();
