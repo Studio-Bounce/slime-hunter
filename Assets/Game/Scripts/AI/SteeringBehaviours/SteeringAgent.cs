@@ -14,6 +14,8 @@ public class SteeringAgent : MonoBehaviour
     [Header("Agent Attributes")]
     public float mass = 1.0f;
     public float maxSpeed = 1.0f;
+    [Tooltip("Always set agent's speed to the max speed value")]
+    public bool alwaysUseMaxSpeed = false;
     public float maxForce = 10.0f;
 
     public Vector3 velocity = Vector3.zero;
@@ -72,7 +74,14 @@ public class SteeringAgent : MonoBehaviour
         {
             Vector3 acceleration = steeringForce / mass;
             velocity += (acceleration * Time.deltaTime);
-            velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+            if (alwaysUseMaxSpeed)
+            {
+                velocity = maxSpeed * velocity.normalized;
+            }
+            else
+            {
+                velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+            }
 
             // Movement
             if (!useRootMotion)

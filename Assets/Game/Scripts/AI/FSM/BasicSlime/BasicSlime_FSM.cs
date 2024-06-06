@@ -13,6 +13,7 @@ public class BasicSlime_FSM : FSM
     public WanderSteeringBehaviour wanderSteeringBehaviour;
 
     [HideInInspector] public SteeringAgent slimeAgent;
+    [HideInInspector] public CharacterController characterController;
     [HideInInspector] public Transform playerTransform;
 
     public SkinnedMeshRenderer slimeOuterMesh;
@@ -42,6 +43,7 @@ public class BasicSlime_FSM : FSM
     protected virtual void Start()
     {
         slimeAgent = GetComponent<SteeringAgent>();
+        characterController = GetComponent<CharacterController>();
         weapon = GetComponent<EnemyWeapon>();
         slimeEnemy = GetComponent<Enemy>();
         playerTransform = GameObject.FindWithTag("Player")?.transform;

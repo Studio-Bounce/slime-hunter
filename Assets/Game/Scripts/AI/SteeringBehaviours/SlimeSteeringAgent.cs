@@ -9,6 +9,13 @@ public class SlimeSteeringAgent : SteeringAgent
 
     private readonly int IsMoving = Animator.StringToHash("isMoving");
 
+    protected override void Start()
+    {
+        base.Start();
+
+        alwaysUseMaxSpeed = true;
+    }
+
     protected override void Update()
     {
         base.Update();
