@@ -24,9 +24,9 @@ public class CameraShake : MonoBehaviour
         if (shakeTimer > 0) 
         {
             shakeTimer -= Time.deltaTime;
-            if (shakeTimer < =0f ) {
-            //Time Over!
-            }
+            //if (shakeTimer < =0f ) {
+            ////Time Over!
+            //}
         }
     }
 }
