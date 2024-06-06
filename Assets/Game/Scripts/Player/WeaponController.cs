@@ -53,6 +53,11 @@ public class WeaponController : MonoBehaviour
             currentAttackState == AttackState.WIND_DOWN;
     }
 
+    public bool IsDodgeInterruptable()
+    {
+        return currentAttackState != AttackState.WIND_UP;
+    }
+
     public WeaponSO CurrentWeapon
     {
         get { return availableWeapons[_equippedWeaponIndex]; }

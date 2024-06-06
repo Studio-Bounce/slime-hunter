@@ -19,7 +19,10 @@ public class GrassPosition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 trackerPos = tracker.GetComponent<Transform>().position;
-        grassMat.SetVector("_trackerPosition", trackerPos);
+        if (tracker != null)
+        {
+            Vector3 trackerPos = tracker.GetComponent<Transform>().position;
+            grassMat.SetVector("_trackerPosition", trackerPos);
+        }
     }
 }
