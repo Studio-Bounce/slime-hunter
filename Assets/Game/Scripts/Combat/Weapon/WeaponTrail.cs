@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -14,7 +15,6 @@ public class WeaponTrail : DamageDealer
     private MeshCollider _collider;
     private int _vertexCount;
 
-    public uint framesToPause = 0;
     private readonly string flipVFXParameter = "Flip";
     private WeaponSO currentWeaponSO;
 
@@ -80,8 +80,19 @@ public class WeaponTrail : DamageDealer
     {
         active = true;
         weaponVFX.Play();
-        yield return new WaitForSeconds(duration);
+        float _timer = 0.0f;
+        while (_timer < duration && active)
+        {
+            _timer += Time.deltaTime;
+            yield return null;
+        }
         active = false;
+    }
+
+    public void Deactivate()
+    {
+        active = false;
+        weaponVFX.Stop();
     }
 
     private void UpdateArcMesh()

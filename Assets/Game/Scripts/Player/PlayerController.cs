@@ -32,7 +32,9 @@ public class PlayerController : MonoBehaviour
     public Transform cameraTransform;
     public float rotationDuration = 0.3f;
     public float rotationIncrement = 45f;
-    private bool isRotating = false;
+    public Vector2 rotationRange = Vector2.zero;
+    private float _currentRotation = 0;
+    private bool _isRotating = false;
 
     // Used for jump, dash, and gravity
     CharacterController characterController;
@@ -41,10 +43,6 @@ public class PlayerController : MonoBehaviour
     Trail trail;
 
     private float lastDashTime = 0.0f;
-
-    private void Awake()
-    {
-    }
 
     void Start()
     {
@@ -70,16 +68,18 @@ public class PlayerController : MonoBehaviour
 
     public void RotateCamera(InputAction.CallbackContext context)
     {
-        if (isRotating) return;
+        if (_isRotating) return;
 
         float rotateDir = context.ReadValue<float>();
 
-        if (rotateDir < 0)
+        if (rotateDir < 0 && _currentRotation > rotationRange.x)
         {
+            _currentRotation -= rotationIncrement;
             StartCoroutine(PerformCameraRotate(rotationIncrement));
         }
-        else if (rotateDir > 0)
+        else if (rotateDir > 0 && _currentRotation < rotationRange.y)
         {
+            _currentRotation += rotationIncrement;
             StartCoroutine(PerformCameraRotate(-rotationIncrement));
         }
 
@@ -122,13 +122,16 @@ public class PlayerController : MonoBehaviour
         if (!isDashing &&
             !isJumping &&
             (Time.time > lastDashTime + dashCooldown) &&
-            weaponController.IsDodgeInterruptable() &&
+            weaponController.IsDashInterruptable() &&
             (GameManager.Instance.PlayerStamina >= dashStaminaUse))
         {
             weaponController.ResetCombo();
+            weaponController.DashInterruptAttack();
             Vector3 dashDirection = Utils.DirectionToCameraForward(transform.position, inputController.movement);
             dashDirection = dashDirection == Vector3.zero ? transform.forward : dashDirection;
 
+            // Rotate player to dash
+            transform.forward = dashDirection;
             isDashing = true;
             trail.InitiateTrail();
             StartCoroutine(PerformDash(dashDirection * dashDistance));
@@ -236,7 +239,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PerformCameraRotate(float angle)
     {
-        isRotating = true;
+        _isRotating = true;
         float startTime = Time.time;
         Quaternion startRotation = cameraTransform.localRotation;
         Quaternion targetRotation = Quaternion.Euler(startRotation.eulerAngles.x, startRotation.eulerAngles.y + angle, startRotation.eulerAngles.z);
@@ -251,7 +254,7 @@ public class PlayerController : MonoBehaviour
         }
         cameraTransform.localRotation = targetRotation;
 
-        isRotating = false;
+        _isRotating = false;
     }
 
 #if UNITY_EDITOR

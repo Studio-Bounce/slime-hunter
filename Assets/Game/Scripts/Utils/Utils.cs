@@ -31,6 +31,7 @@ public static class Utils
     {
         return a + (b - a) * t;
     }
+
     public static Vector3 UnclampedLerp(Vector3 a, Vector3 b, float t)
     {
         return new Vector3(
@@ -38,5 +39,24 @@ public static class Utils
             UnclampedLerp(a.y, b.y, t),
             UnclampedLerp(a.z, b.z, t)
         );
+    }
+
+    public static void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        if (obj == null)
+        {
+            return;
+        }
+
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            if (child == null || !child.gameObject.activeInHierarchy)
+            {
+                continue;
+            }
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
     }
 }

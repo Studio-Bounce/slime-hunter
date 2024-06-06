@@ -20,6 +20,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     [Tooltip("Damage delay ensures that multiple damages do not get registered in a short interval")]
     public float damageDelay = 0.5f;
     public float knockbackTime = 0.25f;
+    public uint framesToPause = 4;
 
     protected bool isInKnockback = false;
     // Slime invincibility can depend on Slime's state (in FSM). Hence, its public
@@ -55,6 +56,8 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
         {
             return;
         }
+
+        StartCoroutine(PauseForFrames(framesToPause));
 
         if (!isInvincible)
         {
@@ -102,5 +105,15 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
             yield return null;
         }
         isInKnockback = false;
+    }
+
+    IEnumerator PauseForFrames(uint frames)
+    {
+        Time.timeScale = 0;
+        for (uint i = 0; i < frames; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        Time.timeScale = 1;
     }
 }
