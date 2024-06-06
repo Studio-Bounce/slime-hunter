@@ -10511,6 +10511,7 @@ MonoBehaviour:
   summingMethod: 0
   mass: 1
   maxSpeed: 2
+  alwaysUseMaxSpeed: 0
   maxForce: 10
   velocity: {x: 0, y: 0, z: 0}
   angularDampeningTime: 4
@@ -10536,6 +10537,7 @@ MonoBehaviour:
   seekSteeringBehaviour: {fileID: 6649224708828666492}
   wanderSteeringBehaviour: {fileID: 4521368074098091959}
   slimeAgent: {fileID: 0}
+  characterController: {fileID: 0}
   playerTransform: {fileID: 0}
   slimeOuterMesh: {fileID: 3539770233314810749}
   weapon: {fileID: 0}
@@ -10548,7 +10550,7 @@ MonoBehaviour:
   seekDistance: 10
   wanderSpeed: 4
   chaseSpeed: 10
-  attackSpeed: 20
+  attackSpeed: 50
   attackRadius: 4
   attackEmissionTime: 1
   attackProximity: 1
