@@ -35703,6 +35703,11 @@ PrefabInstance:
       propertyPath: onDeathEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1192717474}
+    - target: {fileID: 8536796487223862311, guid: 7c19e2e033650b243b9b77976b3424a8,
+        type: 3}
+      propertyPath: framesToPause
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

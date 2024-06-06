@@ -15,7 +15,6 @@ public class WeaponTrail : DamageDealer
     private MeshCollider _collider;
     private int _vertexCount;
 
-    public uint framesToPause = 0;
     private readonly string flipVFXParameter = "Flip";
     private WeaponSO currentWeaponSO;
 
@@ -79,8 +78,6 @@ public class WeaponTrail : DamageDealer
 
     IEnumerator ActiveAttack(float duration)
     {
-        Debug.Log("Activate VFX");
-
         active = true;
         weaponVFX.Play();
         float _timer = 0.0f;
@@ -96,7 +93,6 @@ public class WeaponTrail : DamageDealer
     {
         active = false;
         weaponVFX.Stop();
-        Debug.Log("Deactivate VFX");
     }
 
     private void UpdateArcMesh()

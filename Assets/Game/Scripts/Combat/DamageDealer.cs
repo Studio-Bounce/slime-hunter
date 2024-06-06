@@ -13,7 +13,7 @@ public class DamageDealer : MonoBehaviour
     protected bool active = false;
     // attackDetected can be used by child classes to do something on attack
     protected bool attackDetected = false;
-    protected uint _framesToPause = 0;
+    public uint _framesToPause = 0;
 
     protected virtual void Start()
     {
@@ -37,18 +37,6 @@ public class DamageDealer : MonoBehaviour
             ITakeDamage damageReceiver = other.gameObject.GetComponent<ITakeDamage>();
             damageReceiver?.TakeDamage(damage);
             attackDetected = true;
-            StartCoroutine(PauseForFrames(_framesToPause));
         }
     }
-
-    IEnumerator PauseForFrames(uint frames)
-    {
-        Time.timeScale = 0;
-        for (uint i = 0; i < frames; i++)
-        {
-            yield return null; // Wait for the next frame
-        }
-        Time.timeScale = 1;
-    }
-
 }
