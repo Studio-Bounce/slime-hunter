@@ -1,15 +1,12 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Cinemachine;
 
-public class CameraShake : MonoBehaviour
+public class CameraManager : Singleton<CameraManager>
 {
-    private CinemachineVirtualCamera cinemachineVirtualCamera;
-    private void Awake()
-    {
-        cinemachineVirtualCamera = GetComponent<CinemachineVirtualCamera>();
-    }
+    public CinemachineVirtualCamera activeCineCamera;
+
     public void ShakeCamera(float intensity, float time)
     {
         StartCoroutine(StartShake(intensity, time));
@@ -17,7 +14,7 @@ public class CameraShake : MonoBehaviour
 
     IEnumerator StartShake(float intensity, float time)
     {
-        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin = activeCineCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = intensity;
         yield return new WaitForSeconds(time);
         cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
