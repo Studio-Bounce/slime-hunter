@@ -53,6 +53,11 @@ public class WeaponController : MonoBehaviour
             currentAttackState == AttackState.WIND_DOWN;
     }
 
+    public bool IsDashInterruptable()
+    {
+        return currentAttackState != AttackState.WIND_UP;
+    }
+
     public WeaponSO CurrentWeapon
     {
         get { return availableWeapons[_equippedWeaponIndex]; }
@@ -130,6 +135,7 @@ public class WeaponController : MonoBehaviour
     public bool Attack(InputAction.CallbackContext context)
     {
         if (!InterruptAttack()) return false;
+
         // Get vector from player to mouse click
         Vector2 clickPosition = Mouse.current.position.ReadValue();
         Vector2 currentScreenPos = Camera.main.WorldToScreenPoint(transform.position);
@@ -179,6 +185,16 @@ public class WeaponController : MonoBehaviour
             {
                 _animator.CrossFade(baseStateHash, 0.0f);
             }
+            return true;
+        }
+        return false;
+    }
+
+    public bool DashInterruptAttack()
+    {
+        if (IsDashInterruptable())
+        {
+            weaponTrail.Deactivate();
             return true;
         }
         return false;

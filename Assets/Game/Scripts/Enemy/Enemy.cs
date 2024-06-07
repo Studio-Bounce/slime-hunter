@@ -34,13 +34,18 @@ public class Enemy : DamageTaker
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] float deathDelay = 3.5f;
 
+    BasicSlime_FSM fsm;
+
     protected override void Start()
     {
         base.Start();
+
         normalEye.enabled = true;
         attackEye.enabled = false;
         deathEye.enabled = false;
         isAlive = true;
+
+        fsm = GetComponent<BasicSlime_FSM>();
     }
 
     // Used in child classes to call the original TakeDamage method
@@ -73,6 +78,7 @@ public class Enemy : DamageTaker
         onDeathEvent.Invoke();
 
         isAlive = false;
+        fsm.ChangeState(fsm.DeadStateName);
 
         // Hide visible meshes / UI
         slimeModel.SetActive(false);

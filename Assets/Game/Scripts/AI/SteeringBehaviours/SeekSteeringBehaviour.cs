@@ -41,7 +41,7 @@ public class SeekSteeringBehaviour : SteeringBehaviourBase
     protected Vector3 CalculateSeekForce()
     {
         desiredVelocity = (target - transform.position).normalized;
-        desiredVelocity = desiredVelocity * steeringAgent.maxSpeed;
+        desiredVelocity *= steeringAgent.maxSpeed;
         return (desiredVelocity - steeringAgent.velocity);
     }
 

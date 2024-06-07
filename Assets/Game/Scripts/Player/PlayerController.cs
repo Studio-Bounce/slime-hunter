@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     //public float rotationSpeed = 5f;
     public float moveSpeed = 5f;
+    public float sprintMultiplier = 1.5f;
     public float slowDownMultiplierOnAttack = 0.3f;
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
@@ -25,14 +26,17 @@ public class PlayerController : MonoBehaviour
 
     public bool useGravity = true;
 
-    public bool isDashing = false;  // public to allow access to Trail
-    private bool isJumping = false;
+    public bool _isDashing = false;  // public to allow access to Trail
+    private bool _isJumping = false;
+    private bool _isSprint = false;
 
     [Header("Camera Handling")]
     public Transform cameraTransform;
     public float rotationDuration = 0.3f;
     public float rotationIncrement = 45f;
-    private bool isRotating = false;
+    public Vector2 rotationRange = Vector2.zero;
+    private float _currentRotation = 0;
+    private bool _isRotating = false;
 
     // Used for jump, dash, and gravity
     CharacterController characterController;
@@ -41,10 +45,6 @@ public class PlayerController : MonoBehaviour
     Trail trail;
 
     private float lastDashTime = 0.0f;
-
-    private void Awake()
-    {
-    }
 
     void Start()
     {
@@ -70,16 +70,18 @@ public class PlayerController : MonoBehaviour
 
     public void RotateCamera(InputAction.CallbackContext context)
     {
-        if (isRotating) return;
+        if (_isRotating) return;
 
         float rotateDir = context.ReadValue<float>();
 
-        if (rotateDir < 0)
+        if (rotateDir < 0 && _currentRotation > rotationRange.x)
         {
+            _currentRotation -= rotationIncrement;
             StartCoroutine(PerformCameraRotate(rotationIncrement));
         }
-        else if (rotateDir > 0)
+        else if (rotateDir > 0 && _currentRotation < rotationRange.y)
         {
+            _currentRotation += rotationIncrement;
             StartCoroutine(PerformCameraRotate(-rotationIncrement));
         }
 
@@ -88,7 +90,7 @@ public class PlayerController : MonoBehaviour
     // -------------------- Movement Mechanism --------------------
     public void MovePlayer()
     {
-        if (isDashing || isJumping) return;
+        if (_isDashing || _isJumping) return;
 
         Vector2 moveInput = inputController.movement;
         // Set move animation based on input
@@ -119,17 +121,20 @@ public class PlayerController : MonoBehaviour
     public bool Dash(InputAction.CallbackContext context)
     {
         // Dashing while jumping is not allowed
-        if (!isDashing &&
-            !isJumping &&
+        if (!_isDashing &&
+            !_isJumping &&
             (Time.time > lastDashTime + dashCooldown) &&
-            weaponController.IsInterruptable() &&
+            weaponController.IsDashInterruptable() &&
             (GameManager.Instance.PlayerStamina >= dashStaminaUse))
         {
             weaponController.ResetCombo();
+            weaponController.DashInterruptAttack();
             Vector3 dashDirection = Utils.DirectionToCameraForward(transform.position, inputController.movement);
             dashDirection = dashDirection == Vector3.zero ? transform.forward : dashDirection;
 
-            isDashing = true;
+            // Rotate player to dash
+            transform.forward = dashDirection;
+            _isDashing = true;
             trail.InitiateTrail();
             StartCoroutine(PerformDash(dashDirection * dashDistance));
 
@@ -140,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PerformDash(Vector3 dashVector)
     {
-        animator.SetBool(dashBoolash, isDashing);
+        animator.SetBool(dashBoolash, _isDashing);
 
         // Dash follows the curve of y^3 = x from 0 to 1
         // Provides a quick action in beginning which then slows
@@ -179,8 +184,8 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         
-        isDashing = false;
-        animator.SetBool(dashBoolash, isDashing);
+        _isDashing = false;
+        animator.SetBool(dashBoolash, _isDashing);
         lastDashTime = Time.time;
     }
 
@@ -199,7 +204,7 @@ public class PlayerController : MonoBehaviour
     public void Jump(float upForce, float jumpDuration, Vector3 target)
     {
         // Jumping while dashing is not allowed
-        if (!isJumping && !isDashing)
+        if (!_isJumping && !_isDashing)
         {
             // Orient towards target
             transform.LookAt(target);
@@ -210,7 +215,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetTrigger(jumpTriggerHash);
 
-        isJumping = true;
+        _isJumping = true;
         useGravity = false;
         float timeElapsed = 0f;
         Vector3 initialPosition = transform.position;
@@ -231,12 +236,12 @@ public class PlayerController : MonoBehaviour
         }
 
         useGravity = true;
-        isJumping = false;
+        _isJumping = false;
     }
 
     IEnumerator PerformCameraRotate(float angle)
     {
-        isRotating = true;
+        _isRotating = true;
         float startTime = Time.time;
         Quaternion startRotation = cameraTransform.localRotation;
         Quaternion targetRotation = Quaternion.Euler(startRotation.eulerAngles.x, startRotation.eulerAngles.y + angle, startRotation.eulerAngles.z);
@@ -251,7 +256,7 @@ public class PlayerController : MonoBehaviour
         }
         cameraTransform.localRotation = targetRotation;
 
-        isRotating = false;
+        _isRotating = false;
     }
 
 #if UNITY_EDITOR

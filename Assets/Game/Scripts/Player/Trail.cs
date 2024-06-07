@@ -7,12 +7,19 @@ using UnityEngine.SceneManagement;
 
 public class Trail : MonoBehaviour
 {
+    enum TrailType
+    {
+        PLAYER,
+        SLIME
+    };
     public float activeTime = 2f;
 
     [Header("Mesh")]
     public float meshfreshRate = 0.1f;
     public float meshDestroyDelay = 3f;
-    public GameObject playerModel;
+    public GameObject model;
+    [SerializeField] TrailType trailType = TrailType.PLAYER;
+    [SerializeField] LayerMask ignoreLightingLayer;
 
     [Header("Shader")]
     public Material mat;
@@ -26,7 +33,10 @@ public class Trail : MonoBehaviour
 
     private void Start()
     {
-        playerController = GetComponent<PlayerController>();
+        if (trailType == TrailType.PLAYER)
+        {
+            playerController = GetComponent<PlayerController>();
+        }
     }
 
     public bool InitiateTrail()
@@ -43,7 +53,7 @@ public class Trail : MonoBehaviour
 
     IEnumerator ActivateTrail (float timeActive)
     {
-        while (timeActive > 0 && playerController.isDashing) 
+        while (timeActive > 0 && (trailType == TrailType.SLIME || playerController._isDashing)) 
         {
             timeActive -= meshfreshRate;
 
@@ -54,20 +64,44 @@ public class Trail : MonoBehaviour
             }
             else
             {
-                GameObject gObj = Instantiate(playerModel, transform.position, transform.rotation);
+                GameObject gObj = Instantiate(model, transform.position, transform.rotation);
                 SceneManager.MoveGameObjectToScene(gObj, gameObject.scene);
+                gObj.transform.localScale = gameObject.transform.localScale;
+                Utils.SetLayerRecursively(gObj, 10);
 
                 SkinnedMeshRenderer[] skinnedMeshRenderers = gObj.GetComponentsInChildren<SkinnedMeshRenderer>();
 
                 if (skinnedMeshRenderers.Length > 0)
                 {
-                    SkinnedMeshRenderer skinnedMeshRenderer = skinnedMeshRenderers[skinnedMeshRenderers.Length - 1];
-
                     // Apply trail material
-                    Material[] trailMats = { mat, mat, mat, mat, mat };
-                    skinnedMeshRenderer.materials = trailMats;
+                    if (trailType == TrailType.PLAYER)
+                    {
+                        SkinnedMeshRenderer skinnedMeshRenderer = skinnedMeshRenderers[skinnedMeshRenderers.Length - 1];
 
-                    StartCoroutine(AnimateMaterialFloat(skinnedMeshRenderer));
+                        Material[] trailMats = { mat, mat, mat, mat, mat };
+                        skinnedMeshRenderer.materials = trailMats;
+
+                        StartCoroutine(AnimateMaterialFloat(skinnedMeshRenderer));
+                    }
+                    else if (trailType == TrailType.SLIME)
+                    {
+                        // Disable the animator on model
+                        if (gObj.TryGetComponent<Animator>(out Animator modelAnimator))
+                        {
+                            modelAnimator.enabled = false;
+                        }
+
+                        Material[] trailMats = { mat };
+                        // Apply trail material to outer body
+                        skinnedMeshRenderers[0].materials = trailMats;
+                        StartCoroutine(AnimateMaterialFloat(skinnedMeshRenderers[0]));
+                        // Disable any other mesh renderers
+                        for (int i = 1; i < skinnedMeshRenderers.Length; i++)
+                        {
+                            skinnedMeshRenderers[i].gameObject.SetActive(false);
+                        }
+                    }
+
                 }
 
                 Destroy(gObj, meshDestroyDelay + 0.01f);

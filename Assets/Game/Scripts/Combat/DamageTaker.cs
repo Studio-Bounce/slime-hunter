@@ -58,6 +58,8 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
         if (!isInvincible)
         {
+            CameraManager.Instance.ShakeCamera(0.2f, 0.2f);
+
             health -= (int)damage.value;
 
             if (damage.effect != null)
@@ -102,5 +104,15 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
             yield return null;
         }
         isInKnockback = false;
+    }
+
+    IEnumerator PauseForFrames(uint frames)
+    {
+        Time.timeScale = 0;
+        for (uint i = 0; i < frames; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        Time.timeScale = 1;
     }
 }

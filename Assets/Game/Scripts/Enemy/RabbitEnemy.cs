@@ -5,12 +5,12 @@ using UnityEngine;
 public class RabbitEnemy : Enemy
 {
     [Header("Slime Dodge")]
-    [SerializeField] float dodgeSpeed = 5.0f;
+    [SerializeField] float dodgeDistance = 5.0f;
     [SerializeField] float dodgeTime = 1.0f;
 
-    RabbitSlime_FSM fsm;
+    RabbitSlime_FSM rfsm;
     Transform playerTransform;
-    TrailRenderer trailRenderer;
+    Trail slimeTrail;
 
     // Used by FSM states
     [HideInInspector] public bool isDodging = false;
@@ -18,8 +18,10 @@ public class RabbitEnemy : Enemy
     protected override void Start()
     {
         base.Start();
-        trailRenderer = GetComponent<TrailRenderer>();
-        fsm = GetComponent<RabbitSlime_FSM>();
+
+        slimeTrail = GetComponent<Trail>();
+        slimeTrail.activeTime = dodgeTime;
+        rfsm = GetComponent<RabbitSlime_FSM>();
         playerTransform = GameObject.FindWithTag("Player")?.transform;
         UnityEngine.Assertions.Assert.IsNotNull(playerTransform, "GameObject with tag 'Player' not found!");
     }
@@ -28,11 +30,14 @@ public class RabbitEnemy : Enemy
     {
         base.BaseEnemyTakeDamage(damage);
 
-        if (isInvincible && isAlive)
+        // Rabbit slime can not be stopped when its actively attacking
+        bool isAttackStoppable = (rfsm.GetAttackState() == BasicSlime_AttackPlayer.AttackState.CHARGE_UP ||
+                                  rfsm.GetAttackState() == BasicSlime_AttackPlayer.AttackState.NONE);
+        if (isInvincible && isAlive && isAttackStoppable)
         {
             // Dodge
             // HACK: FSM state change happening outside of actual FSM (fixme)
-            fsm.ChangeState(fsm.DodgeStateName);
+            rfsm.ChangeState(rfsm.DodgeStateName);
         }
     }
 
@@ -58,19 +63,19 @@ public class RabbitEnemy : Enemy
         dodgeDirection += playerToSlime;
         dodgeDirection.Normalize();
 
-        StartCoroutine(ApplyDodge(dodgeDirection * dodgeSpeed));
+        StartCoroutine(ApplyDodge(dodgeDirection * dodgeDistance));
     }
 
     IEnumerator ApplyDodge(Vector3 dodgeDirection)
     {
-        trailRenderer.enabled = true;
+        slimeTrail.InitiateTrail();
         Vector3 startPosition = transform.position;
         Vector3 endPosition = startPosition + dodgeDirection;
         float timeElapsed = 0.0f;
         while (timeElapsed < dodgeTime)
         {
             // Lerp knockback
-            float t = Easing.EaseOutQuart(timeElapsed / dodgeTime);
+            float t = Easing.EaseOutCubic(timeElapsed / dodgeTime);
             Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, t);
             if (characterController != null && characterController.enabled)
                 characterController.Move(newPosition - transform.position);
@@ -81,7 +86,6 @@ public class RabbitEnemy : Enemy
             yield return null;
         }
         isDodging = false;
-        trailRenderer.enabled = false;
     }
 
 }

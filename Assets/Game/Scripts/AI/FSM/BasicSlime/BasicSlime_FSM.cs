@@ -8,11 +8,15 @@ public class BasicSlime_FSM : FSM
     public readonly int WanderAroundStateName = Animator.StringToHash("WanderAround");
     public readonly int AttackPlayerStateName = Animator.StringToHash("AttackPlayer");
     public readonly int CooldownStateName = Animator.StringToHash("Cooldown");
+    public readonly int DeadStateName = Animator.StringToHash("Dead");
+
+    public BasicSlime_AttackPlayer.AttackState currentAttackState = BasicSlime_AttackPlayer.AttackState.NONE;
 
     public SeekSteeringBehaviour seekSteeringBehaviour;
     public WanderSteeringBehaviour wanderSteeringBehaviour;
 
     [HideInInspector] public SteeringAgent slimeAgent;
+    [HideInInspector] public CharacterController characterController;
     [HideInInspector] public Transform playerTransform;
 
     public SkinnedMeshRenderer slimeOuterMesh;
@@ -42,6 +46,7 @@ public class BasicSlime_FSM : FSM
     protected virtual void Start()
     {
         slimeAgent = GetComponent<SteeringAgent>();
+        characterController = GetComponent<CharacterController>();
         weapon = GetComponent<EnemyWeapon>();
         slimeEnemy = GetComponent<Enemy>();
         playerTransform = GameObject.FindWithTag("Player")?.transform;
@@ -52,5 +57,10 @@ public class BasicSlime_FSM : FSM
     {
         DebugExtension.DrawCircle(transform.position, Color.cyan, seekDistance);
         DebugExtension.DrawCircle(transform.position, Color.red, attackRadius);
+    }
+
+    public BasicSlime_AttackPlayer.AttackState GetAttackState()
+    {
+        return currentAttackState;
     }
 }

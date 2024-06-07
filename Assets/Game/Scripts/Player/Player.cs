@@ -5,6 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider))]
 public class Player : DamageTaker
 {
+    public float slowDownOnHitMultiplier = 0.2f;
+    public int slowDownOnHitFrames = 5;
+
     private void Awake()
     {
         GameManager.Instance.playerRef = this;
@@ -29,10 +32,21 @@ public class Player : DamageTaker
         // For player, we want to change GameManager.PlayerHealth
         base.TakeDamage(damage);
 
+        StartCoroutine(SlowDownOnHit());
         GameManager.Instance.PlayerHealth -= (int)damage.value;
         if (GameManager.Instance.PlayerHealth <= 0)
         {
             Death();
         }
+    }
+
+    IEnumerator SlowDownOnHit()
+    {
+        Time.timeScale = slowDownOnHitMultiplier;
+        for (int i = 0; i < slowDownOnHitFrames; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        Time.timeScale = 1;
     }
 }

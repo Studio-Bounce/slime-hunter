@@ -11,21 +11,29 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
     readonly int MoveState = Animator.StringToHash("HeadButt_Move");
     readonly int HeadAttackState = Animator.StringToHash("HeadButt_Attack");
 
-    enum AttackState
+    public enum AttackState
     {
         CHARGE_UP,
         DASH,
-        ATTACK
+        ATTACK,
+        NONE
     };
-    AttackState attackState;
 
     protected int nextStateName = 0;
+    Vector3 target = Vector3.zero;
+    bool waitForAnimation = false;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         nextStateName = fsm.CooldownStateName;
-        attackState = AttackState.CHARGE_UP;
-        UpdateSteeringBehaviours();
+        fsm.currentAttackState = AttackState.CHARGE_UP;
+        // No movement
+        fsm.seekSteeringBehaviour.enabled = false;
+        fsm.seekSteeringBehaviour.gameObject.SetActive(false);
+        fsm.wanderSteeringBehaviour.enabled = false;
+        fsm.wanderSteeringBehaviour.gameObject.SetActive(false);
+        fsm.slimeAgent.reachedGoal = true;
+        fsm.slimeAgent.velocity = Vector3.zero;
 
         // Change slime material (color)
         if (fsm.slimeOuterMesh.materials.Length > 0)
@@ -46,7 +54,6 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         }
         fsm.StartCoroutine(IncreaseEmissionIntensity(10));
 
-
         // Make the weapon active
         fsm.weapon.ActivateWeapon();
 
@@ -55,6 +62,11 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 
         // Attack animation
         fsm.slimeAnimator.SetTrigger(AttackChargeAnimation);
+        waitForAnimation = true;
+
+        // Set & look at target
+        target = GetSlimeTargetConsideringBoundary();
+        fsm.transform.LookAt(target);
     }
 
     IEnumerator IncreaseEmissionIntensity(int steps)
@@ -82,32 +94,39 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             fsm.slimeEnemy.SetEye(EnemyEye.ATTACK);
         }
 
-        switch (attackState)
+        // Wait for an attack animation to start (it can take a couple of frames)
+        int animationHash = fsm.slimeAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash;
+        while (waitForAnimation && animationHash != ChargeUpState && animationHash != MoveState && animationHash != HeadAttackState)
+            return;
+        waitForAnimation = false;
+
+        switch (fsm.currentAttackState)
         {
             case AttackState.CHARGE_UP:
                 // Check if charge up has been finished
-                if (fsm.slimeAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash != ChargeUpState)
+                if (animationHash != ChargeUpState)
                 {
-                    attackState = AttackState.DASH;
-                    UpdateSteeringBehaviours();
+                    fsm.currentAttackState = AttackState.DASH;
                 }
                 break;
 
             case AttackState.DASH:
+                // Charge towards target (player)
+                Vector3 direction = (target - fsm.transform.position).normalized;
+                fsm.characterController.Move(fsm.attackSpeed * Time.deltaTime * direction);
+
                 // If close to goal, do a headbutt
-                if (Vector3.Distance(fsm.slimeAgent.transform.position,
-                                     fsm.seekSteeringBehaviour.target)  < fsm.attackProximity)
+                if (Vector3.Distance(fsm.transform.position, target)  < fsm.attackProximity)
                 {
-                    attackState = AttackState.ATTACK;
+                    fsm.currentAttackState = AttackState.ATTACK;
                     fsm.slimeAnimator.SetTrigger(AttackReachedAnimation);
                 }
                 break;
 
             case AttackState.ATTACK:
                 // Once attack is complete, go to rest state
-                int animationHash = fsm.slimeAnimator.GetCurrentAnimatorStateInfo(0).shortNameHash;
                 bool animationFinished = ((animationHash != ChargeUpState) && (animationHash != MoveState) && (animationHash != HeadAttackState));
-                if (animationFinished && (fsm.slimeAgent.reachedGoal || fsm.weapon.DidAttackLand()))
+                if (animationFinished || fsm.weapon.DidAttackLand())
                 {
                     fsm.ChangeState(nextStateName);
                 }
@@ -133,31 +152,6 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 
         // Ensure the attack animation sequence has been completed
         fsm.slimeAnimator.SetTrigger(ToIdleAnimation);
-    }
-
-    void UpdateSteeringBehaviours()
-    {
-        if (attackState == AttackState.CHARGE_UP)
-        {
-            // No movement
-            fsm.seekSteeringBehaviour.enabled = false;
-            fsm.seekSteeringBehaviour.gameObject.SetActive(false);
-            fsm.wanderSteeringBehaviour.enabled = false;
-            fsm.wanderSteeringBehaviour.gameObject.SetActive(false);
-            fsm.slimeAgent.reachedGoal = true;
-            fsm.slimeAgent.velocity = Vector3.zero;
-        }
-        else if (attackState == AttackState.DASH)
-        {
-            // Steer towards player
-            fsm.slimeAgent.reachedGoal = false;
-            fsm.slimeAgent.maxSpeed = fsm.attackSpeed;
-            fsm.seekSteeringBehaviour.enabled = true;
-            fsm.seekSteeringBehaviour.gameObject.SetActive(true);
-            fsm.seekSteeringBehaviour.target = GetSlimeTargetConsideringBoundary();
-            fsm.wanderSteeringBehaviour.enabled = false;
-            fsm.wanderSteeringBehaviour.gameObject.SetActive(false);
-        }
     }
 
     Vector3 GetSlimeTargetConsideringBoundary()
