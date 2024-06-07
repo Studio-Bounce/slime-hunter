@@ -10494,7 +10494,7 @@ MonoBehaviour:
   deathParticles: {fileID: 4469707161624757012}
   deathDelay: 3.5
   dodgeDistance: 5
-  dodgeTime: 1
+  dodgeTime: 0.3
   slimeAnimator: {fileID: 2403758375320863911}
   isDodging: 0
 --- !u!114 &8400284841796279740
@@ -10740,17 +10740,17 @@ PrefabInstance:
     - target: {fileID: 6427321115966553525, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -0.061802953
       objectReference: {fileID: 0}
     - target: {fileID: 6427321115966553525, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 0.00431617
       objectReference: {fileID: 0}
     - target: {fileID: 6427321115966553525, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 0.0010977983
       objectReference: {fileID: 0}
     - target: {fileID: 6440824974522327981, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
@@ -10785,17 +10785,17 @@ PrefabInstance:
     - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: -0.0033403635
       objectReference: {fileID: 0}
     - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -0.033998013
       objectReference: {fileID: 0}
     - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 89.4554
+      value: 89.43368
       objectReference: {fileID: 0}
     - target: {fileID: 8699541509210442394, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
