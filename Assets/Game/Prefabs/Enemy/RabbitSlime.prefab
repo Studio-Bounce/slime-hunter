@@ -10477,7 +10477,6 @@ MonoBehaviour:
   isAlive: 1
   damageDelay: 0.3
   knockbackTime: 0.25
-  framesToPause: 4
   isInvincible: 0
   onDeathEvent:
     m_PersistentCalls:
@@ -10495,7 +10494,8 @@ MonoBehaviour:
   deathParticles: {fileID: 4469707161624757012}
   deathDelay: 3.5
   dodgeDistance: 5
-  dodgeTime: 0.25
+  dodgeTime: 0.3
+  slimeAnimator: {fileID: 2403758375320863911}
   isDodging: 0
 --- !u!114 &8400284841796279740
 MonoBehaviour:
@@ -10548,7 +10548,7 @@ MonoBehaviour:
   chaseMat: {fileID: 2100000, guid: 162f61ffdabb50c43850c43146a531ae, type: 2}
   attackMat: {fileID: 2100000, guid: 54086adf35a39a34f93097e070b5c598, type: 2}
   attackGlowIntensity: 1
-  cooldownTime: 1.5
+  cooldownTime: 0.8
   seekDistance: 12
   wanderSpeed: 4
   chaseSpeed: 5
@@ -10569,7 +10569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _framesToPause: 0
   slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
 --- !u!114 &614397070389318196
 MonoBehaviour:
@@ -10741,17 +10740,17 @@ PrefabInstance:
     - target: {fileID: 6427321115966553525, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 10.9461355
+      value: -0.061802953
       objectReference: {fileID: 0}
     - target: {fileID: 6427321115966553525, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -0.00040622705
+      value: 0.00431617
       objectReference: {fileID: 0}
     - target: {fileID: 6427321115966553525, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0.0020741378
+      value: 0.0010977983
       objectReference: {fileID: 0}
     - target: {fileID: 6440824974522327981, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
@@ -10766,12 +10765,12 @@ PrefabInstance:
     - target: {fileID: 7208285609052654675, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -5.318112e-14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7208285609052654675, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -5.055001e-16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7208285609052654675, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
@@ -10786,17 +10785,17 @@ PrefabInstance:
     - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -0.19598582
+      value: -0.0033403635
       objectReference: {fileID: 0}
     - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -21.092003
+      value: -0.033998013
       objectReference: {fileID: 0}
     - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 89.49189
+      value: 89.43368
       objectReference: {fileID: 0}
     - target: {fileID: 8699541509210442394, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
