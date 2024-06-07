@@ -8,6 +8,7 @@ public class BasicSlime_FSM : FSM
     public readonly int WanderAroundStateName = Animator.StringToHash("WanderAround");
     public readonly int AttackPlayerStateName = Animator.StringToHash("AttackPlayer");
     public readonly int CooldownStateName = Animator.StringToHash("Cooldown");
+    public readonly int DeadStateName = Animator.StringToHash("Dead");
 
     public SeekSteeringBehaviour seekSteeringBehaviour;
     public WanderSteeringBehaviour wanderSteeringBehaviour;
