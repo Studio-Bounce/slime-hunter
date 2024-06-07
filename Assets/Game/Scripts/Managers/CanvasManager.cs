@@ -38,6 +38,7 @@ public class CanvasManager : Singleton<CanvasManager>
     {
         // Set element's parent to the screen canvas
         element.SetParent(screenCanvas.transform);
+        element.localPosition = Vector3.zero;
 
         // Add a component to the anchor to handle OnDestroy event
         AnchorDestroyHandler handler = anchor.gameObject.GetComponent<AnchorDestroyHandler>();

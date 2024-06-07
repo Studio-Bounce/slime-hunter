@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 // DamageTaker does not need rigidbody. Its collider triggers the collider of DamageDealer.
 // There's no OnTriggerEnter here because of absence of rigidbody.
