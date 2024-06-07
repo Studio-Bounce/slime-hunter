@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine;
 public class CameraStartup : MonoBehaviour
 {
     private Camera _camera;
+    public CinemachineVirtualCamera virtualCamera;
 
     public bool targetCameraOnStart;
 
@@ -15,7 +17,7 @@ public class CameraStartup : MonoBehaviour
 
         if (targetCameraOnStart)
         {
-            CameraManager.Instance.SwitchToCamera(_camera);
+            CameraManager.Instance.SwitchToCamera(_camera, virtualCamera);
         }
     }
 }
