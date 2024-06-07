@@ -22,6 +22,7 @@ public class SlimeSteeringAgent : SteeringAgent
 
         forceStopMovement = (slimeModel.localPosition.y <= 0);
         animator.SetBool(IsMoving, velocity.magnitude != 0);
+        
     }
 
 }

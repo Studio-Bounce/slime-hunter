@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class BasicSlime_ChasePlayer : BasicSlime_BaseState
 {
-    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    public virtual void SetChaseTarget()
     {
         fsm.seekSteeringBehaviour.target = fsm.playerTransform.position;
+    }
+
+    public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        SetChaseTarget();
         fsm.slimeAgent.reachedGoal = false;
         fsm.slimeAgent.maxSpeed = fsm.chaseSpeed;
 
@@ -29,7 +34,7 @@ public class BasicSlime_ChasePlayer : BasicSlime_BaseState
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Player can move so keep adjusting target
-        fsm.seekSteeringBehaviour.target = fsm.playerTransform.position;
+        SetChaseTarget();
 
         float playerDistance = Vector3.Distance(fsm.slimeAgent.transform.position, fsm.playerTransform.position);
         // If player evaded, switch back to wander
