@@ -8,7 +8,7 @@ public class RabbitEnemy : Enemy
     [SerializeField] float dodgeDistance = 5.0f;
     [SerializeField] float dodgeTime = 1.0f;
 
-    RabbitSlime_FSM fsm;
+    RabbitSlime_FSM rfsm;
     Transform playerTransform;
     Trail slimeTrail;
 
@@ -21,7 +21,7 @@ public class RabbitEnemy : Enemy
 
         slimeTrail = GetComponent<Trail>();
         slimeTrail.activeTime = dodgeTime;
-        fsm = GetComponent<RabbitSlime_FSM>();
+        rfsm = GetComponent<RabbitSlime_FSM>();
         playerTransform = GameObject.FindWithTag("Player")?.transform;
         UnityEngine.Assertions.Assert.IsNotNull(playerTransform, "GameObject with tag 'Player' not found!");
     }
@@ -34,7 +34,7 @@ public class RabbitEnemy : Enemy
         {
             // Dodge
             // HACK: FSM state change happening outside of actual FSM (fixme)
-            fsm.ChangeState(fsm.DodgeStateName);
+            rfsm.ChangeState(rfsm.DodgeStateName);
         }
     }
 
