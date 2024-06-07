@@ -11,13 +11,13 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
     readonly int MoveState = Animator.StringToHash("HeadButt_Move");
     readonly int HeadAttackState = Animator.StringToHash("HeadButt_Attack");
 
-    enum AttackState
+    public enum AttackState
     {
         CHARGE_UP,
         DASH,
-        ATTACK
+        ATTACK,
+        NONE
     };
-    AttackState attackState;
 
     protected int nextStateName = 0;
     Vector3 target = Vector3.zero;
@@ -26,7 +26,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         nextStateName = fsm.CooldownStateName;
-        attackState = AttackState.CHARGE_UP;
+        fsm.currentAttackState = AttackState.CHARGE_UP;
         // No movement
         fsm.seekSteeringBehaviour.enabled = false;
         fsm.seekSteeringBehaviour.gameObject.SetActive(false);
@@ -53,7 +53,6 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             fsm.slimeOuterMesh.materials = mats;
         }
         fsm.StartCoroutine(IncreaseEmissionIntensity(10));
-
 
         // Make the weapon active
         fsm.weapon.ActivateWeapon();
@@ -101,13 +100,13 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             return;
         waitForAnimation = false;
 
-        switch (attackState)
+        switch (fsm.currentAttackState)
         {
             case AttackState.CHARGE_UP:
                 // Check if charge up has been finished
                 if (animationHash != ChargeUpState)
                 {
-                    attackState = AttackState.DASH;
+                    fsm.currentAttackState = AttackState.DASH;
                 }
                 break;
 
@@ -119,7 +118,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
                 // If close to goal, do a headbutt
                 if (Vector3.Distance(fsm.transform.position, target)  < fsm.attackProximity)
                 {
-                    attackState = AttackState.ATTACK;
+                    fsm.currentAttackState = AttackState.ATTACK;
                     fsm.slimeAnimator.SetTrigger(AttackReachedAnimation);
                 }
                 break;
