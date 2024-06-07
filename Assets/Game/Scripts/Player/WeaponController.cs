@@ -136,8 +136,14 @@ public class WeaponController : MonoBehaviour
     {
         if (!InterruptAttack()) return false;
 
-        // Attack is performed directly where the player is facing
-        StartCoroutine(PerformAttack(CurrentWeapon.attackMoves[_attackMoveIndex], transform.forward));
+        // Get vector from player to mouse click
+        Vector2 clickPosition = Mouse.current.position.ReadValue();
+        Vector2 currentScreenPos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector2 clickDirection = (clickPosition - currentScreenPos).normalized;
+
+        // Align to camera forward
+        Vector3 attackDirection = Utils.DirectionToCameraForward(transform.position, clickDirection);
+        StartCoroutine(PerformAttack(CurrentWeapon.attackMoves[_attackMoveIndex], attackDirection));
 
         return true;
     }
@@ -148,6 +154,8 @@ public class WeaponController : MonoBehaviour
         SetupAttackAnimation(move);
         // Increment combo
         _attackMoveIndex = _attackMoveIndex < CurrentWeapon.attackMoves.Count-1 ? _attackMoveIndex+1 : 0;
+        // Rotate player towards attack
+        transform.forward = direction;
         weaponTrail.transform.forward = direction;
         // Start attack 
         _animator.SetTrigger(attackStartTriggerHash);
