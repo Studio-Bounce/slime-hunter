@@ -30,7 +30,10 @@ public class RabbitEnemy : Enemy
     {
         base.BaseEnemyTakeDamage(damage);
 
-        if (isInvincible && isAlive)
+        // Rabbit slime can not be stopped when its actively attacking
+        bool isAttackStoppable = (rfsm.GetAttackState() == BasicSlime_AttackPlayer.AttackState.CHARGE_UP ||
+                                  rfsm.GetAttackState() == BasicSlime_AttackPlayer.AttackState.NONE);
+        if (isInvincible && isAlive && isAttackStoppable)
         {
             // Dodge
             // HACK: FSM state change happening outside of actual FSM (fixme)

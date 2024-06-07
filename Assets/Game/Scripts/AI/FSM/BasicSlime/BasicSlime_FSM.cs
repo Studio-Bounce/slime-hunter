@@ -10,6 +10,8 @@ public class BasicSlime_FSM : FSM
     public readonly int CooldownStateName = Animator.StringToHash("Cooldown");
     public readonly int DeadStateName = Animator.StringToHash("Dead");
 
+    public BasicSlime_AttackPlayer.AttackState currentAttackState = BasicSlime_AttackPlayer.AttackState.NONE;
+
     public SeekSteeringBehaviour seekSteeringBehaviour;
     public WanderSteeringBehaviour wanderSteeringBehaviour;
 
@@ -55,5 +57,10 @@ public class BasicSlime_FSM : FSM
     {
         DebugExtension.DrawCircle(transform.position, Color.cyan, seekDistance);
         DebugExtension.DrawCircle(transform.position, Color.red, attackRadius);
+    }
+
+    public BasicSlime_AttackPlayer.AttackState GetAttackState()
+    {
+        return currentAttackState;
     }
 }

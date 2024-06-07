@@ -5,7 +5,7 @@ using UnityEngine;
 public class RabbitSlime_FSM : BasicSlime_FSM
 {
     public readonly int DodgeStateName = Animator.StringToHash("Dodge");
-
+    
     protected override void Start()
     {
         base.Start();

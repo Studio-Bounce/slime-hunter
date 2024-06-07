@@ -1358,6 +1358,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5760338420974404415, guid: 7c19e2e033650b243b9b77976b3424a8,
         type: 3}
+      propertyPath: dashDistance
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5760338420974404415, guid: 7c19e2e033650b243b9b77976b3424a8,
+        type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 823012863}
@@ -1731,16 +1736,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 267308195683594635, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
-        type: 3}
-      propertyPath: attackRadius
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 267308195683594635, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
-        type: 3}
-      propertyPath: seekDistance
-      value: 12
-      objectReference: {fileID: 0}
     - target: {fileID: 1739790972204781641, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
         type: 3}
       propertyPath: m_AnchorMax.x
