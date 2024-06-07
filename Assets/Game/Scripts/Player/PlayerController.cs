@@ -26,9 +26,8 @@ public class PlayerController : MonoBehaviour
 
     public bool useGravity = true;
 
-    public bool _isDashing = false;  // public to allow access to Trail
-    private bool _isJumping = false;
-    private bool _isSprint = false;
+    bool _isDashing = false;
+    bool _isJumping = false;
 
     [Header("Camera Handling")]
     public Transform cameraTransform;
@@ -199,6 +198,8 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    public bool IsDashing() { return _isDashing; }
+
     // -------------------- Jump Mechanism --------------------
 
     public void Jump(float upForce, float jumpDuration, Vector3 target)
@@ -258,6 +259,8 @@ public class PlayerController : MonoBehaviour
 
         _isRotating = false;
     }
+
+    public bool IsJumping() { return _isJumping; }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
