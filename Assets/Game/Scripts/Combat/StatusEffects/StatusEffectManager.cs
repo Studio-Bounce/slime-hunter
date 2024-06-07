@@ -17,10 +17,9 @@ public class StatusEffectManager : MonoBehaviour
     private void Start()
     {
         damageTaker = GetComponent<DamageTaker>();
-        statusBar = GetComponent<StatusBar>();
 
+        statusBar = statusBarPrefab.GetComponent<StatusBar>();
         InitializeStatusBar();
-
         foreach (var effect in activeEffects)
         {
             effect.StartEffect(damageTaker);

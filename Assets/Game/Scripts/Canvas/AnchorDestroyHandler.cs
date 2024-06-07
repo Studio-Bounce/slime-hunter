@@ -6,6 +6,9 @@ public class AnchorDestroyHandler : MonoBehaviour
 {
     private void OnDestroy()
     {
-        CanvasManager.Instance.RemoveAnchoredElement(transform);
+        if (CanvasManager.Instance)
+        {
+            CanvasManager.Instance.RemoveAnchoredElement(transform);
+        }
     }
 }

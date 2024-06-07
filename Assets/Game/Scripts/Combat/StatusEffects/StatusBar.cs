@@ -25,14 +25,10 @@ public class StatusBar : MonoBehaviour
     {
         if (!statusToImageMap.ContainsKey(effect))
         {
-            GameObject imageObject = new GameObject("StatusEffectImage");
+            GameObject imageObject = new GameObject("StatusEffectImage", typeof(Image));
             imageObject.transform.SetParent(statusBarRoot.transform, false);
-            imageObject.transform.localPosition = Vector3.zero;
-            imageObject.transform.localScale = Vector3.one;
-            Image imageComponent = imageObject.AddComponent<Image>();
+            Image imageComponent = imageObject.GetComponent<Image>();
             imageComponent.sprite = effect.icon;
-            imageComponent.rectTransform.localScale = Vector3.one;
-            imageComponent.rectTransform.sizeDelta = iconSize;
             statusToImageMap[effect] = imageComponent;
         }
     }
