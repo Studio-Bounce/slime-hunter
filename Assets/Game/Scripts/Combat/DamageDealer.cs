@@ -13,7 +13,6 @@ public class DamageDealer : MonoBehaviour
     protected bool active = false;
     // attackDetected can be used by child classes to do something on attack
     protected bool attackDetected = false;
-    public uint _framesToPause = 0;
 
     protected virtual void Start()
     {

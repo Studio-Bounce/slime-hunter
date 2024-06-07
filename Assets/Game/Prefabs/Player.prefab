@@ -161,6 +161,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  slowDownOnHitMultiplier: 0.2
+  slowDownOnHitFrames: 5
 --- !u!114 &2463496225978856163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,12 +806,6 @@ PrefabInstance:
 --- !u!4 &5126069991169466018 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
-    type: 3}
-  m_PrefabInstance: {fileID: 4659479598651636041}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5505832874139599896 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
     type: 3}
   m_PrefabInstance: {fileID: 4659479598651636041}
   m_PrefabAsset: {fileID: 0}

@@ -53,7 +53,7 @@ public class Trail : MonoBehaviour
 
     IEnumerator ActivateTrail (float timeActive)
     {
-        while (timeActive > 0 && (trailType == TrailType.SLIME || playerController.isDashing)) 
+        while (timeActive > 0 && (trailType == TrailType.SLIME || playerController._isDashing)) 
         {
             timeActive -= meshfreshRate;
 
