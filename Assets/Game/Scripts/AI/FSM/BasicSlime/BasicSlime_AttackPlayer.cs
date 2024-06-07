@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 {
-    readonly int ToIdleAnimation = Animator.StringToHash("toIdle");
     readonly int AttackChargeAnimation = Animator.StringToHash("attackChargeUp");
     readonly int AttackReachedAnimation = Animator.StringToHash("attackReached");
+    readonly int AttackCompleteAnimation = Animator.StringToHash("attackComplete");
 
     readonly int ChargeUpState = Animator.StringToHash("HeadButt_ChargeUp");
     readonly int MoveState = Animator.StringToHash("HeadButt_Move");
@@ -150,8 +150,8 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         // Change eye
         fsm.slimeEnemy.SetEye(EnemyEye.NORMAL);
 
-        // Ensure the attack animation sequence has been completed
-        fsm.slimeAnimator.SetTrigger(ToIdleAnimation);
+        // Ensure animation does not get stuck on dash
+        fsm.slimeAnimator.SetTrigger(AttackCompleteAnimation);
     }
 
     Vector3 GetSlimeTargetConsideringBoundary()

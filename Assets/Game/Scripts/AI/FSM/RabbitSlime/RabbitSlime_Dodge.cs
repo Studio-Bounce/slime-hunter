@@ -8,6 +8,7 @@ public class RabbitSlime_Dodge : BasicSlime_BaseState
     {
         // Stop the agent
         fsm.slimeAgent.reachedGoal = true;
+        fsm.slimeAgent.velocity = Vector3.zero;
         // Disable seeking & wandering
         fsm.seekSteeringBehaviour.enabled = false;
         fsm.seekSteeringBehaviour.gameObject.SetActive(false);
