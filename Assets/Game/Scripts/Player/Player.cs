@@ -33,7 +33,6 @@ public class Player : DamageTaker
         base.TakeDamage(damage);
 
         StartCoroutine(SlowDownOnHit());
-
         GameManager.Instance.PlayerHealth -= (int)damage.value;
         if (GameManager.Instance.PlayerHealth <= 0)
         {
