@@ -35,13 +35,33 @@ public class CanvasManager : Singleton<CanvasManager>
         {
             Transform anchor = entry.Key;
             RectTransform element = entry.Value;
-
-            element.anchoredPosition = Camera.main.WorldToScreenPoint(anchor.position);
+            element.anchoredPosition = CameraManager.Instance.ActiveCamera.WorldToScreenPoint(anchor.position);
         }
     }
 
     public void AddAnchoredElement(Transform anchor, RectTransform element)
     {
+        // Set element's parent to the screen canvas
         element.SetParent(screenCanvas.transform);
+
+        // Add a component to the anchor to handle OnDestroy event
+        AnchorDestroyHandler handler = anchor.gameObject.GetComponent<AnchorDestroyHandler>();
+        if (handler == null)
+        {
+            anchor.gameObject.AddComponent<AnchorDestroyHandler>();
+        }
+
+        // Add to the map
+        anchorToElementMap[anchor] = element;
+    }
+
+    public void RemoveAnchoredElement(Transform anchor)
+    {
+        if (anchorToElementMap.ContainsKey(anchor))
+        {
+            RectTransform element = anchorToElementMap[anchor];
+            anchorToElementMap.Remove(anchor);
+            Destroy(element.gameObject);
+        }
     }
 }

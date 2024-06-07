@@ -10477,7 +10477,6 @@ MonoBehaviour:
   isAlive: 1
   damageDelay: 0.3
   knockbackTime: 0.25
-  framesToPause: 4
   isInvincible: 0
   onDeathEvent:
     m_PersistentCalls:
@@ -10569,7 +10568,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _framesToPause: 0
   slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
 --- !u!114 &614397070389318196
 MonoBehaviour:
@@ -10585,7 +10583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusBarPrefab: {fileID: 6282667672108503733, guid: ea642a1a7f9f513448fe26f6b9ebcf7e,
     type: 3}
-  showStatusBar: 0
+  showStatusBar: 1
   activeEffects: []
   effectsToRemove: []
 --- !u!114 &8206751856348697906

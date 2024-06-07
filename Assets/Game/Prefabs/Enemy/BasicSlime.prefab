@@ -10420,7 +10420,6 @@ MonoBehaviour:
   isAlive: 1
   damageDelay: 0.3
   knockbackTime: 0.2
-  framesToPause: 4
   isInvincible: 0
   onDeathEvent:
     m_PersistentCalls:
@@ -10475,6 +10474,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FSMController: {fileID: 9100000, guid: 9ac75dfce77963141b5b6511da96b973, type: 2}
+  currentAttackState: 3
   seekSteeringBehaviour: {fileID: 8433862984451030069}
   wanderSteeringBehaviour: {fileID: 386777113257166750}
   slimeAgent: {fileID: 0}
@@ -10508,7 +10508,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _framesToPause: 0
   slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
 --- !u!114 &984750678147540403
 MonoBehaviour:
@@ -10524,7 +10523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusBarPrefab: {fileID: 6282667672108503733, guid: ea642a1a7f9f513448fe26f6b9ebcf7e,
     type: 3}
-  showStatusBar: 0
+  showStatusBar: 1
   activeEffects: []
   effectsToRemove: []
 --- !u!1 &8843669738811188421
