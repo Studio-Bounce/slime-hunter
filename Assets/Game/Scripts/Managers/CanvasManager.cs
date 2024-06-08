@@ -2,13 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.ProBuilder.AutoUnwrapSettings;
+
+public struct CanvasElement
+{
+    public Transform anchor;
+    public RectTransform rect;
+    public Vector2 offset;
+}
+
 
 public class CanvasManager : Singleton<CanvasManager>
 {
     public Canvas screenCanvas;
 
-    private Dictionary<Transform, RectTransform> anchorToElementMap = new Dictionary<Transform, RectTransform>();
-
+    private List<CanvasAnchorHandler> canvasAnchorList = new List<CanvasAnchorHandler>();
+    
     private void Awake()
     {
         // Create a canvas if one doesn't exist
@@ -22,42 +31,32 @@ public class CanvasManager : Singleton<CanvasManager>
         }
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        // Update the positions of elements to match anchor
-        foreach (KeyValuePair<Transform, RectTransform> entry in anchorToElementMap)
-        {
-            Transform anchor = entry.Key;
-            RectTransform element = entry.Value;
-            element.anchoredPosition = CameraManager.Instance.ActiveCamera.WorldToScreenPoint(anchor.position);
-        }
-    }
-
-    public void AddAnchoredElement(Transform anchor, RectTransform element)
+    public void AddAnchoredElement(Transform anchor, RectTransform rect, Vector2 offset = default(Vector2))
     {
         // Set element's parent to the screen canvas
-        element.SetParent(screenCanvas.transform);
-        element.localPosition = Vector3.zero;
+        rect.SetParent(screenCanvas.transform);
+        rect.localPosition = Vector3.zero;
 
-        // Add a component to the anchor to handle OnDestroy event
-        AnchorDestroyHandler handler = anchor.gameObject.GetComponent<AnchorDestroyHandler>();
+        // Add a component to the anchor to handle canvas elements
+        CanvasAnchorHandler handler = anchor.gameObject.GetComponent<CanvasAnchorHandler>();
         if (handler == null)
         {
-            anchor.gameObject.AddComponent<AnchorDestroyHandler>();
+            handler = anchor.gameObject.AddComponent<CanvasAnchorHandler>();
         }
 
-        // Add to the map
-        anchorToElementMap[anchor] = element;
+        CanvasElement canvasElement = new CanvasElement
+        {
+            anchor = anchor,
+            rect = rect,
+            offset = offset
+        };
+
+        handler.RegisterCanvasElement(canvasElement);
+        canvasAnchorList.Add(handler);
     }
 
-    public void RemoveAnchoredElement(Transform anchor)
+    public void RemoveCanvasAnchor(CanvasAnchorHandler canvasAnchor)
     {
-        if (anchorToElementMap.ContainsKey(anchor))
-        {
-            RectTransform element = anchorToElementMap[anchor];
-            anchorToElementMap.Remove(anchor);
-            Destroy(element.gameObject);
-        }
+        canvasAnchorList.Remove(canvasAnchor);
     }
 }

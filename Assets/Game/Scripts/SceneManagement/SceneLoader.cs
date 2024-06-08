@@ -33,7 +33,7 @@ public class SceneLoader : Singleton<SceneLoader>
             // Placeholder for loading bars
             while (!operation.isDone) {
                 // float progress = Mathf.Clamp01(operation.progress/ .9f);
-                Debug.Log($"Loading Scene [{sceneName}]: {operation.progress}%");
+                //Debug.Log($"Loading Scene [{sceneName}]: {operation.progress}%");
                 yield return null; 
             }
 
