@@ -21,9 +21,6 @@ public class Player : DamageTaker
         base.Start();
         // Ensures that base.health does not change as per damage
         isInvincible = true;
-
-        CanvasManager.Instance.AddAnchoredElement(transform, staminaUI.GetComponent<RectTransform>(), new Vector2(-70, 100));
-        GameManager.Instance.OnPlayerStaminaChange += value => staminaUI.SetFill((float)value/GameManager.Instance.PlayerMaxStamina);
     }
 
     public override void Death()

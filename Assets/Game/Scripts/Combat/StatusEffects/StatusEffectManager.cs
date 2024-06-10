@@ -33,8 +33,7 @@ public class StatusEffectManager : MonoBehaviour
     {
         if (showStatusBar)
         {
-            statusBar = Instantiate(statusBarPrefab)?.GetComponent<StatusBar>();
-            statusBar.Initialize(transform);
+            statusBar = Instantiate(statusBarPrefab, transform, false)?.GetComponent<StatusBar>();
         }
     }
 

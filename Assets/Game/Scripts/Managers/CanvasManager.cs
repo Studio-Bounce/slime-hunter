@@ -30,7 +30,7 @@ public class CanvasManager : Singleton<CanvasManager>
     }
 
     // Note offset is in screenspace
-    public void AddAnchoredElement(Transform anchor, RectTransform rect, Vector2 offset = default(Vector2))
+    public CanvasElement AddAnchoredElement(Transform anchor, RectTransform rect, Vector2 offset = default(Vector2))
     {
         // Set element's parent to the screen canvas
         rect.SetParent(screenCanvas.transform);
@@ -52,6 +52,7 @@ public class CanvasManager : Singleton<CanvasManager>
 
         handler.RegisterCanvasElement(canvasElement);
         canvasAnchorList.Add(handler);
+        return canvasElement;
     }
 
     public void RemoveCanvasAnchor(CanvasAnchorHandler canvasAnchor)
