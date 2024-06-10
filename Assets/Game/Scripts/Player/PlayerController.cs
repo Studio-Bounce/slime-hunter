@@ -172,11 +172,8 @@ public class PlayerController : MonoBehaviour
                 staminaUsed = true;
                 // Stamina might have been changed by some other action.
                 // Just confirm that player has enough stamina for dashing
-                if (GameManager.Instance.PlayerStamina < dashStaminaUse)
-                {
-                    break;
-                }
-                GameManager.Instance.PlayerStamina -= dashStaminaUse;
+                if (GameManager.Instance.PlayerStamina < dashStaminaUse) break;
+                GameManager.Instance.UseStamina(dashStaminaUse);
             }
 
             transform.position = startPosition + dashVector * dashProgress;

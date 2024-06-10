@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.ProBuilder.AutoUnwrapSettings;
 
 public struct CanvasElement
 {
@@ -10,7 +9,6 @@ public struct CanvasElement
     public RectTransform rect;
     public Vector2 offset;
 }
-
 
 public class CanvasManager : Singleton<CanvasManager>
 {
@@ -31,6 +29,7 @@ public class CanvasManager : Singleton<CanvasManager>
         }
     }
 
+    // Note offset is in screenspace
     public void AddAnchoredElement(Transform anchor, RectTransform rect, Vector2 offset = default(Vector2))
     {
         // Set element's parent to the screen canvas

@@ -18,7 +18,7 @@ public class StatusBar : MonoBehaviour
 
     public void Initialize(Transform trans)
     {
-        CanvasManager.Instance.AddAnchoredElement(trans, statusBarRoot);
+        CanvasManager.Instance.AddAnchoredElement(trans, statusBarRoot, new Vector2(-100, 100));
     }
 
     public void AddStatusEffect(StatusEffect effect)
@@ -28,6 +28,7 @@ public class StatusBar : MonoBehaviour
             GameObject imageObject = new GameObject("StatusEffectImage", typeof(Image));
             imageObject.transform.SetParent(statusBarRoot.transform, false);
             Image imageComponent = imageObject.GetComponent<Image>();
+            imageComponent.rectTransform.sizeDelta = iconSize;
             imageComponent.sprite = effect.icon;
             statusToImageMap[effect] = imageComponent;
         }

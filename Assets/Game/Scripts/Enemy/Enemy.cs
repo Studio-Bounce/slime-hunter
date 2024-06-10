@@ -50,7 +50,7 @@ public class Enemy : DamageTaker
         isAlive = true;
 
         fsm = GetComponent<BasicSlime_FSM>();
-        CanvasManager.Instance.AddAnchoredElement(transform, healthSlider.GetComponent<RectTransform>());
+        CanvasManager.Instance.AddAnchoredElement(transform, healthSlider.GetComponent<RectTransform>(), new Vector2(0, 80));
     }
 
     // Used in child classes to call the original TakeDamage method

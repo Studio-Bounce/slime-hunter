@@ -12,8 +12,6 @@ public class StatusEffectManager : MonoBehaviour
     public List<StatusEffect> activeEffects = new List<StatusEffect>();
     public List<StatusEffect> effectsToRemove = new List<StatusEffect>();
 
-
-
     private void Start()
     {
         damageTaker = GetComponent<DamageTaker>();
