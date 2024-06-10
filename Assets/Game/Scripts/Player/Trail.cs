@@ -19,7 +19,6 @@ public class Trail : MonoBehaviour
     public float meshDestroyDelay = 3f;
     public GameObject model;
     [SerializeField] TrailType trailType = TrailType.PLAYER;
-    [SerializeField] LayerMask ignoreLightingLayer;
 
     [Header("Shader")]
     public Material mat;
