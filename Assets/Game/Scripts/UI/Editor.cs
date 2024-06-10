@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Editor : MonoBehaviour
+public class Editor : Menu
 {
     UIDocument document = null;
     Button basicSlimeSpawnerBtn = null;

@@ -136,8 +136,14 @@ public class WeaponController : MonoBehaviour
     {
         if (!InterruptAttack()) return false;
 
-        // Attack is performed directly where the player is facing
-        StartCoroutine(PerformAttack(CurrentWeapon.attackMoves[_attackMoveIndex], transform.forward));
+        // Get vector from player to mouse click
+        Vector2 clickPosition = Mouse.current.position.ReadValue();
+        Vector2 currentScreenPos = Camera.main.WorldToScreenPoint(transform.position);
+        Vector2 clickDirection = (clickPosition - currentScreenPos).normalized;
+
+        // Align to camera forward
+        Vector3 attackDirection = Utils.DirectionToCameraForward(transform.position, clickDirection);
+        StartCoroutine(PerformAttack(CurrentWeapon.attackMoves[_attackMoveIndex], attackDirection));
 
         return true;
     }
@@ -146,15 +152,23 @@ public class WeaponController : MonoBehaviour
     {
         currentAttackState = AttackState.WIND_UP;
         SetupAttackAnimation(move);
+
         // Increment combo
-        _attackMoveIndex = _attackMoveIndex < CurrentWeapon.attackMoves.Count-1 ? _attackMoveIndex+1 : 0;
+        bool isFinalAttack = (_attackMoveIndex == CurrentWeapon.attackMoves.Count - 1);
+        _attackMoveIndex = isFinalAttack ? 0 : _attackMoveIndex + 1;
+
+        // Rotate player towards attack
+        transform.forward = direction;
         weaponTrail.transform.forward = direction;
+
         // Start attack 
         _animator.SetTrigger(attackStartTriggerHash);
         yield return new WaitForSeconds(move.animationOffset);
+
         currentAttackState = AttackState.ACTIVE;
-        weaponTrail.Attack(move);
+        weaponTrail.Attack(move, isFinalAttack);
         yield return new WaitForSeconds(move.duration);
+
         currentAttackState = AttackState.WIND_DOWN;
         yield return new WaitForSeconds(move.clip.length - (move.animationOffset + move.duration));
         if (currentAttackState == AttackState.WIND_DOWN)

@@ -19,7 +19,6 @@ public class Trail : MonoBehaviour
     public float meshDestroyDelay = 3f;
     public GameObject model;
     [SerializeField] TrailType trailType = TrailType.PLAYER;
-    [SerializeField] LayerMask ignoreLightingLayer;
 
     [Header("Shader")]
     public Material mat;
@@ -53,7 +52,7 @@ public class Trail : MonoBehaviour
 
     IEnumerator ActivateTrail (float timeActive)
     {
-        while (timeActive > 0 && (trailType == TrailType.SLIME || playerController.isDashing)) 
+        while (timeActive > 0 && (trailType == TrailType.SLIME || playerController.IsDashing()))
         {
             timeActive -= meshfreshRate;
 

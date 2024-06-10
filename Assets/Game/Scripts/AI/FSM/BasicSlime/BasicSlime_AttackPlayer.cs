@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 {
-    readonly int ToIdleAnimation = Animator.StringToHash("toIdle");
     readonly int AttackChargeAnimation = Animator.StringToHash("attackChargeUp");
     readonly int AttackReachedAnimation = Animator.StringToHash("attackReached");
+    readonly int AttackCompleteAnimation = Animator.StringToHash("attackComplete");
 
     readonly int ChargeUpState = Animator.StringToHash("HeadButt_ChargeUp");
     readonly int MoveState = Animator.StringToHash("HeadButt_Move");
     readonly int HeadAttackState = Animator.StringToHash("HeadButt_Attack");
 
-    enum AttackState
+    public enum AttackState
     {
         CHARGE_UP,
         DASH,
-        ATTACK
+        ATTACK,
+        NONE
     };
-    AttackState attackState;
 
     protected int nextStateName = 0;
     Vector3 target = Vector3.zero;
@@ -26,7 +26,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         nextStateName = fsm.CooldownStateName;
-        attackState = AttackState.CHARGE_UP;
+        fsm.currentAttackState = AttackState.CHARGE_UP;
         // No movement
         fsm.seekSteeringBehaviour.enabled = false;
         fsm.seekSteeringBehaviour.gameObject.SetActive(false);
@@ -52,8 +52,10 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             Material[] mats = { redGlow };
             fsm.slimeOuterMesh.materials = mats;
         }
-        fsm.StartCoroutine(IncreaseEmissionIntensity(10));
+        // Disable shadow in slime outer mesh to show transparent material properly
+        fsm.slimeOuterMesh.gameObject.layer = GameConstants.IgnoreLightingLayer;
 
+        fsm.StartCoroutine(IncreaseEmissionIntensity(10));
 
         // Make the weapon active
         fsm.weapon.ActivateWeapon();
@@ -101,13 +103,13 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             return;
         waitForAnimation = false;
 
-        switch (attackState)
+        switch (fsm.currentAttackState)
         {
             case AttackState.CHARGE_UP:
                 // Check if charge up has been finished
                 if (animationHash != ChargeUpState)
                 {
-                    attackState = AttackState.DASH;
+                    fsm.currentAttackState = AttackState.DASH;
                 }
                 break;
 
@@ -119,7 +121,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
                 // If close to goal, do a headbutt
                 if (Vector3.Distance(fsm.transform.position, target)  < fsm.attackProximity)
                 {
-                    attackState = AttackState.ATTACK;
+                    fsm.currentAttackState = AttackState.ATTACK;
                     fsm.slimeAnimator.SetTrigger(AttackReachedAnimation);
                 }
                 break;
@@ -144,6 +146,8 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             Material[] mats = { fsm.defaultMat };
             fsm.slimeOuterMesh.materials = mats;
         }
+        // Revert layer back to enemy
+        fsm.slimeOuterMesh.gameObject.layer = GameConstants.EnemyLayer;
 
         // Make the weapon inactive
         fsm.weapon.DeactivateWeapon();
@@ -151,15 +155,15 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         // Change eye
         fsm.slimeEnemy.SetEye(EnemyEye.NORMAL);
 
-        // Ensure the attack animation sequence has been completed
-        fsm.slimeAnimator.SetTrigger(ToIdleAnimation);
+        // Ensure animation does not get stuck on dash
+        fsm.slimeAnimator.SetTrigger(AttackCompleteAnimation);
     }
 
     Vector3 GetSlimeTargetConsideringBoundary()
     {
         Vector3 lineDirection = fsm.playerTransform.position - fsm.transform.position;
         Ray ray = new(fsm.transform.position, lineDirection);
-        int layerMask = 1 << 9;  // 9th layer is EnemyBoundary
+        int layerMask = (1 << GameConstants.EnemyBoundaryLayer);
         if (Physics.Raycast(ray, out RaycastHit hit, lineDirection.magnitude, layerMask))
         {
             // Little offset, just so that the target is not directly on the wall

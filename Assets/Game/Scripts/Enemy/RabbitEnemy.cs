@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class RabbitEnemy : Enemy
 {
+    public readonly int DodgeTrigger = Animator.StringToHash("dodge");
+    public readonly int DodgeSpeedField = Animator.StringToHash("dodgeSpeed");
+
     [Header("Slime Dodge")]
     [SerializeField] float dodgeDistance = 5.0f;
     [SerializeField] float dodgeTime = 1.0f;
 
-    RabbitSlime_FSM fsm;
+    [SerializeField] Animator slimeAnimator;
+
+    RabbitSlime_FSM rfsm;
     Transform playerTransform;
     Trail slimeTrail;
 
@@ -20,8 +25,8 @@ public class RabbitEnemy : Enemy
         base.Start();
 
         slimeTrail = GetComponent<Trail>();
-        slimeTrail.activeTime = dodgeTime;
-        fsm = GetComponent<RabbitSlime_FSM>();
+        slimeTrail.activeTime = Mathf.Max(0.0f, dodgeTime - 0.1f);
+        rfsm = GetComponent<RabbitSlime_FSM>();
         playerTransform = GameObject.FindWithTag("Player")?.transform;
         UnityEngine.Assertions.Assert.IsNotNull(playerTransform, "GameObject with tag 'Player' not found!");
     }
@@ -30,16 +35,23 @@ public class RabbitEnemy : Enemy
     {
         base.BaseEnemyTakeDamage(damage);
 
-        if (isInvincible && isAlive)
+        // Rabbit slime can not be stopped when its actively attacking
+        bool isAttackStoppable = (rfsm.GetAttackState() == BasicSlime_AttackPlayer.AttackState.CHARGE_UP ||
+                                  rfsm.GetAttackState() == BasicSlime_AttackPlayer.AttackState.NONE);
+        if (isInvincible && isAlive && isAttackStoppable)
         {
             // Dodge
             // HACK: FSM state change happening outside of actual FSM (fixme)
-            fsm.ChangeState(fsm.DodgeStateName);
+            rfsm.ChangeState(rfsm.DodgeStateName);
         }
     }
 
     public void Dodge()
     {
+        slimeAnimator.SetTrigger(DodgeTrigger);
+        // Dodge animation length is 1 seconds, so the scaling works perfectly
+        slimeAnimator.SetFloat(DodgeSpeedField, (1 / dodgeTime));
+
         isDodging = true;
         Vector3 playerDirection = playerTransform.position - transform.position;
         playerDirection.Normalize();
@@ -63,11 +75,11 @@ public class RabbitEnemy : Enemy
         StartCoroutine(ApplyDodge(dodgeDirection * dodgeDistance));
     }
 
-    IEnumerator ApplyDodge(Vector3 dodgeDirection)
+    IEnumerator ApplyDodge(Vector3 dodgeVec)
     {
         slimeTrail.InitiateTrail();
         Vector3 startPosition = transform.position;
-        Vector3 endPosition = startPosition + dodgeDirection;
+        Vector3 endPosition = startPosition + dodgeVec;
         float timeElapsed = 0.0f;
         while (timeElapsed < dodgeTime)
         {

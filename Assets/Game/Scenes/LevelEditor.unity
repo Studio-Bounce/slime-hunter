@@ -239,6 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef612fce983ff547adc2cb806ff22b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showOnStart: 1
   basicSlimePrefab: {fileID: 8820871006783578033, guid: b940c09142173ff479a8f04c83ee9b5d,
     type: 3}
   basicSlimePreviewPrefab: {fileID: 392323323981360913, guid: f14f850f821ec864ba0e4667da16143e,
@@ -548,6 +549,7 @@ GameObject:
   - component: {fileID: 506742199}
   - component: {fileID: 506742201}
   - component: {fileID: 506742200}
+  - component: {fileID: 506742202}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -625,6 +627,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &506742202
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 506742198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &517502608
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,6 +797,7 @@ GameObject:
   - component: {fileID: 775544184}
   - component: {fileID: 775544183}
   - component: {fileID: 775544182}
+  - component: {fileID: 775544187}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -937,6 +957,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 30, y: -22.347, z: -0.004}
+--- !u!114 &775544187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775544181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f20d5b0f7321b4a9dab104af66e9dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 823012862}
+  targetCameraOnStart: 1
 --- !u!1 &823012860
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,7 +981,6 @@ GameObject:
   m_Component:
   - component: {fileID: 823012863}
   - component: {fileID: 823012862}
-  - component: {fileID: 823012861}
   m_Layer: 0
   m_Name: Virtual Camera
   m_TagString: Untagged
@@ -955,23 +988,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &823012861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 823012860}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fba25a5cd15594e8f050a11e386c80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ConfineMode: 1
-  m_BoundingVolume: {fileID: 0}
-  m_BoundingShape2D: {fileID: 0}
-  m_ConfineScreenEdges: 1
-  m_Damping: 0
 --- !u!114 &823012862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1130,12 +1146,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &976223659 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5505832874139599896, guid: 7c19e2e033650b243b9b77976b3424a8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1640256222}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &981108443
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,16 +1351,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 133212583615146192, guid: 7c19e2e033650b243b9b77976b3424a8,
-        type: 3}
-      propertyPath: model
-      value: 
-      objectReference: {fileID: 976223659}
-    - target: {fileID: 133212583615146192, guid: 7c19e2e033650b243b9b77976b3424a8,
-        type: 3}
-      propertyPath: ignoreLightingLayer.m_Bits
-      value: 1024
-      objectReference: {fileID: 0}
     - target: {fileID: 972491070015094324, guid: 7c19e2e033650b243b9b77976b3424a8,
         type: 3}
       propertyPath: m_Name
