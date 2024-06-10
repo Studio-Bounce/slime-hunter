@@ -61,6 +61,7 @@ public class Notification : MonoBehaviour
 
     public void Play(bool reverse = false)
     {
+        StopAllCoroutines();
         StartCoroutine(PlayNotification(reverse));
     }
 
@@ -71,6 +72,7 @@ public class Notification : MonoBehaviour
 
     IEnumerator PlayNotification(bool reverse)
     {
+        Debug.Log($"Play {reverse}");
         float timer = reverse ? transitionDuration : 0;
 
         while (reverse ? timer > 0 : timer < transitionDuration)

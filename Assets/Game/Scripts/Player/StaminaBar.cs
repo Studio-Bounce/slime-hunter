@@ -20,12 +20,16 @@ public class StaminaBar : Notification
             CanvasManager.Instance.AddAnchoredElement(player.transform, rectTransform.GetComponent<RectTransform>(), new Vector2(-70, 100));
         }
         GameManager.Instance.OnPlayerStaminaChange += value => SetFill((float)value / GameManager.Instance.PlayerMaxStamina);
+        GameManager.Instance.OnPlayerUseStamina += value => ShowBar();
     }
 
     public void SetFill(float amount)
     {
         fill.fillAmount = amount;
-        PlayInOut(visibleDuration);
     }
 
+    public void ShowBar()
+    {
+        PlayInOut(visibleDuration);
+    }
 }

@@ -47,6 +47,7 @@ public class GameManager : Singleton<GameManager>
 
     public event Action<int> OnPlayerHealthChange;
     public event Action<int> OnPlayerStaminaChange;
+    public event Action<int> OnPlayerUseStamina;
 
     private void Awake()
     {
@@ -73,6 +74,7 @@ public class GameManager : Singleton<GameManager>
             _staminaTimer = 0;
             _cooldown = true;
         }
+        OnPlayerUseStamina.Invoke(PlayerStamina);
     }
 
     private void UpdateStamina()
