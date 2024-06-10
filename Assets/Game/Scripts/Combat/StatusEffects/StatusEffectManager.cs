@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(DamageTaker))]
 public class StatusEffectManager : MonoBehaviour
 {
     private DamageTaker damageTaker;
