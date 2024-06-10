@@ -72,7 +72,6 @@ public class Notification : MonoBehaviour
 
     IEnumerator PlayNotification(bool reverse)
     {
-        Debug.Log($"Play {reverse}");
         float timer = reverse ? transitionDuration : 0;
 
         while (reverse ? timer > 0 : timer < transitionDuration)
@@ -103,7 +102,7 @@ public class Notification : MonoBehaviour
     private void FlyUp(float time)
     {
         Vector2 offset = startPosition;
-        offset.y += 30;
+        offset.y += 5;
         rectTransform.pivot = Vector3.LerpUnclamped(offset, startPosition, Easing.EaseOutCubic(time));
     }
 }
