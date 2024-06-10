@@ -10546,8 +10546,8 @@ MonoBehaviour:
   slimeEnemy: {fileID: 0}
   defaultMat: {fileID: 2100000, guid: 162f61ffdabb50c43850c43146a531ae, type: 2}
   chaseMat: {fileID: 2100000, guid: 162f61ffdabb50c43850c43146a531ae, type: 2}
-  attackMat: {fileID: 2100000, guid: 54086adf35a39a34f93097e070b5c598, type: 2}
-  attackGlowIntensity: 1
+  attackMat: {fileID: 2100000, guid: f21b9f86456c57f4aaf2dd713eac1d33, type: 2}
+  attackGlowIntensity: 3.5
   cooldownTime: 0.8
   seekDistance: 12
   wanderSpeed: 4
@@ -10569,6 +10569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraShakeIntensity: 1
+  cameraShakeTime: 0.5
   slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
 --- !u!114 &614397070389318196
 MonoBehaviour:
@@ -10604,9 +10606,6 @@ MonoBehaviour:
   meshDestroyDelay: 0.15
   model: {fileID: 9002733011280807015}
   trailType: 1
-  ignoreLightingLayer:
-    serializedVersion: 2
-    m_Bits: 1024
   mat: {fileID: 2100000, guid: bf1ede0e762e2f240bf3df9878045d69, type: 2}
   alphaReductionSteps: 10
 --- !u!1001 &8084322144036485430

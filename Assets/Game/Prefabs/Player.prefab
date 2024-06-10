@@ -132,7 +132,6 @@ MonoBehaviour:
   isAlive: 1
   damageDelay: 0.5
   knockbackTime: 0.25
-  framesToPause: 4
   isInvincible: 0
   onDeathEvent:
     m_PersistentCalls:
@@ -199,13 +198,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1901138044527206527}
   moveSpeed: 5
+  sprintMultiplier: 1.5
   slowDownMultiplierOnAttack: 0.1
   dashDistance: 3
   dashDuration: 0.2
   dashCooldown: 0.25
   dashStaminaUse: 25
   useGravity: 1
-  isDashing: 0
   cameraTransform: {fileID: 0}
   rotationDuration: 0.7
   rotationIncrement: 60
@@ -270,9 +269,6 @@ MonoBehaviour:
   meshDestroyDelay: 0.1
   model: {fileID: 5505832874139599896}
   trailType: 0
-  ignoreLightingLayer:
-    serializedVersion: 2
-    m_Bits: 1024
   mat: {fileID: 2100000, guid: c05ea85d9a0e4e24d8c08daea614544f, type: 2}
   alphaReductionSteps: 15
 --- !u!2083052967 &1494307534359424848
@@ -448,7 +444,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7f69d7d97456a41befd77507afab60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _framesToPause: 0
+  cameraShakeIntensity: 1
+  cameraShakeTime: 0.5
   arcAngle: 90
   arcRadius: 1
   meshResolution: 3
@@ -806,6 +803,12 @@ PrefabInstance:
 --- !u!4 &5126069991169466018 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4659479598651636041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5505832874139599896 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0d0c5be203bd64e4fba091b0de9ab88c,
     type: 3}
   m_PrefabInstance: {fileID: 4659479598651636041}
   m_PrefabAsset: {fileID: 0}
