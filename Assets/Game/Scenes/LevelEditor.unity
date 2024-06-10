@@ -1446,6 +1446,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5760338420974404415, guid: 7c19e2e033650b243b9b77976b3424a8,
         type: 3}
+      propertyPath: dashDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5760338420974404415, guid: 7c19e2e033650b243b9b77976b3424a8,
+        type: 3}
       propertyPath: cameraTransform
       value: 
       objectReference: {fileID: 823012863}
