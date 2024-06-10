@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
         // Interrupt any attack release animation
         weaponController.InterruptAttack();
 
-        Vector3 moveDirection = Utils.DirectionToCameraForward(transform.position,moveInput);
+        Vector3 moveDirection = CameraManager.Instance.DirectionToCameraForward(transform.position,moveInput);
         // Rotate the player to look at the movement direction
         float _moveSpeed = moveSpeed;
         if (!weaponController.IsInterruptable())
@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
         {
             weaponController.ResetCombo();
             weaponController.DashInterruptAttack();
-            Vector3 dashDirection = Utils.DirectionToCameraForward(transform.position, inputController.movement);
+            Vector3 dashDirection = CameraManager.Instance.DirectionToCameraForward(transform.position, inputController.movement);
             dashDirection = dashDirection == Vector3.zero ? transform.forward : dashDirection;
 
             // Rotate player to dash
@@ -171,11 +171,8 @@ public class PlayerController : MonoBehaviour
                 staminaUsed = true;
                 // Stamina might have been changed by some other action.
                 // Just confirm that player has enough stamina for dashing
-                if (GameManager.Instance.PlayerStamina < dashStaminaUse)
-                {
-                    break;
-                }
-                GameManager.Instance.PlayerStamina -= dashStaminaUse;
+                if (GameManager.Instance.PlayerStamina < dashStaminaUse) break;
+                GameManager.Instance.UseStamina(dashStaminaUse);
             }
 
             transform.position = startPosition + dashVector * dashProgress;

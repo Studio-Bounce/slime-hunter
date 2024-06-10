@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 // DamageTaker does not need rigidbody. Its collider triggers the collider of DamageDealer.
 // There's no OnTriggerEnter here because of absence of rigidbody.
@@ -12,8 +11,7 @@ using UnityEngine.UI;
 public class DamageTaker : MonoBehaviour, ITakeDamage
 {
     public int health = 100;
-    [SerializeField] protected Slider healthSlider;
-    private int maxHealth = 0;
+    protected int maxHealth = 100;
     [HideInInspector, ReadOnly]
     public bool isAlive = true;
 
@@ -62,16 +60,11 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
             if (damage.effect != null)
             {
-                Debug.Log(damage.effect.effectName);
                 statusEffectManager.AddEffect(damage.effect);
             }
             StartCoroutine(ApplyKnockback(damage));
         }
         lastDamageTime = Time.time;
-        if (healthSlider != null)
-        {
-            healthSlider.value = ((float) health / maxHealth);
-        }
 
         if (health <= 0)
         {

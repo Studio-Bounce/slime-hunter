@@ -12,15 +12,12 @@ public class StatusEffectManager : MonoBehaviour
     public List<StatusEffect> activeEffects = new List<StatusEffect>();
     public List<StatusEffect> effectsToRemove = new List<StatusEffect>();
 
-
-
     private void Start()
     {
         damageTaker = GetComponent<DamageTaker>();
-        statusBar = GetComponent<StatusBar>();
 
+        statusBar = statusBarPrefab.GetComponent<StatusBar>();
         InitializeStatusBar();
-
         foreach (var effect in activeEffects)
         {
             effect.StartEffect(damageTaker);
@@ -36,8 +33,7 @@ public class StatusEffectManager : MonoBehaviour
     {
         if (showStatusBar)
         {
-            statusBar = Instantiate(statusBarPrefab)?.GetComponent<StatusBar>();
-            statusBar.Initialize(transform);
+            statusBar = Instantiate(statusBarPrefab, transform, false)?.GetComponent<StatusBar>();
         }
     }
 
