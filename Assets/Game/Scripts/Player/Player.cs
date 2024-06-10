@@ -8,7 +8,6 @@ public class Player : DamageTaker
 {
     public float slowDownOnHitMultiplier = 0.2f;
     public int slowDownOnHitFrames = 5;
-    public ImageFill staminaUI;
     PlayerController playerController;
 
     private void Awake()

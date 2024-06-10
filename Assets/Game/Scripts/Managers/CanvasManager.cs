@@ -59,4 +59,9 @@ public class CanvasManager : Singleton<CanvasManager>
     {
         canvasAnchorList.Remove(canvasAnchor);
     }
+
+    private void OnDestroy()
+    {
+        canvasAnchorList.Clear();
+    }
 }
