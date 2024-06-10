@@ -62,10 +62,12 @@ public class CanvasManager : Singleton<CanvasManager>
 
     private void OnDestroy()
     {
+        canvasAnchorList.Clear();
         // Ensure that screenCanvas is destroyed
         if (screenCanvas != null)
         {
-            Destroy(screenCanvas);
+            Destroy(screenCanvas.gameObject);
+            screenCanvas = null;
         }
     }
 }
