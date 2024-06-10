@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CapsuleCollider))]
 public class Player : DamageTaker
 {
     public float slowDownOnHitMultiplier = 0.2f;
     public int slowDownOnHitFrames = 5;
-
     PlayerController playerController;
 
     private void Awake()

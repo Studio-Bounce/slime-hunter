@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 public enum EnemyEye
@@ -36,6 +37,9 @@ public class Enemy : DamageTaker
 
     BasicSlime_FSM fsm;
 
+    [SerializeField] protected Slider healthSlider;
+
+
     protected override void Start()
     {
         base.Start();
@@ -46,6 +50,7 @@ public class Enemy : DamageTaker
         isAlive = true;
 
         fsm = GetComponent<BasicSlime_FSM>();
+        CanvasManager.Instance.AddAnchoredElement(transform, healthSlider.GetComponent<RectTransform>(), new Vector2(0, 80));
     }
 
     // Used in child classes to call the original TakeDamage method
@@ -66,6 +71,12 @@ public class Enemy : DamageTaker
     public override void TakeDamage(Damage damage)
     {
         BaseEnemyTakeDamage(damage);
+
+        if (healthSlider != null)
+        {
+            healthSlider.value = ((float)health / maxHealth);
+        }
+
         if (!isInvincible)
         {
             StartCoroutine(ChangeEyeToDamage());

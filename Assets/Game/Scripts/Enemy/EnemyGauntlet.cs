@@ -126,7 +126,7 @@ public class EnemyGauntlet : MonoBehaviour
                 startPosition.y = startHeight;
                 Vector3 endPosition = wall.transform.position;
                 endPosition.y = endHeight;
-                wall.transform.position = Utils.UnclampedLerp(startPosition, endPosition, t);
+                wall.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, t);
             }
             timeElapsed += Time.deltaTime;
             yield return null;
@@ -147,7 +147,7 @@ public class EnemyGauntlet : MonoBehaviour
             while (timeElapsed < animationTime)
             {
                 float t = Easing.EaseInBack(timeElapsed / animationTime);
-                wall.transform.position = Utils.UnclampedLerp(startPosition, endPosition, t);
+                wall.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, t);
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
