@@ -52,6 +52,9 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             Material[] mats = { redGlow };
             fsm.slimeOuterMesh.materials = mats;
         }
+        // Disable shadow in slime outer mesh to show transparent material properly
+        fsm.slimeOuterMesh.gameObject.layer = GameConstants.IgnoreLightingLayer;
+
         fsm.StartCoroutine(IncreaseEmissionIntensity(10));
 
         // Make the weapon active
@@ -143,6 +146,8 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             Material[] mats = { fsm.defaultMat };
             fsm.slimeOuterMesh.materials = mats;
         }
+        // Revert layer back to enemy
+        fsm.slimeOuterMesh.gameObject.layer = GameConstants.EnemyLayer;
 
         // Make the weapon inactive
         fsm.weapon.DeactivateWeapon();
@@ -158,7 +163,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
     {
         Vector3 lineDirection = fsm.playerTransform.position - fsm.transform.position;
         Ray ray = new(fsm.transform.position, lineDirection);
-        int layerMask = 1 << 9;  // 9th layer is EnemyBoundary
+        int layerMask = (1 << GameConstants.EnemyBoundaryLayer);
         if (Physics.Raycast(ray, out RaycastHit hit, lineDirection.magnitude, layerMask))
         {
             // Little offset, just so that the target is not directly on the wall
