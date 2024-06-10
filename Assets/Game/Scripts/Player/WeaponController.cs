@@ -152,17 +152,23 @@ public class WeaponController : MonoBehaviour
     {
         currentAttackState = AttackState.WIND_UP;
         SetupAttackAnimation(move);
+
         // Increment combo
-        _attackMoveIndex = _attackMoveIndex < CurrentWeapon.attackMoves.Count-1 ? _attackMoveIndex+1 : 0;
+        bool isFinalAttack = (_attackMoveIndex == CurrentWeapon.attackMoves.Count - 1);
+        _attackMoveIndex = isFinalAttack ? 0 : _attackMoveIndex + 1;
+
         // Rotate player towards attack
         transform.forward = direction;
         weaponTrail.transform.forward = direction;
+
         // Start attack 
         _animator.SetTrigger(attackStartTriggerHash);
         yield return new WaitForSeconds(move.animationOffset);
+
         currentAttackState = AttackState.ACTIVE;
-        weaponTrail.Attack(move);
+        weaponTrail.Attack(move, isFinalAttack);
         yield return new WaitForSeconds(move.duration);
+
         currentAttackState = AttackState.WIND_DOWN;
         yield return new WaitForSeconds(move.clip.length - (move.animationOffset + move.duration));
         if (currentAttackState == AttackState.WIND_DOWN)

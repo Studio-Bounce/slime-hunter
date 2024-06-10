@@ -14,6 +14,11 @@ public class DamageDealer : MonoBehaviour
     // attackDetected can be used by child classes to do something on attack
     protected bool attackDetected = false;
 
+    [Header("Camera Shake")]
+    [SerializeField] float cameraShakeIntensity = 1.0f;
+    [SerializeField] float cameraShakeTime = 0.5f;
+    protected bool applyCameraShake = false;
+
     protected virtual void Start()
     {
         // Ensure the rigid body is kinematic
@@ -35,6 +40,10 @@ public class DamageDealer : MonoBehaviour
             damage.direction = (other.transform.position - transform.position).normalized;
             ITakeDamage damageReceiver = other.gameObject.GetComponent<ITakeDamage>();
             damageReceiver?.TakeDamage(damage);
+            if (applyCameraShake)
+            {
+                CameraManager.Instance.ShakeCamera(cameraShakeIntensity, cameraShakeTime);
+            }
             attackDetected = true;
         }
     }

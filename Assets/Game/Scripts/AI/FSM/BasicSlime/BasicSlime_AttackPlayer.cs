@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 {
-    readonly int ToIdleAnimation = Animator.StringToHash("toIdle");
     readonly int AttackChargeAnimation = Animator.StringToHash("attackChargeUp");
     readonly int AttackReachedAnimation = Animator.StringToHash("attackReached");
+    readonly int AttackCompleteAnimation = Animator.StringToHash("attackComplete");
 
     readonly int ChargeUpState = Animator.StringToHash("HeadButt_ChargeUp");
     readonly int MoveState = Animator.StringToHash("HeadButt_Move");
@@ -52,6 +52,9 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             Material[] mats = { redGlow };
             fsm.slimeOuterMesh.materials = mats;
         }
+        // Disable shadow in slime outer mesh to show transparent material properly
+        fsm.slimeOuterMesh.gameObject.layer = GameConstants.IgnoreLightingLayer;
+
         fsm.StartCoroutine(IncreaseEmissionIntensity(10));
 
         // Make the weapon active
@@ -143,6 +146,8 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             Material[] mats = { fsm.defaultMat };
             fsm.slimeOuterMesh.materials = mats;
         }
+        // Revert layer back to enemy
+        fsm.slimeOuterMesh.gameObject.layer = GameConstants.EnemyLayer;
 
         // Make the weapon inactive
         fsm.weapon.DeactivateWeapon();
@@ -150,15 +155,15 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         // Change eye
         fsm.slimeEnemy.SetEye(EnemyEye.NORMAL);
 
-        // Ensure the attack animation sequence has been completed
-        fsm.slimeAnimator.SetTrigger(ToIdleAnimation);
+        // Ensure animation does not get stuck on dash
+        fsm.slimeAnimator.SetTrigger(AttackCompleteAnimation);
     }
 
     Vector3 GetSlimeTargetConsideringBoundary()
     {
         Vector3 lineDirection = fsm.playerTransform.position - fsm.transform.position;
         Ray ray = new(fsm.transform.position, lineDirection);
-        int layerMask = 1 << 9;  // 9th layer is EnemyBoundary
+        int layerMask = (1 << GameConstants.EnemyBoundaryLayer);
         if (Physics.Raycast(ray, out RaycastHit hit, lineDirection.magnitude, layerMask))
         {
             // Little offset, just so that the target is not directly on the wall

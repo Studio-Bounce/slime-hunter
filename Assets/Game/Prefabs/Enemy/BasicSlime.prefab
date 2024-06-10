@@ -9900,7 +9900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8823308102426459182
 Transform:
   m_ObjectHideFlags: 0
@@ -10167,14 +10167,14 @@ MonoBehaviour:
   slimeEnemy: {fileID: 0}
   defaultMat: {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
   chaseMat: {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
-  attackMat: {fileID: 2100000, guid: 54086adf35a39a34f93097e070b5c598, type: 2}
-  attackGlowIntensity: 1
+  attackMat: {fileID: 2100000, guid: f21b9f86456c57f4aaf2dd713eac1d33, type: 2}
+  attackGlowIntensity: 3.5
   cooldownTime: 1
   seekDistance: 8
   wanderSpeed: 1
   chaseSpeed: 3
   attackSpeed: 50
-  attackRadius: 5
+  attackRadius: 4
   attackEmissionTime: 1
   attackProximity: 1
   slimeAnimator: {fileID: 1065457560711704899}
@@ -10190,6 +10190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraShakeIntensity: 1
+  cameraShakeTime: 0.5
   slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
 --- !u!114 &984750678147540403
 MonoBehaviour:
