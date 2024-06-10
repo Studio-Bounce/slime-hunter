@@ -49,7 +49,9 @@ public class WeaponTrail : DamageDealer
         arcRadius = weaponSO.range;
     }
 
-    public void Attack(AttackMove move)
+    // If the attack is part of a attack combo sequence, isFinalAttack tells whether
+    // it is the final attack in this sequence or not
+    public void Attack(AttackMove move, bool isFinalAttack)
     {
         // Update weapon damage on attack
         damage.value = (int)(currentWeaponSO.damage.value * move.damageMultiplier);
@@ -73,6 +75,8 @@ public class WeaponTrail : DamageDealer
 
         weaponVFX.transform.rotation = Quaternion.Euler(weaponVFX.transform.rotation.eulerAngles.x, weaponVFX.transform.rotation.eulerAngles.y, verticalRotation);
         UpdateArcMesh();
+
+        applyCameraShake = isFinalAttack;
         StartCoroutine(ActiveAttack(move.duration));
     }
 
