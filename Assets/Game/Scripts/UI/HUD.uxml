@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Game/Scripts/UI/USS/ProgressBar.uss?fileID=7433441132597879392&amp;guid=0fdab442c7ffa024e8faa0924c8217d2&amp;type=3#ProgressBar" />
-    <Style src="project://database/Assets/Game/Scripts/UI/USS/SkillCD.uss?fileID=7433441132597879392&amp;guid=221c6915abb9f9744a49ca7c683d18a2&amp;type=3#SkillCD" />
-    <Style src="project://database/Assets/Game/Scripts/UI/USS/Damage.uss?fileID=7433441132597879392&amp;guid=37c76dbc6d95c6041934135cae8ea696&amp;type=3#Damage" />
+    <Style src="project://database/Assets/Game/Scripts/UI/Uss/ProgressBar.uss?fileID=7433441132597879392&amp;guid=0fdab442c7ffa024e8faa0924c8217d2&amp;type=3#ProgressBar" />
+    <Style src="project://database/Assets/Game/Scripts/UI/Uss/SkillCD.uss?fileID=7433441132597879392&amp;guid=221c6915abb9f9744a49ca7c683d18a2&amp;type=3#SkillCD" />
+    <Style src="project://database/Assets/Game/Scripts/UI/Uss/Damage.uss?fileID=7433441132597879392&amp;guid=37c76dbc6d95c6041934135cae8ea696&amp;type=3#Damage" />
     <ui:VisualElement name="Background" style="flex-grow: 1; background-image: none; -unity-background-scale-mode: scale-to-fit; background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgba(255, 255, 255, 0.24); align-self: auto; align-items: stretch; flex-direction: row; color: rgb(27, 27, 27); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
         <ui:VisualElement name="Left" style="flex-grow: 0; height: auto; width: 30%;">
             <ui:VisualElement name="Blank_Lefttop" style="flex-grow: 0; height: 79%;" />
@@ -50,5 +50,5 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="Red_Alert" class="redalert" style="flex-grow: 1; position: absolute; height: 1080px; width: 1920px; -unity-background-scale-mode: scale-and-crop; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Rectangle%2047playersttacked.png?fileID=2800000&amp;guid=000297ea16efd484185e1cd60150cb9f&amp;type=3#Rectangle 47playersttacked&quot;); -unity-background-image-tint-color: rgb(255, 255, 255); opacity: 0;" />
+    <ui:VisualElement name="Red_Alert" class="redalert" style="flex-grow: 1; position: absolute; height: 1080px; width: 1920px; -unity-background-scale-mode: stretch-to-fill; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Rectangle%2047playersttacked.png?fileID=2800000&amp;guid=000297ea16efd484185e1cd60150cb9f&amp;type=3#Rectangle 47playersttacked&quot;); -unity-background-image-tint-color: rgb(255, 255, 255); opacity: 0;" />
 </ui:UXML>
