@@ -18,23 +18,18 @@ public class Menu : MonoBehaviour
         SetVisible(showOnStart);
     }
 
-    public virtual void Load()
+    public void SetVisible(bool visible)
     {
-
+        uiDocument.rootVisualElement.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
     }
 
     public void Show()
     {
-        uiDocument.rootVisualElement.style.display = DisplayStyle.Flex;
+        SetVisible(true);
     }
 
     public void Hide()
     {
-        uiDocument.rootVisualElement.style.display = DisplayStyle.None;
-    }
-
-    public void SetVisible(bool visible)
-    {
-        uiDocument.rootVisualElement.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+        SetVisible(false);
     }
 }

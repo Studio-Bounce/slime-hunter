@@ -5,6 +5,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// All game state actions must use this!
+public enum GameStates
+{
+    INVALID,
+    MAIN_MENU,
+    LOADING,
+    PAUSED,
+    GAMEPLAY
+};
+
 public class GameManager : Singleton<GameManager>
 {
     // Global Variables
@@ -25,6 +35,13 @@ public class GameManager : Singleton<GameManager>
     private bool _cooldown = false;
 
     public Canvas screenCanvas;
+
+    GameStates _gameState = GameStates.INVALID;
+    public GameStates GameState
+    {
+        get { return _gameState; }
+        set { _gameState = value; }
+    }
 
     public int PlayerHealth
     {

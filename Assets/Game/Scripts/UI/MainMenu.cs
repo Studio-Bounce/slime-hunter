@@ -24,6 +24,7 @@ public class MainMenu : Menu
         SceneLoader.Instance.LoadScene(playSceneName);
         UIManager.Instance.SetMainMenu(false);
         UIManager.Instance.SetHUDMenu(true);
+        GameManager.Instance.GameState = GameStates.GAMEPLAY;
     }
 
     private void QuitGame()

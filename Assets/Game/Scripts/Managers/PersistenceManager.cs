@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PersistenceManager : Singleton<PersistenceManager>
 {
+    [Tooltip("Time between each auto-save")]
+    [SerializeField] float autoSaveInterval = 5.0f;
+
     List<PersistentObject> persistentGameObjects;
     const string SAVE_FOLDER = "slime_hunter_save";
 
@@ -15,6 +18,32 @@ public class PersistenceManager : Singleton<PersistenceManager>
         {
             Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, SAVE_FOLDER));
         }
+    }
+
+    private void Start()
+    {
+        // Auto-save every x seconds
+        StartCoroutine(AutoSaveSequence());
+    }
+
+    IEnumerator AutoSaveSequence()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(autoSaveInterval - 1.0f);
+            if (GameManager.Instance.GameState == GameStates.GAMEPLAY)
+            {
+                UIManager.Instance.ShowAutoSave();
+                SaveGame();
+                yield return new WaitForSeconds(1.0f);  // Ideally this should be the time taken in saving
+                UIManager.Instance.HideAutoSave();
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 
     // ---------------------- Save / Load ----------------------
