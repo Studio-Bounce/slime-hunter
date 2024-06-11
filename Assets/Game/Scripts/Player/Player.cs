@@ -28,7 +28,6 @@ public class Player : DamageTaker
     {
         // Trigger events
         onDeathEvent.Invoke();
-        GameManager.Instance.PlayerHealth = GameManager.Instance.PlayerMaxHealth;
     }
 
     public override void TakeDamage(Damage damage)

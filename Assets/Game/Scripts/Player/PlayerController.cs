@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
         trail = GetComponent<Trail>();
 
+        // Find the virual camera and tell it about the player
         if (cameraTransform == null)
         {
             GameObject virtualCam = GameObject.FindWithTag(GameConstants.VirtualCameraTag);

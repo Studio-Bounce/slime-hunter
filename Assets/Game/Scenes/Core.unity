@@ -878,6 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d06df7d3d350c8e4a8f23902302248fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameSceneName: DemoLevel
   playerRef: {fileID: 0}
   playerHealth: 100
   playerStamina: 3
@@ -885,7 +886,6 @@ MonoBehaviour:
   staminaIncreaseInterval: 0.33
   cooldownLength: 1.5
   screenCanvas: {fileID: 1122067127}
-  _gameState: 1
 --- !u!1 &1444939304
 GameObject:
   m_ObjectHideFlags: 0

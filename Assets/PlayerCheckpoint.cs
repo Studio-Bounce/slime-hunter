@@ -21,7 +21,6 @@ public class PlayerCheckpoint : MonoBehaviour
         if (!isCheckpointCleared && other.gameObject.layer == GameConstants.PlayerLayer)
         {
             isCheckpointCleared = true;
-            Debug.Log($"Player entered checkpoint {gameObject.name}");
             spawner.ModifyRecentCheckpoint(this);
         }
     }

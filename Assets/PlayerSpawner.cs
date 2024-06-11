@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
+using UnityEngine.VFX;
 
 // Keeps track of all player spawn points / checkpoints
 public class PlayerSpawner : PersistentObject
 {
     [SerializeField] GameObject playerPrefab;
-    GameObject playerInstance = null;
+    public GameObject playerInstance = null;
 
     public int currentCheckpointIdx = -1;
     public PlayerCheckpoint[] checkpoints;
@@ -31,16 +33,37 @@ public class PlayerSpawner : PersistentObject
     {
         int idx = (currentCheckpointIdx != -1) ? currentCheckpointIdx : 0;
         Vector3 playerPosition = checkpoints[idx].transform.position;
-        playerPosition.y = 0;
         if (playerInstance == null)
         {
             // Instantiate the player at appropriate location
             playerInstance = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
+            SceneManager.MoveGameObjectToScene(playerInstance, SceneManager.GetSceneByName(GameManager.Instance.gameSceneName));
         }
         else
         {
             // Move the player to latest location
-            playerInstance.transform.position = playerPosition;
+            // Player has a character controller so we can't move it directly
+            if (playerInstance.TryGetComponent<CharacterController>(out var playerCC))
+            {
+                playerCC.enabled = false;
+                playerInstance.transform.position = playerPosition;
+                playerCC.enabled = true;
+            }
+            else
+            {
+                playerInstance.transform.position = playerPosition;
+            }
+        }
+        PlayPlayerSpawnVFXWithDelay(0.5f);
+    }
+
+    IEnumerator PlayPlayerSpawnVFXWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        
+        if (playerInstance.TryGetComponent<VisualEffect>(out var visualEffect))
+        {
+            visualEffect.Play();
         }
     }
 
