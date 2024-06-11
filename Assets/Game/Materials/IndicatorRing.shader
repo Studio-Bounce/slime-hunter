@@ -15,6 +15,7 @@ Shader "Custom/IndicatorRing"
         Pass
         {
             Blend SrcAlpha OneMinusSrcAlpha
+            ZTest Always
             ZWrite Off
 
             HLSLPROGRAM
@@ -31,8 +32,8 @@ Shader "Custom/IndicatorRing"
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float2 uv : TEXCOORD0;
             };
 
             float4 _Color;
@@ -56,8 +57,11 @@ Shader "Custom/IndicatorRing"
                 float sdf = length(center - i.uv) - (_Radius-(thickness+_Feathering));
                 sdf = abs(sdf);
                 sdf = 1-smoothstep(thickness, thickness+_Feathering, sdf);
+                sdf = sdf*sdf*sdf;
 
-                fixed4 col = _Color*sdf;
+                fixed4 col = _Color;
+                col.a *= sdf;
+
                 return col;
             }
             ENDHLSL

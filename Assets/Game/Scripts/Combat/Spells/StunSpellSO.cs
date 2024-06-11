@@ -7,6 +7,6 @@ public class StunSpellSO : SpellSO
 {
     public override void Cast()
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Cast");
     }
 }

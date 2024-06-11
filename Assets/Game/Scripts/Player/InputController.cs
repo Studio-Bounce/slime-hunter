@@ -92,6 +92,9 @@ public class InputController : MonoBehaviour
         _playerActions.Rotate.performed += _playerController.RotateCamera;
         _playerActions.Attack.performed += attackQueuedAction;
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
+        // Spells
+        _playerActions.Spell1.performed +=  _spellController.StartCast;
+        _playerActions.CastSpell.performed += _spellController.Cast;
     }
 
     private void SetupUIControls()
@@ -132,6 +135,9 @@ public class InputController : MonoBehaviour
         _playerActions.Rotate.performed -= _playerController.RotateCamera;
         _playerActions.Attack.performed -= attackQueuedAction;
         _playerActions.CycleWeapon.performed -= _weaponController.CycleWeapon;
+
+        _playerActions.Spell1.performed -= _spellController.StartCast;
+        _playerActions.CastSpell.performed -= _spellController.Cast;
     }
 
     private void DisableUIControls()

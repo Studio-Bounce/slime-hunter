@@ -1,5 +1,10 @@
 using UnityEngine;
 
+public enum IndicatorType
+{
+    RADIAL
+}
+
 public abstract class SpellSO : ScriptableObject
 {
     public string spellName;
@@ -10,7 +15,7 @@ public abstract class SpellSO : ScriptableObject
     public float castTime;
     public float manaCost;
     public GameObject spellEffectPrefab;
-    public SpellIndicator spellIndicator;
+    public IndicatorType spellIndicator;
 
     public abstract void Cast();
 }

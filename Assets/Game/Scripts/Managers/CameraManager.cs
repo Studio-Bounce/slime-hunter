@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class CameraManager : Singleton<CameraManager>
 {
-    public Camera _activeCamera;
-    public CinemachineVirtualCamera _activeVCamera;
+    public static Camera _activeCamera;
+    public static CinemachineVirtualCamera _activeVCamera;
 
-    public Camera ActiveCamera { get { return _activeCamera; } }
-    public CinemachineVirtualCamera ActiveCineCamera { get { return _activeVCamera; } }
+    public static Camera ActiveCamera { get { return _activeCamera; } }
+    public static CinemachineVirtualCamera ActiveCineCamera { get { return _activeVCamera; } }
 
     public void SwitchToCamera(Camera cam, CinemachineVirtualCamera vCam = null)
     {

@@ -4,35 +4,65 @@ using UnityEngine;
 
 public class RadialIndicator : SpellIndicator
 {
-    public GameObject indicatorPrefab;
-
     public float castRange;
     public float radiusOfEffect;
 
-    private Transform sourceIndicator;
-    private Transform targetIndicator;
+    public Transform player;
+    public Transform sourceIndicator;
+    public Transform targetIndicator;
+
+    public Renderer sourceRenderer;
+    public Renderer targetRenderer;
 
     private void Start()
     {
-        Debug.Assert(indicatorPrefab != null, "Requires prefab for indicator");
-        sourceIndicator = Instantiate(indicatorPrefab, transform, false).transform;
-        sourceIndicator.localScale = new Vector3(castRange, castRange, castRange);
-        sourceIndicator.gameObject.SetActive(false);
+        Debug.Assert(player != null, "Requires transform for player");
+        Debug.Assert(sourceIndicator != null, "Requires prefab for sourceIndicator");
+        Debug.Assert(targetIndicator != null, "Requires prefab for targetIndicator");
 
-        targetIndicator = Instantiate(indicatorPrefab, transform, false).transform;
+        sourceIndicator.localScale = new Vector3(castRange, castRange, castRange);
         targetIndicator.localScale = new Vector3(radiusOfEffect, radiusOfEffect, radiusOfEffect);
-        targetIndicator.gameObject.SetActive(false);
+
+        Material material = sourceRenderer.material;
+        float thickness = material.GetFloat("_Thickness");
+        float feathering = material.GetFloat("_Feathering");
+        material.SetFloat("_Thickness", thickness / castRange);
+        material.SetFloat("_Feathering", feathering / castRange);
+
+        material = targetRenderer.material;
+        thickness = material.GetFloat("_Thickness");
+        feathering = material.GetFloat("_Feathering");
+        material.SetFloat("_Thickness", thickness / radiusOfEffect);
+        material.SetFloat("_Feathering", feathering / radiusOfEffect);
+
+    }
+
+    private void Update()
+    {
+        sourceIndicator.transform.position = player.position;
+
+        Ray ray = CameraManager.ActiveCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            Vector3 direction = hit.point - player.position;
+
+            if (direction.magnitude > castRange)
+            {
+                direction = direction.normalized * castRange;
+            }
+
+            targetIndicator.position = player.position + direction;
+        }
     }
 
     public override void ShowIndicator()
     {
-        sourceIndicator?.gameObject.SetActive(true);
-        targetIndicator?.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public override void HideIndicator()
     {
-        sourceIndicator?.gameObject.SetActive(false);
-        targetIndicator?.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }
