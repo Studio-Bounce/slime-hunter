@@ -18,9 +18,11 @@ public class Startup : MonoBehaviour
 
     IEnumerator BootSequence()
     {
+        GameManager.Instance.GameState = GameStates.LOADING;
         yield return new WaitForSeconds(InitialBootDelay);
         if (InitialUI != null )
         {
+            GameManager.Instance.GameState = GameStates.MAIN_MENU;
             UIManager.Instance.ShowUI(InitialUI);
             SceneLoader.Instance.LoadScene(StartupSceneName);
         }

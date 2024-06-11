@@ -5,7 +5,6 @@ using UnityEngine;
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
 	private static T instance;
-	private bool initialized;
 
 	public static T Instance
 	{
