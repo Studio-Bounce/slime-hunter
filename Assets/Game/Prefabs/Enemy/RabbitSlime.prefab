@@ -10230,7 +10230,7 @@ MonoBehaviour:
   chaseMat: {fileID: 2100000, guid: 162f61ffdabb50c43850c43146a531ae, type: 2}
   attackMat: {fileID: 2100000, guid: f21b9f86456c57f4aaf2dd713eac1d33, type: 2}
   attackGlowIntensity: 3.5
-  cooldownTime: 0.8
+  cooldownTime: 1.3
   seekDistance: 12
   wanderSpeed: 4
   chaseSpeed: 5
@@ -10251,8 +10251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraShakeIntensity: 1
-  cameraShakeTime: 0.5
+  cameraShakeIntensity: 5
+  cameraShakeTime: 0.05
   slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
 --- !u!114 &5300803188311187486
 MonoBehaviour:
