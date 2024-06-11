@@ -17,7 +17,7 @@ public class BasicSlime_FSM : FSM
 
     [HideInInspector] public SteeringAgent slimeAgent;
     [HideInInspector] public CharacterController characterController;
-    [HideInInspector] public Transform playerTransform;
+    Transform playerTransform;
 
     public SkinnedMeshRenderer slimeOuterMesh;
     [HideInInspector] public EnemyWeapon weapon;
@@ -49,8 +49,35 @@ public class BasicSlime_FSM : FSM
         characterController = GetComponent<CharacterController>();
         weapon = GetComponent<EnemyWeapon>();
         slimeEnemy = GetComponent<Enemy>();
-        playerTransform = GameObject.FindWithTag("Player")?.transform;
-        UnityEngine.Assertions.Assert.IsNotNull(playerTransform, "GameObject with tag 'Player' not found!");
+
+        // Player might take some time to get spawned
+        // Keep trying to find the player till the player is found
+        StartCoroutine(FindPlayer());
+    }
+
+    IEnumerator FindPlayer()
+    {
+        while (playerTransform == null)
+        {
+            playerTransform = GameObject.FindWithTag("Player")?.transform;
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    public Vector3 GetPlayerForward()
+    {
+        if (playerTransform == null)
+            return Vector3.forward;
+
+        return playerTransform.forward;
+    }
+
+    public Vector3 GetPlayerPosition()
+    {
+        if (playerTransform == null)
+            return Vector3.zero;
+
+        return playerTransform.position;
     }
 
     private void OnDrawGizmos()

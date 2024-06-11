@@ -8,12 +8,11 @@ public class PersistenceManager : Singleton<PersistenceManager>
     [Tooltip("Time between each auto-save")]
     [SerializeField] float autoSaveInterval = 5.0f;
 
-    List<PersistentObject> persistentGameObjects;
+    List<PersistentObject> persistentGameObjects = new List<PersistentObject>();
     const string SAVE_FOLDER = "slime_hunter_save";
 
     private void Awake()
     {
-        persistentGameObjects = new List<PersistentObject>();
         if (!Directory.Exists(Path.Combine(Application.persistentDataPath, SAVE_FOLDER)))
         {
             Directory.CreateDirectory(Path.Combine(Application.persistentDataPath, SAVE_FOLDER));

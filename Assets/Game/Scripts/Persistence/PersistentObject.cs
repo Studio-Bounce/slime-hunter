@@ -12,6 +12,7 @@ public abstract class PersistentObject : MonoBehaviour, IPersistent
     {
         if (string.IsNullOrEmpty(uuid))
         {
+            Debug.LogWarning("UUID not found! Fix it. This causes invalid save files to be created.");
             uuid = Guid.NewGuid().ToString();
         }
         PersistenceManager.Instance.RegisterPersistent(this);

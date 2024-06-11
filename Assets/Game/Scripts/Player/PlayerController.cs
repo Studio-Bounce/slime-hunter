@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using Unity.VisualScripting;
@@ -52,7 +53,21 @@ public class PlayerController : MonoBehaviour
         weaponController = GetComponent<WeaponController>();
         trail = GetComponent<Trail>();
 
-        Debug.Assert(cameraTransform != null, "Missing camera transform");
+        if (cameraTransform == null)
+        {
+            GameObject virtualCam = GameObject.FindWithTag(GameConstants.VirtualCameraTag);
+            if (virtualCam == null)
+            {
+                Debug.LogError("Could not find the appropriate virtual camera");
+            }
+            else
+            {
+                if (virtualCam.TryGetComponent<CinemachineVirtualCamera>(out var virtualCamera))
+                {
+                    virtualCamera.Follow = transform;
+                }
+            }
+        }
     }
 
     private void Update()
