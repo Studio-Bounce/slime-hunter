@@ -10172,10 +10172,10 @@ MonoBehaviour:
   cooldownTime: 1
   seekDistance: 8
   wanderSpeed: 1
-  chaseSpeed: 3
-  attackSpeed: 50
+  chaseSpeed: 7
+  attackSpeed: 80
   attackRadius: 4
-  attackEmissionTime: 1
+  attackEmissionTime: 1.5
   attackProximity: 1
   slimeAnimator: {fileID: 1065457560711704899}
 --- !u!114 &4347139268971403823
@@ -10190,6 +10190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  framesToPause: 34
   cameraShakeIntensity: 1
   cameraShakeTime: 0.5
   slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
