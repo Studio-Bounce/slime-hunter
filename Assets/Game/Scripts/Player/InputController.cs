@@ -99,16 +99,16 @@ public class InputController : MonoBehaviour
         _UIActions.Pause.performed += Pause;
     }
 
-    // Temp, may have global UI controls?
     private void Pause(InputContext context)
     {
-        if (UIManager.Instance.pauseMenu.IsVisible)
+        if (GameManager.Instance.GameState == GameStates.PAUSED)
         {
             UIManager.Instance.SetPauseMenu(false);
             Time.timeScale = 1;
         }
         else
         {
+            GameManager.Instance.GameState = GameStates.PAUSED;
             UIManager.Instance.SetPauseMenu(true);
             Time.timeScale = 0;
         }

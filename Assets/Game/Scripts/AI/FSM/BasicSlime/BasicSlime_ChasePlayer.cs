@@ -6,7 +6,7 @@ public class BasicSlime_ChasePlayer : BasicSlime_BaseState
 {
     public virtual void SetChaseTarget()
     {
-        fsm.seekSteeringBehaviour.target = fsm.playerTransform.position;
+        fsm.seekSteeringBehaviour.target = fsm.GetPlayerPosition();
     }
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -36,7 +36,7 @@ public class BasicSlime_ChasePlayer : BasicSlime_BaseState
         // Player can move so keep adjusting target
         SetChaseTarget();
 
-        float playerDistance = Vector3.Distance(fsm.slimeAgent.transform.position, fsm.playerTransform.position);
+        float playerDistance = Vector3.Distance(fsm.slimeAgent.transform.position, fsm.GetPlayerPosition());
         // If player evaded, switch back to wander
         if (playerDistance > fsm.seekDistance)
         {

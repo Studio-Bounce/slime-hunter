@@ -161,7 +161,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
 
     Vector3 GetSlimeTargetConsideringBoundary()
     {
-        Vector3 lineDirection = fsm.playerTransform.position - fsm.transform.position;
+        Vector3 lineDirection = fsm.GetPlayerPosition() - fsm.transform.position;
         Ray ray = new(fsm.transform.position, lineDirection);
         int layerMask = (1 << GameConstants.EnemyBoundaryLayer);
         if (Physics.Raycast(ray, out RaycastHit hit, lineDirection.magnitude, layerMask))
@@ -169,6 +169,6 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
             // Little offset, just so that the target is not directly on the wall
             return (hit.point - 0.5f * lineDirection.normalized);
         }
-        return fsm.playerTransform.position;
+        return fsm.GetPlayerPosition();
     }
 }
