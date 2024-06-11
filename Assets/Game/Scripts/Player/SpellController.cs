@@ -3,8 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SpellController : MonoBehaviour
+public abstract class SpellController : MonoBehaviour
 {
+
+
+    public void ShowIndicator()
+    {
+
+    }
+
     public void Cast(InputAction.CallbackContext context)
     {
 
