@@ -96,14 +96,4 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
         }
         isInKnockback = false;
     }
-
-    IEnumerator PauseForFrames(uint frames)
-    {
-        Time.timeScale = 0;
-        for (uint i = 0; i < frames; i++)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        Time.timeScale = 1;
-    }
 }

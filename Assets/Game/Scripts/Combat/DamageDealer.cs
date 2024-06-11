@@ -9,6 +9,9 @@ public class DamageDealer : MonoBehaviour
     protected LayerMask hitLayers;
     protected Damage damage;
 
+    [Tooltip("Frames to pause game before continuing")]
+    public uint framesToPause;
+
     // Active damage dealer deals damage. Inactive does not.
     protected bool active = false;
     // attackDetected can be used by child classes to do something on attack
@@ -37,6 +40,7 @@ public class DamageDealer : MonoBehaviour
         if (!active) return;
         if ((hitLayers.value & (1 << other.gameObject.layer)) > 0)
         {
+            StartCoroutine(PauseForFrames(framesToPause));
             damage.direction = (other.transform.position - transform.position).normalized;
             ITakeDamage damageReceiver = other.gameObject.GetComponent<ITakeDamage>();
             damageReceiver?.TakeDamage(damage);
@@ -46,5 +50,15 @@ public class DamageDealer : MonoBehaviour
             }
             attackDetected = true;
         }
+    }
+
+    IEnumerator PauseForFrames(uint frames)
+    {
+        Time.timeScale = 0;
+        for (uint i = 0; i < frames; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        Time.timeScale = 1;
     }
 }
