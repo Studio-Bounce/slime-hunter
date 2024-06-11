@@ -15876,6 +15876,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8106494912137241872, guid: 61a52f839ddb1b445bdb739b327b09f8,
+        type: 3}
+      propertyPath: uuid
+      value: f8c5bfae-2007-43cc-8772-dbdb63817118
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23176,6 +23181,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8106494912137241872, guid: 61a52f839ddb1b445bdb739b327b09f8,
+        type: 3}
+      propertyPath: uuid
+      value: a634f77d-aaee-4d5f-8bc2-53c269b33ea6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -30121,6 +30131,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8106494912137241872, guid: 61a52f839ddb1b445bdb739b327b09f8,
+        type: 3}
+      propertyPath: uuid
+      value: 919b93ca-5e18-4908-af2f-68a2e8e2bee2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -33565,6 +33580,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8106494912137241872, guid: 61a52f839ddb1b445bdb739b327b09f8,
+        type: 3}
+      propertyPath: uuid
+      value: 28948296-f7fd-43f9-9997-1b2f77892991
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46002,8 +46022,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8106494912137241872, guid: 61a52f839ddb1b445bdb739b327b09f8,
         type: 3}
+      propertyPath: uuid
+      value: 3ecba539-571d-4012-b2a1-7afbd954b474
+      objectReference: {fileID: 0}
+    - target: {fileID: 8106494912137241872, guid: 61a52f839ddb1b445bdb739b327b09f8,
+        type: 3}
       propertyPath: isCheckpointCleared
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

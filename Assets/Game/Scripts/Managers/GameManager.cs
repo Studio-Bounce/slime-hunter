@@ -24,7 +24,7 @@ public class GameManager : Singleton<GameManager>
     public readonly int PlayerMaxHealth = 100;
     public readonly int PlayerMaxStamina = 3;
 
-    public string gameSceneName = "";
+    public string gameSceneName = "DemoLevel";
     public Player playerRef;
     public int playerHealth = 100;
     public int playerStamina = 3;

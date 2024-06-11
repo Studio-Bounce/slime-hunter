@@ -74,7 +74,8 @@ public class PlayerSpawner : PersistentObject
         {
             Debug.LogError("Invalid checkpoint");
         }
-        else
+        // No point in updating older checkpoints
+        else if (idx > currentCheckpointIdx)
         {
             currentCheckpointIdx = idx;
             // Save the checkpoint
