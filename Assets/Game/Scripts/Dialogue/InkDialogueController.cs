@@ -24,22 +24,6 @@ public class InkDialogueController : MonoBehaviour
         isStoryComplete = false;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == GameConstants.PlayerLayer)
-        {
-            StartStory();
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == GameConstants.PlayerLayer)
-        {
-            StartCoroutine(DelayedClear(2.0f));
-        }
-    }
-
     // Entry point which starts a story
     public void StartStory()
     {
@@ -49,6 +33,13 @@ public class InkDialogueController : MonoBehaviour
 
         story = new Story(inkStoryJSON.text);
         ContinueStory();
+    }
+
+    // Gets called when the story ends.
+    // Use this to start a quest
+    protected virtual void EndStory()
+    {
+        StartCoroutine(DelayedClear(5.0f));
     }
 
     // Main function which gets called every time the story changes
@@ -80,7 +71,7 @@ public class InkDialogueController : MonoBehaviour
         else
         {
             isStoryComplete = true;
-            StartCoroutine(DelayedClear(2.0f));
+            EndStory();
         }
     }
 
@@ -110,7 +101,7 @@ public class InkDialogueController : MonoBehaviour
         return choice;
     }
 
-    void ClearCanvas()
+    protected void ClearCanvas()
     {
         int childCount = canvas.transform.childCount;
         for (int i = childCount - 1; i >= 0; --i)
@@ -119,7 +110,7 @@ public class InkDialogueController : MonoBehaviour
         }
     }
 
-    IEnumerator DelayedClear(float timer)
+    protected IEnumerator DelayedClear(float timer)
     {
         isStoryRunning = false;
         yield return new WaitForSeconds(timer);
