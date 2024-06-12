@@ -9,4 +9,7 @@ public static class GameConstants
     public static int PlayerLayer { get; } = 8;
     public static int EnemyBoundaryLayer { get; } = 9;
     public static int IgnoreLightingLayer { get; } = 10;
+
+    // -------------- Unity Tags --------------
+    public static string VirtualCameraTag { get; } = "MainVirtualCamera";
 }

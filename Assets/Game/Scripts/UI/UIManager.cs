@@ -5,31 +5,51 @@ using UnityEngine.UIElements;
 
 public class UIManager : Singleton<UIManager>
 {
-    public Menu loadMenu;
-    public Menu mainMenu;
-    public Menu pauseMenu;
-    public Menu HUDMenu;//riccio's test
+    [SerializeField] public Menu loadMenu;
+    [SerializeField] public Menu mainMenu;
+    [SerializeField] public Menu pauseMenu;
+    [SerializeField] public Menu HUDMenu;
+    [SerializeField] public Menu autoSave;
 
+    // ----------------- Pause -----------------
     public void SetPauseMenu(bool active)
     {
+        if (active && GameManager.Instance.GameState != GameStates.PAUSED)
+        {
+            GameManager.Instance.GameState = GameStates.PAUSED;
+        }
         pauseMenu.SetVisible(active);
     }
 
+    // ----------------- Load -----------------
     public void SetLoadMenu(bool active)
     {
         loadMenu.SetVisible(active);
     }
 
+    // ----------------- Main Menu -----------------
     public void SetMainMenu(bool active)
     {
         mainMenu.SetVisible(active);
     }
 
+    // ----------------- HUD -----------------
     public void SetHUDMenu(bool active)
     {
         HUDMenu.SetVisible(active);
-    }//riccio's test
+    }
 
+    // ----------------- Auto-save -----------------
+    public void ShowAutoSave()
+    {
+        autoSave.Show();
+    }
+    public void HideAutoSave()
+    {
+        autoSave.Hide();
+    }
+
+    // ----------------- Generic -----------------
     public void ShowUI(Menu menuOBJ)
     {
         menuOBJ.Show();
@@ -39,4 +59,5 @@ public class UIManager : Singleton<UIManager>
     {
         menuOBJ.Hide();
     }
+
 }
