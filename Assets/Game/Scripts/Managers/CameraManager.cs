@@ -10,6 +10,17 @@ public class CameraManager : Singleton<CameraManager>
     public static Camera ActiveCamera { get { return _activeCamera; } }
     public static CinemachineVirtualCamera ActiveCineCamera { get { return _activeVCamera; } }
 
+    public void SetCameraFollow(Transform _transform)
+    {
+        if (ActiveCineCamera != null)
+        {
+            ActiveCineCamera.Follow = _transform;
+        } else
+        {
+            Debug.Log("No active CineCamera");
+        }
+    }
+
     public void SwitchToCamera(Camera cam, CinemachineVirtualCamera vCam = null)
     {
         if (_activeCamera)

@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     bool _isJumping = false;
 
     [Header("Camera Handling")]
-    public Transform cameraTransform;
     public float rotationDuration = 0.3f;
     public float rotationIncrement = 45f;
     public Vector2 rotationRange = Vector2.zero;
@@ -54,21 +53,7 @@ public class PlayerController : MonoBehaviour
         trail = GetComponent<Trail>();
 
         // Find the virual camera and tell it about the player
-        if (cameraTransform == null)
-        {
-            GameObject virtualCam = GameObject.FindWithTag(GameConstants.VirtualCameraTag);
-            if (virtualCam == null)
-            {
-                Debug.LogError("Could not find the appropriate virtual camera");
-            }
-            else
-            {
-                if (virtualCam.TryGetComponent<CinemachineVirtualCamera>(out var virtualCamera))
-                {
-                    virtualCamera.Follow = transform;
-                }
-            }
-        }
+        CameraManager.Instance.SetCameraFollow(transform);
     }
 
     private void Update()
@@ -257,7 +242,8 @@ public class PlayerController : MonoBehaviour
     {
         _isRotating = true;
         float startTime = Time.time;
-        Quaternion startRotation = cameraTransform.localRotation;
+        Transform cameraTransform = CameraManager.ActiveCineCamera.transform;
+        Quaternion startRotation =  cameraTransform.localRotation;
         Quaternion targetRotation = Quaternion.Euler(startRotation.eulerAngles.x, startRotation.eulerAngles.y + angle, startRotation.eulerAngles.z);
 
         while (Time.time < startTime + rotationDuration)
