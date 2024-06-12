@@ -1,18 +1,20 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewSpell", menuName = "Spells/Spell")]
-public abstract class Spell : ScriptableObject
+public enum IndicatorType
+{
+    RADIAL
+}
+
+[CreateAssetMenu(menuName = "Spell")]
+public class SpellSO : ScriptableObject
 {
     public string spellName;
+    [TextArea] public string description;
     public Sprite icon;
     public Damage damage;
     public float cooldown;
     public float castTime;
     public float manaCost;
-    public GameObject spellEffectPrefab;
-
-    [TextArea]
-    public string description;
-
-    public abstract void Cast();
+    public Spell spellPrefab;
+    public IndicatorType spellIndicator;
 }

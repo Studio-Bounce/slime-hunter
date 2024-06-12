@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
     bool _isJumping = false;
 
     [Header("Camera Handling")]
-    public Transform cameraTransform;
     public float rotationDuration = 0.3f;
     public float rotationIncrement = 45f;
     public Vector2 rotationRange = Vector2.zero;
@@ -46,6 +45,10 @@ public class PlayerController : MonoBehaviour
 
     private float lastDashTime = 0.0f;
 
+    public bool IsJumping { get { return _isJumping; } }
+    public bool IsDashing { get { return _isDashing; } }
+
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -54,21 +57,7 @@ public class PlayerController : MonoBehaviour
         trail = GetComponent<Trail>();
 
         // Find the virual camera and tell it about the player
-        if (cameraTransform == null)
-        {
-            GameObject virtualCam = GameObject.FindWithTag(GameConstants.VirtualCameraTag);
-            if (virtualCam == null)
-            {
-                Debug.LogError("Could not find the appropriate virtual camera");
-            }
-            else
-            {
-                if (virtualCam.TryGetComponent<CinemachineVirtualCamera>(out var virtualCamera))
-                {
-                    virtualCamera.Follow = transform;
-                }
-            }
-        }
+        CameraManager.Instance.SetCameraFollow(transform);
     }
 
     private void Update()
@@ -107,7 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isDashing || _isJumping) return;
 
-        Vector2 moveInput = inputController.movement;
+        Vector2 moveInput = inputController.Movement;
         // Set move animation based on input
         animator.SetFloat(blendSpeedHash, moveInput.magnitude);
         if (moveInput == Vector2.zero)
@@ -144,7 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             weaponController.ResetCombo();
             weaponController.DashInterruptAttack();
-            Vector3 dashDirection = CameraManager.Instance.DirectionToCameraForward(transform.position, inputController.movement);
+            Vector3 dashDirection = CameraManager.Instance.DirectionToCameraForward(transform.position, inputController.Movement);
             dashDirection = dashDirection == Vector3.zero ? transform.forward : dashDirection;
 
             // Rotate player to dash
@@ -211,8 +200,6 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    public bool IsDashing() { return _isDashing; }
-
     // -------------------- Jump Mechanism --------------------
 
     public void Jump(float upForce, float jumpDuration, Vector3 target)
@@ -257,7 +244,8 @@ public class PlayerController : MonoBehaviour
     {
         _isRotating = true;
         float startTime = Time.time;
-        Quaternion startRotation = cameraTransform.localRotation;
+        Transform cameraTransform = CameraManager.ActiveCamera.transform;
+        Quaternion startRotation =  cameraTransform.localRotation;
         Quaternion targetRotation = Quaternion.Euler(startRotation.eulerAngles.x, startRotation.eulerAngles.y + angle, startRotation.eulerAngles.z);
 
         while (Time.time < startTime + rotationDuration)
@@ -272,8 +260,6 @@ public class PlayerController : MonoBehaviour
 
         _isRotating = false;
     }
-
-    public bool IsJumping() { return _isJumping; }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
