@@ -4,22 +4,11 @@ using UnityEngine;
 
 public class CameraManager : Singleton<CameraManager>
 {
-    public static Camera _activeCamera;
-    public static CinemachineVirtualCamera _activeVCamera;
+    public Camera _activeCamera;
+    public CinemachineVirtualCamera _activeVCamera;
 
-    public static Camera ActiveCamera { get { return _activeCamera; } }
-    public static CinemachineVirtualCamera ActiveCineCamera { get { return _activeVCamera; } }
-
-    public void SetCameraFollow(Transform _transform)
-    {
-        if (ActiveCineCamera != null)
-        {
-            ActiveCineCamera.Follow = _transform;
-        } else
-        {
-            Debug.Log("No active CineCamera");
-        }
-    }
+    public Camera ActiveCamera { get { return _activeCamera; } }
+    public CinemachineVirtualCamera ActiveCineCamera { get { return _activeVCamera; } }
 
     public void SwitchToCamera(Camera cam, CinemachineVirtualCamera vCam = null)
     {

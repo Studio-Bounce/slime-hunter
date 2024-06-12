@@ -11,7 +11,7 @@ public class CameraStartup : MonoBehaviour
 
     public bool targetCameraOnStart;
 
-    void Awake()
+    void Start()
     {
         _camera = GetComponent<Camera>();
 

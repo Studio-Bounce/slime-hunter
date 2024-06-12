@@ -30,8 +30,8 @@ public class GameManager : Singleton<GameManager>
     public int playerStamina = 3;
     [Tooltip("Amount of Stamina increase per second (max: 100)")]
     public int staminaIncreaseValue = 1;
-    public float staminaIncreaseInterval = 0.33f;
-    public float cooldownLength = 1.5f;
+    public float staminaIncreaseInterval = 1.0f;
+    public float cooldownLength = 2.0f;
 
     private float _staminaTimer = 0.0f;
     private bool _cooldown = false;

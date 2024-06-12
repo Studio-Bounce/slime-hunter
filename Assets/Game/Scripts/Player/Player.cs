@@ -33,7 +33,7 @@ public class Player : DamageTaker
     public override void TakeDamage(Damage damage)
     {
         // Can not take damage if dashing or jumping
-        if (playerController.IsDashing || playerController.IsJumping)
+        if (playerController.IsDashing() || playerController.IsJumping())
             return;
 
         // For player, we want to change GameManager.PlayerHealth

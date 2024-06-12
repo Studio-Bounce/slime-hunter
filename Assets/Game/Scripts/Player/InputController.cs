@@ -19,7 +19,7 @@ public class InputController : MonoBehaviour
     private PlayerInputActions.PlayerActions _playerActions;
     private PlayerInputActions.UIActions _UIActions;
 
-    private Vector2 _movement = Vector2.zero;
+    public Vector2 movement = Vector2.zero;
 
     public float inputQueueDelay = .3f;
     private Dictionary<Func<InputContext, bool>, InputContext> QueuedInputMap = new Dictionary<Func<InputContext, bool>, InputContext>();
@@ -28,8 +28,6 @@ public class InputController : MonoBehaviour
     // WIP: Find a cleaner solution?
     Action<InputContext> attackQueuedAction;
     Action<InputContext> dashQueuedAction;
-
-    public Vector2 Movement { get { return _movement; } }
 
     private void Awake()
     {
@@ -94,9 +92,6 @@ public class InputController : MonoBehaviour
         _playerActions.Rotate.performed += _playerController.RotateCamera;
         _playerActions.Attack.performed += attackQueuedAction;
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
-        // Spells
-        _playerActions.Spell1.performed +=  _spellController.StartCast;
-        _playerActions.CastSpell.performed += _spellController.Cast;
     }
 
     private void SetupUIControls()
@@ -122,12 +117,12 @@ public class InputController : MonoBehaviour
 
     private void TrackMovement(InputContext context)
     {
-        _movement = context.ReadValue<Vector2>();
+        movement = context.ReadValue<Vector2>();
     }
 
     private void StopMovement(InputContext context)
     {
-        _movement = Vector2.zero;
+        movement = Vector2.zero;
     }
 
     private void DisablePlayerControls()
@@ -138,9 +133,6 @@ public class InputController : MonoBehaviour
         _playerActions.Rotate.performed -= _playerController.RotateCamera;
         _playerActions.Attack.performed -= attackQueuedAction;
         _playerActions.CycleWeapon.performed -= _weaponController.CycleWeapon;
-
-        _playerActions.Spell1.performed -= _spellController.StartCast;
-        _playerActions.CastSpell.performed -= _spellController.Cast;
     }
 
     private void DisableUIControls()

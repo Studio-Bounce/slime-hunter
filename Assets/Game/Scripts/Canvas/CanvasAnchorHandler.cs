@@ -10,7 +10,7 @@ public class CanvasAnchorHandler : MonoBehaviour
     {
         foreach (CanvasElement el in canvasElements)
         {
-            el.rect.anchoredPosition = CameraManager.ActiveCamera.WorldToScreenPoint(el.anchor.position);
+            el.rect.anchoredPosition = CameraManager.Instance.ActiveCamera.WorldToScreenPoint(el.anchor.position);
             el.rect.anchoredPosition += el.offset;
         }
     }

@@ -6,8 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class DamageDealer : MonoBehaviour
 {
-    public LayerMask hitLayers;
-    public Damage damage;
+    protected LayerMask hitLayers;
+    protected Damage damage;
 
     [Tooltip("Frames to pause game before continuing")]
     public uint framesToPause;
@@ -21,17 +21,6 @@ public class DamageDealer : MonoBehaviour
     [SerializeField] float cameraShakeIntensity = 1.0f;
     [SerializeField] float cameraShakeTime = 0.5f;
     protected bool applyCameraShake = false;
-
-
-    public bool Active { 
-        get { 
-            return active;
-        } 
-        set {
-            GetComponent<Collider>().enabled = value;
-            active = value;
-        }
-    }
 
     protected virtual void Start()
     {
@@ -48,11 +37,9 @@ public class DamageDealer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Collided {active}: {other.gameObject.layer.ToString()}");
         if (!active) return;
         if ((hitLayers.value & (1 << other.gameObject.layer)) > 0)
         {
-            Debug.Log("Success");
             StartCoroutine(PauseForFrames(framesToPause));
             damage.direction = (other.transform.position - transform.position).normalized;
             ITakeDamage damageReceiver = other.gameObject.GetComponent<ITakeDamage>();
