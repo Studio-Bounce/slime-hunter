@@ -103,6 +103,7 @@ public class InputController : MonoBehaviour
     {
         if (GameManager.Instance.GameState == GameStates.PAUSED)
         {
+            GameManager.Instance.GameState = GameStates.GAMEPLAY;
             UIManager.Instance.SetPauseMenu(false);
             Time.timeScale = 1;
         }
