@@ -244,7 +244,7 @@ public class PlayerController : MonoBehaviour
     {
         _isRotating = true;
         float startTime = Time.time;
-        Transform cameraTransform = CameraManager.ActiveCamera.transform;
+        Transform cameraTransform = CameraManager.ActiveCineCamera.transform;
         Quaternion startRotation =  cameraTransform.localRotation;
         Quaternion targetRotation = Quaternion.Euler(startRotation.eulerAngles.x, startRotation.eulerAngles.y + angle, startRotation.eulerAngles.z);
 

@@ -48,11 +48,9 @@ public class DamageDealer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Collided {active}: {other.gameObject.layer.ToString()}");
         if (!active) return;
         if ((hitLayers.value & (1 << other.gameObject.layer)) > 0)
         {
-            Debug.Log("Success");
             StartCoroutine(PauseForFrames(framesToPause));
             damage.direction = (other.transform.position - transform.position).normalized;
             ITakeDamage damageReceiver = other.gameObject.GetComponent<ITakeDamage>();
