@@ -5,11 +5,11 @@ using UnityEngine.UIElements;
 
 public class UIManager : Singleton<UIManager>
 {
-    [SerializeField] Menu loadMenu;
-    [SerializeField] Menu mainMenu;
-    [SerializeField] Menu pauseMenu;
-    [SerializeField] Menu HUDMenu;
-    [SerializeField] Menu autoSave;
+    [SerializeField] public Menu loadMenu;
+    [SerializeField] public Menu mainMenu;
+    [SerializeField] public Menu pauseMenu;
+    [SerializeField] public Menu HUDMenu;
+    [SerializeField] public Menu autoSave;
 
     // ----------------- Pause -----------------
     public void SetPauseMenu(bool active)
