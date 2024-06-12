@@ -14,7 +14,6 @@ public class EventSpawner : MonoBehaviour
 
     public void Respawn()
     {
-        Debug.Log("Respawn");
         StartCoroutine(RunRespawn());
     }
 

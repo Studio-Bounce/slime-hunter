@@ -5,6 +5,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// All game state actions must use this!
+public enum GameStates
+{
+    INVALID,
+    MAIN_MENU,
+    LOADING,
+    PAUSED,
+    GAMEPLAY,
+    GAME_OVER
+};
+
 public class GameManager : Singleton<GameManager>
 {
     // Global Variables
@@ -13,6 +24,7 @@ public class GameManager : Singleton<GameManager>
     public readonly int PlayerMaxHealth = 100;
     public readonly int PlayerMaxStamina = 3;
 
+    public string gameSceneName = "DemoLevel";
     public Player playerRef;
     public int playerHealth = 100;
     public int playerStamina = 3;
@@ -26,6 +38,13 @@ public class GameManager : Singleton<GameManager>
 
     public Canvas screenCanvas;
 
+    GameStates _gameState = GameStates.INVALID;
+    public GameStates GameState
+    {
+        get { return _gameState; }
+        set { _gameState = value; }
+    }
+
     public int PlayerHealth
     {
         get { return playerHealth; }
@@ -33,6 +52,10 @@ public class GameManager : Singleton<GameManager>
         {
             playerHealth = value;
             OnPlayerHealthChange?.Invoke(playerHealth);
+            if (playerHealth <= 0)
+            {
+                GameOver();
+            }
         }
     }
     public int PlayerStamina
@@ -97,6 +120,17 @@ public class GameManager : Singleton<GameManager>
                 PlayerStamina = Mathf.Min(PlayerStamina + staminaIncreaseValue, PlayerMaxStamina);
             }
         }
+    }
+
+    void GameOver()
+    {
+        GameState = GameStates.GAME_OVER;
+        // TODO: Show game over screen
+
+        // Reload game data from the saved file
+        PersistenceManager.Instance.LoadGame();
+        PlayerHealth = PlayerMaxHealth;
+        GameState = GameStates.GAMEPLAY;
     }
 
     private void OnDestroy()

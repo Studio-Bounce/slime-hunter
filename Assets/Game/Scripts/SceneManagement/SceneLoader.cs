@@ -10,12 +10,12 @@ public class SceneLoader : Singleton<SceneLoader>
     [Tooltip("Artificial Load Delay")]
     public float loadDelay = 1.0f;
 
-    public void LoadScene(string sceneName, bool showLoadingScreen = true, bool cacheScene = true)
+    public void LoadScene(string sceneName, bool showLoadingScreen = true, Action<AsyncOperation, string> callback = null)
     {
-        StartCoroutine(loadScene(sceneName, showLoadingScreen));
+        StartCoroutine(loadScene(sceneName, showLoadingScreen, callback));
     }
 
-    IEnumerator loadScene(string sceneName, bool showLoadingScreen)
+    IEnumerator loadScene(string sceneName, bool showLoadingScreen, Action<AsyncOperation, string> callback)
     {
         if (SceneManager.GetSceneByName(sceneName).isLoaded == false)
         {
@@ -28,7 +28,10 @@ public class SceneLoader : Singleton<SceneLoader>
             Application.backgroundLoadingPriority = ThreadPriority.Low;
 
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
-            operation.completed += (AsyncOperation op) => OnSceneLoaded(op, sceneName);
+            if (callback != null)
+            {
+                operation.completed += (AsyncOperation op) => callback.Invoke(op, sceneName);
+            }
 
             // Placeholder for loading bars
             while (!operation.isDone) {
@@ -47,7 +50,7 @@ public class SceneLoader : Singleton<SceneLoader>
         }
     }
 
-    private void OnSceneLoaded(AsyncOperation asyncOperation, string sceneName) {
+    private void OnSceneLoaded() {
         //Scene newScene = SceneManager.GetSceneByName(sceneName);
     }
 

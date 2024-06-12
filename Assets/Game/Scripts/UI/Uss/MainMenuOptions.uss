@@ -1,4 +1,6 @@
 
+/* Option Menus */
+
 .option-slot {
     
 }
@@ -30,4 +32,45 @@
 
 .option-slot:hover .menu-button-deco {
     opacity: 1;
+}
+
+/* Tabbed Menus */
+
+.tab {
+	transition-property: all;
+    transition-duration: 0.2s;
+	background-color: #1C2C34;
+}
+
+.tab Label {
+	color: white;
+	opacity: 0.5;
+}
+
+.tab:hover {
+	background-color: #46BBCA;
+}
+
+.tab:hover Label {
+	opacity: 1;
+}
+
+.selected-tab {
+    display: flex;
+	background-color: #46BBCA;
+	color: white;
+}
+
+.selected-tab Label {
+	opacity: 1
+}
+
+/* Style for tabContent */
+.tab-content {
+
+}
+
+/* Hides the unselected tab content */
+.unselected-content {
+    display: none;
 }

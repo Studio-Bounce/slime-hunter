@@ -14,7 +14,6 @@ public class RabbitEnemy : Enemy
     [SerializeField] Animator slimeAnimator;
 
     RabbitSlime_FSM rfsm;
-    Transform playerTransform;
     Trail slimeTrail;
 
     // Used by FSM states
@@ -27,8 +26,6 @@ public class RabbitEnemy : Enemy
         slimeTrail = GetComponent<Trail>();
         slimeTrail.activeTime = Mathf.Max(0.0f, dodgeTime - 0.1f);
         rfsm = GetComponent<RabbitSlime_FSM>();
-        playerTransform = GameObject.FindWithTag("Player")?.transform;
-        UnityEngine.Assertions.Assert.IsNotNull(playerTransform, "GameObject with tag 'Player' not found!");
     }
 
     public override void TakeDamage(Damage damage)
@@ -53,7 +50,7 @@ public class RabbitEnemy : Enemy
         slimeAnimator.SetFloat(DodgeSpeedField, (1 / dodgeTime));
 
         isDodging = true;
-        Vector3 playerDirection = playerTransform.position - transform.position;
+        Vector3 playerDirection = rfsm.GetPlayerPosition() - transform.position;
         playerDirection.Normalize();
         
         // Dodge in a direction orthogonal to the slime-player vector
@@ -67,7 +64,7 @@ public class RabbitEnemy : Enemy
             dodgeDirection = new Vector3(playerDirection.z, playerDirection.y, -playerDirection.x);
         }
         // Add player-to-slime vector to dodge slime away from player
-        Vector3 playerToSlime = transform.position - playerTransform.position;
+        Vector3 playerToSlime = transform.position - rfsm.GetPlayerPosition();
         playerToSlime.Normalize();
         dodgeDirection += playerToSlime;
         dodgeDirection.Normalize();
