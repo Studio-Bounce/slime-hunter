@@ -13,7 +13,6 @@ public struct CanvasElement
 public class CanvasManager : Singleton<CanvasManager>
 {
     public Canvas screenCanvas;
-
     private List<CanvasAnchorHandler> canvasAnchorList = new List<CanvasAnchorHandler>();
     
     private void Awake()
@@ -66,7 +65,7 @@ public class CanvasManager : Singleton<CanvasManager>
         // Ensure that screenCanvas is destroyed
         if (screenCanvas != null)
         {
-            Destroy(screenCanvas.gameObject);
+            DestroyImmediate(screenCanvas.gameObject);
             screenCanvas = null;
         }
     }
