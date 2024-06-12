@@ -6,6 +6,7 @@ public class RadialIndicator : SpellIndicator
 {
     public float castRange;
     public float radiusOfEffect;
+    public LayerMask hitLayers;
 
     [SerializeField] private Transform player;
     [SerializeField] private Transform sourceIndicator;
@@ -45,7 +46,7 @@ public class RadialIndicator : SpellIndicator
 
         Ray ray = CameraManager.ActiveCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 100))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitLayers))
         {
             Vector3 direction = hit.point - player.position;
 

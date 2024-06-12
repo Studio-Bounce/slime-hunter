@@ -6,9 +6,7 @@ using UnityEngine.InputSystem;
 public class SpellController : MonoBehaviour
 {
     public SpellSO[] spells = new SpellSO[3];
-
     [SerializeField] private SpellIndicator radialIndicator;
-
     private SpellIndicator currentIndicator;
 
     public void Start()

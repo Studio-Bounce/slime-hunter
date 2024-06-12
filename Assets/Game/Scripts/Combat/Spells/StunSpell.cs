@@ -5,11 +5,23 @@ using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.VFX;
 
+[RequireComponent(typeof(SphereCollider), typeof(DamageDealer))]
 [System.Serializable]
 public class StunSpell : Spell
 {
     public VisualEffect impactEffect;
     public GameObject projectile;
+    private DamageDealer damageDealer;
+    private SphereCollider damageCollider;
+
+    private void Start()
+    {
+        damageDealer = GetComponent<DamageDealer>();
+        damageDealer.Active = false;
+        damageCollider = GetComponent<SphereCollider>();
+        damageCollider.isTrigger = true;
+        damageCollider.radius = 3; // WIP: Hardcoded
+    }
 
     public override void Cast(Vector3 target = default)
     {
@@ -36,6 +48,7 @@ public class StunSpell : Spell
         }
         projectile.gameObject.SetActive(false);
         impactEffect.Play();
+        damageDealer.Active = true;
         yield return new WaitForSeconds(0.2f); // To account for any spawn delay affecting HasAnySystemAwake
         while (impactEffect.HasAnySystemAwake())
         {

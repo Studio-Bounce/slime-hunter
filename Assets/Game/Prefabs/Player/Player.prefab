@@ -291,7 +291,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fce3e71fc2b604aadf269de4da0ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {x: 0, y: 0}
   inputQueueDelay: 0.3
 --- !u!114 &1276497373221949065
 MonoBehaviour:
@@ -524,6 +523,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7f69d7d97456a41befd77507afab60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  damage:
+    value: 0
+    knockback: 0
+    direction: {x: 0, y: 0, z: 0}
+    effect: {fileID: 0}
   framesToPause: 4
   cameraShakeIntensity: 1
   cameraShakeTime: 0.5
@@ -581,6 +588,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castRange: 6
   radiusOfEffect: 3
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 8
   player: {fileID: 6144532255685469683}
   sourceIndicator: {fileID: 8552583317466130818}
   targetIndicator: {fileID: 1491881206767092403}

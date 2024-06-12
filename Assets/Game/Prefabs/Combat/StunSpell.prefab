@@ -210,6 +210,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1942007616629916514}
   - component: {fileID: 6701679911909493986}
+  - component: {fileID: 8083353152017258920}
+  - component: {fileID: 2891778027920406517}
+  - component: {fileID: 1548116192279810279}
   m_Layer: 0
   m_Name: StunSpell
   m_TagString: Untagged
@@ -248,3 +251,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactEffect: {fileID: 2583026496745879692}
   projectile: {fileID: 2130459878426908165}
+--- !u!135 &8083353152017258920
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6179766151588686226}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2891778027920406517
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6179766151588686226}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &1548116192279810279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6179766151588686226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1447458ceaf73094a9cc795732b2b694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  damage:
+    value: 2
+    knockback: 15
+    direction: {x: 0, y: 0, z: 0}
+    effect: {fileID: 11400000, guid: 194e3545abb07b94ab515e1afbd829cb, type: 2}
+  framesToPause: 10
+  cameraShakeIntensity: 1
+  cameraShakeTime: 0.3

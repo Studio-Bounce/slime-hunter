@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour
 
     private float lastDashTime = 0.0f;
 
+    public bool IsJumping { get { return _isJumping; } }
+    public bool IsDashing { get { return _isDashing; } }
+
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -92,7 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isDashing || _isJumping) return;
 
-        Vector2 moveInput = inputController.movement;
+        Vector2 moveInput = inputController.Movement;
         // Set move animation based on input
         animator.SetFloat(blendSpeedHash, moveInput.magnitude);
         if (moveInput == Vector2.zero)
@@ -129,7 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             weaponController.ResetCombo();
             weaponController.DashInterruptAttack();
-            Vector3 dashDirection = CameraManager.Instance.DirectionToCameraForward(transform.position, inputController.movement);
+            Vector3 dashDirection = CameraManager.Instance.DirectionToCameraForward(transform.position, inputController.Movement);
             dashDirection = dashDirection == Vector3.zero ? transform.forward : dashDirection;
 
             // Rotate player to dash
@@ -196,8 +200,6 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    public bool IsDashing() { return _isDashing; }
-
     // -------------------- Jump Mechanism --------------------
 
     public void Jump(float upForce, float jumpDuration, Vector3 target)
@@ -242,7 +244,7 @@ public class PlayerController : MonoBehaviour
     {
         _isRotating = true;
         float startTime = Time.time;
-        Transform cameraTransform = CameraManager.ActiveCineCamera.transform;
+        Transform cameraTransform = CameraManager.ActiveCamera.transform;
         Quaternion startRotation =  cameraTransform.localRotation;
         Quaternion targetRotation = Quaternion.Euler(startRotation.eulerAngles.x, startRotation.eulerAngles.y + angle, startRotation.eulerAngles.z);
 
@@ -258,8 +260,6 @@ public class PlayerController : MonoBehaviour
 
         _isRotating = false;
     }
-
-    public bool IsJumping() { return _isJumping; }
 
 #if UNITY_EDITOR
     private void OnDrawGizmos()
