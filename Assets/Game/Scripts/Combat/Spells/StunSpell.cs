@@ -36,12 +36,13 @@ public class StunSpell : Spell
         }
         projectile.gameObject.SetActive(false);
         impactEffect.Play();
-        //while (impactEffect.HasAnySystemAwake())
-        //{
-        //    yield return null;
-        //}
-        //Destroy(gameObject);
+        yield return new WaitForSeconds(0.2f); // To account for any spawn delay affecting HasAnySystemAwake
+        while (impactEffect.HasAnySystemAwake())
+        {
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 
-    
+
 }
