@@ -10113,7 +10113,7 @@ MonoBehaviour:
   hitVFXDuration: 1
   slimeOuterBody: {fileID: 2201507902128942745}
   flashDuration: 0.1
-  flashColor: {r: 2.5193918, g: 2.5193918, b: 2.5193918, a: 0.47058824}
+  flashColor: {r: 19.622643, g: 19.622643, b: 19.622643, a: 1}
   slimeModel: {fileID: 6008567685828587907}
   deathParticles: {fileID: 7219281769877467878}
   deathDelay: 3.5
@@ -10189,6 +10189,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  damage:
+    value: 0
+    knockback: 0
+    direction: {x: 0, y: 0, z: 0}
+    effect: {fileID: 0}
   framesToPause: 34
   cameraShakeIntensity: 1
   cameraShakeTime: 0.5
