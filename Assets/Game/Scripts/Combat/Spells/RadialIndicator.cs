@@ -7,12 +7,14 @@ public class RadialIndicator : SpellIndicator
     public float castRange;
     public float radiusOfEffect;
 
-    public Transform player;
-    public Transform sourceIndicator;
-    public Transform targetIndicator;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform sourceIndicator;
+    [SerializeField] private Transform targetIndicator;
 
-    public Renderer sourceRenderer;
-    public Renderer targetRenderer;
+    [SerializeField] private Renderer sourceRenderer;
+    [SerializeField] private Renderer targetRenderer;
+
+    public override Vector3 GetTarget {  get { return targetIndicator.transform.position; } }
 
     private void Start()
     {

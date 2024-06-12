@@ -7,7 +7,8 @@ public class SpellController : MonoBehaviour
 {
     public SpellSO[] spells = new SpellSO[3];
 
-    public SpellIndicator radialIndicator;
+    [SerializeField] private SpellIndicator radialIndicator;
+
     private SpellIndicator currentIndicator;
 
     public void Start()
@@ -31,7 +32,6 @@ public class SpellController : MonoBehaviour
         } else
         {
             currentIndicator.HideIndicator();
-
         }
     }
 
@@ -39,7 +39,10 @@ public class SpellController : MonoBehaviour
     {
         if (currentIndicator != null && currentIndicator.isActiveAndEnabled)
         {
-            spells[0].Cast();
+            Spell spell = Instantiate(spells[0].spellPrefab);
+            spell.transform.position = transform.position;
+            spell.Cast(currentIndicator.GetTarget);
+
             currentIndicator.HideIndicator();
         }
     }

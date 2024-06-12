@@ -5,7 +5,8 @@ public enum IndicatorType
     RADIAL
 }
 
-public abstract class SpellSO : ScriptableObject
+[CreateAssetMenu(menuName = "Spell")]
+public class SpellSO : ScriptableObject
 {
     public string spellName;
     [TextArea] public string description;
@@ -14,8 +15,6 @@ public abstract class SpellSO : ScriptableObject
     public float cooldown;
     public float castTime;
     public float manaCost;
-    public GameObject spellEffectPrefab;
+    public Spell spellPrefab;
     public IndicatorType spellIndicator;
-
-    public abstract void Cast();
 }
