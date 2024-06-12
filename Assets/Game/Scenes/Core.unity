@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b01d8a5305a527c4daeab5318708e238, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
+  m_IndirectSpecularColor: {r: 0.102909945, g: 0.24969026, b: 0.4516643, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialUI: {fileID: 1577727803}
-  StartupSceneName: ArtTest
+  StartupSceneName: Main_Title_Scene
   InitialBootDelay: 0
 --- !u!4 &657485088
 Transform:
@@ -817,7 +817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showOnStart: 0
   playSceneName: DemoLevel
-  menuSceneName: ArtTest
+  menuSceneName: Main_Title_Scene
 --- !u!114 &1179840937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1073,7 +1073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showOnStart: 0
   playSceneName: DemoLevel
-  menuSceneName: ArtTest
+  menuSceneName: Main_Title_Scene
 --- !u!1 &1687697181
 GameObject:
   m_ObjectHideFlags: 0
