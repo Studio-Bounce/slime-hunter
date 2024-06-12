@@ -1414,7 +1414,7 @@ PrefabInstance:
     - target: {fileID: 1560174599449287195, guid: feea3f1c554c3a6489e0bc69747341d6,
         type: 3}
       propertyPath: m_PropertySheet.m_Bool.m_Array.Array.data[0].m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1560174599449287195, guid: feea3f1c554c3a6489e0bc69747341d6,
         type: 3}
@@ -1503,6 +1503,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410378942904223581, guid: 7c19e2e033650b243b9b77976b3424a8,
+        type: 3}
+      propertyPath: slowDownOnHitFrames
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8536796487223862311, guid: 7c19e2e033650b243b9b77976b3424a8,
+        type: 3}
+      propertyPath: framesToPause
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -232,7 +232,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   slowDownOnHitMultiplier: 0.2
-  slowDownOnHitFrames: 10
+  slowDownOnHitFrames: 25
 --- !u!114 &2463496225978856163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,7 +531,7 @@ MonoBehaviour:
     knockback: 0
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
-  framesToPause: 4
+  framesToPause: 7
   cameraShakeIntensity: 1
   cameraShakeTime: 0.5
   arcAngle: 90

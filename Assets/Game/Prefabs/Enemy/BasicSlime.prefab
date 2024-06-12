@@ -10161,7 +10161,6 @@ MonoBehaviour:
   wanderSteeringBehaviour: {fileID: 386777113257166750}
   slimeAgent: {fileID: 0}
   characterController: {fileID: 0}
-  playerTransform: {fileID: 0}
   slimeOuterMesh: {fileID: 2201507902128942745}
   weapon: {fileID: 0}
   slimeEnemy: {fileID: 0}
@@ -10169,14 +10168,14 @@ MonoBehaviour:
   chaseMat: {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
   attackMat: {fileID: 2100000, guid: f21b9f86456c57f4aaf2dd713eac1d33, type: 2}
   attackGlowIntensity: 3.5
-  cooldownTime: 1
+  cooldownTime: 0.5
   seekDistance: 8
   wanderSpeed: 1
-  chaseSpeed: 3
-  attackSpeed: 50
-  attackRadius: 4
-  attackEmissionTime: 1
-  attackProximity: 1
+  chaseSpeed: 7
+  attackSpeed: 80
+  attackRadius: 6
+  attackEmissionTime: 0.1
+  attackProximity: 3
   slimeAnimator: {fileID: 1065457560711704899}
 --- !u!114 &4347139268971403823
 MonoBehaviour:
@@ -10190,6 +10189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  framesToPause: 34
   cameraShakeIntensity: 1
   cameraShakeTime: 0.5
   slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
