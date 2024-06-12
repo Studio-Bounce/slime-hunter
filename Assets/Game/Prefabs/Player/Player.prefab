@@ -137,7 +137,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   slowDownOnHitMultiplier: 0.2
-  slowDownOnHitFrames: 10
+  slowDownOnHitFrames: 25
 --- !u!114 &2463496225978856163
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc7f69d7d97456a41befd77507afab60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  framesToPause: 4
+  framesToPause: 12
   cameraShakeIntensity: 1
   cameraShakeTime: 0.5
   arcAngle: 90
