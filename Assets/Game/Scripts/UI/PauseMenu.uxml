@@ -140,7 +140,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="QuestExplanation" style="flex-grow: 1; padding-top: 69px; padding-bottom: 50px; padding-left: 21px; padding-right: 82px;">
-                    <ui:VisualElement name="Content" style="background-color: rgba(47, 50, 53, 0.8); flex-grow: 1; border-left-color: rgb(70, 187, 202); border-right-color: rgb(70, 187, 202); border-top-color: rgb(70, 187, 202); border-bottom-color: rgb(70, 187, 202); border-top-left-radius: 21px; border-top-right-radius: 21px; border-bottom-right-radius: 21px; border-bottom-left-radius: 21px; border-top-width: 8px; border-right-width: 8px; border-bottom-width: 8px; border-left-width: 8px; padding-left: 65px; padding-right: 65px; padding-top: 60px; padding-bottom: 60px;">
+                    <ui:VisualElement name="Content" style="background-color: rgba(47, 50, 53, 0.8); flex-grow: 1; border-left-color: rgb(70, 187, 202); border-right-color: rgb(70, 187, 202); border-top-color: rgb(70, 187, 202); border-bottom-color: rgb(70, 187, 202); border-top-left-radius: 21px; border-top-right-radius: 21px; border-bottom-right-radius: 21px; border-bottom-left-radius: 21px; border-top-width: 8px; border-right-width: 8px; border-bottom-width: 8px; border-left-width: 8px; padding-left: 65px; padding-right: 65px; padding-top: 60px; padding-bottom: 33px;">
                         <ui:VisualElement name="QuestName" style="flex-grow: 0;">
                             <ui:Label tabindex="-1" text="Hello,Lyra!" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold;" />
                         </ui:VisualElement>
@@ -148,7 +148,7 @@
                         <ui:VisualElement name="Position" style="flex-grow: 0;">
                             <ui:Label tabindex="-1" text="Glade Village" parse-escape-sequences="true" display-tooltip-when-elided="true" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 255, 255); font-size: 20px; -unity-font-style: bold; margin-bottom: 25px;" />
                         </ui:VisualElement>
-                        <ui:VisualElement name="TackInformation" style="flex-grow: 0; height: 360px;">
+                        <ui:VisualElement name="TackInformation" style="flex-grow: 0; height: 376px;">
                             <ui:Label tabindex="-1" text="Mylo gets out of his bed and gets out of the home to see that the village is devastated by the slimes. He goes around the village and asks the villagers about the whereabouts of Kuro and then finally one of the villagers tells him that they saw him go towards the North Fort." parse-escape-sequences="true" display-tooltip-when-elided="true" name="Description" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 255, 255); font-size: 20px; -unity-font-style: normal; flex-wrap: wrap; flex-grow: 0; text-overflow: clip; white-space: normal; margin-bottom: 25px;" />
                             <ui:VisualElement name="ToDoList" style="flex-grow: 1;">
                                 <ui:Label tabindex="-1" text="-Talk with Lyra" parse-escape-sequences="true" display-tooltip-when-elided="true" name="List1" style="font-size: 20px; -unity-font-style: normal; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); color: rgb(255, 255, 255); opacity: 0.5;" />
