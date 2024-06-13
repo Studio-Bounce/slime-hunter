@@ -6,8 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class DamageDealer : MonoBehaviour
 {
-    protected LayerMask hitLayers;
-    protected Damage damage;
+    public LayerMask hitLayers;
+    public Damage damage;
 
     [Tooltip("Frames to pause game before continuing")]
     public uint framesToPause;
@@ -21,6 +21,17 @@ public class DamageDealer : MonoBehaviour
     [SerializeField] float cameraShakeIntensity = 1.0f;
     [SerializeField] float cameraShakeTime = 0.5f;
     protected bool applyCameraShake = false;
+
+
+    public bool Active { 
+        get { 
+            return active;
+        } 
+        set {
+            GetComponent<Collider>().enabled = value;
+            active = value;
+        }
+    }
 
     protected virtual void Start()
     {
