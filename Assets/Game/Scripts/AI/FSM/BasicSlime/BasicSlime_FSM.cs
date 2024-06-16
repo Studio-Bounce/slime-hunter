@@ -9,6 +9,7 @@ public class BasicSlime_FSM : FSM
     public readonly int AttackPlayerStateName = Animator.StringToHash("AttackPlayer");
     public readonly int CooldownStateName = Animator.StringToHash("Cooldown");
     public readonly int DeadStateName = Animator.StringToHash("Dead");
+    public readonly int StunnedStateName = Animator.StringToHash("Stunned");
 
     public BasicSlime_AttackPlayer.AttackState currentAttackState = BasicSlime_AttackPlayer.AttackState.NONE;
 

@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StatusEffectManager : MonoBehaviour
 {
     private DamageTaker damageTaker;
-
     public GameObject statusBarPrefab;
     private StatusBar statusBar;
     public bool showStatusBar = true;

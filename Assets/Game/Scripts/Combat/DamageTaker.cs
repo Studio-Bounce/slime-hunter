@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +23,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     protected bool isInKnockback = false;
     // Slime invincibility can depend on Slime's state (in FSM). Hence, its public
     [HideInInspector] public bool isInvincible = false;
-
+    [HideInInspector] public bool stunned = false;
     protected CharacterController characterController;
     protected StatusEffectManager statusEffectManager;
 
