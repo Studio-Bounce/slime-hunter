@@ -33,6 +33,8 @@ public class BasicSlime_ChasePlayer : BasicSlime_BaseState
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        base.OnStateUpdate(animator, stateInfo, layerIndex);
+
         // Player can move so keep adjusting target
         SetChaseTarget();
 

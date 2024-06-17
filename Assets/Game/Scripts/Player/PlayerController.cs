@@ -129,7 +129,8 @@ public class PlayerController : MonoBehaviour
             !_isJumping &&
             (Time.time > lastDashTime + dashCooldown) &&
             weaponController.IsDashInterruptable() &&
-            (GameManager.Instance.PlayerStamina >= dashStaminaUse))
+                GameManager.Instance.UseStamina(dashStaminaUse)
+            )
         {
             weaponController.ResetCombo();
             weaponController.DashInterruptAttack();
@@ -176,8 +177,7 @@ public class PlayerController : MonoBehaviour
                 staminaUsed = true;
                 // Stamina might have been changed by some other action.
                 // Just confirm that player has enough stamina for dashing
-                if (GameManager.Instance.PlayerStamina < dashStaminaUse) break;
-                GameManager.Instance.UseStamina(dashStaminaUse);
+                // if (GameManager.Instance.PlayerStamina < dashStaminaUse) break;
             }
 
             transform.position = startPosition + dashVector * dashProgress;

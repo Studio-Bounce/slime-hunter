@@ -30,14 +30,15 @@ public class StunSpell : Spell
 
     IEnumerator RunLaunch(Vector3 start, Vector3 target)
     {
+        // Timer and lerp variable initialization
         float timer = 0;
         float duration = 1.0f;
-
         float startHeight = start.y;
         float maxHeight = 4;
         Vector2 startVec2 = new Vector2(start.x, start.z);
         Vector2 endVec2 = new Vector2(target.x, target.z);
 
+        // Calculate lerp sin curve
         while (timer < duration)
         {
             timer += Time.deltaTime;
@@ -46,6 +47,8 @@ public class StunSpell : Spell
             transform.position = new Vector3(lerpedPos.x, lerpedHeight, lerpedPos.y);
             yield return null;
         }
+
+        // Activate damage and effects on impact
         projectile.gameObject.SetActive(false);
         impactEffect.Play();
         damageDealer.Active = true;

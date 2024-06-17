@@ -22,6 +22,8 @@ public class BasicSlime_Cooldown : BasicSlime_BaseState
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        base.OnStateUpdate(animator, stateInfo, layerIndex);
+
         if (!isResting)
         {
             fsm.ChangeState(fsm.WanderAroundStateName);

@@ -39,7 +39,6 @@ public class Enemy : DamageTaker
 
     [SerializeField] protected Slider healthSlider;
 
-
     protected override void Start()
     {
         base.Start();

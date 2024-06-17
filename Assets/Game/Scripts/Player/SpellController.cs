@@ -37,6 +37,10 @@ public class SpellController : MonoBehaviour
     {
         if (currentIndicator != null && currentIndicator.isActiveAndEnabled)
         {
+            // Hard code to use full stamina
+            if (!GameManager.Instance.IsFullStamina) return;
+            GameManager.Instance.UseStamina(GameManager.Instance.PlayerStamina);
+
             Spell spell = Instantiate(spells[0].spellPrefab);
             spell.transform.position = transform.position;
             spell.Cast(currentIndicator.GetTarget);
