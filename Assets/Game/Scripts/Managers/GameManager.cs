@@ -43,9 +43,6 @@ public class GameManager : Singleton<GameManager>
     private float _staminaTimer = 0.0f;
     private bool _cooldown = false;
 
-    [Header("General Canvas")]
-    public Canvas screenCanvas;
-
     GameStates _gameState = GameStates.INVALID;
     public GameStates GameState
     {
@@ -84,15 +81,6 @@ public class GameManager : Singleton<GameManager>
 
     private void Awake()
     {
-        if (screenCanvas == null)
-        {
-            GameObject canvasObject = new GameObject("ScreenCanvas");
-            canvasObject.transform.SetParent(null, false);
-            screenCanvas = canvasObject.AddComponent<Canvas>();
-            screenCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvasObject.AddComponent<GraphicRaycaster>();
-        }
-
         // Ensure that we start from core scene
         if (forceCorrectEntry && SceneManager.GetActiveScene().name != entryPointSceneName)
         {
