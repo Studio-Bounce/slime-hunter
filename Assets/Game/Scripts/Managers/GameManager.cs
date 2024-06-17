@@ -24,9 +24,14 @@ public class GameManager : Singleton<GameManager>
     public readonly int PlayerMaxHealth = 100;
     public readonly int PlayerMaxStamina = 3;
 
-    public string gameSceneName = "DemoLevel";
+    [Header("Entry Scene")]
+    public bool forceCorrectEntry = true;
     public string entryPointSceneName = "Core";
 
+    [Header("Game Scene")]
+    public string gameSceneName = "DemoLevel";
+
+    [Header("Player Attributes")]
     public Player playerRef;
     public int playerHealth = 100;
     public int playerStamina = 3;
@@ -38,6 +43,7 @@ public class GameManager : Singleton<GameManager>
     private float _staminaTimer = 0.0f;
     private bool _cooldown = false;
 
+    [Header("General Canvas")]
     public Canvas screenCanvas;
 
     GameStates _gameState = GameStates.INVALID;
@@ -88,7 +94,7 @@ public class GameManager : Singleton<GameManager>
         }
 
         // Ensure that we start from core scene
-        if (SceneManager.GetActiveScene().name != entryPointSceneName)
+        if (forceCorrectEntry && SceneManager.GetActiveScene().name != entryPointSceneName)
         {
             SceneManager.LoadScene(entryPointSceneName);
         }
