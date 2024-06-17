@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PersistentSingleton<T> : PersistentObject where T : MonoBehaviour
+public class PersistentSingleton<T> : PersistentObject where T : PersistentObject
 {
     private static T instance;
 
