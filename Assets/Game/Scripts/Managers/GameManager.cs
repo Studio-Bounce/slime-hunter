@@ -25,6 +25,8 @@ public class GameManager : Singleton<GameManager>
     public readonly int PlayerMaxStamina = 3;
 
     public string gameSceneName = "DemoLevel";
+    public string entryPointSceneName = "Core";
+
     public Player playerRef;
     public int playerHealth = 100;
     public int playerStamina = 3;
@@ -83,6 +85,12 @@ public class GameManager : Singleton<GameManager>
             screenCanvas = canvasObject.AddComponent<Canvas>();
             screenCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
             canvasObject.AddComponent<GraphicRaycaster>();
+        }
+
+        // Ensure that we start from core scene
+        if (SceneManager.GetActiveScene().name != entryPointSceneName)
+        {
+            SceneManager.LoadScene(entryPointSceneName);
         }
     }
 

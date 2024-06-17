@@ -54,7 +54,7 @@ public class PlayerSpawner : PersistentObject
                 playerInstance.transform.position = playerPosition;
             }
         }
-        PlayPlayerSpawnVFXWithDelay(0.5f);
+        StartCoroutine(PlayPlayerSpawnVFXWithDelay(0.5f));
     }
 
     IEnumerator PlayPlayerSpawnVFXWithDelay(float delay)
