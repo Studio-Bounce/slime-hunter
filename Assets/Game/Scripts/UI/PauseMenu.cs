@@ -9,7 +9,6 @@ public class PauseMenu : Menu
     public string playSceneName;
     public string menuSceneName;//Main menu Scene
 
-
     void Start()
     {
         VisualElement root = uiDocument.rootVisualElement;
