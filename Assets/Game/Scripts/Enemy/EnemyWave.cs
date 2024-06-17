@@ -37,7 +37,7 @@ public class EnemyWave : MonoBehaviour
     private int enemySpawnCount = 0;
     private Vector2 bounds;
     private bool isComplete = false;
-    private int totalDeaths = 0;
+    public int totalDeaths = 0;
 
     public bool Completed { get { return isComplete; } }
     public bool Started { get { return isStart; } }
@@ -78,16 +78,27 @@ public class EnemyWave : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void ResetWaves(bool cleanSlimes)
     {
         properties = null;
         bounds = Vector2.zero;
-        spawnedEnemies.Clear();
         timer = 0;
         enemySpawnCount = 0;
-        totalDeaths = 0;
         isStart = false;
         isComplete = false;
+        // Kill the slimes spawned in an enemy wave
+        if (cleanSlimes)
+        {
+            foreach (Enemy enemy in spawnedEnemies)
+            {
+                if (enemy != null && enemy.gameObject != null)
+                {
+                    enemy.Death();
+                }
+            }
+        }
+        totalDeaths = 0;  // Enemy death increments the counter, so reset it afterwards
+        spawnedEnemies.Clear();
     }
 
     public void StartWave(EnemyWaveProperties _properties, Vector2 _bounds)
