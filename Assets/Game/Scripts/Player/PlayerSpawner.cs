@@ -14,6 +14,7 @@ public class PlayerSpawner : PersistentObject
 
     public int currentCheckpointIdx = -1;
     public PlayerCheckpoint[] checkpoints;
+    public float respawnMoveDelay = 0.5f;
 
     protected override void Awake()
     {
@@ -33,6 +34,7 @@ public class PlayerSpawner : PersistentObject
     {
         int idx = (currentCheckpointIdx != -1) ? currentCheckpointIdx : 0;
         Vector3 playerPosition = checkpoints[idx].transform.position;
+        float spawnVFXDelay = 0.5f;
         if (playerInstance == null)
         {
             // Instantiate the player at appropriate location
@@ -45,16 +47,43 @@ public class PlayerSpawner : PersistentObject
             // Player has a character controller so we can't move it directly
             if (playerInstance.TryGetComponent<CharacterController>(out var playerCC))
             {
-                playerCC.enabled = false;
-                playerInstance.transform.position = playerPosition;
-                playerCC.enabled = true;
+                StartCoroutine(MovePlayerSmoothly(respawnMoveDelay, playerPosition, playerCC));
             }
             else
             {
-                playerInstance.transform.position = playerPosition;
+                StartCoroutine(MovePlayerSmoothly(respawnMoveDelay, playerPosition));
             }
+            spawnVFXDelay += respawnMoveDelay;
         }
-        StartCoroutine(PlayPlayerSpawnVFXWithDelay(0.5f));
+        StartCoroutine(PlayPlayerSpawnVFXWithDelay(spawnVFXDelay));
+    }
+
+    IEnumerator MovePlayerSmoothly(float delay, Vector3 target, CharacterController playerCC = null)
+    {
+        if (playerCC != null)
+        {
+            playerCC.enabled = false;
+        }
+        Vector3 startPosition = playerInstance.transform.position;
+        Vector3 endPosition = target;
+        float timeElapsed = 0.0f;
+        while (timeElapsed < delay)
+        {
+            // Lerp movement
+            float normalizedTime = timeElapsed / delay;
+            float t = Easing.EaseOutCubic(normalizedTime);
+            Vector3 position = Vector3.Lerp(startPosition, endPosition, t);
+
+            playerInstance.transform.position = position;
+            timeElapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        if (playerCC != null)
+        {
+            playerCC.enabled = true;
+        }
     }
 
     IEnumerator PlayPlayerSpawnVFXWithDelay(float delay)
