@@ -86,20 +86,21 @@ LightComponents CalculateCelShading(Light l, SurfaceInfo s, InputParams p) {
     
     float3 attenuation = l.distanceAttenuation * l.shadowAttenuation;
     float lambertian = saturate(dot(s.normal, l.direction));
-        
-
+    float diffuse = attenuation * lambertian;
 
     // Diffuse Light
     float dhp = p.diffPos + p.diffWidth; // TODO: Move this crap outside of the loop
     float dlp = p.diffPos - p.diffWidth;
     float df = p.diffFeather;
 
-    c.diffHigh = attenuation * smoothstep(dhp - df,dhp + df , lambertian);
-    c.diffLow = attenuation * smoothstep(dlp - df,dlp + df , lambertian);
+    
+
+    c.diffHigh = smoothstep(dhp - df,dhp + df , diffuse);
+    c.diffLow = smoothstep(dlp - df,dlp + df , diffuse);
     c.diffuse = c.diffLow * l.color;
 
     // Fresnel
-    c.fresnel = pow(s.ndotv * lambertian, p.fresnelPow);
+    c.fresnel = pow(s.ndotv * diffuse, p.fresnelPow);
     
     
 

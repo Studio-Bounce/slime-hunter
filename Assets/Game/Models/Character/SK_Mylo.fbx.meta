@@ -7,6 +7,16 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Bandage_MAT
+    second: {fileID: 2100000, guid: 8c0817e91a96c374eabd7eab43a8eb72, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BaseArmor_MAT
+    second: {fileID: 2100000, guid: 19f9cd7a08618a54ab2541bff2c7ae26, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: BaseArmour_MAT
     second: {fileID: 2100000, guid: 19f9cd7a08618a54ab2541bff2c7ae26, type: 2}
   - first:
@@ -14,6 +24,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Body_MAT
     second: {fileID: 2100000, guid: 88295cc1283142846aba349fa88dd5ef, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Hair_MAT
+    second: {fileID: 2100000, guid: ee5563a3ac67d914187d84bcc461b5ad, type: 2}
   materials:
     materialImportMode: 2
     materialName: 1

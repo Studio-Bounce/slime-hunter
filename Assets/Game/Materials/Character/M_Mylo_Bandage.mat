@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Mylo_Body
+  m_Name: M_Mylo_Bandage
   m_Shader: {fileID: -6465566751694194690, guid: 8004e6e95c7802b4aab9c878b3931018,
     type: 3}
   m_Parent: {fileID: 0}
@@ -47,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Color:
-        m_Texture: {fileID: 2800000, guid: c7aca9ef7d82c4b4c8104e7d00bb1f94, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3b0bec8a7a1b5534383226b3b40996dc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -115,7 +115,7 @@ Material:
     - _ADDITIONAL_LIGHTS: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Band_Saturation_Boost: 1.48
+    - _Band_Saturation_Boost: 2
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
@@ -126,7 +126,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Diffuse_Band_Weight: 0.621
+    - _Diffuse_Band_Weight: 0.5
     - _Diffuse_Feather: 0.01
     - _Diffuse_Fresnel_Weight: 1
     - _Diffuse_Position: 0.5
@@ -154,7 +154,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Rim_Feather: 0.1
-    - _Rim_Position: 0.688
+    - _Rim_Position: 0.7
     - _SHADOWS_SOFT: 1
     - _Shininess: 0
     - _Smoothness: 0.5
