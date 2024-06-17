@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour
     // -------------------- Movement Mechanism --------------------
     public void MovePlayer()
     {
-        if (_isDashing || _isJumping) return;
+        if (_isDashing || _isJumping || !characterController.enabled) return;
 
         Vector2 moveInput = inputController.Movement;
         // Set move animation based on input

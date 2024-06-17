@@ -154,7 +154,7 @@ public class EnemyGauntlet : MonoBehaviour
 
             _wallObjectPool[i].SetActive(false);
         }
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
