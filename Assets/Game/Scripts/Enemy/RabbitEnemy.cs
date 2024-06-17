@@ -33,8 +33,8 @@ public class RabbitEnemy : Enemy
         base.BaseEnemyTakeDamage(damage);
 
         // Rabbit slime can not be stopped when its actively attacking
-        bool isAttackStoppable = (rfsm.GetAttackState() == BasicSlime_AttackPlayer.AttackState.CHARGE_UP ||
-                                  rfsm.GetAttackState() == BasicSlime_AttackPlayer.AttackState.NONE);
+        bool isAttackStoppable = (rfsm.GetAttackState() == BasicSlime_AttackPlayer.SlimeAttackState.CHARGE_UP ||
+                                  rfsm.GetAttackState() == BasicSlime_AttackPlayer.SlimeAttackState.NONE);
         if (isInvincible && isAlive && isAttackStoppable)
         {
             // Dodge

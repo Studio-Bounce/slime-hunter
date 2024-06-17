@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,7 @@ public class StaminaBar : Notification
 {
     public Player player;
     public Image fill;
+    public Image back;
 
     public float visibleDuration;
 
@@ -20,7 +22,7 @@ public class StaminaBar : Notification
             CanvasManager.Instance.AddAnchoredElement(player.transform, rectTransform.GetComponent<RectTransform>(), new Vector2(-70, 100));
         }
         GameManager.Instance.OnPlayerStaminaChange += value => SetFill((float)value / GameManager.Instance.PlayerMaxStamina);
-        GameManager.Instance.OnPlayerUseStamina += value => ShowBar();
+        GameManager.Instance.OnPlayerUseStamina += value => ShowBar(value);
     }
 
     public void SetFill(float amount)
@@ -28,7 +30,7 @@ public class StaminaBar : Notification
         fill.fillAmount = amount;
     }
 
-    public void ShowBar()
+    public void ShowBar(float amount)
     {
         PlayInOut(visibleDuration);
     }

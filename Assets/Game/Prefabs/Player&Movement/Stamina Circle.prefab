@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 820402840546615517}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1386903398526666628}
@@ -65,9 +65,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitions: 0000000001000000
   playOnStart: 0
-  duration: 1
+  transitionDuration: 0.5
   player: {fileID: 0}
-  fill: {fileID: 0}
+  fill: {fileID: 8448879962085908330}
+  back: {fileID: 3972625144834929154}
+  errorColor: {r: 1, g: 0, b: 0, a: 0}
+  visibleDuration: 2
 --- !u!1 &2247391656583662526
 GameObject:
   m_ObjectHideFlags: 0

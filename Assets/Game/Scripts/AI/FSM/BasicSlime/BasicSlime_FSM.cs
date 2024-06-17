@@ -11,7 +11,7 @@ public class BasicSlime_FSM : FSM
     public readonly int DeadStateName = Animator.StringToHash("Dead");
     public readonly int StunnedStateName = Animator.StringToHash("Stunned");
 
-    public BasicSlime_AttackPlayer.AttackState currentAttackState = BasicSlime_AttackPlayer.AttackState.NONE;
+    public BasicSlime_AttackPlayer.SlimeAttackState currentAttackState = BasicSlime_AttackPlayer.SlimeAttackState.NONE;
 
     public SeekSteeringBehaviour seekSteeringBehaviour;
     public WanderSteeringBehaviour wanderSteeringBehaviour;
@@ -87,7 +87,7 @@ public class BasicSlime_FSM : FSM
         DebugExtension.DrawCircle(transform.position, Color.red, attackRadius);
     }
 
-    public BasicSlime_AttackPlayer.AttackState GetAttackState()
+    public BasicSlime_AttackPlayer.SlimeAttackState GetAttackState()
     {
         return currentAttackState;
     }

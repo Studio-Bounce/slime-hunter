@@ -68,6 +68,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public bool IsFullStamina { get { return playerStamina == PlayerMaxStamina; } }
+
     public event Action<int> OnPlayerHealthChange;
     public event Action<int> OnPlayerStaminaChange;
     public event Action<int> OnPlayerUseStamina;
@@ -89,15 +91,17 @@ public class GameManager : Singleton<GameManager>
         UpdateStamina();
     }
 
-    public void UseStamina(int value)
+    public bool UseStamina(int value)
     {
-        if (PlayerStamina > 0)
+        OnPlayerUseStamina.Invoke(PlayerStamina);
+        if (PlayerStamina >= value)
         {
             PlayerStamina -= value;
             _staminaTimer = 0;
             _cooldown = true;
+            return true;
         }
-        OnPlayerUseStamina.Invoke(PlayerStamina);
+        return false;
     }
 
     private void UpdateStamina()

@@ -7,7 +7,8 @@ using UnityEngine;
 public enum NotificationTransitions
 {
     FADE,
-    FLY_UP
+    FLY_UP,
+    SHAKE
 }
 
 [RequireComponent(typeof(RectTransform), typeof(CanvasGroup))]
@@ -88,6 +89,9 @@ public class Notification : MonoBehaviour
                     case NotificationTransitions.FLY_UP:
                         FlyUp(normalTime);
                         break;
+                    case NotificationTransitions.SHAKE:
+                        Shake(normalTime);
+                        break;
                 }
             }
             yield return null;
@@ -104,5 +108,16 @@ public class Notification : MonoBehaviour
         Vector2 offset = startPosition;
         offset.y += 5;
         rectTransform.pivot = Vector3.LerpUnclamped(offset, startPosition, Easing.EaseOutCubic(time));
+    }
+
+    private void Shake(float time)
+    {
+        float speed = 5 * Mathf.PI; // Adjust the speed of the shake
+        float magnitude = 5f; // Adjust the magnitude of the shake
+
+        float x = Mathf.Sin(time * speed) * magnitude;
+        Vector2 offset = startPosition;
+        offset.x += x;
+        rectTransform.pivot = Vector3.Lerp(offset, startPosition, Easing.EaseOutQuad(time));
     }
 }

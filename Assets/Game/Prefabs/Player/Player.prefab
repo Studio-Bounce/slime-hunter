@@ -134,6 +134,7 @@ MonoBehaviour:
   damageDelay: 0.5
   knockbackTime: 0.25
   isInvincible: 0
+  stunned: 0
   onDeathEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -451,38 +452,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3332213138012660216, guid: 41f01cc0fd7cca94e811bce721c1f779,
         type: 3}
-      propertyPath: fill
-      value: 
-      objectReference: {fileID: 5168173387629098775}
-    - target: {fileID: -3332213138012660216, guid: 41f01cc0fd7cca94e811bce721c1f779,
-        type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 8410378942904223581}
     - target: {fileID: -3332213138012660216, guid: 41f01cc0fd7cca94e811bce721c1f779,
         type: 3}
-      propertyPath: duration
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -3332213138012660216, guid: 41f01cc0fd7cca94e811bce721c1f779,
-        type: 3}
-      propertyPath: playOnStart
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -3332213138012660216, guid: 41f01cc0fd7cca94e811bce721c1f779,
-        type: 3}
-      propertyPath: inOutDuration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -3332213138012660216, guid: 41f01cc0fd7cca94e811bce721c1f779,
-        type: 3}
-      propertyPath: visibleDuration
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -3332213138012660216, guid: 41f01cc0fd7cca94e811bce721c1f779,
-        type: 3}
       propertyPath: transitionDuration
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 733247925723628549, guid: 41f01cc0fd7cca94e811bce721c1f779,
         type: 3}
@@ -523,16 +499,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 733247925723628549, guid: 41f01cc0fd7cca94e811bce721c1f779,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 733247925723628549, guid: 41f01cc0fd7cca94e811bce721c1f779,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 733247925723628549, guid: 41f01cc0fd7cca94e811bce721c1f779,
         type: 3}
@@ -610,18 +576,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3673100973561718909}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5168173387629098775 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8448879962085908330, guid: 41f01cc0fd7cca94e811bce721c1f779,
-    type: 3}
-  m_PrefabInstance: {fileID: 3673100973561718909}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4659479598651636041
 PrefabInstance:
   m_ObjectHideFlags: 0
