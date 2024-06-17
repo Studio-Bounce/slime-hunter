@@ -20,6 +20,7 @@ public class CanvasManager : Singleton<CanvasManager>
         // Create a canvas if one doesn't exist
         if (screenCanvas == null)
         {
+            Debug.Log("Created screen canvas");
             GameObject canvasObject = new GameObject("ScreenCanvas");
             canvasObject.transform.SetParent(null, false);
             screenCanvas = canvasObject.AddComponent<Canvas>();
@@ -59,14 +60,14 @@ public class CanvasManager : Singleton<CanvasManager>
         canvasAnchorList.Remove(canvasAnchor);
     }
 
-    private void OnDestroy()
-    {
-        canvasAnchorList.Clear();
-        // Ensure that screenCanvas is destroyed
-        if (screenCanvas != null)
-        {
-            DestroyImmediate(screenCanvas.gameObject);
-            screenCanvas = null;
-        }
-    }
+    //private void OnDestroy()
+    //{
+    //    canvasAnchorList.Clear();
+    //    // Ensure that screenCanvas is destroyed
+    //    if (screenCanvas != null)
+    //    {
+    //        DestroyImmediate(screenCanvas.gameObject);
+    //        screenCanvas = null;
+    //    }
+    //}
 }

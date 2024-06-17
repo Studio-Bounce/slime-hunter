@@ -6,6 +6,14 @@ public class CanvasAnchorHandler : MonoBehaviour
 {
     public List<CanvasElement> canvasElements = new List<CanvasElement>();
 
+    // Caching instead of getting from CanvasManager.Instance to prevent creation of new instance OnDestroy
+    CanvasManager canvasManager = null;
+
+    private void Awake()
+    {
+        canvasManager = CanvasManager.Instance;
+    }
+
     private void Update()
     {
         foreach (CanvasElement el in canvasElements)
@@ -22,9 +30,9 @@ public class CanvasAnchorHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (CanvasManager.Instance)
+        if (canvasManager != null)
         {
-            CanvasManager.Instance.RemoveCanvasAnchor(this);
+            canvasManager.RemoveCanvasAnchor(this);
         }
     }
 }
