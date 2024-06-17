@@ -2,8 +2,9 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 using System.Collections;
+using System.IO;
 
-public class EnemyGauntlet : MonoBehaviour
+public class EnemyGauntlet : PersistentObject
 {
     [Header("Gauntlet Bounds")]
     public Vector2 boundSize;
@@ -17,10 +18,11 @@ public class EnemyGauntlet : MonoBehaviour
 
     private BoxCollider _boxCollider;
     private GameObject[] _wallObjectPool = new GameObject[4];
+    private bool wallsInstantiated = false;
 
     [Header("Gauntlet Enemy Waves")]
     public List<EnemyWaveProperties> enemyWaves = new List<EnemyWaveProperties>();
-    private EnemyWave enemyWaveHandler;
+    private EnemyWave enemyWaveHandler = null;
 
     private bool gauntletStart = false;
     private int waveCounter = 0;
@@ -30,9 +32,14 @@ public class EnemyGauntlet : MonoBehaviour
         get { return enemyWaves[waveCounter]; }
     }
 
-    private void Awake()
+    protected override void Awake()
     {
-        _boxCollider = gameObject.AddComponent<BoxCollider>();
+        base.Awake();
+        _boxCollider = gameObject.GetComponent<BoxCollider>();
+        if (_boxCollider == null)
+        {
+            _boxCollider = gameObject.AddComponent<BoxCollider>();
+        }
     }
 
     private void Start()
@@ -49,6 +56,7 @@ public class EnemyGauntlet : MonoBehaviour
             _wallObjectPool[i] = Instantiate(wallPrefab, transform);
             _wallObjectPool[i].SetActive(false);
         }
+        wallsInstantiated = true;
 
         GameObject go = new GameObject("EnemyWave");
         go.transform.SetParent(transform, false);
@@ -85,7 +93,7 @@ public class EnemyGauntlet : MonoBehaviour
         if (enemyWaveHandler.Completed)
         {
             waveCounter++;
-            enemyWaveHandler.Reset();
+            enemyWaveHandler.ResetWaves(false);
         }
     }
 
@@ -135,26 +143,45 @@ public class EnemyGauntlet : MonoBehaviour
         gauntletStart = true;
     }
 
-    IEnumerator ReleaseWalls()
+    IEnumerator ReleaseWalls(float releaseTime = 1.0f, bool destroyGO = true)
     {
-        for (int i = 0; i < _wallObjectPool.Length; i++)
+        if (wallsInstantiated)
         {
-            GameObject wall = _wallObjectPool[i];
-            float timeElapsed = 0;
-            float animationTime = 1;
-            Vector3 startPosition = wall.transform.position;
-            Vector3 endPosition = wall.transform.position - new Vector3(0, boundHeight/2, 0);
-            while (timeElapsed < animationTime)
+            for (int i = 0; i < _wallObjectPool.Length; i++)
             {
-                float t = Easing.EaseInBack(timeElapsed / animationTime);
-                wall.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, t);
-                timeElapsed += Time.deltaTime;
-                yield return null;
-            }
+                GameObject wall = _wallObjectPool[i];
+                float timeElapsed = 0;
+                Vector3 startPosition = wall.transform.position;
+                Vector3 endPosition = wall.transform.position - new Vector3(0, boundHeight / 2, 0);
+                while (timeElapsed < releaseTime)
+                {
+                    float t = Easing.EaseInBack(timeElapsed / releaseTime);
+                    wall.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, t);
+                    timeElapsed += Time.deltaTime;
+                    yield return null;
+                }
 
-            _wallObjectPool[i].SetActive(false);
+                _wallObjectPool[i].SetActive(false);
+            }
         }
-        Destroy(gameObject);
+        if (destroyGO)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void ResetGauntlet()
+    {
+        StartCoroutine(ReleaseWalls(0.2f, false));
+
+        // Reset gauntlet attributes
+        gauntletStart = false;
+        waveCounter = 0;
+        _boxCollider.enabled = true;
+        if (enemyWaveHandler != null)
+        {
+            enemyWaveHandler.ResetWaves(true);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -168,6 +195,12 @@ public class EnemyGauntlet : MonoBehaviour
             }
         }
 
+    }
+
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        StopAllCoroutines();
     }
 
 #if UNITY_EDITOR
@@ -207,4 +240,17 @@ public class EnemyGauntlet : MonoBehaviour
 
     }
 #endif
+
+    // ------------------- Save / Load -------------------
+    public override void LoadSaveData(byte[] data)
+    {
+        // Just an indication to reset the gauntlet
+        ResetGauntlet();
+    }
+
+    public override byte[] GetSaveData()
+    {
+        // No data saved as of now
+        return new byte[0];
+    }
 }

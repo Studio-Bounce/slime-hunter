@@ -20,7 +20,6 @@ public class CanvasManager : Singleton<CanvasManager>
         // Create a canvas if one doesn't exist
         if (screenCanvas == null)
         {
-            Debug.Log("Created screen canvas");
             GameObject canvasObject = new GameObject("ScreenCanvas");
             canvasObject.transform.SetParent(null, false);
             screenCanvas = canvasObject.AddComponent<Canvas>();
