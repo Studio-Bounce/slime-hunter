@@ -148,7 +148,7 @@ public class GameManager : Singleton<GameManager>
     private void OnDestroy()
     {
         StopAllCoroutines();
-        Instance.OnPlayerHealthChange = null;
-        Instance.OnPlayerStaminaChange = null;
+        OnPlayerHealthChange = null;
+        OnPlayerStaminaChange = null;
     }
 }
