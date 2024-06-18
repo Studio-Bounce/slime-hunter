@@ -33,6 +33,8 @@ public class PlayerSpawner : PersistentObject
     void InstantiateOrMovePlayer()
     {
         int idx = (currentCheckpointIdx != -1) ? currentCheckpointIdx : 0;
+        Debug.Log("Checkpoint index is " + idx);
+        Debug.Log("PlayerCheckpoint is " + checkpoints[idx].gameObject);
         Vector3 playerPosition = checkpoints[idx].transform.position;
         float spawnVFXDelay = 0.5f;
         if (playerInstance == null)

@@ -50,22 +50,22 @@ public class SceneLoader : Singleton<SceneLoader>
         }
     }
 
-    private void OnSceneLoaded() {
-        //Scene newScene = SceneManager.GetSceneByName(sceneName);
-    }
-
-    public void UnloadScene(string sceneName)
+    public void UnloadScene(string sceneName, Action<AsyncOperation, string> callback = null)
     {
-        StartCoroutine(unloadScene(sceneName));
+        StartCoroutine(unloadScene(sceneName, callback));
     }
 
-    IEnumerator unloadScene(string sceneName)
+    IEnumerator unloadScene(string sceneName, Action<AsyncOperation, string> callback)
     {
         AsyncOperation operation = null;
 
         try
         {
             operation = SceneManager.UnloadSceneAsync(sceneName);
+            if (callback != null)
+            {
+                operation.completed += (AsyncOperation op) => callback.Invoke(op, sceneName);
+            }
         }
         catch (Exception ex)
         {
