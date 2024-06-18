@@ -65,10 +65,12 @@ public class QuestMenu : MonoBehaviour
         // Update quest list
         ClearQuestContentList();
         List<QuestSO> quests = QuestManager.Instance.GetQuestsByType(questType);
+        bool isFirst = true;
         foreach (QuestSO quest in quests)
         {
             VisualElement questElement = questListAsset.CloneTree();
-            PopulateQuestDetails(questElement, quest);
+            PopulateQuestDetails(questElement, quest, isFirst);
+            isFirst = false;
             questListContent.Add(questElement);
         }
     }
@@ -87,22 +89,25 @@ public class QuestMenu : MonoBehaviour
         }
     }
 
-    void PopulateQuestDetails(VisualElement questItemVE, QuestSO quest)
+    void PopulateQuestDetails(VisualElement questItemVE, QuestSO quest, bool isSelected)
     {
+        string veName = (isSelected) ? "QuestListItemSelected" : "QuestListItem";
+        VisualElement questItemParent = questItemVE.Q<VisualElement>(veName);
+        questItemParent.style.display = DisplayStyle.Flex;
         // Quest status: Active or Inactive
-        VisualElement questStatus = questItemVE.Q<VisualElement>("QuestStatus");
+        VisualElement questStatus = questItemParent.Q<VisualElement>("QuestStatus");
         VisualElement activeStatus    = questStatus.Q<VisualElement>("Active");
         VisualElement notActiveStatus = questStatus.Q<VisualElement>("NotActive");
         activeStatus.style.display    = (quest.isActive) ? DisplayStyle.Flex : DisplayStyle.None;
         notActiveStatus.style.display = (quest.isActive) ? DisplayStyle.None : DisplayStyle.Flex;
 
         // Task name
-        VisualElement taskName = questItemVE.Q<VisualElement>("TaskNameSlot");
+        VisualElement taskName = questItemParent.Q<VisualElement>("TaskNameSlot");
         Label taskNameLbl = taskName.Q<Label>("TaskNameLabel");
         taskNameLbl.text = quest.questName;
 
         // Task level
-        VisualElement taskLevel = questItemVE.Q<VisualElement>("TaskLevelSlot");
+        VisualElement taskLevel = questItemParent.Q<VisualElement>("TaskLevelSlot");
         Label taskLevelLbl = taskLevel.Q<Label>("TaskLevelLabel");
         taskLevelLbl.text = quest.levelName;
     }

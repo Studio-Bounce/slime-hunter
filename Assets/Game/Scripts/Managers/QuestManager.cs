@@ -17,7 +17,6 @@ public class QuestManager : Singleton<QuestManager>
         {
             allQuests.Add(q);
         }
-        SetQuestAsActive(testAllQuests[0]);
     }
 
     private void Update()
