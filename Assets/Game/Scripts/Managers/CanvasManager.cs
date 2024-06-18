@@ -59,14 +59,16 @@ public class CanvasManager : Singleton<CanvasManager>
         canvasAnchorList.Remove(canvasAnchor);
     }
 
-    //private void OnDestroy()
-    //{
-    //    canvasAnchorList.Clear();
-    //    // Ensure that screenCanvas is destroyed
-    //    if (screenCanvas != null)
-    //    {
-    //        DestroyImmediate(screenCanvas.gameObject);
-    //        screenCanvas = null;
-    //    }
-    //}
+    public void ClearCanvas()
+    {
+        Debug.Log("Clearning " + screenCanvas.name);
+        if (screenCanvas != null)
+        {
+            foreach (Transform canvasElement in screenCanvas.transform)
+            {
+                Destroy(canvasElement.gameObject);
+            }
+        }
+        canvasAnchorList.Clear();
+    }
 }

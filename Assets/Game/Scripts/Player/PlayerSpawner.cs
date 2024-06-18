@@ -27,7 +27,10 @@ public class PlayerSpawner : PersistentObject
 
     private void Start()
     {
-        InstantiateOrMovePlayer();
+        if (playerInstance == null)
+        {
+            InstantiateOrMovePlayer();
+        }
     }
 
     void InstantiateOrMovePlayer()
