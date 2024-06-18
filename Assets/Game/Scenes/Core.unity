@@ -500,6 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   autoSaveInterval: 5
+  persistentGameObjects: []
 --- !u!1 &976020909
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,10 +826,9 @@ MonoBehaviour:
   questListAsset: {fileID: 9197481963319205126, guid: 122d8bf57c2956446a30f4ee4542afd7,
     type: 3}
   activeQuestIcon: {fileID: 2800000, guid: 9062a029e693f1b4d92df2106d7c32b9, type: 3}
-  activeQuestBorderColor: {r: 0.27450982, g: 0.73333335, b: 0.7921569, a: 0}
-  inactiveQuestBorderColor: {r: 1, g: 1, b: 1, a: 0}
-  activeQuestBorderWidth: 10
-  inactiveQuestBorderWidth: 5
+  selectedQuestBorderColor: {r: 0.27450982, g: 0.73333335, b: 0.7921569, a: 1}
+  selectedQuestBorderWidth: 5
+  questBorderWidth: 2
 --- !u!1 &1222843758
 GameObject:
   m_ObjectHideFlags: 0
