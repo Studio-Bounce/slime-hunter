@@ -9,6 +9,8 @@ public class QuestMenu : MonoBehaviour
     UIDocument uiDocument;
 
     // Buttons
+    const int numTabs = 3;
+    int currentTab = 0;  // For left/right shift functionality
     Button mainQuestBtn;
     Button sideQuestBtn;
     Button huntingQuestBtn;
@@ -19,6 +21,10 @@ public class QuestMenu : MonoBehaviour
     VisualElement questListContent;
     VisualElement questContent;
     VisualElement questComplete;
+
+    Button mainPagination;
+    Button sidePagination;
+    Button huntingPagination;
 
     [SerializeField] VisualTreeAsset questListAsset;
     [SerializeField] Texture2D activeQuestIcon;
@@ -31,6 +37,10 @@ public class QuestMenu : MonoBehaviour
     private void Awake()
     {
         uiDocument = GetComponent<UIDocument>();
+    }
+
+    private void Start()
+    {
         VisualElement root = uiDocument.rootVisualElement;
 
         // Top-level button on the pause menu ----------------
@@ -39,6 +49,7 @@ public class QuestMenu : MonoBehaviour
             // Open main quests by default
             QuestTypeSelected(QuestType.MAIN);
         });
+        currentTab = 0;
 
         // Left side options on Quest page -------------------
         VisualElement questTypes = root.Q<VisualElement>("SubOptions");
@@ -46,7 +57,23 @@ public class QuestMenu : MonoBehaviour
         sideQuestBtn = questTypes.Q<Button>("SideQuestBtn");
         huntingQuestBtn = questTypes.Q<Button>("HuntingQuestBtn");
 
+        selectedQuestTypeBtn = mainQuestBtn;  // Main quest is active by default
+        mainQuestBtn.clicked += () => QuestTypeSelected(QuestType.MAIN);
+        sideQuestBtn.clicked += () => QuestTypeSelected(QuestType.SIDE);
+        huntingQuestBtn.clicked += () => QuestTypeSelected(QuestType.HUNTING);
+
         VisualElement questList = root.Q<VisualElement>("QuestList");
+        VisualElement questListLeft = questList.Q<VisualElement>("LeftArrow");
+        VisualElement questListRight = questList.Q<VisualElement>("RightArrow");
+        questListLeft.Q<Button>().clicked += () => {
+            currentTab = (numTabs + currentTab - 1) % numTabs;
+            QuestTypeSelectById();
+        };
+        questListRight.Q<Button>().clicked += () => {
+            currentTab = (currentTab + 1) % numTabs;
+            QuestTypeSelectById();
+        };
+
         questListContent = questList.Q<VisualElement>("Content");
 
         // Right side options on Quest page ------------------
@@ -54,32 +81,55 @@ public class QuestMenu : MonoBehaviour
         questContent = questExplanation.Q<VisualElement>("Content");
         questComplete = questExplanation.Q<VisualElement>("Complete");
         questComplete.style.display = DisplayStyle.None;
+
+        // Bottom pagination ---------------------------------
+        VisualElement questTypesPage = root.Q<VisualElement>("QuestPage");
+        mainPagination = questTypesPage.Q<Button>("Main");
+        sidePagination = questTypesPage.Q<Button>("Side");
+        huntingPagination = questTypesPage.Q<Button>("Hunting");
     }
 
-    private void Start()
+    void QuestTypeSelectById()
     {
-        selectedQuestTypeBtn = mainQuestBtn;  // Main quest is active by default
-        mainQuestBtn.clicked += () => QuestTypeSelected(QuestType.MAIN);
-        sideQuestBtn.clicked += () => QuestTypeSelected(QuestType.SIDE);
-        huntingQuestBtn.clicked += () => QuestTypeSelected(QuestType.HUNTING);
+        if (currentTab == 0)
+        {
+            QuestTypeSelected(QuestType.MAIN);
+        }
+        else if (currentTab == 1)
+        {
+            QuestTypeSelected(QuestType.SIDE);
+        }
+        else if (currentTab == 2)
+        {
+            QuestTypeSelected(QuestType.HUNTING);
+        }
     }
 
     void QuestTypeSelected(QuestType questType)
     {
         selectedQuestTypeBtn.style.unityFontStyleAndWeight = FontStyle.Normal;
         selectedQuestTypeBtn.style.opacity = 50;
+        mainPagination.style.opacity = 50;
+        sidePagination.style.opacity = 50;
+        huntingPagination.style.opacity = 50;
         switch (questType)
         {
             case QuestType.MAIN:
                 selectedQuestTypeBtn = mainQuestBtn;
+                currentTab = 0;
+                mainPagination.style.opacity = 100;
                 break;
 
             case QuestType.SIDE:
                 selectedQuestTypeBtn = sideQuestBtn;
+                currentTab = 1;
+                sidePagination.style.opacity = 100;
                 break;
 
             case QuestType.HUNTING:
                 selectedQuestTypeBtn = huntingQuestBtn;
+                currentTab = 2;
+                huntingPagination.style.opacity = 100;
                 break;
         }
 
