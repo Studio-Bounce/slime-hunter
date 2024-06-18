@@ -7,6 +7,19 @@ public class QuestManager : Singleton<QuestManager>
     List<QuestSO> allQuests = new();
     QuestSO activeQuest = null;
 
+    [Header("For Testing")]
+    public QuestSO[] testAllQuests;
+
+    private void Start()
+    {
+        // FOR TESTING ONLY
+        foreach (QuestSO q in testAllQuests)
+        {
+            allQuests.Add(q);
+        }
+        SetQuestAsActive(testAllQuests[0]);
+    }
+
     private void Update()
     {
         // Track the active quest

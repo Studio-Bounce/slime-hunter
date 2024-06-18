@@ -14,16 +14,22 @@ public class QuestMenu : MonoBehaviour
     Button sideQuestBtn;
     Button huntingQuestBtn;
 
+    VisualElement questListContent;
+    [SerializeField] VisualTreeAsset questListAsset;
+    [SerializeField] Texture2D activeQuestIcon;
+
     private void Awake()
     {
         uiDocument = GetComponent<UIDocument>();
         VisualElement root = uiDocument.rootVisualElement;
 
         VisualElement questTypes = root.Q<VisualElement>("SubOptions");
-
         mainQuestBtn = questTypes.Q<Button>("MainQuestBtn");
         sideQuestBtn = questTypes.Q<Button>("SideQuestBtn");
         huntingQuestBtn = questTypes.Q<Button>("HuntingQuestBtn");
+
+        VisualElement questList = root.Q<VisualElement>("QuestList");
+        questListContent = questList.Q<VisualElement>("Content");
     }
 
     private void Start()
@@ -36,6 +42,7 @@ public class QuestMenu : MonoBehaviour
 
     void QuestTypeSelected(QuestType questType)
     {
+        Debug.Log("Clicked " + questType.ToString());
         activeBtn.style.unityFontStyleAndWeight = FontStyle.Normal;
         switch (questType)
         {
@@ -50,9 +57,53 @@ public class QuestMenu : MonoBehaviour
             case QuestType.HUNTING:
                 activeBtn = huntingQuestBtn;
                 break;
-
         }
 
+        // Highlight the button
         activeBtn.style.unityFontStyleAndWeight = FontStyle.Bold;
+
+        // Update quest list
+        ClearQuestContentList();
+        List<QuestSO> quests = QuestManager.Instance.GetQuestsByType(questType);
+        foreach (QuestSO quest in quests)
+        {
+            VisualElement questElement = questListAsset.CloneTree();
+            PopulateQuestDetails(questElement, quest);
+            questListContent.Add(questElement);
+        }
+    }
+
+    void ClearQuestContentList()
+    {
+        // Safe-deletion
+        List<VisualElement> questItems = new();
+        foreach (VisualElement questItem in questListContent.Children())
+        {
+            questItems.Add(questItem);
+        }
+        foreach (VisualElement questItem in questItems)
+        {
+            questListContent.Remove(questItem);
+        }
+    }
+
+    void PopulateQuestDetails(VisualElement questItemVE, QuestSO quest)
+    {
+        // Quest status: Active or Inactive
+        VisualElement questStatus = questItemVE.Q<VisualElement>("QuestStatus");
+        VisualElement activeStatus    = questStatus.Q<VisualElement>("Active");
+        VisualElement notActiveStatus = questStatus.Q<VisualElement>("NotActive");
+        activeStatus.style.display    = (quest.isActive) ? DisplayStyle.Flex : DisplayStyle.None;
+        notActiveStatus.style.display = (quest.isActive) ? DisplayStyle.None : DisplayStyle.Flex;
+
+        // Task name
+        VisualElement taskName = questItemVE.Q<VisualElement>("TaskNameSlot");
+        Label taskNameLbl = taskName.Q<Label>("TaskNameLabel");
+        taskNameLbl.text = quest.questName;
+
+        // Task level
+        VisualElement taskLevel = questItemVE.Q<VisualElement>("TaskLevelSlot");
+        Label taskLevelLbl = taskLevel.Q<Label>("TaskLevelLabel");
+        taskLevelLbl.text = quest.levelName;
     }
 }
