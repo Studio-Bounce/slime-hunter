@@ -9,20 +9,38 @@ public class QuestMenu : MonoBehaviour
     UIDocument uiDocument;
 
     // Buttons
-    Button activeBtn;
     Button mainQuestBtn;
     Button sideQuestBtn;
     Button huntingQuestBtn;
+    Button selectedQuestTypeBtn;
+    Button selectedQuestBtn = null;
 
+    VisualElement questHeader;
     VisualElement questListContent;
+    VisualElement questContent;
+    VisualElement questComplete;
+
     [SerializeField] VisualTreeAsset questListAsset;
     [SerializeField] Texture2D activeQuestIcon;
+
+    [SerializeField] Color selectedQuestBorderColor;
+    [SerializeField] int selectedQuestBorderWidth = 5;
+    [SerializeField] int questBorderWidth = 2;
+    [SerializeField] Font questObjectiveFont;
 
     private void Awake()
     {
         uiDocument = GetComponent<UIDocument>();
         VisualElement root = uiDocument.rootVisualElement;
 
+        // Top-level button on the pause menu ----------------
+        questHeader = root.Q<VisualElement>("QuestTab");
+        questHeader.RegisterCallback<ClickEvent>(evt => {
+            // Open main quests by default
+            QuestTypeSelected(QuestType.MAIN);
+        });
+
+        // Left side options on Quest page -------------------
         VisualElement questTypes = root.Q<VisualElement>("SubOptions");
         mainQuestBtn = questTypes.Q<Button>("MainQuestBtn");
         sideQuestBtn = questTypes.Q<Button>("SideQuestBtn");
@@ -30,11 +48,17 @@ public class QuestMenu : MonoBehaviour
 
         VisualElement questList = root.Q<VisualElement>("QuestList");
         questListContent = questList.Q<VisualElement>("Content");
+
+        // Right side options on Quest page ------------------
+        VisualElement questExplanation = root.Q<VisualElement>("QuestExplanation");
+        questContent = questExplanation.Q<VisualElement>("Content");
+        questComplete = questExplanation.Q<VisualElement>("Complete");
+        questComplete.style.display = DisplayStyle.None;
     }
 
     private void Start()
     {
-        activeBtn = mainQuestBtn;  // Main quest is active by default
+        selectedQuestTypeBtn = mainQuestBtn;  // Main quest is active by default
         mainQuestBtn.clicked += () => QuestTypeSelected(QuestType.MAIN);
         sideQuestBtn.clicked += () => QuestTypeSelected(QuestType.SIDE);
         huntingQuestBtn.clicked += () => QuestTypeSelected(QuestType.HUNTING);
@@ -42,28 +66,30 @@ public class QuestMenu : MonoBehaviour
 
     void QuestTypeSelected(QuestType questType)
     {
-        Debug.Log("Clicked " + questType.ToString());
-        activeBtn.style.unityFontStyleAndWeight = FontStyle.Normal;
+        selectedQuestTypeBtn.style.unityFontStyleAndWeight = FontStyle.Normal;
+        selectedQuestTypeBtn.style.opacity = 50;
         switch (questType)
         {
             case QuestType.MAIN:
-                activeBtn = mainQuestBtn;
+                selectedQuestTypeBtn = mainQuestBtn;
                 break;
 
             case QuestType.SIDE:
-                activeBtn = sideQuestBtn;
+                selectedQuestTypeBtn = sideQuestBtn;
                 break;
 
             case QuestType.HUNTING:
-                activeBtn = huntingQuestBtn;
+                selectedQuestTypeBtn = huntingQuestBtn;
                 break;
         }
 
         // Highlight the button
-        activeBtn.style.unityFontStyleAndWeight = FontStyle.Bold;
+        selectedQuestTypeBtn.style.unityFontStyleAndWeight = FontStyle.Bold;
+        selectedQuestTypeBtn.style.opacity = 100;
 
         // Update quest list
-        ClearQuestContentList();
+        ClearVisualElement(questListContent);
+        selectedQuestBtn = null;
         List<QuestSO> quests = QuestManager.Instance.GetQuestsByType(questType);
         bool isFirst = true;
         foreach (QuestSO quest in quests)
@@ -75,25 +101,17 @@ public class QuestMenu : MonoBehaviour
         }
     }
 
-    void ClearQuestContentList()
+    void PopulateQuestDetails(VisualElement questItemVE, QuestSO quest, bool isFirst)
     {
-        // Safe-deletion
-        List<VisualElement> questItems = new();
-        foreach (VisualElement questItem in questListContent.Children())
-        {
-            questItems.Add(questItem);
-        }
-        foreach (VisualElement questItem in questItems)
-        {
-            questListContent.Remove(questItem);
-        }
-    }
-
-    void PopulateQuestDetails(VisualElement questItemVE, QuestSO quest, bool isSelected)
-    {
-        string veName = (isSelected) ? "QuestListItemSelected" : "QuestListItem";
-        VisualElement questItemParent = questItemVE.Q<VisualElement>(veName);
+        Button questItemParent = questItemVE.Q<Button>("QuestListItem");
         questItemParent.style.display = DisplayStyle.Flex;
+        questItemParent.clicked += () => QuestSelected(questItemParent, quest);
+        // Auto-select the first quest
+        if (isFirst)
+        {
+            QuestSelected(questItemParent, quest);
+        }
+
         // Quest status: Active or Inactive
         VisualElement questStatus = questItemParent.Q<VisualElement>("QuestStatus");
         VisualElement activeStatus    = questStatus.Q<VisualElement>("Active");
@@ -110,5 +128,114 @@ public class QuestMenu : MonoBehaviour
         VisualElement taskLevel = questItemParent.Q<VisualElement>("TaskLevelSlot");
         Label taskLevelLbl = taskLevel.Q<Label>("TaskLevelLabel");
         taskLevelLbl.text = quest.levelName;
+    }
+
+    void QuestSelected(Button questBtn, QuestSO quest)
+    {
+        if (selectedQuestBtn != null)
+        {
+            // Remove highlight of previously selected button
+            SetButtonBorderColor(selectedQuestBtn, Color.white);
+            SetButtonBorderWidth(selectedQuestBtn, questBorderWidth);
+        }
+        // Highlight newly selected button
+        SetButtonBorderColor(questBtn, selectedQuestBorderColor);
+        SetButtonBorderWidth(questBtn, selectedQuestBorderWidth);
+
+        // Display quest content
+        VisualElement questNameVE = questContent.Q<VisualElement>("QuestName");
+        questNameVE.Q<Label>().text = quest.questName;
+        VisualElement questPositionVE = questContent.Q<VisualElement>("Position");
+        questPositionVE.Q<Label>().text = quest.levelName;
+
+        VisualElement questDescription = questContent.Q<VisualElement>("TrackInformation");
+        questDescription.Q<Label>().text = quest.description;
+        VisualElement questObjectives = questDescription.Q<VisualElement>("ToDoList");
+        ClearVisualElement(questObjectives);
+        for (int i = 0; i < quest.objectives.Count; i++)
+        {
+            Label objectiveLabel = new()
+            {
+                name = $"Item{i + 1}",
+                text = $"- {quest.objectives[i].objective}"
+            };
+            objectiveLabel.style.color = Color.white;
+            objectiveLabel.style.fontSize = 20;
+            if (questObjectiveFont != null)
+            {
+                objectiveLabel.style.unityFont = questObjectiveFont;
+            }
+            if (i != quest.currentObjective)
+            {
+                // Don't highlight
+                objectiveLabel.style.opacity = 50;
+                objectiveLabel.style.unityFontStyleAndWeight = FontStyle.Normal;
+            }
+            else
+            {
+                // Highlight
+                objectiveLabel.style.opacity = 100;
+                objectiveLabel.style.unityFontStyleAndWeight = FontStyle.Bold;
+            }
+            questObjectives.Add(objectiveLabel);
+        }
+
+        VisualElement questRewards = questContent.Q<VisualElement>("Rewards");
+        VisualElement questWeapon = questRewards.Q<VisualElement>("Weapon");
+        VisualElement questSpell = questRewards.Q<VisualElement>("Spell");
+        VisualElement questCash = questRewards.Q<VisualElement>("Cash");
+        questWeapon.style.display = DisplayStyle.None;
+        questSpell.style.display = DisplayStyle.None;
+        questCash.style.display = DisplayStyle.None;
+        foreach (QuestReward questReward in quest.rewards)
+        {
+            if (questReward.rewardType == RewardType.WEAPON)
+            {
+                questWeapon.style.display = DisplayStyle.Flex;
+                questWeapon.Q<Label>().text = questReward.rewardName;
+            }
+            else if (questReward.rewardType == RewardType.SPELL)
+            {
+                questSpell.style.display = DisplayStyle.Flex;
+                questSpell.Q<Label>().text = questReward.rewardName;
+            }
+            else if (questReward.rewardType == RewardType.CASH)
+            {
+                questCash.style.display = DisplayStyle.Flex;
+                questCash.Q<Label>().text = questReward.quantity.ToString();
+            }
+        }
+
+        selectedQuestBtn = questBtn;
+    }
+
+    void SetButtonBorderColor(Button _button, Color _color)
+    {
+        _button.style.borderBottomColor = _color;
+        _button.style.borderTopColor = _color;
+        _button.style.borderLeftColor = _color;
+        _button.style.borderRightColor = _color;
+    }
+
+    void SetButtonBorderWidth(Button _button, int _width)
+    {
+        _button.style.borderBottomWidth = _width;
+        _button.style.borderTopWidth = _width;
+        _button.style.borderLeftWidth = _width;
+        _button.style.borderRightWidth = _width;
+    }
+
+    void ClearVisualElement(VisualElement veToClear)
+    {
+        // Safe-deletion
+        List<VisualElement> veItems = new();
+        foreach (VisualElement veItem in veToClear.Children())
+        {
+            veItems.Add(veItem);
+        }
+        foreach (VisualElement veItem in veItems)
+        {
+            veToClear.Remove(veItem);
+        }
     }
 }
