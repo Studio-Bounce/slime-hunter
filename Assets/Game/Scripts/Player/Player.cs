@@ -12,7 +12,7 @@ public class Player : DamageTaker
 
     private void Awake()
     {
-        GameManager.Instance.playerRef = this;
+        GameManager.Instance.PlayerRef = this;
     }
 
     protected override void Start()

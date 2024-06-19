@@ -13,7 +13,7 @@ public class HUDMenu : Menu
     ProgressBar healthProgressBar;
     ProgressBar staminaProgressBar;
 
-    VisualElement questContainer;
+    VisualElement questNameVE;
     Label questNameLabel;
     Label questDescriptionLabel;
 
@@ -45,11 +45,14 @@ public class HUDMenu : Menu
         gameManager.OnPlayerStaminaChange += UpdateStaminaBar;
         UpdateStaminaBar(gameManager.PlayerStamina);
 
-        questContainer = root.Q<VisualElement>("QuestContainer");
-        questNameLabel = questContainer.Q<VisualElement>("Header").Q<Label>("Quest-Name");
+        VisualElement questContainer = root.Q<VisualElement>("QuestContainer");
+        questNameVE = questContainer.Q<VisualElement>("Header");
+        questNameLabel = questNameVE.Q<Label>("Quest-Name");
         questDescriptionLabel = questContainer.Q<Label>("Content");
-        questContainer.style.display = DisplayStyle.None;
         questManager.OnActiveQuestChange += UpdateActiveQuest;
+        
+        questNameVE.style.display = DisplayStyle.None;
+        questDescriptionLabel.style.display = DisplayStyle.None;
     }
 
     // ------------------------------ Health ------------------------------
@@ -102,10 +105,12 @@ public class HUDMenu : Menu
     {
         if (questName == "")
         {
-            questContainer.style.display = DisplayStyle.None;
+            questNameVE.style.display = DisplayStyle.None;
+            questDescriptionLabel.style.display = DisplayStyle.None;
             return;
         }
-        questContainer.style.display = DisplayStyle.Flex;
+        questNameVE.style.display = DisplayStyle.Flex;
+        questDescriptionLabel.style.display = DisplayStyle.Flex;
         questNameLabel.text = questName;
         questDescriptionLabel.text = questDescription;
     }
