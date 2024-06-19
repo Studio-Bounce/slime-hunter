@@ -35,9 +35,15 @@ public class Enemy : DamageTaker
     [SerializeField] ParticleSystem deathParticles;
     [SerializeField] float deathDelay = 3.5f;
 
-    BasicSlime_FSM fsm;
 
+    [Header("Canvas")]
     [SerializeField] protected Slider healthSlider;
+    [SerializeField] float canvasTimeout = 10.0f;
+    Canvas enemyCanvas;
+    CanvasGroup enemyCanvasGroup;
+    bool canvasTriggered = false;  // Used as a flag to detect if enemy got hit, i.e. canvas should be shown
+
+    BasicSlime_FSM fsm;
 
     protected override void Start()
     {
@@ -49,7 +55,15 @@ public class Enemy : DamageTaker
         isAlive = true;
 
         fsm = GetComponent<BasicSlime_FSM>();
-        CanvasManager.Instance.AddAnchoredElement(transform, healthSlider.GetComponent<RectTransform>(), new Vector2(0, 80));
+        //CanvasManager.Instance.AddAnchoredElement(transform, healthSlider.GetComponent<RectTransform>(), new Vector2(0, 80));
+
+        // Hide canvas unless required, for efficiency
+        enemyCanvas = GetComponentInChildren<Canvas>();
+        if (enemyCanvas != null)
+        {
+            enemyCanvasGroup = enemyCanvas.gameObject.GetComponent<CanvasGroup>();
+            enemyCanvas.enabled = false;
+        }
     }
 
     // Used in child classes to call the original TakeDamage method
@@ -71,15 +85,60 @@ public class Enemy : DamageTaker
     {
         BaseEnemyTakeDamage(damage);
 
-        if (healthSlider != null)
+        if (healthSlider != null && enemyCanvas != null)
         {
-            healthSlider.value = ((float)health / maxHealth);
+            if (enemyCanvas.enabled)
+            {
+                canvasTriggered = true;
+                healthSlider.value = ((float)health / maxHealth);
+            }
+            else
+            {
+                enemyCanvasGroup.alpha = 1;
+                enemyCanvas.enabled = true;
+                // Update health with a small delay
+                StartCoroutine(UpdateHealth(0.1f));
+                StartCoroutine(DisableCanvasAfterTimeout());
+            }
         }
 
         if (!isInvincible)
         {
             StartCoroutine(ChangeEyeToDamage());
         }
+    }
+
+    IEnumerator UpdateHealth(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        healthSlider.value = ((float)health / maxHealth);
+    }
+
+    IEnumerator DisableCanvasAfterTimeout()
+    {
+        float timeElapsed = 0.0f;
+        while (timeElapsed < canvasTimeout)
+        {
+            yield return null;
+
+            timeElapsed += Time.deltaTime;
+            if (canvasTriggered)
+            {
+                // Reset time as enemy got hit again
+                timeElapsed = 0.0f;
+                canvasTriggered = false;
+            }
+        }
+
+        // Fade
+        float t = 0.5f;
+        while (t >= 0.0f)
+        {
+            enemyCanvasGroup.alpha = t * 2;
+            yield return null;
+            t -= Time.deltaTime;
+        }
+        enemyCanvas.enabled = false;
     }
 
     public override void Death()

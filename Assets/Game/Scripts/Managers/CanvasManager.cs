@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ public class CanvasManager : Singleton<CanvasManager>
 {
     public Canvas screenCanvas;
     private List<CanvasAnchorHandler> canvasAnchorList = new List<CanvasAnchorHandler>();
-    
+
     private void Awake()
     {
         // Create a canvas if one doesn't exist

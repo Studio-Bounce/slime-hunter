@@ -55,6 +55,5 @@ public static class Utils
     public static bool IsVector3OffScreen(Vector3 pos)
     {
         return (pos.x < 0 || pos.x > Screen.width || pos.y < 0 || pos.y > Screen.height);
-
     }
 }
