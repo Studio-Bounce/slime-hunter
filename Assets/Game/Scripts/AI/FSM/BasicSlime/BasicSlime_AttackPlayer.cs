@@ -112,6 +112,13 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
                 {
                     fsm.currentAttackState = SlimeAttackState.DASH;
                 }
+
+                // If the slime is already very close to the player, its attack won't get detected (OnTriggerEnter)
+                if (Vector3.Distance(fsm.transform.position, target) < 1.0f)
+                {
+                    // Move the slime back a bit during charge up
+                    fsm.characterController.Move(Time.deltaTime * (fsm.transform.position - target).normalized);
+                }
                 break;
 
             case SlimeAttackState.DASH:
