@@ -31,8 +31,8 @@ public class GameManager : Singleton<GameManager>
     [Header("Game Scene")]
     public string gameSceneName = "DemoLevel";
 
+    public Player PlayerRef { get; set; }
     [Header("Player Attributes")]
-    public Player playerRef;
     public int playerHealth = 100;
     public int playerStamina = 3;
     [Tooltip("Amount of Stamina increase per second (max: 100)")]

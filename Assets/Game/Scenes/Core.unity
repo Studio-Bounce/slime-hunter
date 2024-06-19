@@ -158,7 +158,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 60, y: 60}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &71063980
 MonoBehaviour:
@@ -213,7 +213,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &87094828
 RectTransform:
   m_ObjectHideFlags: 0
@@ -322,6 +322,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e352fcea4878ebc449d34e00a712d452, type: 2}
   - {fileID: 11400000, guid: d8a1e14993fecf14780e8feb5ca0fc3e, type: 2}
   - {fileID: 11400000, guid: 8c603cf0beb1af74c80a1796a4699c69, type: 2}
+  questTracker: {fileID: 87094828}
+  questArrow: {fileID: 71063979}
+  questDistance: {fileID: 1443875822}
+  edgeBuffer: 80
 --- !u!1 &436524884
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +795,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &1122067128
 RectTransform:
@@ -989,7 +993,6 @@ MonoBehaviour:
   forceCorrectEntry: 1
   entryPointSceneName: Core
   gameSceneName: DemoLevel
-  playerRef: {fileID: 0}
   playerHealth: 100
   playerStamina: 3
   staminaIncreaseValue: 1
@@ -1029,7 +1032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25, y: -55}
+  m_AnchoredPosition: {x: 10, y: -75}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443875822
@@ -1079,8 +1082,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 32
+  m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

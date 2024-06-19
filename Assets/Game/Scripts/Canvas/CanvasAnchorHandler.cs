@@ -19,11 +19,11 @@ public class CanvasAnchorHandler : MonoBehaviour
         foreach (CanvasElement el in canvasElements)
         {
             Vector3 elScreenPosition = CameraManager.ActiveCamera.WorldToScreenPoint(el.anchor.position);
-            bool isOffScreen = Utils.IsVector3OffScreen(elScreenPosition);
+            bool isOffScreen = Utils.IsScreenPositionOffScreen(elScreenPosition);
 
             // Save some canvas re-renders by not changing position if element is offscreen
             // If currently element is on-screen but it should be off-screen, move it off-screen
-            if (!isOffScreen || !(Utils.IsVector3OffScreen(el.rect.anchoredPosition)))
+            if (!isOffScreen || !(Utils.IsScreenPositionOffScreen(el.rect.anchoredPosition)))
             {
                 el.rect.anchoredPosition = elScreenPosition;
                 el.rect.anchoredPosition += el.offset;

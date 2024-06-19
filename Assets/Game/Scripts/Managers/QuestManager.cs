@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class QuestManager : Singleton<QuestManager>
@@ -13,6 +14,11 @@ public class QuestManager : Singleton<QuestManager>
     [Header("For Testing")]
     public QuestSO[] testAllQuests;
 
+    [SerializeField] RectTransform questTracker;
+    [SerializeField] RectTransform questArrow;
+    [SerializeField] TextMeshProUGUI questDistance;
+    public float edgeBuffer = 10.0f;
+
     private void Start()
     {
         // FOR TESTING ONLY
@@ -22,23 +28,42 @@ public class QuestManager : Singleton<QuestManager>
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        // Track the active quest
-        if (activeQuest != null && activeQuest.isActive)
-        {
-            TrackActiveQuest();
-        }
+        TrackActiveQuest();
     }
 
     void TrackActiveQuest()
     {
-        if (activeQuest == null)
+        if (activeQuest == null || !activeQuest.isActive || GameManager.Instance.PlayerRef == null)
         {
+            questTracker.gameObject.SetActive(false);
             return;
         }
+        if (!questTracker.gameObject.activeSelf)
+        {
+            questTracker.gameObject.SetActive(true);
+        }
 
-        // TODO: Tracking logic
+        Transform target = activeQuest.objectives[activeQuest.currentObjective].target;
+        bool isTargetOffscreen = Utils.IsWorldPositionOffScreen(target.position + Vector3.up, out Vector3 screenPosition);
+        if (isTargetOffscreen)
+        {
+            screenPosition.x = Mathf.Clamp(screenPosition.x, edgeBuffer, Screen.width - edgeBuffer);
+            screenPosition.y = Mathf.Clamp(screenPosition.y, edgeBuffer, Screen.height - edgeBuffer);
+        }
+
+        questTracker.position = screenPosition;
+        // Calculate the direction from the player to the target
+        Vector3 playerPosition = GameManager.Instance.PlayerRef.transform.position;
+        float angle = 0;
+        if (isTargetOffscreen)
+        {
+            Vector3 direction = (target.position - playerPosition).normalized;
+            angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        }
+        questArrow.rotation = Quaternion.Euler(0, 0, angle - 90);
+        questDistance.text = $"{(int)Vector3.Distance(playerPosition, target.position)}m";
     }
 
     void GiveRewards(QuestReward questReward)
@@ -97,6 +122,11 @@ public class QuestManager : Singleton<QuestManager>
                 activeQuest = null;
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
     }
 
     // ------------- Getters -------------

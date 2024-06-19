@@ -52,8 +52,14 @@ public static class Utils
         }
     }
 
-    public static bool IsVector3OffScreen(Vector3 pos)
+    public static bool IsWorldPositionOffScreen(Vector3 worldPosition, out Vector3 screenPosition)
     {
-        return (pos.x < 0 || pos.x > Screen.width || pos.y < 0 || pos.y > Screen.height);
+        screenPosition = CameraManager.ActiveCamera.WorldToScreenPoint(worldPosition);
+        return IsScreenPositionOffScreen(screenPosition);
+    }
+
+    public static bool IsScreenPositionOffScreen(Vector3 screenPosition)
+    {
+        return (screenPosition.x < 0 || screenPosition.x > Screen.width || screenPosition.y < 0 || screenPosition.y > Screen.height);
     }
 }
