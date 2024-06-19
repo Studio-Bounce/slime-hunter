@@ -61,7 +61,6 @@ public class CanvasManager : Singleton<CanvasManager>
 
     public void ClearCanvas()
     {
-        Debug.Log("Clearning " + screenCanvas.name);
         if (screenCanvas != null)
         {
             foreach (Transform canvasElement in screenCanvas.transform)

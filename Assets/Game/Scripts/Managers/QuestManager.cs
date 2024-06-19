@@ -29,19 +29,6 @@ public class QuestManager : Singleton<QuestManager>
         {
             TrackActiveQuest();
         }
-
-        // FOR TESTING ONLY
-        if (activeQuest == null)
-        {
-            foreach (QuestSO quest in allQuests)
-            {
-                if (quest.isActive)
-                {
-                    SetQuestAsActive(quest);
-                    return;
-                }
-            }
-        }
     }
 
     void TrackActiveQuest()
@@ -59,10 +46,6 @@ public class QuestManager : Singleton<QuestManager>
         // TODO: Implement reward mechanism
         Debug.Log("Rewarding player with " + questReward.rewardName);
     }
-
-    // -------------------------- Quest HUD Handler -----------------------------------
-
-
 
     // -------------------------- Exposed (public) functions --------------------------
 
