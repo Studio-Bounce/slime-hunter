@@ -10102,6 +10102,7 @@ MonoBehaviour:
   damageDelay: 0.3
   knockbackTime: 0.2
   isInvincible: 0
+  stunned: 0
   onDeathEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -10175,7 +10176,7 @@ MonoBehaviour:
   attackSpeed: 80
   attackRadius: 6
   attackEmissionTime: 0.1
-  attackProximity: 3
+  attackProximity: 1
   slimeAnimator: {fileID: 1065457560711704899}
 --- !u!114 &4347139268971403823
 MonoBehaviour:
@@ -10189,6 +10190,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  damage:
+    value: 0
+    knockback: 0
+    direction: {x: 0, y: 0, z: 0}
+    effect: {fileID: 0}
   framesToPause: 34
   cameraShakeIntensity: 1
   cameraShakeTime: 0.5

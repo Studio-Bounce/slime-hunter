@@ -33,7 +33,8 @@ public class PauseMenu : Menu
     {
         Time.timeScale = 1;
         UIManager.Instance.SetPauseMenu(false);
-        SceneLoader.Instance.UnloadScene(playSceneName);
+        SceneLoader.Instance.UnloadScene(playSceneName,
+            (AsyncOperation _, string _) => CanvasManager.Instance.ClearCanvas());
         UIManager.Instance.SetMainMenu(true);
         SceneLoader.Instance.LoadScene(menuSceneName);//load menu scene
         UIManager.Instance.SetHUDMenu(false);//unload HUD

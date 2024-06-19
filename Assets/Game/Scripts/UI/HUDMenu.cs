@@ -13,11 +13,21 @@ public class HUDMenu : Menu
     ProgressBar healthProgressBar;
     ProgressBar staminaProgressBar;
 
+    VisualElement questContainer;
+    Label questNameLabel;
+    Label questDescriptionLabel;
+
     bool redAlertUp = false;
+
+    // Cached as they're getting called in OnDestroy
+    GameManager gameManager;
+    QuestManager questManager;
 
     void Start()
     {
         VisualElement root = uiDocument.rootVisualElement;
+        gameManager = GameManager.Instance;
+        questManager = QuestManager.Instance;
 
         healthDamageVE = root.Q<VisualElement>("Red_Alert");
         VisualElement background = root.Q<VisualElement>("Background");
@@ -27,13 +37,19 @@ public class HUDMenu : Menu
 
         VisualElement healthVE = statusBars.Q<VisualElement>("Health");
         healthProgressBar = healthVE.Q<ProgressBar>("HealthBar");
-        GameManager.Instance.OnPlayerHealthChange += UpdateHealthBar;
-        UpdateHealthBar(GameManager.Instance.PlayerHealth);
+        gameManager.OnPlayerHealthChange += UpdateHealthBar;
+        UpdateHealthBar(gameManager.PlayerHealth);
 
         VisualElement staminaVE = statusBars.Q<VisualElement>("Stamina");
         staminaProgressBar = staminaVE.Q<ProgressBar>("StaminaBar");
-        GameManager.Instance.OnPlayerStaminaChange += UpdateStaminaBar;
-        UpdateStaminaBar(GameManager.Instance.PlayerStamina);
+        gameManager.OnPlayerStaminaChange += UpdateStaminaBar;
+        UpdateStaminaBar(gameManager.PlayerStamina);
+
+        questContainer = root.Q<VisualElement>("QuestContainer");
+        questNameLabel = questContainer.Q<VisualElement>("Header").Q<Label>("Quest-Name");
+        questDescriptionLabel = questContainer.Q<Label>("Content");
+        questContainer.style.display = DisplayStyle.None;
+        questManager.OnActiveQuestChange += UpdateActiveQuest;
     }
 
     // ------------------------------ Health ------------------------------
@@ -77,6 +93,33 @@ public class HUDMenu : Menu
         if (staminaProgressBar != null)
         {
             staminaProgressBar.value = (float)stamina / GameManager.Instance.PlayerMaxStamina;
+        }
+    }
+
+    // ------------------------------ Quests -------------------------------
+
+    void UpdateActiveQuest(string questName, string questDescription)
+    {
+        if (questName == "")
+        {
+            questContainer.style.display = DisplayStyle.None;
+            return;
+        }
+        questContainer.style.display = DisplayStyle.Flex;
+        questNameLabel.text = questName;
+        questDescriptionLabel.text = questDescription;
+    }
+
+    private void OnDestroy()
+    {
+        if (gameManager != null)
+        {
+            gameManager.OnPlayerHealthChange -= UpdateHealthBar;
+            gameManager.OnPlayerStaminaChange -= UpdateStaminaBar;
+        }
+        if (questManager != null)
+        {
+            questManager.OnActiveQuestChange -= UpdateActiveQuest;
         }
     }
 }

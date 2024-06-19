@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,39 @@ public class QuestManager : Singleton<QuestManager>
     List<QuestSO> allQuests = new();
     QuestSO activeQuest = null;
 
+    public event Action<string, string> OnActiveQuestChange;
+
+    [Header("For Testing")]
+    public QuestSO[] testAllQuests;
+
+    private void Start()
+    {
+        // FOR TESTING ONLY
+        foreach (QuestSO q in testAllQuests)
+        {
+            allQuests.Add(q);
+        }
+    }
+
     private void Update()
     {
         // Track the active quest
         if (activeQuest != null && activeQuest.isActive)
         {
             TrackActiveQuest();
+        }
+
+        // FOR TESTING ONLY
+        if (activeQuest == null)
+        {
+            foreach (QuestSO quest in allQuests)
+            {
+                if (quest.isActive)
+                {
+                    SetQuestAsActive(quest);
+                    return;
+                }
+            }
         }
     }
 
@@ -32,6 +60,10 @@ public class QuestManager : Singleton<QuestManager>
         Debug.Log("Rewarding player with " + questReward.rewardName);
     }
 
+    // -------------------------- Quest HUD Handler -----------------------------------
+
+
+
     // -------------------------- Exposed (public) functions --------------------------
 
     // Add a new quest to player's game
@@ -49,8 +81,8 @@ public class QuestManager : Singleton<QuestManager>
         }
         activeQuest = quest;
         activeQuest.isActive = true;
+        OnActiveQuestChange.Invoke(activeQuest.questName, activeQuest.objectives[activeQuest.currentObjective].objective);
     }
-
 
     // Called when the player clears the current objective of a quest.
     // If all objectives are cleared, the quest gets completed & rewards are awarded

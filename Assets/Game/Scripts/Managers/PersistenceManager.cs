@@ -8,7 +8,7 @@ public class PersistenceManager : Singleton<PersistenceManager>
     [Tooltip("Time between each auto-save")]
     [SerializeField] float autoSaveInterval = 5.0f;
 
-    List<PersistentObject> persistentGameObjects = new List<PersistentObject>();
+    public List<PersistentObject> persistentGameObjects = new List<PersistentObject>();
     const string SAVE_FOLDER = "slime_hunter_save";
 
     private void Awake()
@@ -80,7 +80,7 @@ public class PersistenceManager : Singleton<PersistenceManager>
 
     public void UnregisterPersistent(PersistentObject persistentObject)
     {
-        if (!persistentGameObjects.Contains(persistentObject))
+        if (persistentGameObjects.Contains(persistentObject))
         {
             persistentGameObjects.Remove(persistentObject);
         }

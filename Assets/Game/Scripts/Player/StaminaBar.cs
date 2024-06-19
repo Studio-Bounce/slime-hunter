@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +9,9 @@ public class StaminaBar : Notification
 
     public float visibleDuration;
 
+    // Cache game manager's instance to ensure that we don't end up creating it in Ondestroy
+    GameManager gameManager = null;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -21,8 +21,9 @@ public class StaminaBar : Notification
         {
             CanvasManager.Instance.AddAnchoredElement(player.transform, rectTransform.GetComponent<RectTransform>(), new Vector2(-70, 100));
         }
-        GameManager.Instance.OnPlayerStaminaChange += value => SetFill((float)value / GameManager.Instance.PlayerMaxStamina);
-        GameManager.Instance.OnPlayerUseStamina += value => ShowBar(value);
+        gameManager = GameManager.Instance;
+        gameManager.OnPlayerStaminaChange += OnPlayerStaminaChange;
+        gameManager.OnPlayerUseStamina += OnPlayerUseStamina;
     }
 
     public void SetFill(float amount)
@@ -33,5 +34,24 @@ public class StaminaBar : Notification
     public void ShowBar(float amount)
     {
         PlayInOut(visibleDuration);
+    }
+
+    void OnPlayerStaminaChange(int value)
+    {
+        SetFill((float)value / GameManager.Instance.PlayerMaxStamina);
+    }
+
+    void OnPlayerUseStamina(int value)
+    {
+        ShowBar(value);
+    }
+
+    private void OnDestroy()
+    {
+        if (gameManager != null)
+        {
+            gameManager.OnPlayerStaminaChange -= OnPlayerStaminaChange;
+            gameManager.OnPlayerUseStamina -= OnPlayerUseStamina;
+        }
     }
 }
