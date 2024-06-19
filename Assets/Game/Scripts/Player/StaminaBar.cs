@@ -38,7 +38,7 @@ public class StaminaBar : Notification
 
     void OnPlayerStaminaChange(int value)
     {
-        SetFill((float)value / GameManager.Instance.PlayerMaxStamina);
+        SetFill((float)value / gameManager.PlayerMaxStamina);
     }
 
     void OnPlayerUseStamina(int value)

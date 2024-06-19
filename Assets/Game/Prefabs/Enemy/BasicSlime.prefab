@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 7627680177218896917}
   - component: {fileID: 785640628441536717}
   - component: {fileID: 976840549659335045}
+  - component: {fileID: 1678410851431471269}
   - component: {fileID: 6903828166098284839}
   m_Layer: 5
   m_Name: Canvas
@@ -289,6 +290,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &1678410851431471269
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819532411300855875}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &6903828166098284839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10473,6 +10486,7 @@ MonoBehaviour:
   deathParticles: {fileID: 7219281769877467878}
   deathDelay: 3.5
   healthSlider: {fileID: 3093743597393084328}
+  canvasTimeout: 10
 --- !u!114 &3662461099208768734
 MonoBehaviour:
   m_ObjectHideFlags: 0

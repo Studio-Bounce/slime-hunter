@@ -18,7 +18,7 @@ public class StatusBar : MonoBehaviour
 
     private void Start()
     {
-        CanvasManager.Instance.AddAnchoredElement(transform.parent, statusBarRoot, new Vector2(0, 100));
+        //CanvasManager.Instance.AddAnchoredElement(transform.parent, statusBarRoot, new Vector2(0, 100));
     }
 
     public void AddStatusEffect(StatusEffect effect)
