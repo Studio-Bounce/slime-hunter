@@ -107,35 +107,37 @@ public class QuestMenu : MonoBehaviour
 
     void QuestTypeSelected(QuestType questType)
     {
+        // Un-highlight previous button
         selectedQuestTypeBtn.style.unityFontStyleAndWeight = FontStyle.Normal;
-        selectedQuestTypeBtn.style.opacity = 50;
-        mainPagination.style.opacity = 50;
-        sidePagination.style.opacity = 50;
-        huntingPagination.style.opacity = 50;
+        selectedQuestTypeBtn.style.opacity = 0.5f;
+
+        mainPagination.style.opacity = 0.25f;
+        sidePagination.style.opacity = 0.25f;
+        huntingPagination.style.opacity = 0.25f;
         switch (questType)
         {
             case QuestType.MAIN:
                 selectedQuestTypeBtn = mainQuestBtn;
                 currentTab = 0;
-                mainPagination.style.opacity = 100;
+                mainPagination.style.opacity = 1.0f;
                 break;
 
             case QuestType.SIDE:
                 selectedQuestTypeBtn = sideQuestBtn;
                 currentTab = 1;
-                sidePagination.style.opacity = 100;
+                sidePagination.style.opacity = 1.0f;
                 break;
 
             case QuestType.HUNTING:
                 selectedQuestTypeBtn = huntingQuestBtn;
                 currentTab = 2;
-                huntingPagination.style.opacity = 100;
+                huntingPagination.style.opacity = 1.0f;
                 break;
         }
 
         // Highlight the button
         selectedQuestTypeBtn.style.unityFontStyleAndWeight = FontStyle.Bold;
-        selectedQuestTypeBtn.style.opacity = 100;
+        selectedQuestTypeBtn.style.opacity = 1.0f;
 
         // Update quest list
         ClearVisualElement(questListContent);
@@ -218,13 +220,13 @@ public class QuestMenu : MonoBehaviour
             if (i != quest.currentObjective)
             {
                 // Don't highlight
-                objectiveLabel.style.opacity = 50;
+                objectiveLabel.style.opacity = 0.5f;
                 objectiveLabel.style.unityFontStyleAndWeight = FontStyle.Normal;
             }
             else
             {
                 // Highlight
-                objectiveLabel.style.opacity = 100;
+                objectiveLabel.style.opacity = 1.0f;
                 objectiveLabel.style.unityFontStyleAndWeight = FontStyle.Bold;
             }
             questObjectives.Add(objectiveLabel);
