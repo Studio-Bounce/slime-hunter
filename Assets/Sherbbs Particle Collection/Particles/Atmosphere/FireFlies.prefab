@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3456768597155298676}
   - component: {fileID: 3456768597155298679}
   - component: {fileID: 3456768597155298678}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FireFlies
   m_TagString: Untagged
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
@@ -4871,7 +4871,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 63c277894672e024897840a609c424ca, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
