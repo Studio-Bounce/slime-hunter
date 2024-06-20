@@ -36,7 +36,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="QuestContent" class="tab-content" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="QuestContent" class="tab-content unselected-content" style="flex-grow: 1; flex-direction: row;">
                 <ui:VisualElement name="QuestSelection" style="flex-grow: 0; width: 1072px;">
                     <ui:VisualElement name="SubOptions" style="flex-grow: 0; height: 100px; flex-direction: row; justify-content: flex-start; padding-left: 162px; padding-top: 52px;">
                         <ui:Button text="Main Journey" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MainQuestBtn" style="background-color: rgba(0, 0, 0, 0); -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); -unity-font-style: bold; color: rgb(255, 255, 255); font-size: 20px; border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); width: 150px; padding-bottom: 0; padding-top: 0;" />
@@ -196,7 +196,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="MenuContent" class="tab-content unselected-content" style="flex-grow: 1; padding-right: 700px; padding-left: 700px; padding-top: 235px; padding-bottom: 200px;">
+            <ui:VisualElement name="MenuContent" class="tab-content" style="flex-grow: 1; padding-right: 700px; padding-left: 700px; padding-top: 235px; padding-bottom: 200px;">
                 <ui:VisualElement style="flex-grow: 1; -unity-text-align: upper-center; align-self: center; justify-content: center;">
                     <ui:VisualElement class="option-slot" style="flex-grow: 0;">
                         <ui:Button text="Continue" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnUnpause" class="menu-button" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); -unity-font-style: bold;" />

@@ -12,7 +12,7 @@ public class Menu : MonoBehaviour
     public bool IsVisible { get { return uiDocument.rootVisualElement.style.display == DisplayStyle.Flex; } }
 
     // Start is called before the first frame update
-    void Awake()
+    protected virtual void Awake()
     {
         uiDocument = GetComponent<UIDocument>();
         SetVisible(showOnStart);

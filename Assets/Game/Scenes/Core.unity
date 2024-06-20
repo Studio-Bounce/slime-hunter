@@ -714,7 +714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac4f68068b95bc49a55d66104e66e75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenCanvas: {fileID: 1122067127}
+  screenCanvas: {fileID: 0}
 --- !u!1 &1122067124
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 1122067126}
   - component: {fileID: 1122067125}
   m_Layer: 5
-  m_Name: ScreenCanvas
+  m_Name: QuestScreenCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -826,6 +826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1160628561}
+  - component: {fileID: 1160628562}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -848,6 +849,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 146768978}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1160628562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1160628560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c4205d038c4a2243a1175163daf962f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1179840934
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,8 +909,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showOnStart: 0
-  playSceneName: DemoLevel
-  menuSceneName: ArtTest
 --- !u!114 &1179840937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -992,7 +1003,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceCorrectEntry: 1
   entryPointSceneName: Core
-  gameSceneName: DemoLevel
+  menuSceneName: ArtTest
+  gameSceneName: Gray_GladeVillage
   playerHealth: 100
   playerStamina: 3
   staminaIncreaseValue: 1
@@ -1305,8 +1317,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showOnStart: 0
-  playSceneName: DemoLevel
-  menuSceneName: ArtTest
 --- !u!1 &1687697181
 GameObject:
   m_ObjectHideFlags: 0

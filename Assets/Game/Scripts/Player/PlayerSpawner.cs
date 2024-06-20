@@ -42,7 +42,7 @@ public class PlayerSpawner : PersistentObject
         {
             // Instantiate the player at appropriate location
             playerInstance = Instantiate(playerPrefab, playerPosition, Quaternion.identity);
-            SceneManager.MoveGameObjectToScene(playerInstance, SceneManager.GetSceneByName(GameManager.Instance.gameSceneName));
+            SceneManager.MoveGameObjectToScene(playerInstance, SceneManager.GetSceneByName(GameManager.Instance.GameSceneName));
         }
         else
         {
