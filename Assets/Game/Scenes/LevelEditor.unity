@@ -569,6 +569,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceCorrectEntry: 0
   entryPointSceneName: Core
+  menuSceneName: 
   gameSceneName: DemoLevel
   playerHealth: 100
   playerStamina: 3
@@ -2057,6 +2058,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1827226128182048838, guid: 2b269a3ee16b94045a6690ddc2fe58a0,
         type: 3}
+    - target: {fileID: 606331671084474555, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+        type: 3}
+      propertyPath: handPivotOffset.z
+      value: -0.15
+      objectReference: {fileID: 0}
     - target: {fileID: 606331671084474555, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
         type: 3}
       propertyPath: availableWeapons.Array.data[0]
