@@ -7,7 +7,7 @@
 === blacksmith ===
 
 1: No. I have not seen him since the devastation of this village. <>
- Although, I need some help from you Mylo, there are still some slimes in my backyard, can you get rid of them for me and bring my gear? I will make sure your efforts dont go in vain!"
+ Although, I need some help from you Mylo, , can you go to the Gooey Forest and bring my gear? I will make sure your efforts dont go in vain!"
 
     -> myloresponse
 
