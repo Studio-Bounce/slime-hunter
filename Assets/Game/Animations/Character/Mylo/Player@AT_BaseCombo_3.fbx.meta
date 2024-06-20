@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 07512f421a707e541a31bfd62431cac5
+guid: 1ee3c76f37b077c40b3ca0463755dc32
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -29,7 +29,11 @@ ModelImporter:
       will be discarded.\n\t'spine_C0_spine_04_Jnt' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n\t'spine_C0_spine_04_Jnt'
       has scale animation that will be discarded.\n\t'neck_C0_head_Jnt' has translation
-      animation that will be discarded.\n"
+      animation that will be discarded.\n\t'arm_R0_lowerarm_Jnt' has translation
+      animation that will be discarded.\n\t'arm_R0_hand_Jnt' has translation animation
+      that will be discarded.\n\t'leg_L0_calf_Jnt' has translation animation that
+      will be discarded.\n\t'leg_L0_foot_Jnt' has translation animation that will
+      be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -43,11 +47,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: AT_Combo_B
+      name: AT_BaseCombo_3
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 0
-      lastFrame: 120
+      firstFrame: 1
+      lastFrame: 68
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -59,9 +63,9 @@ ModelImporter:
       loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
-      keepOriginalOrientation: 1
+      keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 1
+      keepOriginalPositionXZ: 0
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -558,6 +562,11 @@ ModelImporter:
       position: {x: 0.08193054, y: 0.011269525, z: -0.07337358}
       rotation: {x: 0.012371755, y: -0.010339339, z: 0.9997036, w: 0.018244255}
       scale: {x: 1, y: 1, z: 1}
+    - name: leg_L0_thigh_twist_01_Jnt
+      parentName: leg_L0_thigh_Jnt
+      position: {x: -0.14785908, y: 0.0000000010615671, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     - name: leg_L0_calf_Jnt
       parentName: leg_L0_thigh_Jnt
       position: {x: -0.29571816, y: 0.0000000021104234, z: -1.0658141e-16}
@@ -573,15 +582,15 @@ ModelImporter:
       position: {x: -0.052077908, y: 0.08212966, z: 0.0017358073}
       rotation: {x: 0.007471083, y: 0.007471083, z: -0.7070673, w: 0.7070673}
       scale: {x: 1, y: 1, z: 1}
-    - name: leg_L0_thigh_twist_01_Jnt
-      parentName: leg_L0_thigh_Jnt
-      position: {x: -0.14785908, y: 0.0000000010615671, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
     - name: leg_R0_thigh_Jnt
       parentName: spine_C0_pelvis_Jnt
       position: {x: 0.08193054, y: 0.011269525, z: 0.07337358}
       rotation: {x: -0.010339341, y: -0.012371753, z: -0.018244255, w: 0.9997036}
+      scale: {x: 1, y: 1, z: 1}
+    - name: leg_R0_thigh_twist_01_Jnt
+      parentName: leg_R0_thigh_Jnt
+      position: {x: 0.14785908, y: -0.0000000010615671, z: -1.7763568e-17}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: leg_R0_calf_Jnt
       parentName: leg_R0_thigh_Jnt
@@ -597,11 +606,6 @@ ModelImporter:
       parentName: leg_R0_foot_Jnt
       position: {x: 0.052077908, y: -0.08212966, z: -0.0017358073}
       rotation: {x: 0.007471083, y: 0.007471083, z: -0.7070673, w: 0.7070673}
-      scale: {x: 1, y: 1, z: 1}
-    - name: leg_R0_thigh_twist_01_Jnt
-      parentName: leg_R0_thigh_Jnt
-      position: {x: 0.14785908, y: -0.0000000010615671, z: -1.7763568e-17}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: spine_C0_spine_01_Jnt
       parentName: spine_C0_pelvis_Jnt
@@ -888,97 +892,12 @@ ModelImporter:
       position: {x: 0.07990616, y: 0, z: -2.842171e-16}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: Boot_Cuff_GEO
+    - name: Ears_GEO
       parentName: SK_Mylo(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: Boot_Metal_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Boot_Base_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Scarf_Clasp_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Scarf_Hanging_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Scarf_Loop_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Strap_Ring_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Bag_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Bag_Ring_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Strap_Button_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Bag_Button_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Strap_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Belt_Base_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Belt_Loose_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Belt_Buckle_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Belt_Pin_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Bandages_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Top_GEO
-      parentName: SK_Mylo(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Pants_GEO
+    - name: Body_GEO
       parentName: SK_Mylo(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
@@ -988,12 +907,97 @@ ModelImporter:
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: Ears_GEO
+    - name: Pants_GEO
       parentName: SK_Mylo(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: Body_GEO
+    - name: Top_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bandages_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Belt_Pin_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Belt_Buckle_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Belt_Loose_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Belt_Base_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Strap_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bag_Button_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Strap_Button_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bag_Ring_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bag_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Strap_Ring_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Scarf_Loop_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Scarf_Hanging_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Scarf_Clasp_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Boot_Base_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Boot_Metal_GEO
+      parentName: SK_Mylo(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Boot_Cuff_GEO
       parentName: SK_Mylo(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
