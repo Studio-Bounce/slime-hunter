@@ -28,8 +28,19 @@ public class GameManager : Singleton<GameManager>
     public bool forceCorrectEntry = true;
     public string entryPointSceneName = "Core";
 
+    [Header("Menu Scene")]
+    [SerializeField] string menuSceneName = "";
+    public string MenuSceneName
+    {
+        get { return menuSceneName; }
+    }
+
     [Header("Game Scene")]
-    public string gameSceneName = "DemoLevel";
+    [SerializeField] string gameSceneName = "";
+    public string GameSceneName
+    {
+        get { return gameSceneName; }
+    }
 
     public Player PlayerRef { get; set; }
     [Header("Player Attributes")]
