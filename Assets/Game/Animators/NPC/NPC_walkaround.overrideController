@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: NPC_walkaround
+  m_Controller: {fileID: 9100000, guid: 7d3f334cf9f90dd409b4befdf3b4714e, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -203655887218126122, guid: 2d3c8c9507414f0438bd54378d72a492,
+      type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 36e4b2ac130e3b844829e7d7fb2337c3,
+      type: 3}
