@@ -10,7 +10,7 @@ using UnityEngine.VFX;
 public class PlayerSpawner : PersistentObject
 {
     [SerializeField] GameObject playerPrefab;
-    public GameObject playerInstance = null;
+    GameObject playerInstance = null;
 
     public int currentCheckpointIdx = -1;
     public PlayerCheckpoint[] checkpoints;
