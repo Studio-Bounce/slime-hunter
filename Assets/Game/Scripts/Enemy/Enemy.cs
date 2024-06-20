@@ -49,6 +49,10 @@ public class Enemy : DamageTaker
     {
         base.Start();
 
+        // Ensure that eye game objects are active
+        normalEye.gameObject.SetActive(true);
+        attackEye.gameObject.SetActive(true);
+        deathEye.gameObject.SetActive(true);
         normalEye.enabled = true;
         attackEye.enabled = false;
         deathEye.enabled = false;
