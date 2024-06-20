@@ -14,7 +14,7 @@ public class Editor : Menu
     [SerializeField] GameObject rabbitSlimePrefab;
     [SerializeField] GameObject rabbitSlimePreviewPrefab;
 
-    private void Awake()
+    protected override void Awake()
     {
         document = GetComponent<UIDocument>();
     }
