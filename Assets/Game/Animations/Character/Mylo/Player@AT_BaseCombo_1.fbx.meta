@@ -26,17 +26,7 @@ ModelImporter:
       will be discarded.\n\t'spine_C0_spine_04_Jnt' is inbetween humanoid transforms
       and has rotation animation that will be discarded.\n\t'spine_C0_spine_04_Jnt'
       has scale animation that will be discarded.\n"
-    animationRetargetingWarnings: "\nRetargeting quality report for clip 'Take 001':\n\tLeftUpperArm
-      average position error 11.8 mm and maximum position error 24.4 mm at time 0:
-      9 (34.6%) Frame 9\n\tLeftLowerArm average position error 11.8 mm and maximum
-      position error 24.5 mm at time 0: 9 (34.6%) Frame 9\n\tLeftHand average position
-      error 11.7 mm and maximum position error 24.1 mm at time 0: 9 (34.6%) Frame
-      9\n\tRightUpperArm average position error 11.6 mm and maximum position error
-      23.6 mm at time 0: 9 (34.6%) Frame 9\n\tRightLowerArm average position error
-      11.4 mm and maximum position error 23.4 mm at time 0: 9 (34.6%) Frame 9\n\tRightHand
-      average position error 11.0 mm and maximum position error 22.7 mm at time 0:
-      9 (34.6%) Frame 9\n\tHead average position error 13.9 mm and maximum position
-      error 28.7 mm at time 0: 9 (34.6%) Frame 9\n"
+    animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
@@ -52,8 +42,8 @@ ModelImporter:
       name: AT_BaseCombo_1
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 1
-      lastFrame: 32
+      firstFrame: 0
+      lastFrame: 33
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -65,9 +55,9 @@ ModelImporter:
       loopBlendOrientation: 1
       loopBlendPositionY: 1
       loopBlendPositionXZ: 1
-      keepOriginalOrientation: 0
+      keepOriginalOrientation: 1
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
