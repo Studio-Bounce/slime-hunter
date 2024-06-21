@@ -149,5 +149,6 @@ public class EnemyWave : MonoBehaviour
         // Instantiate the enemy at that location
         Enemy enemyRef = Instantiate(enemy, randomPosition, Quaternion.identity, transform).GetComponent<Enemy>();
         enemyRef.onDeathEvent.AddListener(() => totalDeaths++);
+        spawnedEnemies.Add(enemyRef);
     }
 }
