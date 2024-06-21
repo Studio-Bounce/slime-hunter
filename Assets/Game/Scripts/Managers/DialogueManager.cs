@@ -8,6 +8,7 @@ public class DialogueManager : Singleton<DialogueManager>
 {
     [SerializeField] DialogueHUD dialogueHUD = null;
 
+    NPCDialogue storyOwner = null;
     bool isStoryRunning = false;
 
     private void Start()
@@ -18,7 +19,7 @@ public class DialogueManager : Singleton<DialogueManager>
         }
     }
 
-    public bool StartDialogues(Dialogue dialogue)
+    public bool StartDialogues(NPCDialogue owner, Dialogue dialogue)
     {
         if (isStoryRunning)
         {
@@ -26,8 +27,11 @@ public class DialogueManager : Singleton<DialogueManager>
             return false;
         }
 
+        // TODO: Disable controls
+
         isStoryRunning = true;
         dialogueHUD.Show();
+        storyOwner = owner;
         Story story = new Story(dialogue.inkStoryJSON.text);
         ContinueStory(dialogue, story);
 
@@ -74,7 +78,8 @@ public class DialogueManager : Singleton<DialogueManager>
         {
             // Story complete
             isStoryRunning = false;
-            StartCoroutine(DelayedClear(0.5f));
+            storyOwner.isStoryComplete = true;
+            StartCoroutine(DelayedClear(2.0f));
         }
     }
 

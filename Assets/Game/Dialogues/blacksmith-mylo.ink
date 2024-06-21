@@ -17,7 +17,7 @@
     -> next2
     
     === myloresponse ===
- * [Sure! ]1: "Yes I would like to help you! Just keep my reward ready"
+ * ["Sure!"]1: "Yes I would like to help you! Just keep my reward ready"
  -> completion
  
 === next ===

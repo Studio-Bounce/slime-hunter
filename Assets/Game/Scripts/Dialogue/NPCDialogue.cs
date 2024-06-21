@@ -23,20 +23,18 @@ public class Dialogue
 public class NPCDialogue : MonoBehaviour
 {
     [SerializeField] Dialogue dialogue;
+    public bool isStoryComplete = false;
+
+    private void Start()
+    {
+        isStoryComplete = false;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == GameConstants.PlayerLayer)
+        if (!isStoryComplete && other.gameObject.layer == GameConstants.PlayerLayer)
         {
-            DialogueManager.Instance.StartDialogues(dialogue);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.layer == GameConstants.PlayerLayer)
-        {
-            //StartCoroutine(DelayedClear(0.5f));
+            DialogueManager.Instance.StartDialogues(this, dialogue);
         }
     }
 }

@@ -6,3 +6,19 @@
 .dialogue-button:hover {
     background-color: rgba(70, 187, 202, 1); /* Hover color */
 }
+
+@keyframes flash {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.flash-button {
+    animation: flash 1s infinite;
+}
