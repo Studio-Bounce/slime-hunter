@@ -1,3 +1,5 @@
+using Ink.Runtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,5 +63,22 @@ public static class Utils
     public static bool IsScreenPositionOffScreen(Vector3 screenPosition)
     {
         return (screenPosition.x < 0 || screenPosition.x > Screen.width || screenPosition.y < 0 || screenPosition.y > Screen.height);
+    }
+
+    public static string ToCapitalizedString(string text)
+    {
+        text.Trim();
+        if (text.Length > 1)
+        {
+            return char.ToUpper(text[0]) + text.Substring(1).ToLower();
+        }
+        else if (text.Length == 1)
+        {
+            return text.ToUpper();
+        }
+        else
+        {
+            return text;
+        }
     }
 }

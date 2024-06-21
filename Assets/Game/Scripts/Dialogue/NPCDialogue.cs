@@ -2,13 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCDialogue : InkDialogueController
+
+public enum Character
 {
+    MYLO,
+    BLACKSMITH,
+    ALCHEMIST
+}
+
+
+[System.Serializable]
+public class Dialogue
+{
+    public TextAsset inkStoryJSON;
+    [Tooltip("People who are part of the conversation")]
+    public List<Character> participants;
+}
+
+
+public class NPCDialogue : MonoBehaviour
+{
+    [SerializeField] Dialogue dialogue;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == GameConstants.PlayerLayer)
         {
-            StartStory();
+            DialogueManager.Instance.StartDialogues(dialogue);
         }
     }
 
@@ -16,7 +36,7 @@ public class NPCDialogue : InkDialogueController
     {
         if (other.gameObject.layer == GameConstants.PlayerLayer)
         {
-            StartCoroutine(DelayedClear(0.5f));
+            //StartCoroutine(DelayedClear(0.5f));
         }
     }
 }
