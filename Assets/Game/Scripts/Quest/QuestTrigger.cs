@@ -6,6 +6,7 @@ public class QuestTrigger : MonoBehaviour
 {
     [SerializeField] QuestSO quest;
     [SerializeField] Transform[] objectiveTargets;
+    [SerializeField] float endProximity = 1.0f;
     
     bool triggered = false;
 
@@ -15,6 +16,25 @@ public class QuestTrigger : MonoBehaviour
         for (int i = 0; i < objectiveTargets.Length; i++)
         {
             quest.objectives[i].target = objectiveTargets[i];
+        }
+    }
+
+    private void Update()
+    {
+        if (triggered)
+        {
+            // Clear the quest objective when user reaches in proximity
+            float distance = Vector3.Distance(GameManager.Instance.PlayerRef.transform.position,
+                                              objectiveTargets[quest.currentObjective].position);
+            if (distance < endProximity)
+            {
+                QuestManager.Instance.ClearQuestObjective(quest);
+
+                if (quest.currentObjective >= quest.objectives.Count)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 

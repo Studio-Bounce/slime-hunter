@@ -32,23 +32,25 @@ public class QuestManager : Singleton<QuestManager>
             questTracker.gameObject.SetActive(false);
             return;
         }
-        if (!questTracker.gameObject.activeSelf)
-        {
-            questTracker.gameObject.SetActive(true);
-        }
-
         Transform target = activeQuest.objectives[activeQuest.currentObjective].target;
         if (target == null)
         {
+            questTracker.gameObject.SetActive(false);
             return;
         }
-
         bool isTargetOffscreen = Utils.IsWorldPositionOffScreen(target.position + Vector3.up, out Vector3 screenPosition);
         if (isTargetOffscreen)
         {
             screenPosition.x = Mathf.Clamp(screenPosition.x, edgeBuffer, Screen.width - edgeBuffer);
             screenPosition.y = Mathf.Clamp(screenPosition.y, edgeBuffer, Screen.height - edgeBuffer);
-            return; // TEMPORARY
+            // TEMPORARY
+            questTracker.gameObject.SetActive(false);
+            return;
+        }
+
+        if (!questTracker.gameObject.activeSelf)
+        {
+            questTracker.gameObject.SetActive(true);
         }
 
         questTracker.position = screenPosition;
@@ -68,6 +70,8 @@ public class QuestManager : Singleton<QuestManager>
     {
         // TODO: Implement reward mechanism
         Debug.Log("Rewarding player with " + questReward.rewardName);
+        // Clear the active quest
+        OnActiveQuestChange.Invoke("", "");
     }
 
     // -------------------------- Exposed (public) functions --------------------------
@@ -120,6 +124,10 @@ public class QuestManager : Singleton<QuestManager>
             {
                 activeQuest = null;
             }
+        }
+        else
+        {
+            OnActiveQuestChange.Invoke(activeQuest.questName, activeQuest.objectives[activeQuest.currentObjective].objective);
         }
     }
 
