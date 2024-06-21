@@ -34,53 +34,71 @@ public class DialogueManager : Singleton<DialogueManager>
         dialogueHUD.Show();
         storyOwner = owner;
         Story story = new Story(dialogue.inkStoryJSON.text);
-        ContinueStory(dialogue, story);
+        StartCoroutine(ContinueStory(dialogue, story));
 
         return true;
     }
 
-    // Main function which gets called every time the story changes
-    public void ContinueStory(Dialogue dialogue, Story story)
+    public void ContinueStoryPublic(Dialogue dialogue, Story story)
     {
-        if (!isStoryRunning)
-            return;
+        StartCoroutine(ContinueStory(dialogue, story));
+    }
 
-        // Clear the previous dialogues & options
-        dialogueHUD.ClearDialogueBox();
-        dialogueHUD.ClearDialogueOptions();
-
-        // Read the story content (returns false for choices)
-        bool startingStory = true;
-        while (story.canContinue)
+    // Main function which gets called every time the story changes
+    IEnumerator ContinueStory(Dialogue dialogue, Story story)
+    {
+        if (isStoryRunning)
         {
-            string text = story.Continue();
-            ParseDialogue(text, out string dialogText, out int idx);
-            if (startingStory)
+            // Clear the previous dialogues & options
+            dialogueHUD.ClearDialogueBox();
+            dialogueHUD.ClearDialogueOptions();
+
+            // Read the story content (returns false for choices)
+            bool startingStory = true;
+            while (story.canContinue)
             {
-                // Starting new dialogue so update both person name and the dialogue
-                startingStory = false;
-                string participant = dialogue.participants[idx].ToString();
-                participant = Utils.ToCapitalizedString(participant);
-                dialogueHUD.SetDialogueBox(participant, dialogText);
+                string text = story.Continue();
+                ParseDialogue(text, out string dialogText, out int idx);
+                
+                // Do not interrupt running dialog
+                while (dialogueHUD.dialogRunning)
+                {
+                    yield return null;
+                }
+
+                if (startingStory)
+                {
+                    // Starting new dialogue so update both person name and the dialogue
+                    startingStory = false;
+                    string participant = dialogue.participants[idx].ToString();
+                    participant = Utils.ToCapitalizedString(participant);
+                    dialogueHUD.SetDialogueBox(participant, dialogText);
+                }
+                else
+                {
+                    // Appending to running dialog, no need of updating name
+                    dialogueHUD.AppendDialogue(dialogText);
+                }
+            }
+
+            // Do not interrupt running dialog
+            while (dialogueHUD.dialogRunning)
+            {
+                yield return null;
+            }
+
+            // Display the choices, if any
+            if (story.currentChoices.Count > 0)
+            {
+                dialogueHUD.SpawnDialogueOptions(dialogue, story);
             }
             else
             {
-                // Appending to running dialog, no need of updating name
-                dialogueHUD.AppendDialogue(dialogText);
+                // Story complete
+                isStoryRunning = false;
+                storyOwner.isStoryComplete = true;
+                StartCoroutine(DelayedClear(2.0f));
             }
-        }
-
-        // Display the choices, if any
-        if (story.currentChoices.Count > 0)
-        {
-            dialogueHUD.SpawnDialogueOptions(dialogue, story);
-        }
-        else
-        {
-            // Story complete
-            isStoryRunning = false;
-            storyOwner.isStoryComplete = true;
-            StartCoroutine(DelayedClear(2.0f));
         }
     }
 

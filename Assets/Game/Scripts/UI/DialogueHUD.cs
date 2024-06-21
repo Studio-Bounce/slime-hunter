@@ -15,6 +15,7 @@ public class DialogueHUD : Menu
     [SerializeField] VisualTreeAsset dialogOptionBtn;
     [SerializeField] Color dialogColor;
     [SerializeField] Color dialogHoverColor;
+    [HideInInspector] public bool dialogRunning = false;
 
     private void Start()
     {
@@ -51,7 +52,7 @@ public class DialogueHUD : Menu
 
             dialogButton.clicked += () => {
                 story.ChooseChoiceIndex(choice.index);
-                DialogueManager.Instance.ContinueStory(dialogue, story);
+                DialogueManager.Instance.ContinueStoryPublic(dialogue, story);
             };
 
             dialogOptions.Add(dialogVE);
@@ -68,11 +69,23 @@ public class DialogueHUD : Menu
     public void SetDialogueBox(string personName, string dialogText)
     {
         dialogPersonName.text = personName;
-        dialogContent.text = dialogText;
+        dialogContent.text = "";
+        StartCoroutine(AddDialogue(dialogText));
     }
 
     public void AppendDialogue(string dialogText)
     {
-        dialogContent.text += dialogText;
+        StartCoroutine(AddDialogue(dialogText));
+    }
+
+    IEnumerator AddDialogue(string dialogText)
+    {
+        dialogRunning = true;
+        foreach (char c in dialogText)
+        {
+            dialogContent.text += c;
+            yield return null;
+        }
+        dialogRunning = false;
     }
 }
