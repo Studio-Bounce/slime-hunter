@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class QuestMenu : MonoBehaviour
+public class QuestMenu : Menu
 {
-    UIDocument uiDocument;
-
     // Buttons
     const int numTabs = 3;
     int currentTab = 0;  // For left/right shift functionality
@@ -33,11 +31,6 @@ public class QuestMenu : MonoBehaviour
     [SerializeField] int selectedQuestBorderWidth = 5;
     [SerializeField] int questBorderWidth = 2;
     [SerializeField] Font questObjectiveFont;
-
-    private void Awake()
-    {
-        uiDocument = GetComponent<UIDocument>();
-    }
 
     private void Start()
     {
@@ -140,7 +133,7 @@ public class QuestMenu : MonoBehaviour
         selectedQuestTypeBtn.style.opacity = 1.0f;
 
         // Update quest list
-        ClearVisualElement(questListContent);
+        UIManager.Instance.ClearVisualElement(questListContent);
         selectedQuestBtn = null;
         List<QuestSO> quests = QuestManager.Instance.GetQuestsByType(questType);
         bool isFirst = true;
@@ -203,7 +196,7 @@ public class QuestMenu : MonoBehaviour
         VisualElement questDescription = questContent.Q<VisualElement>("TrackInformation");
         questDescription.Q<Label>().text = quest.description;
         VisualElement questObjectives = questDescription.Q<VisualElement>("ToDoList");
-        ClearVisualElement(questObjectives);
+        UIManager.Instance.ClearVisualElement(questObjectives);
         for (int i = 0; i < quest.objectives.Count; i++)
         {
             Label objectiveLabel = new()
@@ -275,19 +268,5 @@ public class QuestMenu : MonoBehaviour
         _button.style.borderTopWidth = _width;
         _button.style.borderLeftWidth = _width;
         _button.style.borderRightWidth = _width;
-    }
-
-    void ClearVisualElement(VisualElement veToClear)
-    {
-        // Safe-deletion
-        List<VisualElement> veItems = new();
-        foreach (VisualElement veItem in veToClear.Children())
-        {
-            veItems.Add(veItem);
-        }
-        foreach (VisualElement veItem in veItems)
-        {
-            veToClear.Remove(veItem);
-        }
     }
 }

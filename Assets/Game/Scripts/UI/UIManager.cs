@@ -60,4 +60,17 @@ public class UIManager : Singleton<UIManager>
         menuOBJ.Hide();
     }
 
+    public void ClearVisualElement(VisualElement veToClear)
+    {
+        // Safe-deletion
+        List<VisualElement> veItems = new();
+        foreach (VisualElement veItem in veToClear.Children())
+        {
+            veItems.Add(veItem);
+        }
+        foreach (VisualElement veItem in veItems)
+        {
+            veToClear.Remove(veItem);
+        }
+    }
 }

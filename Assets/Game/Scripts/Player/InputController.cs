@@ -26,6 +26,9 @@ public class InputController : MonoBehaviour
     Action<InputContext> attackQueuedAction;
     Action<InputContext> dashQueuedAction;
 
+    // FIXME: Used to stop player input at different times. Move InputController away from player
+    bool enableInput = true;
+    public bool EnableInput { get { return enableInput; } set { enableInput = value; } }
     public Vector2 Movement { get { return _movement; } }
 
     private void Awake()
@@ -34,6 +37,7 @@ public class InputController : MonoBehaviour
         _inputActions.Enable();
         _playerActions = _inputActions.Player;
         _UIActions = _inputActions.UI;
+        EnableInput = true;
     }
 
     private void Start()
@@ -59,7 +63,7 @@ public class InputController : MonoBehaviour
     // Callback should return bool to check if the input had succeeded
     private void QueueInput(Func<InputContext, bool> inputCallback, InputContext e)
     {
-        if (!QueuedInputMap.ContainsKey(inputCallback))
+        if (!QueuedInputMap.ContainsKey(inputCallback) && EnableInput)
         {
             StartCoroutine(QueueInputCoroutine(inputCallback, e));
         }
@@ -119,7 +123,10 @@ public class InputController : MonoBehaviour
 
     private void TrackMovement(InputContext context)
     {
-        _movement = context.ReadValue<Vector2>();
+        if (EnableInput)
+        {
+            _movement = context.ReadValue<Vector2>();
+        }
     }
 
     private void StopMovement(InputContext context)

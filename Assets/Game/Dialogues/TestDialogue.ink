@@ -5,7 +5,7 @@ Hello Traveller
 
 === blacksmith ===
 I am the blacksmith. Need to sharpen your blade?
-*   Yes[] but I have no money.
+*   Yes[y] but I have no money.
     If you get rid of the slimes near my home, I'll do it for free.
     * *     Sure[], I'll help you!
             Great! Go to outskirt of the town and look to your right
