@@ -27,7 +27,8 @@ public class DialogueManager : Singleton<DialogueManager>
             return false;
         }
 
-        // TODO: Disable controls
+        // Disable controls
+        GameManager.Instance.PlayerRef.GetComponent<InputController>().EnableInput = false;
 
         isStoryRunning = true;
         dialogueHUD.Show();
@@ -87,6 +88,8 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         yield return new WaitForSeconds(timer);
         dialogueHUD.Hide();
+        // Enable controls
+        GameManager.Instance.PlayerRef.GetComponent<InputController>().EnableInput = true;
     }
 
     void ParseDialogue(string dialogText, out string actualDialog, out int participantIdx)

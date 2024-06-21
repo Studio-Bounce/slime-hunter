@@ -18,7 +18,7 @@
     
     === myloresponse ===
  * ["Sure!"]1: "Yes I would like to help you! Just keep my reward ready"
- -> completion
+ -> next3
  
 === next ===
  * [Continue]
@@ -27,6 +27,10 @@
 === next2 ===
  * [Continue]
   -> blacksmith
+  
+=== next3 ===
+ * [Continue]
+  -> completion
 
 === completion ===
 0: "Okay, Thank you Mylo, see you around!"
