@@ -117,6 +117,13 @@ public class GameManager : Singleton<GameManager>
         return false;
     }
 
+    public void ReturnStamina(int value)
+    {
+        PlayerStamina = Mathf.Min(PlayerMaxStamina, PlayerStamina + value);
+        _staminaTimer = 0;
+        _cooldown = true;
+    }
+
     private void UpdateStamina()
     {
         _staminaTimer += Time.deltaTime;

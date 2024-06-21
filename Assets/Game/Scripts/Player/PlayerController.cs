@@ -158,9 +158,6 @@ public class PlayerController : MonoBehaviour
         float startTime = Time.time;
         Vector3 startPosition = transform.position;
 
-        // Dash shouldn't use stamina if dash is not possible. Hence, this check.
-        bool staminaUsed = false;
-
         while (dashProgress <= 1.0f)
         {
             dashProgress = (Time.time - startTime) / dashDuration;
@@ -170,14 +167,12 @@ public class PlayerController : MonoBehaviour
             // We need to detect and stop dash if this happens
             if (CheckForwardCollisions())
             {
+                // Do not use stamina if dash was a failure (movement < 25%)
+                if (dashProgress < 0.25f)
+                {
+                    GameManager.Instance.ReturnStamina(dashStaminaUse);
+                }
                 break;
-            }
-            else if (!staminaUsed)
-            {
-                staminaUsed = true;
-                // Stamina might have been changed by some other action.
-                // Just confirm that player has enough stamina for dashing
-                // if (GameManager.Instance.PlayerStamina < dashStaminaUse) break;
             }
 
             transform.position = startPosition + dashVector * dashProgress;
