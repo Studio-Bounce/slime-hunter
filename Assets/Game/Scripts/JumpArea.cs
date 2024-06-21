@@ -7,7 +7,7 @@ public class JumpArea : MonoBehaviour
     [SerializeField] float jumpForce = 10.0f;
     [SerializeField] float jumpDuration = 0.5f;
     
-    public Transform[] jumpTargets;
+    Transform[] jumpTargets;
 
     private void Start()
     {
