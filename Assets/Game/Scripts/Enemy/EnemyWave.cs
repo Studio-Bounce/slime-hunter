@@ -13,7 +13,7 @@ public enum SpawnLocation
 public struct EnemySpawnProperties
 {
     public GameObject enemyPrefab;
-    public float spawnWeight; // A value between 0 and 1
+    public int spawnCount;
     public SpawnLocation spawnLocation;
 }
 
@@ -22,19 +22,16 @@ public struct EnemySpawnProperties
 public class EnemyWaveProperties
 {
     public List<EnemySpawnProperties> enemiesInWave;
-    public int totalEnemies;
-    public float spawnInterval;
     public float delayOnComplete;
 }
 
 public class EnemyWave : MonoBehaviour
 {
     private EnemyWaveProperties properties;
-    private float _totalWeight;
     private List<Enemy> spawnedEnemies = new List<Enemy>();
     private bool isStart = false;
     private float timer = 0;
-    private int enemySpawnCount = 0;
+    private int totalEnemies = 0;
     private Vector2 bounds;
     private bool isComplete = false;
     public int totalDeaths = 0;
@@ -43,38 +40,17 @@ public class EnemyWave : MonoBehaviour
     public bool Started { get { return isStart; } }
 
     // Using timer method as coroutines have issue instantiating FSM
-    public void Update()
+    private void Update()
     {
         if (!Started) return;
 
+        // Don't complete unless all enemies killed
+        if (totalDeaths < totalEnemies) return;
+
         timer += Time.deltaTime;
-        if (enemySpawnCount < properties.totalEnemies)
+        if (Utils.CheckTimer(ref timer, properties.delayOnComplete))
         {
-            // Exit early if not time to spawn
-            if (!Utils.CheckTimer(ref timer, properties.spawnInterval)) return;
-
-            EnemySpawnProperties enemy = RollEnemy();
-            switch (enemy.spawnLocation)
-            {
-                case SpawnLocation.RANDOM_BORDER:
-                    SpawnAtBorder(enemy.enemyPrefab);
-                    break;
-                case SpawnLocation.RANDOM_INNER:
-                    SpawnAtInner(enemy.enemyPrefab);
-                    break;
-                default:
-                    break;
-            }
-            enemySpawnCount++;
-        } else
-        {
-            // Don't complete unless all enemies killed
-            if (totalDeaths < properties.totalEnemies) return;
-
-            if (Utils.CheckTimer(ref timer, properties.delayOnComplete))
-            {
-                isComplete = true;
-            }
+            isComplete = true;
         }
     }
 
@@ -83,7 +59,7 @@ public class EnemyWave : MonoBehaviour
         properties = null;
         bounds = Vector2.zero;
         timer = 0;
-        enemySpawnCount = 0;
+        totalEnemies = 0;
         isStart = false;
         isComplete = false;
         // Kill the slimes spawned in an enemy wave
@@ -104,29 +80,31 @@ public class EnemyWave : MonoBehaviour
     public void StartWave(EnemyWaveProperties _properties, Vector2 _bounds)
     {
         properties = _properties;
-        _totalWeight = 0f;
-        foreach (var enemy in properties.enemiesInWave)
-        {
-            _totalWeight += enemy.spawnWeight;
-        }
         bounds = _bounds;
         isStart = true;
-    }
 
-    public EnemySpawnProperties RollEnemy()
-    {
-        float randomValue = Random.Range(0f, _totalWeight);
-        // Determine which enemy to spawn
-        float cumulativeWeight = 0f;
-        foreach (var enemy in properties.enemiesInWave)
+        foreach (EnemySpawnProperties prop in properties.enemiesInWave)
         {
-            cumulativeWeight += enemy.spawnWeight;
-            if (randomValue <= cumulativeWeight)
+            totalEnemies += prop.spawnCount;
+        }
+
+        foreach (EnemySpawnProperties prop in properties.enemiesInWave)
+        {
+            for (int i = 0; i < prop.spawnCount; i++)
             {
-                return enemy;
+                switch (prop.spawnLocation)
+                {
+                    case SpawnLocation.RANDOM_BORDER:
+                        SpawnAtBorder(prop.enemyPrefab);
+                        break;
+                    case SpawnLocation.RANDOM_INNER:
+                        SpawnAtInner(prop.enemyPrefab);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
-        return properties.enemiesInWave[0];
     }
 
     private void SpawnAtBorder(GameObject enemy)
