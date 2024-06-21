@@ -3,30 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class QuestManager : Singleton<QuestManager>
 {
     List<QuestSO> allQuests = new();
     QuestSO activeQuest = null;
 
+    public event Action<QuestSO> OnAddQuest;
     public event Action<string, string> OnActiveQuestChange;
-
-    [Header("For Testing")]
-    public QuestSO[] testAllQuests;
 
     [SerializeField] RectTransform questTracker;
     [SerializeField] RectTransform questArrow;
     [SerializeField] TextMeshProUGUI questDistance;
     public float edgeBuffer = 10.0f;
 
-    private void Start()
-    {
-        // FOR TESTING ONLY
-        foreach (QuestSO q in testAllQuests)
-        {
-            allQuests.Add(q);
-        }
-    }
+    [SerializeField] QuestMenu questMenu;
 
     private void LateUpdate()
     {
@@ -46,11 +38,17 @@ public class QuestManager : Singleton<QuestManager>
         }
 
         Transform target = activeQuest.objectives[activeQuest.currentObjective].target;
+        if (target == null)
+        {
+            return;
+        }
+
         bool isTargetOffscreen = Utils.IsWorldPositionOffScreen(target.position + Vector3.up, out Vector3 screenPosition);
         if (isTargetOffscreen)
         {
             screenPosition.x = Mathf.Clamp(screenPosition.x, edgeBuffer, Screen.width - edgeBuffer);
             screenPosition.y = Mathf.Clamp(screenPosition.y, edgeBuffer, Screen.height - edgeBuffer);
+            return; // TEMPORARY
         }
 
         questTracker.position = screenPosition;
@@ -77,6 +75,7 @@ public class QuestManager : Singleton<QuestManager>
     // Add a new quest to player's game
     public void AddQuest(QuestSO quest)
     {
+        OnAddQuest.Invoke(quest);
         allQuests.Add(quest);
     }
 

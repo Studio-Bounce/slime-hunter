@@ -317,15 +317,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02f8985121db7542a4ed8b0b8188e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testAllQuests:
-  - {fileID: 11400000, guid: 2f96c4b179cbeaa45806ed000990f086, type: 2}
-  - {fileID: 11400000, guid: e352fcea4878ebc449d34e00a712d452, type: 2}
-  - {fileID: 11400000, guid: d8a1e14993fecf14780e8feb5ca0fc3e, type: 2}
-  - {fileID: 11400000, guid: 8c603cf0beb1af74c80a1796a4699c69, type: 2}
   questTracker: {fileID: 87094828}
   questArrow: {fileID: 71063979}
   questDistance: {fileID: 1443875822}
   edgeBuffer: 80
+  questMenu: {fileID: 0}
 --- !u!1 &436524884
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,6 +642,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1666288460}
   - {fileID: 1687697182}
   - {fileID: 1498221638}
   - {fileID: 1577727800}
@@ -781,7 +778,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1122067124}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -1319,6 +1316,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showOnStart: 0
   coreCamera: {fileID: 0}
+--- !u!1 &1666288459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1666288460}
+  - component: {fileID: 1666288462}
+  - component: {fileID: 1666288461}
+  m_Layer: 0
+  m_Name: QuestAdded
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1666288460
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666288459}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 976020910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1666288461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666288459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7fa8eac7e6be3b438b9e61b7f70c71b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showOnStart: 1
+  questBannerTime: 2
+--- !u!114 &1666288462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1666288459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 4e1433707955c884c969a50848da7077, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 037f821284cbcf54e81b54988f5939a3,
+    type: 3}
+  m_SortingOrder: -1
 --- !u!1 &1687697181
 GameObject:
   m_ObjectHideFlags: 0
