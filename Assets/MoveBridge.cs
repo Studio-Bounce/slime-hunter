@@ -6,6 +6,7 @@ public class MoveBridge : MonoBehaviour
 {
     [SerializeField] Transform finalTransform;
     [SerializeField] float moveDuration = 2.0f;
+    [SerializeField] Transform[] objToDestroy;
 
     Transform initialTransform;
 
@@ -18,6 +19,10 @@ public class MoveBridge : MonoBehaviour
     public void MoveTheBridge()
     {
         StartCoroutine(LerpTransform());
+        foreach (Transform _transform in objToDestroy)
+        {
+            Destroy(_transform.gameObject, 1.0f);
+        }
     }
 
     IEnumerator LerpTransform()
