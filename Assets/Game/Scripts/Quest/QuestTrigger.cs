@@ -1,20 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class QuestTrigger : MonoBehaviour
 {
     [SerializeField] QuestSO quest;
     [SerializeField] Transform[] objectiveTargets;
-    
-    bool triggered = false;
+    [SerializeField] float endProximity = 1.0f;
+
+    public UnityEvent onCompleteEvent;
+    public bool triggered = false;
 
     private void Start()
     {
+        quest.currentObjective = 0;
         // Map targets to quest
         for (int i = 0; i < objectiveTargets.Length; i++)
         {
             quest.objectives[i].target = objectiveTargets[i];
+        }
+    }
+
+    private void Update()
+    {
+        if (triggered)
+        {
+            // Clear the quest objective when user reaches in proximity
+            float distance = Vector3.Distance(GameManager.Instance.PlayerRef.transform.position,
+                                              objectiveTargets[quest.currentObjective].position);
+            if (distance < endProximity)
+            {
+                QuestManager.Instance.ClearQuestObjective(quest);
+                // HACK
+                if (quest.currentObjective == 2)
+                {
+                    onCompleteEvent.Invoke();
+                }
+                if (quest.currentObjective >= quest.objectives.Count)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 

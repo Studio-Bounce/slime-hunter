@@ -3,30 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class QuestManager : Singleton<QuestManager>
 {
     List<QuestSO> allQuests = new();
     QuestSO activeQuest = null;
 
+    public event Action<QuestSO> OnAddQuest;
     public event Action<string, string> OnActiveQuestChange;
-
-    [Header("For Testing")]
-    public QuestSO[] testAllQuests;
 
     [SerializeField] RectTransform questTracker;
     [SerializeField] RectTransform questArrow;
     [SerializeField] TextMeshProUGUI questDistance;
     public float edgeBuffer = 10.0f;
 
-    private void Start()
-    {
-        // FOR TESTING ONLY
-        foreach (QuestSO q in testAllQuests)
-        {
-            allQuests.Add(q);
-        }
-    }
+    [SerializeField] QuestMenu questMenu;
 
     private void LateUpdate()
     {
@@ -40,17 +32,25 @@ public class QuestManager : Singleton<QuestManager>
             questTracker.gameObject.SetActive(false);
             return;
         }
-        if (!questTracker.gameObject.activeSelf)
-        {
-            questTracker.gameObject.SetActive(true);
-        }
-
         Transform target = activeQuest.objectives[activeQuest.currentObjective].target;
+        if (target == null)
+        {
+            questTracker.gameObject.SetActive(false);
+            return;
+        }
         bool isTargetOffscreen = Utils.IsWorldPositionOffScreen(target.position + Vector3.up, out Vector3 screenPosition);
         if (isTargetOffscreen)
         {
             screenPosition.x = Mathf.Clamp(screenPosition.x, edgeBuffer, Screen.width - edgeBuffer);
             screenPosition.y = Mathf.Clamp(screenPosition.y, edgeBuffer, Screen.height - edgeBuffer);
+            // TEMPORARY
+            questTracker.gameObject.SetActive(false);
+            return;
+        }
+
+        if (!questTracker.gameObject.activeSelf)
+        {
+            questTracker.gameObject.SetActive(true);
         }
 
         questTracker.position = screenPosition;
@@ -70,6 +70,8 @@ public class QuestManager : Singleton<QuestManager>
     {
         // TODO: Implement reward mechanism
         Debug.Log("Rewarding player with " + questReward.rewardName);
+        // Clear the active quest
+        OnActiveQuestChange.Invoke("", "");
     }
 
     // -------------------------- Exposed (public) functions --------------------------
@@ -77,6 +79,7 @@ public class QuestManager : Singleton<QuestManager>
     // Add a new quest to player's game
     public void AddQuest(QuestSO quest)
     {
+        OnAddQuest.Invoke(quest);
         allQuests.Add(quest);
     }
 
@@ -121,6 +124,10 @@ public class QuestManager : Singleton<QuestManager>
             {
                 activeQuest = null;
             }
+        }
+        else
+        {
+            OnActiveQuestChange.Invoke(activeQuest.questName, activeQuest.objectives[activeQuest.currentObjective].objective);
         }
     }
 

@@ -23,11 +23,24 @@ public class Dialogue
 public class NPCDialogue : MonoBehaviour
 {
     [SerializeField] Dialogue dialogue;
+    [SerializeField] GameObject questGameObject;
+
     public bool isStoryComplete = false;
 
     private void Start()
     {
         isStoryComplete = false;
+        questGameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (isStoryComplete)
+        {
+            // Start the quest
+            questGameObject.SetActive(true);
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

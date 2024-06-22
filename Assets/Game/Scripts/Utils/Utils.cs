@@ -62,7 +62,9 @@ public static class Utils
 
     public static bool IsScreenPositionOffScreen(Vector3 screenPosition)
     {
-        return (screenPosition.x < 0 || screenPosition.x > Screen.width || screenPosition.y < 0 || screenPosition.y > Screen.height);
+        return (screenPosition.z < 0 ||
+                screenPosition.x < 0 || screenPosition.x > Screen.width ||
+                screenPosition.y < 0 || screenPosition.y > Screen.height);
     }
 
     public static string ToCapitalizedString(string text)
