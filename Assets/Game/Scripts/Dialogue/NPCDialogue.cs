@@ -7,7 +7,8 @@ public enum Character
 {
     MYLO,
     BLACKSMITH,
-    ALCHEMIST
+    ALCHEMIST,
+    GUARD
 }
 
 
@@ -30,7 +31,8 @@ public class NPCDialogue : MonoBehaviour
     private void Start()
     {
         isStoryComplete = false;
-        questGameObject.SetActive(false);
+        if (questGameObject != null)
+            questGameObject.SetActive(false);
     }
 
     private void Update()
@@ -38,7 +40,8 @@ public class NPCDialogue : MonoBehaviour
         if (isStoryComplete)
         {
             // Start the quest
-            questGameObject.SetActive(true);
+            if (questGameObject != null)
+                questGameObject.SetActive(true);
             Destroy(gameObject);
         }
     }

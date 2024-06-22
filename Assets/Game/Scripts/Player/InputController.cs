@@ -127,6 +127,10 @@ public class InputController : MonoBehaviour
         {
             _movement = context.ReadValue<Vector2>();
         }
+        else
+        {
+            _movement = Vector2.zero;
+        }
     }
 
     private void StopMovement(InputContext context)
