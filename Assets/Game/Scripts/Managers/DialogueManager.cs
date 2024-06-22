@@ -7,6 +7,7 @@ using UnityEngine;
 public class DialogueManager : Singleton<DialogueManager>
 {
     [SerializeField] DialogueHUD dialogueHUD = null;
+    [SerializeField] HUDMenu hudMenu = null;
 
     NPCDialogue storyOwner = null;
     bool isStoryRunning = false;
@@ -32,6 +33,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
         isStoryRunning = true;
         dialogueHUD.Show();
+        hudMenu.Hide();
         storyOwner = owner;
         Story story = new Story(dialogue.inkStoryJSON.text);
         StartCoroutine(ContinueStory(dialogue, story));
@@ -106,6 +108,7 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         yield return new WaitForSeconds(timer);
         dialogueHUD.Hide();
+        hudMenu.Show();
         // Enable controls
         GameManager.Instance.PlayerRef.GetComponent<InputController>().EnableInput = true;
     }
