@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class QuestTrigger : MonoBehaviour
 {
     [SerializeField] QuestSO quest;
     [SerializeField] Transform[] objectiveTargets;
     [SerializeField] float endProximity = 1.0f;
-    
-    bool triggered = false;
+
+    public UnityEvent onCompleteEvent;
+    public bool triggered = false;
 
     private void Start()
     {
+        quest.currentObjective = 0;
         // Map targets to quest
         for (int i = 0; i < objectiveTargets.Length; i++)
         {
@@ -29,7 +32,11 @@ public class QuestTrigger : MonoBehaviour
             if (distance < endProximity)
             {
                 QuestManager.Instance.ClearQuestObjective(quest);
-
+                // HACK
+                if (quest.currentObjective == 2)
+                {
+                    onCompleteEvent.Invoke();
+                }
                 if (quest.currentObjective >= quest.objectives.Count)
                 {
                     Destroy(gameObject);
