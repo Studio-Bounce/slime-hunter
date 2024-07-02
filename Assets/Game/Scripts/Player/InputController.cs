@@ -22,7 +22,6 @@ public class InputController : MonoBehaviour
     private Dictionary<Func<InputContext, bool>, InputContext> QueuedInputMap = new Dictionary<Func<InputContext, bool>, InputContext>();
 
     // Need to store the function to properly add and removed callbacks to inputs
-    // WIP: Find a cleaner solution?
     Action<InputContext> attackQueuedAction;
     Action<InputContext> dashQueuedAction;
     Action<InputContext> spell1Action;

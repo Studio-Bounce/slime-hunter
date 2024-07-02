@@ -58,7 +58,7 @@ public class SpellController : MonoBehaviour
     // Depends on motion event to be called
     IEnumerator StopCast()
     {
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.4f); // TODO: Hardcoded 0.4 seconds
         isCasting = false;
     }
 
@@ -70,7 +70,7 @@ public class SpellController : MonoBehaviour
             StartCoroutine(StopCast());
             CurrentSpell.Ready = false;
             currentIndicator.HideIndicator();
-            // Cast Spell
+            // Cast spell
             Spell spell = Instantiate(CurrentSpell.spellPrefab);
             spell.transform.position = transform.position;
             spell.Cast(currentIndicator.GetTarget);

@@ -20,7 +20,7 @@ public class StunSpell : Spell
         damageDealer.Active = false;
         damageCollider = GetComponent<SphereCollider>();
         damageCollider.isTrigger = true;
-        damageCollider.radius = 3; // WIP: Hardcoded
+        damageCollider.radius = 3; // TODO: Hardcoded
     }
 
     public override void Cast(Vector3 target = default)

@@ -17,7 +17,7 @@ public class BasicSlime_BaseState : FSMBaseState<BasicSlime_FSM>
         // Ensure all overrides call base.OnStateUpdate
         if (fsm.slimeEnemy.stunned && stateInfo.shortNameHash != fsm.StunnedStateName)
         {
-            // WIP: Need to check if not already in state
+            // TODO: Need to check if not already in state
             fsm.ChangeState(fsm.StunnedStateName);
         }
     }

@@ -99,6 +99,13 @@ public class HUDMenu : Menu
         }
     }
 
+    // ------------------------------ Spells -------------------------------
+
+    void UpdateSpellCooldown(int spellIndex)
+    {
+
+    }
+
     // ------------------------------ Quests -------------------------------
 
     void UpdateActiveQuest(string questName, string questDescription)
