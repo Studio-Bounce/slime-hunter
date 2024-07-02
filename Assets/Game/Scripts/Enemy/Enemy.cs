@@ -39,7 +39,7 @@ public class Enemy : DamageTaker
     [Header("Canvas")]
     [SerializeField] protected Slider healthSlider;
     [SerializeField] float canvasTimeout = 10.0f;
-    Canvas enemyCanvas;
+    [SerializeField] Canvas enemyCanvas;
     CanvasGroup enemyCanvasGroup;
     bool canvasTriggered = false;  // Used as a flag to detect if enemy got hit, i.e. canvas should be shown
 
@@ -62,7 +62,6 @@ public class Enemy : DamageTaker
         //CanvasManager.Instance.AddAnchoredElement(transform, healthSlider.GetComponent<RectTransform>(), new Vector2(0, 80));
 
         // Hide canvas unless required, for efficiency
-        enemyCanvas = GetComponentInChildren<Canvas>();
         if (enemyCanvas != null)
         {
             enemyCanvasGroup = enemyCanvas.gameObject.GetComponent<CanvasGroup>();
@@ -83,12 +82,7 @@ public class Enemy : DamageTaker
             StartCoroutine(ShowHitParticles());
             StartCoroutine(FlashSlime());
         }
-    }
-
-    public override void TakeDamage(Damage damage)
-    {
-        BaseEnemyTakeDamage(damage);
-
+        // Enable health bar canvas
         if (healthSlider != null && enemyCanvas != null)
         {
             if (enemyCanvas.enabled)
@@ -105,6 +99,11 @@ public class Enemy : DamageTaker
                 StartCoroutine(DisableCanvasAfterTimeout());
             }
         }
+    }
+
+    public override void TakeDamage(Damage damage)
+    {
+        BaseEnemyTakeDamage(damage);
 
         if (!isInvincible)
         {
