@@ -1,15 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
 public class SpellController : MonoBehaviour
 {
+    public bool isCasting = false;
+
     public SpellSO[] spells = new SpellSO[3];
+
+    private int currentSpellIndex = 0;
     [SerializeField] private SpellIndicator radialIndicator;
     private SpellIndicator currentIndicator;
 
-    public void Start()
+    private Animator _animator;
+    private readonly int castTriggerHash = Animator.StringToHash("Cast");
+
+    public SpellSO CurrentSpell
+    {
+        get { return spells[currentSpellIndex]; }
+    }
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+        foreach (SpellSO spell in spells) spell.Ready = true;
+    }
+
+    private void Start()
     {
         Debug.Assert(radialIndicator != null);
         radialIndicator.HideIndicator();
@@ -17,7 +37,9 @@ public class SpellController : MonoBehaviour
 
     public void StartCast(int spellIndex)
     {
-        switch (spells[spellIndex].spellIndicator)
+        currentSpellIndex = spellIndex;
+
+        switch (CurrentSpell.spellIndicator)
         {
             case IndicatorType.RADIAL:
                 currentIndicator = radialIndicator;
@@ -33,19 +55,44 @@ public class SpellController : MonoBehaviour
         }
     }
 
+    // Depends on motion event to be called
+    IEnumerator StopCast()
+    {
+        yield return new WaitForSeconds(0.4f);
+        isCasting = false;
+    }
+
     public void Cast(InputAction.CallbackContext context)
     {
-        if (currentIndicator != null && currentIndicator.isActiveAndEnabled)
+        if (currentIndicator != null && currentIndicator.isActiveAndEnabled && CurrentSpell.Ready)
         {
-            // Hard code to use full stamina
-            if (!GameManager.Instance.IsFullStamina) return;
-            GameManager.Instance.UseStamina(GameManager.Instance.PlayerStamina);
-
-            Spell spell = Instantiate(spells[0].spellPrefab);
+            isCasting = true;
+            StartCoroutine(StopCast());
+            CurrentSpell.Ready = false;
+            currentIndicator.HideIndicator();
+            // Cast Spell
+            Spell spell = Instantiate(CurrentSpell.spellPrefab);
             spell.transform.position = transform.position;
             spell.Cast(currentIndicator.GetTarget);
-
-            currentIndicator.HideIndicator();
+            StartCoroutine(StartCooldown(currentSpellIndex));
+            // Rotate player to cast direction
+            Vector3 castDirection = currentIndicator.GetTarget - transform.position;
+            transform.forward = castDirection;
+            _animator.SetTrigger(castTriggerHash);
         }
+    }
+
+    IEnumerator StartCooldown(int spellIndex)
+    {
+        float remainingCD = spells[spellIndex].cooldown;
+        while (remainingCD > 0)
+        {
+            if (spellIndex == currentSpellIndex) currentIndicator.SetReady(false);
+            remainingCD -= Time.deltaTime;
+            yield return null;
+        }
+        spells[spellIndex].Ready = true;
+        if (spellIndex == currentSpellIndex) currentIndicator.SetReady(true);
+
     }
 }

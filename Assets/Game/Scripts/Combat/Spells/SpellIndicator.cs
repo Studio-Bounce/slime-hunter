@@ -7,6 +7,8 @@ public abstract class SpellIndicator : MonoBehaviour
 {
     public abstract Vector3 GetTarget { get; }
 
+    public abstract void SetReady(bool ready);
+
     public abstract void ShowIndicator();
 
     public abstract void HideIndicator();
