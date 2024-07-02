@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     CharacterController characterController;
     InputController inputController;
     WeaponController weaponController;
+    SpellController spellController;
     Trail trail;
 
     private float lastDashTime = 0.0f;
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         inputController = GetComponent<InputController>();
         weaponController = GetComponent<WeaponController>();
+        spellController = GetComponent<SpellController>();
         trail = GetComponent<Trail>();
 
         // Find the virual camera and tell it about the player
@@ -108,7 +110,7 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDirection = CameraManager.Instance.DirectionToCameraForward(transform.position,moveInput);
         // Rotate the player to look at the movement direction
         float _moveSpeed = moveSpeed;
-        if (!weaponController.IsInterruptable())
+        if (!weaponController.IsInterruptable() || spellController.isCasting)
         {
             _moveSpeed *= slowDownMultiplierOnAttack;
         } 

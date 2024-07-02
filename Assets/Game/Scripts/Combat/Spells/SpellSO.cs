@@ -13,8 +13,14 @@ public class SpellSO : ScriptableObject
     public Sprite icon;
     public Damage damage;
     public float cooldown;
-    public float castTime;
-    public float manaCost;
     public Spell spellPrefab;
     public IndicatorType spellIndicator;
+
+    private bool ready = true;
+
+    public bool Ready
+    {
+        get { return ready; }
+        set { ready = value; }
+    }
 }
