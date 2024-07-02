@@ -98,7 +98,7 @@ public class WeaponController : MonoBehaviour
         handPivot.forward = handPivotForward;
     }
 
-    // WIP: Should pool all weapons to begin with and disable as needed
+    // TODO: Should pool all weapons to begin with and disable as needed
     private void InstantiateWeapon(WeaponSO weaponSO)
     {
         if (weaponSO == null) return;
