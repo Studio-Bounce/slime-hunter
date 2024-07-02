@@ -15,9 +15,9 @@ public class SpellController : MonoBehaviour
         radialIndicator.HideIndicator();
     }
 
-    public void StartCast(InputAction.CallbackContext context)
+    public void StartCast(int spellIndex)
     {
-        switch (spells[0].spellIndicator)
+        switch (spells[spellIndex].spellIndicator)
         {
             case IndicatorType.RADIAL:
                 currentIndicator = radialIndicator;
