@@ -713,10 +713,10 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -35
+  near clip plane: 0.01
   far clip plane: 10000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 6.5
   m_Depth: 0
   m_CullingMask:
@@ -802,7 +802,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 6.5
-    NearClipPlane: -35
+    NearClipPlane: 0.01
     FarClipPlane: 10000
     Dutch: 0
     ModeOverride: 0
@@ -991,7 +991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1013020573
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1093,6 +1093,7 @@ MonoBehaviour:
   dialogue:
     inkStoryJSON: {fileID: 4900000, guid: f8f1f17b5bdd0e34dad03f7ef5c9f9ac, type: 3}
     participants: 0100000000000000
+  questGameObject: {fileID: 0}
   isStoryComplete: 0
 --- !u!1 &1385081036
 GameObject:
@@ -1111,7 +1112,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1385081037
 Transform:
   m_ObjectHideFlags: 0
@@ -1537,7 +1538,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2064921801
 Transform:
   m_ObjectHideFlags: 0
@@ -1566,6 +1567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueHUD: {fileID: 1385081039}
+  hudMenu: {fileID: 0}
 --- !u!1001 &7155365241120205141
 PrefabInstance:
   m_ObjectHideFlags: 0
