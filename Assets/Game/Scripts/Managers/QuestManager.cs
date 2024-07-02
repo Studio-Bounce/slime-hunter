@@ -38,31 +38,41 @@ public class QuestManager : Singleton<QuestManager>
             questTracker.gameObject.SetActive(false);
             return;
         }
-        bool isTargetOffscreen = Utils.IsWorldPositionOffScreen(target.position + Vector3.up, out Vector3 screenPosition);
-        if (isTargetOffscreen)
-        {
-            screenPosition.x = Mathf.Clamp(screenPosition.x, edgeBuffer, Screen.width - edgeBuffer);
-            screenPosition.y = Mathf.Clamp(screenPosition.y, edgeBuffer, Screen.height - edgeBuffer);
-            // TEMPORARY
-            questTracker.gameObject.SetActive(false);
-            return;
-        }
 
         if (!questTracker.gameObject.activeSelf)
         {
             questTracker.gameObject.SetActive(true);
         }
 
+        Transform cameraT = CameraManager.ActiveCamera.transform;
+        bool isTargetOffscreen = Utils.IsWorldPositionOffScreen(target.position + Vector3.up, out Vector3 screenPosition);
+        if (isTargetOffscreen)
+        {
+            if (Vector3.Dot((target.position - cameraT.position), cameraT.forward) < 0)
+            {
+                // Projection behind camera
+                if (screenPosition.x < Screen.width / 2)
+                    screenPosition.x = Screen.width - edgeBuffer;
+                else
+                    screenPosition.x = edgeBuffer;
+            }
+
+            screenPosition.x = Mathf.Clamp(screenPosition.x, edgeBuffer, Screen.width - edgeBuffer);
+            screenPosition.y = Mathf.Clamp(screenPosition.y, edgeBuffer, Screen.height - edgeBuffer);
+        }
+
         questTracker.position = screenPosition;
         // Calculate the direction from the player to the target
         Vector3 playerPosition = GameManager.Instance.PlayerRef.transform.position;
-        float angle = 0;
+        float angle = -45;
         if (isTargetOffscreen)
         {
-            Vector3 direction = (target.position - playerPosition).normalized;
-            angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Vector3 direction = (target.position - playerPosition);
+            direction.y = 0;
+            direction.Normalize();
+            angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
         }
-        questArrow.rotation = Quaternion.Euler(0, 0, angle - 90);
+        questArrow.rotation = Quaternion.Euler(0, 0, angle - 45);
         questDistance.text = $"{(int)Vector3.Distance(playerPosition, target.position)}m";
     }
 
@@ -150,5 +160,4 @@ public class QuestManager : Singleton<QuestManager>
     }
 
     public QuestSO GetActiveQuest() { return activeQuest; }
-
 }

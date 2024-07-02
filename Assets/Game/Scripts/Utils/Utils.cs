@@ -62,8 +62,7 @@ public static class Utils
 
     public static bool IsScreenPositionOffScreen(Vector3 screenPosition)
     {
-        return (screenPosition.z < 0 ||
-                screenPosition.x < 0 || screenPosition.x > Screen.width ||
+        return (screenPosition.x < 0 || screenPosition.x > Screen.width ||
                 screenPosition.y < 0 || screenPosition.y > Screen.height);
     }
 
