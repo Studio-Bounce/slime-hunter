@@ -25,6 +25,9 @@ public class InputController : MonoBehaviour
     // WIP: Find a cleaner solution?
     Action<InputContext> attackQueuedAction;
     Action<InputContext> dashQueuedAction;
+    Action<InputContext> spell1Action;
+    Action<InputContext> spell2Action;
+    Action<InputContext> spell3Action;
 
     // FIXME: Used to stop player input at different times. Move InputController away from player
     bool enableInput = true;
@@ -48,6 +51,10 @@ public class InputController : MonoBehaviour
         _trail = GetComponent<Trail>();
         attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
         dashQueuedAction = e => QueueInput(_playerController.Dash, e);
+
+        spell1Action = e => _spellController.StartCast(0);
+        spell2Action = e => _spellController.StartCast(1);
+        spell3Action = e => _spellController.StartCast(2);
 
         SetupPlayerControls();
         SetupUIControls();
@@ -89,15 +96,20 @@ public class InputController : MonoBehaviour
 
     private void SetupPlayerControls()
     {
+        // Player
         _playerActions.Move.performed += TrackMovement;
         _playerActions.Move.canceled += StopMovement;
         _playerActions.Dash.performed += dashQueuedAction;
         _playerActions.Rotate.performed += _playerController.RotateCamera;
+        // Weapon
         _playerActions.Attack.performed += attackQueuedAction;
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
         // Spells
-        //_playerActions.Spell1.performed +=  _spellController.StartCast;
-        //_playerActions.CastSpell.performed += _spellController.Cast;
+        _playerActions.Spell1.performed += spell1Action;
+        _playerActions.Spell2.performed += spell2Action;
+        _playerActions.Spell3.performed += spell3Action;
+
+        _playerActions.CastSpell.performed += _spellController.Cast;
     }
 
     private void SetupUIControls()
