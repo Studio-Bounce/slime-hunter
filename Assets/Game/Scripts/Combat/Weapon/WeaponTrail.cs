@@ -49,7 +49,7 @@ public class WeaponTrail : DamageDealer
         arcRadius = weaponSO.range;
     }
 
-    // If the attack is part of a attack combo sequence, isFinalAttack tells whether
+    // If the attack is part of an attack combo sequence, isFinalAttack tells whether
     // it is the final attack in this sequence or not
     public void Attack(AttackMove move, bool isFinalAttack)
     {
