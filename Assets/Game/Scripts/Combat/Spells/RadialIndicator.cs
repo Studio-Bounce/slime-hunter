@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RadialIndicator : SpellIndicator
 {
+    public Color activeColor = Color.white;
+    public Color inactiveColor = Color.red;
+
     public float castRange;
     public float radiusOfEffect;
     public LayerMask hitLayers;
@@ -31,13 +34,15 @@ public class RadialIndicator : SpellIndicator
         float feathering = material.GetFloat("_Feathering");
         material.SetFloat("_Thickness", thickness / castRange);
         material.SetFloat("_Feathering", feathering / castRange);
+        sourceRenderer.material.SetColor("_Color", activeColor);
+
 
         material = targetRenderer.material;
         thickness = material.GetFloat("_Thickness");
         feathering = material.GetFloat("_Feathering");
         material.SetFloat("_Thickness", thickness / radiusOfEffect);
         material.SetFloat("_Feathering", feathering / radiusOfEffect);
-
+        targetRenderer.material.SetColor("_Color", activeColor);
     }
 
     private void Update()
@@ -67,5 +72,12 @@ public class RadialIndicator : SpellIndicator
     public override void HideIndicator()
     {
         gameObject.SetActive(false);
+    }
+
+    public override void SetReady(bool ready)
+    {
+        Color col = ready ? activeColor : inactiveColor;
+        sourceRenderer.material.SetColor("_Color", col);
+        targetRenderer.material.SetColor("_Color", col);
     }
 }

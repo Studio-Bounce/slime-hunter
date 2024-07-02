@@ -16,13 +16,11 @@ MonoBehaviour:
   description: 
   icon: {fileID: 21300000, guid: abcb244d5a600ef4bb5f34b3514c2bb4, type: 3}
   damage:
-    value: 0
-    knockback: 0
+    value: 1
+    knockback: 5
     direction: {x: 0, y: 0, z: 0}
-    effect: {fileID: 0}
-  cooldown: 0
-  castTime: 0
-  manaCost: 0
+    effect: {fileID: 11400000, guid: 194e3545abb07b94ab515e1afbd829cb, type: 2}
+  cooldown: 5
   spellPrefab: {fileID: 6701679911909493986, guid: eac53cdb1db0c5d4c91caebb5f404b18,
     type: 3}
   spellIndicator: 0
