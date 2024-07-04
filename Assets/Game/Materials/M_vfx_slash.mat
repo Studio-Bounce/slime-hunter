@@ -84,28 +84,33 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
+    - _Base_Intensity: 0.27
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
-    - _Brigh_VoronoiSpeed: 25
-    - _Bright_VoronoiGamma: 2
-    - _Bright_VoronoiPower: 20
+    - _Brigh_VoronoiSpeed: 20
+    - _Bright_Intensity: 7
+    - _Bright_Peak: 0.745
+    - _Bright_VoronoiGamma: 0.25
+    - _Bright_VoronoiPower: 5
     - _Bright_VoronoiScale: 7
     - _BumpScale: 1
-    - _CircularGamma: 0.5
+    - _CircularGamma: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Dark_VoronoiGamma: 2
-    - _Dark_VoronoiPower: 22
+    - _Dark_Intensity: 2
+    - _Dark_Peak: 0.713
+    - _Dark_VoronoiGamma: 0.5
+    - _Dark_VoronoiPower: 2
     - _Dark_VoronoiScale: 2
-    - _Dark_VoronoiSpeed: 4.5
+    - _Dark_VoronoiSpeed: 5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Factor: 0
+    - _Factor: 1
     - _Flip: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -116,11 +121,11 @@ Material:
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RadialGamma: 0.5
-    - _Range: 176
+    - _RadialGamma: 0.25
+    - _Range: 200
     - _ReceiveShadows: 1
-    - _RotateSpeed: 10
-    - _RotationGamma: 2
+    - _RotateSpeed: 7.38
+    - _RotationGamma: 2.11
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -136,7 +141,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Bright_Color: {r: 0.05649454, g: 0.887228, b: 4.867144, a: 0.8117647}
+    - _Bright_Color: {r: 0.05649454, g: 0.887228, b: 4.867144, a: 1}
     - _Color: {r: 2.21, g: 8, b: 9.39, a: 0.80784315}
     - _Dark_Color: {r: 0.06274508, g: 0, b: 0.7686275, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
