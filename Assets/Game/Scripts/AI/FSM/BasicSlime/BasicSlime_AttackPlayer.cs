@@ -55,7 +55,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         // Disable shadow in slime outer mesh to show transparent material properly
         fsm.slimeOuterMesh.gameObject.layer = GameConstants.IgnoreLightingLayer;
 
-        fsm.StartCoroutine(IncreaseEmissionIntensity(10));
+        fsm.Emit(10);
 
         // Make the weapon active
         fsm.weapon.ActivateWeapon();
@@ -70,23 +70,6 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         // Set & look at target
         target = GetSlimeTargetConsideringBoundary();
         fsm.transform.LookAt(target);
-    }
-
-    IEnumerator IncreaseEmissionIntensity(int steps)
-    {
-        float intensity = 0.0f;
-        float intensityDelta = fsm.attackGlowIntensity / steps;
-        float deltaTime = fsm.attackEmissionTime / steps;
-        while (steps > 0)
-        {
-            --steps;
-            intensity += intensityDelta;
-
-            Color finalEmissionColor = fsm.attackMat.color * intensity;
-            fsm.slimeOuterMesh.materials[0].SetColor("_EmissionColor", finalEmissionColor);
-
-            yield return new WaitForSeconds(deltaTime);
-        }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

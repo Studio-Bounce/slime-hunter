@@ -158,7 +158,10 @@ public class Enemy : DamageTaker
 
         // Hide visible meshes / UI
         slimeModel.SetActive(false);
-        healthSlider.gameObject.SetActive(false);
+        if (healthSlider != null)
+        {
+            healthSlider.gameObject.SetActive(false);
+        }
 
         // Ensure the enemy doesn't give damage after dying
         if (TryGetComponent<SphereCollider>(out var sphereCollider))

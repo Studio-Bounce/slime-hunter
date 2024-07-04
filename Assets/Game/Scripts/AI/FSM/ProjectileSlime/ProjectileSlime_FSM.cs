@@ -57,9 +57,12 @@ public class ProjectileSlime_FSM : BasicSlime_FSM
     {
         // Nullify the fields which are not used for projectile slime
         seekSteeringBehaviour = null;
+        attackGlowIntensity = 0;
         chaseSpeed = 0;
         attackSpeed = 0;
         attackRadius = 0;
+        attackEmissionTime = 0;
+        attackProximity = 0;
     }
 
     protected override void OnDrawGizmos()
