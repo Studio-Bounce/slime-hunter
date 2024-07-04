@@ -21,6 +21,11 @@ public class WeaponTrail : DamageDealer
     // Visual
     public VisualEffect weaponVFX;
 
+    // New
+    private readonly string flipShaderParameter = "_Flip";
+    public Renderer trailRenderer;
+    private Material trailMaterial;
+
     protected override void Start()
     {
         base.Start();
@@ -29,6 +34,8 @@ public class WeaponTrail : DamageDealer
         _collider = GetComponent<MeshCollider>();
         _collider.convex = true;
         _collider.isTrigger = true;
+
+        trailMaterial = trailRenderer.material;
 
         _SetupArcMesh();
         _SetupVFX();
@@ -63,6 +70,12 @@ public class WeaponTrail : DamageDealer
         weaponVFX.transform.localScale = new Vector3(attackRange, 1, attackRange);
         // VFX Direction
         weaponVFX.SetBool(flipVFXParameter, move.direction.x < 0);
+
+
+        // TODO: SHADER
+        trailMaterial.SetFloat(flipShaderParameter, move.direction.x < 0 ? 1 : 0); ;
+
+
         float verticalRotation = 0;
         if (move.direction.y > 0)
         {
@@ -82,19 +95,27 @@ public class WeaponTrail : DamageDealer
 
     IEnumerator ActiveAttack(float duration)
     {
+
+
         active = true;
         weaponVFX.Play();
         float _timer = 0.0f;
+        float _normalTime = 0.0f;
         while (_timer < duration && active)
         {
             _timer += Time.deltaTime;
+            _normalTime = _timer / duration;
+            trailMaterial.SetFloat("_Factor", _normalTime/3);
+            Debug.Log($"{trailMaterial.GetFloat("_Factor")}");
             yield return null;
         }
         active = false;
+        trailMaterial.SetFloat("_Factor", 0);
     }
 
     public void Deactivate()
     {
+        trailMaterial.SetFloat("_Factor", 0);
         active = false;
         weaponVFX.Stop();
     }
