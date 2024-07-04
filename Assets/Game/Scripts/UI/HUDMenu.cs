@@ -9,10 +9,21 @@ public class HUDMenu : Menu
     [Range(1, 100)][SerializeField] int maxAlert = 50;
     [SerializeField] float damageAlertTime = 1.0f;
 
+    // Player
     VisualElement healthDamageVE;
     ProgressBar healthProgressBar;
     ProgressBar staminaProgressBar;
 
+    // Spells
+    VisualElement icon1;
+    VisualElement icon2;
+    VisualElement coverCD1;
+    VisualElement coverCD2;
+    Label timer1;
+    Label timer2;
+
+
+    // Quests
     VisualElement questNameVE;
     Label questNameLabel;
     Label questDescriptionLabel;
@@ -29,6 +40,7 @@ public class HUDMenu : Menu
         gameManager = GameManager.Instance;
         questManager = QuestManager.Instance;
 
+        // Player
         healthDamageVE = root.Q<VisualElement>("Red_Alert");
         VisualElement background = root.Q<VisualElement>("Background");
         VisualElement leftBg = background.Q<VisualElement>("Left");
@@ -45,6 +57,20 @@ public class HUDMenu : Menu
         gameManager.OnPlayerStaminaChange += UpdateStaminaBar;
         UpdateStaminaBar(gameManager.PlayerStamina);
 
+        // Spells
+        VisualElement skillContainer = root.Q<VisualElement>("Skill1");
+        icon1 = skillContainer.Q<VisualElement>("Icon");
+        coverCD1 = skillContainer.Q<VisualElement>("CD");
+        coverCD1.style.display = DisplayStyle.None;
+        timer1 = skillContainer.Q<Label>("Timer");
+
+        skillContainer = root.Q<VisualElement>("Skill2");
+        icon2 = skillContainer.Q<VisualElement>("Icon");
+        coverCD2 = skillContainer.Q<VisualElement>("CD");
+        coverCD2.style.display = DisplayStyle.None;
+        timer2 = skillContainer.Q<Label>("Timer");
+
+        // Quests
         VisualElement questContainer = root.Q<VisualElement>("QuestContainer");
         questNameVE = questContainer.Q<VisualElement>("Header");
         questNameLabel = questNameVE.Q<Label>("Quest-Name");
@@ -101,9 +127,10 @@ public class HUDMenu : Menu
 
     // ------------------------------ Spells -------------------------------
 
-    void UpdateSpellCooldown(int spellIndex)
+    public void UpdateSpellCooldown(int spellIndex, int value)
     {
-
+        coverCD1.style.display = value > 0 ? DisplayStyle.Flex : DisplayStyle.None;
+        timer1.text = $"{value}s";
     }
 
     // ------------------------------ Quests -------------------------------

@@ -43,6 +43,7 @@ public class RadialIndicator : SpellIndicator
         material.SetFloat("_Thickness", thickness / radiusOfEffect);
         material.SetFloat("_Feathering", feathering / radiusOfEffect);
         targetRenderer.material.SetColor("_Color", activeColor);
+        HideIndicator();
     }
 
     private void Update()

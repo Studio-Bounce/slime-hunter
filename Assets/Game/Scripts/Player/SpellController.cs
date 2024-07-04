@@ -55,7 +55,6 @@ public class SpellController : MonoBehaviour
         }
     }
 
-    // Depends on motion event to be called
     IEnumerator StopCast()
     {
         yield return new WaitForSeconds(0.4f); // TODO: Hardcoded 0.4 seconds
@@ -84,13 +83,17 @@ public class SpellController : MonoBehaviour
 
     IEnumerator StartCooldown(int spellIndex)
     {
+        HUDMenu hud = UIManager.Instance.HUDMenu as HUDMenu;
+
         float remainingCD = spells[spellIndex].cooldown;
         while (remainingCD > 0)
         {
             if (spellIndex == currentSpellIndex) currentIndicator.SetReady(false);
             remainingCD -= Time.deltaTime;
+            hud.UpdateSpellCooldown(0, Mathf.CeilToInt(remainingCD));
             yield return null;
         }
+        hud.UpdateSpellCooldown(0, 0);
         spells[spellIndex].Ready = true;
         if (spellIndex == currentSpellIndex) currentIndicator.SetReady(true);
 
