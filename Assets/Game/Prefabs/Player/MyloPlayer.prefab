@@ -439,8 +439,6 @@ MonoBehaviour:
   arcRadius: 1
   meshResolution: 3
   liveReload: 0
-  weaponVFX: {fileID: 1560174599449287195, guid: feea3f1c554c3a6489e0bc69747341d6,
-    type: 3}
   trailRenderer: {fileID: 9203957836311026299}
 --- !u!1 &2715495693817631843
 GameObject:
@@ -582,7 +580,6 @@ GameObject:
   - component: {fileID: 6321593382221126173}
   - component: {fileID: 6455694469460722276}
   - component: {fileID: 9203957836311026299}
-  - component: {fileID: 5788814255439052201}
   m_Layer: 8
   m_Name: MaterialTrail
   m_TagString: Untagged
@@ -655,28 +652,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5788814255439052201
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9140879976467860335}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -8974981081048568534, guid: 7445655d11351f7428e869a8adbd946b, type: 3}
 --- !u!1001 &3386946183868369580
 PrefabInstance:
   m_ObjectHideFlags: 0
