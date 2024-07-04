@@ -5,6 +5,7 @@ using UnityEngine;
 public class FleeSteeringBehaviour : SteeringBehaviourBase
 {
     public Transform enemyTarget;
+    [Tooltip("Max distance to flee. Not considered if 0")]
     public float fleeDistance = 5.0f;
     Vector3 desiredVelocity;
     private bool showGizmoArrows = true;
@@ -21,7 +22,7 @@ public class FleeSteeringBehaviour : SteeringBehaviourBase
         }
 
         float distance = (transform.position - target).magnitude;
-        if (distance > fleeDistance)
+        if (fleeDistance != 0 && distance > fleeDistance)
         {
             showGizmoArrows = false;
             return Vector3.zero;

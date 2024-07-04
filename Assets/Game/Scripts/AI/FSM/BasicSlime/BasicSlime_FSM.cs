@@ -18,7 +18,7 @@ public class BasicSlime_FSM : FSM
 
     [HideInInspector] public SteeringAgent slimeAgent;
     [HideInInspector] public CharacterController characterController;
-    Transform playerTransform;
+    protected Transform playerTransform;
 
     public SkinnedMeshRenderer slimeOuterMesh;
     [HideInInspector] public EnemyWeapon weapon;
@@ -60,7 +60,7 @@ public class BasicSlime_FSM : FSM
     {
         while (playerTransform == null)
         {
-            playerTransform = GameObject.FindWithTag("Player")?.transform;
+            playerTransform = GameManager.Instance.PlayerRef.transform;
             yield return new WaitForSeconds(0.5f);
         }
     }
@@ -81,7 +81,7 @@ public class BasicSlime_FSM : FSM
         return playerTransform.position;
     }
 
-    private void OnDrawGizmos()
+    protected virtual void OnDrawGizmos()
     {
         DebugExtension.DrawCircle(transform.position, Color.cyan, seekDistance);
         DebugExtension.DrawCircle(transform.position, Color.red, attackRadius);

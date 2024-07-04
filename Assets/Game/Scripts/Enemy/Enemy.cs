@@ -29,6 +29,8 @@ public class Enemy : DamageTaker
     [SerializeField] SkinnedMeshRenderer slimeOuterBody;
     [SerializeField] float flashDuration = 0.2f;
     [SerializeField][ColorUsage(true, true)] Color flashColor;
+    bool hitVFXPlaying = false;
+    bool isFlashing = false;
 
     [Header("Death")]
     [SerializeField] GameObject slimeModel;
@@ -79,8 +81,10 @@ public class Enemy : DamageTaker
         base.TakeDamage(damage);
         if (!isInvincible)
         {
-            StartCoroutine(ShowHitParticles());
-            StartCoroutine(FlashSlime());
+            if (!hitVFXPlaying)
+                StartCoroutine(ShowHitParticles());
+            if (!isFlashing)
+                StartCoroutine(FlashSlime());
         }
         // Enable health bar canvas
         if (healthSlider != null && enemyCanvas != null)
@@ -105,7 +109,7 @@ public class Enemy : DamageTaker
     {
         BaseEnemyTakeDamage(damage);
 
-        if (!isInvincible)
+        if (!isInvincible && !freezeEyeChange)
         {
             StartCoroutine(ChangeEyeToDamage());
         }
@@ -180,16 +184,19 @@ public class Enemy : DamageTaker
 
     IEnumerator ShowHitParticles()
     {
+        hitVFXPlaying = true;
         if (hitVFX != null)
         {
             hitVFX.Play();
             yield return new WaitForSeconds(hitVFXDuration);
             hitVFX.Stop();
         }
+        hitVFXPlaying = false;
     }
 
     IEnumerator FlashSlime()
     {
+        isFlashing = true;
         if (slimeOuterBody != null)
         {
             Color slimeColor = slimeOuterBody.materials[0].color;
@@ -202,15 +209,16 @@ public class Enemy : DamageTaker
             // Revert color
             slimeOuterBody.materials[0].color = slimeColor;
         }
+        isFlashing = false;
     }
 
     IEnumerator ChangeEyeToDamage()
     {
-        SetEye(EnemyEye.DEATH);
         freezeEyeChange = true;
+        SetEye(EnemyEye.DEATH);
         yield return new WaitForSeconds(damageEyeTimer);
-        freezeEyeChange = false;
         SetEye(EnemyEye.NORMAL);
+        freezeEyeChange = false;
     }
 
     IEnumerator ChangeEye(EnemyEye enemyEye)
