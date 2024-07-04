@@ -146,6 +146,12 @@ public class HUDMenu : Menu
         }
     }
 
+    public void SetSpellIcon(int spellNumber, Sprite icon)
+    {
+        VisualElement skillElement = root.Q<VisualElement>($"Spell{spellNumber}");
+        skillElement.style.backgroundImage = icon.texture;
+    }
+
     // ------------------------------ Quests -------------------------------
 
     void UpdateActiveQuest(string questName, string questDescription)

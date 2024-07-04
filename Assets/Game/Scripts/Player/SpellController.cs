@@ -40,6 +40,15 @@ public class SpellController : MonoBehaviour
     {
         Debug.Assert(radialIndicator != null);
         radialIndicator.HideIndicator();
+        LoadSpellIcons();
+    }
+
+    private void LoadSpellIcons()
+    {
+        for (int i = 0; i < spells.Length; i++)
+        {
+            hudMenu.SetSpellIcon(i + 1, spells[i].icon);
+        }
     }
 
     public void StartCast(int spellIndex)
