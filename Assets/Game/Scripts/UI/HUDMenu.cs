@@ -9,19 +9,16 @@ public class HUDMenu : Menu
     [Range(1, 100)][SerializeField] int maxAlert = 50;
     [SerializeField] float damageAlertTime = 1.0f;
 
+    VisualElement root;
+
     // Player
     VisualElement healthDamageVE;
     ProgressBar healthProgressBar;
     ProgressBar staminaProgressBar;
 
     // Spells
-    VisualElement icon1;
-    VisualElement icon2;
-    VisualElement coverCD1;
-    VisualElement coverCD2;
-    Label timer1;
-    Label timer2;
-
+    string spellDisabledStyle = "spell-glyph-disabled";
+    string spellActiveStyle = "spell-glyph-active";
 
     // Quests
     VisualElement questNameVE;
@@ -36,7 +33,7 @@ public class HUDMenu : Menu
 
     void Start()
     {
-        VisualElement root = uiDocument.rootVisualElement;
+        root = uiDocument.rootVisualElement;
         gameManager = GameManager.Instance;
         questManager = QuestManager.Instance;
 
@@ -58,17 +55,6 @@ public class HUDMenu : Menu
         UpdateStaminaBar(gameManager.PlayerStamina);
 
         // Spells
-        VisualElement skillContainer = root.Q<VisualElement>("Skill1");
-        icon1 = skillContainer.Q<VisualElement>("Icon");
-        coverCD1 = skillContainer.Q<VisualElement>("CD");
-        coverCD1.style.display = DisplayStyle.None;
-        timer1 = skillContainer.Q<Label>("Timer");
-
-        skillContainer = root.Q<VisualElement>("Skill2");
-        icon2 = skillContainer.Q<VisualElement>("Icon");
-        coverCD2 = skillContainer.Q<VisualElement>("CD");
-        coverCD2.style.display = DisplayStyle.None;
-        timer2 = skillContainer.Q<Label>("Timer");
 
         // Quests
         VisualElement questContainer = root.Q<VisualElement>("QuestContainer");
@@ -127,10 +113,37 @@ public class HUDMenu : Menu
 
     // ------------------------------ Spells -------------------------------
 
-    public void UpdateSpellCooldown(int spellIndex, int value)
+    public void UpdateSpellCooldown(int spellNumber, int value)
     {
-        coverCD1.style.display = value > 0 ? DisplayStyle.Flex : DisplayStyle.None;
-        timer1.text = $"{value}s";
+        VisualElement skillElement = root.Q<VisualElement>($"Spell{spellNumber}");
+        Label skillTimer = skillElement.Q<Label>("Timer");
+
+        if (value > 0) {
+            skillElement.AddToClassList(spellDisabledStyle);
+        } else
+        {
+            skillElement.RemoveFromClassList(spellDisabledStyle);
+        }
+
+        skillTimer.text = value.ToString();
+    }
+
+    public void SetSpellActive(int spellNumber)
+    {
+        // Set active style to selected spell and remove from rest
+        var skillElements = root.Query<VisualElement>().Where(
+            ve => ve.name != null && ve.name.StartsWith("Spell")
+            ).ToList();
+        foreach (var el in skillElements)
+        {
+            if (el.name.Contains(spellNumber.ToString()))
+            {
+                el.AddToClassList(spellActiveStyle);
+            } else
+            {
+                el.RemoveFromClassList(spellActiveStyle);
+            }
+        }
     }
 
     // ------------------------------ Quests -------------------------------

@@ -69,15 +69,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Spell3",
-                    "type": "Button",
-                    "id": "a93a6f1e-2051-417f-b386-0560347e8ba7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "CastSpell",
                     "type": "Button",
                     "id": "4da7daa0-3311-4f28-a626-7cc8ac46b153",
@@ -239,17 +230,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Spell2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "db789e31-e2ea-45e8-97d3-cc67f03d208c",
-                    "path": "<Keyboard>/3",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Spell3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

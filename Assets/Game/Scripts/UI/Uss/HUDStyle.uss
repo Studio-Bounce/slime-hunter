@@ -37,7 +37,7 @@
 .unity-progress-bar {
 }
 
-.skill-glyph {
+.spell-glyph {
     width: 128px;
     height: 128px;
     align-items: center;
@@ -45,16 +45,26 @@
     margin: 10px;
     border-width: 6px;
     border-radius: 50%;
-    border-color: rgba(255, 255, 255, 1);
+    border-color: rgb(255, 255, 255);
     border-style: solid;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-in-out-cubic;
 }
 
-.skill-glyph-cooldown {
-    -unity-background-image-tint-color: rgba(100, 100, 100, 1.0);
+.spell-glyph-disabled {
+    -unity-background-image-tint-color: rgb(100, 100, 100);
+}
+
+.spell-glyph-disabled > .cooldown-timer {
+    display: flex;
+}
+
+.spell-glyph-active {
+    width: 192px;
+    height: 192px;
 }
 
 .cooldown-timer {
+    display: none;
     width: 100%;
     height: 100%;
     color: white;
@@ -64,15 +74,15 @@
 }
 
 .hotkey-indicator {
+    position: absolute;
+    bottom: -36px;
+    width: 32px;
+    height: 32px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     background-color: white;
     text-align: center;
+    font-size: 24px;
     -unity-font-style: bold;
     -unity-text-align: middle-center;
-}
-
-.skill-glyph-active {
-    width: 192px;
-    height: 192px;
 }

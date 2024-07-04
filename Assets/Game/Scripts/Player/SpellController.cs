@@ -9,12 +9,18 @@ public class SpellController : MonoBehaviour
 {
     public bool isCasting = false;
 
-    public SpellSO[] spells = new SpellSO[3];
+    public SpellSO[] spells = new SpellSO[2];
 
     private int currentSpellIndex = 0;
+    private int lastSpellIndex = -1;
+
+    // Indicator & UI
     [SerializeField] private SpellIndicator radialIndicator;
     private SpellIndicator currentIndicator;
+    HUDMenu hudMenu;
 
+
+    // Animations
     private Animator _animator;
     private readonly int castTriggerHash = Animator.StringToHash("Cast");
 
@@ -26,6 +32,7 @@ public class SpellController : MonoBehaviour
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        hudMenu = UIManager.Instance.HUDMenu as HUDMenu;
         foreach (SpellSO spell in spells) spell.Ready = true;
     }
 
@@ -37,8 +44,9 @@ public class SpellController : MonoBehaviour
 
     public void StartCast(int spellIndex)
     {
+        // Set indicator type based on spell
+        lastSpellIndex = currentSpellIndex;
         currentSpellIndex = spellIndex;
-
         switch (CurrentSpell.spellIndicator)
         {
             case IndicatorType.RADIAL:
@@ -46,12 +54,20 @@ public class SpellController : MonoBehaviour
                 break;
         }
 
+        // Toggle indicator
         if (!currentIndicator.isActiveAndEnabled)
         {
+            currentIndicator.SetReady(spells[spellIndex].Ready);
+            hudMenu.SetSpellActive(currentSpellIndex+1);
             currentIndicator.ShowIndicator();
-        } else
+        } else if (lastSpellIndex == currentSpellIndex)
         {
             currentIndicator.HideIndicator();
+        } else
+        {
+            // If switching to different spell while previous indicator is active
+            currentIndicator.SetReady(spells[spellIndex].Ready);
+            hudMenu.SetSpellActive(currentSpellIndex + 1);
         }
     }
 
@@ -66,7 +82,6 @@ public class SpellController : MonoBehaviour
         if (currentIndicator != null && currentIndicator.isActiveAndEnabled && CurrentSpell.Ready)
         {
             isCasting = true;
-            StartCoroutine(StopCast());
             CurrentSpell.Ready = false;
             currentIndicator.HideIndicator();
             // Cast spell
@@ -83,17 +98,18 @@ public class SpellController : MonoBehaviour
 
     IEnumerator StartCooldown(int spellIndex)
     {
-        HUDMenu hud = UIManager.Instance.HUDMenu as HUDMenu;
-
+        StartCoroutine(StopCast());
         float remainingCD = spells[spellIndex].cooldown;
+
+        if (spellIndex == currentSpellIndex) currentIndicator.SetReady(false);
         while (remainingCD > 0)
         {
-            if (spellIndex == currentSpellIndex) currentIndicator.SetReady(false);
             remainingCD -= Time.deltaTime;
-            hud.UpdateSpellCooldown(0, Mathf.CeilToInt(remainingCD));
+            hudMenu.UpdateSpellCooldown(spellIndex+1, Mathf.CeilToInt(remainingCD));
             yield return null;
         }
-        hud.UpdateSpellCooldown(0, 0);
+
+        hudMenu.UpdateSpellCooldown(spellIndex + 1, 0);
         spells[spellIndex].Ready = true;
         if (spellIndex == currentSpellIndex) currentIndicator.SetReady(true);
 

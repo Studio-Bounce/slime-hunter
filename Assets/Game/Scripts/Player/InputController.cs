@@ -26,7 +26,6 @@ public class InputController : MonoBehaviour
     Action<InputContext> dashQueuedAction;
     Action<InputContext> spell1Action;
     Action<InputContext> spell2Action;
-    Action<InputContext> spell3Action;
 
     // FIXME: Used to stop player input at different times. Move InputController away from player
     bool enableInput = true;
@@ -53,7 +52,6 @@ public class InputController : MonoBehaviour
 
         spell1Action = e => _spellController.StartCast(0);
         spell2Action = e => _spellController.StartCast(1);
-        spell3Action = e => _spellController.StartCast(2);
 
         SetupPlayerControls();
         SetupUIControls();
@@ -106,7 +104,6 @@ public class InputController : MonoBehaviour
         // Spells
         _playerActions.Spell1.performed += spell1Action;
         _playerActions.Spell2.performed += spell2Action;
-        _playerActions.Spell3.performed += spell3Action;
 
         _playerActions.CastSpell.performed += _spellController.Cast;
     }
