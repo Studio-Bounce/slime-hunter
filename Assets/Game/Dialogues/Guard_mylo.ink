@@ -2,7 +2,8 @@
 
 === Guard_Greetings ===
 
-0: "Hi Mylo, Hope you are doing well. Are you headed towards the Gooey Forest?"
+0: "Hi Mylo, Hope you are doing well. 
+    Are you headed towards the Gooey Forest?"
 -> next
 
 === next ===
@@ -11,7 +12,8 @@
 
 === Mylo_Greetings ===
 
-1: "Hi Erika, yes I am going towards the forest to get a gear for the Blacksmith."
+1: "Hi Erika, yes I am going towards the forest 
+    to get a gear for the Blacksmith."
 -> next2
 
 === next2 ===
@@ -27,7 +29,8 @@
 -> Mylo
 
 === Mylo ===
-1: "Its okay, I need his help and he said he will give me some reward and I am not a kid anymore, I can handle some slimes by myself."
+1: "Its okay, I need his help and he said he will give me some reward and 
+I am not a kid anymore, I can handle some slimes by myself."
 -> next4
 
 === next4 ===
