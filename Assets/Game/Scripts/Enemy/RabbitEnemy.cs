@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// For the Rabbit Slime
 public class RabbitEnemy : Enemy
 {
     public readonly int DodgeTrigger = Animator.StringToHash("dodge");

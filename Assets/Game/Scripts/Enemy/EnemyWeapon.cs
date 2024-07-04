@@ -27,4 +27,13 @@ public class EnemyWeapon : DamageDealer
     {
         active = false;
     }
+
+    private void OnValidate()
+    {
+        if (slimeHitWeapon != null)
+        {
+            damage = slimeHitWeapon.damage;
+            hitLayers = slimeHitWeapon.hitLayers;
+        }
+    }
 }
