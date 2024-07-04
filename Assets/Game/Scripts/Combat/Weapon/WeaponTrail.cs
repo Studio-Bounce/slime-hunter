@@ -15,23 +15,24 @@ public class WeaponTrail : DamageDealer
     private MeshCollider _collider;
     private int _vertexCount;
 
-    private readonly string flipVFXParameter = "Flip";
     private WeaponSO currentWeaponSO;
 
-    // Visual
-    public VisualEffect weaponVFX;
+    // Trail Shader Effects
+    private readonly string flipShaderParameter = "_Flip";
+    public Renderer trailRenderer;
+    private Material trailMaterial;
 
     protected override void Start()
     {
         base.Start();
-        Debug.Assert(weaponVFX != null, "Requires a VisualEffect");
         _vertexCount = meshResolution + 2;
         _collider = GetComponent<MeshCollider>();
         _collider.convex = true;
         _collider.isTrigger = true;
 
+        trailMaterial = trailRenderer.material;
+
         _SetupArcMesh();
-        _SetupVFX();
     }
 
     protected override void Update()
@@ -59,10 +60,13 @@ public class WeaponTrail : DamageDealer
         damage.knockback = currentWeaponSO.damage.knockback * move.knockbackMultiplier;
         // Update weapon range on attack
         arcRadius = currentWeaponSO.range * move.rangeMultiplier;
-        float attackRange = (currentWeaponSO.range / 3) * move.rangeMultiplier; // TODO: Hardcoded /3 as base VFX is roughly 3 units large
-        weaponVFX.transform.localScale = new Vector3(attackRange, 1, attackRange);
-        // VFX Direction
-        weaponVFX.SetBool(flipVFXParameter, move.direction.x < 0);
+        float attackRange = (currentWeaponSO.range) * move.rangeMultiplier;
+
+        //Trail Effects Direction
+        trailMaterial.SetFloat(flipShaderParameter, move.direction.x < 0 ? 0 : 1);
+        trailRenderer.transform.localScale = new Vector3(attackRange, 1, attackRange);
+
+
         float verticalRotation = 0;
         if (move.direction.y > 0)
         {
@@ -73,30 +77,34 @@ public class WeaponTrail : DamageDealer
             verticalRotation = 90;
         }
 
-        weaponVFX.transform.rotation = Quaternion.Euler(weaponVFX.transform.rotation.eulerAngles.x, weaponVFX.transform.rotation.eulerAngles.y, verticalRotation);
         UpdateArcMesh();
-
         applyCameraShake = isFinalAttack;
         StartCoroutine(ActiveAttack(move.duration));
+        trailRenderer.transform.rotation = Quaternion.Euler(trailRenderer.transform.rotation.eulerAngles.x, trailRenderer.transform.rotation.eulerAngles.y, verticalRotation);
     }
 
     IEnumerator ActiveAttack(float duration)
     {
+
+
         active = true;
-        weaponVFX.Play();
         float _timer = 0.0f;
+        float _normalTime = 0.0f;
         while (_timer < duration && active)
         {
             _timer += Time.deltaTime;
+            _normalTime = _timer / duration;
+            trailMaterial.SetFloat("_Factor", _normalTime);
             yield return null;
         }
         active = false;
+        trailMaterial.SetFloat("_Factor", 0);
     }
 
     public void Deactivate()
     {
+        trailMaterial.SetFloat("_Factor", 0);
         active = false;
-        weaponVFX.Stop();
     }
 
     private void UpdateArcMesh()
@@ -114,13 +122,6 @@ public class WeaponTrail : DamageDealer
         }
         mesh.vertices = vertices;
         _collider.sharedMesh = mesh;
-    }
-
-    private void _SetupVFX()
-    {
-        weaponVFX = Instantiate(weaponVFX.gameObject).GetComponent<VisualEffect>();
-        weaponVFX.transform.SetParent(transform);
-        weaponVFX.transform.localPosition = Vector3.zero;
     }
 
     private void _SetupArcMesh()

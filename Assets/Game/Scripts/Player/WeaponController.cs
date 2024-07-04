@@ -66,7 +66,9 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+
+        _animator = GetComponent<PlayerController>()?.animator;
+        Debug.Assert(_animator != null);
         _overrideAnimatorController = new AnimatorOverrideController(_animator.runtimeAnimatorController);
     }
 

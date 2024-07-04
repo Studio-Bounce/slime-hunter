@@ -5,19 +5,14 @@ using UnityEngine.Events;
 
 public class StatusEffectManager : MonoBehaviour
 {
+    public StatusBar statusBar;
     private DamageTaker damageTaker;
-    public GameObject statusBarPrefab;
-    private StatusBar statusBar;
-    public bool showStatusBar = true;
     public List<StatusEffect> activeEffects = new List<StatusEffect>();
     public List<StatusEffect> effectsToRemove = new List<StatusEffect>();
 
     private void Start()
     {
         damageTaker = GetComponent<DamageTaker>();
-
-        statusBar = statusBarPrefab.GetComponent<StatusBar>();
-        InitializeStatusBar();
         foreach (var effect in activeEffects)
         {
             effect.StartEffect(damageTaker);
@@ -29,14 +24,6 @@ public class StatusEffectManager : MonoBehaviour
         }
     }
 
-    private void InitializeStatusBar()
-    {
-        if (showStatusBar)
-        {
-            statusBar = Instantiate(statusBarPrefab, transform, false)?.GetComponent<StatusBar>();
-        }
-    }
-
     void Update()
     {
         foreach (var effect in activeEffects)
@@ -45,8 +32,7 @@ public class StatusEffectManager : MonoBehaviour
             {
                 effect.EndEffect(damageTaker);
                 effectsToRemove.Add(effect);
-
-                if (showStatusBar) statusBar.RemoveStatusEffect(effect);
+                statusBar.RemoveStatusEffect(effect);
             }
         }
 
@@ -56,7 +42,7 @@ public class StatusEffectManager : MonoBehaviour
         }
         effectsToRemove.Clear();
 
-        if (!damageTaker.isAlive && showStatusBar)
+        if (!damageTaker.isAlive)
         {
             statusBar.gameObject.SetActive(false);
         }
@@ -69,6 +55,6 @@ public class StatusEffectManager : MonoBehaviour
         effectInstance.StartEffect(damageTaker);
         activeEffects.Add(effectInstance);
 
-        if (showStatusBar) statusBar.AddStatusEffect(effectInstance);
+        statusBar.AddStatusEffect(effectInstance);
     }
 }
