@@ -15,5 +15,7 @@ public class StatusEffectIcon : MonoBehaviour
     {
         image = GetComponent<Image>();
         rect = GetComponent<RectTransform>();
+        Debug.Assert(image != null);
+        Debug.Assert(rect != null);
     }
 }
