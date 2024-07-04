@@ -49,7 +49,7 @@ public class WeaponTrail : DamageDealer
         arcRadius = weaponSO.range;
     }
 
-    // If the attack is part of a attack combo sequence, isFinalAttack tells whether
+    // If the attack is part of an attack combo sequence, isFinalAttack tells whether
     // it is the final attack in this sequence or not
     public void Attack(AttackMove move, bool isFinalAttack)
     {
@@ -59,7 +59,7 @@ public class WeaponTrail : DamageDealer
         damage.knockback = currentWeaponSO.damage.knockback * move.knockbackMultiplier;
         // Update weapon range on attack
         arcRadius = currentWeaponSO.range * move.rangeMultiplier;
-        float attackRange = (currentWeaponSO.range / 3) * move.rangeMultiplier; // WIP: Hardcoded /3 as base VFX is roughly 3 units large
+        float attackRange = (currentWeaponSO.range / 3) * move.rangeMultiplier; // TODO: Hardcoded /3 as base VFX is roughly 3 units large
         weaponVFX.transform.localScale = new Vector3(attackRange, 1, attackRange);
         // VFX Direction
         weaponVFX.SetBool(flipVFXParameter, move.direction.x < 0);

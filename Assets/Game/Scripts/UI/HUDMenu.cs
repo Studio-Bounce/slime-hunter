@@ -9,10 +9,18 @@ public class HUDMenu : Menu
     [Range(1, 100)][SerializeField] int maxAlert = 50;
     [SerializeField] float damageAlertTime = 1.0f;
 
+    VisualElement root;
+
+    // Player
     VisualElement healthDamageVE;
     ProgressBar healthProgressBar;
     ProgressBar staminaProgressBar;
 
+    // Spells
+    string spellDisabledStyle = "spell-glyph-disabled";
+    string spellActiveStyle = "spell-glyph-active";
+
+    // Quests
     VisualElement questNameVE;
     Label questNameLabel;
     Label questDescriptionLabel;
@@ -25,10 +33,11 @@ public class HUDMenu : Menu
 
     void Start()
     {
-        VisualElement root = uiDocument.rootVisualElement;
+        root = uiDocument.rootVisualElement;
         gameManager = GameManager.Instance;
         questManager = QuestManager.Instance;
 
+        // Player
         healthDamageVE = root.Q<VisualElement>("Red_Alert");
         VisualElement background = root.Q<VisualElement>("Background");
         VisualElement leftBg = background.Q<VisualElement>("Left");
@@ -45,6 +54,9 @@ public class HUDMenu : Menu
         gameManager.OnPlayerStaminaChange += UpdateStaminaBar;
         UpdateStaminaBar(gameManager.PlayerStamina);
 
+        // Spells
+
+        // Quests
         VisualElement questContainer = root.Q<VisualElement>("QuestContainer");
         questNameVE = questContainer.Q<VisualElement>("Header");
         questNameLabel = questNameVE.Q<Label>("Quest-Name");
@@ -97,6 +109,47 @@ public class HUDMenu : Menu
         {
             staminaProgressBar.value = (float)stamina / GameManager.Instance.PlayerMaxStamina;
         }
+    }
+
+    // ------------------------------ Spells -------------------------------
+
+    public void UpdateSpellCooldown(int spellNumber, int value)
+    {
+        VisualElement skillElement = root.Q<VisualElement>($"Spell{spellNumber}");
+        Label skillTimer = skillElement.Q<Label>("Timer");
+
+        if (value > 0) {
+            skillElement.AddToClassList(spellDisabledStyle);
+        } else
+        {
+            skillElement.RemoveFromClassList(spellDisabledStyle);
+        }
+
+        skillTimer.text = value.ToString();
+    }
+
+    public void SetSpellActive(int spellNumber)
+    {
+        // Set active style to selected spell and remove from rest
+        var skillElements = root.Query<VisualElement>().Where(
+            ve => ve.name != null && ve.name.StartsWith("Spell")
+            ).ToList();
+        foreach (var el in skillElements)
+        {
+            if (el.name.Contains(spellNumber.ToString()))
+            {
+                el.AddToClassList(spellActiveStyle);
+            } else
+            {
+                el.RemoveFromClassList(spellActiveStyle);
+            }
+        }
+    }
+
+    public void SetSpellIcon(int spellNumber, Sprite icon)
+    {
+        VisualElement skillElement = root.Q<VisualElement>($"Spell{spellNumber}");
+        skillElement.style.backgroundImage = icon.texture;
     }
 
     // ------------------------------ Quests -------------------------------

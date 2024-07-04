@@ -228,8 +228,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c13dd9c19000524681981923137cb00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCasting: 0
   spells:
-  - {fileID: 11400000, guid: dc880fec30a3478409d673d8710936ea, type: 2}
+  - {fileID: 11400000, guid: fa97121a094b5134f917ca118bfc4e43, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   radialIndicator: {fileID: 3979711181428871676}

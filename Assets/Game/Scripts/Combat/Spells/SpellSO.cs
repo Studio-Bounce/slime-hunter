@@ -12,9 +12,17 @@ public class SpellSO : ScriptableObject
     [TextArea] public string description;
     public Sprite icon;
     public Damage damage;
+    public float castRange;
+    public float areaOfEffect;
     public float cooldown;
-    public float castTime;
-    public float manaCost;
     public Spell spellPrefab;
     public IndicatorType spellIndicator;
+
+    private bool ready = true;
+
+    public bool Ready
+    {
+        get { return ready; }
+        set { ready = value; }
+    }
 }

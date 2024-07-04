@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RadialIndicator : SpellIndicator
 {
-    public float castRange;
-    public float radiusOfEffect;
+    public Color activeColor = Color.white;
+    public Color inactiveColor = Color.red;
     public LayerMask hitLayers;
 
     [SerializeField] private Transform player;
@@ -23,21 +23,22 @@ public class RadialIndicator : SpellIndicator
         Debug.Assert(sourceIndicator != null, "Requires prefab for sourceIndicator");
         Debug.Assert(targetIndicator != null, "Requires prefab for targetIndicator");
 
+        InitializeScaleMaterial();
+        HideIndicator();
+    }
+
+    private void InitializeScaleMaterial()
+    {
         sourceIndicator.localScale = new Vector3(castRange, castRange, castRange);
-        targetIndicator.localScale = new Vector3(radiusOfEffect, radiusOfEffect, radiusOfEffect);
-
+        targetIndicator.localScale = new Vector3(areaOfEffect, areaOfEffect, areaOfEffect);
         Material material = sourceRenderer.material;
-        float thickness = material.GetFloat("_Thickness");
-        float feathering = material.GetFloat("_Feathering");
-        material.SetFloat("_Thickness", thickness / castRange);
-        material.SetFloat("_Feathering", feathering / castRange);
-
+        material.SetFloat("_ThicknessScale", 1 / castRange);
+        material.SetFloat("_FeatheringScale", 1 / castRange);
+        sourceRenderer.material.SetColor("_Color", activeColor);
         material = targetRenderer.material;
-        thickness = material.GetFloat("_Thickness");
-        feathering = material.GetFloat("_Feathering");
-        material.SetFloat("_Thickness", thickness / radiusOfEffect);
-        material.SetFloat("_Feathering", feathering / radiusOfEffect);
-
+        material.SetFloat("_ThicknessScale", 1 / areaOfEffect);
+        material.SetFloat("_FeatheringScale", 1 / areaOfEffect);
+        targetRenderer.material.SetColor("_Color", activeColor);
     }
 
     private void Update()
@@ -59,13 +60,23 @@ public class RadialIndicator : SpellIndicator
         }
     }
 
-    public override void ShowIndicator()
+    public override void ShowIndicator(SpellSO spellSO)
     {
+        castRange = spellSO.castRange;
+        areaOfEffect = spellSO.areaOfEffect;
+        InitializeScaleMaterial();
         gameObject.SetActive(true);
     }
 
     public override void HideIndicator()
     {
         gameObject.SetActive(false);
+    }
+
+    public override void SetReady(bool ready)
+    {
+        Color col = ready ? activeColor : inactiveColor;
+        sourceRenderer.material.SetColor("_Color", col);
+        targetRenderer.material.SetColor("_Color", col);
     }
 }

@@ -22,9 +22,10 @@ public class InputController : MonoBehaviour
     private Dictionary<Func<InputContext, bool>, InputContext> QueuedInputMap = new Dictionary<Func<InputContext, bool>, InputContext>();
 
     // Need to store the function to properly add and removed callbacks to inputs
-    // WIP: Find a cleaner solution?
     Action<InputContext> attackQueuedAction;
     Action<InputContext> dashQueuedAction;
+    Action<InputContext> spell1Action;
+    Action<InputContext> spell2Action;
 
     // FIXME: Used to stop player input at different times. Move InputController away from player
     bool enableInput = true;
@@ -48,6 +49,9 @@ public class InputController : MonoBehaviour
         _trail = GetComponent<Trail>();
         attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
         dashQueuedAction = e => QueueInput(_playerController.Dash, e);
+
+        spell1Action = e => _spellController.StartCast(0);
+        spell2Action = e => _spellController.StartCast(1);
 
         SetupPlayerControls();
         SetupUIControls();
@@ -89,15 +93,19 @@ public class InputController : MonoBehaviour
 
     private void SetupPlayerControls()
     {
+        // Player
         _playerActions.Move.performed += TrackMovement;
         _playerActions.Move.canceled += StopMovement;
         _playerActions.Dash.performed += dashQueuedAction;
         _playerActions.Rotate.performed += _playerController.RotateCamera;
+        // Weapon
         _playerActions.Attack.performed += attackQueuedAction;
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
         // Spells
-        //_playerActions.Spell1.performed +=  _spellController.StartCast;
-        //_playerActions.CastSpell.performed += _spellController.Cast;
+        _playerActions.Spell1.performed += spell1Action;
+        _playerActions.Spell2.performed += spell2Action;
+
+        _playerActions.CastSpell.performed += _spellController.Cast;
     }
 
     private void SetupUIControls()
@@ -123,14 +131,7 @@ public class InputController : MonoBehaviour
 
     private void TrackMovement(InputContext context)
     {
-        if (EnableInput)
-        {
-            _movement = context.ReadValue<Vector2>();
-        }
-        else
-        {
-            _movement = Vector2.zero;
-        }
+        _movement = EnableInput ? context.ReadValue<Vector2>() : Vector2.zero;
     }
 
     private void StopMovement(InputContext context)
@@ -147,8 +148,9 @@ public class InputController : MonoBehaviour
         _playerActions.Attack.performed -= attackQueuedAction;
         _playerActions.CycleWeapon.performed -= _weaponController.CycleWeapon;
 
-        //_playerActions.Spell1.performed -= _spellController.StartCast;
-        //_playerActions.CastSpell.performed -= _spellController.Cast;
+        _playerActions.Spell1.performed -= spell1Action;
+        _playerActions.Spell2.performed -= spell2Action;
+        _playerActions.CastSpell.performed -= _spellController.Cast;
     }
 
     private void DisableUIControls()

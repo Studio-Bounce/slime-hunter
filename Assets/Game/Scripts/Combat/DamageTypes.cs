@@ -8,6 +8,6 @@ public struct Damage
 {
     public float value;
     public float knockback;
-    public Vector3 direction;
+    [HideInInspector] public Vector3 direction;
     public StatusEffect effect;
 }

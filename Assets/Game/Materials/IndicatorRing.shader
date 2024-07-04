@@ -7,6 +7,9 @@ Shader "Custom/IndicatorRing"
         _Thickness ("Thickness", Float) = 0.05
         _Feathering ("Feathering", Float) = 0.01
 
+        _ThicknessScale ("ThicknessScale", Float) = 1
+        _FeatheringScale ("FeatheringScale", Float) = 1
+
     }
     SubShader
     {
@@ -41,6 +44,9 @@ Shader "Custom/IndicatorRing"
             float _Thickness;
             float _Feathering;
 
+            float _ThicknessScale;
+            float _FeatheringScale;
+
             v2f vert (appdata v)
             {
                 v2f o;
@@ -51,12 +57,13 @@ Shader "Custom/IndicatorRing"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                float thickness = _Thickness/4;
+                float thickness = (_Thickness/4)*_ThicknessScale;
+                float feathering = _Feathering*_FeatheringScale;
 
                 float2 center = float2(0.5, 0.5);
-                float sdf = length(center - i.uv) - (_Radius-(thickness+_Feathering));
+                float sdf = length(center - i.uv) - (_Radius-(thickness+feathering));
                 sdf = abs(sdf);
-                sdf = 1-smoothstep(thickness, thickness+_Feathering, sdf);
+                sdf = 1-smoothstep(thickness, thickness+feathering, sdf);
                 sdf = sdf*sdf*sdf;
 
                 fixed4 col = _Color;
