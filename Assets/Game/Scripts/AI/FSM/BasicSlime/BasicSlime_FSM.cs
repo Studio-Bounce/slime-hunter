@@ -11,7 +11,7 @@ public class BasicSlime_FSM : FSM
     public readonly int DeadStateName = Animator.StringToHash("Dead");
     public readonly int StunnedStateName = Animator.StringToHash("Stunned");
 
-    public BasicSlime_AttackPlayer.SlimeAttackState currentAttackState = BasicSlime_AttackPlayer.SlimeAttackState.NONE;
+    [HideInInspector] public BasicSlime_AttackPlayer.SlimeAttackState currentAttackState = BasicSlime_AttackPlayer.SlimeAttackState.NONE;
 
     public SeekSteeringBehaviour seekSteeringBehaviour;
     public WanderSteeringBehaviour wanderSteeringBehaviour;
@@ -79,6 +79,28 @@ public class BasicSlime_FSM : FSM
             return Vector3.zero;
 
         return playerTransform.position;
+    }
+
+    public void Emit(int steps)
+    {
+        StartCoroutine(IncreaseEmissionIntensity(steps));
+    }
+
+    IEnumerator IncreaseEmissionIntensity(int steps)
+    {
+        float intensity = 0.0f;
+        float intensityDelta = attackGlowIntensity / steps;
+        float deltaTime = attackEmissionTime / steps;
+        while (steps > 0)
+        {
+            --steps;
+            intensity += intensityDelta;
+
+            Color finalEmissionColor = attackMat.color * intensity;
+            slimeOuterMesh.materials[0].SetColor("_EmissionColor", finalEmissionColor);
+
+            yield return new WaitForSeconds(deltaTime);
+        }
     }
 
     protected virtual void OnDrawGizmos()
