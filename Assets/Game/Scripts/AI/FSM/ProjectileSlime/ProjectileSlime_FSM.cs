@@ -10,8 +10,11 @@ public class ProjectileSlime_FSM : BasicSlime_FSM
     public FleeSteeringBehaviour fleeSteeringBehaviour;
     public GameObject projectile;
     public float projectileSpeed = 10.0f;
+    [Tooltip("Slime flees if player gets in proximity")]
     public float playerProximityDistance = 5.0f;
     public float fleeSpeed = 5.0f;
+    [Tooltip("Time taken in rotating towards the player after cooldown")]
+    [SerializeField] float rotationTime = 0.5f;
 
     [HideInInspector] public bool isAttacking = false;
 
@@ -47,8 +50,19 @@ public class ProjectileSlime_FSM : BasicSlime_FSM
         {
             yield return new WaitForSeconds(cooldownTime);
 
-            // Turn towards the player
-            transform.LookAt(GetPlayerPosition());
+            // Turn towards player
+            float elapsedTime = 0f;
+            Quaternion startRot = transform.rotation;
+            Quaternion endRot = Quaternion.LookRotation(GetPlayerPosition() - transform.position);
+            while (elapsedTime < rotationTime)
+            {
+                float t = elapsedTime / rotationTime;
+                transform.rotation = Quaternion.Slerp(startRot, endRot, t);
+                elapsedTime += Time.deltaTime;
+
+                yield return null;
+            }
+            transform.rotation = endRot;
 
             GameObject projectileGO = Instantiate(projectile, transform.position + transform.forward, Quaternion.identity);
             ProjectileSlimeBullet bullet = projectileGO.GetComponent<ProjectileSlimeBullet>();

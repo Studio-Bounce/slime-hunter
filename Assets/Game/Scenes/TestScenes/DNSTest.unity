@@ -2069,6 +2069,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1582668792982206064, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
+        type: 3}
+      propertyPath: cooldownTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582668792982206064, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
+        type: 3}
+      propertyPath: rotationTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1582668792982206064, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
+        type: 3}
+      propertyPath: projectileSpeed
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 2123117332715989980, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
         type: 3}
       propertyPath: m_AnchorMax.x
