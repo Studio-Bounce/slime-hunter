@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class StatusEffect : ScriptableObject
 {
-    public Sprite icon;
+    public StatusEffectIcon icon;
     public string effectName;
     public float duration = 1;
     public float tickInterval = 1;

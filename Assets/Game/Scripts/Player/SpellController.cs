@@ -47,7 +47,7 @@ public class SpellController : MonoBehaviour
     {
         for (int i = 0; i < spells.Length; i++)
         {
-            hudMenu.SetSpellIcon(i + 1, spells[i].icon);
+            hudMenu?.SetSpellIcon(i + 1, spells[i].icon);
         }
     }
 
@@ -71,7 +71,7 @@ public class SpellController : MonoBehaviour
     {
         if (!currentIndicator.isActiveAndEnabled)
         {
-            hudMenu.SetSpellActive(currentSpellIndex + 1);
+            hudMenu?.SetSpellActive(currentSpellIndex + 1);
             currentIndicator.ShowIndicator(CurrentSpell);
             currentIndicator.SetReady(CurrentSpell.Ready);
 
@@ -85,7 +85,7 @@ public class SpellController : MonoBehaviour
             // If switching to different spell while previous indicator is active
             currentIndicator.ShowIndicator(CurrentSpell);
             currentIndicator.SetReady(CurrentSpell.Ready);
-            hudMenu.SetSpellActive(currentSpellIndex + 1);
+            hudMenu?.SetSpellActive(currentSpellIndex + 1);
         }
     }
 
@@ -123,11 +123,11 @@ public class SpellController : MonoBehaviour
         while (remainingCD > 0)
         {
             remainingCD -= Time.deltaTime;
-            hudMenu.UpdateSpellCooldown(spellIndex+1, Mathf.CeilToInt(remainingCD));
+            hudMenu?.UpdateSpellCooldown(spellIndex+1, Mathf.CeilToInt(remainingCD));
             yield return null;
         }
 
-        hudMenu.UpdateSpellCooldown(spellIndex + 1, 0);
+        hudMenu?.UpdateSpellCooldown(spellIndex + 1, 0);
         spells[spellIndex].Ready = true;
         if (spellIndex == currentSpellIndex) currentIndicator.SetReady(true);
 

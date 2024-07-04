@@ -90,6 +90,7 @@ Material:
     - _Bright_VoronoiGamma: 2
     - _Bright_VoronoiPower: 20
     - _Bright_VoronoiScale: 7
+    - _Bright_VoronoiSpeed: 25
     - _BumpScale: 1
     - _CircularGamma: 0.5
     - _ClearCoatMask: 0
@@ -116,10 +117,10 @@ Material:
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RadialGamma: 0.5
+    - _RadialGamma: 0.1
     - _Range: 176
     - _ReceiveShadows: 1
-    - _RotateSpeed: 10
+    - _RotateSpeed: 4
     - _RotationGamma: 2
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0

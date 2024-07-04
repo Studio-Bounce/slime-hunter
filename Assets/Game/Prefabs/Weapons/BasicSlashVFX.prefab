@@ -71,7 +71,10 @@ VisualEffect:
     m_NamedObject:
       m_Array: []
     m_Bool:
-      m_Array: []
+      m_Array:
+      - m_Value: 0
+        m_Name: Flip
+        m_Overridden: 1
 --- !u!73398921 &7252191243466871220
 VFXRenderer:
   serializedVersion: 1
