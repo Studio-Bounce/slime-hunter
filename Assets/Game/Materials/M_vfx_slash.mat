@@ -84,16 +84,16 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _AlphaToMask: 0
-    - _Base_Intensity: 0.27
+    - _Base_Intensity: 0.6
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _Brigh_VoronoiSpeed: 20
     - _Bright_Intensity: 7
     - _Bright_Peak: 0.745
     - _Bright_VoronoiGamma: 0.25
-    - _Bright_VoronoiPower: 5
+    - _Bright_VoronoiPower: 3
     - _Bright_VoronoiScale: 7
-    - _Bright_VoronoiSpeed: 25
+    - _Bright_VoronoiSpeed: 7
     - _BumpScale: 1
     - _CircularGamma: 1
     - _ClearCoatMask: 0
@@ -122,10 +122,10 @@ Material:
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _RadialGamma: 0.1
+    - _RadialGamma: 1.2
     - _Range: 176
     - _ReceiveShadows: 1
-    - _RotateSpeed: 4
+    - _RotateSpeed: 3
     - _RotationGamma: 2
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
