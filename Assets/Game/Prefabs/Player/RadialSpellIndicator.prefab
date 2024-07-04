@@ -244,10 +244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee7ef12239d2da34c81d3d204e8d6d38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeColor: {r: 1, g: 1, b: 1, a: 0.39215687}
-  inactiveColor: {r: 1, g: 0, b: 0, a: 0.5647059}
   castRange: 6
-  radiusOfEffect: 3
+  areaOfEffect: 0
+  activeColor: {r: 0.71661675, g: 1, b: 0.7075472, a: 0.627451}
+  inactiveColor: {r: 1, g: 0, b: 0, a: 0.2509804}
   hitLayers:
     serializedVersion: 2
     m_Bits: 8

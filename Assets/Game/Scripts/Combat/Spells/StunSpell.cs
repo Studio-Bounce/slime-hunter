@@ -14,13 +14,18 @@ public class StunSpell : Spell
     private DamageDealer damageDealer;
     private SphereCollider damageCollider;
 
-    private void Start()
+    private void Awake()
     {
         damageDealer = GetComponent<DamageDealer>();
         damageDealer.Active = false;
         damageCollider = GetComponent<SphereCollider>();
         damageCollider.isTrigger = true;
-        damageCollider.radius = 3; // TODO: Hardcoded
+    }
+
+    public override void Initialize(SpellSO spellSO)
+    {
+        damageDealer.damage = spellSO.damage;
+        damageCollider.radius = spellSO.areaOfEffect;
     }
 
     public override void Cast(Vector3 target = default)

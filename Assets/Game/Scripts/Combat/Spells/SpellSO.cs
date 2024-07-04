@@ -12,6 +12,8 @@ public class SpellSO : ScriptableObject
     [TextArea] public string description;
     public Sprite icon;
     public Damage damage;
+    public float castRange;
+    public float areaOfEffect;
     public float cooldown;
     public Spell spellPrefab;
     public IndicatorType spellIndicator;

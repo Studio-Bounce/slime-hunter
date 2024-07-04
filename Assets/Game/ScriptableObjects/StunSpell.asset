@@ -20,6 +20,8 @@ MonoBehaviour:
     knockback: 5
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 11400000, guid: 194e3545abb07b94ab515e1afbd829cb, type: 2}
+  castRange: 7
+  areaOfEffect: 3
   cooldown: 5
   spellPrefab: {fileID: 6701679911909493986, guid: eac53cdb1db0c5d4c91caebb5f404b18,
     type: 3}

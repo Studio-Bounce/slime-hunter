@@ -131,14 +131,7 @@ public class InputController : MonoBehaviour
 
     private void TrackMovement(InputContext context)
     {
-        if (EnableInput)
-        {
-            _movement = context.ReadValue<Vector2>();
-        }
-        else
-        {
-            _movement = Vector2.zero;
-        }
+        _movement = EnableInput ? context.ReadValue<Vector2>() : Vector2.zero;
     }
 
     private void StopMovement(InputContext context)
@@ -155,8 +148,9 @@ public class InputController : MonoBehaviour
         _playerActions.Attack.performed -= attackQueuedAction;
         _playerActions.CycleWeapon.performed -= _weaponController.CycleWeapon;
 
-        //_playerActions.Spell1.performed -= _spellController.StartCast;
-        //_playerActions.CastSpell.performed -= _spellController.Cast;
+        _playerActions.Spell1.performed -= spell1Action;
+        _playerActions.Spell2.performed -= spell2Action;
+        _playerActions.CastSpell.performed -= _spellController.Cast;
     }
 
     private void DisableUIControls()

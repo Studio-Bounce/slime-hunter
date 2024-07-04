@@ -63,19 +63,28 @@ public class SpellController : MonoBehaviour
                 break;
         }
 
-        // Toggle indicator
+        ToggleIndicatorAndUI();
+    }
+
+    // TogglesIndicator and Updates HUD
+    private void ToggleIndicatorAndUI()
+    {
         if (!currentIndicator.isActiveAndEnabled)
         {
-            currentIndicator.SetReady(spells[spellIndex].Ready);
-            hudMenu.SetSpellActive(currentSpellIndex+1);
-            currentIndicator.ShowIndicator();
-        } else if (lastSpellIndex == currentSpellIndex)
+            hudMenu.SetSpellActive(currentSpellIndex + 1);
+            currentIndicator.ShowIndicator(CurrentSpell);
+            currentIndicator.SetReady(CurrentSpell.Ready);
+
+        }
+        else if (lastSpellIndex == currentSpellIndex)
         {
             currentIndicator.HideIndicator();
-        } else
+        }
+        else
         {
             // If switching to different spell while previous indicator is active
-            currentIndicator.SetReady(spells[spellIndex].Ready);
+            currentIndicator.ShowIndicator(CurrentSpell);
+            currentIndicator.SetReady(CurrentSpell.Ready);
             hudMenu.SetSpellActive(currentSpellIndex + 1);
         }
     }
@@ -94,11 +103,11 @@ public class SpellController : MonoBehaviour
             CurrentSpell.Ready = false;
             currentIndicator.HideIndicator();
             // Cast spell
-            Spell spell = Instantiate(CurrentSpell.spellPrefab);
-            spell.transform.position = transform.position;
+            Spell spell = Instantiate(CurrentSpell.spellPrefab, transform.position, Quaternion.identity);
+            spell.Initialize(CurrentSpell);
             spell.Cast(currentIndicator.GetTarget);
             StartCoroutine(StartCooldown(currentSpellIndex));
-            // Rotate player to cast direction
+            // Rotate player to cast direction and animate
             Vector3 castDirection = currentIndicator.GetTarget - transform.position;
             transform.forward = castDirection;
             _animator.SetTrigger(castTriggerHash);
