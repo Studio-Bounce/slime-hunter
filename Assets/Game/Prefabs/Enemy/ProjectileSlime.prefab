@@ -75,6 +75,56 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &639021658783697714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7014905470582134069}
+  - component: {fileID: 1750778169829689240}
+  m_Layer: 7
+  m_Name: AI_Flee
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7014905470582134069
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639021658783697714}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2483517191844165147}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1750778169829689240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639021658783697714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05bfc7ebe5cacee4aa0d61ab101a09d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  target: {x: 0, y: 0, z: 0}
+  useMouseInput: 0
+  steeringAgent: {fileID: 0}
+  enemyTarget: {fileID: 0}
+  fleeDistance: 0
 --- !u!1 &1033410182881191639
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,7 +537,6 @@ GameObject:
   - component: {fileID: 7905635636638535154}
   - component: {fileID: 3777895731377175427}
   - component: {fileID: 1582668792982206064}
-  - component: {fileID: 1781801438465598720}
   - component: {fileID: 7743835302399944005}
   m_Layer: 7
   m_Name: ProjectileSlime
@@ -511,7 +560,7 @@ Transform:
   m_Children:
   - {fileID: 5822232665335690707}
   - {fileID: 1307903818974522329}
-  - {fileID: 5752617622261281050}
+  - {fileID: 7014905470582134069}
   - {fileID: 4247537382679076834}
   - {fileID: 2228441388969818613}
   - {fileID: 6097230810047125289}
@@ -642,7 +691,7 @@ MonoBehaviour:
   summingMethod: 0
   mass: 1
   maxSpeed: 2
-  alwaysUseMaxSpeed: 0
+  alwaysUseMaxSpeed: 1
   maxForce: 10
   velocity: {x: 0, y: 0, z: 0}
   angularDampeningTime: 4
@@ -666,7 +715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FSMController: {fileID: 9100000, guid: 3c360e7df362da9468f9f6caab721a91, type: 2}
   currentAttackState: 3
-  seekSteeringBehaviour: {fileID: 868317196797159245}
+  seekSteeringBehaviour: {fileID: 0}
   wanderSteeringBehaviour: {fileID: 310336043614536508}
   slimeAgent: {fileID: 0}
   characterController: {fileID: 0}
@@ -678,38 +727,20 @@ MonoBehaviour:
   attackMat: {fileID: 2100000, guid: f21b9f86456c57f4aaf2dd713eac1d33, type: 2}
   attackGlowIntensity: 3.5
   cooldownTime: 1.3
-  seekDistance: 12
+  seekDistance: 10
   wanderSpeed: 4
-  chaseSpeed: 5
-  attackSpeed: 50
-  attackRadius: 3
+  chaseSpeed: 0
+  attackSpeed: 0
+  attackRadius: 0
   attackEmissionTime: 1
   attackProximity: 1
   slimeAnimator: {fileID: 444894387013398441}
---- !u!114 &1781801438465598720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5550856846267920840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd112e9a535bfde4cb3d092b2f27b089, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitLayers:
-    serializedVersion: 2
-    m_Bits: 256
-  damage:
-    value: 10
-    knockback: 0
-    direction: {x: 0, y: 0, z: 0}
-    effect: {fileID: 0}
-  framesToPause: 0
-  cameraShakeIntensity: 5
-  cameraShakeTime: 0.05
-  slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
+  fleeSteeringBehaviour: {fileID: 1750778169829689240}
+  projectile: {fileID: 5722810862771267375, guid: fd3e43c165cb9914984bb09223f422cc,
+    type: 3}
+  projectileSpeed: 10
+  playerProximityDistance: 4
+  fleeSpeed: 5
 --- !u!114 &7743835302399944005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5703,59 +5734,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1 &7996629234572071246
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5752617622261281050}
-  - component: {fileID: 868317196797159245}
-  m_Layer: 7
-  m_Name: AI_Seek
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5752617622261281050
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7996629234572071246}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2483517191844165147}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &868317196797159245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7996629234572071246}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f4f44dd39e7d7d4db3b6498bdb25d23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weight: 1
-  target: {x: 0, y: 0, z: 0}
-  useMouseInput: 0
-  steeringAgent: {fileID: 0}
-  performStuckDetection: 0
-  stopThreshold: 0.15
-  cacheLength: 10
-  cacheInterval: 0.25
-  stuckThreshold: 0.01
 --- !u!1 &9055898555775314328
 GameObject:
   m_ObjectHideFlags: 0
@@ -10761,7 +10739,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: c0cd59f1e7124024d8b3b24f71fd2342, type: 2}
+      objectReference: {fileID: 9100000, guid: 316dd0ab9a62feb469737b7cbfc650cb, type: 2}
     - target: {fileID: 6427321115966553525, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalRotation.y

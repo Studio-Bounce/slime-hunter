@@ -45,6 +45,9 @@ public class SpellController : MonoBehaviour
 
     private void LoadSpellIcons()
     {
+        if (hudMenu == null)
+            return;
+
         for (int i = 0; i < spells.Length; i++)
         {
             hudMenu.SetSpellIcon(i + 1, spells[i].icon);

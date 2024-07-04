@@ -23,7 +23,7 @@ public class BasicSlime_WanderAround : BasicSlime_BaseState
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
         // If slime reached close to player, switch to chase
-        if (Vector3.Distance(fsm.slimeAgent.transform.position, fsm.GetPlayerPosition()) <= fsm.seekDistance)
+        if (Vector3.Distance(fsm.transform.position, fsm.GetPlayerPosition()) <= fsm.seekDistance)
         {
             fsm.ChangeState(fsm.ChasePlayerStateName);
         }

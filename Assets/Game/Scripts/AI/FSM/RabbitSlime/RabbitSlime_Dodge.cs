@@ -20,6 +20,8 @@ public class RabbitSlime_Dodge : BasicSlime_BaseState
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        base.OnStateUpdate(animator, stateInfo, layerIndex);
+
         // If dodge is complete, cooldown
         if (!((RabbitEnemy)fsm.slimeEnemy).isDodging)
         {
