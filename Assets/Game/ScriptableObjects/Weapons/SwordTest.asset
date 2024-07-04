@@ -28,14 +28,14 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   attackMoves:
   - clip: {fileID: 1827226128182048838, guid: 2b269a3ee16b94045a6690ddc2fe58a0, type: 3}
-    animationOffset: 0
+    animationOffset: 0.05
     duration: 0.3
     direction: {x: 0, y: 0}
     damageMultiplier: 1
     rangeMultiplier: 1
     knockbackMultiplier: 1
   - clip: {fileID: 1827226128182048838, guid: 07512f421a707e541a31bfd62431cac5, type: 3}
-    animationOffset: 0
+    animationOffset: 0.05
     duration: 0.3
     direction: {x: -1, y: 0}
     damageMultiplier: 1
