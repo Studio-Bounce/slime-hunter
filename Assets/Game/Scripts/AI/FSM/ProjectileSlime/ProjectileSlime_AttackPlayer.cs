@@ -33,6 +33,6 @@ public class ProjectileSlime_AttackPlayer : ProjectileSlime_BaseState
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        projFSM.isAttacking = false;
+        projFSM.StopAttacking();
     }
 }

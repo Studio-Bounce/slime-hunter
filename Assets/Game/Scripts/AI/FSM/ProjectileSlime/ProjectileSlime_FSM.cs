@@ -31,6 +31,15 @@ public class ProjectileSlime_FSM : BasicSlime_FSM
         }
     }
 
+    public void StopAttacking()
+    {
+        if (isAttacking)
+        {
+            isAttacking = false;
+            StopCoroutine(ShootProjectiles());
+        }
+    }
+
     IEnumerator ShootProjectiles()
     {
         // Shoot projectiles
