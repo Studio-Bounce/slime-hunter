@@ -90,23 +90,7 @@ ModelImporter:
           preInfinity: 2
           postInfinity: 2
           rotationOrder: 4
-      events:
-      - time: 0.3477814
-        functionName: EnableAttack
-        data: Attack Event
-        objectReferenceParameter: {fileID: 11500000, guid: fb773333b1e5f4048a3f1f990813e33a,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 0.5064305
-        functionName: DisableAttack
-        data: Attack Event
-        objectReferenceParameter: {fileID: 11500000, guid: fb773333b1e5f4048a3f1f990813e33a,
-          type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
