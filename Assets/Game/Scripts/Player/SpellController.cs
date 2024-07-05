@@ -31,7 +31,8 @@ public class SpellController : MonoBehaviour
 
     private void Awake()
     {
-        _animator = GetComponent<Animator>();
+        _animator = GetComponent<PlayerController>()?.animator;
+        Debug.Assert(_animator != null);
         hudMenu = UIManager.Instance.HUDMenu as HUDMenu;
         foreach (SpellSO spell in spells) spell.Ready = true;
     }

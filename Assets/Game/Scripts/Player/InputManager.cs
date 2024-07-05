@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using InputContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 
-[RequireComponent(typeof(PlayerController), typeof(WeaponController), typeof(SpellController))]
-public class InputController : MonoBehaviour
+public class InputManager : Singleton<InputManager>
 {
     private PlayerController _playerController;
     private WeaponController _weaponController;
     private SpellController _spellController;
-    private Trail _trail;
 
     private PlayerInputActions _inputActions;
     private PlayerInputActions.PlayerActions _playerActions;
@@ -27,47 +25,81 @@ public class InputController : MonoBehaviour
     Action<InputContext> spell1Action;
     Action<InputContext> spell2Action;
 
-    // FIXME: Used to stop player input at different times. Move InputController away from player
-    bool enableInput = true;
-    public bool EnableInput { get { return enableInput; } set { enableInput = value; } }
     public Vector2 Movement { get { return _movement; } }
 
     private void Awake()
     {
+        // Enable InputActions
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
         _playerActions = _inputActions.Player;
         _UIActions = _inputActions.UI;
-        EnableInput = true;
+        // Assign actions
+        attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
+        dashQueuedAction = e => QueueInput(_playerController.Dash, e);
+        spell1Action = e => _spellController.StartCast(0);
+        spell2Action = e => _spellController.StartCast(1);
+        // Enables/disables inputs based on game state
+        GameManager.Instance.OnGameStateChange += UpdateInputAvailability;
+        GameManager.Instance.OnPlayerRefChange += GetControllers;
     }
 
     private void Start()
     {
-        _playerController = GetComponent<PlayerController>();
-        _weaponController = GetComponent<WeaponController>();
-        _spellController = GetComponent<SpellController>();
-        _trail = GetComponent<Trail>();
-        attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
-        dashQueuedAction = e => QueueInput(_playerController.Dash, e);
+        _AddUIControls();
+    }
 
-        spell1Action = e => _spellController.StartCast(0);
-        spell2Action = e => _spellController.StartCast(1);
+    public void UpdateInputAvailability(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.MAIN_MENU:
+                TogglePlayerControls(false);
+                break;
 
-        SetupPlayerControls();
-        SetupUIControls();
+            case GameState.PAUSED:
+                TogglePlayerControls(false);
+                break;
+
+            case GameState.GAMEPLAY:
+                TogglePlayerControls(true);
+                break;
+
+            case GameState.GAME_OVER:
+                TogglePlayerControls(false);
+                break;
+        }
+    }
+
+    private void GetControllers(Player player)
+    {
+        _playerController = player.GetComponent<PlayerController>();
+        _weaponController = player.GetComponent<WeaponController>();
+        _spellController = player.GetComponent<SpellController>();
+        _AddPlayerControls();
+    }
+
+    public void TogglePlayerControls(bool active)
+    {
+        if (active) _playerActions.Enable(); else _playerActions.Disable();
+    }
+
+    public void ToggleUIControls(bool active)
+    {
+        if (active) _UIActions.Enable(); else _UIActions.Disable();
     }
 
     private void OnDestroy()
     {
-        DisablePlayerControls();
-        DisableUIControls();
+        _RemovePlayerControls();
+        _RemoveUIControls();
     }
 
     // Give leniency to player input when timing is important
     // Callback should return bool to check if the input had succeeded
     private void QueueInput(Func<InputContext, bool> inputCallback, InputContext e)
     {
-        if (!QueuedInputMap.ContainsKey(inputCallback) && EnableInput)
+        if (!QueuedInputMap.ContainsKey(inputCallback))
         {
             StartCoroutine(QueueInputCoroutine(inputCallback, e));
         }
@@ -91,7 +123,7 @@ public class InputController : MonoBehaviour
         QueuedInputMap.Remove(inputCallback);
     }
 
-    private void SetupPlayerControls()
+    private void _AddPlayerControls()
     {
         // Player
         _playerActions.Move.performed += TrackMovement;
@@ -104,42 +136,15 @@ public class InputController : MonoBehaviour
         // Spells
         _playerActions.Spell1.performed += spell1Action;
         _playerActions.Spell2.performed += spell2Action;
-
         _playerActions.CastSpell.performed += _spellController.Cast;
     }
 
-    private void SetupUIControls()
+    private void _AddUIControls()
     {
         _UIActions.Pause.performed += Pause;
     }
 
-    private void Pause(InputContext context)
-    {
-        if (GameManager.Instance.GameState == GameStates.PAUSED)
-        {
-            GameManager.Instance.GameState = GameStates.GAMEPLAY;
-            UIManager.Instance.SetPauseMenu(false);
-            Time.timeScale = 1;
-        }
-        else
-        {
-            GameManager.Instance.GameState = GameStates.PAUSED;
-            UIManager.Instance.SetPauseMenu(true);
-            Time.timeScale = 0;
-        }
-    }
-
-    private void TrackMovement(InputContext context)
-    {
-        _movement = EnableInput ? context.ReadValue<Vector2>() : Vector2.zero;
-    }
-
-    private void StopMovement(InputContext context)
-    {
-        _movement = Vector2.zero;
-    }
-
-    private void DisablePlayerControls()
+    private void _RemovePlayerControls()
     {
         _playerActions.Move.performed -= TrackMovement;
         _playerActions.Move.canceled -= StopMovement;
@@ -153,8 +158,34 @@ public class InputController : MonoBehaviour
         _playerActions.CastSpell.performed -= _spellController.Cast;
     }
 
-    private void DisableUIControls()
+    private void _RemoveUIControls()
     {
         _UIActions.Pause.performed -= Pause;
+    }
+
+    private void Pause(InputContext context)
+    {
+        if (GameManager.Instance.GameState == GameState.PAUSED)
+        {
+            GameManager.Instance.GameState = GameState.GAMEPLAY;
+            UIManager.Instance.SetPauseMenu(false);
+            Time.timeScale = 1;
+        }
+        else
+        {
+            GameManager.Instance.GameState = GameState.PAUSED;
+            UIManager.Instance.SetPauseMenu(true);
+            Time.timeScale = 0;
+        }
+    }
+
+    private void TrackMovement(InputContext context)
+    {
+        _movement = context.ReadValue<Vector2>();
+    }
+
+    private void StopMovement(InputContext context)
+    {
+        _movement = Vector2.zero;
     }
 }

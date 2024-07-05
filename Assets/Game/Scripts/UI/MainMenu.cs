@@ -31,7 +31,7 @@ public class MainMenu : Menu
 
     void InitiateGame(Action<AsyncOperation, string> sceneLoadCallback = null)
     {
-        GameManager.Instance.GameState = GameStates.LOADING;
+        GameManager.Instance.GameState = GameState.LOADING;
         // Ensure that core scene's camera is enabled
         CameraManager.Instance.SwitchToCamera(coreCamera);
         SceneLoader.Instance.UnloadScene(GameManager.Instance.MenuSceneName);
@@ -42,7 +42,7 @@ public class MainMenu : Menu
 
     void SetStartState(AsyncOperation _, string _s)
     {
-        GameManager.Instance.GameState = GameStates.GAMEPLAY;
+        GameManager.Instance.GameState = GameState.GAMEPLAY;
     }
 
     void LoadData(AsyncOperation _, string _s)
@@ -53,7 +53,7 @@ public class MainMenu : Menu
 
     private void QuitGame()
     {
-        GameManager.Instance.GameState = GameStates.GAME_OVER;
+        GameManager.Instance.GameState = GameState.GAME_OVER;
 #if UNITY_EDITOR
         EditorApplication.isPlaying = false;
 #else
