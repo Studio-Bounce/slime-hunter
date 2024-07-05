@@ -10,7 +10,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="StatusArea" style="flex-grow: 1; flex-direction: row; margin-left: 40px;">
+            <ui:VisualElement name="StatusArea" style="flex-grow: 1; flex-direction: row; margin-left: 30px;">
                 <ui:VisualElement name="weaponSwitchArea" style="flex-grow: 0; width: 138px; opacity: 1; padding-top: 50px; padding-bottom: 37px;">
                     <ui:VisualElement name="WeaponIconSlot" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/1231.png?fileID=2800000&amp;guid=dfbf3a0ad495ee54b87d996397bc2e01&amp;type=3#1231&quot;); -unity-background-scale-mode: scale-to-fit; align-self: auto;" />
                 </ui:VisualElement>
@@ -40,11 +40,11 @@
             <ui:VisualElement name="MiniMapContainer" style="flex-grow: 0; height: 230px; -unity-text-align: upper-right; -unity-background-scale-mode: scale-to-fit; background-image: none; align-self: stretch; align-items: stretch; padding-right: 19px; margin-left: 0; margin-top: 16px; margin-bottom: 0; padding-bottom: 0; padding-left: 0; display: flex;" />
             <ui:VisualElement name="SpellContainer" style="flex-grow: 0; height: 20%; padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; flex-direction: row; -unity-background-scale-mode: scale-to-fit; display: flex; align-self: flex-end; width: auto; align-items: center; visibility: visible; overflow: visible; opacity: 1; -unity-text-align: lower-left; justify-content: center;">
                 <ui:VisualElement name="GlyphWrapper" style="flex-grow: 0; flex-direction: row; width: auto; height: auto; align-items: flex-start; flex-shrink: 0; margin-right: 58px; margin-bottom: 15px;">
-                    <ui:VisualElement name="Spell1" class="spell-glyph spell-glyph-active" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/SpellIcons/Stun.png?fileID=21300000&amp;guid=95eeb2d1c5537024db1cd4e0870a00ab&amp;type=3#Stun&quot;); -unity-background-scale-mode: scale-to-fit; align-self: flex-end;">
+                    <ui:VisualElement name="Spell1" class="spell-glyph spell-glyph-active" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/SpellIcons/Stun.png?fileID=21300000&amp;guid=95eeb2d1c5537024db1cd4e0870a00ab&amp;type=3#Stun&quot;); -unity-background-scale-mode: scale-to-fit; align-self: flex-end; -unity-slice-left: 5; -unity-slice-top: 5; -unity-slice-right: 5; -unity-slice-bottom: 5;">
                         <ui:Label tabindex="-1" text="24s" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Timer" class="cooldown-timer" />
                         <ui:Label tabindex="-1" text="1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hotkey" class="hotkey-indicator" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="Spell2" class="spell-glyph" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/SpellIcons/Crystal.png?fileID=2800000&amp;guid=7443ed49e912504468e5cc1357ec4fa1&amp;type=3#Crystal&quot;); -unity-background-scale-mode: scale-to-fit; align-self: flex-end;">
+                    <ui:VisualElement name="Spell2" class="spell-glyph" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/SpellIcons/Crystal.png?fileID=2800000&amp;guid=7443ed49e912504468e5cc1357ec4fa1&amp;type=3#Crystal&quot;); -unity-background-scale-mode: scale-to-fit; align-self: flex-end; -unity-slice-left: 5; -unity-slice-top: 5; -unity-slice-right: 5; -unity-slice-bottom: 5;">
                         <ui:Label tabindex="-1" text="24s" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Timer" class="cooldown-timer" />
                         <ui:Label tabindex="-1" text="2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hotkey" class="hotkey-indicator" />
                     </ui:VisualElement>
