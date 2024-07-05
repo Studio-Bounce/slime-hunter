@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     // Used for jump, dash, and gravity
     CharacterController characterController;
-    InputController inputController;
+    InputManager inputController;
     WeaponController weaponController;
     SpellController spellController;
     Trail trail;
@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        inputController = GetComponent<InputController>();
+        inputController = GetComponent<InputManager>();
         weaponController = GetComponent<WeaponController>();
         spellController = GetComponent<SpellController>();
         trail = GetComponent<Trail>();

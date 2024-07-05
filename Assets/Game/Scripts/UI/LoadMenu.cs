@@ -16,7 +16,7 @@ public class LoadMenu : Menu
 
     private void Update()
     {
-        if (spinner != null && (GameManager.Instance.GameState == GameStates.LOADING))
+        if (spinner != null && (GameManager.Instance.GameState == GameState.LOADING))
         {
             Vector3 rotation = spinner.transform.rotation.eulerAngles + new Vector3(0, 0, rotationSpeed * Time.deltaTime);
             spinner.transform.rotation = Quaternion.Euler(rotation);

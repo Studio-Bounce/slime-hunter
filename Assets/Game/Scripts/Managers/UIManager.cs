@@ -14,9 +14,9 @@ public class UIManager : Singleton<UIManager>
     // ----------------- Pause -----------------
     public void SetPauseMenu(bool active)
     {
-        if (active && GameManager.Instance.GameState != GameStates.PAUSED)
+        if (active && GameManager.Instance.GameState != GameState.PAUSED)
         {
-            GameManager.Instance.GameState = GameStates.PAUSED;
+            GameManager.Instance.GameState = GameState.PAUSED;
         }
         pauseMenu.SetVisible(active);
     }

@@ -12,15 +12,15 @@ public class Player : DamageTaker
 
     private void Awake()
     {
-        GameManager.Instance.PlayerRef = this;
+        
     }
 
     protected override void Start()
     {
         base.Start();
         // Ensures that base.health does not change as per damage
+        GameManager.Instance.PlayerRef = this;
         isInvincible = true;
-
         playerController = GetComponent<PlayerController>();
     }
 

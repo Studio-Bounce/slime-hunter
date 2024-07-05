@@ -30,7 +30,7 @@ public class PersistenceManager : Singleton<PersistenceManager>
         while (true)
         {
             yield return new WaitForSeconds(autoSaveInterval - 1.0f);
-            if (GameManager.Instance.GameState == GameStates.GAMEPLAY)
+            if (GameManager.Instance.GameState == GameState.GAMEPLAY)
             {
                 UIManager.Instance.ShowAutoSave();
                 SaveGame();

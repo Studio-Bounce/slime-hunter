@@ -29,8 +29,7 @@ public class DialogueManager : Singleton<DialogueManager>
         }
 
         // Disable controls
-        GameManager.Instance.PlayerRef.GetComponent<InputController>().EnableInput = false;
-
+        InputManager.Instance.TogglePlayerControls(false);
         isStoryRunning = true;
         dialogueHUD.Show();
         hudMenu.Hide();
@@ -110,7 +109,7 @@ public class DialogueManager : Singleton<DialogueManager>
         dialogueHUD.Hide();
         hudMenu.Show();
         // Enable controls
-        GameManager.Instance.PlayerRef.GetComponent<InputController>().EnableInput = true;
+        InputManager.Instance.TogglePlayerControls(true);
     }
 
     void ParseDialogue(string dialogText, out string actualDialog, out int participantIdx)

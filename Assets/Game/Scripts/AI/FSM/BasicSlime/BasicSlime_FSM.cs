@@ -60,7 +60,7 @@ public class BasicSlime_FSM : FSM
     {
         while (playerTransform == null)
         {
-            playerTransform = GameManager.Instance.PlayerRef.transform;
+            playerTransform = GameManager.Instance.PlayerRef?.transform;
             yield return new WaitForSeconds(0.5f);
         }
     }
