@@ -78,8 +78,13 @@ public class GameManager : Singleton<GameManager>
     }
 
     public Player PlayerRef 
-    { get 
+    { 
+        get 
         {
+            if (_playerRef == null)
+            {
+                _playerRef = FindObjectOfType<Player>();
+            }
             return _playerRef;
         }
         set 

@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
 
     // Used for jump, dash, and gravity
     CharacterController characterController;
-    InputManager inputController;
     WeaponController weaponController;
     SpellController spellController;
     Trail trail;
@@ -53,7 +52,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        inputController = GetComponent<InputManager>();
         weaponController = GetComponent<WeaponController>();
         spellController = GetComponent<SpellController>();
         trail = GetComponent<Trail>();
@@ -98,7 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_isDashing || _isJumping || !characterController.enabled) return;
 
-        Vector2 moveInput = inputController.Movement;
+        Vector2 moveInput = InputManager.Instance.Movement;
         // Set move animation based on input
         animator.SetFloat(blendSpeedHash, moveInput.magnitude);
         if (moveInput == Vector2.zero)
@@ -136,7 +134,7 @@ public class PlayerController : MonoBehaviour
         {
             weaponController.ResetCombo();
             weaponController.DashInterruptAttack();
-            Vector3 dashDirection = CameraManager.Instance.DirectionToCameraForward(transform.position, inputController.Movement);
+            Vector3 dashDirection = CameraManager.Instance.DirectionToCameraForward(transform.position, InputManager.Instance.Movement);
             dashDirection = dashDirection == Vector3.zero ? transform.forward : dashDirection;
 
             // Rotate player to dash

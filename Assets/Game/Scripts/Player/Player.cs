@@ -10,11 +10,6 @@ public class Player : DamageTaker
     public int slowDownOnHitFrames = 5;
     PlayerController playerController;
 
-    private void Awake()
-    {
-        
-    }
-
     protected override void Start()
     {
         base.Start();

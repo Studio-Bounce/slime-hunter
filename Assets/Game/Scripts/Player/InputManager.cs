@@ -46,6 +46,7 @@ public class InputManager : Singleton<InputManager>
 
     private void Start()
     {
+        GetControllers(GameManager.Instance.PlayerRef);
         _AddUIControls();
     }
 
@@ -73,6 +74,7 @@ public class InputManager : Singleton<InputManager>
 
     private void GetControllers(Player player)
     {
+        if (player == null) return;
         _playerController = player.GetComponent<PlayerController>();
         _weaponController = player.GetComponent<WeaponController>();
         _spellController = player.GetComponent<SpellController>();

@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8649876446043933928}
   - component: {fileID: 606331671084474555}
   - component: {fileID: 1400482589994016055}
-  - component: {fileID: 179933461974590091}
   - component: {fileID: 3109943353670570679}
   - component: {fileID: 4259289431672013625}
   - component: {fileID: 886262207501665116}
@@ -186,19 +185,6 @@ MonoBehaviour:
   rotationDuration: 0.7
   rotationIncrement: 60
   rotationRange: {x: -60, y: 60}
---- !u!114 &179933461974590091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281410272845203375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9fce3e71fc2b604aadf269de4da0ad9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputQueueDelay: 0.3
 --- !u!114 &3109943353670570679
 MonoBehaviour:
   m_ObjectHideFlags: 0
