@@ -27,21 +27,21 @@ MonoBehaviour:
     type: 3}
   hitSound: {fileID: 0}
   attackMoves:
-  - clip: {fileID: -203655887218126122, guid: 368a8195de7259c4b90d8c64c0c4c8e2, type: 3}
-    animationOffset: 0
+  - clip: {fileID: 1827226128182048838, guid: 2b269a3ee16b94045a6690ddc2fe58a0, type: 3}
+    animationOffset: 0.0333
     duration: 0.3
     direction: {x: 0, y: 0}
     damageMultiplier: 1
     rangeMultiplier: 1
     knockbackMultiplier: 1
-  - clip: {fileID: -203655887218126122, guid: 9a561e5270d33e94c8269d1b9af88d9c, type: 3}
-    animationOffset: 0
+  - clip: {fileID: 1827226128182048838, guid: 07512f421a707e541a31bfd62431cac5, type: 3}
+    animationOffset: 0.033
     duration: 0.3
     direction: {x: -1, y: 0}
     damageMultiplier: 1
     rangeMultiplier: 1
     knockbackMultiplier: 1
-  - clip: {fileID: -203655887218126122, guid: 26b8362ba6b3b3947bfe28a26b606f92, type: 3}
+  - clip: {fileID: 1827226128182048838, guid: 1ee3c76f37b077c40b3ca0463755dc32, type: 3}
     animationOffset: 0.4
     duration: 0.5
     direction: {x: -1, y: 0}
