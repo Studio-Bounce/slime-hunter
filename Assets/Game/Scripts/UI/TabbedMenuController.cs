@@ -5,7 +5,7 @@ public class TabbedMenuController
     /* Define member variables*/
     private const string tabClassName = "tab";
     private const string selectedTabClassName = "selected-tab";
-    private const string unselectedContentClassName = "unselected-content";
+    private const string selectedContentClassName = "selected-content";
     // Tab and tab content have the same prefix but different suffix
     // Define the suffix of the tab name
     private const string tabNameSuffix = "Tab";
@@ -53,14 +53,14 @@ public class TabbedMenuController
     {
         tab.AddToClassList(selectedTabClassName);
         VisualElement content = FindContent(tab);
-        content.RemoveFromClassList(unselectedContentClassName);
+        content.AddToClassList(selectedContentClassName);
     }
 
     private void UnselectTab(VisualElement tab)
     {
         tab.RemoveFromClassList(selectedTabClassName);
         VisualElement content = FindContent(tab);
-        content.AddToClassList(unselectedContentClassName);
+        content.RemoveFromClassList(selectedContentClassName);
     }
 
     // Method to generate the associated tab content name by for the given tab name

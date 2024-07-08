@@ -1,76 +1,62 @@
-
-/* Option Menus */
-
 .option-slot {
-    
 }
-
 
 .menu-button {
-	transition-property: all;
+    transition-property: all;
     transition-duration: 0.2s;
-	color: white;
-	opacity:0.5;
-
- 
+    color: white;
+    opacity: 0.5;
 }
 
-.option-slot:hover .menu-button{
-	
-	color: white;
-	opacity:1; 
-
+.option-slot:hover .menu-button {
+    color: white;
+    opacity: 1;
 }
 
 .menu-button-deco {
-	transition-property: all;
+    transition-property: all;
     transition-duration: 0.2s;
-	color: white;
-	opacity:0;
- 
+    color: white;
+    opacity: 0;
 }
 
 .option-slot:hover .menu-button-deco {
     opacity: 1;
 }
 
-/* Tabbed Menus */
-
 .tab {
-	transition-property: all;
+    transition-property: all;
     transition-duration: 0.2s;
-	background-color: #1C2C34;
+    background-color: rgb(28, 44, 52);
 }
 
 .tab Label {
-	color: white;
-	opacity: 0.5;
+    color: white;
+    opacity: 0.5;
 }
 
 .tab:hover {
-	background-color: #46BBCA;
+    background-color: rgb(70, 187, 202);
 }
 
 .tab:hover Label {
-	opacity: 1;
+    opacity: 1;
 }
 
 .selected-tab {
     display: flex;
-	background-color: #46BBCA;
-	color: white;
+    background-color: rgb(70, 187, 202);
+    color: white;
 }
 
 .selected-tab Label {
-	opacity: 1
+    opacity: 1;
 }
 
-/* Style for tabContent */
 .tab-content {
-
+    display: none;
 }
 
-/* Hides the unselected tab content */
-.unselected-content {
-    display: none;
+.selected-content {
+    display: flex;
 }
