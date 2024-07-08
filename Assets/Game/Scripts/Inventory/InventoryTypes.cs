@@ -8,6 +8,7 @@ public class Item
 {
     public string itemName;
     public Sprite icon;
+    public ScriptableObject itemRef;
     public ItemType itemType;
     public int quantity;
     public int value;
@@ -26,6 +27,7 @@ public class Item
     {
         bw.Write(itemName);
         bw.Write(AssetDatabase.GetAssetPath(icon));
+        bw.Write(AssetDatabase.GetAssetPath(itemRef));
         bw.Write((int)itemType);
         bw.Write((int)quantity);
         bw.Write((int)value);
@@ -62,19 +64,26 @@ public class Inventory : PersistentObject
             for (int i = 0; i < itemCount; i++)
             {
                 Item item = new Item();
+
+                // Read the sprite path
+                string path = reader.ReadString();
+                if (!string.IsNullOrEmpty(path))
+                {
+                    item.icon = Resources.Load<Sprite>(path);
+                }
+
+                // Read the itemRef path
+                path = reader.ReadString();
+                if (!string.IsNullOrEmpty(path))
+                {
+                    item.itemRef = Resources.Load<ScriptableObject>(path);
+                }
+
                 item.itemName = reader.ReadString();
                 item.itemType = (Item.ItemType)reader.ReadInt32();
                 item.quantity = reader.ReadInt32();
                 item.value = reader.ReadInt32();
                 item.weight = reader.ReadInt32();
-
-                // Read the sprite path
-                string spritePath = reader.ReadString();
-                if (!string.IsNullOrEmpty(spritePath))
-                {
-                    item.icon = Resources.Load<Sprite>(spritePath);
-                }
-
                 items.Add(item);
             }
         }
