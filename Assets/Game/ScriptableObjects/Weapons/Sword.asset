@@ -29,11 +29,11 @@ MonoBehaviour:
   material: {fileID: 0}
   attackMoves:
   - clip: {fileID: 1827226128182048838, guid: 2b269a3ee16b94045a6690ddc2fe58a0, type: 3}
-    animationDelay: 0.033
-    animationDuration: 0.5
+    animationDelay: 0.05
+    animationDuration: 0.2
     direction: {x: 0, y: 0}
     attackDuration: 0.3
-    comboDuration: 0
+    comboDuration: 0.2
     damageMultiplier: 1
     rangeMultiplier: 1
     knockbackMultiplier: 1
@@ -43,11 +43,11 @@ MonoBehaviour:
     rotationGamma: 2
     voranoiPeak: 0.073
   - clip: {fileID: 1827226128182048838, guid: 07512f421a707e541a31bfd62431cac5, type: 3}
-    animationDelay: 0.033
-    animationDuration: 0.5
+    animationDelay: 0.05
+    animationDuration: 0.2
     direction: {x: -1, y: 0}
     attackDuration: 0.3
-    comboDuration: 0
+    comboDuration: 0.4
     damageMultiplier: 1
     rangeMultiplier: 1
     knockbackMultiplier: 1
@@ -58,15 +58,15 @@ MonoBehaviour:
     voranoiPeak: 0.171
   - clip: {fileID: 1827226128182048838, guid: 1ee3c76f37b077c40b3ca0463755dc32, type: 3}
     animationDelay: 0.7
-    animationDuration: 0.5
+    animationDuration: 0.3
     direction: {x: -1, y: 1}
     attackDuration: 0.3
-    comboDuration: 0
+    comboDuration: 1
     damageMultiplier: 2
     rangeMultiplier: 1.5
     knockbackMultiplier: 5
-    rotateSpeed: 4.81
-    angleRange: 161
-    angleStart: 272
+    rotateSpeed: 6.73
+    angleRange: 121
+    angleStart: 206
     rotationGamma: 2
     voranoiPeak: 0.182
