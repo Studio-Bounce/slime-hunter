@@ -18,7 +18,13 @@ public class WeaponTrail : DamageDealer
     private WeaponSO currentWeaponSO;
 
     // Trail Shader Effects
-    private readonly string flipShaderParameter = "_Flip";
+    private readonly string flipShaderParam = "_Flip";
+    private readonly string rotateSpeedShaderParam = "_RotateSpeed";
+    private readonly string startAngleShaderParam = "_StartAngle";
+    private readonly string rotationGammaShaderParam = "_RotationGamma";
+    private readonly string brightPeakShaderParam = "_Bright_Peak";
+    private readonly string darkPeakShaderParam = "_Dark_Peak";
+
     public Renderer trailRenderer;
     private Material trailMaterial;
 
@@ -44,10 +50,14 @@ public class WeaponTrail : DamageDealer
     public void SetupWeaponSettings(WeaponSO weaponSO)
     {
         currentWeaponSO = weaponSO;
-
         damage = weaponSO.damage;
         hitLayers = weaponSO.hitLayers;
         arcRadius = weaponSO.range;
+        if (currentWeaponSO.material != null)
+        {
+            trailRenderer.material = currentWeaponSO.material;
+            trailMaterial = currentWeaponSO.material;
+        }
     }
 
     // If the attack is part of an attack combo sequence, isFinalAttack tells whether
@@ -62,11 +72,9 @@ public class WeaponTrail : DamageDealer
         arcRadius = currentWeaponSO.range * move.rangeMultiplier;
         float attackRange = (currentWeaponSO.range) * move.rangeMultiplier;
 
-        //Trail Effects Direction
-        trailMaterial.SetFloat(flipShaderParameter, move.direction.x < 0 ? 0 : 1);
+        // Trail Effects Direction
+        trailMaterial.SetFloat(flipShaderParam, move.direction.x < 0 ? 0 : 1);
         trailRenderer.transform.localScale = new Vector3(attackRange, 1, attackRange);
-
-
         float verticalRotation = 0;
         if (move.direction.y > 0)
         {
@@ -76,6 +84,13 @@ public class WeaponTrail : DamageDealer
         {
             verticalRotation = 90;
         }
+
+        // Trail Material
+        trailMaterial.SetFloat(rotateSpeedShaderParam, move.rotateSpeed);
+        trailMaterial.SetFloat(startAngleShaderParam, move.angleStart);
+        trailMaterial.SetFloat(rotationGammaShaderParam, move.rotationGamma);
+        trailMaterial.SetFloat(brightPeakShaderParam, move.voranoiPeak);
+        trailMaterial.SetFloat(darkPeakShaderParam, move.voranoiPeak);
 
         UpdateArcMesh();
         applyCameraShake = isFinalAttack;
