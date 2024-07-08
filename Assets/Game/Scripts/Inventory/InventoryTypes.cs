@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
 using UnityEngine;
 
 [System.Serializable]
@@ -24,6 +25,7 @@ public class Item
     public void Write(BinaryWriter bw)
     {
         bw.Write(itemName);
+        bw.Write(AssetDatabase.GetAssetPath(icon));
         bw.Write((int)itemType);
         bw.Write((int)quantity);
         bw.Write((int)value);
@@ -42,6 +44,7 @@ public class Inventory : PersistentObject
         using (var stream = new MemoryStream())
         using (var writer = new BinaryWriter(stream))
         {
+            writer.Write(items.Count);
             foreach (var item in items)
             {
                 item.Write(writer);
@@ -52,6 +55,28 @@ public class Inventory : PersistentObject
 
     public override void LoadSaveData(byte[] data)
     {
-        throw new System.NotImplementedException();
+        using (var stream = new MemoryStream(data))
+        using (var reader = new BinaryReader(stream))
+        {
+            int itemCount = reader.ReadInt32();
+            for (int i = 0; i < itemCount; i++)
+            {
+                Item item = new Item();
+                item.itemName = reader.ReadString();
+                item.itemType = (Item.ItemType)reader.ReadInt32();
+                item.quantity = reader.ReadInt32();
+                item.value = reader.ReadInt32();
+                item.weight = reader.ReadInt32();
+
+                // Read the sprite path
+                string spritePath = reader.ReadString();
+                if (!string.IsNullOrEmpty(spritePath))
+                {
+                    item.icon = Resources.Load<Sprite>(spritePath);
+                }
+
+                items.Add(item);
+            }
+        }
     }
 }
