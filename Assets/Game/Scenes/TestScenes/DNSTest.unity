@@ -298,18 +298,6 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!114 &552854884 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2166973078715065078, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-    type: 3}
-  m_PrefabInstance: {fileID: 5060309976767239590}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39a1c0549dd01554895b4783d443f64b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &681012531
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,7 +658,7 @@ PrefabInstance:
     - target: {fileID: 8810285186818103379, guid: b940c09142173ff479a8f04c83ee9b5d,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8820871006783578033, guid: b940c09142173ff479a8f04c83ee9b5d,
         type: 3}
@@ -1880,45 +1868,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1820466750742305653, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2166973078715065078, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      propertyPath: health
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      propertyPath: bomberEnemy
-      value: 
-      objectReference: {fileID: 552854884}
-    - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      propertyPath: framesToPause
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5275610641280969590, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 5799752166503753409, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: m_Name
       value: BomberSlime
-      objectReference: {fileID: 0}
-    - target: {fileID: 5799752166503753409, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8436900575294888671, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9032985347633649912, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
