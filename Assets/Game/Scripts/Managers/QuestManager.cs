@@ -12,6 +12,8 @@ public class QuestManager : Singleton<QuestManager>
 
     public event Action<QuestSO> OnAddQuest;
     public event Action<string, string> OnActiveQuestChange;
+    public event Action<string> OnQuestObjectiveComplete;
+    public event Action<QuestSO> OnQuestComplete;
 
     [SerializeField] RectTransform questTracker;
     [SerializeField] RectTransform questArrow;
@@ -119,11 +121,12 @@ public class QuestManager : Singleton<QuestManager>
         // Quest complete
         if (quest.currentObjective >= quest.objectives.Count)
         {
-            // TODO: Notification that quest is complete
-            Debug.Log("Quest is complete");
-
             quest.isComplete = true;
             quest.isActive = false;
+
+            // Notification that quest is complete
+            OnQuestComplete.Invoke(quest);
+
             foreach (QuestReward questReward in quest.rewards)
             {
                 GiveRewards(questReward);
@@ -138,6 +141,7 @@ public class QuestManager : Singleton<QuestManager>
         else
         {
             OnActiveQuestChange.Invoke(activeQuest.questName, activeQuest.objectives[activeQuest.currentObjective].objective);
+            OnQuestObjectiveComplete.Invoke(activeQuest.objectives[activeQuest.currentObjective].objective);
         }
     }
 
