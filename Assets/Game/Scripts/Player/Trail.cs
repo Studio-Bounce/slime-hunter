@@ -75,12 +75,12 @@ public class Trail : MonoBehaviour
                     // Apply trail material
                     if (trailType == TrailType.PLAYER)
                     {
-                        SkinnedMeshRenderer skinnedMeshRenderer = skinnedMeshRenderers[skinnedMeshRenderers.Length - 1];
-
-                        Material[] trailMats = { mat, mat, mat, mat, mat };
-                        skinnedMeshRenderer.materials = trailMats;
-
-                        StartCoroutine(AnimateMaterialFloat(skinnedMeshRenderer));
+                        foreach (SkinnedMeshRenderer skinnedMeshRenderer in skinnedMeshRenderers)
+                        {
+                            Material[] trailMats = { mat };
+                            skinnedMeshRenderer.materials = trailMats;
+                        }
+                        StartCoroutine(AnimateMaterialFloat(skinnedMeshRenderers));
                     }
                     else if (trailType == TrailType.SLIME)
                     {
@@ -93,7 +93,8 @@ public class Trail : MonoBehaviour
                         Material[] trailMats = { mat };
                         // Apply trail material to outer body
                         skinnedMeshRenderers[0].materials = trailMats;
-                        StartCoroutine(AnimateMaterialFloat(skinnedMeshRenderers[0]));
+                        SkinnedMeshRenderer[] smr = { skinnedMeshRenderers[0] };
+                        StartCoroutine(AnimateMaterialFloat(smr));
                         // Disable any other mesh renderers
                         for (int i = 1; i < skinnedMeshRenderers.Length; i++)
                         {
@@ -113,7 +114,7 @@ public class Trail : MonoBehaviour
         isTrailActive = false;
     }
 
-    IEnumerator AnimateMaterialFloat (SkinnedMeshRenderer skinnedMeshRenderer)
+    IEnumerator AnimateMaterialFloat (SkinnedMeshRenderer[] skinnedMeshRenderers)
     {
         float valueToAnimate = mat.GetFloat(shaderVarRef);
         // The alpha value will be reduced in alphaReductionSteps steps
@@ -121,14 +122,24 @@ public class Trail : MonoBehaviour
         float rate = valueToAnimate / alphaReductionSteps;
         float refreshRate = meshDestroyDelay / alphaReductionSteps;
 
-        while (valueToAnimate > goal && skinnedMeshRenderer != null && skinnedMeshRenderer.gameObject != null)
+        bool objectDead = false;
+        while (!objectDead && valueToAnimate > goal && skinnedMeshRenderers.Length != 0)
         {
             valueToAnimate -= rate;
-            foreach (Material mat in skinnedMeshRenderer.materials)
+            foreach (SkinnedMeshRenderer skinnedMeshRenderer in skinnedMeshRenderers)
             {
-                mat.SetFloat(shaderVarRef, valueToAnimate);
+                if (skinnedMeshRenderer == null || skinnedMeshRenderer.gameObject == null)
+                {
+                    objectDead = true;
+                    break;
+                }
+
+                foreach (Material mat in skinnedMeshRenderer.materials)
+                {
+                    mat.SetFloat(shaderVarRef, valueToAnimate);
+                }
             }
-            yield return new WaitForSeconds (refreshRate);
+            yield return new WaitForSeconds(refreshRate);
         }
     }
 }
