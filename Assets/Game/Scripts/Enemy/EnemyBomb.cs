@@ -11,11 +11,12 @@ public class EnemyBomb : DamageDealer
     [SerializeField] Renderer ringRenderer;
 
     public float explosionTime = 1.0f;
-    [HideInInspector] public float damageRadius = 0.0f;
+    [HideInInspector] public float damageRadius = 5.0f;
 
     SphereCollider sphereCollider;
     bool didExplode = false;
 
+    [SerializeField] BomberEnemy bomberEnemy;
     public UnityEvent onExplosion;
 
     protected override void Start()
@@ -33,9 +34,14 @@ public class EnemyBomb : DamageDealer
     {
         if (didExplode)
             return;
+
         didExplode = true;
         Active = true;
         ring.gameObject.SetActive(true);
+
+        // Disable damage taker of this bomb or else it will detect the damage dealer of this bomb
+        bomberEnemy.enabled = false;
+
         StartCoroutine(ExplosionSequence());
     }
 
@@ -47,12 +53,11 @@ public class EnemyBomb : DamageDealer
         while (t < 1.0f)
         {
             t = (Time.time - startTime) / explosionTime;
-            t = Easing.Linear(t);
 
             float val = t * damageRadius;
             sphereCollider.radius = val;
+            float scale = Mathf.Max(0.1f, (val / 5.0f));  // ring : unity unit ratio = 5
 
-            float scale = (val / 5.0f);  // ring : unity unit ratio = 5
             ring.localScale = new Vector3(scale, scale, scale);
             Material mat = ringRenderer.material;
             mat.SetFloat("_ThicknessScale", 1 / scale);
