@@ -17,8 +17,8 @@ public class HUDMenu : Menu
     ProgressBar staminaProgressBar;
 
     // Spells
-    string spellDisabledStyle = "spell-glyph-disabled";
-    string spellActiveStyle = "spell-glyph-active";
+    readonly string spellDisabledStyle = "spell-glyph-disabled";
+    readonly string spellActiveStyle = "spell-glyph-active";
 
     // Quests
     VisualElement questNameVE;
