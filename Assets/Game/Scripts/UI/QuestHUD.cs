@@ -92,9 +92,9 @@ public class QuestHUD : Menu
         Label questName = questCompletedVE.Q<Label>("QuestName");
         questName.text = quest.questName;
 
-        VisualElement weapon = questStartVE.Q<VisualElement>("Weapon");
-        VisualElement spell = questStartVE.Q<VisualElement>("Spell");
-        VisualElement cash = questStartVE.Q<VisualElement>("Cash");
+        VisualElement weapon = questCompletedVE.Q<VisualElement>("Weapon");
+        VisualElement spell = questCompletedVE.Q<VisualElement>("Spell");
+        VisualElement cash = questCompletedVE.Q<VisualElement>("Cash");
         bool hasWeapon = false, hasSpell = false, hasCash = false;
         foreach (QuestReward questReward in quest.rewards)
         {
