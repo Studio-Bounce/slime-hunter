@@ -1,0 +1,88 @@
+.unity-progress-bar__progress {
+}
+
+.unity-progress-bar__background {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-width: 0;
+}
+
+.health-progressbar.unity-progress-bar {
+}
+
+.health-progressbar .unity-progress-bar__progress {
+    background-color: rgb(245, 79, 21);
+    margin-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    border-left-width: 0;
+}
+
+.stamina-progressbar.unity-progress-bar {
+}
+
+.stamina-progressbar .unity-progress-bar__progress {
+    background-color: rgb(238, 142, 44);
+    margin-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    border-width: 0;
+}
+
+.stamina-progressbar {
+    transform-origin: center;
+}
+
+.unity-progress-bar {
+}
+
+.spell-glyph {
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    border-width: 6px;
+    border-radius: 50%;
+    border-color: rgb(255, 255, 255);
+    border-style: solid;
+    transition: all 0.3s ease-in-out-cubic;
+}
+
+.spell-glyph-disabled {
+    -unity-background-image-tint-color: rgb(100, 100, 100);
+}
+
+.spell-glyph-disabled > .cooldown-timer {
+    display: flex;
+}
+
+.spell-glyph-active {
+    width: 130px;
+    height: 130px;
+}
+
+.cooldown-timer {
+    display: none;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-size: 24px;
+    -unity-text-align: middle-center;
+    -unity-font-style: bold;
+}
+
+.hotkey-indicator {
+    position: absolute;
+    bottom: -36px;
+    width: 32px;
+    height: 32px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: white;
+    text-align: center;
+    font-size: 24px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+}

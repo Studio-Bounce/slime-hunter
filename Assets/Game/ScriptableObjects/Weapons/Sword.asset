@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc55e73ce4a8f4418809250d2064544, type: 3}
+  m_Name: Sword
+  m_EditorClassIdentifier: 
+  weaponName: Sword
+  damage:
+    value: 10
+    knockback: 1
+    direction: {x: 0, y: 0, z: 0}
+    effect: {fileID: 0}
+  swingSpeed: 10
+  range: 3
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  weaponModel: {fileID: 7029180468595197948, guid: 67a0056a73bcfba41905c1a3e2e4ddab,
+    type: 3}
+  hitSound: {fileID: 0}
+  attackMoves:
+  - clip: {fileID: 1827226128182048838, guid: 2b269a3ee16b94045a6690ddc2fe58a0, type: 3}
+    animationOffset: 0.0333
+    duration: 0.3
+    direction: {x: 0, y: 0}
+    damageMultiplier: 1
+    rangeMultiplier: 1
+    knockbackMultiplier: 1
+  - clip: {fileID: 1827226128182048838, guid: 07512f421a707e541a31bfd62431cac5, type: 3}
+    animationOffset: 0.033
+    duration: 0.3
+    direction: {x: -1, y: 0}
+    damageMultiplier: 1
+    rangeMultiplier: 1
+    knockbackMultiplier: 1
+  - clip: {fileID: 1827226128182048838, guid: 1ee3c76f37b077c40b3ca0463755dc32, type: 3}
+    animationOffset: 0.4
+    duration: 0.5
+    direction: {x: -1, y: 0}
+    damageMultiplier: 2
+    rangeMultiplier: 1.5
+    knockbackMultiplier: 5
