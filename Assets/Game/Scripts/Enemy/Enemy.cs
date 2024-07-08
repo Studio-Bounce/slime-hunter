@@ -34,9 +34,8 @@ public class Enemy : DamageTaker
 
     [Header("Death")]
     [SerializeField] GameObject slimeModel;
-    [SerializeField] ParticleSystem deathParticles;
+    [SerializeField] GameObject deathParticlesGO;
     [SerializeField] float deathDelay = 3.5f;
-
 
     [Header("Canvas")]
     [SerializeField] protected Slider healthSlider;
@@ -150,6 +149,9 @@ public class Enemy : DamageTaker
 
     public override void Death()
     {
+        // Ensure zero health
+        health = 0;
+
         // Trigger events
         onDeathEvent.Invoke();
 
@@ -171,8 +173,10 @@ public class Enemy : DamageTaker
 
         // Stop movement
         GetComponent<SlimeSteeringAgent>().enabled = false;
-        deathParticles.Play();
-        Destroy(gameObject, deathDelay);
+        GameObject deathObj = Instantiate(deathParticlesGO, transform.position, Quaternion.identity);
+        deathObj.GetComponent<ParticleSystem>().Play();
+        Destroy(deathObj, deathDelay);
+        Destroy(gameObject);
     }
 
     public void SetEye(EnemyEye enemyEye)

@@ -100,7 +100,6 @@ public class GameManager : Singleton<GameManager>
         set
         {
             playerHealth = value;
-            Debug.Log("health " + value);
             OnPlayerHealthChange?.Invoke(playerHealth);
             if (playerHealth <= 0)
             {

@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class BomberEnemy : Enemy
 {
-    EnemyBomb enemyBomb;
+    BomberSlime_FSM slimeBombFSM;
 
     protected override void Start()
     {
         base.Start();
 
-        enemyBomb = GetComponentInChildren<EnemyBomb>();
+        slimeBombFSM = GetComponent<BomberSlime_FSM>();
     }
 
     public override void TakeDamage(Damage damage)
     {
-        BaseEnemyTakeDamage(damage);
-
         // Explode
-        enemyBomb.Explode();
+        slimeBombFSM.GotHit();
     }
 }

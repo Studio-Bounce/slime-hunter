@@ -19,6 +19,11 @@ public class BomberSlime_FSM : BasicSlime_FSM
         enemyBomb.damageRadius = damageRadius;
     }
 
+    public void GotHit()
+    {
+        ChangeState(AttackPlayerStateName);
+    }
+
     public void Explode()
     {
         if (!didExplode)

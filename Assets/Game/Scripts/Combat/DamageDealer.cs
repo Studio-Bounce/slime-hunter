@@ -59,7 +59,11 @@ public class DamageDealer : MonoBehaviour
             {
                 CameraManager.Instance.ShakeCamera(cameraShakeIntensity, cameraShakeTime);
             }
-            attackDetected = true;
+            // Detect attack only on ITakeDamage
+            if (damageReceiver != null)
+            {
+                attackDetected = true;
+            }
         }
     }
 
