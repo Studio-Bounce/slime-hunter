@@ -21,6 +21,7 @@ public class WeaponTrail : DamageDealer
     private readonly string flipShaderParam = "_Flip";
     private readonly string rotateSpeedShaderParam = "_RotateSpeed";
     private readonly string startAngleShaderParam = "_StartAngle";
+    private readonly string rangeShaderParam = "_Range";
     private readonly string rotationGammaShaderParam = "_RotationGamma";
     private readonly string brightPeakShaderParam = "_Bright_Peak";
     private readonly string darkPeakShaderParam = "_Dark_Peak";
@@ -88,6 +89,7 @@ public class WeaponTrail : DamageDealer
         // Trail Material
         trailMaterial.SetFloat(rotateSpeedShaderParam, move.rotateSpeed);
         trailMaterial.SetFloat(startAngleShaderParam, move.angleStart);
+        trailMaterial.SetFloat(rangeShaderParam, move.angleRange);
         trailMaterial.SetFloat(rotationGammaShaderParam, move.rotationGamma);
         trailMaterial.SetFloat(brightPeakShaderParam, move.voranoiPeak);
         trailMaterial.SetFloat(darkPeakShaderParam, move.voranoiPeak);
