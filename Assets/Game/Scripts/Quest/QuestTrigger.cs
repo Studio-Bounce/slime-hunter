@@ -32,13 +32,9 @@ public class QuestTrigger : MonoBehaviour
             if (distance < endProximity)
             {
                 QuestManager.Instance.ClearQuestObjective(quest);
-                // HACK
-                if (quest.currentObjective == 2)
-                {
-                    onCompleteEvent.Invoke();
-                }
                 if (quest.currentObjective >= quest.objectives.Count)
                 {
+                    // Quest complete
                     Destroy(gameObject);
                 }
             }
