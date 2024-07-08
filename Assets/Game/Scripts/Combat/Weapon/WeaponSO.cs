@@ -7,11 +7,13 @@ public class AttackMove
 {
     [Header("Animation Properties")]
     public AnimationClip clip;
-    public float attackDelay; // When the attack starts in the animation
-    public float duration = 0.5f; // How long the attacks lasts
+    public float animationDelay; // When the attack starts in the animation
+    public float animationDuration = 0.5f; // How long the attacks lasts
     public Vector2 direction;
 
     [Header("Attack Attributes")]
+    public float attackDuration = 0.3f; // How long to combo into next attack
+    public float comboDuration; // How long to combo into next attack
     public float damageMultiplier = 1.0f;
     public float rangeMultiplier = 1.0f;
     public float knockbackMultiplier = 1.0f;
