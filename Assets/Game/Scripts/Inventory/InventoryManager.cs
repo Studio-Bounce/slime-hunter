@@ -4,10 +4,17 @@ public class InventoryManager : Singleton<InventoryManager>
 {
     public Inventory inventory;
 
+    // UI
+    readonly string inventoryContainerClass = "grid-inventory-container";
+
     void Start()
     {
         inventory = new Inventory();
-        inventory.maxWeight = 20;
+        inventory.maxWeight = 30;
+    }
+
+    public void UpdateInventoryUI()
+    {
     }
 
     public int GetTotalWeight()
