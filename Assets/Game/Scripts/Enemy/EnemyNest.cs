@@ -23,8 +23,11 @@ public class EnemyNest : MonoBehaviour
 
     public void ActivateNest()
     {
-        isSpawning = true;
-        StartCoroutine(SpawnEnemies());
+        if (!isSpawning)
+        {
+            isSpawning = true;
+            StartCoroutine(SpawnEnemies());
+        }
     }
 
     public void DeactivateNest()
@@ -63,14 +66,6 @@ public class EnemyNest : MonoBehaviour
             enemyNestIdx = (enemyNestIdx + 1) % enemyNestItems.Count;
 
             yield return new WaitForSeconds(waveDelay);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!isSpawning && other.CompareTag("Player"))
-        {
-            ActivateNest();
         }
     }
 
