@@ -16,7 +16,7 @@ public abstract class StatusEffect : ScriptableObject
         timeRemaining = duration;
     }
 
-    public void StartEffect(DamageTaker taker)
+    public void StartEffect(DynamicDamageTaker taker)
     {
         OnStartEffect(taker);
     }
@@ -26,7 +26,7 @@ public abstract class StatusEffect : ScriptableObject
         timeRemaining = duration;
     }
 
-    public bool UpdateEffect(DamageTaker taker)
+    public bool UpdateEffect(DynamicDamageTaker taker)
     {
         timeRemaining -= Time.deltaTime;
         tickTimer += Time.deltaTime;
@@ -40,15 +40,15 @@ public abstract class StatusEffect : ScriptableObject
         return timeRemaining <= 0f;
     }
 
-    public void EndEffect(DamageTaker taker)
+    public void EndEffect(DynamicDamageTaker taker)
     {
         OnEndEffect(taker);
     }
 
-    protected abstract void OnStartEffect(DamageTaker taker);
+    protected abstract void OnStartEffect(DynamicDamageTaker taker);
 
-    protected abstract void OnUpdateEffect(DamageTaker taker);
+    protected abstract void OnUpdateEffect(DynamicDamageTaker taker);
 
-    protected abstract void OnEndEffect(DamageTaker taker);
+    protected abstract void OnEndEffect(DynamicDamageTaker taker);
 
 }

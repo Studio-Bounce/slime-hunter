@@ -54,7 +54,7 @@ public class DamageDealer : MonoBehaviour
             StartCoroutine(PauseForFrames(framesToPause));
             damage.direction = (other.transform.position - transform.position).normalized;
             ITakeDamage damageReceiver = other.gameObject.GetComponent<ITakeDamage>();
-            damageReceiver?.TakeDamage(damage);
+            damageReceiver?.TakeDamage(damage, true);
             if (applyCameraShake)
             {
                 CameraManager.Instance.ShakeCamera(cameraShakeIntensity, cameraShakeTime);

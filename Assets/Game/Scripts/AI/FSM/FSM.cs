@@ -16,7 +16,7 @@ public abstract class FSM : MonoBehaviour
         fsmAnimator = FSMGO.GetComponent<Animator>();
         fsmAnimator.runtimeAnimatorController = FSMController;
 
-        // Hide aniamtor (optional)
+        // Hide animator (optional)
         fsmAnimator.hideFlags = HideFlags.HideInInspector;
 
         InternalFSMBaseState[] behaviours = fsmAnimator.GetBehaviours<InternalFSMBaseState>();

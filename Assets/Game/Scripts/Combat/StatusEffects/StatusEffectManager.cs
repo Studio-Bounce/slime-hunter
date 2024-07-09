@@ -6,13 +6,13 @@ using UnityEngine.Events;
 public class StatusEffectManager : MonoBehaviour
 {
     public StatusBar statusBar;
-    private DamageTaker damageTaker;
+    private DynamicDamageTaker damageTaker;
     public List<StatusEffect> activeEffects = new List<StatusEffect>();
     public List<StatusEffect> effectsToRemove = new List<StatusEffect>();
 
     private void Start()
     {
-        damageTaker = GetComponent<DamageTaker>();
+        damageTaker = GetComponent<DynamicDamageTaker>();
         foreach (var effect in activeEffects)
         {
             effect.StartEffect(damageTaker);

@@ -69,7 +69,7 @@ public class EnemyWave : MonoBehaviour
             {
                 if (enemy != null && enemy.gameObject != null)
                 {
-                    enemy.Death();
+                    enemy.Death(true);
                 }
             }
         }

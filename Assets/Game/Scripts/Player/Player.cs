@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CapsuleCollider))]
-public class Player : DamageTaker
+public class Player : DynamicDamageTaker
 {
     public float slowDownOnHitMultiplier = 0.2f;
     public int slowDownOnHitFrames = 5;
@@ -13,33 +13,41 @@ public class Player : DamageTaker
     protected override void Start()
     {
         base.Start();
+        playerController = GetComponent<PlayerController>();
+
         // Ensures that base.health does not change as per damage
         GameManager.Instance.PlayerRef = this;
+        
+        // Don't use DamageTaker's health system
         isInvincible = true;
-        playerController = GetComponent<PlayerController>();
     }
 
-    public override void Death()
+    public override void Death(bool killObject)
     {
         // Trigger events
         onDeathEvent.Invoke();
     }
 
-    public override void TakeDamage(Damage damage)
+    public override bool TakeDamage(Damage damage, bool detectDeath)
     {
         // Can not take damage if dashing or jumping
         if (playerController.IsDashing || playerController.IsJumping)
-            return;
+            return false;
 
         // For player, we want to change GameManager.PlayerHealth
-        base.TakeDamage(damage);
+        bool damageRegistered = base.TakeDamage(damage, false);
+        if (!damageRegistered)
+        {
+            return false;
+        }
 
         StartCoroutine(SlowDownOnHit());
         GameManager.Instance.PlayerHealth -= (int)damage.value;
         if (GameManager.Instance.PlayerHealth <= 0)
         {
-            Death();
+            Death(false);
         }
+        return true;
     }
 
     IEnumerator SlowDownOnHit()
