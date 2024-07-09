@@ -6,11 +6,9 @@ public enum IndicatorType
 }
 
 [CreateAssetMenu(menuName = "Spell")]
-public class SpellSO : ScriptableObject
+public class SpellSO : ItemSO
 {
-    public string spellName;
-    [TextArea] public string description;
-    public Sprite icon;
+    [Header("Spell Properties")]
     public Damage damage;
     public float castRange;
     public float areaOfEffect;
