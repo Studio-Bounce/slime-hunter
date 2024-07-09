@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 333453ebcee9a9b41aac9c41cf515da8
+  m_SerializeEntries:
+  - m_GUID: fa97121a094b5134f917ca118bfc4e43
+    m_Address: Assets/Game/ScriptableObjects/StunSpell.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b42d147c988248e40b0ee225796aa19c
+    m_Address: Assets/Game/ScriptableObjects/Weapons/Sword.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f32afa1fd9f13d948aa63edfdd3f5abc
+    m_Address: Assets/Game/ScriptableObjects/Weapons/Hammer.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99cedeb06ace0a541a4b2160b3e72dbe
+    m_Address: Assets/Game/ScriptableObjects/Weapons/Funny.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: bcf84703395ff1b41af4c0d26678b5b7, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: db5714a12a221bd48bd446de99780c97, type: 2}
+    - {fileID: 11400000, guid: 52b7d205de4f99c4787d162bd3459860, type: 2}
