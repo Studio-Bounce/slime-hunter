@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc55e73ce4a8f4418809250d2064544, type: 3}
   m_Name: Hammer
   m_EditorClassIdentifier: 
-  weaponName: Hammer
+  itemName: Hammer
+  description: S M A S H
+  icon: {fileID: 21300000, guid: 29b4bc3a0b491c648be33a110af4266a, type: 3}
+  itemType: 0
+  value: 0
+  weight: 0
   damage:
     value: 10
     knockback: 5
@@ -26,11 +31,19 @@ MonoBehaviour:
   weaponModel: {fileID: 7285824344911898120, guid: 1859842f9c528344e8e9dad23c67d251,
     type: 3}
   hitSound: {fileID: 0}
+  material: {fileID: 0}
   attackMoves:
   - clip: {fileID: -203655887218126122, guid: 368a8195de7259c4b90d8c64c0c4c8e2, type: 3}
-    animationOffset: 0
-    duration: 0.5
+    animationDelay: 0
+    animationDuration: 0.5
     direction: {x: 0, y: 0}
+    attackDuration: 0.3
+    comboDuration: 0
     damageMultiplier: 1
     rangeMultiplier: 1
     knockbackMultiplier: 1
+    rotateSpeed: 0
+    angleRange: 0
+    angleStart: 0
+    rotationGamma: 0
+    voranoiPeak: 0

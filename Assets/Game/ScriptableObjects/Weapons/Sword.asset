@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc55e73ce4a8f4418809250d2064544, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  weaponName: Sword
+  itemName: Basic Sword
+  description: This is Mylo's trust old (and I mean OLD) sword.
+  icon: {fileID: 21300000, guid: dfbf3a0ad495ee54b87d996397bc2e01, type: 3}
+  itemType: 0
+  value: 0
+  weight: 7
   damage:
     value: 10
     knockback: 1
