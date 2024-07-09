@@ -157,8 +157,8 @@
                         <ui:Label tabindex="-1" text="Material" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ALL" style="font-size: 24px; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); color: rgb(255, 255, 255); margin-right: 15px; margin-left: 15px; width: 100px; -unity-text-align: upper-center; opacity: 0.2;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="InventoryContainer" class="grid-inventory-container" style="display: flex;">
-                        <ui:VisualElement name="InventorySlot" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/1231.png?fileID=2800000&amp;guid=dfbf3a0ad495ee54b87d996397bc2e01&amp;type=3#1231&quot;);">
-                            <ui:Label tabindex="-1" text="1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuantityLabel" />
+                        <ui:VisualElement name="InventorySlot">
+                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuantityLabel" />
                         </ui:VisualElement>
                         <ui:VisualElement name="InventorySlot">
                             <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuantityLabel" />
