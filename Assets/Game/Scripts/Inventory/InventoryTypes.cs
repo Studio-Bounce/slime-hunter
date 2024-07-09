@@ -8,6 +8,7 @@ using static UnityEditor.Progress;
 [System.Serializable]
 public class Item : ScriptableObject
 {
+    [Header("Item Properties")]
     public string itemName;
     public Sprite icon;
     public ScriptableObject itemRef;
