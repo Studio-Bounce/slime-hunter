@@ -13,23 +13,29 @@ public class PauseMenu : Menu
         Button btnBackMainMenu = root.Q<Button>("btnBackMainMenu");
         Button btnQuit = root.Q<Button>("btnQuit");
 
-
         btnUnpause.clicked += Unpause;
         btnBackMainMenu.clicked += ReturnMainMenu;
         btnQuit.clicked += () => Application.Quit();
     }
 
-    private void Unpause()
+    public void Pause()
     {
-        UIManager.Instance.SetPauseMenu(false);
+        GameManager.Instance.GameState = GameState.PAUSED;
+        SetVisible(true);
+        Time.timeScale = 0;
+        InventoryManager.Instance.UpdateInventoryUI();
+    }
 
+    public void Unpause()
+    {
+        SetVisible(false);
         Time.timeScale = 1;
     }
 
     private void ReturnMainMenu()
     {
-        Time.timeScale = 1;
-        UIManager.Instance.SetPauseMenu(false);
+        Unpause();
+
         SceneLoader.Instance.UnloadScene(GameManager.Instance.GameSceneName,
             (AsyncOperation _, string _) => CanvasManager.Instance.ClearCanvas());
         UIManager.Instance.SetMainMenu(true);
