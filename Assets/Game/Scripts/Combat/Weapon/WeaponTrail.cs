@@ -96,14 +96,13 @@ public class WeaponTrail : DamageDealer
 
         UpdateArcMesh();
         applyCameraShake = isFinalAttack;
-        StartCoroutine(ActiveAttack(move.duration));
+        StopAllCoroutines();
+        StartCoroutine(ActiveAttack(move.animationDuration));
         trailRenderer.transform.rotation = Quaternion.Euler(trailRenderer.transform.rotation.eulerAngles.x, trailRenderer.transform.rotation.eulerAngles.y, verticalRotation);
     }
 
     IEnumerator ActiveAttack(float duration)
     {
-
-
         active = true;
         float _timer = 0.0f;
         float _normalTime = 0.0f;
