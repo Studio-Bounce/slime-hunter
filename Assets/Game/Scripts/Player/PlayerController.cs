@@ -141,14 +141,14 @@ public class PlayerController : MonoBehaviour
             transform.forward = dashDirection;
             _isDashing = true;
             trail.InitiateTrail();
-            StartCoroutine(PerformDash(dashDirection * dashDistance));
+            StartCoroutine(PerformDash(dashDirection));
 
             return true;
         }
         return false;
     }
 
-    IEnumerator PerformDash(Vector3 dashVector)
+    IEnumerator PerformDash(Vector3 dashDirection)
     {
         animator.SetBool(dashBoolash, _isDashing);
 
@@ -156,8 +156,9 @@ public class PlayerController : MonoBehaviour
         // Provides a quick action in beginning which then slows
         float dashProgress = 0.0f;
         float startTime = Time.time;
-        Vector3 startPosition = transform.position;
 
+        float prevDashProgress = 0.0f;
+        float prevTime = Time.time;
         while (dashProgress <= 1.0f)
         {
             dashProgress = (Time.time - startTime) / dashDuration;
@@ -175,7 +176,9 @@ public class PlayerController : MonoBehaviour
                 break;
             }
 
-            transform.position = startPosition + dashVector * dashProgress;
+            characterController.Move(dashDistance * (dashProgress - prevDashProgress) * dashDirection);
+            prevDashProgress = dashProgress;
+            prevTime = Time.time;
 
             yield return null;
         }
@@ -187,8 +190,8 @@ public class PlayerController : MonoBehaviour
 
     bool CheckForwardCollisions()
     {
-        // Dash detection happens at 1/3rd of the player height
-        if (Physics.Raycast(transform.position + characterController.height * 0.33f * Vector3.up, transform.forward, out _, 1.0f))
+        // Dash detection happens at 1/2 of the player height
+        if (Physics.Raycast(transform.position + characterController.height * 0.5f * Vector3.up, transform.forward, out _, 1.0f))
         {
             return true;
         }
@@ -261,7 +264,7 @@ public class PlayerController : MonoBehaviour
     {
         // Dash direction
         float height = (characterController != null) ? characterController.height : 1.5f;
-        DebugExtension.DrawArrow(transform.position + height * 0.33f * Vector3.up, transform.forward, Color.magenta);
+        DebugExtension.DrawArrow(transform.position + height * 0.5f * Vector3.up, transform.forward, Color.magenta);
     }
 #endif
 }
