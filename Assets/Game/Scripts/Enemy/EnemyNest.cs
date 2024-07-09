@@ -45,7 +45,7 @@ public class EnemyNest : MonoBehaviour
             for (int i = 0; i < enemyNest.enemyCount; i++)
             {
                 // Random position in one of the 4 sides
-                float deltaX = 0, deltaZ = 0;
+                float deltaX, deltaZ;
                 if (Random.Range(0f, 1f) < 0.5f)
                 {
                     deltaX = Random.Range((-scaleX / 2f) - borderBuffer, (scaleX / 2) + borderBuffer);
