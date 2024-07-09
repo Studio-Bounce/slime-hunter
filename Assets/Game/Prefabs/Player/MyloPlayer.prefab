@@ -131,12 +131,15 @@ MonoBehaviour:
   health: 100
   isAlive: 1
   damageDelay: 0.5
-  knockbackTime: 0.25
   isInvincible: 0
-  stunned: 0
   onDeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  healthSlider: {fileID: 0}
+  canvasTimeout: 10
+  healthCanvas: {fileID: 0}
+  knockbackTime: 0.25
+  stunned: 0
   slowDownOnHitMultiplier: 0.2
   slowDownOnHitFrames: 25
 --- !u!114 &606331671084474555
@@ -418,7 +421,7 @@ MonoBehaviour:
     knockback: 0
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
-  framesToPause: 10
+  framesToPause: 3
   cameraShakeIntensity: 1
   cameraShakeTime: 0.5
   arcAngle: 90

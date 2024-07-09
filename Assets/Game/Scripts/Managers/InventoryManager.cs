@@ -16,12 +16,6 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     readonly string inventorySlot = "InventorySlot"; 
     readonly string quantityLabel = "QuantityLabel";
 
-
-    void Start()
-    {
-
-    }
-
     public void UpdateInventoryUI()
     {
         VisualElement root = uiDocument.rootVisualElement;
@@ -34,7 +28,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             Label quantityEl = slot.Q<Label>(quantityLabel);
             if (i < items.Count) {
                 Item item = items[i];
-                slot.style.backgroundImage = item.itemRef.icon.texture;
+                slot.style.backgroundImage = item.itemRef?.icon.texture;
                 quantityEl.text = item.quantity.ToString();
             } 
             else
