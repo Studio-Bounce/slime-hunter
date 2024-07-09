@@ -805,12 +805,15 @@ MonoBehaviour:
   health: 20
   isAlive: 1
   damageDelay: 0.3
-  knockbackTime: 0.25
   isInvincible: 0
-  stunned: 0
   onDeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  healthSlider: {fileID: 6579561672026257349}
+  canvasTimeout: 10
+  healthCanvas: {fileID: 2017927438104127464}
+  knockbackTime: 0.25
+  stunned: 0
   normalEye: {fileID: 6377116420226650459}
   attackEye: {fileID: 1112610852234478933}
   deathEye: {fileID: 5640311663750280099}
@@ -824,9 +827,6 @@ MonoBehaviour:
   deathParticlesGO: {fileID: 7561334915480803397, guid: 50c9da95617416f41a015456a5289f9b,
     type: 3}
   deathDelay: 3.5
-  healthSlider: {fileID: 6579561672026257349}
-  canvasTimeout: 10
-  enemyCanvas: {fileID: 2017927438104127464}
   dodgeDistance: 5
   dodgeTime: 0.3
   slimeAnimator: {fileID: 2403758375320863911}

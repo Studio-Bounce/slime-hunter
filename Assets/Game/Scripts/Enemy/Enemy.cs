@@ -12,7 +12,7 @@ public enum EnemyEye
 };
 
 [RequireComponent(typeof(SphereCollider))]
-public class Enemy : DamageTaker
+public class Enemy : DynamicDamageTaker
 {
     [Header("Slime Eyes")]
     [SerializeField] SkinnedMeshRenderer normalEye;
@@ -37,13 +37,6 @@ public class Enemy : DamageTaker
     [SerializeField] GameObject deathParticlesGO;
     [SerializeField] float deathDelay = 3.5f;
 
-    [Header("Canvas")]
-    [SerializeField] protected Slider healthSlider;
-    [SerializeField] float canvasTimeout = 10.0f;
-    [SerializeField] Canvas enemyCanvas;
-    CanvasGroup enemyCanvasGroup;
-    bool canvasTriggered = false;  // Used as a flag to detect if enemy got hit, i.e. canvas should be shown
-
     BasicSlime_FSM fsm;
 
     protected override void Start()
@@ -60,24 +53,17 @@ public class Enemy : DamageTaker
         isAlive = true;
 
         fsm = GetComponent<BasicSlime_FSM>();
-        //CanvasManager.Instance.AddAnchoredElement(transform, healthSlider.GetComponent<RectTransform>(), new Vector2(0, 80));
-
-        // Hide canvas unless required, for efficiency
-        if (enemyCanvas != null)
-        {
-            enemyCanvasGroup = enemyCanvas.gameObject.GetComponent<CanvasGroup>();
-            enemyCanvas.enabled = false;
-        }
     }
 
     // Used in child classes to call the original TakeDamage method
-    protected void BaseEnemyTakeDamage(Damage damage)
+    protected bool BaseEnemyTakeDamage(Damage damage, bool detectDeath)
     {
-        if (!isAlive)
+        bool damageRegistered = base.TakeDamage(damage, detectDeath);
+        if (!isAlive || !damageRegistered)
         {
-            return;
+            return false;
         }
-        base.TakeDamage(damage);
+
         if (!isInvincible)
         {
             if (!hitVFXPlaying)
@@ -85,97 +71,37 @@ public class Enemy : DamageTaker
             if (!isFlashing)
                 StartCoroutine(FlashSlime());
         }
-        // Enable health bar canvas
-        if (healthSlider != null && enemyCanvas != null)
-        {
-            if (enemyCanvas.enabled)
-            {
-                canvasTriggered = true;
-                healthSlider.value = ((float)health / maxHealth);
-            }
-            else
-            {
-                enemyCanvasGroup.alpha = 1;
-                enemyCanvas.enabled = true;
-                // Update health with a small delay
-                StartCoroutine(UpdateHealth(0.1f));
-                StartCoroutine(DisableCanvasAfterTimeout());
-            }
-        }
+        return true;
     }
 
-    public override void TakeDamage(Damage damage)
+    public override bool TakeDamage(Damage damage, bool detectDeath)
     {
-        BaseEnemyTakeDamage(damage);
+        bool damageRegistered = BaseEnemyTakeDamage(damage, true);
+        if (!damageRegistered)
+        {
+            return false;
+        }
 
         if (!isInvincible && !freezeEyeChange)
         {
             StartCoroutine(ChangeEyeToDamage());
         }
+        return true;
     }
 
-    IEnumerator UpdateHealth(float delay)
+    public override void Death(bool killObject)
     {
-        yield return new WaitForSeconds(delay);
-        healthSlider.value = ((float)health / maxHealth);
-    }
+        // Don't destroy the object yet
+        base.Death(false);
 
-    IEnumerator DisableCanvasAfterTimeout()
-    {
-        float timeElapsed = 0.0f;
-        while (timeElapsed < canvasTimeout)
-        {
-            yield return null;
-
-            timeElapsed += Time.deltaTime;
-            if (canvasTriggered)
-            {
-                // Reset time as enemy got hit again
-                timeElapsed = 0.0f;
-                canvasTriggered = false;
-            }
-        }
-
-        // Fade
-        float t = 0.5f;
-        while (t >= 0.0f)
-        {
-            enemyCanvasGroup.alpha = t * 2;
-            yield return null;
-            t -= Time.deltaTime;
-        }
-        enemyCanvas.enabled = false;
-    }
-
-    public override void Death()
-    {
-        // Ensure zero health
-        health = 0;
-
-        // Trigger events
-        onDeathEvent.Invoke();
-
-        isAlive = false;
         fsm.ChangeState(fsm.DeadStateName);
 
-        // Hide visible meshes / UI
-        slimeModel.SetActive(false);
-        if (healthSlider != null)
-        {
-            healthSlider.gameObject.SetActive(false);
-        }
-
-        // Ensure the enemy doesn't give damage after dying
-        if (TryGetComponent<SphereCollider>(out var sphereCollider))
-        {
-            sphereCollider.enabled = false;
-        }
-
-        // Stop movement
-        GetComponent<SlimeSteeringAgent>().enabled = false;
+        // Death particles
         GameObject deathObj = Instantiate(deathParticlesGO, transform.position, Quaternion.identity);
         deathObj.GetComponent<ParticleSystem>().Play();
         Destroy(deathObj, deathDelay);
+
+        // Time to die
         Destroy(gameObject);
     }
 

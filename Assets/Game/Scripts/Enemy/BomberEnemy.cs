@@ -13,9 +13,11 @@ public class BomberEnemy : Enemy
         slimeBombFSM = GetComponent<BomberSlime_FSM>();
     }
 
-    public override void TakeDamage(Damage damage)
+    public override bool TakeDamage(Damage damage, bool detectDeath)
     {
         // Explode
         slimeBombFSM.GotHit();
+
+        return true;
     }
 }

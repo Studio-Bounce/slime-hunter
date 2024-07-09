@@ -29,9 +29,13 @@ public class RabbitEnemy : Enemy
         rfsm = GetComponent<RabbitSlime_FSM>();
     }
 
-    public override void TakeDamage(Damage damage)
+    public override bool TakeDamage(Damage damage, bool detectDeath)
     {
-        base.BaseEnemyTakeDamage(damage);
+        bool damageRegistered = BaseEnemyTakeDamage(damage, detectDeath);
+        if (!damageRegistered)
+        {
+            return false;
+        }
 
         // Rabbit slime can not be stopped when its actively attacking
         bool isAttackStoppable = (rfsm.GetAttackState() == BasicSlime_AttackPlayer.SlimeAttackState.CHARGE_UP ||
@@ -42,6 +46,7 @@ public class RabbitEnemy : Enemy
             // HACK: FSM state change happening outside of actual FSM (fixme)
             rfsm.ChangeState(rfsm.DodgeStateName);
         }
+        return true;
     }
 
     public void Dodge()
