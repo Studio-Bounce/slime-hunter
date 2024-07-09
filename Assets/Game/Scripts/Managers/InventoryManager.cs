@@ -28,13 +28,21 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         VisualElement inventoryEl = root.Q<VisualElement>(inventoryContainer);
         List<VisualElement> slotElements = inventoryEl.Query<VisualElement>(name: inventorySlot).ToList();
 
-        for (int i = 0; i < items.Count; i++) {
-            Item item = items[i];
+        for (int i = 0; i < slotElements.Count; i++)
+        {
             VisualElement slot = slotElements[i];
-
-            slot.style.backgroundImage = item.itemRef.icon.texture;
             Label quantityEl = slot.Q<Label>(quantityLabel);
-            quantityEl.text = item.quantity.ToString();
+            if (i < items.Count) {
+                Item item = items[i];
+                slot.style.backgroundImage = item.itemRef.icon.texture;
+                quantityEl.text = item.quantity.ToString();
+            } 
+            else
+            {
+                slot.style.backgroundImage = null;
+                quantityEl.text = string.Empty;
+            }
+
         }
     }
 
