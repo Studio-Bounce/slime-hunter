@@ -9,10 +9,9 @@ public class EnemyGauntlet : PersistentObject
     [Header("Gauntlet Bounds")]
     public Vector2 boundSize;
     public float boundHeight = 3f;
-    public string collisionTag = "Player";
     public GameObject wallPrefab;
     public float wallWidth = 2f;
-    public float colliderOffset;
+    public float colliderOffset = 4.5f;
     public float boundSpawnDelay = 0f;
     public bool active = true;
 
