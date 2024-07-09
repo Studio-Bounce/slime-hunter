@@ -31,7 +31,6 @@ public class Item
     public IEnumerator ReadAsync(BinaryReader br)
     {
         string path = br.ReadString();
-        Debug.Log($"Read: {path}");
         var handle = Addressables.LoadAssetAsync<ItemSO>(path);
         yield return handle;
         itemRef = handle.Result;
@@ -41,7 +40,6 @@ public class Item
     public void Write(BinaryWriter bw)
     {
         string path = AssetDatabase.GetAssetPath(itemRef);
-        Debug.Log($"Write: {path}");
         bw.Write(path);
         bw.Write((int)quantity);
     }
