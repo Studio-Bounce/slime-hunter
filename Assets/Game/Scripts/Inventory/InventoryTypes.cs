@@ -1,10 +1,12 @@
+using Ink.Parsed;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 [System.Serializable]
-public class Item
+public class Item : ScriptableObject
 {
     public string itemName;
     public Sprite icon;
@@ -23,11 +25,29 @@ public class Item
         Other
     }
 
+    public void Read(BinaryReader br)
+    {
+        // Read the sprite path
+        string path = br.ReadString();
+        if (!string.IsNullOrEmpty(path))
+            icon = Resources.Load<Sprite>(path);
+        // Read the itemRef path
+        path = br.ReadString();
+        if (!string.IsNullOrEmpty(path))
+            itemRef = Resources.Load<ScriptableObject>(path);
+
+        itemName = br.ReadString();
+        itemType = (Item.ItemType)br.ReadInt32();
+        quantity = br.ReadInt32();
+        value = br.ReadInt32();
+        weight = br.ReadInt32();
+    }
+
     public void Write(BinaryWriter bw)
     {
-        bw.Write(itemName);
         bw.Write(AssetDatabase.GetAssetPath(icon));
         bw.Write(AssetDatabase.GetAssetPath(itemRef));
+        bw.Write(itemName);
         bw.Write((int)itemType);
         bw.Write((int)quantity);
         bw.Write((int)value);
@@ -64,26 +84,7 @@ public class Inventory : PersistentObject
             for (int i = 0; i < itemCount; i++)
             {
                 Item item = new Item();
-
-                // Read the sprite path
-                string path = reader.ReadString();
-                if (!string.IsNullOrEmpty(path))
-                {
-                    item.icon = Resources.Load<Sprite>(path);
-                }
-
-                // Read the itemRef path
-                path = reader.ReadString();
-                if (!string.IsNullOrEmpty(path))
-                {
-                    item.itemRef = Resources.Load<ScriptableObject>(path);
-                }
-
-                item.itemName = reader.ReadString();
-                item.itemType = (Item.ItemType)reader.ReadInt32();
-                item.quantity = reader.ReadInt32();
-                item.value = reader.ReadInt32();
-                item.weight = reader.ReadInt32();
+                item.Read(reader);
                 items.Add(item);
             }
         }
