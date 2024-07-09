@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
+    [SerializeField] private UIDocument uiDocument;
     public List<Item> items = new List<Item>();
     public int maxWeight = 30;
 
     // UI
-    readonly string inventoryContainerClass = "grid-inventory-container";
+    readonly string inventoryContainer = "InventoryContent";
+    readonly string inventorySlot = "InventorySlot"; 
+    readonly string quantityLabel = "QuantityLabel";
+
 
     void Start()
     {
@@ -18,7 +24,18 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
 
     public void UpdateInventoryUI()
     {
+        VisualElement root = uiDocument.rootVisualElement;
+        VisualElement inventoryEl = root.Q<VisualElement>(inventoryContainer);
+        List<VisualElement> slotElements = inventoryEl.Query<VisualElement>(name: inventorySlot).ToList();
 
+        for (int i = 0; i < items.Count; i++) {
+            Item item = items[i];
+            VisualElement slot = slotElements[i];
+
+            slot.style.backgroundImage = item.itemRef.icon.texture;
+            Label quantityEl = slot.Q<Label>(quantityLabel);
+            quantityEl.text = item.quantity.ToString();
+        }
     }
 
     public int GetTotalWeight()
@@ -82,6 +99,5 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                 items.Add(item);
             }
         }
-        UpdateInventoryUI();
     }
 }

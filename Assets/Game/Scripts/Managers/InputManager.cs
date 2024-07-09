@@ -171,13 +171,11 @@ public class InputManager : Singleton<InputManager>
         {
             GameManager.Instance.GameState = GameState.GAMEPLAY;
             UIManager.Instance.SetPauseMenu(false);
-            Time.timeScale = 1;
         }
         else
         {
             GameManager.Instance.GameState = GameState.PAUSED;
             UIManager.Instance.SetPauseMenu(true);
-            Time.timeScale = 0;
         }
     }
 
