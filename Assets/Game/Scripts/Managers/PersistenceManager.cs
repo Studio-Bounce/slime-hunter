@@ -29,6 +29,9 @@ public class PersistenceManager : Singleton<PersistenceManager>
     {
         while (true)
         {
+            // If loading async the AutoSaveSequence might start too quickly
+            if (GameManager.Instance.GameState != GameState.GAMEPLAY) yield return null;
+
             yield return new WaitForSeconds(autoSaveInterval - 1.0f);
             if (GameManager.Instance.GameState == GameState.GAMEPLAY)
             {
