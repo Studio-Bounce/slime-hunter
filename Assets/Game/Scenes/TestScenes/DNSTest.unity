@@ -327,12 +327,12 @@ PrefabInstance:
     - target: {fileID: 2123117332715989980, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2123117332715989980, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2483517191844165147, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
         type: 3}
@@ -384,10 +384,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3555267780927596722, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5550856846267920840, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
         type: 3}
       propertyPath: m_Name
       value: ProjectileSlime
+      objectReference: {fileID: 0}
+    - target: {fileID: 5550856846267920840, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1457,12 +1467,12 @@ PrefabInstance:
     - target: {fileID: 5806249055319058629, guid: b940c09142173ff479a8f04c83ee9b5d,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5806249055319058629, guid: b940c09142173ff479a8f04c83ee9b5d,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8529491203750411947, guid: b940c09142173ff479a8f04c83ee9b5d,
         type: 3}
@@ -1514,10 +1524,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8810285186818103379, guid: b940c09142173ff479a8f04c83ee9b5d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8820871006783578033, guid: b940c09142173ff479a8f04c83ee9b5d,
         type: 3}
       propertyPath: m_Name
       value: BasicSlime
+      objectReference: {fileID: 0}
+    - target: {fileID: 8820871006783578033, guid: b940c09142173ff479a8f04c83ee9b5d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1827,6 +1847,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2191826967792925071, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5107899256479304164, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1880,17 +1905,22 @@ PrefabInstance:
     - target: {fileID: 5842345838058222381, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5842345838058222381, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8223826132166210976, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
         type: 3}
       propertyPath: m_Name
       value: RabbitSlime
+      objectReference: {fileID: 0}
+    - target: {fileID: 8223826132166210976, guid: 07df9ee5f1a104e4bb1b4fbeea0ebcfa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2075,20 +2105,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2678552535762397094, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
+    - target: {fileID: 1820466750742305653, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
-      propertyPath: m_AnchorMax.x
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2678552535762397094, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2678552535762397094, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
+        type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5799752166503753409, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: m_Name
       value: BomberSlime
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799752166503753409, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9032985347633649912, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
@@ -2392,7 +2432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &2125892084
 MeshRenderer:
   m_ObjectHideFlags: 0

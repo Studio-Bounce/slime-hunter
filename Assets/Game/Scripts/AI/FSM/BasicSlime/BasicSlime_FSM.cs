@@ -44,13 +44,18 @@ public class BasicSlime_FSM : FSM
     public float attackProximity = 0.5f;
     public Animator slimeAnimator;
 
-    protected virtual void Start()
+    protected override void Awake()
     {
+        base.Awake();
+
         slimeAgent = GetComponent<SteeringAgent>();
         characterController = GetComponent<CharacterController>();
         weapon = GetComponent<EnemyWeapon>();
         slimeEnemy = GetComponent<Enemy>();
+    }
 
+    protected virtual void Start()
+    {
         // Player might take some time to get spawned
         // Keep trying to find the player till the player is found
         StartCoroutine(FindPlayer());
