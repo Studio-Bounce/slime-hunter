@@ -10,31 +10,51 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     public List<Item> items = new List<Item>();
     public int maxWeight = 30;
 
+    Item selectedItem;
+
     // UI
     VisualElement root;
     List<VisualElement> slotElements;
 
-    readonly string inventoryContainer = "InventoryContent";
     readonly string inventorySlot = "InventorySlot"; 
     readonly string quantityLabel = "QuantityLabel";
 
-    readonly string itemInfoContainer = "ItemInfoContainer";
-    readonly string itemIcon = "ItemIcon";
-    readonly string itemName = "ItemName";
-    readonly string itemDescription = "ItemDescription";
+    // Inventory Container
+    VisualElement inventoryContainer;
+
+    // Info Container
+    VisualElement infoContainer;
+    Label infoName;
+    Label infoDescription;
+    VisualElement infoIcon;
+    Button equipBtn;
+    Button dropBtn;
 
     private void Start()
     {
+        // Inventory Container
         root = uiDocument.rootVisualElement;
-        VisualElement container = root.Q<VisualElement>(inventoryContainer);
-        slotElements = container.Query<VisualElement>(name: inventorySlot).ToList();
+        inventoryContainer = root.Q<VisualElement>("InventoryContainer");
+        slotElements = inventoryContainer.Query<VisualElement>(name: inventorySlot).ToList();
+        // Info Container
+        infoContainer = root.Q<VisualElement>("ItemInfoContainer");
+        infoName = infoContainer.Q<Label>("ItemName");
+        infoDescription = infoContainer.Q<Label>("ItemDescription");
+        infoIcon = infoContainer.Q<VisualElement>("ItemIcon");
+        equipBtn = infoContainer.Q<Button>("EquipBtn");
+        dropBtn = infoContainer.Q<Button>("DropBtn");
 
+        // Add item slot callbacks
         for (int i = 0; i < slotElements.Count; i++)
         {
             int index = i;
             var slot = slotElements[index];
             slot.RegisterCallback<ClickEvent>(e => UpdateSelectedItemInfo(index));
         }
+
+        // Add equip/drop callbacks
+        equipBtn.RegisterCallback<ClickEvent>(e => EquipItem(selectedItem));
+        dropBtn.RegisterCallback<ClickEvent>(e => DropItem(selectedItem));
     }
 
     public void UpdateInventoryUI()
@@ -53,7 +73,6 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                 slot.style.backgroundImage = null;
                 quantityEl.text = string.Empty;
             }
-
         }
     }
 
@@ -65,15 +84,29 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             return;
         }
 
-        VisualElement container = root.Q<VisualElement>(itemInfoContainer);
-        VisualElement icon = container.Q<VisualElement>(itemIcon);
-        Label name = container.Q<Label>(itemName);
-        Label description = container.Q<Label>(itemDescription);
-
         Item item = items[index];
-        icon.style.backgroundImage = item.itemRef.icon.texture;
-        name.text = item.itemRef.itemName;
-        description.text = item.itemRef.description;
+        infoIcon.style.backgroundImage = item.itemRef.icon.texture;
+        infoName.text = item.itemRef.itemName;
+        infoDescription.text = item.itemRef.description;
+
+        // Equip and Stats
+        switch (item.itemRef.itemType)
+        {
+            case ItemType.Weapon:
+                equipBtn.SetEnabled(true);
+                dropBtn.SetEnabled(false);
+                break;
+            case ItemType.Spell:
+                equipBtn.SetEnabled(true);
+                dropBtn.SetEnabled(false);
+                break;
+            case ItemType.Material:
+                equipBtn.SetEnabled(false);
+                dropBtn.SetEnabled(true);
+                break;
+            default:
+                break;
+        }
     }
 
     public int GetTotalWeight()
@@ -100,6 +133,43 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     {
         items.Remove(item);
     }
+
+    public void EquipItem(Item item)
+    {
+        switch (item.itemRef.itemType)
+        {
+            case ItemType.Weapon:
+
+                break;
+            case ItemType.Spell:
+                break;
+            case ItemType.Material:
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void DropItem(Item item)
+    {
+        item.quantity -= 1;
+
+        // Remove if 0
+
+        switch (item.itemRef.itemType)
+        {
+            case ItemType.Weapon:
+                break;
+            case ItemType.Spell:
+                break;
+            case ItemType.Material:
+                break;
+            default:
+                break;
+        }
+    }
+
+    #region Saving/Loading
 
     public override byte[] GetSaveData()
     {
@@ -138,4 +208,6 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             }
         }
     }
+
+    #endregion
 }

@@ -1,3 +1,7 @@
-﻿public class MaterialSO : ItemSO
+﻿using UnityEngine;
+
+[CreateAssetMenu(menuName = "Slime Material")]
+public class MaterialSO : ItemSO
 {
+
 }

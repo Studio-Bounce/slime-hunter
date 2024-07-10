@@ -7,10 +7,9 @@ using UnityEngine.InputSystem;
 
 public class SpellController : MonoBehaviour
 {
-    public bool isCasting = false;
-
     public SpellSO[] spells = new SpellSO[2];
 
+    [HideInInspector] public bool isCasting = false;
     private int currentSpellIndex = 0;
     private int lastSpellIndex = -1;
 

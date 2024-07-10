@@ -106,3 +106,21 @@
     border-color: #46BBCA;
     scale: 0.95;
 }
+
+Button {
+    transition-property: all;
+    transition-duration: 0.2s;
+    background-color: #46BBCA;
+    border-width: 2px;
+    border-color: white;
+    border-radius: 20px;
+    margin: 0;
+}
+
+Button:hover {
+    background-color: #32808A;
+}
+
+Button:active {
+    scale: 0.95;
+}
