@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,16 +11,34 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     public int maxWeight = 30;
 
     // UI
+    VisualElement root;
+    List<VisualElement> slotElements;
+
     readonly string inventoryContainer = "InventoryContent";
     readonly string inventorySlot = "InventorySlot"; 
     readonly string quantityLabel = "QuantityLabel";
 
+    readonly string itemInfoContainer = "ItemInfoContainer";
+    readonly string itemIcon = "ItemIcon";
+    readonly string itemName = "ItemName";
+    readonly string itemDescription = "ItemDescription";
+
+    private void Start()
+    {
+        root = uiDocument.rootVisualElement;
+        VisualElement container = root.Q<VisualElement>(inventoryContainer);
+        slotElements = container.Query<VisualElement>(name: inventorySlot).ToList();
+
+        for (int i = 0; i < slotElements.Count; i++)
+        {
+            int index = i;
+            var slot = slotElements[index];
+            slot.RegisterCallback<ClickEvent>(e => UpdateSelectedItemInfo(index));
+        }
+    }
+
     public void UpdateInventoryUI()
     {
-        VisualElement root = uiDocument.rootVisualElement;
-        VisualElement inventoryEl = root.Q<VisualElement>(inventoryContainer);
-        List<VisualElement> slotElements = inventoryEl.Query<VisualElement>(name: inventorySlot).ToList();
-
         for (int i = 0; i < slotElements.Count; i++)
         {
             VisualElement slot = slotElements[i];
@@ -38,6 +55,25 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             }
 
         }
+    }
+
+    public void UpdateSelectedItemInfo(int index)
+    {
+        if (index >= items.Count)
+        {
+            Debug.Log($"No item at the selected index {index} >= {items.Count}");
+            return;
+        }
+
+        VisualElement container = root.Q<VisualElement>(itemInfoContainer);
+        VisualElement icon = container.Q<VisualElement>(itemIcon);
+        Label name = container.Q<Label>(itemName);
+        Label description = container.Q<Label>(itemDescription);
+
+        Item item = items[index];
+        icon.style.backgroundImage = item.itemRef.icon.texture;
+        name.text = item.itemRef.itemName;
+        description.text = item.itemRef.description;
     }
 
     public int GetTotalWeight()
