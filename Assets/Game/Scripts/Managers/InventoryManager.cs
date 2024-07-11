@@ -10,7 +10,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     public List<Item> items = new List<Item>();
     public int maxWeight = 30;
 
-    Item selectedItem;
+    int selectedIndex = 0;
 
     // UI
     VisualElement root;
@@ -27,6 +27,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     Label infoName;
     Label infoDescription;
     VisualElement infoIcon;
+    Label infoType;
     Button equipBtn;
     Button dropBtn;
 
@@ -41,6 +42,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         infoName = infoContainer.Q<Label>("ItemName");
         infoDescription = infoContainer.Q<Label>("ItemDescription");
         infoIcon = infoContainer.Q<VisualElement>("ItemIcon");
+        infoType = infoContainer.Q<Label>("ItemType");
         equipBtn = infoContainer.Q<Button>("EquipBtn");
         dropBtn = infoContainer.Q<Button>("DropBtn");
 
@@ -53,8 +55,8 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         }
 
         // Add equip/drop callbacks
-        equipBtn.RegisterCallback<ClickEvent>(e => EquipItem(selectedItem));
-        dropBtn.RegisterCallback<ClickEvent>(e => DropItem(selectedItem));
+        equipBtn.RegisterCallback<ClickEvent>(e => EquipItem());
+        dropBtn.RegisterCallback<ClickEvent>(e => DropItem());
     }
 
     public void UpdateInventoryUI()
@@ -78,6 +80,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
 
     public void UpdateSelectedItemInfo(int index)
     {
+        selectedIndex = index;
         if (index >= items.Count)
         {
             Debug.Log($"No item at the selected index {index} >= {items.Count}");
@@ -88,6 +91,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         infoIcon.style.backgroundImage = item.itemRef.icon.texture;
         infoName.text = item.itemRef.itemName;
         infoDescription.text = item.itemRef.description;
+        infoType.text = item.itemRef.itemType.ToString();
 
         // Equip and Stats
         switch (item.itemRef.itemType)
@@ -132,10 +136,13 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     public void RemoveItem(Item item)
     {
         items.Remove(item);
+        UpdateInventoryUI();
     }
 
-    public void EquipItem(Item item)
+    public void EquipItem()
     {
+        Item item = items[selectedIndex];
+
         switch (item.itemRef.itemType)
         {
             case ItemType.Weapon:
@@ -150,22 +157,26 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         }
     }
 
-    public void DropItem(Item item)
+    public void DropItem()
     {
+        if (selectedIndex >= items.Count)
+        {
+            Debug.Log("No item to drop at this index");
+            return;
+        }
+
+        Item item = items[selectedIndex];
         item.quantity -= 1;
 
-        // Remove if 0
+        // Update slot UI
+        VisualElement slot = slotElements[selectedIndex];
+        Label quantityEl = slot.Q<Label>(quantityLabel);
+        quantityEl.text = item.quantity.ToString();
 
-        switch (item.itemRef.itemType)
+        if (item.quantity < 1)
         {
-            case ItemType.Weapon:
-                break;
-            case ItemType.Spell:
-                break;
-            case ItemType.Material:
-                break;
-            default:
-                break;
+            items.RemoveAt(selectedIndex);
+            UpdateInventoryUI();
         }
     }
 
