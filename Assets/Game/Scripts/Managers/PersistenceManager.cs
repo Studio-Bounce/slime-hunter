@@ -37,7 +37,7 @@ public class PersistenceManager : Singleton<PersistenceManager>
             {
                 UIManager.Instance.ShowAutoSave();
                 SaveGame();
-                yield return new WaitForSeconds(1.0f);  // Ideally this should be the time taken in saving
+                yield return new WaitForSeconds(1.0f); // Ideally this should be the time taken in saving
                 UIManager.Instance.HideAutoSave();
             }
         }

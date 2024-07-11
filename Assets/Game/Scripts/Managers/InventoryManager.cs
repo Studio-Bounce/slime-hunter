@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
@@ -16,8 +17,12 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     VisualElement root;
     List<VisualElement> slotElements;
 
+    // IDs
     readonly string inventorySlot = "InventorySlot"; 
     readonly string quantityLabel = "QuantityLabel";
+
+    // Classes
+    readonly string slotSelected = "slot-selected";
 
     // Inventory Container
     VisualElement inventoryContainer;
@@ -28,8 +33,10 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     Label infoDescription;
     VisualElement infoIcon;
     Label infoType;
-    Button equipBtn;
+    Button equip1Btn;
+    Button equip2Btn;
     Button dropBtn;
+
 
     private void Start()
     {
@@ -43,8 +50,18 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         infoDescription = infoContainer.Q<Label>("ItemDescription");
         infoIcon = infoContainer.Q<VisualElement>("ItemIcon");
         infoType = infoContainer.Q<Label>("ItemType");
-        equipBtn = infoContainer.Q<Button>("EquipBtn");
+        equip1Btn = infoContainer.Q<Button>("Equip1Btn");
+        equip2Btn = infoContainer.Q<Button>("Equip2Btn");
         dropBtn = infoContainer.Q<Button>("DropBtn");
+
+        // Clear info panel
+        infoIcon.style.backgroundImage = null;
+        infoName.text = string.Empty;
+        infoDescription.text = string.Empty;
+        infoType.text = string.Empty;
+        equip1Btn.style.display = DisplayStyle.None;
+        equip2Btn.style.display = DisplayStyle.None;
+        dropBtn.style.display = DisplayStyle.None;
 
         // Add item slot callbacks
         for (int i = 0; i < slotElements.Count; i++)
@@ -55,7 +72,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         }
 
         // Add equip/drop callbacks
-        equipBtn.RegisterCallback<ClickEvent>(e => EquipItem());
+        equip1Btn.RegisterCallback<ClickEvent>(e => EquipItem());
         dropBtn.RegisterCallback<ClickEvent>(e => DropItem());
     }
 
@@ -80,12 +97,16 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
 
     public void UpdateSelectedItemInfo(int index)
     {
-        selectedIndex = index;
         if (index >= items.Count)
         {
             Debug.Log($"No item at the selected index {index} >= {items.Count}");
             return;
         }
+
+        // Add selected style
+        slotElements[selectedIndex].RemoveFromClassList(slotSelected);
+        slotElements[index].AddToClassList(slotSelected);
+        selectedIndex = index;
 
         Item item = items[index];
         infoIcon.style.backgroundImage = item.itemRef.icon.texture;
@@ -97,16 +118,19 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         switch (item.itemRef.itemType)
         {
             case ItemType.Weapon:
-                equipBtn.SetEnabled(true);
-                dropBtn.SetEnabled(false);
+                equip1Btn.style.display = DisplayStyle.Flex;
+                equip2Btn.style.display = DisplayStyle.Flex;
+                dropBtn.style.display = DisplayStyle.None;
                 break;
             case ItemType.Spell:
-                equipBtn.SetEnabled(true);
-                dropBtn.SetEnabled(false);
+                equip1Btn.style.display = DisplayStyle.Flex;
+                equip2Btn.style.display = DisplayStyle.Flex;
+                dropBtn.style.display = DisplayStyle.None;
                 break;
             case ItemType.Material:
-                equipBtn.SetEnabled(false);
-                dropBtn.SetEnabled(true);
+                equip1Btn.style.display = DisplayStyle.None;
+                equip2Btn.style.display = DisplayStyle.None;
+                dropBtn.style.display = DisplayStyle.Flex;
                 break;
             default:
                 break;
@@ -149,8 +173,10 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
 
                 break;
             case ItemType.Spell:
+
                 break;
             case ItemType.Material:
+
                 break;
             default:
                 break;

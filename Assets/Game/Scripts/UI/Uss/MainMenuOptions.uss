@@ -101,6 +101,11 @@
     scale: 0.95;
 }
 
+.slot-selected {
+    border-color: rgb(70, 187, 202);
+    scale: 0.95;
+}
+
 Button {
     transition-property: all;
     transition-duration: 0.2s;

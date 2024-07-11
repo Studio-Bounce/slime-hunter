@@ -31,7 +31,6 @@ public class WeaponSO : ItemSO
 {
     [Header("Weapon Attributes")]
     public Damage damage;
-    public int swingSpeed;
     public float range;
     public LayerMask hitLayers;
 
