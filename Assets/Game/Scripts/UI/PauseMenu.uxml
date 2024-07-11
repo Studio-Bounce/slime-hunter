@@ -30,7 +30,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="TabContent" style="flex-grow: 1; padding-right: 100px; padding-left: 100px; padding-top: 50px; padding-bottom: 50px;">
             <ui:VisualElement name="InventoryContent" class="tab-content selected-content" style="flex-grow: 1; flex-direction: row; margin-left: 2px;">
-                <ui:VisualElement name="InventoryLeft" style="flex-grow: 1; width: 59%;">
+                <ui:VisualElement name="InventoryLeft" style="flex-grow: 1; width: 59%; padding-left: 50px;">
                     <ui:VisualElement name="CharacterInfoContainer" style="flex-grow: 1; flex-direction: row;">
                         <ui:VisualElement name="Information" style="flex-grow: 1; width: 35%; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-top-left-radius: 21px; border-top-right-radius: 21px; border-bottom-right-radius: 21px; border-bottom-left-radius: 21px; background-color: rgba(47, 50, 53, 0.8); flex-shrink: 1; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;">
                             <ui:Label tabindex="-1" text="Mylo" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Name" style="-unity-text-align: upper-center; font-size: 25px; -unity-font-style: normal; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); color: rgb(255, 255, 255); margin-top: 17px; -unity-font-definition: initial; margin-bottom: 10px;" />
@@ -139,7 +139,7 @@
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="InventoryRight" style="flex-grow: 1; width: 50%;">
+                <ui:VisualElement name="InventoryRight" style="flex-grow: 1; width: 50%; padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left: 50px;">
                     <ui:VisualElement name="Classify" style="flex-grow: 0; height: 64px; flex-direction: row; align-items: center;">
                         <ui:Label tabindex="-1" text="All Item" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ALL" style="font-size: 24px; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); color: rgb(255, 255, 255); margin-right: 15px; margin-left: 15px; width: 100px; -unity-text-align: upper-center;" />
                         <ui:Label tabindex="-1" text="Equip" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ALL" style="font-size: 24px; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); color: rgb(255, 255, 255); margin-right: 15px; margin-left: 15px; width: 100px; -unity-text-align: upper-center; opacity: 0.2;" />
