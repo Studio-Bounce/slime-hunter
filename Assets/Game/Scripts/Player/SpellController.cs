@@ -41,15 +41,16 @@ public class SpellController : MonoBehaviour
         LoadSpellIcons();
     }
 
-    private void LoadSpellIcons()
+    public void LoadSpellIcons()
     {
         if (hudMenu == null)
             return;
 
         for (int i = 0; i < availableSpells.Length; i++)
         {
-            hudMenu?.SetSpellIcon(i + 1, availableSpells[i].icon);
+            hudMenu?.SetSpellIcon(i + 1, availableSpells[i]?.icon);
         }
+        UpdateSpellUI();
     }
 
     public void StartCast(int spellIndex)
@@ -57,6 +58,12 @@ public class SpellController : MonoBehaviour
         // Set indicator type based on spell
         lastSpellIndex = currentSpellIndex;
         currentSpellIndex = spellIndex;
+        if (CurrentSpell == null)
+        {
+            Debug.Log("No spell equipped in slot");
+            return;
+        }
+
         switch (CurrentSpell.spellIndicator)
         {
             case IndicatorType.RADIAL:
@@ -64,30 +71,26 @@ public class SpellController : MonoBehaviour
                 break;
         }
 
-        ToggleIndicatorAndUI();
+        ToggleIndicator();
     }
 
-    // TogglesIndicator and Updates HUD
-    private void ToggleIndicatorAndUI()
+    private void ToggleIndicator()
     {
-        if (!currentIndicator.isActiveAndEnabled)
-        {
-            hudMenu?.SetSpellActive(currentSpellIndex + 1);
-            currentIndicator.ShowIndicator(CurrentSpell);
-            currentIndicator.SetReady(CurrentSpell.Ready);
-
-        }
-        else if (lastSpellIndex == currentSpellIndex)
+        if (lastSpellIndex == currentSpellIndex)
         {
             currentIndicator.HideIndicator();
         }
         else
         {
-            // If switching to different spell while previous indicator is active
             currentIndicator.ShowIndicator(CurrentSpell);
             currentIndicator.SetReady(CurrentSpell.Ready);
-            hudMenu?.SetSpellActive(currentSpellIndex + 1);
+            UpdateSpellUI();
         }
+    }
+
+    private void UpdateSpellUI()
+    {
+        hudMenu?.SetSpellActive(currentSpellIndex+1);
     }
 
     IEnumerator StopCast()

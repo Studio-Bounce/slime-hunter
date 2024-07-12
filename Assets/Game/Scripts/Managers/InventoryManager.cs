@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -51,8 +52,8 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     int selectedIndex = 0;
 
     // Equipped
-    Item[] equippedWeapons = new Item[2];
-    Item[] equippedSpells = new Item[2];
+    public Item[] equippedWeapons = new Item[2];
+    public Item[] equippedSpells = new Item[2];
 
     // UI
     [SerializeField] private UIDocument uiDocument;
@@ -120,7 +121,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         {
             int index = i;
             var slot = slotElements[index];
-            slot.RegisterCallback<ClickEvent>(e => UpdateSelectedItemInfo(index));
+            slot.RegisterCallback<ClickEvent>(e => _UpdateSelectedItemInfo(index));
         }
         equip1Btn.RegisterCallback<ClickEvent>(e => EquipItem(true));
         equip2Btn.RegisterCallback<ClickEvent>(e => EquipItem(false));
@@ -132,7 +133,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         infoContainer.AddToClassList(hideContentClass);
     }
 
-    public void UpdateEquippedToControllers()
+    private void _UpdateEquippedToControllers()
     {
         WeaponController weaponController = GameManager.Instance.PlayerRef?.GetComponent<WeaponController>();
         SpellController spellController = GameManager.Instance.PlayerRef?.GetComponent<SpellController>();
@@ -146,33 +147,46 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         weaponController.availableWeapons[1] = equippedWeapons[1]?.itemRef as WeaponSO;
         spellController.availableSpells[0] = equippedSpells[0]?.itemRef as SpellSO;
         spellController.availableSpells[1] = equippedSpells[1]?.itemRef as SpellSO;
+
+        weaponController.InstantiateWeapon(weaponController.CurrentWeapon);
+        spellController.LoadSpellIcons();
     }
 
     public void UpdateInventoryUI()
+    {
+        _UpdateSlotsUI();
+        _UpdateEquippedUI();
+    }
+
+    private void _UpdateSlotsUI()
     {
         for (int i = 0; i < slotElements.Count; i++)
         {
             VisualElement slot = slotElements[i];
             Label quantityEl = slot.Q<Label>(quantityLabel);
-            if (i < items.Count) {
+            if (i < items.Count)
+            {
                 Item item = items[i];
                 slot.style.backgroundImage = item.itemRef?.icon.texture;
                 quantityEl.text = item.quantity.ToString();
-            } 
+            }
             else
             {
                 slot.style.backgroundImage = null;
                 quantityEl.text = string.Empty;
             }
         }
-
-        weapon1Icon.style.backgroundImage = equippedWeapons[0]?.itemRef.icon.texture;
-        weapon2Icon.style.backgroundImage = equippedWeapons[1]?.itemRef.icon.texture;
-        spell1Icon.style.backgroundImage = equippedSpells[0]?.itemRef.icon.texture;
-        spell2Icon.style.backgroundImage = equippedSpells[1]?.itemRef.icon.texture;
     }
 
-    public void UpdateSelectedItemInfo(int index)
+    private void _UpdateEquippedUI()
+    {
+        weapon1Icon.style.backgroundImage = equippedWeapons[0]?.itemRef?.icon.texture;
+        weapon2Icon.style.backgroundImage = equippedWeapons[1]?.itemRef?.icon.texture;
+        spell1Icon.style.backgroundImage = equippedSpells[0]?.itemRef?.icon.texture;
+        spell2Icon.style.backgroundImage = equippedSpells[1]?.itemRef?.icon.texture;
+    }
+
+    private void _UpdateSelectedItemInfo(int index)
     {
         if (index >= items.Count)
         {
@@ -243,32 +257,50 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         UpdateInventoryUI();
     }
 
+    // Equip item into indicated slot
     public void EquipItem(bool isSlotOne)
     {
         Item item = items[selectedIndex];
-        VisualElement selectedSlot = weapon1Icon;
+        int equippedIndex = isSlotOne ? 0 : 1;
+        EquipState equipState = isSlotOne ? EquipState.One : EquipState.Two;
+        Item[] equippedSlots;
 
-        int index = isSlotOne ? 0 : 1;
-
+        // Assign variables depending on equipped type
         switch (item.itemRef.itemType)
         {
             case ItemType.Weapon:
-                selectedSlot = isSlotOne ? weapon1Icon : weapon2Icon;
-                if (equippedWeapons[index] != null) equippedWeapons[index].equipState = EquipState.None;
-                equippedWeapons[index] = item;
-                item.equipState = isSlotOne ? EquipState.One : EquipState.Two;
+                equippedSlots = equippedWeapons;
                 break;
             case ItemType.Spell:
-                selectedSlot = isSlotOne ? spell1Icon : spell2Icon;
-                if (equippedSpells[index] != null) equippedSpells[index].equipState = EquipState.None;
-                equippedSpells[index] = item;
-                item.equipState = isSlotOne ? EquipState.One : EquipState.Two;
+                equippedSlots = equippedSpells;
                 break;
-            default:
+            default: return;
+        }
+
+        // Unequip if slot taken
+        if (equippedSlots[equippedIndex] != null)
+        {
+            equippedSlots[equippedIndex].equipState = EquipState.None;
+        }
+
+        // Handle equipping same item in multiple slots
+        switch (item.equipState)
+        {
+            case EquipState.One:
+                equippedSlots[0] = null;
+                break;
+            case EquipState.Two:
+                equippedSlots[1] = null;
                 break;
         }
-        selectedSlot.style.backgroundImage = item.itemRef.icon.texture;
-        UpdateEquippedToControllers();
+
+        // Equip Item
+        equippedSlots[equippedIndex] = item;
+        item.equipState = equipState;
+
+        // Update UI
+        _UpdateEquippedToControllers();
+        _UpdateEquippedUI();
     }
 
     public void DropItem()
@@ -336,6 +368,8 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
 
             // Load equipped items
         }
+        UpdateInventoryUI();
+        _UpdateEquippedToControllers();
     }
 
     private void _EquipLoadedItem(Item item)

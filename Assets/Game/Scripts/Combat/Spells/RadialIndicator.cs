@@ -62,15 +62,17 @@ public class RadialIndicator : SpellIndicator
 
     public override void ShowIndicator(SpellSO spellSO)
     {
+        sourceRenderer.enabled = true;
+        targetRenderer.enabled = true;
         castRange = spellSO.castRange;
         areaOfEffect = spellSO.areaOfEffect;
         InitializeScaleMaterial();
-        gameObject.SetActive(true);
     }
 
     public override void HideIndicator()
     {
-        gameObject.SetActive(false);
+        sourceRenderer.enabled = false;
+        targetRenderer.enabled = false;
     }
 
     public override void SetReady(bool ready)

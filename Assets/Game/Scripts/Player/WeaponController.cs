@@ -11,7 +11,7 @@ public class WeaponController : MonoBehaviour
     public Transform handPivot;
     public Vector3 handPivotOffset;
     public Vector3 handPivotForward;
-    public WeaponSO[] availableWeapons = new WeaponSO[3];
+    public WeaponSO[] availableWeapons = new WeaponSO[2];
 
     [Header("Animations/Visuals")]
     public WeaponTrail weaponTrail;
@@ -97,7 +97,7 @@ public class WeaponController : MonoBehaviour
     }
 
     // TODO: Should pool all weapons to begin with and disable as needed
-    private void InstantiateWeapon(WeaponSO weaponSO)
+    public void InstantiateWeapon(WeaponSO weaponSO)
     {
         if (weaponSO == null) return;
         _currentWeaponPrefab = Instantiate(weaponSO.weaponModel, handPivot);
