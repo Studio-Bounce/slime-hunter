@@ -23,11 +23,22 @@ public class ItemSO : ScriptableObject
     public int weight;
 }
 
+public enum EquipState
+{
+    None,
+    One,
+    Two
+}
+
 [System.Serializable]
 public class Item
 {
     public ItemSO itemRef;
-    public int quantity;
+    public int quantity = 1;
+
+    //[HideInInspector]
+    public EquipState equipState = EquipState.None;
+
     public IEnumerator ReadAsync(BinaryReader br)
     {
         string path = br.ReadString();
@@ -35,12 +46,14 @@ public class Item
         yield return handle;
         itemRef = handle.Result;
         quantity = br.ReadInt32();
+        equipState = (EquipState)br.ReadInt32();
     }
 
     public void Write(BinaryWriter bw)
     {
         string path = AssetDatabase.GetAssetPath(itemRef);
         bw.Write(path);
-        bw.Write((int)quantity);
+        bw.Write(quantity);
+        bw.Write((int)equipState);
     }
 }

@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 
 public class SpellController : MonoBehaviour
 {
-    public SpellSO[] spells = new SpellSO[2];
+    public SpellSO[] availableSpells = new SpellSO[2];
 
     [HideInInspector] public bool isCasting = false;
     private int currentSpellIndex = 0;
@@ -25,7 +23,7 @@ public class SpellController : MonoBehaviour
 
     public SpellSO CurrentSpell
     {
-        get { return spells[currentSpellIndex]; }
+        get { return availableSpells[currentSpellIndex]; }
     }
 
     private void Awake()
@@ -33,7 +31,7 @@ public class SpellController : MonoBehaviour
         _animator = GetComponent<PlayerController>()?.animator;
         Debug.Assert(_animator != null);
         hudMenu = UIManager.Instance.HUDMenu as HUDMenu;
-        foreach (SpellSO spell in spells) spell.Ready = true;
+        foreach (SpellSO spell in availableSpells) spell.Ready = true;
     }
 
     private void Start()
@@ -48,9 +46,9 @@ public class SpellController : MonoBehaviour
         if (hudMenu == null)
             return;
 
-        for (int i = 0; i < spells.Length; i++)
+        for (int i = 0; i < availableSpells.Length; i++)
         {
-            hudMenu?.SetSpellIcon(i + 1, spells[i].icon);
+            hudMenu?.SetSpellIcon(i + 1, availableSpells[i].icon);
         }
     }
 
@@ -120,7 +118,7 @@ public class SpellController : MonoBehaviour
     IEnumerator StartCooldown(int spellIndex)
     {
         StartCoroutine(StopCast());
-        float remainingCD = spells[spellIndex].cooldown;
+        float remainingCD = availableSpells[spellIndex].cooldown;
 
         if (spellIndex == currentSpellIndex) currentIndicator.SetReady(false);
         while (remainingCD > 0)
@@ -131,7 +129,7 @@ public class SpellController : MonoBehaviour
         }
 
         hudMenu?.UpdateSpellCooldown(spellIndex + 1, 0);
-        spells[spellIndex].Ready = true;
+        availableSpells[spellIndex].Ready = true;
         if (spellIndex == currentSpellIndex) currentIndicator.SetReady(true);
 
     }

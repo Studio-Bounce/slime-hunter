@@ -106,6 +106,10 @@
     scale: 0.95;
 }
 
+.hide-content > * {
+    visibility: hidden;
+}
+
 Button {
     transition-property: all;
     transition-duration: 0.2s;
