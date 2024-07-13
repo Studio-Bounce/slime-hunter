@@ -24,7 +24,6 @@ MonoBehaviour:
     knockback: 1
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
-  swingSpeed: 10
   range: 3
   hitLayers:
     serializedVersion: 2
@@ -32,7 +31,7 @@ MonoBehaviour:
   weaponModel: {fileID: 7029180468595197948, guid: 67a0056a73bcfba41905c1a3e2e4ddab,
     type: 3}
   hitSound: {fileID: 0}
-  material: {fileID: 0}
+  material: {fileID: 2100000, guid: 76b12491295cfc84fb1848e4e8d655ca, type: 2}
   attackMoves:
   - clip: {fileID: 1827226128182048838, guid: 2b269a3ee16b94045a6690ddc2fe58a0, type: 3}
     animationDelay: 0.05

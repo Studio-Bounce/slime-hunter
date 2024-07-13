@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_vfx_sword_slash
+  m_Name: M_vfx_sword_slash_grey
   m_Shader: {fileID: -6465566751694194690, guid: ab34cc55f1e95ec48ab0c4ba81f67212,
     type: 3}
   m_Parent: {fileID: 0}
@@ -123,7 +123,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _RadialGamma: 2
-    - _Range: 190
+    - _Range: 120
     - _ReceiveShadows: 1
     - _RotateSpeed: 1.9
     - _RotationGamma: 2
@@ -132,7 +132,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
-    - _StartAngle: 8
+    - _StartAngle: 340
     - _Surface: 0
     - _VoronoiGamma: 2
     - _VoronoiPower: 20
@@ -142,9 +142,9 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Bright_Color: {r: 0.05649454, g: 0.887228, b: 4.867144, a: 1}
+    - _Bright_Color: {r: 4.585396, g: 3.8153038, b: 1.7562928, a: 1}
     - _Color: {r: 2.21, g: 8, b: 9.39, a: 0.80784315}
-    - _Dark_Color: {r: 0.06274508, g: 0, b: 0.7686275, a: 1}
+    - _Dark_Color: {r: 0.6528301, g: 0.59881884, b: 0.55059445, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

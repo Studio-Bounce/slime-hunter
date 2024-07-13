@@ -62,6 +62,7 @@ public class RadialIndicator : SpellIndicator
 
     public override void ShowIndicator(SpellSO spellSO)
     {
+        Active = true;
         sourceRenderer.enabled = true;
         targetRenderer.enabled = true;
         castRange = spellSO.castRange;
@@ -71,11 +72,12 @@ public class RadialIndicator : SpellIndicator
 
     public override void HideIndicator()
     {
+        Active = false;
         sourceRenderer.enabled = false;
         targetRenderer.enabled = false;
     }
 
-    public override void SetReady(bool ready)
+    public override void ToggleReady(bool ready)
     {
         Color col = ready ? activeColor : inactiveColor;
         sourceRenderer.material.SetColor("_Color", col);

@@ -11,7 +11,8 @@ public class WeaponController : MonoBehaviour
     public Transform handPivot;
     public Vector3 handPivotOffset;
     public Vector3 handPivotForward;
-    public WeaponSO[] availableWeapons = new WeaponSO[2];
+    [NonSerialized] public WeaponSO[] availableWeapons = new WeaponSO[2];
+    public WeaponSO fallbackWeapon;
 
     [Header("Animations/Visuals")]
     public WeaponTrail weaponTrail;
@@ -25,7 +26,6 @@ public class WeaponController : MonoBehaviour
     private Animator _animator;
 
     private readonly int attackStartTriggerHash = Animator.StringToHash("AttackStart");
-    private readonly int attackEndTriggerHash = Animator.StringToHash("AttackEnd");
     private readonly int attackStateHash = Animator.StringToHash("Attack");
     private readonly int baseStateHash = Animator.StringToHash("Locomotion");
     private int _attackMoveIndex = 0;
@@ -56,7 +56,13 @@ public class WeaponController : MonoBehaviour
 
     public WeaponSO CurrentWeapon
     {
-        get { return availableWeapons[_equippedWeaponIndex]; }
+        get { 
+            if (availableWeapons[_equippedWeaponIndex] == null)
+            {
+                availableWeapons[_equippedWeaponIndex] = fallbackWeapon;
+            }
+            return availableWeapons[_equippedWeaponIndex]; 
+        }
         set { availableWeapons[_equippedWeaponIndex] = value; }
     }
 
@@ -99,12 +105,17 @@ public class WeaponController : MonoBehaviour
     // TODO: Should pool all weapons to begin with and disable as needed
     public void InstantiateWeapon(WeaponSO weaponSO)
     {
-        if (weaponSO == null) return;
-        _currentWeaponPrefab = Instantiate(weaponSO.weaponModel, handPivot);
-        _currentWeaponPrefab.transform.forward = handPivot.forward;
-        _currentWeaponPrefab.transform.position += handPivotOffset;
-        // The weapon trail needs to know current weapon's settings
-        weaponTrail.SetupWeaponSettings(weaponSO);
+        if (weaponSO != null)
+        {
+            weaponTrail.SetupWeaponSettings(weaponSO);
+        } 
+
+        if (weaponSO.weaponModel != null)
+        {
+            _currentWeaponPrefab = Instantiate(weaponSO.weaponModel, handPivot);
+            _currentWeaponPrefab.transform.forward = handPivot.forward;
+            _currentWeaponPrefab.transform.position += handPivotOffset;
+        }
     }
 
     // Replace base attack animation with weapon animations
@@ -119,9 +130,9 @@ public class WeaponController : MonoBehaviour
         // Cycle equipped
         _equippedWeaponIndex = _equippedWeaponIndex == availableWeapons.Length-1 ? 
             0 : _equippedWeaponIndex+1;
+
         // Reset any existing combo
         _attackMoveIndex = 0;
-
         if (_currentWeaponPrefab != null)
         {
             Destroy(_currentWeaponPrefab);

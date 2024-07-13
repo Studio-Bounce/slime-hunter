@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Game/Scripts/UI/Uss/HUDStyle.uss?fileID=7433441132597879392&amp;guid=0fdab442c7ffa024e8faa0924c8217d2&amp;type=3#HUDStyle" />
-    <Style src="project://database/Assets/Game/Scripts/UI/Uss/Damage.uss?fileID=7433441132597879392&amp;guid=37c76dbc6d95c6041934135cae8ea696&amp;type=3#Damage" />
+    <Style src="project://database/Assets/Game/Scripts/UI/USS/HUDStyle.uss?fileID=7433441132597879392&amp;guid=0fdab442c7ffa024e8faa0924c8217d2&amp;type=3#HUDStyle" />
+    <Style src="project://database/Assets/Game/Scripts/UI/USS/Damage.uss?fileID=7433441132597879392&amp;guid=37c76dbc6d95c6041934135cae8ea696&amp;type=3#Damage" />
     <ui:VisualElement name="Background" style="flex-grow: 1; background-image: none; -unity-background-scale-mode: scale-to-fit; background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgba(255, 255, 255, 0.24); align-self: auto; align-items: stretch; flex-direction: row; color: rgb(27, 27, 27); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
         <ui:VisualElement name="Left" style="flex-grow: 0; height: auto; width: 30%;">
             <ui:VisualElement name="Blank_Lefttop" style="flex-grow: 0; height: 79%;">
@@ -12,7 +12,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="StatusArea" style="flex-grow: 1; flex-direction: row; margin-left: 30px;">
                 <ui:VisualElement name="weaponSwitchArea" style="flex-grow: 0; width: 138px; opacity: 1; padding-top: 50px; padding-bottom: 37px;">
-                    <ui:VisualElement name="WeaponIconSlot" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/1231.png?fileID=2800000&amp;guid=dfbf3a0ad495ee54b87d996397bc2e01&amp;type=3#1231&quot;); -unity-background-scale-mode: scale-to-fit; align-self: auto;" />
+                    <ui:VisualElement name="WeaponIconSlot" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/thirdweapon.png?fileID=2800000&amp;guid=2e63cda403abdc845bdf0ca700093c97&amp;type=3#thirdweapon&quot;); -unity-background-scale-mode: scale-to-fit; align-self: auto;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="Bars" style="flex-grow: 1; padding-top: 20%; padding-right: 17%; padding-bottom: 6%; padding-left: 2%;">
                     <ui:VisualElement name="Stamina" style="flex-grow: 1; flex-direction: row;">
@@ -40,11 +40,11 @@
             <ui:VisualElement name="MiniMapContainer" style="flex-grow: 0; height: 230px; -unity-text-align: upper-right; -unity-background-scale-mode: scale-to-fit; background-image: none; align-self: stretch; align-items: stretch; padding-right: 19px; margin-left: 0; margin-top: 16px; margin-bottom: 0; padding-bottom: 0; padding-left: 0; display: flex;" />
             <ui:VisualElement name="SpellContainer" style="flex-grow: 0; height: 20%; padding-top: 0; padding-bottom: 0; padding-right: 0; padding-left: 0; flex-direction: row; -unity-background-scale-mode: scale-to-fit; display: flex; align-self: flex-end; width: auto; align-items: center; visibility: visible; overflow: visible; opacity: 1; -unity-text-align: lower-left; justify-content: center;">
                 <ui:VisualElement name="GlyphWrapper" style="flex-grow: 0; flex-direction: row; width: auto; height: auto; align-items: flex-start; flex-shrink: 0; margin-right: 58px; margin-bottom: 15px;">
-                    <ui:VisualElement name="Spell1" class="spell-glyph spell-glyph-active" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/SpellIcons/Stun.png?fileID=21300000&amp;guid=95eeb2d1c5537024db1cd4e0870a00ab&amp;type=3#Stun&quot;); -unity-background-scale-mode: scale-to-fit; align-self: flex-end; -unity-slice-left: 5; -unity-slice-top: 5; -unity-slice-right: 5; -unity-slice-bottom: 5;">
+                    <ui:VisualElement name="Spell1" class="spell-glyph spell-glyph-active" style="background-image: none; -unity-background-scale-mode: scale-to-fit; align-self: flex-end; -unity-slice-left: 5; -unity-slice-top: 5; -unity-slice-right: 5; -unity-slice-bottom: 5;">
                         <ui:Label tabindex="-1" text="24s" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Timer" class="cooldown-timer" />
                         <ui:Label tabindex="-1" text="1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hotkey" class="hotkey-indicator" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="Spell2" class="spell-glyph" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/SpellIcons/Crystal.png?fileID=2800000&amp;guid=7443ed49e912504468e5cc1357ec4fa1&amp;type=3#Crystal&quot;); -unity-background-scale-mode: scale-to-fit; align-self: flex-end; -unity-slice-left: 5; -unity-slice-top: 5; -unity-slice-right: 5; -unity-slice-bottom: 5;">
+                    <ui:VisualElement name="Spell2" class="spell-glyph" style="background-image: none; -unity-background-scale-mode: scale-to-fit; align-self: flex-end; -unity-slice-left: 5; -unity-slice-top: 5; -unity-slice-right: 5; -unity-slice-bottom: 5;">
                         <ui:Label tabindex="-1" text="24s" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Timer" class="cooldown-timer" />
                         <ui:Label tabindex="-1" text="2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hotkey" class="hotkey-indicator" />
                     </ui:VisualElement>

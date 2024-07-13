@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum IndicatorType
@@ -16,7 +17,7 @@ public class SpellSO : ItemSO
     public Spell spellPrefab;
     public IndicatorType spellIndicator;
 
-    private bool ready = true;
+    [NonSerialized] private bool ready = true;
 
     public bool Ready
     {

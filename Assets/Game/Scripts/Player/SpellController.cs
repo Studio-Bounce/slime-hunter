@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,17 +6,16 @@ using UnityEngine.InputSystem;
 
 public class SpellController : MonoBehaviour
 {
-    public SpellSO[] availableSpells = new SpellSO[2];
+    [NonSerialized] public SpellSO[] availableSpells = new SpellSO[2];
+    [NonSerialized] public bool isCasting = false;
 
-    [HideInInspector] public bool isCasting = false;
     private int currentSpellIndex = 0;
     private int lastSpellIndex = -1;
 
     // Indicator & UI
     [SerializeField] private SpellIndicator radialIndicator;
     private SpellIndicator currentIndicator;
-    HUDMenu hudMenu;
-
+    private HUDMenu hudMenu;
 
     // Animations
     private Animator _animator;
@@ -31,7 +31,6 @@ public class SpellController : MonoBehaviour
         _animator = GetComponent<PlayerController>()?.animator;
         Debug.Assert(_animator != null);
         hudMenu = UIManager.Instance.HUDMenu as HUDMenu;
-        foreach (SpellSO spell in availableSpells) spell.Ready = true;
     }
 
     private void Start()
@@ -76,15 +75,17 @@ public class SpellController : MonoBehaviour
 
     private void ToggleIndicator()
     {
-        if (lastSpellIndex == currentSpellIndex)
+
+        if (lastSpellIndex != currentSpellIndex || !currentIndicator.Active)
         {
-            currentIndicator.HideIndicator();
+            currentIndicator.ShowIndicator(CurrentSpell);
+            currentIndicator.ToggleReady(CurrentSpell.Ready);
+            UpdateSpellUI();
         }
         else
         {
-            currentIndicator.ShowIndicator(CurrentSpell);
-            currentIndicator.SetReady(CurrentSpell.Ready);
-            UpdateSpellUI();
+            currentIndicator.HideIndicator();
+
         }
     }
 
@@ -123,7 +124,7 @@ public class SpellController : MonoBehaviour
         StartCoroutine(StopCast());
         float remainingCD = availableSpells[spellIndex].cooldown;
 
-        if (spellIndex == currentSpellIndex) currentIndicator.SetReady(false);
+        if (spellIndex == currentSpellIndex) currentIndicator.ToggleReady(false);
         while (remainingCD > 0)
         {
             remainingCD -= Time.deltaTime;
@@ -133,7 +134,7 @@ public class SpellController : MonoBehaviour
 
         hudMenu?.UpdateSpellCooldown(spellIndex + 1, 0);
         availableSpells[spellIndex].Ready = true;
-        if (spellIndex == currentSpellIndex) currentIndicator.SetReady(true);
+        if (spellIndex == currentSpellIndex) currentIndicator.ToggleReady(true);
 
     }
 }

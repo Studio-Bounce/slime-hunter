@@ -1,45 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
-
-[System.Serializable]
-public class Equipped
-{
-    public Item[] weapons = new Item[2];
-    public Item[] spells = new Item[2];
-
-    public IEnumerator ReadAsync(BinaryReader br)
-    {
-        int length = br.ReadInt32();
-        for (int i = 0; i < length; i++)
-        {
-            Item weapon = new Item();
-            weapon.ReadAsync(br);
-            yield return weapon;
-            weapons[i] = weapon;
-        }
-        length = br.ReadInt32();
-        for (int i = 0; i < length; i++)
-        {
-            Item spell = new Item();
-            spell.ReadAsync(br);
-            yield return spell;
-            spells[i] = spell;
-        }
-    }
-
-    public void Write(BinaryWriter bw)
-    {
-        bw.Write(weapons.Length);
-        foreach (var weapon in weapons) weapon.Write(bw);
-
-        bw.Write(spells.Length);
-        foreach (var spell in spells) spell.Write(bw);
-    }
-}
 
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
@@ -52,8 +15,8 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     int selectedIndex = 0;
 
     // Equipped
-    public Item[] equippedWeapons = new Item[2];
-    public Item[] equippedSpells = new Item[2];
+    private Item[] equippedWeapons = new Item[2];
+    private Item[] equippedSpells = new Item[2];
 
     // UI
     [SerializeField] private UIDocument uiDocument;

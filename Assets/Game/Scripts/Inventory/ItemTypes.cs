@@ -3,6 +3,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using System.Collections;
+using System;
 
 public enum ItemType
 {
@@ -36,7 +37,7 @@ public class Item
     public ItemSO itemRef;
     public int quantity = 1;
 
-    //[HideInInspector]
+    [NonSerialized]
     public EquipState equipState = EquipState.None;
 
     public IEnumerator ReadAsync(BinaryReader br)

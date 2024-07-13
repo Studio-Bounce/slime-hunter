@@ -157,9 +157,7 @@ MonoBehaviour:
   handPivot: {fileID: 866127921040074411}
   handPivotOffset: {x: 0, y: 0, z: 0}
   handPivotForward: {x: 0, y: 0, z: 1}
-  availableWeapons:
-  - {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
-  - {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
+  fallbackWeapon: {fileID: 11400000, guid: e29ae9ffac4bdf24bbf790fcb2467210, type: 2}
   weaponTrail: {fileID: 3997934283830900321}
   baseAttackClip: {fileID: -203655887218126122, guid: 368a8195de7259c4b90d8c64c0c4c8e2,
     type: 3}
@@ -214,9 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c13dd9c19000524681981923137cb00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableSpells:
-  - {fileID: 11400000, guid: fa97121a094b5134f917ca118bfc4e43, type: 2}
-  - {fileID: 11400000, guid: 6650162a58912e84fb6f113771fb1e37, type: 2}
+  availableSpells: []
   isCasting: 0
   radialIndicator: {fileID: 3979711181428871676}
 --- !u!114 &886262207501665116

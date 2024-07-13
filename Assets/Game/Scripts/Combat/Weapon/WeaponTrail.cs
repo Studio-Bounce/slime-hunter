@@ -65,6 +65,7 @@ public class WeaponTrail : DamageDealer
     // it is the final attack in this sequence or not
     public void Attack(AttackMove move, bool isFinalAttack)
     {
+
         // Update weapon damage on attack
         damage.value = (int)(currentWeaponSO.damage.value * move.damageMultiplier);
         // Update weapon knockback on attack
