@@ -2,12 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
-using static Ink.Runtime.SimpleJson;
 
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
@@ -20,11 +17,8 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     int selectedIndex = 0;
 
     // Equipped
-    private ItemSO[] equippedWeapons = new ItemSO[2];
-    private ItemSO[] equippedSpells = new ItemSO[2];
-
-    //private Dictionary<WeaponSO, int> weaponToEquipSlot = new Dictionary<WeaponSO, int>();
-    //private Dictionary<SpellSO, int> spellToEquipSlot = new Dictionary<SpellSO, int>();
+    private WeaponSO[] equippedWeapons = new WeaponSO[2];
+    private SpellSO[] equippedSpells = new SpellSO[2];
 
     // UI
     [SerializeField] private UIDocument uiDocument;
@@ -119,10 +113,10 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             Debug.Log("Can't find player controllers");
             return;
         }
-        weaponController.availableWeapons[0] = equippedWeapons[0] as WeaponSO;
-        weaponController.availableWeapons[1] = equippedWeapons[1] as WeaponSO;
-        spellController.availableSpells[0] = equippedSpells[0] as SpellSO;
-        spellController.availableSpells[1] = equippedSpells[1]as SpellSO;
+        weaponController.availableWeapons[0] = equippedWeapons[0];
+        weaponController.availableWeapons[1] = equippedWeapons[1];
+        spellController.availableSpells[0] = equippedSpells[0];
+        spellController.availableSpells[1] = equippedSpells[1];
 
         weaponController.InstantiateWeapon(weaponController.CurrentWeapon);
         spellController.LoadSpellIcons();
@@ -355,8 +349,8 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         }
 
         OnInventoryChanged.Invoke();
-        OnEquippedWeaponsChanged(equippedWeapons[0] as WeaponSO, equippedWeapons[1] as WeaponSO);
-        OnEquippedSpellsChanged(equippedSpells[0] as SpellSO, equippedSpells[1] as SpellSO);
+        OnEquippedWeaponsChanged(equippedWeapons[0], equippedWeapons[1]);
+        OnEquippedSpellsChanged(equippedSpells[0], equippedSpells[1]);
 
         UpdateInventoryUI();
         _UpdateEquippedToControllers();
@@ -370,7 +364,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             if (br.ReadBoolean())
             {
                 string address = br.ReadString();
-                var handle = Addressables.LoadAssetAsync<ItemSO>(address);
+                var handle = Addressables.LoadAssetAsync<WeaponSO>(address);
                 yield return handle;
                 equippedWeapons[i] = handle.Result;
             }
@@ -378,7 +372,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             if (br.ReadBoolean())
             {
                 string address = br.ReadString();
-                var handle = Addressables.LoadAssetAsync<ItemSO>(address);
+                var handle = Addressables.LoadAssetAsync<SpellSO>(address);
                 yield return handle;
                 equippedSpells[i] = handle.Result;
             }
