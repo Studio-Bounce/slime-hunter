@@ -1,8 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
+using static Ink.Runtime.SimpleJson;
 
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
@@ -15,8 +20,11 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     int selectedIndex = 0;
 
     // Equipped
-    private Item[] equippedWeapons = new Item[2];
-    private Item[] equippedSpells = new Item[2];
+    private ItemSO[] equippedWeapons = new ItemSO[2];
+    private ItemSO[] equippedSpells = new ItemSO[2];
+
+    //private Dictionary<WeaponSO, int> weaponToEquipSlot = new Dictionary<WeaponSO, int>();
+    //private Dictionary<SpellSO, int> spellToEquipSlot = new Dictionary<SpellSO, int>();
 
     // UI
     [SerializeField] private UIDocument uiDocument;
@@ -50,6 +58,11 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     VisualElement weapon2Icon;
     VisualElement spell1Icon;
     VisualElement spell2Icon;
+
+    // Events
+    public event Action OnInventoryChanged = delegate { };
+    public event Action<WeaponSO, WeaponSO> OnEquippedWeaponsChanged = delegate { };
+    public event Action<SpellSO, SpellSO> OnEquippedSpellsChanged = delegate { };
 
     private void Start()
     {
@@ -86,8 +99,8 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             var slot = slotElements[index];
             slot.RegisterCallback<ClickEvent>(e => _UpdateSelectedItemInfo(index));
         }
-        equip1Btn.RegisterCallback<ClickEvent>(e => EquipItem(true));
-        equip2Btn.RegisterCallback<ClickEvent>(e => EquipItem(false));
+        equip1Btn.RegisterCallback<ClickEvent>(e => EquipItemToSlot(true));
+        equip2Btn.RegisterCallback<ClickEvent>(e => EquipItemToSlot(false));
         dropBtn.RegisterCallback<ClickEvent>(e => DropItem());
     }
 
@@ -106,10 +119,10 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             Debug.Log("Can't find player controllers");
             return;
         }
-        weaponController.availableWeapons[0] = equippedWeapons[0]?.itemRef as WeaponSO;
-        weaponController.availableWeapons[1] = equippedWeapons[1]?.itemRef as WeaponSO;
-        spellController.availableSpells[0] = equippedSpells[0]?.itemRef as SpellSO;
-        spellController.availableSpells[1] = equippedSpells[1]?.itemRef as SpellSO;
+        weaponController.availableWeapons[0] = equippedWeapons[0] as WeaponSO;
+        weaponController.availableWeapons[1] = equippedWeapons[1] as WeaponSO;
+        spellController.availableSpells[0] = equippedSpells[0] as SpellSO;
+        spellController.availableSpells[1] = equippedSpells[1]as SpellSO;
 
         weaponController.InstantiateWeapon(weaponController.CurrentWeapon);
         spellController.LoadSpellIcons();
@@ -143,10 +156,10 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
 
     private void _UpdateEquippedUI()
     {
-        weapon1Icon.style.backgroundImage = equippedWeapons[0]?.itemRef?.icon.texture;
-        weapon2Icon.style.backgroundImage = equippedWeapons[1]?.itemRef?.icon.texture;
-        spell1Icon.style.backgroundImage = equippedSpells[0]?.itemRef?.icon.texture;
-        spell2Icon.style.backgroundImage = equippedSpells[1]?.itemRef?.icon.texture;
+        weapon1Icon.style.backgroundImage = equippedWeapons[0]?.icon.texture;
+        weapon2Icon.style.backgroundImage = equippedWeapons[1]?.icon.texture;
+        spell1Icon.style.backgroundImage = equippedSpells[0]?.icon.texture;
+        spell2Icon.style.backgroundImage = equippedSpells[1]?.icon.texture;
     }
 
     private void _UpdateSelectedItemInfo(int index)
@@ -221,14 +234,13 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     }
 
     // Equip item into indicated slot
-    public void EquipItem(bool isSlotOne)
+    public void EquipItemToSlot(bool isSlotOne)
     {
         Item item = items[selectedIndex];
         int equippedIndex = isSlotOne ? 0 : 1;
-        EquipState equipState = isSlotOne ? EquipState.One : EquipState.Two;
-        Item[] equippedSlots;
+        ItemSO[] equippedSlots;
 
-        // Assign variables depending on equipped type
+        // Choose slot pair based on item type
         switch (item.itemRef.itemType)
         {
             case ItemType.Weapon:
@@ -240,26 +252,15 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             default: return;
         }
 
-        // Unequip if slot taken
-        if (equippedSlots[equippedIndex] != null)
-        {
-            equippedSlots[equippedIndex].equipState = EquipState.None;
-        }
-
         // Handle equipping same item in multiple slots
-        switch (item.equipState)
+        int otherIndex = (equippedIndex == 0) ? 1 : 0;
+        if (item.itemRef == equippedSlots[otherIndex])
         {
-            case EquipState.One:
-                equippedSlots[0] = null;
-                break;
-            case EquipState.Two:
-                equippedSlots[1] = null;
-                break;
+            equippedSlots[otherIndex] = null;
         }
 
         // Equip Item
-        equippedSlots[equippedIndex] = item;
-        item.equipState = equipState;
+        equippedSlots[equippedIndex] = item.itemRef;
 
         // Update UI
         _UpdateEquippedToControllers();
@@ -298,12 +299,32 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         using (var writer = new BinaryWriter(stream))
         {
             writer.Write(maxWeight);
-
-            // Write items
+            // Write inventory items
             writer.Write(items.Count);
             foreach (var item in items) item.Write(writer);
+            // Write equipped items
+            _WriteEquipped(writer);
 
             return stream.ToArray();
+        }
+    }
+
+    private void _WriteEquipped(BinaryWriter bw)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            // Weapons
+            bw.Write(equippedWeapons[i] != null);
+            if (equippedWeapons[i] != null)
+            {
+                bw.Write(equippedWeapons[i].address);
+            }
+            // Spells
+            bw.Write(equippedSpells[i] != null);
+            if (equippedSpells[i] != null)
+            {
+                bw.Write(equippedSpells[i].address);
+            }
         }
     }
 
@@ -312,6 +333,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         StartCoroutine(_LoadSaveDataAsync(data));
     }
 
+    // Async necessary to load addressables
     private IEnumerator _LoadSaveDataAsync(byte[] data)
     {
         using (var stream = new MemoryStream(data)) 
@@ -319,47 +341,47 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         {
             maxWeight = reader.ReadInt32();
 
-            // Load saved inventory items
+            // Load inventory items
             int itemCount = reader.ReadInt32();
             for (int i = 0; i < itemCount; i++)
             {
                 Item item = new Item();
                 yield return StartCoroutine(item.ReadAsync(reader));
                 items.Add(item);
-                _EquipLoadedItem(item);
             }
 
             // Load equipped items
+            yield return StartCoroutine(_LoadEquippedAsync(reader));
         }
+
+        OnInventoryChanged.Invoke();
+        OnEquippedWeaponsChanged(equippedWeapons[0] as WeaponSO, equippedWeapons[1] as WeaponSO);
+        OnEquippedSpellsChanged(equippedSpells[0] as SpellSO, equippedSpells[1] as SpellSO);
+
         UpdateInventoryUI();
         _UpdateEquippedToControllers();
     }
 
-    private void _EquipLoadedItem(Item item)
+    private IEnumerator _LoadEquippedAsync(BinaryReader br)
     {
-        // Get slot index or exit if not equipped
-        int index;
-        switch (item.equipState)
+        for (int i = 0; i < 2; i++)
         {
-            case EquipState.One:
-                index = 0;
-                break;
-            case EquipState.Two:
-                index = 1;
-                break;
-            default:
-                return;
-        }
-
-        // Add item to equipped
-        switch (item.itemRef.itemType)
-        {
-            case ItemType.Weapon:
-                equippedWeapons[index] = item;
-                break;
-            case ItemType.Spell:
-                equippedSpells[index] = item;
-                break;
+            // Weapons
+            if (br.ReadBoolean())
+            {
+                string address = br.ReadString();
+                var handle = Addressables.LoadAssetAsync<ItemSO>(address);
+                yield return handle;
+                equippedWeapons[i] = handle.Result;
+            }
+            // Spells
+            if (br.ReadBoolean())
+            {
+                string address = br.ReadString();
+                var handle = Addressables.LoadAssetAsync<ItemSO>(address);
+                yield return handle;
+                equippedSpells[i] = handle.Result;
+            }
         }
     }
 

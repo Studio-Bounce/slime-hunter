@@ -75,7 +75,6 @@ public class SpellController : MonoBehaviour
 
     private void ToggleIndicator()
     {
-
         if (lastSpellIndex != currentSpellIndex || !currentIndicator.Active)
         {
             currentIndicator.ShowIndicator(CurrentSpell);

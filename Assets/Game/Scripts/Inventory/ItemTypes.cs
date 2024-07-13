@@ -15,6 +15,9 @@ public enum ItemType
 [System.Serializable]
 public class ItemSO : ScriptableObject
 {
+    [Header("REQUIRED: ADDRESSABLE ADDRESS")]
+    public string address;
+
     [Header("Item Properties")]
     public string itemName;
     [TextArea] public string description;
@@ -24,37 +27,24 @@ public class ItemSO : ScriptableObject
     public int weight;
 }
 
-public enum EquipState
-{
-    None,
-    One,
-    Two
-}
-
 [System.Serializable]
 public class Item
 {
     public ItemSO itemRef;
     public int quantity = 1;
 
-    [NonSerialized]
-    public EquipState equipState = EquipState.None;
-
     public IEnumerator ReadAsync(BinaryReader br)
     {
-        string path = br.ReadString();
-        var handle = Addressables.LoadAssetAsync<ItemSO>(path);
+        string address = br.ReadString();
+        var handle = Addressables.LoadAssetAsync<ItemSO>(address);
         yield return handle;
         itemRef = handle.Result;
         quantity = br.ReadInt32();
-        equipState = (EquipState)br.ReadInt32();
     }
 
     public void Write(BinaryWriter bw)
     {
-        string path = AssetDatabase.GetAssetPath(itemRef);
-        bw.Write(path);
+        bw.Write(itemRef.address);
         bw.Write(quantity);
-        bw.Write((int)equipState);
     }
 }
