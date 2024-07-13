@@ -1103,10 +1103,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uuid: ada7f967-fb32-4222-b529-47d52e60a9bf
-  items: []
+  items:
+  - itemRef: {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
+    quantity: 1
   maxWeight: 17
-  equippedWeapons: []
-  equippedSpells: []
   uiDocument: {fileID: 1179840937}
 --- !u!1 &1443875820
 GameObject:
