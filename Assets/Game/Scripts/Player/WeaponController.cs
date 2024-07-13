@@ -29,6 +29,8 @@ public class WeaponController : MonoBehaviour
     private readonly int baseStateHash = Animator.StringToHash("Locomotion");
     private int _attackMoveIndex = 0;
 
+    private InventoryManager inventoryManager;
+
     public enum AttackState
     {
         WIND_UP,
@@ -71,7 +73,8 @@ public class WeaponController : MonoBehaviour
         Debug.Assert(_animator != null, "Requires an animator");
         Debug.Assert(handPivot != null, "Requires hand location for weapon");
         _overrideAnimatorController = new AnimatorOverrideController(_animator.runtimeAnimatorController);
-        InventoryManager.Instance.OnEquippedWeaponsChanged += OnWeaponUpdate;
+        inventoryManager = InventoryManager.Instance;
+        inventoryManager.OnEquippedWeaponsChanged += OnWeaponUpdate;
     }
 
     void Start()
@@ -83,7 +86,7 @@ public class WeaponController : MonoBehaviour
 
     private void OnDestroy()
     {
-        InventoryManager.Instance.OnEquippedWeaponsChanged -= OnWeaponUpdate;
+        inventoryManager.OnEquippedWeaponsChanged -= OnWeaponUpdate;
     }
 
     private void OnWeaponUpdate(WeaponSO[] weapons)
@@ -138,7 +141,7 @@ public class WeaponController : MonoBehaviour
 
     public void CycleWeapon(InputAction.CallbackContext context)
     {
-        if (IsAttack()) return;
+        if (!IsInterruptable()) return;
         // Cycle equipped
         _equippedWeaponIndex = _equippedWeaponIndex == availableWeapons.Length-1 ? 
             0 : _equippedWeaponIndex+1;

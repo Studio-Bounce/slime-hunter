@@ -21,6 +21,8 @@ public class SpellController : MonoBehaviour
     private Animator _animator;
     private readonly int castTriggerHash = Animator.StringToHash("Cast");
 
+    private InventoryManager inventoryManager;
+
     public SpellSO CurrentSpell
     {
         get { return availableSpells[currentSpellIndex]; }
@@ -30,8 +32,8 @@ public class SpellController : MonoBehaviour
     {
         _animator = GetComponent<PlayerController>()?.animator;
         Debug.Assert(_animator != null);
-        InventoryManager.Instance.OnEquippedSpellsChanged += OnSpellUpdate;
-
+        inventoryManager = InventoryManager.Instance;
+        inventoryManager.OnEquippedSpellsChanged += OnSpellUpdate;
         hudMenu = UIManager.Instance.HUDMenu as HUDMenu;
     }
 
@@ -44,7 +46,7 @@ public class SpellController : MonoBehaviour
 
     private void OnDestroy()
     {
-        InventoryManager.Instance.OnEquippedSpellsChanged -= OnSpellUpdate;
+        inventoryManager.OnEquippedSpellsChanged -= OnSpellUpdate;
     }
 
     private void OnSpellUpdate(SpellSO[] spells)

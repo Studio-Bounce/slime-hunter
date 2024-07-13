@@ -313,6 +313,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
 
     public override void LoadSaveData(byte[] data)
     {
+        items.Clear();
         StartCoroutine(_LoadSaveDataAsync(data));
     }
 
