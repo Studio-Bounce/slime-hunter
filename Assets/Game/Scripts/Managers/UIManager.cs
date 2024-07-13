@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,11 +15,13 @@ public class UIManager : Singleton<UIManager>
     // ----------------- Pause -----------------
     public void SetPauseMenu(bool active)
     {
-        if (active && GameManager.Instance.GameState != GameState.PAUSED)
+        if (active)
         {
-            GameManager.Instance.GameState = GameState.PAUSED;
+            (pauseMenu as PauseMenu).Pause();
+        } else
+        {
+            (pauseMenu as PauseMenu).Unpause();
         }
-        pauseMenu.SetVisible(active);
     }
 
     // ----------------- Load -----------------

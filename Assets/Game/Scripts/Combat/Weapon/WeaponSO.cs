@@ -26,17 +26,15 @@ public class AttackMove
     [Range(0, 1)] public float voranoiPeak;
 }
 
-[CreateAssetMenu(fileName = "NewWeapon", menuName = "Weapons/Weapon")]
-public class WeaponSO : ScriptableObject
+[CreateAssetMenu(menuName = "Weapon")]
+public class WeaponSO : ItemSO
 {
     [Header("Weapon Attributes")]
-    public string weaponName;
     public Damage damage;
-    public int swingSpeed;
     public float range;
     public LayerMask hitLayers;
 
-    [Header("References")]
+    [Header("Weapon References")]
     public GameObject weaponModel;
     public AudioClip hitSound;
     public Material material;

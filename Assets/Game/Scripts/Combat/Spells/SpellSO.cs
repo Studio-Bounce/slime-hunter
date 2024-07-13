@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum IndicatorType
@@ -6,11 +7,9 @@ public enum IndicatorType
 }
 
 [CreateAssetMenu(menuName = "Spell")]
-public class SpellSO : ScriptableObject
+public class SpellSO : ItemSO
 {
-    public string spellName;
-    [TextArea] public string description;
-    public Sprite icon;
+    [Header("Spell Properties")]
     public Damage damage;
     public float castRange;
     public float areaOfEffect;
@@ -18,7 +17,7 @@ public class SpellSO : ScriptableObject
     public Spell spellPrefab;
     public IndicatorType spellIndicator;
 
-    private bool ready = true;
+    [NonSerialized] private bool ready = true;
 
     public bool Ready
     {

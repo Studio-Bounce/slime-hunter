@@ -131,12 +131,15 @@ MonoBehaviour:
   health: 100
   isAlive: 1
   damageDelay: 0.5
-  knockbackTime: 0.25
   isInvincible: 0
-  stunned: 0
   onDeathEvent:
     m_PersistentCalls:
       m_Calls: []
+  healthSlider: {fileID: 0}
+  canvasTimeout: 10
+  healthCanvas: {fileID: 0}
+  knockbackTime: 0.25
+  stunned: 0
   slowDownOnHitMultiplier: 0.2
   slowDownOnHitFrames: 25
 --- !u!114 &2463496225978856163
@@ -157,7 +160,6 @@ MonoBehaviour:
   availableWeapons:
   - {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
   - {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-  - {fileID: 11400000, guid: 99cedeb06ace0a541a4b2160b3e72dbe, type: 2}
   weaponTrail: {fileID: 8536796487223862311}
   baseAttackClip: {fileID: -203655887218126122, guid: 368a8195de7259c4b90d8c64c0c4c8e2,
     type: 3}
@@ -212,10 +214,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c13dd9c19000524681981923137cb00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCasting: 0
-  spells:
+  availableSpells:
   - {fileID: 11400000, guid: fa97121a094b5134f917ca118bfc4e43, type: 2}
   - {fileID: 11400000, guid: 6650162a58912e84fb6f113771fb1e37, type: 2}
+  isCasting: 0
   radialIndicator: {fileID: 2018074894057638010}
 --- !u!114 &133212583615146192
 MonoBehaviour:

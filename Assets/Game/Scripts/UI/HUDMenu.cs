@@ -16,9 +16,12 @@ public class HUDMenu : Menu
     ProgressBar healthProgressBar;
     ProgressBar staminaProgressBar;
 
+    // Weapons
+    VisualElement weaponIcon;
+
     // Spells
-    readonly string spellDisabledStyle = "spell-glyph-disabled";
-    readonly string spellActiveStyle = "spell-glyph-active";
+    private const string spellDisabledStyle = "spell-glyph-disabled";
+    private const string spellActiveStyle = "spell-glyph-active";
 
     // Quests
     VisualElement questNameVE;
@@ -54,7 +57,8 @@ public class HUDMenu : Menu
         gameManager.OnPlayerStaminaChange += UpdateStaminaBar;
         UpdateStaminaBar(gameManager.PlayerStamina);
 
-        // Spells
+        // Weapons
+        weaponIcon = root.Q<VisualElement>("WeaponIcon");
 
         // Quests
         VisualElement questContainer = root.Q<VisualElement>("QuestContainer");
@@ -111,6 +115,13 @@ public class HUDMenu : Menu
         }
     }
 
+    // ------------------------------ Weapons ------------------------------
+
+    public void UpdateWeaponIcon(Sprite icon)
+    {
+        weaponIcon.style.backgroundImage = icon?.texture;
+    }
+
     // ------------------------------ Spells -------------------------------
 
     public void UpdateSpellCooldown(int spellNumber, int value)
@@ -149,7 +160,7 @@ public class HUDMenu : Menu
     public void SetSpellIcon(int spellNumber, Sprite icon)
     {
         VisualElement skillElement = root.Q<VisualElement>($"Spell{spellNumber}");
-        skillElement.style.backgroundImage = icon.texture;
+        skillElement.style.backgroundImage = icon?.texture;
     }
 
     // ------------------------------ Quests -------------------------------
