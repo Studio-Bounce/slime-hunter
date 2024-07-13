@@ -30,6 +30,8 @@ public class SpellController : MonoBehaviour
     {
         _animator = GetComponent<PlayerController>()?.animator;
         Debug.Assert(_animator != null);
+        InventoryManager.Instance.OnEquippedSpellsChanged += OnSpellUpdate;
+
         hudMenu = UIManager.Instance.HUDMenu as HUDMenu;
     }
 
@@ -37,6 +39,17 @@ public class SpellController : MonoBehaviour
     {
         Debug.Assert(radialIndicator != null);
         radialIndicator.HideIndicator();
+        LoadSpellIcons();
+    }
+
+    private void OnDestroy()
+    {
+        InventoryManager.Instance.OnEquippedSpellsChanged -= OnSpellUpdate;
+    }
+
+    private void OnSpellUpdate(SpellSO[] spells)
+    {
+        availableSpells = spells;
         LoadSpellIcons();
     }
 

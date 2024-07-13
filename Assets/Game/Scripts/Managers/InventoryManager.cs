@@ -20,7 +20,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     private WeaponSO[] equippedWeapons = new WeaponSO[2];
     private SpellSO[] equippedSpells = new SpellSO[2];
 
-    // UI
+    // UI Refs
     [SerializeField] private UIDocument uiDocument;
     VisualElement root;
     List<VisualElement> slotElements;
@@ -55,8 +55,8 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
 
     // Events
     public event Action OnInventoryChanged = delegate { };
-    public event Action<WeaponSO, WeaponSO> OnEquippedWeaponsChanged = delegate { };
-    public event Action<SpellSO, SpellSO> OnEquippedSpellsChanged = delegate { };
+    public event Action<WeaponSO[]> OnEquippedWeaponsChanged = delegate { };
+    public event Action<SpellSO[]> OnEquippedSpellsChanged = delegate { };
 
     private void Start()
     {
@@ -101,25 +101,6 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     private void ClearInfoPanel()
     {
         infoContainer.AddToClassList(hideContentClass);
-    }
-
-    private void _UpdateEquippedToControllers()
-    {
-        WeaponController weaponController = GameManager.Instance.PlayerRef?.GetComponent<WeaponController>();
-        SpellController spellController = GameManager.Instance.PlayerRef?.GetComponent<SpellController>();
-
-        if (weaponController == null || spellController == null)
-        {
-            Debug.Log("Can't find player controllers");
-            return;
-        }
-        weaponController.availableWeapons[0] = equippedWeapons[0];
-        weaponController.availableWeapons[1] = equippedWeapons[1];
-        spellController.availableSpells[0] = equippedSpells[0];
-        spellController.availableSpells[1] = equippedSpells[1];
-
-        weaponController.InstantiateWeapon(weaponController.CurrentWeapon);
-        spellController.LoadSpellIcons();
     }
 
     public void UpdateInventoryUI()
@@ -257,7 +238,15 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         equippedSlots[equippedIndex] = item.itemRef;
 
         // Update UI
-        _UpdateEquippedToControllers();
+        switch (item.itemRef.itemType)
+        {
+            case ItemType.Weapon:
+                OnEquippedWeaponsChanged(equippedWeapons);
+                break;
+            case ItemType.Spell:
+                OnEquippedSpellsChanged(equippedSpells);
+                break;
+        }
         _UpdateEquippedUI();
     }
 
@@ -349,11 +338,10 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         }
 
         OnInventoryChanged.Invoke();
-        OnEquippedWeaponsChanged(equippedWeapons[0], equippedWeapons[1]);
-        OnEquippedSpellsChanged(equippedSpells[0], equippedSpells[1]);
+        OnEquippedWeaponsChanged(equippedWeapons);
+        OnEquippedSpellsChanged(equippedSpells);
 
         UpdateInventoryUI();
-        _UpdateEquippedToControllers();
     }
 
     private IEnumerator _LoadEquippedAsync(BinaryReader br)

@@ -3,7 +3,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Animator))]
 public class WeaponController : MonoBehaviour
 {
     [Header("Positioning")]
@@ -68,19 +67,31 @@ public class WeaponController : MonoBehaviour
 
     private void Awake()
     {
-
         _animator = GetComponent<PlayerController>()?.animator;
-        Debug.Assert(_animator != null);
+        Debug.Assert(_animator != null, "Requires an animator");
+        Debug.Assert(handPivot != null, "Requires hand location for weapon");
         _overrideAnimatorController = new AnimatorOverrideController(_animator.runtimeAnimatorController);
+        InventoryManager.Instance.OnEquippedWeaponsChanged += OnWeaponUpdate;
     }
 
     void Start()
     {
-        Debug.Assert(handPivot != null, "Requires hand location for weapon");
-
         // Spawn Initial Weapon
         InitializeHandPivot();
         InstantiateWeapon(CurrentWeapon);
+    }
+
+    private void OnDestroy()
+    {
+        InventoryManager.Instance.OnEquippedWeaponsChanged -= OnWeaponUpdate;
+    }
+
+    private void OnWeaponUpdate(WeaponSO[] weapons)
+    {
+        availableWeapons = weapons;
+        if (_currentWeaponPrefab != null) Destroy(_currentWeaponPrefab);
+        InstantiateWeapon(CurrentWeapon);
+        (UIManager.Instance.HUDMenu as HUDMenu).UpdateWeaponIcon(CurrentWeapon.icon);
     }
 
     private void Update()
@@ -127,6 +138,7 @@ public class WeaponController : MonoBehaviour
 
     public void CycleWeapon(InputAction.CallbackContext context)
     {
+        if (IsAttack()) return;
         // Cycle equipped
         _equippedWeaponIndex = _equippedWeaponIndex == availableWeapons.Length-1 ? 
             0 : _equippedWeaponIndex+1;
@@ -137,8 +149,8 @@ public class WeaponController : MonoBehaviour
         {
             Destroy(_currentWeaponPrefab);
         }
-
         InstantiateWeapon(CurrentWeapon);
+        (UIManager.Instance.HUDMenu as HUDMenu).UpdateWeaponIcon(CurrentWeapon.icon);
     }
 
     public bool Attack(InputAction.CallbackContext context)

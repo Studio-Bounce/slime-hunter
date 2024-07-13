@@ -16,9 +16,12 @@ public class HUDMenu : Menu
     ProgressBar healthProgressBar;
     ProgressBar staminaProgressBar;
 
+    // Weapons
+    VisualElement weaponIcon;
+
     // Spells
-    readonly string spellDisabledStyle = "spell-glyph-disabled";
-    readonly string spellActiveStyle = "spell-glyph-active";
+    private const string spellDisabledStyle = "spell-glyph-disabled";
+    private const string spellActiveStyle = "spell-glyph-active";
 
     // Quests
     VisualElement questNameVE;
@@ -54,7 +57,8 @@ public class HUDMenu : Menu
         gameManager.OnPlayerStaminaChange += UpdateStaminaBar;
         UpdateStaminaBar(gameManager.PlayerStamina);
 
-        // Spells
+        // Weapons
+        weaponIcon = root.Q<VisualElement>("WeaponIcon");
 
         // Quests
         VisualElement questContainer = root.Q<VisualElement>("QuestContainer");
@@ -109,6 +113,13 @@ public class HUDMenu : Menu
         {
             staminaProgressBar.value = (float)stamina / GameManager.Instance.PlayerMaxStamina;
         }
+    }
+
+    // ------------------------------ Weapons ------------------------------
+
+    public void UpdateWeaponIcon(Sprite icon)
+    {
+        weaponIcon.style.backgroundImage = icon?.texture;
     }
 
     // ------------------------------ Spells -------------------------------

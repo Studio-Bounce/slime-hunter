@@ -12,7 +12,7 @@
             </ui:VisualElement>
             <ui:VisualElement name="StatusArea" style="flex-grow: 1; flex-direction: row; margin-left: 30px;">
                 <ui:VisualElement name="weaponSwitchArea" style="flex-grow: 0; width: 138px; opacity: 1; padding-top: 50px; padding-bottom: 37px;">
-                    <ui:VisualElement name="WeaponIconSlot" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/thirdweapon.png?fileID=2800000&amp;guid=2e63cda403abdc845bdf0ca700093c97&amp;type=3#thirdweapon&quot;); -unity-background-scale-mode: scale-to-fit; align-self: auto;" />
+                    <ui:VisualElement name="WeaponIcon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/thirdweapon.png?fileID=2800000&amp;guid=2e63cda403abdc845bdf0ca700093c97&amp;type=3#thirdweapon&quot;); -unity-background-scale-mode: scale-to-fit; align-self: auto;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="Bars" style="flex-grow: 1; padding-top: 20%; padding-right: 17%; padding-bottom: 6%; padding-left: 2%;">
                     <ui:VisualElement name="Stamina" style="flex-grow: 1; flex-direction: row;">
