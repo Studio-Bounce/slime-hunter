@@ -1,14 +1,44 @@
 using Cinemachine;
+using Ink.Runtime;
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class CameraManager : Singleton<CameraManager>
 {
-    public static Camera _activeCamera;
-    public static CinemachineVirtualCamera _activeVCamera;
-
+    // Cameras
+    private static Camera _activeCamera;
+    private static CinemachineVirtualCamera _activeVCamera;
     public static Camera ActiveCamera { get { return _activeCamera; } }
     public static CinemachineVirtualCamera ActiveCineCamera { get { return _activeVCamera; } }
+
+    private static Volume _globalVolume;
+
+    // Look for a global volume in the scene if isn't already set
+    public static Volume GlobalVolume
+    {
+        get
+        {
+            if (_globalVolume != null) return _globalVolume;
+
+            // Find all Volume components in the scene
+            Volume[] volumes = FindObjectsOfType<Volume>();
+
+            // Look for a volume with the "isGlobal" flag set to true
+            foreach (Volume volume in volumes)
+            {
+                if (volume.isGlobal)
+                {
+                    return volume;
+                }
+            }
+
+            // No global volume found, return null
+            return null;
+        }
+    }
 
     public void SetCameraFollow(Transform _transform)
     {
@@ -71,4 +101,49 @@ public class CameraManager : Singleton<CameraManager>
         Vector2 direction2D = (forwardDirection * targetDirection.y + rightDirection * targetDirection.x).normalized;
         return new Vector3(direction2D.x, 0, direction2D.y);
     }
+
+    #region PostProcess
+
+    // Ideally target would be another VolumeComponent but for simplicity, we'll only set the intensity therefore passing in just a target float
+
+    public IEnumerator SmoothSetVignette(float target, float duration)
+    {
+        Vignette _vignette;
+        if (GlobalVolume.profile.TryGet(out _vignette))
+        {
+            float startIntensity = _vignette.intensity.value;
+
+            float elapsedTime = 0f;
+            float t = 0;
+            while (elapsedTime < duration)
+            {
+                t = elapsedTime / duration;
+                _vignette.intensity.value = Mathf.Lerp(startIntensity, target, t);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+        }
+        
+    }
+
+    public IEnumerator SmoothSetChromatic(float target, float duration)
+    {
+        ChromaticAberration _chroma;
+        if (GlobalVolume.profile.TryGet(out _chroma))
+        {
+            float startIntensity = _chroma.intensity.value;
+
+            float elapsedTime = 0f;
+            float t = 0;
+            while (elapsedTime < duration)
+            {
+                t = elapsedTime / duration;
+                _chroma.intensity.value = Mathf.Lerp(startIntensity, target, t);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+        }
+    }
+
+    #endregion
 }

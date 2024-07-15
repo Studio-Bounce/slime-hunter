@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
     public bool IsJumping { get { return _isJumping; } }
     public bool IsDashing { get { return _isDashing; } }
 
+    public event Action OnPlayerDashEvent = delegate { };
+
 
     void Start()
     {
@@ -62,6 +64,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        animator.speed = GameManager.Instance.PlayerSpeedMultiplier;
+
         // Gravity simulation
         if (characterController != null && characterController.enabled && useGravity)
         {
@@ -107,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveDirection = CameraManager.Instance.DirectionToCameraForward(transform.position,moveInput);
         // Rotate the player to look at the movement direction
-        float _moveSpeed = moveSpeed;
+        float _moveSpeed = moveSpeed * GameManager.Instance.PlayerSpeedMultiplier;
         if (!weaponController.IsInterruptable() || spellController.isCasting)
         {
             _moveSpeed *= slowDownMultiplierOnAttack;
@@ -142,7 +146,7 @@ public class PlayerController : MonoBehaviour
             _isDashing = true;
             trail.InitiateTrail();
             StartCoroutine(PerformDash(dashDirection));
-
+            OnPlayerDashEvent.Invoke();
             return true;
         }
         return false;
@@ -150,25 +154,25 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PerformDash(Vector3 dashDirection)
     {
-        animator.SetBool(dashBoolash, _isDashing);
+        animator.SetBool(dashBoolash, true);
+        _isDashing = true;
 
-        // Dash follows the curve of y^3 = x from 0 to 1
-        // Provides a quick action in beginning which then slows
-        float dashProgress = 0.0f;
-        float startTime = Time.time;
+        float elapsedTime = 0.0f;
 
-        float prevDashProgress = 0.0f;
-        float prevTime = Time.time;
-        while (dashProgress <= 1.0f)
+        // Initialize previous dash progress
+        float previousDashProgress = 0.0f;
+
+        while (elapsedTime < dashDuration)
         {
-            dashProgress = (Time.time - startTime) / dashDuration;
+            // Increment elapsed time
+            elapsedTime += Time.deltaTime*GameManager.Instance.PlayerSpeedMultiplier;
+            float dashProgress = Mathf.Clamp01(elapsedTime / dashDuration);
             dashProgress = Easing.EaseOutCubic(dashProgress);
 
-            // Dash is very quick. As a result, it can pass through colliders
-            // We need to detect and stop dash if this happens
+            // Check for collisions
             if (CheckForwardCollisions())
             {
-                // Do not use stamina if dash was a failure (movement < 25%)
+                // Return stamina if dash was a failure (movement < 25%)
                 if (dashProgress < 0.25f)
                 {
                     GameManager.Instance.ReturnStamina(dashStaminaUse);
@@ -176,15 +180,19 @@ public class PlayerController : MonoBehaviour
                 break;
             }
 
-            characterController.Move(dashDistance * (dashProgress - prevDashProgress) * dashDirection);
-            prevDashProgress = dashProgress;
-            prevTime = Time.time;
+            // Calculate movement based on deltaTime and progress
+            float distanceCovered = dashDistance * (dashProgress - previousDashProgress);
+            characterController.Move(distanceCovered * dashDirection);
+
+            // Update previous progress for next frame calculation
+            previousDashProgress = dashProgress;
 
             yield return null;
         }
-        
+
+        // Ensure final dash state is applied
         _isDashing = false;
-        animator.SetBool(dashBoolash, _isDashing);
+        animator.SetBool(dashBoolash, false);
         lastDashTime = Time.time;
     }
 

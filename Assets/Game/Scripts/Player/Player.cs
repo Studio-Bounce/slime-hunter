@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Player : DynamicDamageTaker
 {
     public float slowDownOnHitMultiplier = 0.2f;
-    public int slowDownOnHitFrames = 5;
+    public float slowDownTime = 0.5f;
     PlayerController playerController;
 
     protected override void Start()
@@ -41,22 +41,12 @@ public class Player : DynamicDamageTaker
             return false;
         }
 
-        StartCoroutine(SlowDownOnHit());
+        GameManager.Instance.ApplyTempTimeScale(slowDownOnHitMultiplier, slowDownTime);
         GameManager.Instance.PlayerHealth -= (int)damage.value;
         if (GameManager.Instance.PlayerHealth <= 0)
         {
             Death(false);
         }
         return true;
-    }
-
-    IEnumerator SlowDownOnHit()
-    {
-        Time.timeScale = slowDownOnHitMultiplier;
-        for (int i = 0; i < slowDownOnHitFrames; i++)
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        Time.timeScale = 1;
     }
 }

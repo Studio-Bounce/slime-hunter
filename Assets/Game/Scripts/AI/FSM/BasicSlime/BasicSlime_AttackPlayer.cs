@@ -55,10 +55,7 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
         // Disable shadow in slime outer mesh to show transparent material properly
         fsm.slimeOuterMesh.gameObject.layer = GameConstants.IgnoreLightingLayer;
 
-        fsm.Emit(10);
-
-        // Make the weapon active
-        fsm.weapon.ActivateWeapon();
+        fsm.Emit(10); 
 
         // Change eye
         fsm.slimeEnemy.SetEye(EnemyEye.ATTACK);
@@ -93,6 +90,8 @@ public class BasicSlime_AttackPlayer : BasicSlime_BaseState
                 // Check if charge up has been finished
                 if (animationHash != ChargeUpState)
                 {
+                    // Make the weapon active
+                    fsm.weapon.ActivateWeapon();
                     fsm.currentAttackState = SlimeAttackState.DASH;
                 }
 

@@ -47,6 +47,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Player Attributes")]
     public int playerHealth = 100;
     public int playerStamina = 3;
+
     [Tooltip("Amount of Stamina increase per second")]
     public int staminaIncreaseValue = 1;
     public float staminaIncreaseInterval = 0.33f;
@@ -54,32 +55,9 @@ public class GameManager : Singleton<GameManager>
     private float _staminaTimer = 0.0f;
     private bool _cooldown = false;
 
-    // GameState
-    private GameState _gameState = GameState.INVALID;
-
-    // Events
-    public event Action<GameState> OnGameStateChange = delegate { };
-    public event Action<Player> OnPlayerRefChange = delegate { };
-    public event Action<int> OnPlayerHealthChange = delegate { };
-    public event Action<int> OnPlayerStaminaChange = delegate { };
-    public event Action<int> OnPlayerUseStamina = delegate { };
-
-    // Getter/Setters
-    // C# Naming Convention https://softwareengineering.stackexchange.com/questions/212638/is-it-poor-practice-to-name-a-property-member-the-same-as-the-declaring-type-in
-    public GameState GameState
+    public Player PlayerRef
     {
-        get { 
-            return _gameState; 
-        }
-        set {
-            _gameState = value;
-            OnGameStateChange?.Invoke(value);
-        }
-    }
-
-    public Player PlayerRef 
-    { 
-        get 
+        get
         {
             if (_playerRef == null)
             {
@@ -87,7 +65,7 @@ public class GameManager : Singleton<GameManager>
             }
             return _playerRef;
         }
-        set 
+        set
         {
             _playerRef = value;
             OnPlayerRefChange?.Invoke(_playerRef);
@@ -118,6 +96,34 @@ public class GameManager : Singleton<GameManager>
     }
 
     public bool IsFullStamina { get { return playerStamina == PlayerMaxStamina; } }
+
+    // GameState
+
+    private GameState _gameState = GameState.INVALID;
+    public GameState GameState
+    {
+        get
+        {
+            return _gameState;
+        }
+        set
+        {
+            _gameState = value;
+            OnGameStateChange?.Invoke(value);
+        }
+    }
+
+    // Events
+    public event Action<GameState> OnGameStateChange = delegate { };
+    public event Action<Player> OnPlayerRefChange = delegate { };
+    public event Action<int> OnPlayerHealthChange = delegate { };
+    public event Action<int> OnPlayerStaminaChange = delegate { };
+    public event Action<int> OnPlayerUseStamina = delegate { };
+
+    // Time Scaling
+    private bool IsTimeScaled { get { return Time.timeScale != 1; } }
+    public float PlayerSpeedMultiplier { get; set; } = 1.0f; // For externally altering player speed
+
 
     private void Awake()
     {
@@ -185,6 +191,62 @@ public class GameManager : Singleton<GameManager>
         PlayerHealth = PlayerMaxHealth;
         GameState = GameState.GAMEPLAY;
     }
+
+    #region TimeScaling
+
+    public void ApplyTempTimeScale(float slow, float duration)
+    {
+        if (!IsTimeScaled) StartCoroutine(BeginTimeScale(slow, duration));
+    }
+
+    IEnumerator BeginTimeScale(float slow, float duration)
+    {
+        Time.timeScale = slow;
+        yield return new WaitForSeconds(duration*slow);
+        Time.timeScale = 1;
+    }
+
+    public void ApplyReflexTime(float slow, float duration)
+    {
+        if (!IsTimeScaled) StartCoroutine(BeginReflexTime(slow, duration));
+    }
+
+    IEnumerator BeginReflexTime(float slow, float duration)
+    {
+        PlayerSpeedMultiplier = 1 / slow;
+        Time.timeScale = slow;
+        yield return new WaitForSeconds(duration * slow);
+        Time.timeScale = 1;
+        PlayerSpeedMultiplier = 1;
+    }
+
+    public void ApplyTempTimeScaleFrames(float slow, int frameCount)
+    {
+        if (!IsTimeScaled) StartCoroutine(BeginTimeScaleFrames(slow, frameCount));
+    }
+
+    IEnumerator BeginTimeScaleFrames(float slow, int frameCount)
+    {
+        Time.timeScale = slow;
+        for (int i = 0; i < frameCount; i++)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        Time.timeScale = 1;
+    }
+
+    public void TimeFreeze()
+    {
+        StopAllCoroutines();
+        Time.timeScale = 0;
+    }
+
+    public void TimeNormal()
+    {
+        Time.timeScale = 1;
+    }
+
+    #endregion
 
     private void OnDestroy()
     {
