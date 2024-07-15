@@ -762,7 +762,7 @@ MonoBehaviour:
   slimeEnemy: {fileID: 0}
   defaultMat: {fileID: 2100000, guid: a4d73820e607bbf4190be4d4886d28c2, type: 2}
   chaseMat: {fileID: 2100000, guid: a4d73820e607bbf4190be4d4886d28c2, type: 2}
-  attackMat: {fileID: 2100000, guid: f21b9f86456c57f4aaf2dd713eac1d33, type: 2}
+  attackMat: {fileID: 2100000, guid: 6581b3db22b692b48abf45f40ee0609f, type: 2}
   attackGlowIntensity: 3.5
   cooldownTime: 0.5
   seekDistance: 8
@@ -775,6 +775,7 @@ MonoBehaviour:
   slimeAnimator: {fileID: 1065457560711704899}
   dashDuration: 0.5
   dashDistance: 8
+  attackDelay: 0.5
   dashCurve:
     serializedVersion: 2
     m_Curve:
@@ -1187,6 +1188,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4963625624424330605, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f845a639d3b2f3b4d94befc05723f237, type: 2}
     - target: {fileID: -4188395865261524738, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_Layer

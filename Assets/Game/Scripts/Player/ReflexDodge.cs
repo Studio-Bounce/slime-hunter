@@ -66,14 +66,14 @@ public class ReflexDodge : MonoBehaviour
     {
         // Start Reflex
         GameManager.Instance.ApplyReflexTime(dodgeSlowMultiplier, dodgeSlowLength);
-        StartCoroutine(CameraManager.Instance.SmoothSetVignette(0.25f, 0.1f));
-        StartCoroutine(CameraManager.Instance.SmoothSetChromatic(0.5f, 0.1f));
+        StartCoroutine(CameraManager.Instance.SmoothSetVignette(0.2f, 0.02f));
+        StartCoroutine(CameraManager.Instance.SmoothSetChromatic(0.5f, 0.02f));
         yield return new WaitForSeconds(dodgeSlowLength*dodgeSlowMultiplier);
 
         // End Reflex
         _isReflex = false;
-        StartCoroutine(CameraManager.Instance.SmoothSetVignette(0f, 0.1f));
-        StartCoroutine(CameraManager.Instance.SmoothSetChromatic(0f, 0.1f));
+        StartCoroutine(CameraManager.Instance.SmoothSetVignette(0f, 0.2f));
+        StartCoroutine(CameraManager.Instance.SmoothSetChromatic(0f, 0.2f));
     }
 
 #if UNITY_EDITOR
