@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class WanderRadialBounds : MonoBehaviour
+public class RadialWanderBoundary : MonoBehaviour
 {
     public float radius;
     public Color color = new Color(1, 1, 1, 0.8f);

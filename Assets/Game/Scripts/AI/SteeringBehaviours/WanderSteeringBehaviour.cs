@@ -7,7 +7,7 @@ public class WanderSteeringBehaviour : SeekSteeringBehaviour
     public float wanderDistance = 2.0f;
     public float wanderRadius = 1.0f;
     public float wanderJitter = 20.0f;
-    public WanderRadialBounds wanderBounds;
+    public RadialWanderBoundary wanderBounds;
 
     private Vector3 wanderTarget;
 
