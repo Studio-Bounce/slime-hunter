@@ -728,7 +728,7 @@ MonoBehaviour:
   attackMat: {fileID: 0}
   attackGlowIntensity: 0
   cooldownTime: 1
-  seekDistance: 10
+  seekDistance: 15
   wanderSpeed: 4
   chaseSpeed: 0
   attackSpeed: 0
@@ -740,7 +740,7 @@ MonoBehaviour:
   projectile: {fileID: 5722810862771267375, guid: fd3e43c165cb9914984bb09223f422cc,
     type: 3}
   projectileSpeed: 18
-  playerProximityDistance: 4
+  playerProximityDistance: 8
   fleeSpeed: 5
   rotationTime: 0.2
   isAttacking: 0
@@ -815,6 +815,7 @@ MonoBehaviour:
   wanderDistance: 3
   wanderRadius: 1.5
   wanderJitter: 20
+  wanderBounds: {fileID: 0}
 --- !u!1 &7254488463039029475
 GameObject:
   m_ObjectHideFlags: 0
