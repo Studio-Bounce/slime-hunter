@@ -7,6 +7,8 @@ public class WanderSteeringBehaviour : SeekSteeringBehaviour
     public float wanderDistance = 2.0f;
     public float wanderRadius = 1.0f;
     public float wanderJitter = 20.0f;
+    public WanderRadialBounds wanderBounds;
+
     private Vector3 wanderTarget;
 
     private void Start()
@@ -19,9 +21,16 @@ public class WanderSteeringBehaviour : SeekSteeringBehaviour
 
     public override Vector3 CalculateForce()
     {
+        // If out of bounds then wander back to the center
+        if (wanderBounds != null && !wanderBounds.InBounds(transform.position))
+        {
+            Debug.Log("OOB");
+            wanderTarget = wanderBounds.transform.position;
+        }
+
         // Move the point within a small box
         float wanderJitterTimeSlice = wanderJitter * Time.deltaTime;
-        wanderTarget = wanderTarget + new Vector3(Random.Range(-1.0f, 1.0f) * wanderJitterTimeSlice,
+        wanderTarget += new Vector3(Random.Range(-1.0f, 1.0f) * wanderJitterTimeSlice,
                                                   0.0f,
                                                   Random.Range(-1.0f, 1.0f) * wanderJitterTimeSlice);
         

@@ -66,6 +66,7 @@ public class ReflexDodge : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
+        Handles.color = Color.blue;
         Handles.DrawWireArc(transform.position, Vector3.up, Vector3.forward, 360, dodgeRadius);
     }
 #endif
