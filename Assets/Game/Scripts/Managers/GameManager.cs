@@ -191,7 +191,9 @@ public class GameManager : Singleton<GameManager>
         PlayerHealth = PlayerMaxHealth;
         GameState = GameState.GAMEPLAY;
     }
-    
+
+    #region TimeScaling
+
     public void ApplyTempTimeScale(float slow, float duration)
     {
         if (!IsTimeScaled) StartCoroutine(BeginTimeScale(slow, duration));
@@ -202,6 +204,20 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = slow;
         yield return new WaitForSeconds(duration*slow);
         Time.timeScale = 1;
+    }
+
+    public void ApplyReflexTime(float slow, float duration)
+    {
+        if (!IsTimeScaled) StartCoroutine(BeginReflexTime(slow, duration));
+    }
+
+    IEnumerator BeginReflexTime(float slow, float duration)
+    {
+        PlayerSpeedMultiplier = 1 / slow;
+        Time.timeScale = slow;
+        yield return new WaitForSeconds(duration * slow);
+        Time.timeScale = 1;
+        PlayerSpeedMultiplier = 1;
     }
 
     public void ApplyTempTimeScaleFrames(float slow, int frameCount)
@@ -229,6 +245,8 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 1;
     }
+
+    #endregion
 
     private void OnDestroy()
     {

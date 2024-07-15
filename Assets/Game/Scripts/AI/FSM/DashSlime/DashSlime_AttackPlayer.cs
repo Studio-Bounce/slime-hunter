@@ -59,9 +59,6 @@ public class DashSlime_AttackPlayer : BasicSlime_BaseState
         fsm.slimeOuterMesh.gameObject.layer = GameConstants.IgnoreLightingLayer;
         fsm.Emit(10);
 
-        // Make the weapon active
-        fsm.weapon.ActivateWeapon();
-
         // Change eye
         fsm.slimeEnemy.SetEye(EnemyEye.ATTACK);
 
@@ -95,6 +92,8 @@ public class DashSlime_AttackPlayer : BasicSlime_BaseState
                 // Check if charge up has been finished
                 if (animationHash != ChargeUpState)
                 {
+                    // Make the weapon active
+                    fsm.weapon.ActivateWeapon();
                     dashDirection = (target - fsm.transform.position).normalized;
                     fsm.currentAttackState = SlimeAttackState.DASH;
                 }

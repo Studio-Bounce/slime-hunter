@@ -110,8 +110,8 @@ public class BasicSlime_FSM : FSM
 
     protected virtual void OnDrawGizmos()
     {
-        DebugExtension.DrawCircle(transform.position, Color.cyan, seekDistance);
-        DebugExtension.DrawCircle(transform.position, Color.red, attackRadius);
+        DebugExtension.DrawCircle(transform.position, new Color(0, 1, 1, 0.9f), seekDistance);
+        DebugExtension.DrawCircle(transform.position, new Color(1, 0, 0, 0.9f), attackRadius);
     }
 
     public BasicSlime_AttackPlayer.SlimeAttackState GetAttackState()

@@ -6,6 +6,7 @@ using UnityEngine;
 public class WanderRadialBounds : MonoBehaviour
 {
     public float radius;
+    public Color color = new Color(1, 1, 1, 0.8f);
 
     public bool InBounds(Vector3 pos)
     {
@@ -15,7 +16,7 @@ public class WanderRadialBounds : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Handles.color = Color.white;
+        Handles.color = color;
         Handles.DrawWireArc(transform.position, Vector3.up, Vector3.forward, 360, radius, 4);
     }
 #endif

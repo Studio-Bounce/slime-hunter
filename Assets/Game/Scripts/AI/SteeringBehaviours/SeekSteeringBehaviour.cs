@@ -82,8 +82,8 @@ public class SeekSteeringBehaviour : SteeringBehaviourBase
     {
         if (steeringAgent != null)
         {
-            DebugExtension.DebugArrow(transform.position, desiredVelocity, Color.red);
-            DebugExtension.DebugArrow(transform.position, steeringAgent.velocity, Color.blue);
+            DebugExtension.DebugArrow(transform.position, desiredVelocity, new Color(1, 0, 0, 0.8f));
+            DebugExtension.DebugArrow(transform.position, steeringAgent.velocity, new Color(0, 0, 1, 0.8f));
         }
 
         DebugExtension.DebugPoint(target, Color.magenta);
@@ -91,7 +91,7 @@ public class SeekSteeringBehaviour : SteeringBehaviourBase
         // Cached positions
         for (int i = 0; i < positionCache.Count; i++)
         {
-            DebugExtension.DebugPoint(positionCache[i], Color.red);
+            DebugExtension.DebugPoint(positionCache[i], new Color(1, 0, 0, 0.8f));
         }
     }
 }
