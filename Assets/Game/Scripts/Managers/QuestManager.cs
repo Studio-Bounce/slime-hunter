@@ -24,7 +24,7 @@ public class QuestManager : Singleton<QuestManager>
 
     private void LateUpdate()
     {
-        TrackActiveQuest();
+        //TrackActiveQuest();
     }
 
     void TrackActiveQuest()
@@ -104,6 +104,11 @@ public class QuestManager : Singleton<QuestManager>
         }
         activeQuest = quest;
         activeQuest.isActive = true;
+        Transform target = activeQuest.objectives[activeQuest.currentObjective].target;
+        if (target != null)
+        {
+            UIManager.Instance.StartNavigation(target.position);
+        }
         OnActiveQuestChange.Invoke(activeQuest.questName, activeQuest.objectives[activeQuest.currentObjective].objective);
     }
 

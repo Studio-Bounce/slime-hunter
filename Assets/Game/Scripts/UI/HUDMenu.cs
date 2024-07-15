@@ -28,6 +28,12 @@ public class HUDMenu : Menu
     Label questNameLabel;
     Label questDescriptionLabel;
 
+    // Navigation
+    [SerializeField] float compassRotationOffset = 180.0f;
+    Vector3 navTarget = Vector3.zero;  // in world space
+    bool navigate = false;
+    VisualElement compassNeedle;
+
     bool redAlertUp = false;
 
     // Cached as they're getting called in OnDestroy
@@ -69,6 +75,19 @@ public class HUDMenu : Menu
         
         questNameVE.style.display = DisplayStyle.None;
         questDescriptionLabel.style.display = DisplayStyle.None;
+
+        // Navigation
+        VisualElement navigation = leftBg.Q<VisualElement>("NavigationContainer");
+        compassNeedle = navigation.Q<VisualElement>("CompassNeedle");
+        navigate = false;
+    }
+
+    private void FixedUpdate()
+    {
+        if (navigate)
+        {
+            UpdateCompass();
+        }
     }
 
     // ------------------------------ Health ------------------------------
@@ -177,6 +196,36 @@ public class HUDMenu : Menu
         questDescriptionLabel.style.display = DisplayStyle.Flex;
         questNameLabel.text = questName;
         questDescriptionLabel.text = questDescription;
+    }
+
+    // ------------------------------ Navigation -------------------------------
+
+    void UpdateCompass()
+    {
+        if (GameManager.Instance.PlayerRef == null)
+        {
+            return;
+        }
+        Vector3 playerPosition = GameManager.Instance.PlayerRef.transform.position;
+        Vector3 direction = (navTarget - playerPosition);
+        direction.y = 0;
+        direction.Normalize();
+        float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+        Transform cameraT = CameraManager.ActiveCamera.transform;
+        Vector3 angleVec = new Vector3(0, 0, cameraT.eulerAngles.y - angle + compassRotationOffset);
+        compassNeedle.transform.rotation = Quaternion.Euler(angleVec);
+    }
+
+    public void StartNavigation(Vector3 target)
+    {
+        navigate = true;
+        navTarget = target;
+    }
+
+    public void StopNavigation()
+    {
+        navigate = false;
+        navTarget = Vector3.zero;
     }
 
     private void OnDestroy()
