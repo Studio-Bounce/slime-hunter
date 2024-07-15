@@ -42,6 +42,16 @@ public class UIManager : Singleton<UIManager>
         HUDMenu.SetVisible(active);
     }
 
+    public void StartNavigation(Vector3 target)
+    {
+        ((HUDMenu)HUDMenu).StartNavigation(target);
+    }
+
+    public void StopNavigation()
+    {
+        ((HUDMenu)HUDMenu).StopNavigation();
+    }
+
     // ----------------- Auto-save -----------------
     public void ShowAutoSave()
     {
