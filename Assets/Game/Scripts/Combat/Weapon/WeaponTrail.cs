@@ -12,6 +12,10 @@ public class WeaponTrail : DamageDealer
     public int meshResolution = 3;
     public bool liveReload = false;
 
+    [Header("Weapon Feel")]
+    [Tooltip("Frames to pause game before continuing")]
+    public int framesToPause;
+
     private MeshCollider _collider;
     private int _vertexCount;
 
@@ -46,6 +50,16 @@ public class WeaponTrail : DamageDealer
     {
         base.Update();
         if (liveReload) _SetupArcMesh();
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+        if (attackDetected)
+        {
+            // Impact frames
+            GameManager.Instance.ApplyTempTimeScaleFrames(0, framesToPause);
+        }
     }
 
     public void SetupWeaponSettings(WeaponSO weaponSO)
@@ -109,7 +123,7 @@ public class WeaponTrail : DamageDealer
         float _normalTime = 0.0f;
         while (_timer < duration && active)
         {
-            _timer += Time.deltaTime;
+            _timer += Time.deltaTime*GameManager.Instance.PlayerSpeedMultiplier;
             _normalTime = _timer / duration;
             trailMaterial.SetFloat("_Factor", _normalTime);
             yield return null;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17865337, g: 0.22369754, b: 0.30563766, a: 1}
+  m_IndirectSpecularColor: {r: 0.17865306, g: 0.22369696, b: 0.30563658, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -41692,7 +41692,6 @@ MonoBehaviour:
   uuid: c7d91147-84ec-4e79-a941-19b9d5fcae5b
   boundSize: {x: 21.2, y: 16.5}
   boundHeight: 3
-  collisionTag: Player
   wallPrefab: {fileID: 2850414775290573905, guid: 16c2bd6ed417f2049bf17a60907d31d5,
     type: 3}
   wallWidth: 1
@@ -44932,74 +44931,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2062949764}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &2068247725
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 760224836634179687, guid: ad3b24ad04509a04ab78ee9b823fdfa7,
-        type: 3}
-      propertyPath: m_Name
-      value: S_Grass_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4629516020886954238, guid: ad3b24ad04509a04ab78ee9b823fdfa7,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -19.957716
-      objectReference: {fileID: 0}
-    - target: {fileID: 4629516020886954238, guid: ad3b24ad04509a04ab78ee9b823fdfa7,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 8.104304
-      objectReference: {fileID: 0}
-    - target: {fileID: 4629516020886954238, guid: ad3b24ad04509a04ab78ee9b823fdfa7,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 73.45146
-      objectReference: {fileID: 0}
-    - target: {fileID: 4629516020886954238, guid: ad3b24ad04509a04ab78ee9b823fdfa7,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4629516020886954238, guid: ad3b24ad04509a04ab78ee9b823fdfa7,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4629516020886954238, guid: ad3b24ad04509a04ab78ee9b823fdfa7,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4629516020886954238, guid: ad3b24ad04509a04ab78ee9b823fdfa7,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4629516020886954238, guid: ad3b24ad04509a04ab78ee9b823fdfa7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4629516020886954238, guid: ad3b24ad04509a04ab78ee9b823fdfa7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4629516020886954238, guid: ad3b24ad04509a04ab78ee9b823fdfa7,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ad3b24ad04509a04ab78ee9b823fdfa7, type: 3}
 --- !u!1001 &2068983847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47620,7 +47551,6 @@ SceneRoots:
   - {fileID: 1856952892}
   - {fileID: 1269360599}
   - {fileID: 620500966}
-  - {fileID: 2068247725}
   - {fileID: 786410606}
   - {fileID: 4042643037896673162}
   - {fileID: 1666723712}

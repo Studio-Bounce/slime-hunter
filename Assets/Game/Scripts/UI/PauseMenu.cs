@@ -22,14 +22,14 @@ public class PauseMenu : Menu
     {
         GameManager.Instance.GameState = GameState.PAUSED;
         SetVisible(true);
-        Time.timeScale = 0;
+        GameManager.Instance.TimeFreeze();
         InventoryManager.Instance.UpdateInventoryUI();
     }
 
     public void Unpause()
     {
         SetVisible(false);
-        Time.timeScale = 1;
+        GameManager.Instance.TimeNormal();
     }
 
     private void ReturnMainMenu()
