@@ -1946,6 +1946,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 606331671084474555, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+        type: 3}
+      propertyPath: fallbackWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c,
+        type: 2}
     - target: {fileID: 886262207501665116, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
         type: 3}
       propertyPath: m_Enabled
