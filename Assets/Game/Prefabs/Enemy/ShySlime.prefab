@@ -231,7 +231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2}
+  m_AnchoredPosition: {x: 0, y: 1}
   m_SizeDelta: {x: 850, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7627680177218896917
@@ -396,7 +396,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1 &6049059769121687838
+--- !u!1 &7400268156250200628
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,22 +404,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6957836529911761091}
-  - component: {fileID: 8433862984451030069}
+  - component: {fileID: 2719553742187773741}
+  - component: {fileID: 1860402855733763571}
   m_Layer: 7
-  m_Name: AI_Seek
+  m_Name: AI_Flee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6957836529911761091
+--- !u!4 &2719553742187773741
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6049059769121687838}
+  m_GameObject: {fileID: 7400268156250200628}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -428,27 +428,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8529491203750411947}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8433862984451030069
+--- !u!114 &1860402855733763571
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6049059769121687838}
+  m_GameObject: {fileID: 7400268156250200628}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f4f44dd39e7d7d4db3b6498bdb25d23, type: 3}
+  m_Script: {fileID: 11500000, guid: 05bfc7ebe5cacee4aa0d61ab101a09d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weight: 1
   target: {x: 0, y: 0, z: 0}
-  useMouseInput: 0
+  useMouseInput: 1
   steeringAgent: {fileID: 0}
-  performStuckDetection: 0
-  stopThreshold: 0.15
-  cacheLength: 10
-  cacheInterval: 0.25
-  stuckThreshold: 0.01
+  enemyTarget: {fileID: 0}
+  fleeDistance: 5
 --- !u!1 &7535947962492585048
 GameObject:
   m_ObjectHideFlags: 0
@@ -633,13 +630,13 @@ GameObject:
   - component: {fileID: 2767975063603732144}
   - component: {fileID: 3801100224341897558}
   - component: {fileID: 2869985602088549266}
-  - component: {fileID: 2604173200149926611}
+  - component: {fileID: 4481492702426782661}
   - component: {fileID: 4646127613627469845}
   - component: {fileID: 3662461099208768734}
   - component: {fileID: 4347139268971403823}
   - component: {fileID: 984750678147540403}
   m_Layer: 7
-  m_Name: DashSlime
+  m_Name: ShySlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -660,7 +657,7 @@ Transform:
   m_Children:
   - {fileID: 6352724013957278521}
   - {fileID: 8051194959718624441}
-  - {fileID: 6957836529911761091}
+  - {fileID: 2719553742187773741}
   - {fileID: 4975995372773821764}
   - {fileID: 997298657960752899}
   m_Father: {fileID: 0}
@@ -739,7 +736,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &2604173200149926611
+--- !u!114 &4481492702426782661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -748,22 +745,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 8820871006783578033}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2028c06d947479f46ae38d5322bc15bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 998c6ea22b9931e448fbbec87862df68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FSMController: {fileID: 9100000, guid: f2cd41cc26ec67043b75e68ced36586b, type: 2}
+  FSMController: {fileID: 9100000, guid: 77b73fbfa1b4b754795ee1a0f32ff21a, type: 2}
   currentAttackState: 3
-  seekSteeringBehaviour: {fileID: 8433862984451030069}
-  wanderSteeringBehaviour: {fileID: 386777113257166750}
+  seekSteeringBehaviour: {fileID: 0}
+  wanderSteeringBehaviour: {fileID: 0}
   slimeAgent: {fileID: 0}
   characterController: {fileID: 0}
   slimeOuterMesh: {fileID: 2201507902128942745}
   weapon: {fileID: 0}
   slimeEnemy: {fileID: 0}
-  defaultMat: {fileID: 2100000, guid: a4d73820e607bbf4190be4d4886d28c2, type: 2}
-  chaseMat: {fileID: 2100000, guid: a4d73820e607bbf4190be4d4886d28c2, type: 2}
-  attackMat: {fileID: 2100000, guid: f21b9f86456c57f4aaf2dd713eac1d33, type: 2}
-  attackGlowIntensity: 3.5
+  defaultMat: {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
+  chaseMat: {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
+  attackMat: {fileID: 2100000, guid: 6581b3db22b692b48abf45f40ee0609f, type: 2}
+  attackGlowIntensity: 2
   cooldownTime: 0.5
   seekDistance: 8
   wanderSpeed: 1
@@ -773,60 +770,6 @@ MonoBehaviour:
   attackEmissionTime: 0.1
   attackProximity: 1
   slimeAnimator: {fileID: 1065457560711704899}
-  dashDuration: 0.5
-  dashDistance: 8
-  attackDelay: 0.5
-  dashCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 6.109096
-      outSlope: 6.109096
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.11152649
-      value: 0.68132603
-      inSlope: 3.3122895
-      outSlope: 3.3122895
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.67773396
-      value: 0.9731964
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.17219897
-      outWeight: 0.5329014
-    - serializedVersion: 3
-      time: 0.82443696
-      value: 1.0028193
-      inSlope: 0.09817733
-      outSlope: 0.09817733
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -0.016058618
-      outSlope: -0.016058618
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &4646127613627469845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1140,6 +1083,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1187,6 +1145,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4963625624424330605, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
@@ -1242,7 +1205,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 8b07ff78321402a4fae401d6a756fa1d, type: 2}
+      objectReference: {fileID: 9100000, guid: 63b410539ff2f26468cd649d7ad4c133, type: 2}
     - target: {fileID: 6427321115966553525, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalRotation.y
