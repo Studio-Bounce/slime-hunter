@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class PersistenceManager : Singleton<PersistenceManager>
 {
+    [SerializeField] bool enableAutosave = false;
     [Tooltip("Time between each auto-save")]
     [SerializeField] float autoSaveInterval = 5.0f;
 
-    public List<PersistentObject> persistentGameObjects = new List<PersistentObject>();
+    List<PersistentObject> persistentGameObjects = new List<PersistentObject>();
     const string SAVE_FOLDER = "slime_hunter_save";
 
     private void Awake()
@@ -21,8 +22,11 @@ public class PersistenceManager : Singleton<PersistenceManager>
 
     private void Start()
     {
-        // Auto-save every x seconds
-        StartCoroutine(AutoSaveSequence());
+        if (enableAutosave)
+        {
+            // Auto-save every x seconds
+            StartCoroutine(AutoSaveSequence());
+        }
     }
 
     IEnumerator AutoSaveSequence()

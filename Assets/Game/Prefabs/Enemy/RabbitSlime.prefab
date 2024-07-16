@@ -618,6 +618,7 @@ MonoBehaviour:
   wanderDistance: 3
   wanderRadius: 1.5
   wanderJitter: 20
+  wanderBounds: {fileID: 0}
 --- !u!1 &6098775063094207403
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,7 +911,6 @@ MonoBehaviour:
     knockback: 0
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
-  framesToPause: 0
   cameraShakeIntensity: 5
   cameraShakeTime: 0.05
   slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
@@ -1289,8 +1289,60 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4891676867449732793}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -552784701103934427, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6301417994284603901}
   m_SourcePrefab: {fileID: 100100000, guid: 772ae3dc15e833f40999ac3cb2013fa2, type: 3}
+--- !u!1 &604983279815462163 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -552784701103934427, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 8084322144036485430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6301417994284603901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604983279815462163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d9b85cbcfb0b942bb0243754c49708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnVisible:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8400284841796279740}
+        m_TargetAssemblyTypeName: SlimeSteeringAgent, Assembly-CSharp
+        m_MethodName: UnpauseAgent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnInvisible:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8400284841796279740}
+        m_TargetAssemblyTypeName: SlimeSteeringAgent, Assembly-CSharp
+        m_MethodName: PauseAgent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!137 &1112610852234478933 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: -53619314171823005, guid: 772ae3dc15e833f40999ac3cb2013fa2,
