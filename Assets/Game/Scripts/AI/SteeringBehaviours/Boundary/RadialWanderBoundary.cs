@@ -1,14 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
-public class RadialWanderBoundary : MonoBehaviour
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+public class RadialWanderBoundary : WanderBoundary
 {
     public float radius;
     public Color color = new Color(1, 1, 1, 0.8f);
 
-    public bool InBounds(Vector3 pos)
+    public override bool InBounds(Vector3 pos)
     {
         return Vector3.Distance(transform.position, pos) < radius;
     }
