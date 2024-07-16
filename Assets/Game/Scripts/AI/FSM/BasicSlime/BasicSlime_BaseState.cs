@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BasicSlime_BaseState : FSMBaseState<BasicSlime_FSM>
 {
@@ -23,10 +24,19 @@ public class BasicSlime_BaseState : FSMBaseState<BasicSlime_FSM>
         }
     }
 
+    protected void ForceBackToBase(AnimatorStateInfo stateInfo)
+    {
+        if (fsm.wanderSteeringBehaviour.wanderBounds == null) return;
+        if (fsm.wanderSteeringBehaviour.InOuterBounds) return;
+
+        fsm.ChangeState(fsm.BackToBaseStateName);
+    }
+
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
         BaseStunDetection(stateInfo);
+        ForceBackToBase(stateInfo);
     }
 }

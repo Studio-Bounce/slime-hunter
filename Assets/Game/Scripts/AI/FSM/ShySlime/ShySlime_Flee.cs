@@ -41,4 +41,11 @@ public class ShySlime_Flee : BasicSlime_BaseState
             sFSM.ChangeState(sFSM.WanderAroundStateName);
         }
     }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateExit(animator, stateInfo, layerIndex);
+        sFSM.fleeSteeringBehaviour.enabled = false;
+        sFSM.fleeSteeringBehaviour.gameObject.SetActive(false);
+    }
 }

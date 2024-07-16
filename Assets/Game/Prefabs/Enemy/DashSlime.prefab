@@ -752,6 +752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FSMController: {fileID: 9100000, guid: f2cd41cc26ec67043b75e68ced36586b, type: 2}
+  lockState: 0
   currentAttackState: 3
   seekSteeringBehaviour: {fileID: 8433862984451030069}
   wanderSteeringBehaviour: {fileID: 386777113257166750}
@@ -766,10 +767,12 @@ MonoBehaviour:
   attackGlowIntensity: 3.5
   cooldownTime: 0.5
   seekDistance: 8
-  wanderSpeed: 1
   chaseSpeed: 7
   attackSpeed: 80
   attackRadius: 6
+  wanderSpeed: 1
+  returnToBaseSpeed: 10
+  returnToBaseLockedDuration: 3
   attackEmissionTime: 0.1
   attackProximity: 1
   slimeAnimator: {fileID: 1065457560711704899}
@@ -853,6 +856,7 @@ MonoBehaviour:
   stunned: 0
   normalEye: {fileID: 8580069880333395135}
   attackEye: {fileID: 2369544507332571313}
+  scaredEye: {fileID: 0}
   deathEye: {fileID: 7049523281270179399}
   damageEyeTimer: 0.25
   hitVFX: {fileID: 6171747905485276744}

@@ -6,6 +6,7 @@ public class BasicSlime_FSM : FSM
 {
     public readonly int ChasePlayerStateName = Animator.StringToHash("ChasePlayer");
     public readonly int WanderAroundStateName = Animator.StringToHash("WanderAround");
+    public readonly int BackToBaseStateName = Animator.StringToHash("BackToBase");
     public readonly int AttackPlayerStateName = Animator.StringToHash("AttackPlayer");
     public readonly int CooldownStateName = Animator.StringToHash("Cooldown");
     public readonly int DeadStateName = Animator.StringToHash("Dead");
@@ -34,10 +35,13 @@ public class BasicSlime_FSM : FSM
     [Tooltip("Attributes which change the slime's combat behaviour.")]
     public float cooldownTime = 3.0f;
     public float seekDistance = 20.0f;
-    public float wanderSpeed = 1.0f;
     public float chaseSpeed = 5.0f;
     public float attackSpeed = 10.0f;
     public float attackRadius = 2.0f;
+    // Wander Settings
+    public float wanderSpeed = 1.0f;
+    public float backToBaseSpeed = 10.0f;
+    public float backToBaseLockedDuration = 3.0f;
     [Tooltip("Time taken in reaching full emission before attack")]
     public float attackEmissionTime = 1.0f;
     [Tooltip("How far can the slime hit while on rest?")]

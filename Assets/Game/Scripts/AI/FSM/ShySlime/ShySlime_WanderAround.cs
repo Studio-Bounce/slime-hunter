@@ -5,15 +5,16 @@ using UnityEngine;
 public class ShySlime_WanderAround : BasicSlime_WanderAround
 {
     private ShySlime_FSM sFSM;
-    private FleeSteeringBehaviour fleeSteeringBehaviour;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         sFSM = fsm as ShySlime_FSM;
+        fsm.seekSteeringBehaviour.enabled = false;
+        fsm.seekSteeringBehaviour.gameObject.SetActive(false);
         fsm.wanderSteeringBehaviour.enabled = true;
         fsm.wanderSteeringBehaviour.gameObject.SetActive(true);
-        sFSM.fleeSteeringBehaviour.enabled = true;
-        sFSM.fleeSteeringBehaviour.gameObject.SetActive(true);
+        sFSM.fleeSteeringBehaviour.enabled = false;
+        sFSM.fleeSteeringBehaviour.gameObject.SetActive(false);
         fsm.slimeAgent.reachedGoal = false;
         fsm.slimeAgent.maxSpeed = fsm.wanderSpeed;
         fsm.slimeEnemy.SetEye(EnemyEye.NORMAL);
@@ -21,12 +22,21 @@ public class ShySlime_WanderAround : BasicSlime_WanderAround
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        base.OnStateUpdate(animator, stateInfo, layerIndex);
-
+        BaseStunDetection(stateInfo);
+        ForceBackToBase(stateInfo);
+        Debug.Log(sFSM);
+        Debug.Log(sFSM.playerProximityDistance);
         // If slime reached close to player, switch to flee
         if (Vector3.Distance(fsm.transform.position, fsm.GetPlayerPosition()) <= sFSM.playerProximityDistance)
         {
             fsm.ChangeState(sFSM.FleePlayerStateName);
         }
+    }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateExit(animator, stateInfo, layerIndex);
+        fsm.wanderSteeringBehaviour.enabled = false;
+        fsm.wanderSteeringBehaviour.gameObject.SetActive(false);
     }
 }

@@ -396,6 +396,59 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6249711066716175209
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5554275488525822574}
+  - component: {fileID: 825238505176620728}
+  m_Layer: 7
+  m_Name: AI_Seek
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5554275488525822574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249711066716175209}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.2286184, y: -8.3847065, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8529491203750411947}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &825238505176620728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249711066716175209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f4f44dd39e7d7d4db3b6498bdb25d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  target: {x: 0, y: 0, z: 0}
+  useMouseInput: 0
+  steeringAgent: {fileID: 0}
+  performStuckDetection: 0
+  stopThreshold: 0.15
+  cacheLength: 10
+  cacheInterval: 0.25
+  stuckThreshold: 0.01
 --- !u!1 &7400268156250200628
 GameObject:
   m_ObjectHideFlags: 0
@@ -656,6 +709,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6352724013957278521}
+  - {fileID: 5554275488525822574}
   - {fileID: 8051194959718624441}
   - {fileID: 2719553742187773741}
   - {fileID: 4975995372773821764}
@@ -749,8 +803,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FSMController: {fileID: 9100000, guid: 77b73fbfa1b4b754795ee1a0f32ff21a, type: 2}
+  lockState: 0
   currentAttackState: 3
-  seekSteeringBehaviour: {fileID: 0}
+  seekSteeringBehaviour: {fileID: 825238505176620728}
   wanderSteeringBehaviour: {fileID: 386777113257166750}
   slimeAgent: {fileID: 0}
   characterController: {fileID: 0}
@@ -763,10 +818,12 @@ MonoBehaviour:
   attackGlowIntensity: 2
   cooldownTime: 0.5
   seekDistance: 8
-  wanderSpeed: 1
   chaseSpeed: 7
   attackSpeed: 80
   attackRadius: 6
+  wanderSpeed: 1
+  backToBaseSpeed: 10
+  backToBaseLockedDuration: 3
   attackEmissionTime: 0.1
   attackProximity: 1
   slimeAnimator: {fileID: 1065457560711704899}
@@ -824,7 +881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   summingMethod: 0
-  mass: 1
+  mass: 0.1
   maxSpeed: 1
   alwaysUseMaxSpeed: 0
   maxForce: 10

@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class FSM : MonoBehaviour
 {
     public RuntimeAnimatorController FSMController;
+
+    public bool lockState = false;
 
     public Animator fsmAnimator { get; private set; }
 
@@ -26,13 +29,28 @@ public abstract class FSM : MonoBehaviour
         }
     }
 
+    // Deny any state changes temporarily
+    public void LockStateForSeconds(float duration)
+    {
+        if (!lockState) StartCoroutine(TempStopStateChanges(duration));
+    }
+
+    private IEnumerator TempStopStateChanges(float duration)
+    {
+        lockState = true;
+        yield return new WaitForSeconds(duration);
+        lockState = false;
+    }
+
     public bool ChangeState(string _stateName)
     {
+        if (lockState) return false;
         return ChangeState(Animator.StringToHash(_stateName));
     }
 
     public bool ChangeState(int _stateName)
     {
+        if (lockState) return false;
         bool hasState = true;
 #if UNITY_EDITOR
         //hasState = fsmAnimator.HasState(-1, _stateName);

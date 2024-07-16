@@ -11,6 +11,9 @@ public class WanderSteeringBehaviour : SeekSteeringBehaviour
 
     private Vector3 wanderTarget;
 
+    public bool InInnerBounds { get { return wanderBounds.InBounds(transform.position); } }
+    public bool InOuterBounds { get { return wanderBounds.InOuterBounds(transform.position); } }
+
     private void Start()
     {
         float theta = (float)Random.value * Mathf.PI * 2;
@@ -38,7 +41,7 @@ public class WanderSteeringBehaviour : SeekSteeringBehaviour
         target = steeringAgent.transform.rotation * target + steeringAgent.transform.position;
 
         // If out of bounds then wander back to the center
-        if (wanderBounds != null && !wanderBounds.InBounds(transform.position))
+        if (wanderBounds != null && !InInnerBounds)
         {
             target = wanderBounds.Center;
         }
