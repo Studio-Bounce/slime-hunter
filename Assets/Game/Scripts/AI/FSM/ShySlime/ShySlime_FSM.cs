@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShySlime_FSM : BasicSlime_FSM
 {
     [Header("ShySlime Properties")]
     public readonly int FleePlayerStateName = Animator.StringToHash("FleePlayer");
