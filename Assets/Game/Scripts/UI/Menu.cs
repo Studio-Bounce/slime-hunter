@@ -15,6 +15,7 @@ public class Menu : MonoBehaviour
     protected virtual void Awake()
     {
         uiDocument = GetComponent<UIDocument>();
+        uiDocument.enabled = true;
         SetVisible(showOnStart);
     }
 
