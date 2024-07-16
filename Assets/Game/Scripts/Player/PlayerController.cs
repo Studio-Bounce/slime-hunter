@@ -172,8 +172,8 @@ public class PlayerController : MonoBehaviour
             // Check for collisions
             if (CheckForwardCollisions())
             {
-                // Return stamina if dash was a failure (movement < 25%)
-                if (dashProgress < 0.25f)
+                // Return stamina if dash was a failure (movement < 50%)
+                if (dashProgress < 0.5f)
                 {
                     GameManager.Instance.ReturnStamina(dashStaminaUse);
                 }
@@ -198,8 +198,8 @@ public class PlayerController : MonoBehaviour
 
     bool CheckForwardCollisions()
     {
-        // Dash detection happens at 1/2 of the player height
-        if (Physics.Raycast(transform.position + characterController.height * 0.5f * Vector3.up, transform.forward, out _, 1.0f))
+        // Dash detection happens at 3/4th of the player height
+        if (Physics.Raycast(transform.position + characterController.height * 0.75f * Vector3.up, transform.forward, out _, 1.0f))
         {
             return true;
         }
