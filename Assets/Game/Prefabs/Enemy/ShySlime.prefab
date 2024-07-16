@@ -231,7 +231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: 1.25}
   m_SizeDelta: {x: 850, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7627680177218896917
@@ -751,14 +751,14 @@ MonoBehaviour:
   FSMController: {fileID: 9100000, guid: 77b73fbfa1b4b754795ee1a0f32ff21a, type: 2}
   currentAttackState: 3
   seekSteeringBehaviour: {fileID: 0}
-  wanderSteeringBehaviour: {fileID: 0}
+  wanderSteeringBehaviour: {fileID: 386777113257166750}
   slimeAgent: {fileID: 0}
   characterController: {fileID: 0}
   slimeOuterMesh: {fileID: 2201507902128942745}
   weapon: {fileID: 0}
   slimeEnemy: {fileID: 0}
-  defaultMat: {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
-  chaseMat: {fileID: 2100000, guid: 66e26077505288549ae93cb0ceaa7a10, type: 2}
+  defaultMat: {fileID: 2100000, guid: 42c969ae0a6221f498db40eebbaffac8, type: 2}
+  chaseMat: {fileID: 2100000, guid: 42c969ae0a6221f498db40eebbaffac8, type: 2}
   attackMat: {fileID: 2100000, guid: 6581b3db22b692b48abf45f40ee0609f, type: 2}
   attackGlowIntensity: 2
   cooldownTime: 0.5
@@ -770,6 +770,9 @@ MonoBehaviour:
   attackEmissionTime: 0.1
   attackProximity: 1
   slimeAnimator: {fileID: 1065457560711704899}
+  fleeSteeringBehaviour: {fileID: 1860402855733763571}
+  playerProximityDistance: 5
+  fleeSpeed: 5
 --- !u!114 &4646127613627469845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -796,6 +799,7 @@ MonoBehaviour:
   stunned: 0
   normalEye: {fileID: 8580069880333395135}
   attackEye: {fileID: 2369544507332571313}
+  scaredEye: {fileID: 2369544507332571313}
   deathEye: {fileID: 7049523281270179399}
   damageEyeTimer: 0.25
   hitVFX: {fileID: 6171747905485276744}
@@ -1155,7 +1159,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: f845a639d3b2f3b4d94befc05723f237, type: 2}
+      objectReference: {fileID: 2100000, guid: 42c969ae0a6221f498db40eebbaffac8, type: 2}
     - target: {fileID: -4188395865261524738, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_Layer
@@ -1200,7 +1204,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: a4d73820e607bbf4190be4d4886d28c2, type: 2}
+      objectReference: {fileID: 2100000, guid: 42c969ae0a6221f498db40eebbaffac8, type: 2}
     - target: {fileID: 5866666021909216657, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_Controller

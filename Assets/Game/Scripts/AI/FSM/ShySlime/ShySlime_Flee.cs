@@ -4,31 +4,27 @@ using UnityEngine;
 
 public class ShySlime_Flee : BasicSlime_BaseState
 {
-    public virtual void SetChaseTarget()
+    ShySlime_FSM sFSM;
+
+    public virtual void SetFleeTarget()
     {
-        fsm.seekSteeringBehaviour.target = fsm.GetPlayerPosition();
+        sFSM.fleeSteeringBehaviour.target = sFSM.GetPlayerPosition();
     }
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        SetChaseTarget();
-        fsm.slimeAgent.reachedGoal = false;
-        fsm.slimeAgent.maxSpeed = fsm.chaseSpeed;
+        sFSM = fsm as ShySlime_FSM;
+        // Enable flee, disable wandering
+        sFSM.fleeSteeringBehaviour.enabled = true;
+        sFSM.fleeSteeringBehaviour.gameObject.SetActive(true);
+        sFSM.wanderSteeringBehaviour.enabled = false;
+        sFSM.wanderSteeringBehaviour.gameObject.SetActive(false);
+        SetFleeTarget();
 
-        // Enable seeking, disable wandering
-        fsm.seekSteeringBehaviour.enabled = true;
-        fsm.seekSteeringBehaviour.gameObject.SetActive(true);
-        fsm.wanderSteeringBehaviour.enabled = false;
-        fsm.wanderSteeringBehaviour.gameObject.SetActive(false);
+        sFSM.slimeAgent.reachedGoal = false;
+        sFSM.slimeAgent.maxSpeed = sFSM.fleeSpeed;
 
-        // Change slime material (color)
-        if (fsm.slimeOuterMesh.materials.Length > 0)
-        {
-            Material[] mats = { fsm.chaseMat };
-            fsm.slimeOuterMesh.materials = mats;
-        }
-
-        fsm.slimeEnemy.SetEye(EnemyEye.NORMAL);
+        sFSM.slimeEnemy.SetEye(EnemyEye.SCARED);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -36,28 +32,13 @@ public class ShySlime_Flee : BasicSlime_BaseState
         base.OnStateUpdate(animator, stateInfo, layerIndex);
 
         // Player can move so keep adjusting target
-        SetChaseTarget();
+        SetFleeTarget();
 
-        float playerDistance = Vector3.Distance(fsm.slimeAgent.transform.position, fsm.GetPlayerPosition());
-        // If player evaded, switch back to wander
-        if (playerDistance > fsm.seekDistance)
+        float playerDistance = Vector3.Distance(sFSM.transform.position, sFSM.GetPlayerPosition());
+        // If evade was successful, switch back to wander
+        if (playerDistance > sFSM.playerProximityDistance)
         {
-            fsm.ChangeState(fsm.WanderAroundStateName);
-        }
-        // If player is within attack radius, attack him
-        else if (playerDistance < fsm.attackRadius)
-        {
-            fsm.ChangeState(fsm.AttackPlayerStateName);
-        }
-    }
-
-    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        // Revert slime material (color)
-        if (fsm.slimeOuterMesh.materials.Length > 0)
-        {
-            Material[] mats = { fsm.defaultMat };
-            fsm.slimeOuterMesh.materials = mats;
+            sFSM.ChangeState(sFSM.WanderAroundStateName);
         }
     }
 }
