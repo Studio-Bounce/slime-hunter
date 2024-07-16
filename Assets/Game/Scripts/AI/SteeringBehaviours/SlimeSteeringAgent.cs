@@ -9,6 +9,8 @@ public class SlimeSteeringAgent : SteeringAgent
 
     private readonly int IsMoving = Animator.StringToHash("isMoving");
 
+    bool pauseBehaviour = true;
+
     protected override void Start()
     {
         base.Start();
@@ -18,9 +20,23 @@ public class SlimeSteeringAgent : SteeringAgent
 
     protected override void Update()
     {
+        // No point in updating AI without them being visible
+        if (pauseBehaviour)
+            return;
+
         base.Update();
 
         forceStopMovement = (slimeModel.localPosition.y <= 0);
         animator.SetBool(IsMoving, velocity.magnitude != 0);
+    }
+
+    public void PauseAgent()
+    {
+        pauseBehaviour = true;
+    }
+
+    public void UnpauseAgent()
+    {
+        pauseBehaviour = false;
     }
 }
