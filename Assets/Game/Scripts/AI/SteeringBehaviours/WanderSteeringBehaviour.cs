@@ -49,12 +49,18 @@ public class WanderSteeringBehaviour : SeekSteeringBehaviour
         return base.CalculateSeekForce();
     }
 
+#if UNITY_EDITOR
     protected override void OnDrawGizmos()
     {
 
         Vector3 circle = transform.rotation * new Vector3(0, 0, wanderDistance) + transform.position;
         DebugExtension.DrawCircle(circle, Vector3.up, new Color(1, 0, 0, 0.8f), wanderRadius);
         Debug.DrawLine(transform.position, circle, new Color(1, 1, 0, 0.8f));
-        Debug.DrawLine(transform.position, target, new Color(0, 0, 1, 0.8f));
+        // These lines look ugly in Scene window without the game running
+        if (Application.isPlaying)
+        {
+            Debug.DrawLine(transform.position, target, new Color(0, 0, 1, 0.8f));
+        }
     }
+#endif
 }
