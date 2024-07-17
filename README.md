@@ -34,7 +34,7 @@ And you're done!
 1. Create a new branch off of `develop`
 
 `git checkout develop`
-`git checkout -b feat-new-change
+`git checkout -b feat-new-change`
 
 2. Make your changes
 
