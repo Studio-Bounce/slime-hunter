@@ -15,7 +15,7 @@
 Goto [FMOD for Unity](https://www.fmod.com/download#fmodforunity) and download version `2.02.22` (Unity Verified).
 With the Unity Project open, execute the plugin package and import FMOD to the project.
 
-FMOD files should be added to `Assets/Plugins/FMOD`
+FMOD files should be added to `Assets/Plugins/FMOD` by default.
 
 After Importing the files, the **FMOD Setup Wizard** should open.
 
