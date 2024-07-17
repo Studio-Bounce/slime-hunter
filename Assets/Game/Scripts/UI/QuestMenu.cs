@@ -133,7 +133,7 @@ public class QuestMenu : Menu
         selectedQuestTypeBtn.style.opacity = 1.0f;
 
         // Update quest list
-        UIManager.Instance.ClearVisualElement(questListContent);
+        UIManager.ClearVisualElement(questListContent);
         selectedQuestBtn = null;
         List<QuestSO> quests = QuestManager.Instance.GetQuestsByType(questType);
         bool isFirst = true;
@@ -196,7 +196,7 @@ public class QuestMenu : Menu
         VisualElement questDescription = questContent.Q<VisualElement>("TrackInformation");
         questDescription.Q<Label>().text = quest.description;
         VisualElement questObjectives = questDescription.Q<VisualElement>("ToDoList");
-        UIManager.Instance.ClearVisualElement(questObjectives);
+        UIManager.ClearVisualElement(questObjectives);
         for (int i = 0; i < quest.objectives.Count; i++)
         {
             Label objectiveLabel = new()
