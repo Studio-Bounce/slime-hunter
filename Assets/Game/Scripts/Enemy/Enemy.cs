@@ -8,6 +8,7 @@ public enum EnemyEye
 {
     NORMAL,
     ATTACK,
+    SCARED,
     DEATH
 };
 
@@ -17,6 +18,7 @@ public class Enemy : DynamicDamageTaker
     [Header("Slime Eyes")]
     [SerializeField] SkinnedMeshRenderer normalEye;
     [SerializeField] SkinnedMeshRenderer attackEye;
+    [SerializeField] SkinnedMeshRenderer scaredEye;
     [SerializeField] SkinnedMeshRenderer deathEye;
     EnemyEye eye;
 
@@ -44,11 +46,13 @@ public class Enemy : DynamicDamageTaker
         base.Start();
 
         // Ensure that eye game objects are active
-        normalEye.gameObject.SetActive(true);
-        attackEye.gameObject.SetActive(true);
-        deathEye.gameObject.SetActive(true);
+        normalEye?.gameObject.SetActive(true);
+        attackEye?.gameObject.SetActive(true);
+        if (scaredEye) scaredEye.gameObject.SetActive(true);
+        deathEye?.gameObject.SetActive(true);
         normalEye.enabled = true;
         attackEye.enabled = false;
+        if (scaredEye) scaredEye.enabled = false;
         deathEye.enabled = false;
         isAlive = true;
 
@@ -163,6 +167,7 @@ public class Enemy : DynamicDamageTaker
         eye = enemyEye;
         normalEye.enabled = (enemyEye == EnemyEye.NORMAL);
         attackEye.enabled = (enemyEye == EnemyEye.ATTACK);
+        if (scaredEye) scaredEye.enabled = enemyEye == EnemyEye.SCARED;
         deathEye.enabled = (enemyEye == EnemyEye.DEATH);
     }
 }

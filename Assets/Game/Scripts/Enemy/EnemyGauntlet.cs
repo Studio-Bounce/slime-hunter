@@ -235,8 +235,6 @@ public class EnemyGauntlet : PersistentObject
         bottomRight = position + new Vector3(halfWidth, 0, -halfLength);
 
         Handles.DrawSolidRectangleWithOutline(new Vector3[] { topLeft, topRight, bottomRight, bottomLeft }, new Color(1, 0, 0, 0.05f), Color.red);
-
-
     }
 #endif
 

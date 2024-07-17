@@ -38,4 +38,11 @@ public class ProjectileSlime_Flee : ProjectileSlime_BaseState
             projFSM.ChangeState(projFSM.WanderAroundStateName);
         }
     }
+
+    public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        base.OnStateExit(animator, stateInfo, layerIndex);
+        projFSM.fleeSteeringBehaviour.enabled = false;
+        projFSM.fleeSteeringBehaviour.gameObject.SetActive(false);
+    }
 }

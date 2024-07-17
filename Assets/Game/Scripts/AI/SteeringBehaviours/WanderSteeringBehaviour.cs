@@ -7,9 +7,12 @@ public class WanderSteeringBehaviour : SeekSteeringBehaviour
     public float wanderDistance = 2.0f;
     public float wanderRadius = 1.0f;
     public float wanderJitter = 20.0f;
-    public RadialWanderBoundary wanderBounds;
+    public WanderBoundary wanderBounds;
 
     private Vector3 wanderTarget;
+
+    public bool InInnerBounds { get { return wanderBounds.InBounds(transform.position); } }
+    public bool InOuterBounds { get { return wanderBounds.InOuterBounds(transform.position); } }
 
     private void Start()
     {
@@ -38,9 +41,9 @@ public class WanderSteeringBehaviour : SeekSteeringBehaviour
         target = steeringAgent.transform.rotation * target + steeringAgent.transform.position;
 
         // If out of bounds then wander back to the center
-        if (wanderBounds != null && !wanderBounds.InBounds(transform.position))
+        if (wanderBounds != null && !InInnerBounds)
         {
-            target = wanderBounds.transform.position;
+            target = wanderBounds.Center;
         }
 
         return base.CalculateSeekForce();

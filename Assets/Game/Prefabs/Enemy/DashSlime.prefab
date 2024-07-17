@@ -654,7 +654,7 @@ Transform:
   m_GameObject: {fileID: 8820871006783578033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 3.2286184, y: -8.3847065, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -732,13 +732,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.5
-  m_Radius: 0.4
+  m_Height: 1
+  m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.75, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &2604173200149926611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,6 +752,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FSMController: {fileID: 9100000, guid: f2cd41cc26ec67043b75e68ced36586b, type: 2}
+  lockState: 0
   currentAttackState: 3
   seekSteeringBehaviour: {fileID: 8433862984451030069}
   wanderSteeringBehaviour: {fileID: 386777113257166750}
@@ -762,14 +763,16 @@ MonoBehaviour:
   slimeEnemy: {fileID: 0}
   defaultMat: {fileID: 2100000, guid: a4d73820e607bbf4190be4d4886d28c2, type: 2}
   chaseMat: {fileID: 2100000, guid: a4d73820e607bbf4190be4d4886d28c2, type: 2}
-  attackMat: {fileID: 2100000, guid: 6581b3db22b692b48abf45f40ee0609f, type: 2}
+  attackMat: {fileID: 2100000, guid: f21b9f86456c57f4aaf2dd713eac1d33, type: 2}
   attackGlowIntensity: 3.5
   cooldownTime: 0.5
   seekDistance: 8
-  wanderSpeed: 1
   chaseSpeed: 7
   attackSpeed: 80
   attackRadius: 6
+  wanderSpeed: 1
+  returnToBaseSpeed: 10
+  returnToBaseLockedDuration: 3
   attackEmissionTime: 0.1
   attackProximity: 1
   slimeAnimator: {fileID: 1065457560711704899}
@@ -853,6 +856,7 @@ MonoBehaviour:
   stunned: 0
   normalEye: {fileID: 8580069880333395135}
   attackEye: {fileID: 2369544507332571313}
+  scaredEye: {fileID: 0}
   deathEye: {fileID: 7049523281270179399}
   damageEyeTimer: 0.25
   hitVFX: {fileID: 6171747905485276744}
