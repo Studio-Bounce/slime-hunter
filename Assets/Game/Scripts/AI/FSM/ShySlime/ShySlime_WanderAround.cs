@@ -24,8 +24,6 @@ public class ShySlime_WanderAround : BasicSlime_WanderAround
     {
         BaseStunDetection(stateInfo);
         ForceBackToBase(stateInfo);
-        Debug.Log(sFSM);
-        Debug.Log(sFSM.playerProximityDistance);
         // If slime reached close to player, switch to flee
         if (Vector3.Distance(fsm.transform.position, fsm.GetPlayerPosition()) <= sFSM.playerProximityDistance)
         {

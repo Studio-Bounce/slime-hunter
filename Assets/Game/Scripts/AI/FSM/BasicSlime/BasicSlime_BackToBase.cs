@@ -8,7 +8,6 @@ public class BackToBase : BasicSlime_BaseState
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Enter");
         base.OnStateEnter(animator, stateInfo, layerIndex);
         fsm.LockStateForSeconds(fsm.backToBaseLockedDuration);
 
