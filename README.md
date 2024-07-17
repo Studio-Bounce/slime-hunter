@@ -12,7 +12,7 @@
 
 ### Adding FMOD Plugin
 
-Goto [FMOD for Unity](https://www.fmod.com/download#fmodforunity) and download version `2.02.22` (Unity Verified).
+Goto [FMOD for Unity](https://www.fmod.com/download#fmodforunity) and download version `2.02.22 (Unity Verified)`.
 With the Unity Project open, execute the plugin package and import FMOD to the project.
 
 FMOD files should be added to `Assets/Plugins/FMOD` by default.
@@ -26,7 +26,6 @@ You can skip through all the steps in the setup wizard except for `Linking`.
 
 - Linking
   - Select `FMOD Studio Project` and open up the file in `Assets/Game/Audio/FMOD/slime-hunter-audio.fspro`
-  -  
 #### Building
 
 FMOD needs to be initially built for any audio to play. Open the project file in [FMOD Studio](https://www.fmod.com/download#fmodstudio)
@@ -46,6 +45,7 @@ And you're done!
 1. Create a new branch off of `develop`
 
 `git checkout develop`
+
 `git checkout -b feat-new-change`
 
 2. Make your changes
