@@ -27,6 +27,8 @@ You can skip through all the steps in the setup wizard except for `Linking`.
 - Linking
   - Select `FMOD Studio Project` and open up the file in `Assets/Game/Audio/FMOD/slime-hunter-audio.fspro`
  
+> Make sure to refresh any open scenes in Unity to ensure all referencs are linked with the plugin.
+ 
 #### Building
 
 FMOD needs to be initially built for any audio to play. Open the project file in [FMOD Studio](https://www.fmod.com/download#fmodstudio)
