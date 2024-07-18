@@ -14,9 +14,6 @@ public class ComboAttack : MonoBehaviour
     [Tooltip("No. of attacks after which combo starts")]
     public int startIndex = 3;
 
-    // TODO: Move to GameManager
-    public float specialAttack = 0.0f;
-
     bool isInCombo = false;
     int attackCount = 0;
     float comboTimer = 0.0f;
@@ -25,7 +22,7 @@ public class ComboAttack : MonoBehaviour
     {
         isInCombo = false;
         attackCount = -startIndex;
-        specialAttack = 0.0f;
+        GameManager.Instance.PlayerSpecialAttack = 0.0f;
     }
 
     public void OnPlayerHit(int targetLayer)
@@ -37,7 +34,7 @@ public class ComboAttack : MonoBehaviour
             if (attackCount > 0)
             {
                 UIManager.Instance.UpdateCombo(attackCount);
-                specialAttack = Mathf.Clamp01(specialAttack + specialBarRate);
+                GameManager.Instance.PlayerSpecialAttack += specialBarRate;
                 if (!isInCombo)
                 {
                     StartCoroutine(ComboSequence());

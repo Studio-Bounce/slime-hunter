@@ -14,7 +14,7 @@ public class HUDMenu : Menu
     // Player
     VisualElement healthDamageVE;
     ProgressBar healthProgressBar;
-    ProgressBar staminaProgressBar;
+    ProgressBar specialAttackBar;
 
     // Weapons
     VisualElement weaponIcon;
@@ -63,10 +63,9 @@ public class HUDMenu : Menu
         gameManager.OnPlayerHealthChange += UpdateHealthBar;
         UpdateHealthBar(gameManager.PlayerHealth);
 
-        VisualElement staminaVE = statusBars.Q<VisualElement>("Stamina");
-        staminaProgressBar = staminaVE.Q<ProgressBar>("StaminaBar");
-        gameManager.OnPlayerStaminaChange += UpdateStaminaBar;
-        UpdateStaminaBar(gameManager.PlayerStamina);
+        VisualElement splAttackVE = statusBars.Q<VisualElement>("SpecialAttack");
+        specialAttackBar = splAttackVE.Q<ProgressBar>("SplAttackBar");
+        gameManager.OnPlayerSpecialAttackChange += UpdateSpecialAttackBar;
 
         // Weapons
         weaponIcon = root.Q<VisualElement>("WeaponIcon");
@@ -135,13 +134,13 @@ public class HUDMenu : Menu
         redAlertUp = false;
     }
 
-    // ------------------------------ Stamina ------------------------------
+    // ------------------------------ Special Attack ------------------------------
 
-    void UpdateStaminaBar(int stamina)
+    void UpdateSpecialAttackBar(float splAttackStatus)
     {
-        if (staminaProgressBar != null)
+        if (specialAttackBar != null)
         {
-            staminaProgressBar.value = (float)stamina / GameManager.Instance.PlayerMaxStamina;
+            specialAttackBar.value = splAttackStatus;
         }
     }
 
@@ -266,7 +265,6 @@ public class HUDMenu : Menu
         if (gameManager != null)
         {
             gameManager.OnPlayerHealthChange -= UpdateHealthBar;
-            gameManager.OnPlayerStaminaChange -= UpdateStaminaBar;
         }
         if (questManager != null)
         {

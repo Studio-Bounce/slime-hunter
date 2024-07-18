@@ -47,6 +47,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Player Attributes")]
     public int playerHealth = 100;
     public int playerStamina = 3;
+    private float playerSpecialAttack = 0.0f;
 
     [Tooltip("Amount of Stamina increase per second")]
     public int staminaIncreaseValue = 1;
@@ -94,6 +95,15 @@ public class GameManager : Singleton<GameManager>
             OnPlayerStaminaChange?.Invoke(playerStamina);
         }
     }
+    public float PlayerSpecialAttack
+    {
+        get { return playerSpecialAttack; }
+        set
+        {
+            playerSpecialAttack = Mathf.Clamp01(value);
+            OnPlayerSpecialAttackChange?.Invoke(playerSpecialAttack);
+        }
+    }
 
     public bool IsFullStamina { get { return playerStamina == PlayerMaxStamina; } }
 
@@ -119,6 +129,7 @@ public class GameManager : Singleton<GameManager>
     public event Action<int> OnPlayerHealthChange = delegate { };
     public event Action<int> OnPlayerStaminaChange = delegate { };
     public event Action<int> OnPlayerUseStamina = delegate { };
+    public event Action<float> OnPlayerSpecialAttackChange = delegate { };
 
     // Time Scaling
     private bool IsTimeScaled { get { return Time.timeScale != 1; } }
