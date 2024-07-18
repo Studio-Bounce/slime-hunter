@@ -11,6 +11,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] public Menu pauseMenu;
     [SerializeField] public Menu HUDMenu;
     [SerializeField] public Menu autoSave;
+    [SerializeField] public ShopMenu shopMenu;
 
     // ----------------- Pause -----------------
     public void SetPauseMenu(bool active)
@@ -73,7 +74,7 @@ public class UIManager : Singleton<UIManager>
         menuOBJ.Hide();
     }
 
-    public void ClearVisualElement(VisualElement veToClear)
+    public static void ClearVisualElement(VisualElement veToClear)
     {
         // Safe-deletion
         List<VisualElement> veItems = new();

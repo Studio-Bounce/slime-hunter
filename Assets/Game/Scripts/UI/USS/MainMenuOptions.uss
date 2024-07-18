@@ -1,5 +1,29 @@
-.option-slot {
+* {
+    color: white;
+    font-size: 18px;
 }
+
+Button {
+    transition-property: all;
+    transition-duration: 0.2s;
+    background-color: rgb(70, 187, 202);
+    border-width: 2px;
+    border-color: white;
+    border-radius: 20px;
+    margin: 0;
+}
+
+Button:hover {
+    background-color: rgb(50, 128, 138);
+}
+
+Button:active {
+    scale: 0.95;
+}
+
+/* ## Tabbed Menus */
+
+.option-slot { }
 
 .menu-button {
     transition-property: all;
@@ -61,6 +85,8 @@
     display: flex;
 }
 
+/* ## Inventory */
+
 .grid-inventory-container {
     display: flex;
     flex-direction: row;
@@ -110,20 +136,25 @@
     visibility: hidden;
 }
 
-Button {
-    transition-property: all;
-    transition-duration: 0.2s;
-    background-color: rgb(70, 187, 202);
-    border-width: 2px;
-    border-color: white;
-    border-radius: 20px;
-    margin: 0;
+/* ## Shop */
+
+.item-info-container {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-direction: row;
+    border-color: #46BBCA;
+    border-width: 5px;
+    border-radius: 21px;
+    background-color: #2F3235;
+    padding: 1%;
 }
 
-Button:hover {
-    background-color: rgb(50, 128, 138);
+#ShopItemContainer > .item-info-container {
+    margin-bottom: 20px
 }
 
-Button:active {
-    scale: 0.95;
+.item-requirements-wrapper {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-direction: column;
 }

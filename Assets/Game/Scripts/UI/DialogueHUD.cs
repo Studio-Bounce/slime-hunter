@@ -32,7 +32,7 @@ public class DialogueHUD : Menu
     // ------------------------ Dialogue Options ------------------------
     public void ClearDialogueOptions()
     {
-        UIManager.Instance.ClearVisualElement(dialogOptions);
+        UIManager.ClearVisualElement(dialogOptions);
     }
 
     public void SpawnDialogueOptions(Dialogue dialogue, Story story)

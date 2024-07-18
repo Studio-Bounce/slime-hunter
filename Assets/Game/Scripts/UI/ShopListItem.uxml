@@ -1,0 +1,32 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/Scripts/UI/USS/MainMenuOptions.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainMenuOptions" />
+    <ui:VisualElement name="ShopItemContainer" style="flex-grow: 1;">
+        <ui:VisualElement name="ItemInfoContainer" class="item-info-container">
+            <ui:VisualElement name="ItemIconWrapper" style="flex-shrink: 0; width: 20%; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+                <ui:VisualElement name="ItemIcon" style="width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/thirdweapon.png?fileID=2800000&amp;guid=2e63cda403abdc845bdf0ca700093c97&amp;type=3#thirdweapon&quot;); -unity-background-scale-mode: scale-to-fit;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ItemInfoWrapper" style="flex-shrink: 0; width: 50%; padding-top: 5px; padding-right: 15px; padding-bottom: 5px; padding-left: 15px;">
+                <ui:Label tabindex="-1" text="Iron Sword" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemName" style="color: rgb(255, 255, 255); font-size: 20px; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); -unity-text-align: upper-left; -unity-font-style: normal; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+                <ui:Label tabindex="-1" text="The Iron Sword is a reliable weapon, favored by Hunters and warriors alike for its durability and balance. " parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemDescription" style="white-space: normal; color: rgb(255, 255, 255); font-size: 18px; -unity-text-align: middle-left; -unity-font: url(&quot;project://database/Assets/TextMesh%20Pro/Fonts/LiberationSans.ttf?fileID=12800000&amp;guid=e3265ab4bf004d28a9537516768c1c75&amp;type=3#LiberationSans&quot;); -unity-font-definition: initial; -unity-font-style: normal; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ItemRequirementsWrapper" class="item-requirements-wrapper" style="flex-shrink: 0; width: 20%; padding-top: 5px; padding-right: 15px; padding-bottom: 5px; padding-left: 15px; align-items: flex-start; flex-direction: column;">
+                <ui:VisualElement name="Requirement" style="flex-grow: 1; width: 100%; height: 100%; justify-content: flex-start; align-items: flex-start; flex-direction: row;">
+                    <ui:Label tabindex="-1" text="Price" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-font-style: bold;" />
+                    <ui:Label tabindex="-1" text="0" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="ItemStatWrapper" style="flex-shrink: 0; width: 10%; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; align-items: flex-end; justify-content: space-between;">
+                <ui:VisualElement name="ItemInformation" style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+                    <ui:VisualElement name="UpperLine" style="flex-grow: 0; flex-direction: row; width: 100%; justify-content: flex-end;">
+                        <ui:Label tabindex="-1" text="&lt;ItemType&gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemType" style="color: rgb(255, 255, 255); -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); font-size: 17px; -unity-font-definition: initial; -unity-font-style: normal;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="MiddleLine" style="flex-grow: 0; flex-direction: row; justify-content: space-around; align-self: center; width: 100%;" />
+                    <ui:VisualElement name="LowerLine" style="flex-grow: 0; flex-direction: row; justify-content: space-around; align-self: center; width: 100%; align-items: center;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Action" style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; flex-direction: row; justify-content: space-around;">
+                    <ui:Button text="Purchase" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PurchaseBtn" style="width: 100px; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); color: rgb(255, 255, 255); font-size: 15px;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
