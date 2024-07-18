@@ -4,37 +4,42 @@
 
 ### Installation
 
-1. Clone the Repo
+1. Clone the Repository:
 
-`git clone https://github.com/Studio-Bounce/slime-hunter.git`
+   ```bash
+   git clone https://github.com/Studio-Bounce/slime-hunter.git
+   ```
 
-2. Open the project in `Unity 2022.3.27f1`
+2. Open the project in `Unity 2022.3.27f1`.
 
 ### Adding FMOD Plugin
 
-Goto [FMOD for Unity](https://www.fmod.com/download#fmodforunity) and download version `2.02.22 (Unity Verified)`.
-With the Unity Project open, execute the plugin package and import FMOD to the project.
+> **Note:** While FMOD is not strictly required to run the game, the absence of FMOD will result in the game lacking sound. For development purposes, we **highly** recommend installing FMOD. Without it, references to FMOD components will be hidden, which can lead to unintended changes in existing audio configurations.
 
-FMOD files should be added to `Assets/Plugins/FMOD` by default.
+To add FMOD, follow these steps:
 
-After Importing the files, the **FMOD Setup Wizard** should open.
+1. Download FMOD from [FMOD for Unity](https://www.fmod.com/download#fmodforunity), selecting version `2.02.22 (Unity Verified)`.
+2. With the Unity project open, execute the plugin package and import FMOD to the project. The FMOD files should be added to `Assets/Plugins/FMOD` by default.
+3. After importing the files, the **FMOD Setup Wizard** should open.
 
 #### Setup Wizard
 
-You can skip through all the steps in the setup wizard except for `Linking`.
-> If you don't see the setup wizard, there should be a new menu item at the top labelled `FMOD`. From there goto `Setup Wizard`.
+You can skip all the steps in the setup wizard except for `Linking`.
 
-- Linking
-  - Select `FMOD Studio Project` and open up the file in `Assets/Game/Audio/FMOD/slime-hunter-audio.fspro`
+> **Note:** If you don't see the setup wizard, there should be a new menu item at the top labeled `FMOD`. From there, go to `Setup Wizard`.
+
+- **Linking:**
+  - Select `FMOD Studio Project` and open the file located at `Assets/Game/Audio/FMOD/slime-hunter-audio.fspro`.
+
 #### Building
 
-FMOD needs to be initially built for any audio to play. Open the project file in [FMOD Studio](https://www.fmod.com/download#fmodstudio)
+FMOD needs to be initially built for any audio to play. Open the project file in [FMOD Studio](https://www.fmod.com/download#fmodstudio):
 
 `Assets/Game/Audio/FMOD/slime-hunter-audio.fspro`
 
-Run a build with either `F7` or `File > Build`
+Run a build with either `F7` or `File > Build`.
 
-> Make sure to refresh any open scenes in Unity to ensure all existing referencs are linked with the plugin.
+> **Tip:** Make sure to refresh any open scenes in Unity to ensure all existing references are linked with the plugin.
 
 ---
 
@@ -42,20 +47,23 @@ And you're done!
 
 ## Contributing
 
-1. Create a new branch off of `develop`
+1. Create a new branch off of `develop`:
 
-`git checkout develop`
+   ```bash
+   git checkout develop
+   git checkout -b feat-new-change
+   ```
 
-`git checkout -b feat-new-change`
-
-2. Make your changes
-
-3. Add-Commit-Push your changes
-
-4. Squash and merge to develop
+2. Make your changes.
+3. Add, commit, and push your changes.
+4. Squash and merge to `develop`.
 
 ### Naming Conventions
 
-`<branch-type>-<description>`
+Branches should follow this naming convention: `<branch-type>-<description>`
 
-The first word should indicate the type of branch this will be (fix, feature, docs, test, etc.).  Use lower-case and kebab-case for clarity (separate each word with a hyphen - )
+The first word should indicate the type of branch (fix, feature, docs, test, etc.). Use lower-case and kebab-case for clarity (separate each word with a hyphen).
+
+---
+
+This improved version ensures clarity and readability, making it easier for developers to follow the instructions.
