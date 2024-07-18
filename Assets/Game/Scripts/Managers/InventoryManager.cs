@@ -192,19 +192,33 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         return totalValue;
     }
 
-    public bool AddItem(Item item)
+    public bool AddItem(ItemSO itemSO)
     {
-        if (GetTotalWeight() > maxWeight) // TODO: Inefficient
+        if (GetTotalWeight() > maxWeight) return false;
+
+        // Search if item already exists
+        foreach(var item in items)
         {
-            items.Add(item);
-            return true;
+            if (itemSO == item.itemRef)
+            {
+                item.quantity += 1;
+                UpdateInventoryUI();
+                return true;
+            }
         }
-        return false;
+
+        Item newItem = new Item();
+        newItem.itemRef = itemSO;
+        newItem.quantity = 1;
+        items.Add(newItem);
+        UpdateInventoryUI();
+        return true;
     }
 
-    public void RemoveItem(Item item)
+    public void RemoveItem(ItemSO itemSO)
     {
-        items.Remove(item);
+        // TODO: Unimplemented. May not need.
+        //items.Remove(item);
         UpdateInventoryUI();
     }
 

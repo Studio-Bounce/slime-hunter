@@ -42,9 +42,9 @@ public class GameManager : Singleton<GameManager>
 
     // Player Attributes
     private Player _playerRef;
+    [Header("Player Attributes")]
     public readonly int PlayerMaxHealth = 100;
     public readonly int PlayerMaxStamina = 3;
-    [Header("Player Attributes")]
     public int playerHealth = 100;
     public int playerStamina = 3;
 
@@ -54,6 +54,10 @@ public class GameManager : Singleton<GameManager>
     public float cooldownLength = 1.5f;
     private float _staminaTimer = 0.0f;
     private bool _cooldown = false;
+
+    public float pickupRange = 5.0f;
+    public float pickupSpeed = 5.0f;
+
 
     public Player PlayerRef
     {
