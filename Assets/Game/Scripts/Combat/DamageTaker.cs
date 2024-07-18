@@ -46,7 +46,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
     public virtual bool TakeDamage(Damage damage, bool detectDeath)
     {
         // Prevents accidental double damage
-        if (Time.time < lastDamageTime + damageDelay*GameManager.Instance.PlayerSpeedMultiplier)
+        if (Time.time < lastDamageTime + damageDelay/GameManager.Instance.PlayerSpeedMultiplier)
         {
             return false;
         }
