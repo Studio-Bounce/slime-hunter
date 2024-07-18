@@ -46,6 +46,12 @@ public class ComboAttack : MonoBehaviour
         }
     }
 
+    public void OnPlayerMiss()
+    {
+        // Destroy combo
+        comboTimer = comboBreakTimeout;
+    }
+
     IEnumerator ComboSequence()
     {
         isInCombo = true;

@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.VFX;
 
 public class WeaponTrail : DamageDealer
 {
+    public UnityEvent OnFailedHit;
+
     [Header("Hitboxing")]
     public float arcAngle = 90;
     public float arcRadius = 1;
@@ -114,6 +117,12 @@ public class WeaponTrail : DamageDealer
         StopAllCoroutines();
         StartCoroutine(ActiveAttack(move.animationDuration));
         trailRenderer.transform.rotation = Quaternion.Euler(trailRenderer.transform.rotation.eulerAngles.x, trailRenderer.transform.rotation.eulerAngles.y, verticalRotation);
+    
+        // No attack landed
+        if (!attackDetected)
+        {
+            OnFailedHit.Invoke();
+        }
     }
 
     IEnumerator ActiveAttack(float duration)
