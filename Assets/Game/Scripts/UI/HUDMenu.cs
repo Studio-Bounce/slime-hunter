@@ -34,6 +34,11 @@ public class HUDMenu : Menu
     bool navigate = false;
     VisualElement compassNeedle;
 
+    // Attack combo
+    VisualElement attackComboVE;
+    Label comboCountLabel;
+    bool isComboHUDUp = false;
+
     bool redAlertUp = false;
 
     // Cached as they're getting called in OnDestroy
@@ -80,6 +85,12 @@ public class HUDMenu : Menu
         VisualElement navigation = leftBg.Q<VisualElement>("NavigationContainer");
         compassNeedle = navigation.Q<VisualElement>("CompassNeedle");
         navigate = false;
+
+        // Combo
+        attackComboVE = root.Q<VisualElement>("ComboContainer");
+        comboCountLabel = attackComboVE.Q<Label>("ComboLabel");
+        isComboHUDUp = false;
+        attackComboVE.style.opacity = 0;
     }
 
     private void FixedUpdate()
@@ -226,6 +237,28 @@ public class HUDMenu : Menu
     {
         navigate = false;
         navTarget = Vector3.zero;
+    }
+
+    // ------------------------------ Attack Combo -------------------------------
+
+    public void ShowCombo()
+    {
+        isComboHUDUp = true;
+        attackComboVE.style.opacity = 1;
+    }
+
+    public void HideCombo()
+    {
+        isComboHUDUp = false;
+        attackComboVE.style.opacity = 0;
+    }
+
+    public void UpdateComboCount(int comboCounter)
+    {
+        if (!isComboHUDUp)
+            ShowCombo();
+
+        comboCountLabel.text = comboCounter.ToString();
     }
 
     private void OnDestroy()

@@ -36,7 +36,7 @@ public class ComboAttack : MonoBehaviour
             comboTimer = 0.0f;
             if (attackCount > 0)
             {
-                Debug.Log(attackCount + "X");
+                UIManager.Instance.UpdateCombo(attackCount);
                 specialAttack = Mathf.Clamp01(specialAttack + specialBarRate);
                 if (!isInCombo)
                 {
@@ -60,8 +60,8 @@ public class ComboAttack : MonoBehaviour
 
             yield return null;
         }
-        Debug.Log("COMBO BROKE!");
         attackCount = -startIndex;
         isInCombo = false;
+        UIManager.Instance.ClearCombo();
     }
 }
