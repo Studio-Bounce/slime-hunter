@@ -4,9 +4,9 @@ public static class Easing
 {
     public static readonly Func<float, float> Linear = t => t;
 
-    public static readonly Func<float, float> EaseInQuad = t => t * t;
-    public static readonly Func<float, float> EaseOutQuad = t => t * (2f - t);
-    public static readonly Func<float, float> EaseInOutQuad = t => t < 0.5f ? 2f * t * t : -1f + (4f - 2f * t) * t;
+    public static readonly Func<float, float> EaseIn = t => t * t;
+    public static readonly Func<float, float> EaseOut = t => t * (2f - t);
+    public static readonly Func<float, float> EaseInOut = t => t < 0.5f ? 2f * t * t : -1f + (4f - 2f * t) * t;
 
     public static readonly Func<float, float> EaseInCubic = t => t * t * t;
     public static readonly Func<float, float> EaseOutCubic = t => 1f - Mathf.Pow(1f - t, 3f);
@@ -86,4 +86,15 @@ public static class Easing
             ? -(Mathf.Pow(2, 20 * t - 10) * Mathf.Sin((20 * t - 11.125f) * c5)) / 2
             : (Mathf.Pow(2, -20 * t + 10) * Mathf.Sin((20 * t - 11.125f) * c5)) / 2 + 1;
     };
+
+    public static readonly Func<float, float> EaseInBounce = t => 1f - EaseOutBounce(1f - t);
+    public static readonly Func<float, float> EaseOutBounce = t =>
+        t < 1 / 2.75f ? 7.5625f * t * t :
+        t < 2 / 2.75f ? 7.5625f * (t -= 1.5f / 2.75f) * t + 0.75f :
+        t < 2.5 / 2.75f ? 7.5625f * (t -= 2.25f / 2.75f) * t + 0.9375f :
+        7.5625f * (t -= 2.625f / 2.75f) * t + 0.984375f;
+
+    public static readonly Func<float, float> EaseInOutBounce = t =>
+        t < 0.5f ? EaseInBounce(t * 2f) * 0.5f : EaseOutBounce(t * 2f - 1f) * 0.5f + 0.5f;
+
 }

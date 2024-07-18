@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.102895245, g: 0.24980709, b: 0.45212, a: 1}
+  m_IndirectSpecularColor: {r: 0.102909945, g: 0.24969026, b: 0.4516643, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -723,6 +723,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 1179840936}
   HUDMenu: {fileID: 1498221641}
   autoSave: {fileID: 1812664888}
+  shopMenu: {fileID: 0}
 --- !u!1 &1031717568
 GameObject:
   m_ObjectHideFlags: 0
@@ -811,7 +812,7 @@ MonoBehaviour:
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
-  NonRigidbodyVelocity: 0
+  AllowNonRigidbodyDoppler: 0
   Params: []
   OverrideAttenuation: 0
   OverrideMinDistance: 1
@@ -1127,6 +1128,8 @@ MonoBehaviour:
   staminaIncreaseValue: 1
   staminaIncreaseInterval: 0.33
   cooldownLength: 1.5
+  pickupRange: 5
+  pickupSpeed: 5
 --- !u!1 &1321339799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,6 +1737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showOnStart: 0
+  itemsForSale: []
 --- !u!114 &1738992993
 MonoBehaviour:
   m_ObjectHideFlags: 0

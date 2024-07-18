@@ -690,6 +690,7 @@ GameObject:
   - component: {fileID: 3359904442406818763}
   - component: {fileID: 5300803188311187486}
   - component: {fileID: 8206751856348697906}
+  - component: {fileID: 8202308872076302537}
   m_Layer: 7
   m_Name: RabbitSlime
   m_TagString: Untagged
@@ -817,6 +818,7 @@ MonoBehaviour:
   stunned: 0
   normalEye: {fileID: 6377116420226650459}
   attackEye: {fileID: 1112610852234478933}
+  scaredEye: {fileID: 0}
   deathEye: {fileID: 5640311663750280099}
   damageEyeTimer: 0.25
   hitVFX: {fileID: 461269498797018740}
@@ -870,6 +872,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FSMController: {fileID: 9100000, guid: e24621b67fc50444b8e0c34f8e648fbf, type: 2}
+  lockState: 0
   currentAttackState: 3
   seekSteeringBehaviour: {fileID: 6649224708828666492}
   wanderSteeringBehaviour: {fileID: 4521368074098091959}
@@ -884,10 +887,12 @@ MonoBehaviour:
   attackGlowIntensity: 3.5
   cooldownTime: 1.3
   seekDistance: 12
-  wanderSpeed: 4
   chaseSpeed: 5
   attackSpeed: 50
   attackRadius: 3
+  wanderSpeed: 4
+  backToBaseSpeed: 10
+  backToBaseLockedDuration: 3
   attackEmissionTime: 1
   attackProximity: 1
   slimeAnimator: {fileID: 2403758375320863911}
@@ -948,6 +953,26 @@ MonoBehaviour:
   trailType: 1
   mat: {fileID: 2100000, guid: bf1ede0e762e2f240bf3df9878045d69, type: 2}
   alphaReductionSteps: 10
+--- !u!114 &8202308872076302537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223826132166210976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e9386f50c094e243a4fd2658c9e5c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToDrop:
+  - {fileID: 11400000, guid: fa97121a094b5134f917ca118bfc4e43, type: 2}
+  - {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
+  - {fileID: 11400000, guid: d69917b586cac144b80b436a2e9e34cd, type: 2}
+  - {fileID: 11400000, guid: 6650162a58912e84fb6f113771fb1e37, type: 2}
+  - {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
+  droppedItemPrefab: {fileID: 5271803406887303148, guid: fb226ce21fa4d4f4092706fc0a907e9b,
+    type: 3}
 --- !u!1001 &3988737145339044381
 PrefabInstance:
   m_ObjectHideFlags: 0

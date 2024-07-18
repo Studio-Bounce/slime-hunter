@@ -118,6 +118,6 @@ public class Notification : MonoBehaviour
         float x = Mathf.Sin(time * speed) * magnitude;
         Vector2 offset = startPosition;
         offset.x += x;
-        rectTransform.pivot = Vector3.Lerp(offset, startPosition, Easing.EaseOutQuad(time));
+        rectTransform.pivot = Vector3.Lerp(offset, startPosition, Easing.EaseOut(time));
     }
 }
