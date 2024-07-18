@@ -53,6 +53,16 @@ public class UIManager : Singleton<UIManager>
         ((HUDMenu)HUDMenu).StopNavigation();
     }
 
+    public void UpdateCombo(int comboCount)
+    {
+        ((HUDMenu)HUDMenu).UpdateComboCount(comboCount);
+    }
+
+    public void ClearCombo()
+    {
+        ((HUDMenu)HUDMenu).HideCombo();
+    }
+
     // ----------------- Auto-save -----------------
     public void ShowAutoSave()
     {

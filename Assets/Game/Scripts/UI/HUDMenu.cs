@@ -14,7 +14,7 @@ public class HUDMenu : Menu
     // Player
     VisualElement healthDamageVE;
     ProgressBar healthProgressBar;
-    ProgressBar staminaProgressBar;
+    ProgressBar specialAttackBar;
 
     // Weapons
     VisualElement weaponIcon;
@@ -33,6 +33,11 @@ public class HUDMenu : Menu
     Vector3 navTarget = Vector3.zero;  // in world space
     bool navigate = false;
     VisualElement compassNeedle;
+
+    // Attack combo
+    VisualElement attackComboVE;
+    Label comboCountLabel;
+    bool isComboHUDUp = false;
 
     bool redAlertUp = false;
 
@@ -58,10 +63,9 @@ public class HUDMenu : Menu
         gameManager.OnPlayerHealthChange += UpdateHealthBar;
         UpdateHealthBar(gameManager.PlayerHealth);
 
-        VisualElement staminaVE = statusBars.Q<VisualElement>("Stamina");
-        staminaProgressBar = staminaVE.Q<ProgressBar>("StaminaBar");
-        gameManager.OnPlayerStaminaChange += UpdateStaminaBar;
-        UpdateStaminaBar(gameManager.PlayerStamina);
+        VisualElement splAttackVE = statusBars.Q<VisualElement>("SpecialAttack");
+        specialAttackBar = splAttackVE.Q<ProgressBar>("SplAttackBar");
+        gameManager.OnPlayerSpecialAttackChange += UpdateSpecialAttackBar;
 
         // Weapons
         weaponIcon = root.Q<VisualElement>("WeaponIcon");
@@ -80,6 +84,12 @@ public class HUDMenu : Menu
         VisualElement navigation = leftBg.Q<VisualElement>("NavigationContainer");
         compassNeedle = navigation.Q<VisualElement>("CompassNeedle");
         navigate = false;
+
+        // Combo
+        attackComboVE = root.Q<VisualElement>("ComboContainer");
+        comboCountLabel = attackComboVE.Q<Label>("ComboLabel");
+        isComboHUDUp = false;
+        attackComboVE.style.opacity = 0;
     }
 
     private void FixedUpdate()
@@ -124,13 +134,13 @@ public class HUDMenu : Menu
         redAlertUp = false;
     }
 
-    // ------------------------------ Stamina ------------------------------
+    // ------------------------------ Special Attack ------------------------------
 
-    void UpdateStaminaBar(int stamina)
+    void UpdateSpecialAttackBar(float splAttackStatus)
     {
-        if (staminaProgressBar != null)
+        if (specialAttackBar != null)
         {
-            staminaProgressBar.value = (float)stamina / GameManager.Instance.PlayerMaxStamina;
+            specialAttackBar.value = splAttackStatus;
         }
     }
 
@@ -228,12 +238,33 @@ public class HUDMenu : Menu
         navTarget = Vector3.zero;
     }
 
+    // ------------------------------ Attack Combo -------------------------------
+
+    public void ShowCombo()
+    {
+        isComboHUDUp = true;
+        attackComboVE.style.opacity = 1;
+    }
+
+    public void HideCombo()
+    {
+        isComboHUDUp = false;
+        attackComboVE.style.opacity = 0;
+    }
+
+    public void UpdateComboCount(int comboCounter)
+    {
+        if (!isComboHUDUp)
+            ShowCombo();
+
+        comboCountLabel.text = comboCounter.ToString();
+    }
+
     private void OnDestroy()
     {
         if (gameManager != null)
         {
             gameManager.OnPlayerHealthChange -= UpdateHealthBar;
-            gameManager.OnPlayerStaminaChange -= UpdateStaminaBar;
         }
         if (questManager != null)
         {
