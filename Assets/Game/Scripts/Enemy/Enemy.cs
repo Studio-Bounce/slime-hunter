@@ -63,9 +63,14 @@ public class Enemy : DynamicDamageTaker
     protected bool BaseEnemyTakeDamage(Damage damage, bool detectDeath)
     {
         bool damageRegistered = base.TakeDamage(damage, detectDeath);
-        if (!isAlive || !damageRegistered)
+        if (!damageRegistered)
         {
             return false;
+        }
+        // Returning true because damage was taken but we don't want to act on it
+        if (!isAlive)
+        {
+            return true;
         }
 
         if (!isInvincible)

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 3109943353670570679}
   - component: {fileID: 4259289431672013625}
   - component: {fileID: 886262207501665116}
+  - component: {fileID: 2474286633782853668}
   - component: {fileID: 7850761347003120757}
   - component: {fileID: 8164840651267231046}
   m_Layer: 8
@@ -233,6 +234,18 @@ MonoBehaviour:
   trailType: 0
   mat: {fileID: 2100000, guid: c05ea85d9a0e4e24d8c08daea614544f, type: 2}
   alphaReductionSteps: 15
+--- !u!114 &2474286633782853668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 281410272845203375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a41b9ca57ddf3247bfec2833059c2d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!2083052967 &7850761347003120757
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -467,6 +480,21 @@ MonoBehaviour:
     knockback: 0
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
+  OnSuccessfulHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2474286633782853668}
+        m_TargetAssemblyTypeName: ComboAttack, Assembly-CSharp
+        m_MethodName: OnPlayerHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   cameraShakeIntensity: 1
   cameraShakeTime: 0.5
   arcAngle: 90
