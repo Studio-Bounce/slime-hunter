@@ -4,11 +4,8 @@ using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(DamageTaker))]
-public class DropOnDeath : MonoBehaviour
+public class DropOnDeath : ItemSpawner
 {
-    public List<ItemSO> itemsToDrop;
-    public GameObject droppedItemPrefab;
-
     private DamageTaker damageTaker;
 
     void Start()
@@ -19,12 +16,6 @@ public class DropOnDeath : MonoBehaviour
 
     private void OnDeath()
     {
-        foreach (var item in itemsToDrop)
-        {
-            GameObject go = Instantiate(droppedItemPrefab, gameObject.scene) as GameObject;
-            DroppedItem droppedItem = go.GetComponent<DroppedItem>();
-            droppedItem.transform.position = transform.position;
-            droppedItem.ItemRef = item;
-        }
+        SpawnItems();
     }
 }

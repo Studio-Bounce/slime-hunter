@@ -8,12 +8,15 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 public class DroppedItem : MonoBehaviour
 {
     public Vector2 size;
+    public float launchAngle = 0;
+    public float angleRange = 360;
 
-    public ItemSO ItemRef { get; set; }
-
+    // Refs
     private SpriteRenderer spriteRenderer;
     private Player player;
 
+    // Getters Setters
+    public ItemSO ItemRef { get; set; }
     public bool CanBePickedUp { get; private set; } = false;
 
     // Start is called before the first frame update
@@ -45,19 +48,17 @@ public class DroppedItem : MonoBehaviour
         float animHeight = 1;
         float animDist = 3;
         float animDuration = 1.5f;
-
-        // animHeight = Random.Range(1, animHeight);
         animDist = Random.Range(1, animDist);
-        // animDuration = Random.Range(1, animDuration);
 
         // Random Direction
-        Vector3 direction = Vector3.zero;
-        direction.x = Mathf.Sin(Random.value * 2 * Mathf.PI);
-        direction.z = Mathf.Cos(Random.value * 2 * Mathf.PI);
-        direction.Normalize();
+        float randomAngle = launchAngle + Random.Range(-angleRange / 2f, angleRange / 2f);
+        Vector3 randomDir = transform.forward;
+        Quaternion rotation = Quaternion.AngleAxis(randomAngle, Vector3.up);
+        randomDir = rotation * randomDir;
+        randomDir.Normalize();
 
         Vector3 start = transform.position;
-        Vector3 end = transform.position + animDist * direction;
+        Vector3 end = transform.position + animDist * randomDir;
         float startEndHeight = transform.position.y;
 
         float timer = 0;

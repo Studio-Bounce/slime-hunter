@@ -6,9 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider), typeof(OpenHinge))]
 public class ItemChest : MonoBehaviour
 {
-    public List<ItemSO> itemContents;
     public LayerMask activationLayers;
-    public GameObject droppedItemPrefab;
 
     private OpenHinge openHinge;
 
@@ -20,13 +18,6 @@ public class ItemChest : MonoBehaviour
     public void Open()
     {
         openHinge.Open();
-        foreach (var item in itemContents)
-        {
-            GameObject go = Instantiate(droppedItemPrefab, gameObject.scene) as GameObject;
-            DroppedItem droppedItem = go.GetComponent<DroppedItem>();
-            droppedItem.transform.position = transform.position;
-            droppedItem.ItemRef = item;
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,5 +35,4 @@ public class ItemChest : MonoBehaviour
             Open();
         }
     }
-
 }
