@@ -1349,7 +1349,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 8823308102426459182}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -552784701103934427, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8810986720304164247}
   m_SourcePrefab: {fileID: 100100000, guid: 772ae3dc15e833f40999ac3cb2013fa2, type: 3}
 --- !u!95 &1065457560711704899 stripped
 Animator:
@@ -1369,6 +1373,54 @@ SkinnedMeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 6891582375880887506}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2879995433018783991 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -552784701103934427, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6891582375880887506}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8810986720304164247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2879995433018783991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d9b85cbcfb0b942bb0243754c49708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnVisible:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3662461099208768734}
+        m_TargetAssemblyTypeName: SlimeSteeringAgent, Assembly-CSharp
+        m_MethodName: UnpauseAgent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnInvisible:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3662461099208768734}
+        m_TargetAssemblyTypeName: SlimeSteeringAgent, Assembly-CSharp
+        m_MethodName: PauseAgent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &4299574497244987521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7208285609052654675, guid: 772ae3dc15e833f40999ac3cb2013fa2,
