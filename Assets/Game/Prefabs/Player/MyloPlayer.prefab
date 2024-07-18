@@ -246,6 +246,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a41b9ca57ddf3247bfec2833059c2d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  comboMask:
+    serializedVersion: 2
+    m_Bits: 128
+  comboBreakTimeout: 5
+  specialBarRate: 0.1
+  startIndex: 3
+  specialAttack: 0
 --- !u!2083052967 &7850761347003120757
 VisualEffect:
   m_ObjectHideFlags: 0
