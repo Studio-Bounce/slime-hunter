@@ -64,6 +64,11 @@ public class Trail : MonoBehaviour
             else
             {
                 GameObject gObj = Instantiate(model, transform.position, transform.rotation);
+                Animator anim = gObj.GetComponent<Animator>();
+                if (anim != null)
+                {
+                    Destroy(anim);
+                }
                 SceneManager.MoveGameObjectToScene(gObj, gameObject.scene);
                 gObj.transform.localScale = gameObject.transform.localScale;
                 Utils.SetLayerRecursively(gObj, 10);

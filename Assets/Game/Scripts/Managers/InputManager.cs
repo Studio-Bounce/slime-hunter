@@ -134,6 +134,7 @@ public class InputManager : Singleton<InputManager>
         _playerActions.Rotate.performed += _playerController.RotateCamera;
         // Weapon
         _playerActions.Attack.performed += attackQueuedAction;
+        _playerActions.SpecialAttack.performed += _weaponController.SpecialAttack;
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
         // Spells
         _playerActions.Spell1.performed += spell1Action;
@@ -153,6 +154,7 @@ public class InputManager : Singleton<InputManager>
         _playerActions.Dash.performed -= dashQueuedAction;
         _playerActions.Rotate.performed -= _playerController.RotateCamera;
         _playerActions.Attack.performed -= attackQueuedAction;
+        _playerActions.SpecialAttack.performed -= _weaponController.SpecialAttack;
         _playerActions.CycleWeapon.performed -= _weaponController.CycleWeapon;
 
         _playerActions.Spell1.performed -= spell1Action;

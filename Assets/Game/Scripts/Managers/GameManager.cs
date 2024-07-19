@@ -48,6 +48,7 @@ public class GameManager : Singleton<GameManager>
     public int playerHealth = 100;
     public int playerStamina = 3;
     private float playerSpecialAttack = 0.0f;
+    public readonly float PlayerMaxSpecialAttack = 1.0f;
 
     [Tooltip("Amount of Stamina increase per second")]
     public int staminaIncreaseValue = 1;
