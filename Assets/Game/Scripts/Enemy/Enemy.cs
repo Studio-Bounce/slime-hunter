@@ -1,4 +1,6 @@
+using Ink.Parsed;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -26,12 +28,10 @@ public class Enemy : DynamicDamageTaker
     bool freezeEyeChange = false;
 
     [Header("Hit Feedback")]
-    [SerializeField] VisualEffect hitVFX;
-    [SerializeField] float hitVFXDuration = 1.0f;
+    [SerializeField] GameObject hitVFXGO;
     [SerializeField] SkinnedMeshRenderer slimeOuterBody;
     [SerializeField] float flashDuration = 0.2f;
-    [SerializeField][ColorUsage(true, true)] Color flashColor;
-    bool hitVFXPlaying = false;
+    [SerializeField] Material flashMat;
     bool isFlashing = false;
 
     [Header("Death")]
@@ -75,8 +75,11 @@ public class Enemy : DynamicDamageTaker
 
         if (!isInvincible)
         {
-            if (!hitVFXPlaying)
-                StartCoroutine(ShowHitParticles());
+            // Hit VFX
+            GameObject hitVFXObj = Instantiate(hitVFXGO,
+                transform.position + hitVFXGO.transform.position, Quaternion.LookRotation(damage.direction));
+            Destroy(hitVFXObj, 2.0f);
+
             if (!isFlashing)
                 StartCoroutine(FlashSlime());
         }
@@ -124,32 +127,24 @@ public class Enemy : DynamicDamageTaker
         return eye;
     }
 
-    IEnumerator ShowHitParticles()
-    {
-        hitVFXPlaying = true;
-        if (hitVFX != null)
-        {
-            hitVFX.Play();
-            yield return new WaitForSeconds(hitVFXDuration);
-            hitVFX.Stop();
-        }
-        hitVFXPlaying = false;
-    }
-
     IEnumerator FlashSlime()
     {
         isFlashing = true;
         if (slimeOuterBody != null)
         {
-            Color slimeColor = slimeOuterBody.materials[0].color;
-
             // Change color to white for a short duration
-            slimeOuterBody.materials[0].color = flashColor;
+            var newMats = new List<Material>(slimeOuterBody.materials) { flashMat };
+            slimeOuterBody.materials = newMats.ToArray();
 
             yield return new WaitForSeconds(flashDuration);
 
             // Revert color
-            slimeOuterBody.materials[0].color = slimeColor;
+            if (slimeOuterBody.materials.Length > 1)
+            {
+                var oldMats = new List<Material>(slimeOuterBody.materials);
+                oldMats.RemoveAt(oldMats.Count - 1);
+                slimeOuterBody.materials = oldMats.ToArray();
+            }
         }
         isFlashing = false;
     }
