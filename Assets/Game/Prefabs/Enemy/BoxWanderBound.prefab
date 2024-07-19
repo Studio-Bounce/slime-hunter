@@ -45,5 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lookForChildrenOnAwake: 1
-  size: {x: 10, y: 10}
-  color: {r: 1, g: 1, b: 1, a: 0.8}
+  innerSize: {x: 10, y: 10}
+  outerSizeOffset: 2
+  color: {r: 1, g: 1, b: 1, a: 0.39215687}

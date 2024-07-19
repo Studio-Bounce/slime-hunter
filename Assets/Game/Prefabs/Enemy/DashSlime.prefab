@@ -654,7 +654,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8820871006783578033}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -665,7 +665,7 @@ Transform:
   - {fileID: 4975995372773821764}
   - {fileID: 997298657960752899}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &2767975063603732144
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -926,6 +926,9 @@ MonoBehaviour:
     knockback: 0
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
+  OnSuccessfulHit:
+    m_PersistentCalls:
+      m_Calls: []
   cameraShakeIntensity: 0.76
   cameraShakeTime: 0.5
   slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
@@ -964,7 +967,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d69917b586cac144b80b436a2e9e34cd, type: 2}
   droppedItemPrefab: {fileID: 5271803406887303148, guid: fb226ce21fa4d4f4092706fc0a907e9b,
     type: 3}
-  direction: {x: 1, y: 1}
+  launchAngle: 0
   angleRange: 360
 --- !u!1 &8843669738811188421
 GameObject:
@@ -1242,6 +1245,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: -3231044817340345319, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -2874260813771920915, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_Layer
@@ -1252,6 +1260,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: -53619314171823005, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -6240000619408140269, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
     - target: {fileID: 649751332350429566, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_Layer
@@ -1356,6 +1370,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8699541509210442394, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -31,21 +31,24 @@ public class BoxWanderBoundary : WanderBoundary
         Vector3 center = transform.position;
         Vector3 halfSize = new Vector3(innerSize.x / 2, 0, innerSize.y / 2);
 
-        Vector3[] corners = new Vector3[4];
-        corners[0] = center + new Vector3(-halfSize.x, 0, -halfSize.z); // Bottom left
-        corners[1] = center + new Vector3(-halfSize.x, 0, halfSize.z);  // Top left
-        corners[2] = center + new Vector3(halfSize.x, 0, halfSize.z);   // Top right
-        corners[3] = center + new Vector3(halfSize.x, 0, -halfSize.z);  // Bottom right
+        // Transform corners
+        Vector3[] corners = new Vector3[5];
+        corners[0] = transform.TransformPoint(new Vector3(-halfSize.x, 0, -halfSize.z)); // Bottom left
+        corners[1] = transform.TransformPoint(new Vector3(-halfSize.x, 0, halfSize.z));  // Top left
+        corners[2] = transform.TransformPoint(new Vector3(halfSize.x, 0, halfSize.z));   // Top right
+        corners[3] = transform.TransformPoint(new Vector3(halfSize.x, 0, -halfSize.z));  // Bottom right
+        corners[4] = corners[0]; // Close the loop
 
-        Handles.DrawAAPolyLine(5, corners[0], corners[1], corners[2], corners[3], corners[0]);
+        Handles.DrawAAPolyLine(5, corners);
 
         halfSize = new Vector3((innerSize.x + outerSizeOffset) / 2, 0, (innerSize.y + outerSizeOffset) / 2);
-        corners[0] = center + new Vector3(-halfSize.x, 0, -halfSize.z); // Bottom left
-        corners[1] = center + new Vector3(-halfSize.x, 0, halfSize.z);  // Top left
-        corners[2] = center + new Vector3(halfSize.x, 0, halfSize.z);   // Top right
-        corners[3] = center + new Vector3(halfSize.x, 0, -halfSize.z);  // Bottom right
+        corners[0] = transform.TransformPoint(new Vector3(-halfSize.x, 0, -halfSize.z)); // Bottom left
+        corners[1] = transform.TransformPoint(new Vector3(-halfSize.x, 0, halfSize.z));  // Top left
+        corners[2] = transform.TransformPoint(new Vector3(halfSize.x, 0, halfSize.z));   // Top right
+        corners[3] = transform.TransformPoint(new Vector3(halfSize.x, 0, -halfSize.z));  // Bottom right
+        corners[4] = corners[0]; // Close the loop
 
-        Handles.DrawAAPolyLine(10, corners[0], corners[1], corners[2], corners[3], corners[0]);
+        Handles.DrawAAPolyLine(10, corners);
     }
 #endif
 }

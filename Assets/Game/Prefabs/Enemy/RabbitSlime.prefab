@@ -706,8 +706,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8223826132166210976}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 4.1404376, y: 0.0000019073486, z: -12.644163}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.8000001, y: 0.8000001, z: 0.8000001}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -717,7 +717,7 @@ Transform:
   - {fileID: 7752671134826275387}
   - {fileID: 4797778158928491495}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &8001197021206574200
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -916,6 +916,9 @@ MonoBehaviour:
     knockback: 0
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
+  OnSuccessfulHit:
+    m_PersistentCalls:
+      m_Calls: []
   cameraShakeIntensity: 5
   cameraShakeTime: 0.05
   slimeHitWeapon: {fileID: 11400000, guid: 6a9f264936c83674f801ef8248789f5d, type: 2}
@@ -965,14 +968,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9386f50c094e243a4fd2658c9e5c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsToDrop:
-  - {fileID: 11400000, guid: fa97121a094b5134f917ca118bfc4e43, type: 2}
-  - {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
-  - {fileID: 11400000, guid: d69917b586cac144b80b436a2e9e34cd, type: 2}
-  - {fileID: 11400000, guid: 6650162a58912e84fb6f113771fb1e37, type: 2}
-  - {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
+  items: []
   droppedItemPrefab: {fileID: 5271803406887303148, guid: fb226ce21fa4d4f4092706fc0a907e9b,
     type: 3}
+  launchAngle: 0
+  angleRange: 0
 --- !u!1001 &3988737145339044381
 PrefabInstance:
   m_ObjectHideFlags: 0
