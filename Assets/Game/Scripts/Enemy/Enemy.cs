@@ -26,12 +26,10 @@ public class Enemy : DynamicDamageTaker
     bool freezeEyeChange = false;
 
     [Header("Hit Feedback")]
-    [SerializeField] VisualEffect hitVFX;
-    [SerializeField] float hitVFXDuration = 1.0f;
+    [SerializeField] GameObject hitVFXGO;
     [SerializeField] SkinnedMeshRenderer slimeOuterBody;
     [SerializeField] float flashDuration = 0.2f;
     [SerializeField][ColorUsage(true, true)] Color flashColor;
-    bool hitVFXPlaying = false;
     bool isFlashing = false;
 
     [Header("Death")]
@@ -75,10 +73,13 @@ public class Enemy : DynamicDamageTaker
 
         if (!isInvincible)
         {
-            if (!hitVFXPlaying)
-                StartCoroutine(ShowHitParticles());
-            if (!isFlashing)
-                StartCoroutine(FlashSlime());
+            // Hit VFX
+            GameObject hitVFXObj = Instantiate(hitVFXGO,
+                transform.position + hitVFXGO.transform.position, Quaternion.LookRotation(damage.direction));
+            Destroy(hitVFXObj, 2.0f);
+
+            //if (!isFlashing)
+            //    StartCoroutine(FlashSlime());
         }
         return true;
     }
@@ -122,18 +123,6 @@ public class Enemy : DynamicDamageTaker
     public EnemyEye GetEnemyEye()
     {
         return eye;
-    }
-
-    IEnumerator ShowHitParticles()
-    {
-        hitVFXPlaying = true;
-        if (hitVFX != null)
-        {
-            hitVFX.Play();
-            yield return new WaitForSeconds(hitVFXDuration);
-            hitVFX.Stop();
-        }
-        hitVFXPlaying = false;
     }
 
     IEnumerator FlashSlime()
