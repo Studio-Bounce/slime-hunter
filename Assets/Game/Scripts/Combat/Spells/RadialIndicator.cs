@@ -8,7 +8,6 @@ public class RadialIndicator : SpellIndicator
     public Color inactiveColor = Color.red;
     public LayerMask hitLayers;
 
-    [SerializeField] private Transform player;
     [SerializeField] private Transform sourceIndicator;
     [SerializeField] private Transform targetIndicator;
 
@@ -19,7 +18,6 @@ public class RadialIndicator : SpellIndicator
 
     private void Start()
     {
-        Debug.Assert(player != null, "Requires transform for player");
         Debug.Assert(sourceIndicator != null, "Requires prefab for sourceIndicator");
         Debug.Assert(targetIndicator != null, "Requires prefab for targetIndicator");
 
@@ -34,39 +32,39 @@ public class RadialIndicator : SpellIndicator
         Material material = sourceRenderer.material;
         material.SetFloat("_ThicknessScale", 1 / castRange);
         material.SetFloat("_FeatheringScale", 1 / castRange);
-        sourceRenderer.material.SetColor("_Color", activeColor);
+        material.SetColor("_Color", activeColor);
         material = targetRenderer.material;
         material.SetFloat("_ThicknessScale", 1 / areaOfEffect);
         material.SetFloat("_FeatheringScale", 1 / areaOfEffect);
-        targetRenderer.material.SetColor("_Color", activeColor);
+        material.SetColor("_Color", activeColor);
     }
 
     private void Update()
     {
-        sourceIndicator.transform.position = player.position;
+        if (castRange <= 0) return;
 
         Ray ray = CameraManager.ActiveCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitLayers))
         {
-            Vector3 direction = hit.point - player.position;
+            Vector3 direction = hit.point - sourceIndicator.position;
 
             if (direction.magnitude > castRange)
             {
                 direction = direction.normalized * castRange;
             }
 
-            targetIndicator.position = player.position + direction;
+            targetIndicator.position = sourceIndicator.position + direction;
         }
     }
 
     public override void ShowIndicator(SpellSO spellSO)
     {
         Active = true;
-        sourceRenderer.enabled = true;
-        targetRenderer.enabled = true;
         castRange = spellSO.castRange;
         areaOfEffect = spellSO.areaOfEffect;
+        sourceRenderer.enabled = (castRange > 0) ? true : false;
+        targetRenderer.enabled = true;
         InitializeScaleMaterial();
     }
 

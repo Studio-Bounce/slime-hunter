@@ -13,7 +13,7 @@ public class SpellController : MonoBehaviour
     private int lastSpellIndex = -1;
 
     // Indicator & UI
-    [SerializeField] private SpellIndicator radialIndicator;
+    [SerializeField] private SpellIndicator radialRangedIndicator;
     private SpellIndicator currentIndicator;
     private HUDMenu hudMenu;
 
@@ -21,6 +21,7 @@ public class SpellController : MonoBehaviour
     private Animator _animator;
     private readonly int castTriggerHash = Animator.StringToHash("Cast");
 
+    // Inventory
     private InventoryManager inventoryManager;
 
     public SpellSO CurrentSpell
@@ -39,8 +40,9 @@ public class SpellController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Assert(radialIndicator != null);
-        radialIndicator.HideIndicator();
+        Debug.Assert(radialRangedIndicator != null);
+        radialRangedIndicator.HideIndicator();
+        ChangeSpell(currentSpellIndex);
         LoadSpellIcons();
     }
 
@@ -67,34 +69,32 @@ public class SpellController : MonoBehaviour
         UpdateSpellUI();
     }
 
-    public void StartCast(int spellIndex)
+    public void ChangeSpell(int spellIndex)
     {
-        // Set indicator type based on spell
-        lastSpellIndex = currentSpellIndex;
-        currentSpellIndex = spellIndex;
-        if (CurrentSpell == null)
+        if (availableSpells[spellIndex] == null)
         {
             Debug.Log("No spell equipped in slot");
             return;
         }
-
-        switch (CurrentSpell.spellIndicator)
-        {
-            case IndicatorType.RADIAL:
-                currentIndicator = radialIndicator;
-                break;
-        }
-
-        ToggleIndicator();
+        lastSpellIndex = currentSpellIndex;
+        currentSpellIndex = spellIndex;
+        UpdateSpellUI();
     }
+
 
     private void ToggleIndicator()
     {
+        switch (CurrentSpell.spellIndicator)
+        {
+            case IndicatorType.RADIAL:
+                currentIndicator = radialRangedIndicator;
+                break;
+        }
+
         if (lastSpellIndex != currentSpellIndex || !currentIndicator.Active)
         {
             currentIndicator.ShowIndicator(CurrentSpell);
             currentIndicator.ToggleReady(CurrentSpell.Ready);
-            UpdateSpellUI();
         }
         else
         {
@@ -114,13 +114,18 @@ public class SpellController : MonoBehaviour
         isCasting = false;
     }
 
-    public void Cast(InputAction.CallbackContext context)
+    public void AimSpell(InputAction.CallbackContext context)
     {
+        ToggleIndicator();
+    }
+
+    public void CastSpell(InputAction.CallbackContext context)
+    {
+        currentIndicator.HideIndicator();
         if (currentIndicator != null && currentIndicator.isActiveAndEnabled && CurrentSpell.Ready)
         {
             isCasting = true;
             CurrentSpell.Ready = false;
-            currentIndicator.HideIndicator();
             // Cast spell
             Spell spell = Instantiate(CurrentSpell.spellPrefab, transform.position, Quaternion.identity);
             spell.Initialize(CurrentSpell);
