@@ -63,7 +63,3 @@ And you're done!
 Branches should follow this naming convention: `<branch-type>-<description>`
 
 The first word should indicate the type of branch (fix, feature, docs, test, etc.). Use lower-case and kebab-case for clarity (separate each word with a hyphen).
-
----
-
-This improved version ensures clarity and readability, making it easier for developers to follow the instructions.
