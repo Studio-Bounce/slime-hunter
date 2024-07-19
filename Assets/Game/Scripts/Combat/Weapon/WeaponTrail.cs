@@ -117,27 +117,24 @@ public class WeaponTrail : DamageDealer
         StopAllCoroutines();
         StartCoroutine(ActiveAttack(move.animationDuration));
         trailRenderer.transform.rotation = Quaternion.Euler(trailRenderer.transform.rotation.eulerAngles.x, trailRenderer.transform.rotation.eulerAngles.y, verticalRotation);
-    
-        // No attack landed
-        if (!attackDetected)
-        {
-            OnFailedHit.Invoke();
-        }
     }
 
     IEnumerator ActiveAttack(float duration)
     {
         active = true;
         float _timer = 0.0f;
-        float _normalTime = 0.0f;
         while (_timer < duration && active)
         {
             _timer += Time.deltaTime*GameManager.Instance.PlayerSpeedMultiplier;
-            _normalTime = _timer / duration;
+            float _normalTime = _timer / duration;
             trailMaterial.SetFloat("_Factor", _normalTime);
             yield return null;
         }
         active = false;
+        if (!attackDetected)
+        {
+            OnFailedHit.Invoke();
+        }
         trailMaterial.SetFloat("_Factor", 0);
     }
 

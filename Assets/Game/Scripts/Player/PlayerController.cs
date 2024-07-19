@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XInput;
 
-[RequireComponent(typeof(Animator), typeof(CharacterController), typeof(WeaponController))]
+[RequireComponent(typeof(CharacterController), typeof(WeaponController))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Properties")]

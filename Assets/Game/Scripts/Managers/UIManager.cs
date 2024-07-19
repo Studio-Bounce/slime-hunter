@@ -58,6 +58,11 @@ public class UIManager : Singleton<UIManager>
         ((HUDMenu)HUDMenu).UpdateComboCount(comboCount);
     }
 
+    public void SetHUDFade(float opacity)
+    {
+        ((HUDMenu)HUDMenu).SetComboOpacity(opacity);
+    }
+
     public void ClearCombo()
     {
         ((HUDMenu)HUDMenu).HideCombo();

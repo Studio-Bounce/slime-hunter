@@ -57,12 +57,12 @@ public class WeaponController : MonoBehaviour
 
     public WeaponSO CurrentWeapon
     {
-        get { 
+        get {
             if (availableWeapons[_equippedWeaponIndex] == null)
             {
                 availableWeapons[_equippedWeaponIndex] = fallbackWeapon;
             }
-            return availableWeapons[_equippedWeaponIndex]; 
+            return availableWeapons[_equippedWeaponIndex];
         }
         set { availableWeapons[_equippedWeaponIndex] = value; }
     }
@@ -86,7 +86,10 @@ public class WeaponController : MonoBehaviour
 
     private void OnDestroy()
     {
-        inventoryManager.OnEquippedWeaponsChanged -= OnWeaponUpdate;
+        if (inventoryManager != null)
+        {
+            inventoryManager.OnEquippedWeaponsChanged -= OnWeaponUpdate;
+        }
     }
 
     private void OnWeaponUpdate(WeaponSO[] weapons)
@@ -102,8 +105,8 @@ public class WeaponController : MonoBehaviour
         _animator.speed = 1.0f;
     }
 
-    public void EnableAttack() {}
-    public void DisableAttack() {}
+    public void EnableAttack() { }
+    public void DisableAttack() { }
 
     // Creates a new child GameObject to use as pivot transform so we don't influence the original hand rotation
     // This is incase you pick the hand bone itself to be the pivot
@@ -122,7 +125,7 @@ public class WeaponController : MonoBehaviour
         if (weaponSO != null)
         {
             weaponTrail.SetupWeaponSettings(weaponSO);
-        } 
+        }
 
         if (weaponSO.weaponModel != null)
         {
@@ -143,8 +146,8 @@ public class WeaponController : MonoBehaviour
     {
         if (!IsInterruptable()) return;
         // Cycle equipped
-        _equippedWeaponIndex = _equippedWeaponIndex == availableWeapons.Length-1 ? 
-            0 : _equippedWeaponIndex+1;
+        _equippedWeaponIndex = _equippedWeaponIndex == availableWeapons.Length - 1 ?
+            0 : _equippedWeaponIndex + 1;
 
         // Reset any existing combo
         _attackMoveIndex = 0;
@@ -170,6 +173,15 @@ public class WeaponController : MonoBehaviour
         StartCoroutine(PerformAttack(CurrentWeapon.attackMoves[_attackMoveIndex], attackDirection));
 
         return true;
+    }
+
+    public void SpecialAttack(InputAction.CallbackContext context)
+    {
+        if (GameManager.Instance.PlayerSpecialAttack < GameManager.Instance.PlayerMaxSpecialAttack)
+            return;
+
+        Debug.Log("Special attack!");
+        GameManager.Instance.PlayerSpecialAttack = 0.0f;
     }
 
     private IEnumerator PerformAttack(AttackMove move, Vector3 direction)

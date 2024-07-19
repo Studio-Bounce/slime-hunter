@@ -37,6 +37,7 @@ public class HUDMenu : Menu
     // Attack combo
     VisualElement attackComboVE;
     Label comboCountLabel;
+    VisualElement splAttackComboKey;
     bool isComboHUDUp = false;
 
     bool redAlertUp = false;
@@ -66,6 +67,7 @@ public class HUDMenu : Menu
         VisualElement splAttackVE = statusBars.Q<VisualElement>("SpecialAttack");
         specialAttackBar = splAttackVE.Q<ProgressBar>("SplAttackBar");
         gameManager.OnPlayerSpecialAttackChange += UpdateSpecialAttackBar;
+        splAttackComboKey = specialAttackBar.Q<VisualElement>("SplAttack_Key");
 
         // Weapons
         weaponIcon = root.Q<VisualElement>("WeaponIcon");
@@ -141,6 +143,11 @@ public class HUDMenu : Menu
         if (specialAttackBar != null)
         {
             specialAttackBar.value = splAttackStatus;
+            if (splAttackComboKey != null)
+            {
+                float splAttack = gameManager.PlayerSpecialAttack;
+                splAttackComboKey.style.opacity = (splAttack == 1.0f) ? 1.0f : 0.0f;
+            }
         }
     }
 
@@ -244,6 +251,12 @@ public class HUDMenu : Menu
     {
         isComboHUDUp = true;
         attackComboVE.style.opacity = 1;
+    }
+
+    public void SetComboOpacity(float opacity)
+    {
+        isComboHUDUp = (opacity > 0);
+        attackComboVE.style.opacity = opacity;
     }
 
     public void HideCombo()
