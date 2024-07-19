@@ -246,6 +246,12 @@ public class HUDMenu : Menu
         attackComboVE.style.opacity = 1;
     }
 
+    public void SetComboOpacity(float opacity)
+    {
+        isComboHUDUp = (opacity > 0);
+        attackComboVE.style.opacity = opacity;
+    }
+
     public void HideCombo()
     {
         isComboHUDUp = false;

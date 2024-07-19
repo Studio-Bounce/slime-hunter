@@ -16,9 +16,9 @@ public class ComboAttack : MonoBehaviour
     [Tooltip("Amount of decay per second on special attack bar")]
     [Range(0f, 0.5f)]
     public float specialBarDecayRate = 0.1f;
-    [Tooltip("Max decay possible on special attack bar")]
+    [Tooltip("Special attack bar does not decay below this point")]
     [Range(0f, 1f)]
-    public float specialBarMaxDecay = 0.5f;
+    public float specialBarReserve = 0.3f;
 
     bool isInCombo = false;
     int attackCount = 0;
@@ -61,6 +61,8 @@ public class ComboAttack : MonoBehaviour
         while (true)
         {
             comboTimer += Time.deltaTime;
+            float progress = comboTimer / comboBreakTimeout;
+            UIManager.Instance.SetHUDFade(1.0f - progress);
 
             if (comboTimer > comboBreakTimeout)
             {
@@ -69,28 +71,27 @@ public class ComboAttack : MonoBehaviour
 
             yield return null;
         }
-        attackCount = -startIndex;
         isInCombo = false;
-        UIManager.Instance.ClearCombo();
         StartCoroutine(DecaySequence());
+        attackCount = -startIndex;
+        UIManager.Instance.ClearCombo();
     }
 
     IEnumerator DecaySequence()
     {
         if (GameManager.Instance.PlayerSpecialAttack < 1f)
         {
-            float totalDecay = 0.0f;
             // Decay stops if combo starts building up
-            while (!isInCombo && GameManager.Instance.PlayerSpecialAttack > 0f)
+            while (!isInCombo && GameManager.Instance.PlayerSpecialAttack > specialBarReserve)
             {
                 float deltaDecay = (specialBarDecayRate * Time.deltaTime);
-                totalDecay += deltaDecay;
-                if (totalDecay > specialBarMaxDecay)
-                    break;
-
                 GameManager.Instance.PlayerSpecialAttack -= deltaDecay;
 
                 yield return null;
+            }
+            if (!isInCombo)
+            {
+                GameManager.Instance.PlayerSpecialAttack = specialBarReserve;
             }
         }
     }

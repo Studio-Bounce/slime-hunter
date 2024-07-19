@@ -23,7 +23,6 @@ public class DamageDealer : MonoBehaviour
     [SerializeField] float cameraShakeTime = 0.5f;
     protected bool applyCameraShake = false;
 
-
     public bool Active { 
         get { 
             return active;

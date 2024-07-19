@@ -249,10 +249,11 @@ MonoBehaviour:
   comboMask:
     serializedVersion: 2
     m_Bits: 128
-  comboBreakTimeout: 5
-  specialBarRate: 0.1
-  startIndex: 3
-  specialAttack: 0
+  comboBreakTimeout: 3
+  startIndex: 2
+  specialBarFillRate: 0.1
+  specialBarDecayRate: 0.1
+  specialBarMaxDecay: 0.5
 --- !u!2083052967 &7850761347003120757
 VisualEffect:
   m_ObjectHideFlags: 0

@@ -477,6 +477,8 @@ MonoBehaviour:
   staminaIncreaseValue: 1
   staminaIncreaseInterval: 0.33
   cooldownLength: 1.5
+  pickupRange: 5
+  pickupSpeed: 5
 --- !u!4 &740699611
 Transform:
   m_ObjectHideFlags: 0
@@ -1275,6 +1277,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172923174}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1192905890 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2474286633782853668, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1902421727}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a41b9ca57ddf3247bfec2833059c2d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1244596200
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,6 +2303,51 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c,
         type: 2}
+    - target: {fileID: 3272650402615436579, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+        type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3272650402615436579, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997934283830900321, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+        type: 3}
+      propertyPath: OnFailedHit.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997934283830900321, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+        type: 3}
+      propertyPath: OnFailedHit.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997934283830900321, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+        type: 3}
+      propertyPath: OnFailedHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1192905890}
+    - target: {fileID: 3997934283830900321, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+        type: 3}
+      propertyPath: OnFailedHit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997934283830900321, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+        type: 3}
+      propertyPath: OnFailedHit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPlayerMiss
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997934283830900321, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+        type: 3}
+      propertyPath: OnFailedHit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ComboAttack, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997934283830900321, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
+        type: 3}
+      propertyPath: OnFailedHit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7186318760402298026, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
         type: 3}
       propertyPath: m_LocalPosition.x
