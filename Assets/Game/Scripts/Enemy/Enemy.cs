@@ -1,4 +1,6 @@
+using Ink.Parsed;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -29,7 +31,7 @@ public class Enemy : DynamicDamageTaker
     [SerializeField] GameObject hitVFXGO;
     [SerializeField] SkinnedMeshRenderer slimeOuterBody;
     [SerializeField] float flashDuration = 0.2f;
-    [SerializeField][ColorUsage(true, true)] Color flashColor;
+    [SerializeField] Material flashMat;
     bool isFlashing = false;
 
     [Header("Death")]
@@ -78,8 +80,8 @@ public class Enemy : DynamicDamageTaker
                 transform.position + hitVFXGO.transform.position, Quaternion.LookRotation(damage.direction));
             Destroy(hitVFXObj, 2.0f);
 
-            //if (!isFlashing)
-            //    StartCoroutine(FlashSlime());
+            if (!isFlashing)
+                StartCoroutine(FlashSlime());
         }
         return true;
     }
@@ -130,15 +132,19 @@ public class Enemy : DynamicDamageTaker
         isFlashing = true;
         if (slimeOuterBody != null)
         {
-            Color slimeColor = slimeOuterBody.materials[0].color;
-
             // Change color to white for a short duration
-            slimeOuterBody.materials[0].color = flashColor;
+            var newMats = new List<Material>(slimeOuterBody.materials) { flashMat };
+            slimeOuterBody.materials = newMats.ToArray();
 
             yield return new WaitForSeconds(flashDuration);
 
             // Revert color
-            slimeOuterBody.materials[0].color = slimeColor;
+            if (slimeOuterBody.materials.Length > 1)
+            {
+                var oldMats = new List<Material>(slimeOuterBody.materials);
+                oldMats.RemoveAt(oldMats.Count - 1);
+                slimeOuterBody.materials = oldMats.ToArray();
+            }
         }
         isFlashing = false;
     }

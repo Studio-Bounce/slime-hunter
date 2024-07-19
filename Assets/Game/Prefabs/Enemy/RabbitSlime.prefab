@@ -712,8 +712,8 @@ MonoBehaviour:
   hitVFXGO: {fileID: 2507012300119595446, guid: 207429efa1ee73a45845fb615dc9e278,
     type: 3}
   slimeOuterBody: {fileID: 3539770233314810749}
-  flashDuration: 0.1
-  flashColor: {r: 2.5193918, g: 2.5193918, b: 2.5193918, a: 0.47058824}
+  flashDuration: 0.2
+  flashMat: {fileID: 2100000, guid: ece9a621dbd04e443a99354d2ec2c2fa, type: 2}
   slimeModel: {fileID: 9002733011280807015}
   deathParticlesGO: {fileID: 7561334915480803397, guid: 50c9da95617416f41a015456a5289f9b,
     type: 3}
