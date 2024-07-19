@@ -91,15 +91,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AimSpell"",
-                    ""type"": ""Button"",
-                    ""id"": ""70ebbc8c-351e-42dc-a183-ce0860effef5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""CastSpell"",
                     ""type"": ""Button"",
                     ""id"": ""4da7daa0-3311-4f28-a626-7cc8ac46b153"",
@@ -274,17 +265,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Spell2"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""01d1adf6-13c1-4e10-8cc7-4146c120d9be"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AimSpell"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -351,7 +331,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_CycleWeapon = m_Player.FindAction("CycleWeapon", throwIfNotFound: true);
         m_Player_Spell1 = m_Player.FindAction("Spell1", throwIfNotFound: true);
         m_Player_Spell2 = m_Player.FindAction("Spell2", throwIfNotFound: true);
-        m_Player_AimSpell = m_Player.FindAction("AimSpell", throwIfNotFound: true);
         m_Player_CastSpell = m_Player.FindAction("CastSpell", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -424,7 +403,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CycleWeapon;
     private readonly InputAction m_Player_Spell1;
     private readonly InputAction m_Player_Spell2;
-    private readonly InputAction m_Player_AimSpell;
     private readonly InputAction m_Player_CastSpell;
     public struct PlayerActions
     {
@@ -437,7 +415,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @CycleWeapon => m_Wrapper.m_Player_CycleWeapon;
         public InputAction @Spell1 => m_Wrapper.m_Player_Spell1;
         public InputAction @Spell2 => m_Wrapper.m_Player_Spell2;
-        public InputAction @AimSpell => m_Wrapper.m_Player_AimSpell;
         public InputAction @CastSpell => m_Wrapper.m_Player_CastSpell;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -469,9 +446,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Spell2.started += instance.OnSpell2;
             @Spell2.performed += instance.OnSpell2;
             @Spell2.canceled += instance.OnSpell2;
-            @AimSpell.started += instance.OnAimSpell;
-            @AimSpell.performed += instance.OnAimSpell;
-            @AimSpell.canceled += instance.OnAimSpell;
             @CastSpell.started += instance.OnCastSpell;
             @CastSpell.performed += instance.OnCastSpell;
             @CastSpell.canceled += instance.OnCastSpell;
@@ -500,9 +474,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Spell2.started -= instance.OnSpell2;
             @Spell2.performed -= instance.OnSpell2;
             @Spell2.canceled -= instance.OnSpell2;
-            @AimSpell.started -= instance.OnAimSpell;
-            @AimSpell.performed -= instance.OnAimSpell;
-            @AimSpell.canceled -= instance.OnAimSpell;
             @CastSpell.started -= instance.OnCastSpell;
             @CastSpell.performed -= instance.OnCastSpell;
             @CastSpell.canceled -= instance.OnCastSpell;
@@ -587,7 +558,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnCycleWeapon(InputAction.CallbackContext context);
         void OnSpell1(InputAction.CallbackContext context);
         void OnSpell2(InputAction.CallbackContext context);
-        void OnAimSpell(InputAction.CallbackContext context);
         void OnCastSpell(InputAction.CallbackContext context);
     }
     public interface IUIActions

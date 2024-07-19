@@ -69,15 +69,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AimSpell",
-                    "type": "Button",
-                    "id": "70ebbc8c-351e-42dc-a183-ce0860effef5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "CastSpell",
                     "type": "Button",
                     "id": "4da7daa0-3311-4f28-a626-7cc8ac46b153",
@@ -250,17 +241,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Spell2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "01d1adf6-13c1-4e10-8cc7-4146c120d9be",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AimSpell",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
