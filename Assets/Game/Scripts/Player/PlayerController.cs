@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float sprintMultiplier = 1.5f;
     public float slowDownMultiplierOnAttack = 0.3f;
+    public float slowDownMultiplierOnSpecialAttack = 0.3f;
     public float dashDistance = 5f;
     public float dashDuration = 0.2f;
     public float dashCooldown = 0.5f;
@@ -116,7 +117,11 @@ public class PlayerController : MonoBehaviour
         if (!weaponController.IsInterruptable() || spellController.isCasting)
         {
             _moveSpeed *= slowDownMultiplierOnAttack;
-        } 
+        }
+        else if (weaponController.isPerformingSpecialAttack)
+        {
+            _moveSpeed *= slowDownMultiplierOnSpecialAttack;
+        }
         else if (moveDirection != Vector3.zero) // Only rotate to movement when not attacking
         {
             transform.rotation = Quaternion.LookRotation(moveDirection, Vector3.up); // Snap
@@ -132,6 +137,7 @@ public class PlayerController : MonoBehaviour
         // Dashing while jumping is not allowed
         if (!_isDashing &&
             !_isJumping &&
+            !weaponController.isPerformingSpecialAttack &&
             (Time.time > lastDashTime + dashCooldown) &&
             weaponController.IsDashInterruptable() &&
                 GameManager.Instance.UseStamina(dashStaminaUse)

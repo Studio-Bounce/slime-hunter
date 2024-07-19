@@ -78,22 +78,28 @@ public class WeaponTrail : DamageDealer
         }
     }
 
-    // If the attack is part of an attack combo sequence, isFinalAttack tells whether
-    // it is the final attack in this sequence or not
-    public void Attack(AttackMove move, bool isFinalAttack)
+    public void SetWeaponProps(AttackMove move)
     {
-
         // Update weapon damage on attack
         damage.value = (int)(currentWeaponSO.damage.value * move.damageMultiplier);
         // Update weapon knockback on attack
         damage.knockback = currentWeaponSO.damage.knockback * move.knockbackMultiplier;
         // Update weapon range on attack
         arcRadius = currentWeaponSO.range * move.rangeMultiplier;
-        float attackRange = (currentWeaponSO.range) * move.rangeMultiplier;
+        trailRenderer.transform.localScale = new Vector3(arcRadius, 1, arcRadius);
+
+        UpdateArcMesh();
+    }
+
+    // If the attack is part of an attack combo sequence, isFinalAttack tells whether
+    // it is the final attack in this sequence or not
+    public void Attack(AttackMove move, bool isFinalAttack)
+    {
+        SetWeaponProps(move);
 
         // Trail Effects Direction
         trailMaterial.SetFloat(flipShaderParam, move.direction.x < 0 ? 0 : 1);
-        trailRenderer.transform.localScale = new Vector3(attackRange, 1, attackRange);
+
         float verticalRotation = 0;
         if (move.direction.y > 0)
         {
@@ -112,11 +118,15 @@ public class WeaponTrail : DamageDealer
         trailMaterial.SetFloat(brightPeakShaderParam, move.voranoiPeak);
         trailMaterial.SetFloat(darkPeakShaderParam, move.voranoiPeak);
 
-        UpdateArcMesh();
         applyCameraShake = isFinalAttack;
         StopAllCoroutines();
         StartCoroutine(ActiveAttack(move.animationDuration));
         trailRenderer.transform.rotation = Quaternion.Euler(trailRenderer.transform.rotation.eulerAngles.x, trailRenderer.transform.rotation.eulerAngles.y, verticalRotation);
+    }
+
+    public void SetWeapon(bool _active)
+    {
+        active = _active;
     }
 
     IEnumerator ActiveAttack(float duration)
