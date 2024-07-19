@@ -80,8 +80,8 @@ public class Enemy : DynamicDamageTaker
                 transform.position + hitVFXGO.transform.position, Quaternion.LookRotation(damage.direction));
             Destroy(hitVFXObj, 2.0f);
 
-            //if (!isFlashing)
-            //    StartCoroutine(FlashSlime());
+            if (!isFlashing)
+                StartCoroutine(FlashSlime());
         }
         return true;
     }
