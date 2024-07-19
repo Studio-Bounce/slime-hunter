@@ -9,11 +9,13 @@ public class Player : DynamicDamageTaker
     public float slowDownOnHitMultiplier = 0.2f;
     public float slowDownTime = 0.5f;
     PlayerController playerController;
+    WeaponController weaponController;
 
     protected override void Start()
     {
         base.Start();
         playerController = GetComponent<PlayerController>();
+        weaponController = GetComponent<WeaponController>();
 
         // Ensures that base.health does not change as per damage
         GameManager.Instance.PlayerRef = this;
@@ -30,8 +32,9 @@ public class Player : DynamicDamageTaker
 
     public override bool TakeDamage(Damage damage, bool detectDeath)
     {
-        // Can not take damage if dashing or jumping
-        if (playerController.IsDashing || playerController.IsJumping)
+        if (playerController.IsDashing ||
+            playerController.IsJumping ||
+            weaponController.isPerformingSpecialAttack)
             return false;
 
         // For player, we want to change GameManager.PlayerHealth

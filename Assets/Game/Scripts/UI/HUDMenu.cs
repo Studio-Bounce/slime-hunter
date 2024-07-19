@@ -39,6 +39,8 @@ public class HUDMenu : Menu
     Label comboCountLabel;
     VisualElement splAttackComboKey;
     bool isComboHUDUp = false;
+    bool canDoSpecialAttack = false;
+    [SerializeField] float specialAttackBtnTime = 0.5f;
 
     bool redAlertUp = false;
 
@@ -67,7 +69,8 @@ public class HUDMenu : Menu
         VisualElement splAttackVE = statusBars.Q<VisualElement>("SpecialAttack");
         specialAttackBar = splAttackVE.Q<ProgressBar>("SplAttackBar");
         gameManager.OnPlayerSpecialAttackChange += UpdateSpecialAttackBar;
-        splAttackComboKey = specialAttackBar.Q<VisualElement>("SplAttack_Key");
+        splAttackComboKey = statusBars.Q<VisualElement>("SplAttack_Key");
+        splAttackComboKey.style.opacity = 0.0f;
 
         // Weapons
         weaponIcon = root.Q<VisualElement>("WeaponIcon");
@@ -99,6 +102,19 @@ public class HUDMenu : Menu
         if (navigate)
         {
             UpdateCompass();
+        }
+
+        if (gameManager.PlayerSpecialAttack == 1.0f)
+        {
+            if (!canDoSpecialAttack)
+            {
+                canDoSpecialAttack = true;
+                StartCoroutine(SpecialAttackIndicator());
+            }
+        }
+        else
+        {
+            canDoSpecialAttack = false;
         }
     }
 
@@ -143,12 +159,26 @@ public class HUDMenu : Menu
         if (specialAttackBar != null)
         {
             specialAttackBar.value = splAttackStatus;
-            if (splAttackComboKey != null)
-            {
-                float splAttack = gameManager.PlayerSpecialAttack;
-                splAttackComboKey.style.opacity = (splAttack == 1.0f) ? 1.0f : 0.0f;
-            }
         }
+    }
+
+    IEnumerator SpecialAttackIndicator()
+    {
+        float btnScale = 1.0f;
+        float direction = 1;
+        splAttackComboKey.style.opacity = 1.0f;
+        while (canDoSpecialAttack)
+        {
+
+            // Highlight the special attack button
+            btnScale += direction * (Time.deltaTime / specialAttackBtnTime);
+            if (btnScale <= 1.0f || btnScale >= 2.0f)
+                direction *= -1;
+            splAttackComboKey.transform.scale = new Vector3(btnScale, btnScale, btnScale);
+
+            yield return null;
+        }
+        splAttackComboKey.style.opacity = 0.0f;
     }
 
     // ------------------------------ Weapons ------------------------------

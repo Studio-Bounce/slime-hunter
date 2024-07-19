@@ -19,14 +19,16 @@ public class WeaponController : MonoBehaviour
 
     // Weapon&Animation
     [HideInInspector, NonSerialized] public AttackState currentAttackState = AttackState.INACTIVE;
+    [HideInInspector] public bool isPerformingSpecialAttack = false;
     private AnimatorOverrideController _overrideAnimatorController;
     private int _equippedWeaponIndex = 0;
     private GameObject _currentWeaponPrefab;
     private Animator _animator;
 
     private readonly int attackStartTriggerHash = Animator.StringToHash("AttackStart");
+    private readonly int specialAttackStartHash = Animator.StringToHash("SpecialAttack");
     private readonly int attackStateHash = Animator.StringToHash("Attack");
-    private readonly int baseStateHash = Animator.StringToHash("Locomotion");
+    private readonly int locomotionStateHash = Animator.StringToHash("Locomotion");
     private int _attackMoveIndex = 0;
 
     private InventoryManager inventoryManager;
@@ -161,7 +163,7 @@ public class WeaponController : MonoBehaviour
 
     public bool Attack(InputAction.CallbackContext context)
     {
-        if (!InterruptAttack()) return false;
+        if (!InterruptAttack() || isPerformingSpecialAttack) return false;
 
         // Get vector from player to mouse click
         Vector2 clickPosition = Mouse.current.position.ReadValue();
@@ -173,15 +175,6 @@ public class WeaponController : MonoBehaviour
         StartCoroutine(PerformAttack(CurrentWeapon.attackMoves[_attackMoveIndex], attackDirection));
 
         return true;
-    }
-
-    public void SpecialAttack(InputAction.CallbackContext context)
-    {
-        if (GameManager.Instance.PlayerSpecialAttack < GameManager.Instance.PlayerMaxSpecialAttack)
-            return;
-
-        Debug.Log("Special attack!");
-        GameManager.Instance.PlayerSpecialAttack = 0.0f;
     }
 
     private IEnumerator PerformAttack(AttackMove move, Vector3 direction)
@@ -225,11 +218,58 @@ public class WeaponController : MonoBehaviour
         if (IsInterruptable()) {
             if (_animator.GetCurrentAnimatorStateInfo(0).shortNameHash == attackStateHash)
             {
-                _animator.CrossFade(baseStateHash, 0.0f);
+                _animator.CrossFade(locomotionStateHash, 0.0f);
             }
             return true;
         }
         return false;
+    }
+
+    public void SpecialAttack(InputAction.CallbackContext context)
+    {
+        if ((GameManager.Instance.PlayerSpecialAttack < GameManager.Instance.PlayerMaxSpecialAttack) ||
+            isPerformingSpecialAttack)
+            return;
+
+        GameManager.Instance.PlayerSpecialAttack = 0.0f;
+
+        StartCoroutine(PerformSpecialAttack());
+    }
+
+    IEnumerator PerformSpecialAttack()
+    {
+        isPerformingSpecialAttack = true;
+        weaponTrail.SetWeapon(true);
+        if (CurrentWeapon.attackMoves.Count > 0)
+        {
+            weaponTrail.SetWeaponProps(CurrentWeapon.attackMoves[0]);
+        }
+        _animator.SetTrigger(specialAttackStartHash);
+        
+        // Wait for animation to finish
+        float animationTime = 0.0f;
+        foreach (AnimationClip clip in _animator.runtimeAnimatorController.animationClips)
+        {
+            if (clip.name == "SpecialAttack")
+            {
+                animationTime = clip.length;
+                break;
+            }
+        }
+        animationTime /= GameManager.Instance.PlayerSpeedMultiplier;
+
+        float timeElapsed = 0.0f;
+        while (timeElapsed < animationTime)
+        {
+            timeElapsed += Time.deltaTime;
+            // Update weapon direction as the player rotates
+            weaponTrail.transform.forward = _animator.gameObject.transform.forward;
+
+            yield return null;
+        }
+
+        weaponTrail.SetWeapon(false);
+        isPerformingSpecialAttack = false;
     }
 
     public bool DashInterruptAttack()
