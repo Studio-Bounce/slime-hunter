@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7bcc00ed2029743a440f1357795007, type: 3}
+  m_Name: BlastSpell
+  m_EditorClassIdentifier: 
+  address: Assets/Game/ScriptableObjects/BlastSpell.asset
+  itemName: Blast Spell
+  description: Blast nearby enemies away
+  icon: {fileID: 21300000, guid: 59100be7fada38842967817d43926fe2, type: 3}
+  itemType: 1
+  value: 0
+  weight: 0
+  damage:
+    value: 5
+    knockback: 25
+    direction: {x: 0, y: 0, z: 0}
+    effect: {fileID: 11400000, guid: 194e3545abb07b94ab515e1afbd829cb, type: 2}
+  castRange: 0
+  areaOfEffect: 5
+  cooldown: 5
+  spellPrefab: {fileID: 3300401679637664845, guid: aa496e9510f73364289fb1c4717ab9bc,
+    type: 3}
+  spellIndicator: 0

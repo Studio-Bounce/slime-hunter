@@ -37,8 +37,8 @@ public class InputManager : Singleton<InputManager>
         // Assign actions
         attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
         dashQueuedAction = e => QueueInput(_playerController.Dash, e);
-        spell1Action = e => _spellController.StartCast(0);
-        spell2Action = e => _spellController.StartCast(1);
+        spell1Action = e => _spellController.ChangeSpell(0);
+        spell2Action = e => _spellController.ChangeSpell(1);
         // Enables/disables inputs based on game state
         GameManager.Instance.OnGameStateChange += UpdateInputAvailability;
         GameManager.Instance.OnPlayerRefChange += GetControllers;
@@ -139,7 +139,9 @@ public class InputManager : Singleton<InputManager>
         // Spells
         _playerActions.Spell1.performed += spell1Action;
         _playerActions.Spell2.performed += spell2Action;
-        _playerActions.CastSpell.performed += _spellController.Cast;
+
+        _playerActions.CastSpell.started += _spellController.AimSpell;
+        _playerActions.CastSpell.canceled += _spellController.CastSpell;
     }
 
     private void _AddUIControls()
@@ -159,7 +161,9 @@ public class InputManager : Singleton<InputManager>
 
         _playerActions.Spell1.performed -= spell1Action;
         _playerActions.Spell2.performed -= spell2Action;
-        _playerActions.CastSpell.performed -= _spellController.Cast;
+
+        _playerActions.CastSpell.started -= _spellController.AimSpell;
+        _playerActions.CastSpell.canceled -= _spellController.CastSpell;
     }
 
     private void _RemoveUIControls()
