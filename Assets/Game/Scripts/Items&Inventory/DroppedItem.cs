@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build.Content;
 using UnityEngine;
-using UnityEngine.ResourceManagement.AsyncOperations;
+
 
 [RequireComponent(typeof(SpriteRenderer), typeof(Billboard))]
 public class DroppedItem : MonoBehaviour
