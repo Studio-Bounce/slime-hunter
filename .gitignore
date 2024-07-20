@@ -63,14 +63,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-# FMOD files
-Assets/Game/Audio/FMOD/.*
-Assets/Game/Audio/FMOD/Build/
-Assets/Plugins/FMOD/
-Assets/Plugins/FMOD/Resources/FMODStudioCache.asset
-Assets/StreamingAssets/*.bank
-fmod_editor.log
-
 # Packed Addressables
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
@@ -81,3 +73,29 @@ fmod_editor.log
 
 # Additional Ignores
 ProjectSettings/Packages/com.unity.probuilder/Settings.json
+
+### FMOD Unity Integration ###
+# Never ignore DLLs in the FMOD subfolder, so make sure that the 
+# FMOD-folder is in the correct path.
+!/[Aa]ssets/Plugins/FMOD/**/*.dll
+
+# Don't ignore images and gizmos used by FMOD in the Unity Editor
+!/[Aa}ssets/Gizmos/FMOD/*
+!/[Aa}ssets/Editor Default Resources/FMOD/*
+
+# Ignore the Cache-file since it is updated locally either way
+/[Aa]ssets/**/FMODStudioCache.asset
+/[Aa]ssets/**/FMODStudioCache.asset.meta
+/[Aa]ssets/Plugins/FMOD/Cache.meta
+/[Aa]ssets/Plugins/FMOD/Cache/Editor.meta
+# Ignore entire plugin. Install manually
+Assets/Plugins/FMOD/
+Assets/StreamingAssets/*.bank
+
+# Log-files
+fmod.log
+fmod_editor.log
+
+# FMOD 1.10.x (Legacy)
+/Assets/FMODAssets/*
+/Assets/FMODStudioCache.meta
