@@ -44,6 +44,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     Label infoType;
     Button equip1Btn;
     Button equip2Btn;
+    Button useBtn;
     Button dropBtn;
 
     // Character Container
@@ -57,6 +58,10 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     public event Action OnInventoryChanged = delegate { };
     public event Action<WeaponSO[]> OnEquippedWeaponsChanged = delegate { };
     public event Action<SpellSO[]> OnEquippedSpellsChanged = delegate { };
+
+    public int TotalWeight { get; private set; } = 0;
+    public bool IsFull { get { return TotalWeight >= maxWeight; } }
+
 
     private void Start()
     {
@@ -77,6 +82,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         infoType = infoContainer.Q<Label>("ItemType");
         equip1Btn = infoContainer.Q<Button>("Equip1Btn");
         equip2Btn = infoContainer.Q<Button>("Equip2Btn");
+        useBtn = infoContainer.Q<Button>("UseBtn");
         dropBtn = infoContainer.Q<Button>("DropBtn");
         characterContainer = root.Q<VisualElement>("CharacterContainer");
         weapon1Icon = characterContainer.Q<VisualElement>("Weapon1Icon");
@@ -95,7 +101,12 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         }
         equip1Btn.RegisterCallback<ClickEvent>(e => EquipItemToSlot(true));
         equip2Btn.RegisterCallback<ClickEvent>(e => EquipItemToSlot(false));
+        useBtn.RegisterCallback<ClickEvent>(e => UseItem());
         dropBtn.RegisterCallback<ClickEvent>(e => DropItem());
+
+        // Inventory Change
+        OnInventoryChanged += UpdateInventoryUI;
+        OnInventoryChanged += UpdateTotalWeight;
     }
 
     private void ClearInfoPanel()
@@ -165,16 +176,19 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             case ItemType.Weapon:
                 equip1Btn.style.display = DisplayStyle.Flex;
                 equip2Btn.style.display = DisplayStyle.Flex;
+                useBtn.style.display = DisplayStyle.None;
                 dropBtn.style.display = DisplayStyle.None;
                 break;
             case ItemType.Spell:
                 equip1Btn.style.display = DisplayStyle.Flex;
                 equip2Btn.style.display = DisplayStyle.Flex;
+                useBtn.style.display = DisplayStyle.None;
                 dropBtn.style.display = DisplayStyle.None;
                 break;
             case ItemType.Material:
                 equip1Btn.style.display = DisplayStyle.None;
                 equip2Btn.style.display = DisplayStyle.None;
+                useBtn.style.display = DisplayStyle.Flex;
                 dropBtn.style.display = DisplayStyle.Flex;
                 break;
             default:
@@ -182,19 +196,37 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         }
     }
 
-    public int GetTotalWeight()
+    private void UpdateTotalWeight()
     {
         int totalValue = 0;
         foreach (Item item in items)
         {
             totalValue += item.itemRef.weight * item.quantity;
         }
-        return totalValue;
+        TotalWeight = totalValue;
     }
 
-    public bool AddItem(ItemSO itemSO)
+    private void UseItem()
     {
-        if (GetTotalWeight() > maxWeight) return false;
+        Item item = items[selectedIndex];
+
+        // Choose slot pair based on item type
+        switch (item.itemRef.itemType)
+        {
+            case ItemType.Material:
+                break;
+            default:
+                Debug.Log("Item cannot be used");
+                return;
+        }
+
+        MaterialSO material = item.itemRef as MaterialSO;
+        if (material.Use()) DropItem();
+    }
+
+    public bool AddItem(ItemSO itemSO, bool force = false)
+    {
+        if (!force && IsFull) return false;
 
         // Search if item already exists
         foreach(var item in items)
@@ -202,7 +234,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             if (itemSO == item.itemRef)
             {
                 item.quantity += 1;
-                UpdateInventoryUI();
+                OnInventoryChanged.Invoke();
                 return true;
             }
         }
@@ -211,7 +243,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         newItem.itemRef = itemSO;
         newItem.quantity = 1;
         items.Add(newItem);
-        UpdateInventoryUI();
+        OnInventoryChanged.Invoke();
         return true;
     }
 
@@ -219,7 +251,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     {
         // TODO: Unimplemented. May not need.
         //items.Remove(item);
-        UpdateInventoryUI();
+        OnInventoryChanged.Invoke();
     }
 
     // Equip item into indicated slot
@@ -280,11 +312,8 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         Label quantityEl = slot.Q<Label>(quantityLabel);
         quantityEl.text = item.quantity.ToString();
 
-        if (item.quantity < 1)
-        {
-            items.RemoveAt(selectedIndex);
-            UpdateInventoryUI();
-        }
+        if (item.quantity < 1) items.RemoveAt(selectedIndex);
+        OnInventoryChanged.Invoke();
     }
 
     #region Saving/Loading
@@ -355,8 +384,6 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         OnInventoryChanged.Invoke();
         OnEquippedWeaponsChanged(equippedWeapons);
         OnEquippedSpellsChanged(equippedSpells);
-
-        UpdateInventoryUI();
     }
 
     private IEnumerator _LoadEquippedAsync(BinaryReader br)

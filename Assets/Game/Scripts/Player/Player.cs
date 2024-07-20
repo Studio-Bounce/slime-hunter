@@ -24,6 +24,11 @@ public class Player : DynamicDamageTaker
         isInvincible = true;
     }
 
+    public void Heal(int value)
+    {
+        GameManager.Instance.PlayerHealth += value;
+    }
+
     public override void Death(bool killObject)
     {
         // Trigger events

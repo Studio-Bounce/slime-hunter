@@ -41,8 +41,6 @@ public class RadialIndicator : SpellIndicator
 
     private void Update()
     {
-        if (castRange <= 0) return;
-
         Ray ray = CameraManager.ActiveCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitLayers))

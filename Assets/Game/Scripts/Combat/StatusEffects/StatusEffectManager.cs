@@ -8,7 +8,7 @@ public class StatusEffectManager : MonoBehaviour
     public StatusBar statusBar;
     private DynamicDamageTaker damageTaker;
     public List<StatusEffect> activeEffects = new List<StatusEffect>();
-    public List<StatusEffect> effectsToRemove = new List<StatusEffect>();
+    private List<StatusEffect> effectsToRemove = new List<StatusEffect>();
 
     private void Start()
     {

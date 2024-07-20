@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 548d6b4202b0e37468e0b4e7ca310a23, type: 3}
-  m_Name: SlimeEssence
+  m_Script: {fileID: 11500000, guid: 529bb3efef32aaf4e97b41f8822061df, type: 3}
+  m_Name: SlimeGel
   m_EditorClassIdentifier: 
-  address: Assets/Game/ScriptableObjects/SlimeEssence.asset
-  itemName: Slime Essence
-  description: The core of a recently deceased slime.
+  address: Assets/Game/ScriptableObjects/Materials/SlimeGel.asset
+  itemName: Slime Gel
+  description: The remaining gel gathered from a deceased slime.
   icon: {fileID: 21300000, guid: f8a11596087398343b39181ba41041b1, type: 3}
   itemType: 2
   value: 1
   weight: 1
+  healAmount: 5

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
-[CreateAssetMenu(menuName = "Slime Material")]
-public class MaterialSO : ItemSO
+public abstract class MaterialSO : ItemSO
 {
-
+    public abstract bool Use();
 }
