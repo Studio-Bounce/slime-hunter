@@ -22,24 +22,16 @@ To add FMOD, follow these steps:
 2. With the Unity project open, execute the plugin package and import FMOD to the project. The FMOD files should be added to `Assets/Plugins/FMOD` by default.
 3. After importing the files, the **FMOD Setup Wizard** should open.
 
+> **Note:** Make sure to refresh any open scenes in Unity to ensure all existing references are linked with the plugin.
+
 #### Setup Wizard
 
 You can skip all the steps in the setup wizard except for `Linking`.
 
-> **Note:** If you don't see the setup wizard, there should be a new menu item at the top labeled `FMOD`. From there, go to `Setup Wizard`.
+> **Tip:** If you don't see the setup wizard, there should be a new menu item at the top labeled `FMOD`. From there, go to `Setup Wizard`.
 
 - **Linking:**
-  - Select `FMOD Studio Project` and open the file located at `Assets/Game/Audio/FMOD/slime-hunter-audio.fspro`.
-
-#### Building
-
-FMOD needs to be initially built for any audio to play. Open the project file in [FMOD Studio](https://www.fmod.com/download#fmodstudio):
-
-`Assets/Game/Audio/FMOD/slime-hunter-audio.fspro`
-
-Run a build with either `F7` or `File > Build`.
-
-> **Tip:** Make sure to refresh any open scenes in Unity to ensure all existing references are linked with the plugin.
+  - Select `Single Platform Build` and open the `Desktop` build folder located at `/Assets/Game/Audio/FMOD/Build/Desktop/`.
 
 ---
 
