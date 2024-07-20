@@ -567,7 +567,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!54 &3801100224341897558
 Rigidbody:
@@ -842,11 +842,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 1c9a91ea074ab9b4fb65845663c08715, type: 2}
-  - {fileID: 11400000, guid: 1c9a91ea074ab9b4fb65845663c08715, type: 2}
-  - {fileID: 11400000, guid: 1c9a91ea074ab9b4fb65845663c08715, type: 2}
-  - {fileID: 11400000, guid: 1c9a91ea074ab9b4fb65845663c08715, type: 2}
-  - {fileID: 11400000, guid: 1c9a91ea074ab9b4fb65845663c08715, type: 2}
+  - {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
+  - {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
   droppedItemPrefab: {fileID: 5271803406887303148, guid: fb226ce21fa4d4f4092706fc0a907e9b,
     type: 3}
   launchAngle: 0

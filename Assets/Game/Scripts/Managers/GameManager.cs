@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 // All game state actions must use this!
 public enum GameState
@@ -83,7 +81,7 @@ public class GameManager : Singleton<GameManager>
         get { return playerHealth; }
         set
         {
-            playerHealth = value;
+            playerHealth = Mathf.Min(value, PlayerMaxHealth);
             OnPlayerHealthChange?.Invoke(playerHealth);
             if (playerHealth <= 0)
             {
@@ -110,7 +108,8 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    public bool IsFullStamina { get { return playerStamina == PlayerMaxStamina; } }
+    public bool IsFullHealth { get { return playerHealth >= PlayerMaxHealth; } }
+    public bool IsFullStamina { get { return playerStamina >= PlayerMaxStamina; } }
 
     // GameState
 

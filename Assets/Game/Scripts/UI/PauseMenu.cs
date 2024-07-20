@@ -6,6 +6,12 @@ using UnityEngine.UIElements;
 
 public class PauseMenu : Menu
 {
+    // Inventory Stats
+    VisualElement characterContainer;
+    Label healthValue;
+    Label levelValue;
+    Label spValue;
+
     void Start()
     {
         VisualElement root = uiDocument.rootVisualElement;
@@ -16,6 +22,15 @@ public class PauseMenu : Menu
         btnUnpause.clicked += Unpause;
         btnBackMainMenu.clicked += ReturnMainMenu;
         btnQuit.clicked += () => Application.Quit();
+
+        characterContainer = root.Q<VisualElement>("CharacterContainer");
+        healthValue = root.Q<Label>("HealthValue");
+        LinkInventoryStatsUIToPlayer();
+    }
+
+    private void LinkInventoryStatsUIToPlayer()
+    {
+        GameManager.Instance.OnPlayerHealthChange += (int value) => healthValue.text = value.ToString();
     }
 
     public void Pause()

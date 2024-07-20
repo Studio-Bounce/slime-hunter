@@ -7,9 +7,15 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 [RequireComponent(typeof(SpriteRenderer), typeof(Billboard))]
 public class DroppedItem : MonoBehaviour
 {
+    [Header("Appearance")]
     public Vector2 size;
+
+    [Header("Pickup Settings")]
+    public bool forcePickup = false;
+    public float launchDist = 3.0f;
     public float launchAngle = 0;
     public float angleRange = 360;
+    public float dropLifetime = 5.0f;
 
     // Refs
     private SpriteRenderer spriteRenderer;
@@ -42,13 +48,27 @@ public class DroppedItem : MonoBehaviour
         transform.position = pos;
     }
 
-    IEnumerator AnimateDrop()
+    private IEnumerator RemoveAfterSeconds(float duration)
+    {
+        float timer = 0;
+        while (timer < duration)
+        {
+            float alpha = Mathf.Clamp01(1 - (timer / duration));
+            Color color = spriteRenderer.color;
+            color.a = alpha;
+            spriteRenderer.color = color;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
+
+    private IEnumerator AnimateDrop()
     {
         // Animation Vars
         float animHeight = 1;
-        float animDist = 3;
+        float animDist = Random.Range(1, launchDist);
         float animDuration = 1.5f;
-        animDist = Random.Range(1, animDist);
 
         // Random Direction
         float randomAngle = launchAngle + Random.Range(-angleRange / 2f, angleRange / 2f);
@@ -78,16 +98,24 @@ public class DroppedItem : MonoBehaviour
             yield return null;
         }
         CanBePickedUp = true;
+        StartCoroutine(RemoveAfterSeconds(dropLifetime));
     }
 
     private void Update()
     {
+        if (InventoryManager.Instance.IsFull) return;
+
+        
+
         if (CanBePickedUp)
         {
+            if (forcePickup) PickUpItem(true);
+
             Vector3 target = player.transform.position;
             target.y += 1;
             float dist = Vector3.Distance(transform.position, target);
             GameManager gm = GameManager.Instance;
+
             if (dist > 1 && dist < gm.pickupRange)
             {
                 Vector3 direction = target - transform.position;
@@ -102,9 +130,9 @@ public class DroppedItem : MonoBehaviour
         }
     }
 
-    private void PickUpItem()
+    private void PickUpItem(bool force = false)
     {
-        InventoryManager.Instance.AddItem(ItemRef);
+        InventoryManager.Instance.AddItem(ItemRef, force);
         Destroy(gameObject);
     }
 
