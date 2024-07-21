@@ -108,6 +108,7 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
+    - _FadePower: 10
     - _Feathering: 0
     - _FeatheringScale: 1
     - _GlossMapScale: 0
@@ -115,12 +116,14 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
+    - _OuterRingWidth: 0.02
     - _Parallax: 0.005
     - _Power: 3
     - _PowerScale: 1
     - _QueueOffset: 0
     - _Radius: 0.5
     - _ReceiveShadows: 1
+    - _Scale: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

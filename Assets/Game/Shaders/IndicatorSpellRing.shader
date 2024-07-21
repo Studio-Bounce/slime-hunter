@@ -3,14 +3,9 @@ Shader "Custom/IndicatorSpellRing"
     Properties
     {
         _Color ("Color", Color) = (1, 1, 1, 1)
-        _Power ("Power", Float) = 1
-        _PowerScale ("PowerScale", Float) = 1
-
-
-        // _Bias ("FresnelBias", Float) = 1;
-        // _Scale ("FresnelScale", Float) = 1;
-        // _Power ("FresnelPower", Float) = 1;
-
+        _FadePower ("FadePower", Float) = 1
+        _OuterRingWidth ("OuterRingWidth", Float) = 0.01
+        _Scale ("Scale", Float) = 1
     }
     SubShader
     {
@@ -41,8 +36,9 @@ Shader "Custom/IndicatorSpellRing"
             };
 
             float4 _Color;
-            float _Power;
-            float _PowerScale;
+            float _FadePower;
+            float _OuterRingWidth;
+            float _Scale;
 
             v2f vert (appdata v)
             {
@@ -60,12 +56,18 @@ Shader "Custom/IndicatorSpellRing"
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = _Color;
-
                 float2 center = float2(0.5, 0.5);
+
+                // Circle
                 float dist = length(center - i.uv);
                 col.a *= step(dist, 0.5);
-                float fade = pow(dist*2, _Power*_PowerScale);
-                col *= fade;
+
+                // Outer ring
+                col.rgb = col.rgb + ( 1 - step(dist*2, 1 - (_OuterRingWidth/_Scale) ));
+
+                // Fade
+                float fade = pow(dist*2, _FadePower*_Scale);
+                col.a *= fade;
 
                 return col;
             }
