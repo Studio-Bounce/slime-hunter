@@ -30,12 +30,10 @@ public class RadialIndicator : SpellIndicator
         sourceIndicator.localScale = new Vector3(castRange, castRange, castRange);
         targetIndicator.localScale = new Vector3(areaOfEffect, areaOfEffect, areaOfEffect);
         Material material = sourceRenderer.material;
-        material.SetFloat("_ThicknessScale", 1 / castRange);
-        material.SetFloat("_FeatheringScale", 1 / castRange);
+        material.SetFloat("_PowerScale", castRange);
         material.SetColor("_Color", activeColor);
         material = targetRenderer.material;
-        material.SetFloat("_ThicknessScale", 1 / areaOfEffect);
-        material.SetFloat("_FeatheringScale", 1 / areaOfEffect);
+        material.SetFloat("_PowerScale", areaOfEffect);
         material.SetColor("_Color", activeColor);
     }
 
