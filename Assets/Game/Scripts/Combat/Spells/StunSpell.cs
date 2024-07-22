@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.VFX;
@@ -13,8 +14,9 @@ public class StunSpell : Spell
     public GameObject projectile;
 
     [Header("Animation")]
-    public float projectileDuration = 1.0f;
-    public AnimationCurve projectileCurve;
+    public float animDuration = 1.0f;
+    public float animHeight = 2;
+    public AnimationCurve animCurve;
     public float impactDuration = 5.0f;
 
     private DamageDealer damageDealer;
@@ -32,6 +34,7 @@ public class StunSpell : Spell
     {
         damageDealer.damage = spellSO.damage;
         damageCollider.radius = spellSO.areaOfEffect;
+        impactEffect.transform.localScale = new Vector3(spellSO.areaOfEffect, spellSO.areaOfEffect, spellSO.areaOfEffect);
     }
 
     public override void Cast(Vector3 target = default)
@@ -43,17 +46,22 @@ public class StunSpell : Spell
     {
         // Timer and lerp variable initialization
         float timer = 0;
-        projectileDuration = 1.0f;
+        animDuration = 1.0f;
         Vector2 startVec2 = new Vector2(start.x, start.z);
         Vector2 endVec2 = new Vector2(target.x, target.z);
+        float startHeight = start.y;
 
         // Calculate lerp sin curve
-        while (timer < projectileDuration)
+        while (timer < animDuration)
         {
             timer += Time.deltaTime;
-            float eased = projectileCurve.Evaluate(timer);
+            float normalTime = timer / animDuration;
+            float eased = Easing.EaseOut(normalTime);
             Vector2 lerpedPos = Vector2.LerpUnclamped(startVec2, endVec2, eased);
-            transform.position = new Vector3(lerpedPos.x, transform.position.y, lerpedPos.y);
+            eased = animCurve.Evaluate(normalTime);
+            float lerpedHeight = startHeight + Mathf.Sin(eased * Mathf.PI) * animHeight;
+
+            transform.position = new Vector3(lerpedPos.x, lerpedHeight, lerpedPos.y);
             yield return null;
         }
 
