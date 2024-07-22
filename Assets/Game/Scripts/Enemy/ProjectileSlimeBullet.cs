@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,6 +7,8 @@ using UnityEngine;
 public class ProjectileSlimeBullet : DamageDealer
 {
     [SerializeField] WeaponSO bulletWeapon;
+    [SerializeField] private ParticleSystem effect;
+    [NonSerialized] private bool markDestroy = false;
 
     [Header("Slime Projectile")]
     public float speed = 0.0f;
@@ -27,15 +30,24 @@ public class ProjectileSlimeBullet : DamageDealer
 
     protected override void Update()
     {
+        if (markDestroy) return;
         base.Update();
 
         transform.Translate(speed * Time.deltaTime * direction);
 
         if (attackDetected || timeLapsed > lifetime)
         {
-            Destroy(gameObject);
+            markDestroy = true;
+            StartCoroutine(PlayImpactEffect());
         }
         timeLapsed += Time.deltaTime;
+    }
+
+    private IEnumerator PlayImpactEffect()
+    {
+        effect.Play();
+        yield return new WaitForSeconds(0.2f);
+        Destroy(gameObject);
     }
 
     private void OnValidate()

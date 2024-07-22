@@ -8,9 +8,12 @@ using UnityEngine.VFX;
 [System.Serializable]
 public class BlastSpell : Spell
 {
-    public VisualEffect effect;
+    public ParticleSystem effect;
     private DamageDealer damageDealer;
     private SphereCollider damageCollider;
+
+    [Header("Animation")]
+    public float impactDuration = 5.0f;
 
     private void Awake()
     {
@@ -29,13 +32,15 @@ public class BlastSpell : Spell
     {
         effect.Play();
         damageDealer.Active = true;
-        yield return new WaitForSeconds(0.5f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(0.2f);
+        damageDealer.Active = false;
+        yield return new WaitForSeconds(impactDuration);
     }
 
     public override void Initialize(SpellSO spellSO)
     {
         damageDealer.damage = spellSO.damage;
         damageCollider.radius = spellSO.areaOfEffect;
+        effect.transform.localScale = new Vector3(spellSO.areaOfEffect, spellSO.areaOfEffect, spellSO.areaOfEffect);
     }
 }
