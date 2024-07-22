@@ -601,9 +601,9 @@ GameObject:
   - component: {fileID: 2767975063603732144}
   - component: {fileID: 3801100224341897558}
   - component: {fileID: 2869985602088549266}
-  - component: {fileID: 4481492702426782661}
   - component: {fileID: 4646127613627469845}
   - component: {fileID: 3662461099208768734}
+  - component: {fileID: 4481492702426782661}
   - component: {fileID: 4347139268971403823}
   - component: {fileID: 984750678147540403}
   - component: {fileID: 3472640905637783965}
@@ -709,6 +709,67 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.72, z: 0}
+--- !u!114 &4646127613627469845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8820871006783578033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dd3ea3c9005a54395fbe90b86a583a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 30
+  isAlive: 1
+  damageDelay: 0.3
+  isInvincible: 0
+  onDeathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  healthSlider: {fileID: 3093743597393084328}
+  canvasTimeout: 10
+  healthCanvas: {fileID: 7627680177218896917}
+  knockbackTime: 0.2
+  normalEye: {fileID: 8842123964523835861}
+  attackEye: {fileID: 3262102367825077723}
+  scaredEye: {fileID: 3262102367825077723}
+  deathEye: {fileID: 7814854684481491757}
+  hitVFXGO: {fileID: 2507012300119595446, guid: 207429efa1ee73a45845fb615dc9e278,
+    type: 3}
+  slimeOuterBody: {fileID: 1381007739563146227}
+  flashDuration: 0.2
+  flashMat: {fileID: 2100000, guid: ece9a621dbd04e443a99354d2ec2c2fa, type: 2}
+  deathParticlesGO: {fileID: 4387272774434107089, guid: 7a4bb30fe39569444a78e197f142f33f,
+    type: 3}
+  deathDelay: 3.5
+--- !u!114 &3662461099208768734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8820871006783578033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0037d49733e33746bd0344335b90345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  summingMethod: 0
+  mass: 0.5
+  maxSpeed: 1
+  alwaysUseMaxSpeed: 0
+  maxForce: 10
+  velocity: {x: 0, y: 0, z: 0}
+  angularDampeningTime: 5
+  deadZone: 10
+  reachedGoal: 0
+  animator: {fileID: 247210881314464809}
+  useRootMotion: 0
+  useGravity: 1
+  forceStopMovement: 0
+  slimeModel: {fileID: 3894532602626332139}
 --- !u!114 &4481492702426782661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,67 +810,6 @@ MonoBehaviour:
   fleeSteeringBehaviour: {fileID: 1860402855733763571}
   playerProximityDistance: 5
   fleeSpeed: 5
---- !u!114 &4646127613627469845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8820871006783578033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77dd3ea3c9005a54395fbe90b86a583a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 30
-  isAlive: 1
-  damageDelay: 0.3
-  isInvincible: 0
-  onDeathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  healthSlider: {fileID: 3093743597393084328}
-  canvasTimeout: 10
-  healthCanvas: {fileID: 7627680177218896917}
-  knockbackTime: 0.2
-  normalEye: {fileID: 8842123964523835861}
-  attackEye: {fileID: 3262102367825077723}
-  scaredEye: {fileID: 3262102367825077723}
-  deathEye: {fileID: 7814854684481491757}
-  damageEyeTimer: 0.25
-  hitVFXGO: {fileID: 2507012300119595446, guid: 207429efa1ee73a45845fb615dc9e278,
-    type: 3}
-  slimeOuterBody: {fileID: 1381007739563146227}
-  flashDuration: 0.2
-  flashMat: {fileID: 2100000, guid: ece9a621dbd04e443a99354d2ec2c2fa, type: 2}
-  deathParticlesGO: {fileID: 4387272774434107089, guid: 7a4bb30fe39569444a78e197f142f33f,
-    type: 3}
-  deathDelay: 3.5
---- !u!114 &3662461099208768734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8820871006783578033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0037d49733e33746bd0344335b90345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  summingMethod: 0
-  mass: 0.5
-  maxSpeed: 1
-  alwaysUseMaxSpeed: 0
-  maxForce: 10
-  velocity: {x: 0, y: 0, z: 0}
-  angularDampeningTime: 5
-  deadZone: 10
-  reachedGoal: 0
-  animator: {fileID: 247210881314464809}
-  useRootMotion: 0
-  useGravity: 1
-  slimeModel: {fileID: 6486924552402462942}
 --- !u!114 &4347139268971403823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1131,7 +1131,7 @@ PrefabInstance:
     - target: {fileID: 7841407419538121495, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 89.4554
+      value: 89.45541
       objectReference: {fileID: 0}
     - target: {fileID: 8699541509210442394, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
@@ -1213,15 +1213,15 @@ SkinnedMeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 5910078775740897720}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6164979461329649235 stripped
+--- !u!4 &3894532602626332139 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+  m_CorrespondingSourceObject: {fileID: 7208285609052654675, guid: 772ae3dc15e833f40999ac3cb2013fa2,
     type: 3}
   m_PrefabInstance: {fileID: 5910078775740897720}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &6486924552402462942 stripped
+--- !u!4 &6164979461329649235 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8646068132136750746, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 772ae3dc15e833f40999ac3cb2013fa2,
     type: 3}
   m_PrefabInstance: {fileID: 5910078775740897720}
   m_PrefabAsset: {fileID: 0}
