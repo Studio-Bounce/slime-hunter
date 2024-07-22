@@ -18,7 +18,7 @@ public class BomberSlime_ChasePlayer : BasicSlime_ChasePlayer
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Stun & force to base detection
-        if (BaseStunDetection(stateInfo) || ForceBackToBase(stateInfo))
+        if (BaseStatusDetection(stateInfo) || ForceBackToBase(stateInfo))
         {
             bFSM.slimeAnimator.SetTrigger(bFSM.PlayerLostTrigger);
             return;
