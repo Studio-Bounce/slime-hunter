@@ -2,15 +2,25 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GhostTrail_SoulRelease
   m_Shader: {fileID: 4800000, guid: d985403ea514e7c46bf7c2fab31b9d95, type: 3}
-  m_ShaderKeywords: _ADD_PRECOMPUTED_VELOCITY _BLENDMODE_ALPHA _DISABLE_SSR _DOUBLESIDED_ON
-    _SURFACE_TYPE_TRANSPARENT _USEALPHADISOLVE_ON _USESOFTALPHA_ON
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _USERAMP_ON
+  - _USESOFTALPHA_ON
+  m_InvalidKeywords:
+  - _ADD_PRECOMPUTED_VELOCITY
+  - _BLENDMODE_ALPHA
+  - _DISABLE_SSR
+  - _DOUBLESIDED_ON
+  - _SURFACE_TYPE_TRANSPARENT
+  - _USEALPHADISOLVE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -22,6 +32,7 @@ Material:
   - DistortionVectors
   - MOTIONVECTORS
   - TransparentBackface
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -34,13 +45,14 @@ Material:
         m_Scale: {x: 0.5, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 98583555cbe6a1146a074496fe883021, type: 3}
-        m_Scale: {x: 0.5, y: 1}
+        m_Texture: {fileID: 2800000, guid: 3ac70e7ced6d23946ac37f602b2bc573, type: 3}
+        m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTexture:
         m_Texture: {fileID: 2800000, guid: 98583555cbe6a1146a074496fe883021, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AddPrecomputedVelocity: 1
     - _AlphaCutoff: 0.921
@@ -67,7 +79,7 @@ Material:
     - _ReceivesSSR: 0
     - _RenderQueueType: 4
     - _RequireSplitLighting: 0
-    - _SoftFadeFactor: 0.2
+    - _SoftFadeFactor: 1
     - _SourceBlendRGB: 10
     - _SrcBlend: 1
     - _StencilRef: 0
@@ -87,7 +99,7 @@ Material:
     - _TransparentZWrite: 0
     - _UseAlphaDisolve: 1
     - _UseAlphaOverride: 0
-    - _UseRamp: 0
+    - _UseRamp: 1
     - _UseShadowThreshold: 0
     - _UseSoftAlpha: 1
     - _UseUVOffset: 0
@@ -100,18 +112,18 @@ Material:
     - _AlphaOverridePanning: {r: 0, g: 0, b: 0, a: 0}
     - _DetailAdditiveChannel: {r: 0, g: 0, b: 0, a: 0}
     - _DetailDisolveChannel: {r: 0, g: 0, b: 1, a: 0}
-    - _DetailDistortionChannel: {r: 0.33, g: 0, b: 0, a: 0}
+    - _DetailDistortionChannel: {r: 0, g: 0, b: 0, a: 0}
     - _DetailMultiplyChannel: {r: 2, g: 0, b: 0, a: 0}
-    - _DetailNoisePanning: {r: 0.2, g: 0, b: 0, a: 0}
+    - _DetailNoisePanning: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FlipbooksColumsRows: {r: 1, g: 1, b: 0, a: 0}
-    - _FresnelColor: {r: 0, g: 0.99166536, b: 1, a: 1}
-    - _LastColor: {r: 1, g: 0, b: 0, a: 0}
+    - _FresnelColor: {r: 0, g: 7.0853214, b: 7.5471697, a: 1}
+    - _LastColor: {r: 0.009033485, g: 0.009433985, b: 0.009052557, a: 0}
     - _MainAlphaChannel: {r: 0, g: 0, b: 0, a: 1}
     - _MainAlphaPanning: {r: 0, g: 0, b: 0, a: 0}
     - _MainTextureChannel: {r: 1, g: 1, b: 1, a: 0}
     - _MainTexturePanning: {r: 0.2, g: 0, b: 0, a: 0}
-    - _MidColor: {r: 1, g: 0.44479147, b: 0, a: 0}
-    - _WhiteColor: {r: 1, g: 0.8950032, b: 0, a: 0}
+    - _MidColor: {r: 0.15564393, g: 0.745283, b: 0.06679422, a: 0}
+    - _WhiteColor: {r: 0.3492787, g: 1, b: 0.3254717, a: 0}
   m_BuildTextureStacks: []
