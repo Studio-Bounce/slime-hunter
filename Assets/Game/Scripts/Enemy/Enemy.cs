@@ -22,9 +22,7 @@ public class Enemy : DynamicDamageTaker
     [SerializeField] SkinnedMeshRenderer attackEye;
     [SerializeField] SkinnedMeshRenderer scaredEye;
     [SerializeField] SkinnedMeshRenderer deathEye;
-    public EnemyEye eye;
-
-    [SerializeField] float damageEyeTimer = 1.0f;
+    EnemyEye eye;
 
     [Header("Hit Feedback")]
     [SerializeField] GameObject hitVFXGO;
