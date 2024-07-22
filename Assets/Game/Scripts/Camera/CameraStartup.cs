@@ -17,7 +17,7 @@ public class CameraStartup : MonoBehaviour
 
         if (targetCameraOnStart)
         {
-            CameraManager.Instance.SwitchToCamera(_camera, virtualCamera);
+            CameraManager.Instance.SetMainCamera(_camera, virtualCamera);
         }
     }
 }

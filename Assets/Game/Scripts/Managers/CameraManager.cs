@@ -51,7 +51,7 @@ public class CameraManager : Singleton<CameraManager>
         }
     }
 
-    public void SwitchToCamera(Camera cam, CinemachineVirtualCamera vCam = null)
+    public void SetMainCamera(Camera cam, CinemachineVirtualCamera vCam = null)
     {
         if (_activeCamera)
         {
@@ -66,6 +66,13 @@ public class CameraManager : Singleton<CameraManager>
         {
             _activeVCamera = cam.GetComponent<CinemachineBrain>()?.ActiveVirtualCamera as CinemachineVirtualCamera;
         }
+    }
+
+    public void ChangeVirtualCamera(CinemachineVirtualCamera vCam)
+    {
+        _activeVCamera.Priority = 0;
+        vCam.Priority = 10;
+        _activeVCamera = vCam;
     }
 
     public void ShakeCamera(float intensity, float time)
