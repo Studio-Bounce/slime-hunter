@@ -35,7 +35,6 @@ public class Enemy : DynamicDamageTaker
     bool isFlashing = false;
 
     [Header("Death")]
-    [SerializeField] GameObject slimeModel;
     [SerializeField] GameObject deathParticlesGO;
     [SerializeField] float deathDelay = 3.5f;
 

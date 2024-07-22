@@ -18,6 +18,11 @@ public class ProjectileSlime_FSM : BasicSlime_FSM
 
     [HideInInspector] public bool isAttacking = false;
 
+    // Animation parameters
+    public readonly int ShootTrigger = Animator.StringToHash("shoot");
+    [Tooltip("Delay after triggering attack animation")]
+    [SerializeField] float spitterTimeSync = 1.0f;
+
     protected override void Start()
     {
         base.Start();
@@ -64,7 +69,12 @@ public class ProjectileSlime_FSM : BasicSlime_FSM
             }
             transform.rotation = endRot;
 
-            GameObject projectileGO = Instantiate(projectile, transform.position + transform.forward, Quaternion.identity);
+            slimeAnimator.SetTrigger(ShootTrigger);
+            yield return new WaitForSeconds(spitterTimeSync);  // Animation time
+
+            Vector3 position = transform.position + transform.forward;
+            position.y += characterController.height / 2.0f;
+            GameObject projectileGO = Instantiate(projectile, position, Quaternion.identity);
             ProjectileSlimeBullet bullet = projectileGO.GetComponent<ProjectileSlimeBullet>();
             bullet.speed = projectileSpeed;
             bullet.direction = (playerTransform.position - transform.position).normalized;
