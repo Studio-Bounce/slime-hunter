@@ -187,6 +187,12 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
+--- !u!23 &302588077 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2208844750349371075, guid: f2c26ae83a906db47bb2eb41ca1233a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1651314723}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &604455925
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,7 +880,7 @@ PrefabInstance:
     - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: shaderParams.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
@@ -888,14 +894,39 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
+      propertyPath: shaderParams.Array.data[2].name
+      value: _Intensity
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
+        type: 3}
       propertyPath: shaderParams.Array.data[0].endValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
+      propertyPath: shaderParams.Array.data[0].renderer
+      value: 
+      objectReference: {fileID: 1651314725}
+    - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
+        type: 3}
       propertyPath: shaderParams.Array.data[1].endValue
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
+        type: 3}
+      propertyPath: shaderParams.Array.data[1].renderer
+      value: 
+      objectReference: {fileID: 1651314725}
+    - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
+        type: 3}
+      propertyPath: shaderParams.Array.data[2].endValue
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
+        type: 3}
+      propertyPath: shaderParams.Array.data[2].renderer
+      value: 
+      objectReference: {fileID: 302588077}
     - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: shaderParams.Array.data[0].startValue
@@ -904,6 +935,11 @@ PrefabInstance:
     - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: shaderParams.Array.data[1].startValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3397231588439164458, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
+        type: 3}
+      propertyPath: shaderParams.Array.data[2].startValue
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5799752166503753409, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
@@ -1839,6 +1875,12 @@ PrefabInstance:
 --- !u!4 &1651314724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1557572026923948180, guid: f2c26ae83a906db47bb2eb41ca1233a2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1651314723}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1651314725 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 420725226288767995, guid: f2c26ae83a906db47bb2eb41ca1233a2,
     type: 3}
   m_PrefabInstance: {fileID: 1651314723}
   m_PrefabAsset: {fileID: 0}

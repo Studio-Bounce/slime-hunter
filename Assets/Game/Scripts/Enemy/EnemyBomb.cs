@@ -12,6 +12,7 @@ public class EnemyBomb : DamageDealer
     struct ShaderParam
     {
         public string name;
+        public MeshRenderer renderer;
         public float startValue;
         public float endValue;
     };
@@ -40,7 +41,6 @@ public class EnemyBomb : DamageDealer
         sphereCollider.radius = 0.1f;  // start off small
         Active = false;
         didExplode = false;
-        groundCrackMesh = groundCrack.GetComponent<MeshRenderer>();
         groundCrack.gameObject.SetActive(false);
     }
 
@@ -71,7 +71,7 @@ public class EnemyBomb : DamageDealer
             foreach (ShaderParam _param in shaderParams)
             {
                 float value = _param.startValue + (_param.endValue - _param.startValue) * t;
-                groundCrackMesh.material.SetFloat(_param.name, value);
+                _param.renderer.material.SetFloat(_param.name, value);
             }
 
             yield return null;
