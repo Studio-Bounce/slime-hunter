@@ -187,54 +187,6 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
---- !u!1 &516887733 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 728748758612884327, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-    type: 3}
-  m_PrefabInstance: {fileID: 851729206}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &516887736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516887733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78d9b85cbcfb0b942bb0243754c49708, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnVisible:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 614318306}
-        m_TargetAssemblyTypeName: SlimeSteeringAgent, Assembly-CSharp
-        m_MethodName: UnpauseAgent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnInvisible:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 614318306}
-        m_TargetAssemblyTypeName: SlimeSteeringAgent, Assembly-CSharp
-        m_MethodName: PauseAgent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &604455925
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,18 +279,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   runExitOnce: 1
---- !u!114 &614318306 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3777895731377175427, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-    type: 3}
-  m_PrefabInstance: {fileID: 851729206}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0037d49733e33746bd0344335b90345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &681012531
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,41 +768,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1549067328011578953, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1582668792982206064, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-        type: 3}
-      propertyPath: fleeSpeed
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1582668792982206064, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-        type: 3}
-      propertyPath: defaultMat
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1582668792982206064, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-        type: 3}
-      propertyPath: wanderSpeed
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1582668792982206064, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-        type: 3}
-      propertyPath: seekDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1582668792982206064, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-        type: 3}
-      propertyPath: backToBaseSpeed
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1582668792982206064, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-        type: 3}
-      propertyPath: playerProximityDistance
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2123117332715989980, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -923,11 +828,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3777895731377175427, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-        type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1726271658}
     - target: {fileID: 5550856846267920840, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
         type: 3}
       propertyPath: m_Name
@@ -936,11 +836,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 728748758612884327, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 516887736}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb6a9637f40cf5b4e88228acbeabf5f3, type: 3}
 --- !u!1001 &921150796
 PrefabInstance:
@@ -1842,12 +1738,6 @@ Transform:
   - {fileID: 1607757382}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1726271658 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5419034910252354514, guid: cb6a9637f40cf5b4e88228acbeabf5f3,
-    type: 3}
-  m_PrefabInstance: {fileID: 851729206}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1800603840
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class ProjectileSlime_WanderAround : ProjectileSlime_BaseState
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        BaseStunDetection(stateInfo);
+        BaseStatusDetection(stateInfo);
         ForceBackToBase(stateInfo);
 
         // If slime sees the player, start attacking
