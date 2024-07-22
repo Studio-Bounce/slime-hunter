@@ -15,6 +15,7 @@ public class BasicSlime_Stunned : BasicSlime_BaseState
         if (fsm.seekSteeringBehaviour) fsm.seekSteeringBehaviour.enabled = false;
         if (fsm.seekSteeringBehaviour) fsm.seekSteeringBehaviour.gameObject.SetActive(false);
         fsm.slimeAgent.reachedGoal = true;
+        fsm.slimeEnemy.isInvincible = false;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

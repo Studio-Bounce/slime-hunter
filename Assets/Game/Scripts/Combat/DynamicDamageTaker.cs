@@ -33,7 +33,7 @@ public class DynamicDamageTaker : UIDamageTaker
             return false;
         }
 
-        if (!isInvincible)
+        if (!isInvincible || damage.forceApply)
         {
             if (damage.effect != null)
             {

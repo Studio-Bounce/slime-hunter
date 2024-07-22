@@ -25,6 +25,7 @@ MonoBehaviour:
     knockback: 5
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 11400000, guid: 194e3545abb07b94ab515e1afbd829cb, type: 2}
+    forceApply: 1
   castRange: 7
   areaOfEffect: 3
   cooldown: 5
