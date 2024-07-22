@@ -469,7 +469,6 @@ MonoBehaviour:
   canvasTimeout: 10
   healthCanvas: {fileID: 3707239540979927053}
   knockbackTime: 0.25
-  stunned: 0
   normalEye: {fileID: 0}
   attackEye: {fileID: 0}
   scaredEye: {fileID: 0}
@@ -792,26 +791,176 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8365699258128369059, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6393667112559728585, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6227154262902824258, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6142051005429542727, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -5099798548384814354, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -3935837608217576362, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -3490783589210286146, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -2746367740228572740, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -1989930306627439754, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: -938442326228397696, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5783969802f4364418a7525d7a027817,
         type: 3}
       propertyPath: m_Name
       value: SK_Spitter_Slime
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1090353403839895562, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1155653522924963679, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1172021126988582180, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1469225740179669702, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740096773761628424, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1751647221738335064, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091731177664272046, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2334511596783870257, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3117199037938814870, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3628349342315430268, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3737073581850563414, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3865196240360057436, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5833214905610073698, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 5783969802f4364418a7525d7a027817,
         type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 316dd0ab9a62feb469737b7cbfc650cb, type: 2}
+    - target: {fileID: 5951587063796133418, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5960610784934027862, guid: 5783969802f4364418a7525d7a027817,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2bfd19b47a61c5f479204af279e000ab, type: 2}
+    - target: {fileID: 6135965508914230402, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482962782134926380, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7564649577704795720, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7785104158774014179, guid: 5783969802f4364418a7525d7a027817,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 00d136be7804b5844a794fb087ea2ab3, type: 2}
+    - target: {fileID: 8500377967976615371, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8997632249289074837, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -820,10 +969,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3133754705958316426}
-    - targetCorrespondingSourceObject: {fileID: 1172021126988582180, guid: 5783969802f4364418a7525d7a027817,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8169950406044580890}
   m_SourcePrefab: {fileID: 100100000, guid: 5783969802f4364418a7525d7a027817, type: 3}
 --- !u!1 &728748758612884327 stripped
 GameObject:
@@ -832,48 +977,6 @@ GameObject:
   m_PrefabInstance: {fileID: 1900187144199665219}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &3133754705958316426
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728748758612884327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78d9b85cbcfb0b942bb0243754c49708, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnVisible:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3777895731377175427}
-        m_TargetAssemblyTypeName: SlimeSteeringAgent, Assembly-CSharp
-        m_MethodName: UnpauseAgent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnInvisible:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3777895731377175427}
-        m_TargetAssemblyTypeName: SlimeSteeringAgent, Assembly-CSharp
-        m_MethodName: PauseAgent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &8169950406044580890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -944,6 +1047,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: StatusBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6282667672108503733, guid: ea642a1a7f9f513448fe26f6b9ebcf7e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7552322737616064043, guid: ea642a1a7f9f513448fe26f6b9ebcf7e,
         type: 3}
