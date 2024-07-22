@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   address: Assets/Game/ScriptableObjects/BlastSpell.asset
   itemName: Blast Spell
-  description: Blast nearby enemies away
+  description: A powerful spell that unleashes a concussive wave of force, knocking
+    away all nearby enemies.
   icon: {fileID: 21300000, guid: 59100be7fada38842967817d43926fe2, type: 3}
   itemType: 1
   value: 0
@@ -25,7 +26,7 @@ MonoBehaviour:
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 11400000, guid: 194e3545abb07b94ab515e1afbd829cb, type: 2}
   castRange: 0
-  areaOfEffect: 5
+  areaOfEffect: 4
   cooldown: 5
   spellPrefab: {fileID: 3300401679637664845, guid: aa496e9510f73364289fb1c4717ab9bc,
     type: 3}

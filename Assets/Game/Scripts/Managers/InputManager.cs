@@ -136,11 +136,13 @@ public class InputManager : Singleton<InputManager>
         _playerActions.Attack.performed += attackQueuedAction;
         _playerActions.SpecialAttack.performed += _weaponController.SpecialAttack;
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
+
         // Spells
         _playerActions.Spell1.performed += spell1Action;
         _playerActions.Spell2.performed += spell2Action;
 
         _playerActions.CastSpell.started += _spellController.AimSpell;
+        _playerActions.Attack.performed += _spellController.CancelSpell;
         _playerActions.CastSpell.canceled += _spellController.CastSpell;
     }
 
@@ -163,6 +165,7 @@ public class InputManager : Singleton<InputManager>
         _playerActions.Spell2.performed -= spell2Action;
 
         if (_spellController) _playerActions.CastSpell.started -= _spellController.AimSpell;
+        if (_spellController) _playerActions.Attack.performed -= _spellController.CancelSpell;
         if (_spellController) _playerActions.CastSpell.canceled -= _spellController.CastSpell;
     }
 
