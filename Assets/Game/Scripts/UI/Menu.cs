@@ -33,4 +33,32 @@ public class Menu : MonoBehaviour
     {
         SetVisible(false);
     }
+
+    public virtual IEnumerator FadeIn(float duration)
+    {
+        SetVisible(true);
+        float timer = 0;
+        VisualElement root = uiDocument.rootVisualElement;
+        while (timer < duration)
+        {
+            root.style.opacity = timer;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        root.style.opacity = 1.0f;
+    }
+
+    public virtual IEnumerator FadeOut(float duration)
+    {
+        float timer = duration;
+        VisualElement root = uiDocument.rootVisualElement;
+        while (timer > 0)
+        {
+            root.style.opacity = timer;
+            timer -= Time.deltaTime;
+            yield return null;
+        }
+        root.style.opacity = 0f;
+        SetVisible(false);
+    }
 }

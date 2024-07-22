@@ -33,7 +33,7 @@ public class MainMenu : Menu
     {
         GameManager.Instance.GameState = GameState.LOADING;
         // Ensure that core scene's camera is enabled
-        CameraManager.Instance.SwitchToCamera(coreCamera);
+        CameraManager.Instance.SetMainCamera(coreCamera);
         SceneLoader.Instance.UnloadScene(GameManager.Instance.MenuSceneName);
         SceneLoader.Instance.LoadScene(GameManager.Instance.GameSceneName, callback: sceneLoadCallback);
         UIManager.Instance.SetMainMenu(false);
