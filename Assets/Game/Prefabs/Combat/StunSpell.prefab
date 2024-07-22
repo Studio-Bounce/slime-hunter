@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactEffect: {fileID: 7501139424761742726}
   projectile: {fileID: 234718292555556198}
+  duration: 1
   projectileCurve:
     serializedVersion: 2
     m_Curve:
@@ -58,55 +59,46 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 0
-      outSlope: 3.5822635
+      outSlope: 12.519564
       tangentMode: 0
       weightedMode: 3
       inWeight: 0
-      outWeight: 0.23852958
+      outWeight: 0.5916667
     - serializedVersion: 3
-      time: 0.336583
-      value: 0.828268
-      inSlope: 1.7675189
-      outSlope: 1.7674915
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.43742254
-      outWeight: 0.22151233
-    - serializedVersion: 3
-      time: 0.550666
-      value: 1.079651
-      inSlope: 0.30952567
-      outSlope: 0.30952752
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.4695607
-      outWeight: 0.41548836
-    - serializedVersion: 3
-      time: 0.779498
-      value: 0.974607
-      inSlope: -0.23213644
-      outSlope: -0.23214284
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.35856426
-      outWeight: 0.36235142
-    - serializedVersion: 3
-      time: 0.897999
-      value: 1.003668
-      inSlope: 0.27978534
-      outSlope: 0.27974313
-      tangentMode: 0
-      weightedMode: 3
-      inWeight: 0.33310264
-      outWeight: 0.33069265
-    - serializedVersion: 3
-      time: 1
+      time: 0.225
       value: 1
-      inSlope: -0.20239142
+      inSlope: -4.402922
+      outSlope: -3.2624085
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.59166664
+      outWeight: 0.3916667
+    - serializedVersion: 3
+      time: 0.525
+      value: 1
+      inSlope: -0.55036545
+      outSlope: -0.40816337
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.8666667
+      outWeight: 0.40833333
+    - serializedVersion: 3
+      time: 0.825
+      value: 1
+      inSlope: -0.06879558
       outSlope: 0
       tangentMode: 0
       weightedMode: 3
-      inWeight: 0.3296829
+      inWeight: 0.8916666
+      outWeight: 0.008331367
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.014328615
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 1
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -140,9 +132,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6179766151588686226}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.0000001
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -322,6 +314,26 @@ PrefabInstance:
       propertyPath: Speed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7950529955425830239, guid: 79c78e1ecd3a0834ebb298630a3ff14b,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 998
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950529955425830239, guid: 79c78e1ecd3a0834ebb298630a3ff14b,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 9.8e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950529955425830239, guid: 79c78e1ecd3a0834ebb298630a3ff14b,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7950529955425830239, guid: 79c78e1ecd3a0834ebb298630a3ff14b,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8656039320581314636, guid: 79c78e1ecd3a0834ebb298630a3ff14b,
         type: 3}
       propertyPath: InitialModule.startSpeed.scalar
@@ -406,6 +418,7 @@ PrefabInstance:
     - {fileID: 7168198388771449162, guid: 79c78e1ecd3a0834ebb298630a3ff14b, type: 3}
     - {fileID: 7168198388771449141, guid: 79c78e1ecd3a0834ebb298630a3ff14b, type: 3}
     - {fileID: 7168198388771449140, guid: 79c78e1ecd3a0834ebb298630a3ff14b, type: 3}
+    - {fileID: 4353724499366413322, guid: 79c78e1ecd3a0834ebb298630a3ff14b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

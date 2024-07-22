@@ -12,7 +12,10 @@ public class StunSpell : Spell
     public ParticleSystem impactEffect;
     public GameObject projectile;
 
+    [Header("Animation")]
+    public float projectileDuration = 1.0f;
     public AnimationCurve projectileCurve;
+    public float impactDuration = 5.0f;
 
     private DamageDealer damageDealer;
     private SphereCollider damageCollider;
@@ -40,17 +43,16 @@ public class StunSpell : Spell
     {
         // Timer and lerp variable initialization
         float timer = 0;
-        float duration = 1.0f;
-        float maxHeight = 4;
+        projectileDuration = 1.0f;
         Vector2 startVec2 = new Vector2(start.x, start.z);
         Vector2 endVec2 = new Vector2(target.x, target.z);
 
         // Calculate lerp sin curve
-        while (timer < duration)
+        while (timer < projectileDuration)
         {
             timer += Time.deltaTime;
             float eased = projectileCurve.Evaluate(timer);
-            Vector2 lerpedPos = Vector2.Lerp(startVec2, endVec2, eased);
+            Vector2 lerpedPos = Vector2.LerpUnclamped(startVec2, endVec2, eased);
             transform.position = new Vector3(lerpedPos.x, transform.position.y, lerpedPos.y);
             yield return null;
         }
@@ -59,7 +61,9 @@ public class StunSpell : Spell
         projectile.gameObject.SetActive(false);
         impactEffect.Play();
         damageDealer.Active = true;
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.2f);
+        damageDealer.Active = false;
+        yield return new WaitForSeconds(impactDuration);
         Destroy(gameObject);
     }
 
