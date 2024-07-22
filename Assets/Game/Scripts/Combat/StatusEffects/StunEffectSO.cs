@@ -7,7 +7,6 @@ public class StunEffect : StatusEffect
 {
     protected override void OnStartEffect(DynamicDamageTaker taker)
     {
-        taker.stunned = true;
     }
 
     protected override void OnUpdateEffect(DynamicDamageTaker taker)
@@ -16,6 +15,5 @@ public class StunEffect : StatusEffect
 
     protected override void OnEndEffect(DynamicDamageTaker taker)
     {
-        taker.stunned = false;
     }
 }

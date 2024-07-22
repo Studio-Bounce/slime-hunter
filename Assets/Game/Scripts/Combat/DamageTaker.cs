@@ -52,7 +52,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
         }
         lastDamageTime = Time.time;
 
-        if (!isInvincible)
+        if (!isInvincible || damage.forceApply)
         {
             health -= (int)damage.value;
         }

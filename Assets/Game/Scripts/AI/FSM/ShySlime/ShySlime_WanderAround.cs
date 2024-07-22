@@ -22,7 +22,7 @@ public class ShySlime_WanderAround : BasicSlime_WanderAround
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        BaseStunDetection(stateInfo);
+        BaseStatusDetection(stateInfo);
         ForceBackToBase(stateInfo);
         // If slime reached close to player, switch to flee
         if (Vector3.Distance(fsm.transform.position, fsm.GetPlayerPosition()) <= sFSM.playerProximityDistance)
