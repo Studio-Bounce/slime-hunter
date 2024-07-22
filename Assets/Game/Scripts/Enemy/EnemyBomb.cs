@@ -27,6 +27,7 @@ public class EnemyBomb : DamageDealer
     [SerializeField] ShaderParam[] shaderParams;
 
     SphereCollider sphereCollider;
+    MeshRenderer groundCrackMesh;
     bool didExplode = false;
 
     [SerializeField] BomberEnemy bomberEnemy;
