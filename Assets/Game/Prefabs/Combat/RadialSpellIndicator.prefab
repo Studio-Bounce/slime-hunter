@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dff9571eb644d29488baede4d82d8e7b, type: 2}
+  - {fileID: 2100000, guid: 414d90432836d9742b50db4335eddef7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -176,7 +176,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dff9571eb644d29488baede4d82d8e7b, type: 2}
+  - {fileID: 2100000, guid: 414d90432836d9742b50db4335eddef7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -246,8 +246,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castRange: 0
   areaOfEffect: 0
-  activeColor: {r: 0.71661675, g: 1, b: 0.7075472, a: 0.627451}
-  inactiveColor: {r: 1, g: 0, b: 0, a: 0.2509804}
+  activeColor: {r: 0, g: 1, b: 0.8980392, a: 1}
+  inactiveColor: {r: 1, g: 0.23113209, b: 0.23113209, a: 1}
   hitLayers:
     serializedVersion: 2
     m_Bits: 8
