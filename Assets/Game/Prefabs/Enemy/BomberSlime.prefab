@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56af1a53734f4b649b7176f9114511a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  liveUpdate: 0
 --- !u!1 &4472979621497931293
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,8 +355,8 @@ MonoBehaviour:
   cacheLength: 10
   cacheInterval: 0.25
   stuckThreshold: 0.01
-  wanderDistance: 3
-  wanderRadius: 1.5
+  wanderDistance: 6
+  wanderRadius: 0.5
   wanderJitter: 20
   wanderBounds: {fileID: 0}
 --- !u!1 &4677331337103945424
@@ -563,7 +564,7 @@ MonoBehaviour:
   flashDuration: 0.2
   flashMat: {fileID: 2100000, guid: ece9a621dbd04e443a99354d2ec2c2fa, type: 2}
   slimeModel: {fileID: 0}
-  deathParticlesGO: {fileID: 4387272774434107089, guid: 7a4bb30fe39569444a78e197f142f33f,
+  deathParticlesGO: {fileID: 8714244275622671896, guid: abf8d5b763621654486813c5c8af8234,
     type: 3}
   deathDelay: 3.5
 --- !u!114 &2332900764898418253
