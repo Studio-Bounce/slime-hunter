@@ -7,6 +7,11 @@ public class BomberSlime_FSM : BasicSlime_FSM
     [Header("Bomber Slime Attributes")]
     public float damageRadius = 5.0f;
 
+    // Animation parameters
+    public readonly int AlertTrigger = Animator.StringToHash("alert");
+    public readonly int PlayerLostTrigger = Animator.StringToHash("playerLost");
+    public readonly int PlayerInRangeTrigger = Animator.StringToHash("playerInRange");
+
     [HideInInspector] public EnemyBomb enemyBomb;
     bool didExplode = false;
 
@@ -48,6 +53,10 @@ public class BomberSlime_FSM : BasicSlime_FSM
         cooldownTime = 0;
         attackSpeed = 0;
         attackProximity = 0;
+        defaultMat = null;
+        chaseMat = null;
+        attackMat = null;
+        attackGlowIntensity = 1.0f;
     }
 
     protected override void OnDrawGizmos()

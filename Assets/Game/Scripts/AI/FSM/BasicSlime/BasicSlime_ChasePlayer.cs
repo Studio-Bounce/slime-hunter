@@ -22,7 +22,7 @@ public class BasicSlime_ChasePlayer : BasicSlime_BaseState
         fsm.wanderSteeringBehaviour.gameObject.SetActive(false);
 
         // Change slime material (color)
-        if (fsm.slimeOuterMesh.materials.Length > 0)
+        if (fsm.slimeOuterMesh && fsm.slimeOuterMesh.materials.Length > 0)
         {
             Material[] mats = { fsm.chaseMat };
             fsm.slimeOuterMesh.materials = mats;
@@ -54,7 +54,7 @@ public class BasicSlime_ChasePlayer : BasicSlime_BaseState
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         // Revert slime material (color)
-        if (fsm.slimeOuterMesh.materials.Length > 0)
+        if (fsm.slimeOuterMesh && fsm.slimeOuterMesh.materials.Length > 0)
         {
             Material[] mats = { fsm.defaultMat };
             fsm.slimeOuterMesh.materials = mats;

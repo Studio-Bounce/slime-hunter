@@ -18,26 +18,7 @@ public class BomberSlime_Explode : BasicSlime_BaseState
         bFSM.slimeAgent.reachedGoal = true;
         bFSM.slimeAgent.velocity = Vector3.zero;
 
-        // Change slime material (color)
-        if (bFSM.slimeOuterMesh.materials.Length > 0)
-        {
-            Material redGlow = bFSM.attackMat;
-            // Ensure the material has an emission property
-            if (redGlow.HasProperty("_EmissionColor"))
-            {
-                // Enable the emission keyword
-                redGlow.EnableKeyword("_EMISSION");
-
-                // Set the HDR emission color
-                Color finalEmissionColor = redGlow.color;
-                redGlow.SetColor("_EmissionColor", finalEmissionColor);
-            }
-            Material[] mats = { redGlow };
-            bFSM.slimeOuterMesh.materials = mats;
-        }
-        // Disable shadow in slime outer mesh to show transparent material properly
-        bFSM.slimeOuterMesh.gameObject.layer = GameConstants.IgnoreLightingLayer;
-
+        bFSM.slimeAnimator.SetTrigger(bFSM.PlayerInRangeTrigger);
         bFSM.Explode();
     }
 

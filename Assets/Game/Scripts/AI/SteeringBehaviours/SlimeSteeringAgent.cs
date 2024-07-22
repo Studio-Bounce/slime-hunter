@@ -26,10 +26,11 @@ public class SlimeSteeringAgent : SteeringAgent
 
         base.Update();
 
-        forceStopMovement = (slimeModel.localPosition.y <= 0);
+        if (slimeModel) forceStopMovement = (slimeModel.localPosition.y <= 0);
         animator.SetBool(IsMoving, velocity.magnitude != 0);
     }
 
+    // Used by VisibilityHandler script which must be added to the game object having mesh renderer
     public void PauseAgent()
     {
         pauseBehaviour = true;
