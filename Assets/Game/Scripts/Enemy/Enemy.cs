@@ -46,14 +46,14 @@ public class Enemy : DynamicDamageTaker
         base.Start();
 
         // Ensure that eye game objects are active
-        normalEye?.gameObject.SetActive(true);
-        attackEye?.gameObject.SetActive(true);
+        if (normalEye) normalEye.gameObject.SetActive(true);
+        if (attackEye) attackEye.gameObject.SetActive(true);
         if (scaredEye) scaredEye.gameObject.SetActive(true);
-        deathEye?.gameObject.SetActive(true);
-        normalEye.enabled = true;
-        attackEye.enabled = false;
+        if (deathEye) deathEye.gameObject.SetActive(true);
+        if (normalEye) normalEye.enabled = true;
+        if (attackEye) attackEye.enabled = false;
         if (scaredEye) scaredEye.enabled = false;
-        deathEye.enabled = false;
+        if (deathEye) deathEye.enabled = false;
         isAlive = true;
 
         fsm = GetComponent<BasicSlime_FSM>();
@@ -165,9 +165,9 @@ public class Enemy : DynamicDamageTaker
             yield return null;
         }
         eye = enemyEye;
-        normalEye.enabled = (enemyEye == EnemyEye.NORMAL);
-        attackEye.enabled = (enemyEye == EnemyEye.ATTACK);
+        if (normalEye) normalEye.enabled = (enemyEye == EnemyEye.NORMAL);
+        if (attackEye) attackEye.enabled = (enemyEye == EnemyEye.ATTACK);
         if (scaredEye) scaredEye.enabled = enemyEye == EnemyEye.SCARED;
-        deathEye.enabled = (enemyEye == EnemyEye.DEATH);
+        if (deathEye) deathEye.enabled = (enemyEye == EnemyEye.DEATH);
     }
 }

@@ -187,12 +187,6 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
---- !u!4 &336650649 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9032985347633649912, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-    type: 3}
-  m_PrefabInstance: {fileID: 921150796}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &604455925
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,16 +768,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2332900764898418253, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 1258052931}
-    - target: {fileID: 2332900764898418253, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      propertyPath: slimeModel
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2678552535762397094, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -794,25 +778,15 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3940681315892755474, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5799752166503753409, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: m_Name
       value: BomberSlime
       objectReference: {fileID: 0}
-    - target: {fileID: 5799752166503753409, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9032985347633649912, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.53999996
+      value: -2.06
       objectReference: {fileID: 0}
     - target: {fileID: 9032985347633649912, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
@@ -822,7 +796,7 @@ PrefabInstance:
     - target: {fileID: 9032985347633649912, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.24
+      value: 1.29
       objectReference: {fileID: 0}
     - target: {fileID: 9032985347633649912, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
@@ -860,13 +834,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 3940681315892755474, guid: b4d92b50a4197f14bbf1fb3ece125bb4, type: 3}
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 9032985347633649912, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
-        type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 1258052930}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4d92b50a4197f14bbf1fb3ece125bb4, type: 3}
 --- !u!1001 &925981018
@@ -880,17 +849,22 @@ PrefabInstance:
     - target: {fileID: 2678552535762397094, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2678552535762397094, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5799752166503753409, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
       propertyPath: m_Name
       value: BomberSlime (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799752166503753409, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6242890229790663252, guid: b4d92b50a4197f14bbf1fb3ece125bb4,
         type: 3}
@@ -1499,91 +1473,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244596200}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &1258052929
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 336650649}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_Name
-      value: SK_Bomber
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866666021909216657, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: c3350264998a79448a4f70ace68aa4f7, type: 2}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4b403e34ded7a1646b794bcb7a850bfe, type: 3}
---- !u!4 &1258052930 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-    type: 3}
-  m_PrefabInstance: {fileID: 1258052929}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1258052931 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 4b403e34ded7a1646b794bcb7a850bfe,
-    type: 3}
-  m_PrefabInstance: {fileID: 1258052929}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1297298631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2468,7 +2357,7 @@ PrefabInstance:
     - target: {fileID: 7186318760402298026, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.17
+      value: -2.99
       objectReference: {fileID: 0}
     - target: {fileID: 7186318760402298026, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
         type: 3}
@@ -2478,7 +2367,7 @@ PrefabInstance:
     - target: {fileID: 7186318760402298026, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.92
+      value: -15.4
       objectReference: {fileID: 0}
     - target: {fileID: 7186318760402298026, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
         type: 3}

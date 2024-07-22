@@ -13,7 +13,7 @@ public class BasicSlime_BaseState : FSMBaseState<BasicSlime_FSM>
     // BaseStunDetection can be used in child classes down the inheritance chain
     // Sometimes child classes might want to detect stun effect without calling OnStateUpdate,
     // so its better to have this method separately.
-    protected void BaseStunDetection(AnimatorStateInfo stateInfo)
+    protected bool BaseStunDetection(AnimatorStateInfo stateInfo)
     {
         // Status effects trigger state changes from any state, hence we put this in the base state
         // Ensure all overrides call base.OnStateUpdate
@@ -21,15 +21,18 @@ public class BasicSlime_BaseState : FSMBaseState<BasicSlime_FSM>
         {
             // TODO: Need to check if not already in state
             fsm.ChangeState(fsm.StunnedStateName);
+            return true;
         }
+        return false;
     }
 
-    protected void ForceBackToBase(AnimatorStateInfo stateInfo)
+    protected bool ForceBackToBase(AnimatorStateInfo stateInfo)
     {
-        if (fsm.wanderSteeringBehaviour.wanderBounds == null) return;
-        if (fsm.wanderSteeringBehaviour.InOuterBounds) return;
+        if (fsm.wanderSteeringBehaviour.wanderBounds == null) return false;
+        if (fsm.wanderSteeringBehaviour.InOuterBounds) return false;
 
         fsm.ChangeState(fsm.BackToBaseStateName);
+        return true;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
