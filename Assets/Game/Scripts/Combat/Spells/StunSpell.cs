@@ -9,8 +9,11 @@ using UnityEngine.VFX;
 [System.Serializable]
 public class StunSpell : Spell
 {
-    public VisualEffect impactEffect;
+    public ParticleSystem impactEffect;
     public GameObject projectile;
+
+    public AnimationCurve projectileCurve;
+
     private DamageDealer damageDealer;
     private SphereCollider damageCollider;
 
@@ -38,7 +41,6 @@ public class StunSpell : Spell
         // Timer and lerp variable initialization
         float timer = 0;
         float duration = 1.0f;
-        float startHeight = start.y;
         float maxHeight = 4;
         Vector2 startVec2 = new Vector2(start.x, start.z);
         Vector2 endVec2 = new Vector2(target.x, target.z);
@@ -47,9 +49,9 @@ public class StunSpell : Spell
         while (timer < duration)
         {
             timer += Time.deltaTime;
-            Vector2 lerpedPos = Vector2.Lerp(startVec2, endVec2, timer);
-            float lerpedHeight = startHeight + Mathf.Sin(timer*Mathf.PI)*maxHeight;
-            transform.position = new Vector3(lerpedPos.x, lerpedHeight, lerpedPos.y);
+            float eased = projectileCurve.Evaluate(timer);
+            Vector2 lerpedPos = Vector2.Lerp(startVec2, endVec2, eased);
+            transform.position = new Vector3(lerpedPos.x, transform.position.y, lerpedPos.y);
             yield return null;
         }
 
@@ -57,11 +59,7 @@ public class StunSpell : Spell
         projectile.gameObject.SetActive(false);
         impactEffect.Play();
         damageDealer.Active = true;
-        yield return new WaitForSeconds(0.2f); // To account for any spawn delay affecting HasAnySystemAwake
-        while (impactEffect.HasAnySystemAwake())
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(1.0f);
         Destroy(gameObject);
     }
 
