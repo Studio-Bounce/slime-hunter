@@ -12,9 +12,10 @@ public class DynamicDamageTaker : UIDamageTaker
 
     protected bool isInKnockback = false;
 
-    [HideInInspector] public bool stunned = false;
     protected CharacterController characterController;
     protected StatusEffectManager statusEffectManager;
+
+    public List<StatusEffect> activeEffects { get { return statusEffectManager.activeEffects; } }
 
     protected override void Start()
     {
