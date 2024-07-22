@@ -12,6 +12,7 @@ public class ItemChest : MonoBehaviour
 
     void Start()
     {
+        GetComponent<Collider>().isTrigger = true;
         openHinge = GetComponent<OpenHinge>();
     }
 
@@ -21,14 +22,6 @@ public class ItemChest : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        if ((activationLayers.value & (1 << other.gameObject.layer)) > 0)
-        {
-            Open();
-        }
-    }
-
-    private void OnCollisionEnter(Collision other)
     {
         if ((activationLayers.value & (1 << other.gameObject.layer)) > 0)
         {
