@@ -117,7 +117,7 @@ public class SpellController : MonoBehaviour
     public void CancelSpell(InputAction.CallbackContext context)
     {
         isCasting = false;
-        currentIndicator.HideIndicator();
+        if (currentIndicator != null) currentIndicator.HideIndicator();
     }
 
     public void AimSpell(InputAction.CallbackContext context)

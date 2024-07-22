@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   address: Assets/Game/ScriptableObjects/StunSpell.asset
   itemName: Stun Spell
-  description: A disruptive magical ability that incapacitates a target by overwhelming
-    their senses. When cast, the spell releases a burst of energy that paralyzes
-    the target, leaving them unable to move or act for a short duration.
+  description: A disruptive magical ability that releases a burst of energy that
+    paralyzes the target for a short duration.
   icon: {fileID: 21300000, guid: 95eeb2d1c5537024db1cd4e0870a00ab, type: 3}
   itemType: 1
   value: 1

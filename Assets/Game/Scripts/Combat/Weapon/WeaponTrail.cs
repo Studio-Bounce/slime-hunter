@@ -44,7 +44,8 @@ public class WeaponTrail : DamageDealer
         _collider.convex = true;
         _collider.isTrigger = true;
 
-        trailMaterial = trailRenderer.material;
+        Material tempMaterial = trailRenderer.material;
+        trailMaterial = new Material(tempMaterial);
 
         _SetupArcMesh();
     }
@@ -73,8 +74,8 @@ public class WeaponTrail : DamageDealer
         arcRadius = weaponSO.range;
         if (currentWeaponSO.material != null)
         {
-            trailRenderer.material = currentWeaponSO.material;
-            trailMaterial = currentWeaponSO.material;
+            trailMaterial = new Material(currentWeaponSO.material);
+            trailRenderer.material = trailMaterial;
         }
     }
 
