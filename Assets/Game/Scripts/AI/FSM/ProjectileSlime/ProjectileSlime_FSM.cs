@@ -23,6 +23,8 @@ public class ProjectileSlime_FSM : BasicSlime_FSM
     [Tooltip("Delay after triggering attack animation")]
     [SerializeField] float spitterTimeSync = 1.0f;
 
+    Coroutine attackCoroutine;
+
     protected override void Start()
     {
         base.Start();
@@ -35,7 +37,7 @@ public class ProjectileSlime_FSM : BasicSlime_FSM
         if (!isAttacking)
         {
             isAttacking = true;
-            StartCoroutine(ShootProjectiles());
+            attackCoroutine = StartCoroutine(ShootProjectiles());
         }
     }
 
@@ -44,7 +46,11 @@ public class ProjectileSlime_FSM : BasicSlime_FSM
         if (isAttacking)
         {
             isAttacking = false;
-            StopCoroutine(ShootProjectiles());
+            if (attackCoroutine != null)
+            {
+                StopCoroutine(attackCoroutine);
+                attackCoroutine = null;
+            }
         }
     }
 
