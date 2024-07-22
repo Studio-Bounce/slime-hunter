@@ -16,7 +16,6 @@ public class BasicSlime_BaseState : FSMBaseState<BasicSlime_FSM>
     protected bool BaseStatusDetection(AnimatorStateInfo stateInfo)
     {
         // Status effects trigger state changes from any state, hence we put this in the base state
-        // Ensure all overrides call base.OnStateUpdate
         foreach (StatusEffect effect in fsm.slimeEnemy.activeEffects)
         {
             if (effect is StunEffect)
@@ -26,13 +25,6 @@ public class BasicSlime_BaseState : FSMBaseState<BasicSlime_FSM>
             }
         }
         return false;
-
-        //if (fsm.slimeEnemy.stunned && stateInfo.shortNameHash != fsm.StunnedStateName)
-        //{
-        //    fsm.ChangeState(fsm.StunnedStateName);
-        //    return true;
-        //}
-        //return false;
     }
 
     protected bool ForceBackToBase(AnimatorStateInfo stateInfo)

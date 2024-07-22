@@ -23,7 +23,6 @@ public class ShySlime_Flee : BasicSlime_BaseState
 
         sFSM.slimeAgent.reachedGoal = false;
         sFSM.slimeAgent.maxSpeed = sFSM.fleeSpeed;
-
         sFSM.slimeEnemy.SetEye(EnemyEye.SCARED);
     }
 

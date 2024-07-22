@@ -10,6 +10,11 @@ public class BasicSlime_Stunned : BasicSlime_BaseState
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
+        fsm.wanderSteeringBehaviour.enabled = false;
+        fsm.wanderSteeringBehaviour.gameObject.SetActive(false);
+        if (fsm.seekSteeringBehaviour) fsm.seekSteeringBehaviour.enabled = false;
+        if (fsm.seekSteeringBehaviour) fsm.seekSteeringBehaviour.gameObject.SetActive(false);
+        fsm.slimeAgent.reachedGoal = true;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
