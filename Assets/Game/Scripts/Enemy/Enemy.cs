@@ -22,10 +22,9 @@ public class Enemy : DynamicDamageTaker
     [SerializeField] SkinnedMeshRenderer attackEye;
     [SerializeField] SkinnedMeshRenderer scaredEye;
     [SerializeField] SkinnedMeshRenderer deathEye;
-    EnemyEye eye;
+    public EnemyEye eye;
 
     [SerializeField] float damageEyeTimer = 1.0f;
-    bool freezeEyeChange = false;
 
     [Header("Hit Feedback")]
     [SerializeField] GameObject hitVFXGO;
@@ -92,11 +91,6 @@ public class Enemy : DynamicDamageTaker
         {
             return false;
         }
-
-        if (!isInvincible && !freezeEyeChange)
-        {
-            StartCoroutine(ChangeEyeToDamage());
-        }
         return true;
     }
 
@@ -118,7 +112,11 @@ public class Enemy : DynamicDamageTaker
 
     public void SetEye(EnemyEye enemyEye)
     {
-        StartCoroutine(ChangeEye(enemyEye));
+        eye = enemyEye;
+        if (normalEye) normalEye.enabled = (enemyEye == EnemyEye.NORMAL);
+        if (attackEye) attackEye.enabled = (enemyEye == EnemyEye.ATTACK);
+        if (scaredEye) scaredEye.enabled = (enemyEye == EnemyEye.SCARED);
+        if (deathEye) deathEye.enabled = (enemyEye == EnemyEye.DEATH);
     }
 
     public EnemyEye GetEnemyEye()
@@ -146,27 +144,5 @@ public class Enemy : DynamicDamageTaker
             }
         }
         isFlashing = false;
-    }
-
-    IEnumerator ChangeEyeToDamage()
-    {
-        freezeEyeChange = true;
-        SetEye(EnemyEye.DEATH);
-        yield return new WaitForSeconds(damageEyeTimer);
-        SetEye(EnemyEye.NORMAL);
-        freezeEyeChange = false;
-    }
-
-    IEnumerator ChangeEye(EnemyEye enemyEye)
-    {
-        while (freezeEyeChange)
-        {
-            yield return null;
-        }
-        eye = enemyEye;
-        if (normalEye) normalEye.enabled = (enemyEye == EnemyEye.NORMAL);
-        if (attackEye) attackEye.enabled = (enemyEye == EnemyEye.ATTACK);
-        if (scaredEye) scaredEye.enabled = enemyEye == EnemyEye.SCARED;
-        if (deathEye) deathEye.enabled = (enemyEye == EnemyEye.DEATH);
     }
 }
