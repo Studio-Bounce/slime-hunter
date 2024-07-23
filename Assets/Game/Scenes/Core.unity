@@ -635,7 +635,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attenuationObject: {fileID: 0}
 --- !u!1 &657485086
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,25 +862,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: 1430334228
-      Data2: 1276980401
-      Data3: -1048297056
-      Data4: -420034805
-    Path: event:/BackgroundMusic
-  Event: 
-  PlayEvent: 1
-  StopEvent: 0
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
 --- !u!4 &1063731844
 Transform:
   m_ObjectHideFlags: 0
@@ -1240,10 +1220,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uuid: ada7f967-fb32-4222-b529-47d52e60a9bf
-  items: []
+  items:
+  - itemRef: {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
+    quantity: 1
   maxWeight: 17
   equippedWeapons:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
   - {fileID: 0}
   equippedSpells:
   - {fileID: 0}
