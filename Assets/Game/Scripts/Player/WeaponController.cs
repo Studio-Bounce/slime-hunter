@@ -11,7 +11,6 @@ public class WeaponController : MonoBehaviour
     public Vector3 handPivotOffset;
     public Vector3 handPivotForward;
     [NonSerialized] public WeaponSO[] availableWeapons = new WeaponSO[2];
-    public WeaponSO fallbackWeapon;
 
     [Header("Animations/Visuals")]
     public WeaponTrail weaponTrail;
@@ -62,7 +61,7 @@ public class WeaponController : MonoBehaviour
         get {
             if (availableWeapons[_equippedWeaponIndex] == null)
             {
-                availableWeapons[_equippedWeaponIndex] = fallbackWeapon;
+                return null;
             }
             return availableWeapons[_equippedWeaponIndex];
         }
@@ -96,8 +95,9 @@ public class WeaponController : MonoBehaviour
 
     private void OnWeaponUpdate(WeaponSO[] weapons)
     {
-        Debug.Log("Weapon Update");
         availableWeapons = weapons;
+
+        if (CurrentWeapon == null) return;
         if (_currentWeaponPrefab != null) Destroy(_currentWeaponPrefab);
         InstantiateWeapon(CurrentWeapon);
         (UIManager.Instance.HUDMenu as HUDMenu).UpdateWeaponIcon(CurrentWeapon.icon);
@@ -148,9 +148,13 @@ public class WeaponController : MonoBehaviour
     public void CycleWeapon(InputAction.CallbackContext context)
     {
         if (!IsInterruptable()) return;
+
         // Cycle equipped
-        _equippedWeaponIndex = _equippedWeaponIndex == availableWeapons.Length - 1 ?
+        int nextWeaponIndex = _equippedWeaponIndex == availableWeapons.Length - 1 ?
             0 : _equippedWeaponIndex + 1;
+
+        if (availableWeapons[nextWeaponIndex] == null) return;
+        _equippedWeaponIndex = nextWeaponIndex;
 
         // Reset any existing combo
         _attackMoveIndex = 0;
@@ -164,6 +168,8 @@ public class WeaponController : MonoBehaviour
 
     public bool Attack(InputAction.CallbackContext context)
     {
+        if (CurrentWeapon == null) return false;
+
         if (!InterruptAttack() || isPerformingSpecialAttack) return false;
 
         // Get vector from player to mouse click

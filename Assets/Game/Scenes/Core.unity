@@ -1240,15 +1240,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uuid: ada7f967-fb32-4222-b529-47d52e60a9bf
-  items:
-  - itemRef: {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
-    quantity: 1
+  items: []
   maxWeight: 17
   equippedWeapons:
-  - {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
-  - {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
   equippedSpells:
-  - {fileID: 11400000, guid: fa97121a094b5134f917ca118bfc4e43, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   uiDocument: {fileID: 1179840937}
 --- !u!1 &1443875820
