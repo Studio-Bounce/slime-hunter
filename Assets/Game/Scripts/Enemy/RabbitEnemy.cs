@@ -74,6 +74,12 @@ public class RabbitEnemy : Enemy
         StartCoroutine(ApplyDodge(dodgeDirection * dodgeDistance));
     }
 
+    // Must be used only in tutorial. DO NOT USE ANYWHERE ELSE!
+    public void ApplyDodgeExternal(Vector3 dodgeVec)
+    {
+        StartCoroutine(ApplyDodge(dodgeVec));
+    }
+
     IEnumerator ApplyDodge(Vector3 dodgeVec)
     {
         slimeTrail.InitiateTrail();
