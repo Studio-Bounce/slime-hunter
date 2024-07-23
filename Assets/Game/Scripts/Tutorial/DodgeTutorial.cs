@@ -67,5 +67,9 @@ public class DodgeTutorial : MonoBehaviour
         CameraManager.Instance.ChangeVirtualCamera(currentCamera);
         InputManager.Instance.TogglePlayerControls(true);
         sliAgent.UnpauseAgent();
+
+        yield return new WaitForSeconds(2);
+        rockRigidBody.freezeRotation = true;
+        rockRigidBody.constraints = RigidbodyConstraints.FreezePosition;
     }
 }
