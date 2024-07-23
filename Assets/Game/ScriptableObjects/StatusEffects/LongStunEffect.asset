@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 836725b230df98d46a6dfd352269d354, type: 3}
-  m_Name: BasicStunEffect
+  m_Name: LongStunEffect
   m_EditorClassIdentifier: 
   icon: {fileID: 5797711524704991487, guid: 59176f189af04444c88427da1f559a64, type: 3}
-  effectName: Stun
-  duration: 2
+  effectName: Long Stun
+  duration: 6
   tickInterval: 1

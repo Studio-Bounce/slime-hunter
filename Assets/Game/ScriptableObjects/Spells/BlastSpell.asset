@@ -21,14 +21,14 @@ MonoBehaviour:
   value: 0
   weight: 0
   damage:
-    value: 5
+    value: 20
     knockback: 25
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 11400000, guid: 194e3545abb07b94ab515e1afbd829cb, type: 2}
     forceApply: 0
   castRange: 0
   areaOfEffect: 4
-  cooldown: 5
+  cooldown: 20
   spellPrefab: {fileID: 3300401679637664845, guid: aa496e9510f73364289fb1c4717ab9bc,
     type: 3}
   spellIndicator: 0
