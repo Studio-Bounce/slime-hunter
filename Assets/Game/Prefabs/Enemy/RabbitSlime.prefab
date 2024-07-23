@@ -362,6 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56af1a53734f4b649b7176f9114511a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  liveUpdate: 0
 --- !u!1 &4105564594428707979
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,13 +674,13 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.5
+  m_Height: 2
   m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.75, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &8100604837490706534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,18 +704,15 @@ MonoBehaviour:
   canvasTimeout: 10
   healthCanvas: {fileID: 2017927438104127464}
   knockbackTime: 0.25
-  stunned: 0
   normalEye: {fileID: 6377116420226650459}
   attackEye: {fileID: 1112610852234478933}
   scaredEye: {fileID: 0}
   deathEye: {fileID: 5640311663750280099}
-  damageEyeTimer: 0.25
   hitVFXGO: {fileID: 2507012300119595446, guid: 207429efa1ee73a45845fb615dc9e278,
     type: 3}
   slimeOuterBody: {fileID: 3539770233314810749}
   flashDuration: 0.2
   flashMat: {fileID: 2100000, guid: ece9a621dbd04e443a99354d2ec2c2fa, type: 2}
-  slimeModel: {fileID: 9002733011280807015}
   deathParticlesGO: {fileID: 7561334915480803397, guid: 50c9da95617416f41a015456a5289f9b,
     type: 3}
   deathDelay: 3.5
@@ -804,6 +802,7 @@ MonoBehaviour:
     knockback: 0
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
+    forceApply: 0
   OnSuccessfulHit:
     m_PersistentCalls:
       m_Calls: []
@@ -824,7 +823,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusBar: {fileID: 5259552432514532554}
   activeEffects: []
-  effectsToRemove: []
 --- !u!114 &8206751856348697906
 MonoBehaviour:
   m_ObjectHideFlags: 0

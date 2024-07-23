@@ -473,7 +473,6 @@ MonoBehaviour:
   attackEye: {fileID: 0}
   scaredEye: {fileID: 0}
   deathEye: {fileID: 0}
-  damageEyeTimer: 0.25
   hitVFXGO: {fileID: 2507012300119595446, guid: 207429efa1ee73a45845fb615dc9e278,
     type: 3}
   slimeOuterBody: {fileID: 0}
@@ -548,7 +547,7 @@ MonoBehaviour:
   projectile: {fileID: 5722810862771267375, guid: fd3e43c165cb9914984bb09223f422cc,
     type: 3}
   projectileSpeed: 18
-  playerProximityDistance: 5
+  playerProximityDistance: 3.5
   fleeSpeed: 2.5
   rotationTime: 0.2
   isAttacking: 0
@@ -930,7 +929,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 2bfd19b47a61c5f479204af279e000ab, type: 2}
+      objectReference: {fileID: 2100000, guid: 5889117767c7bd941bd2304928f5cee7, type: 2}
     - target: {fileID: 6135965508914230402, guid: 5783969802f4364418a7525d7a027817,
         type: 3}
       propertyPath: m_Layer
