@@ -24,6 +24,7 @@ public class DroppedItem : MonoBehaviour
     // Refs
     private SpriteRenderer spriteRenderer;
     private Player player;
+    private GameManager gm;
 
     // Getters Setters
     public ItemSO ItemRef { get; set; }
@@ -32,7 +33,8 @@ public class DroppedItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameManager.Instance.PlayerRef;
+        gm = GameManager.Instance;
+        player = gm.PlayerRef;
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = ItemRef.icon;
         ResizeSprite(spriteRenderer, iconSize);
@@ -101,20 +103,31 @@ public class DroppedItem : MonoBehaviour
     private void Update()
     {
         if (InventoryManager.Instance.IsFull) return;
+        if (!CanBePickedUp) return;
 
-        if (CanBePickedUp)
+        if (forcePickup) ForceMagnetPickup(); else MagnetPickup();
+    }
+
+    private void ForceMagnetPickup()
+    {
+        Vector3 target = player.transform.position;
+        target.y += 1;
+        Vector3 direction = target - transform.position;
+        direction.Normalize();
+        transform.position += gm.PlayerSpeedMultiplier * gm.pickupSpeed * 2 * Time.deltaTime * direction;
+
+        float dist = Vector3.Distance(transform.position, target);
+        if (dist < 1)
         {
-            if (forcePickup) PickUpItem(true);
-            DetectPickup();
+            PickUpItem(true);
         }
     }
 
-    private void DetectPickup()
+    private void MagnetPickup()
     {
         Vector3 target = player.transform.position;
         target.y += 1;
         float dist = Vector3.Distance(transform.position, target);
-        GameManager gm = GameManager.Instance;
 
         if (dist > 1 && dist < gm.pickupRange)
         {
