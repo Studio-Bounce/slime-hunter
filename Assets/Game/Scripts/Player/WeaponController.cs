@@ -127,11 +127,7 @@ public class WeaponController : MonoBehaviour
     {
         if (weaponSO == null) return;
 
-        if (weaponSO != null)
-        {
-            weaponTrail.SetupWeaponSettings(weaponSO);
-        }
-
+        weaponTrail.SetupWeaponSettings(weaponSO);
         if (weaponSO.weaponModel != null)
         {
             _currentWeaponPrefab = Instantiate(weaponSO.weaponModel, handPivot);
