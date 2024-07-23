@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56af1a53734f4b649b7176f9114511a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  liveUpdate: 0
 --- !u!114 &7126879183601198399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,9 +111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d65e77f0174834bad3b363f17928a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 0.7, y: 0.7}
-  ignorePickupRange: 1
-  launchDist: 3
-  launchAngle: 0
-  angleRange: 360
+  iconSize: {x: 0.5, y: 0.5}
+  forcePickup: 1
   dropLifetime: 100
+  launchDirection: {x: 0, y: 0, z: 0}
+  launchDist: 3
+  launchHeight: 1
+  launchAngle: 0
+  launchDuration: 1.5
+  angleRange: 360

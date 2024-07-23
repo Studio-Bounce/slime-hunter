@@ -11,7 +11,8 @@ public class OpenHinge : MonoBehaviour
     public bool openOnStart = false;
 
     [Header("Animation")]
-    float duration = 1.0f;
+    public float duration = 1.0f;
+    public AnimationCurve curve;
 
     [Header("Event")]
     public UnityEvent openEvent;
@@ -40,7 +41,8 @@ public class OpenHinge : MonoBehaviour
         float timer = 0;
         while (timer < duration)
         {
-            float eased = Easing.EaseOutBack(timer);
+            float normalTime = timer / duration;
+            float eased = curve.Evaluate(normalTime);
             Vector3 rotation = Vector3.LerpUnclamped(start, end, eased);
             hinge.rotation = Quaternion.Euler(rotation);
             timer += Time.deltaTime;
