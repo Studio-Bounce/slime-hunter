@@ -119,7 +119,7 @@ public class QuestHUD : Menu
         spell.style.display = (hasSpell) ? DisplayStyle.Flex : DisplayStyle.None;
         cash.style.display = (hasCash) ? DisplayStyle.Flex : DisplayStyle.None;
 
-        StartCoroutine(InitiateQuestNotification(QuestNotifType.COMPLETE, false));
+        StartCoroutine(InitiateQuestNotification(QuestNotifType.COMPLETE, true));
     }
 
     IEnumerator InitiateQuestNotification(QuestNotifType notifType, bool autoFade = true)
