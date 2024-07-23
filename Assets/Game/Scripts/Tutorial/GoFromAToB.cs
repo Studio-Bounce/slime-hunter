@@ -9,6 +9,7 @@ public class GoFromAToB : MonoBehaviour
     [SerializeField] Transform pointB;
     [SerializeField] float timeTaken = 3.0f;
 
+    public UnityEvent startMoving;
     public UnityEvent callbackOnB;
     bool moving = false;
 
@@ -23,6 +24,7 @@ public class GoFromAToB : MonoBehaviour
             return;
 
         moving = true;
+        startMoving.Invoke();
         StartCoroutine(InitiateMovement());
     }
 
