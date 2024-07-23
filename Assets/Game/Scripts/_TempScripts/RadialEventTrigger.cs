@@ -10,6 +10,8 @@ public class RadialEventTrigger : MonoBehaviour
     public LayerMask layerMask;
     public SphereCollider _collider;
 
+    public bool oneShot = false;
+
     void Start()
     {
         _collider = GetComponent<SphereCollider>();
@@ -21,6 +23,10 @@ public class RadialEventTrigger : MonoBehaviour
         if (((1 << other.gameObject.layer) & layerMask) != 0)
         {
             onEnter.Invoke();
+            if (oneShot)
+            {
+                Destroy(this);
+            }
         }
     }
 
