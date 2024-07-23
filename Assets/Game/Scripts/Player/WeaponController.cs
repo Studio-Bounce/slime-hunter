@@ -125,6 +125,8 @@ public class WeaponController : MonoBehaviour
     // TODO: Should pool all weapons to begin with and disable as needed
     public void InstantiateWeapon(WeaponSO weaponSO)
     {
+        if (weaponSO == null) return;
+
         if (weaponSO != null)
         {
             weaponTrail.SetupWeaponSettings(weaponSO);
