@@ -35,7 +35,8 @@ public class PauseMenu : Menu
 
     public void Pause()
     {
-        GameManager.Instance.GameState = GameState.PAUSED;
+        if (GameManager.Instance.GameState != GameState.PAUSED)
+            GameManager.Instance.GameState = GameState.PAUSED;
         SetVisible(true);
         GameManager.Instance.TimeFreeze();
         InventoryManager.Instance.UpdateInventoryUI();

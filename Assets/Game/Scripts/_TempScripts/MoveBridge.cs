@@ -5,19 +5,24 @@ using UnityEngine;
 public class MoveBridge : MonoBehaviour
 {
     [SerializeField] Transform finalTransform;
+    [SerializeField] Transform rotateWheel;
+    [SerializeField] float rotationSpeed = 5.0f;
     [SerializeField] float moveDuration = 2.0f;
     [SerializeField] Transform[] objToDestroy;
 
     Transform initialTransform;
+    bool isItDown = false;
 
     // Start is called before the first frame update
     void Start()
     {
         initialTransform = transform;
+        isItDown = false;
     }
 
     public void MoveTheBridge()
     {
+        isItDown = false;
         StartCoroutine(LerpTransform());
         foreach (Transform _transform in objToDestroy)
         {
@@ -45,11 +50,19 @@ public class MoveBridge : MonoBehaviour
             transform.rotation = Quaternion.Lerp(initialRotation, finalTransform.rotation, t);
             transform.localScale = Vector3.Lerp(initialScale, finalTransform.localScale, t);
 
+            rotateWheel.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+
             yield return null;
         }
 
         transform.position = finalTransform.position;
         transform.rotation = finalTransform.rotation;
         transform.localScale = finalTransform.localScale;
+        isItDown = true;
+    }
+
+    public bool IsBridgeDown()
+    {
+        return isItDown;
     }
 }

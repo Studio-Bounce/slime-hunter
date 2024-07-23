@@ -26,8 +26,6 @@ public class QuestTrigger : MonoBehaviour
     {
         if (triggered)
         {
-            // REMOVE
-            return;
             // Clear the quest objective when user reaches in proximity
             float distance = Vector3.Distance(GameManager.Instance.PlayerRef.transform.position,
                                               objectiveTargets[quest.currentObjective].position);
