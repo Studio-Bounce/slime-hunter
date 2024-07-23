@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17865306, g: 0.22369696, b: 0.30563658, a: 1}
+  m_IndirectSpecularColor: {r: 0.17865303, g: 0.22369705, b: 0.30563635, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3500,8 +3500,8 @@ GameObject:
   m_Component:
   - component: {fileID: 233807379}
   - component: {fileID: 233807378}
-  - component: {fileID: 233807377}
   - component: {fileID: 233807376}
+  - component: {fileID: 233807380}
   m_Layer: 0
   m_Name: Camera (1)
   m_TagString: Untagged
@@ -3553,14 +3553,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &233807377
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 233807375}
-  m_Enabled: 1
 --- !u!20 &233807378
 Camera:
   m_ObjectHideFlags: 0
@@ -3627,6 +3619,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -33.725, z: 0}
+--- !u!114 &233807380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 233807375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1001 &238725648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17147,10 +17152,10 @@ GameObject:
   m_Component:
   - component: {fileID: 775544186}
   - component: {fileID: 775544185}
-  - component: {fileID: 775544184}
   - component: {fileID: 775544183}
   - component: {fileID: 775544182}
   - component: {fileID: 775544187}
+  - component: {fileID: 775544188}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -17236,14 +17241,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &775544184
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 775544181}
-  m_Enabled: 1
 --- !u!20 &775544185
 Camera:
   m_ObjectHideFlags: 0
@@ -17324,6 +17321,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 823012862}
   targetCameraOnStart: 1
+--- !u!114 &775544188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775544181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!4 &782262449 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8108353612194840120, guid: 40d928da5aaae7b4785b3a18de92a1f3,
@@ -25736,8 +25746,8 @@ GameObject:
   m_Component:
   - component: {fileID: 960654946}
   - component: {fileID: 960654945}
-  - component: {fileID: 960654944}
   - component: {fileID: 960654943}
+  - component: {fileID: 960654947}
   m_Layer: 0
   m_Name: Camera (2)
   m_TagString: Untagged
@@ -25789,14 +25799,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &960654944
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960654942}
-  m_Enabled: 1
 --- !u!20 &960654945
 Camera:
   m_ObjectHideFlags: 0
@@ -25863,6 +25865,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -37.596, z: 0}
+--- !u!114 &960654947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 960654942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!4 &968059847 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 537247070414176236, guid: e7ea2b39c6ddbf743a445effef31adf7,
