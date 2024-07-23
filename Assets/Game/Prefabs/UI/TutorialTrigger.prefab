@@ -107,6 +107,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _collider: {fileID: 8860658275004422450}
+  oneShot: 0
 --- !u!223 &2725970374572343325
 Canvas:
   m_ObjectHideFlags: 0
@@ -210,8 +211,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: This is a tutorial
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7d6073ab3a477914c8dfbcf427b1ddf8, type: 2}
+  m_sharedMaterial: {fileID: 2826567724391940602, guid: 7d6073ab3a477914c8dfbcf427b1ddf8,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

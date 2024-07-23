@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Android;
 using UnityEngine.UIElements;
 
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
     // Saving
-    private bool hasChanged = false;
+    private bool hasChanged = false; // TODO: Only autosave if there has been a change to the inventory
 
     // Inventory
     public List<Item> items = new List<Item>();
@@ -17,8 +18,9 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     int selectedIndex = 0;
 
     // Equipped
-    private WeaponSO[] equippedWeapons = new WeaponSO[2];
-    private SpellSO[] equippedSpells = new SpellSO[2];
+    [Header("ENSURE EQUIPPED ARRAYS ARE SIZE 2")]
+    public WeaponSO[] equippedWeapons = new WeaponSO[2];
+    public SpellSO[] equippedSpells = new SpellSO[2];
 
     // UI Refs
     [SerializeField] private UIDocument uiDocument;
@@ -68,6 +70,14 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         InitializeUIElements();
         InitializeEventHandlers();
         ClearInfoPanel();
+        GameManager.Instance.OnPlayerRefChange += e => UpdateEquipped();
+    }
+
+    // Ensures initialized equips on new game get propagated to the player
+    private void UpdateEquipped()
+    {
+        OnEquippedWeaponsChanged.Invoke(equippedWeapons);
+        OnEquippedSpellsChanged.Invoke(equippedSpells);
     }
 
     private void InitializeUIElements()
@@ -238,12 +248,41 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
                 return true;
             }
         }
-
+        // Otherwise add it to a new slot
         Item newItem = new Item();
         newItem.itemRef = itemSO;
         newItem.quantity = 1;
         items.Add(newItem);
         OnInventoryChanged.Invoke();
+
+        // Autoequip if possible
+        int openSlot = -1;
+        switch (itemSO.itemType)
+        {
+            case ItemType.Weapon:
+                // Check for open slot for right to left
+                for (int i = equippedWeapons.Length-1; i >= 0; i--)
+                {
+                    if (equippedWeapons[i] == null) openSlot = i;
+                    if (equippedWeapons[i] == itemSO)
+                    {
+                        Debug.Log("EQUIPPED");
+                        return true; // Already equipped
+                    }
+                }
+                if (openSlot > -1) equippedWeapons[openSlot] = itemSO as WeaponSO;
+                break;
+            case ItemType.Spell:
+                for (int i = equippedSpells.Length - 1; i >= 0; i--)
+                {
+                    if (equippedSpells[i] == null) openSlot = i;
+                    if (equippedSpells[i] == itemSO) return true; // Already equipped
+                }
+                if (openSlot > -1) equippedSpells[openSlot] = itemSO as SpellSO;
+                break;
+        }
+
+        UpdateEquipped();
         return true;
     }
 
