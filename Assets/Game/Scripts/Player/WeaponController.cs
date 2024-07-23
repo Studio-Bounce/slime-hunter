@@ -96,6 +96,7 @@ public class WeaponController : MonoBehaviour
 
     private void OnWeaponUpdate(WeaponSO[] weapons)
     {
+        Debug.Log("Weapon Update");
         availableWeapons = weapons;
         if (_currentWeaponPrefab != null) Destroy(_currentWeaponPrefab);
         InstantiateWeapon(CurrentWeapon);

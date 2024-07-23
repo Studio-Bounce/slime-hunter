@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
+using UnityEngine.Android;
 using UnityEngine.UIElements;
 
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
     // Saving
-    private bool hasChanged = false;
+    private bool hasChanged = false; // TODO: Only autosave if there has been a change to the inventory
 
     // Inventory
     public List<Item> items = new List<Item>();
@@ -17,8 +18,8 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     int selectedIndex = 0;
 
     // Equipped
-    private WeaponSO[] equippedWeapons = new WeaponSO[2];
-    private SpellSO[] equippedSpells = new SpellSO[2];
+    public WeaponSO[] equippedWeapons = new WeaponSO[2];
+    public SpellSO[] equippedSpells = new SpellSO[2];
 
     // UI Refs
     [SerializeField] private UIDocument uiDocument;
@@ -68,6 +69,14 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         InitializeUIElements();
         InitializeEventHandlers();
         ClearInfoPanel();
+        GameManager.Instance.OnPlayerRefChange += e => UpdateEquipped();
+    }
+
+    // Ensures initialized equips on new game get propagated to the player
+    private void UpdateEquipped()
+    {
+        OnEquippedWeaponsChanged.Invoke(equippedWeapons);
+        OnEquippedSpellsChanged.Invoke(equippedSpells);
     }
 
     private void InitializeUIElements()

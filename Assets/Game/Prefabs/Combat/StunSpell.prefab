@@ -300,10 +300,40 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1061839254908784901, guid: 0f43385f21975ef4fa79a4d238a38d16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061839254908784909, guid: 0f43385f21975ef4fa79a4d238a38d16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061839254908784997, guid: 0f43385f21975ef4fa79a4d238a38d16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061839254908785007, guid: 0f43385f21975ef4fa79a4d238a38d16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061839254908785011, guid: 0f43385f21975ef4fa79a4d238a38d16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1061839254908785017, guid: 0f43385f21975ef4fa79a4d238a38d16,
         type: 3}
       propertyPath: m_Name
       value: Spell_FrozenGround
+      objectReference: {fileID: 0}
+    - target: {fileID: 1061839254908785017, guid: 0f43385f21975ef4fa79a4d238a38d16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1061839254908785017, guid: 0f43385f21975ef4fa79a4d238a38d16,
         type: 3}
@@ -319,6 +349,11 @@ PrefabInstance:
         type: 3}
       propertyPath: scalingMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4554868417045368176, guid: 0f43385f21975ef4fa79a4d238a38d16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4554868417100380193, guid: 0f43385f21975ef4fa79a4d238a38d16,
         type: 3}
@@ -355,6 +390,11 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4554868417100380198, guid: 0f43385f21975ef4fa79a4d238a38d16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4798677290715732907, guid: 0f43385f21975ef4fa79a4d238a38d16,
         type: 3}
       propertyPath: playOnAwake
@@ -384,6 +424,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4798677290734493017, guid: 0f43385f21975ef4fa79a4d238a38d16,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
