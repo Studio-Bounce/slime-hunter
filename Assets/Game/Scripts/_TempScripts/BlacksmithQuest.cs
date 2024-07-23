@@ -31,8 +31,10 @@ public class BlacksmithQuest : MonoBehaviour
         CameraManager.Instance.ChangeVirtualCamera(targetCamera);
 
         moveBridge.MoveTheBridge();
-        while (!moveBridge.IsBridgeDown())
+        float timeElapsed = 0;
+        while (!moveBridge.IsBridgeDown() && timeElapsed < 5.0f)
         {
+            timeElapsed += Time.deltaTime;
             yield return null;
         }
 
