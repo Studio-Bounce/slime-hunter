@@ -122,11 +122,13 @@ public class SpellController : MonoBehaviour
 
     public void AimSpell(InputAction.CallbackContext context)
     {
+        if (CurrentSpell == null) return;
         ToggleIndicator();
     }
 
     public void CastSpell(InputAction.CallbackContext context)
     {
+        if (CurrentSpell == null) return;
         if (currentIndicator != null && currentIndicator.Active && CurrentSpell.Ready)
         {
             isCasting = true;
