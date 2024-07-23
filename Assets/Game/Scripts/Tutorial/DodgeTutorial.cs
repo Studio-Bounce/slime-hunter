@@ -71,5 +71,6 @@ public class DodgeTutorial : MonoBehaviour
         yield return new WaitForSeconds(2);
         rockRigidBody.freezeRotation = true;
         rockRigidBody.constraints = RigidbodyConstraints.FreezePosition;
+        rockRigidBody.gameObject.layer = LayerMask.NameToLayer("Default");
     }
 }
