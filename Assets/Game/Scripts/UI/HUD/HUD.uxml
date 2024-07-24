@@ -1,16 +1,22 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ItemPickupListItem" src="project://database/Assets/Game/Scripts/UI/HUD/ItemPickupListItem.uxml?fileID=9197481963319205126&amp;guid=51c48b5cd355dfb479a1b439b73030de&amp;type=3#ItemPickupListItem" />
     <Style src="project://database/Assets/Game/Scripts/UI/USS/HUDStyle.uss?fileID=7433441132597879392&amp;guid=0fdab442c7ffa024e8faa0924c8217d2&amp;type=3#HUDStyle" />
     <Style src="project://database/Assets/Game/Scripts/UI/USS/Damage.uss?fileID=7433441132597879392&amp;guid=37c76dbc6d95c6041934135cae8ea696&amp;type=3#Damage" />
     <ui:VisualElement name="Background" style="flex-grow: 1; background-image: none; -unity-background-scale-mode: scale-to-fit; background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgba(255, 255, 255, 0.24); align-self: auto; align-items: stretch; flex-direction: row; color: rgb(27, 27, 27); border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
         <ui:VisualElement name="Left" style="flex-grow: 0; height: auto; width: 30%;">
-            <ui:VisualElement name="Blank_Lefttop" style="flex-grow: 0; height: 79%;">
+            <ui:VisualElement name="Blank_Lefttop" style="flex-grow: 1; height: 30%;">
                 <ui:VisualElement name="NavigationContainer" style="flex-grow: 0; height: 230px; -unity-text-align: upper-right; -unity-background-scale-mode: scale-to-fit; background-image: none; align-self: flex-start; align-items: stretch; padding-right: 20px; margin-left: 0; margin-bottom: 0; padding-bottom: 0; padding-left: 20px; display: flex; flex-direction: column;">
                     <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/Compass.png?fileID=21300000&amp;guid=587ac1ea0910d2b45ac0879a45870d8f&amp;type=3#Compass&quot;); -unity-background-scale-mode: scale-to-fit; margin-right: 0; transform-origin: right top; height: 203px; width: 214px; -unity-text-align: upper-right; align-self: flex-end; justify-content: flex-end;">
                         <ui:VisualElement name="CompassNeedle" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/Direction.png?fileID=2800000&amp;guid=8ef7cd773fd51684bade609b4a46ddb4&amp;type=3#Direction&quot;); -unity-background-scale-mode: scale-to-fit; scale: 0.4 0.4; rotate: 1deg;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="StatusArea" style="flex-grow: 1; flex-direction: row; margin-left: 30px;">
+            <ui:VisualElement name="ItemPickupListContainer" style="flex-grow: 1; height: 50%;">
+                <ui:Instance template="ItemPickupListItem" name="ItemPickupListItem" />
+                <ui:Instance template="ItemPickupListItem" name="ItemPickupListItem" />
+                <ui:Instance template="ItemPickupListItem" name="ItemPickupListItem" />
+            </ui:VisualElement>
+            <ui:VisualElement name="StatusArea" style="flex-grow: 1; flex-direction: row; margin-left: 30px; height: 20%;">
                 <ui:VisualElement name="weaponSwitchArea" style="flex-grow: 0; width: 138px; opacity: 1; padding-top: 50px; padding-bottom: 37px;">
                     <ui:VisualElement name="WeaponIcon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/thirdweapon.png?fileID=2800000&amp;guid=2e63cda403abdc845bdf0ca700093c97&amp;type=3#thirdweapon&quot;); -unity-background-scale-mode: scale-to-fit; align-self: auto;" />
                 </ui:VisualElement>
@@ -30,6 +36,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement name="Red_Alert" class="redalert" style="flex-grow: 1; position: absolute; -unity-background-scale-mode: stretch-to-fill; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Rectangle%2047playersttacked.png?fileID=21300000&amp;guid=000297ea16efd484185e1cd60150cb9f&amp;type=3#Rectangle 47playersttacked&quot;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.49); opacity: 0; width: 100%; height: 100%;" />
         <ui:VisualElement name="Blank_Centre" style="flex-grow: 0; width: 40%;" />
         <ui:VisualElement name="Right" style="flex-grow: 0; width: 30%; flex-direction: column;">
             <ui:VisualElement name="QuestContainer" style="flex-grow: 0; height: 50%; margin-right: 40px; margin-top: 15px;">
@@ -57,5 +64,4 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="Red_Alert" class="redalert" style="flex-grow: 1; position: absolute; -unity-background-scale-mode: stretch-to-fill; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Rectangle%2047playersttacked.png?fileID=21300000&amp;guid=000297ea16efd484185e1cd60150cb9f&amp;type=3#Rectangle 47playersttacked&quot;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.49); opacity: 0; width: 100%; height: 100%;" />
 </ui:UXML>
