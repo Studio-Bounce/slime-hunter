@@ -89,3 +89,47 @@
     -unity-font-style: bold;
     -unity-text-align: middle-center;
 }
+
+/* ## Item Pickups */
+
+#ItemPickupListContainer {
+    padding-right: 10%;
+}
+
+#ItemPickupListContainer > * {
+    margin-bottom: 10px;
+}
+
+#PickupListItem {
+    width: 100%;
+    -unity-slice-left: 25px;
+    -unity-slice-right: 25px;
+    -unity-slice-scale: 2px;
+    flex-direction: row;
+    padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    align-items: center;
+}
+
+#PickupListItem > #Image {
+    width: 20%;
+    height: 100%;
+}
+
+#PickupListItem > Label {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    color: white;
+    justify-content: center;
+    align-content: center;
+    font-size: 24px;
+    -unity-font: resource("Assets/Fonts/Dekko-Regular.ttf");
+    -unity-font-definition: resource("Assets/Fonts/Dekko-Regular.ttf");
+
+}
+
+#PickupListItem > #ItemQuantity {
+    -unity-font-style: bold;
+}
