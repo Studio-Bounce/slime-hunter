@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7bcc00ed2029743a440f1357795007, type: 3}
+  m_Name: HealSpell
+  m_EditorClassIdentifier: 
+  address: Assets/Game/ScriptableObjects/Spells/HealSpell.asset
+  itemName: Heal Spell
+  description: A restorative magic ability that channels mystical energy to mend
+    wounds and restore vitality.
+  icon: {fileID: 21300000, guid: 11cde393a83054a4786e31404bcdb5cf, type: 3}
+  itemType: 1
+  value: 1
+  weight: 1
+  damage:
+    value: 25
+    knockback: 0
+    direction: {x: 0, y: 0, z: 0}
+    effect: {fileID: 0}
+  castRange: 0
+  areaOfEffect: 1
+  cooldown: 25
+  spellPrefab: {fileID: 6017689330135474345, guid: 0f75bd9d900308e478ae1ffac15fc23c,
+    type: 3}
+  spellIndicator: 0

@@ -51,7 +51,7 @@ public class CameraManager : Singleton<CameraManager>
         }
     }
 
-    public void SwitchToCamera(Camera cam, CinemachineVirtualCamera vCam = null)
+    public void SetMainCamera(Camera cam, CinemachineVirtualCamera vCam = null)
     {
         if (_activeCamera)
         {
@@ -67,11 +67,40 @@ public class CameraManager : Singleton<CameraManager>
             _activeVCamera = cam.GetComponent<CinemachineBrain>()?.ActiveVirtualCamera as CinemachineVirtualCamera;
         }
     }
+    
+    public void ChangeVirtualCamera(CinemachineVirtualCamera vCam)
+    {
+        _activeVCamera.Priority = 0;
+        vCam.Priority = 10;
+        _activeVCamera = vCam;
+    }
 
-    public void ShakeCamera(float intensity, float time)
+    public void ShakeCamera(float intensity, float time = 0f)
     {
         if (_activeVCamera == null) return;
-        StartCoroutine(StartShake(intensity, time));
+        if (time > 0)
+        {
+            StartCoroutine(StartShake(intensity, time));
+        }
+        else
+        {
+            CinemachineBasicMultiChannelPerlin camNoise = _activeVCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+            if (camNoise == null)
+            {
+                Debug.Log("No noise channel on virtual camera to shake");
+            }
+            camNoise.m_AmplitudeGain = intensity;
+        }
+    }
+
+    public void StopCameraShake()
+    {
+        CinemachineBasicMultiChannelPerlin camNoise = _activeVCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        if (camNoise == null)
+        {
+            Debug.Log("No noise channel on virtual camera to shake");
+        }
+        camNoise.m_AmplitudeGain = 0;
     }
 
     IEnumerator StartShake(float intensity, float time)

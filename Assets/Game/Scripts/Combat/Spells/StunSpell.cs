@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.VFX;
@@ -9,8 +10,15 @@ using UnityEngine.VFX;
 [System.Serializable]
 public class StunSpell : Spell
 {
-    public VisualEffect impactEffect;
+    public ParticleSystem impactEffect;
     public GameObject projectile;
+
+    [Header("Animation")]
+    public float animDuration = 1.0f;
+    public float animHeight = 2;
+    public AnimationCurve animCurve;
+    public float impactDuration = 5.0f;
+
     private DamageDealer damageDealer;
     private SphereCollider damageCollider;
 
@@ -26,6 +34,7 @@ public class StunSpell : Spell
     {
         damageDealer.damage = spellSO.damage;
         damageCollider.radius = spellSO.areaOfEffect;
+        impactEffect.transform.localScale = new Vector3(spellSO.areaOfEffect, spellSO.areaOfEffect, spellSO.areaOfEffect);
     }
 
     public override void Cast(Vector3 target = default)
@@ -37,18 +46,21 @@ public class StunSpell : Spell
     {
         // Timer and lerp variable initialization
         float timer = 0;
-        float duration = 1.0f;
-        float startHeight = start.y;
-        float maxHeight = 4;
+        animDuration = 1.0f;
         Vector2 startVec2 = new Vector2(start.x, start.z);
         Vector2 endVec2 = new Vector2(target.x, target.z);
+        float startHeight = start.y;
 
         // Calculate lerp sin curve
-        while (timer < duration)
+        while (timer < animDuration)
         {
             timer += Time.deltaTime;
-            Vector2 lerpedPos = Vector2.Lerp(startVec2, endVec2, timer);
-            float lerpedHeight = startHeight + Mathf.Sin(timer*Mathf.PI)*maxHeight;
+            float normalTime = timer / animDuration;
+            float eased = Easing.EaseOut(normalTime);
+            Vector2 lerpedPos = Vector2.LerpUnclamped(startVec2, endVec2, eased);
+            eased = animCurve.Evaluate(normalTime);
+            float lerpedHeight = startHeight + Mathf.Sin(eased * Mathf.PI) * animHeight;
+
             transform.position = new Vector3(lerpedPos.x, lerpedHeight, lerpedPos.y);
             yield return null;
         }
@@ -57,11 +69,9 @@ public class StunSpell : Spell
         projectile.gameObject.SetActive(false);
         impactEffect.Play();
         damageDealer.Active = true;
-        yield return new WaitForSeconds(0.2f); // To account for any spawn delay affecting HasAnySystemAwake
-        while (impactEffect.HasAnySystemAwake())
-        {
-            yield return null;
-        }
+        yield return new WaitForSeconds(0.2f);
+        damageDealer.Active = false;
+        yield return new WaitForSeconds(impactDuration);
         Destroy(gameObject);
     }
 

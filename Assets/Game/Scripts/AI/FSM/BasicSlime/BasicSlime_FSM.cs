@@ -106,7 +106,7 @@ public class BasicSlime_FSM : FSM
             intensity += intensityDelta;
 
             Color finalEmissionColor = attackMat.color * intensity;
-            slimeOuterMesh.materials[0].SetColor("_EmissionColor", finalEmissionColor);
+            if (slimeOuterMesh) slimeOuterMesh.materials[0].SetColor("_EmissionColor", finalEmissionColor);
 
             yield return new WaitForSeconds(deltaTime);
         }

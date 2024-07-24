@@ -10,4 +10,5 @@ public struct Damage
     public float knockback;
     [HideInInspector] public Vector3 direction;
     public StatusEffect effect;
+    public bool forceApply;
 }

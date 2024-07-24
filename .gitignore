@@ -75,6 +75,8 @@ crashlytics-build.properties
 ProjectSettings/Packages/com.unity.probuilder/Settings.json
 
 ### FMOD Unity Integration ###
+Assets/Game/Audio/FMOD/.cache/
+
 # Never ignore DLLs in the FMOD subfolder, so make sure that the 
 # FMOD-folder is in the correct path.
 !/[Aa]ssets/Plugins/FMOD/**/*.dll
@@ -90,7 +92,7 @@ ProjectSettings/Packages/com.unity.probuilder/Settings.json
 /[Aa]ssets/Plugins/FMOD/Cache/Editor.meta
 # Ignore entire plugin. Install manually
 Assets/Plugins/FMOD/
-Assets/StreamingAssets/*.bank
+Assets/StreamingAssets/
 
 # Log-files
 fmod.log

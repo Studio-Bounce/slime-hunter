@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   address: Assets/Game/ScriptableObjects/Materials/SlimeGel.asset
   itemName: Slime Gel
-  description: The remaining gel gathered from a deceased slime.
+  description: The remaining gel gathered from a deceased slime. Has healing properties
+    when consumed.
   icon: {fileID: 21300000, guid: f8a11596087398343b39181ba41041b1, type: 3}
   itemType: 2
   value: 1

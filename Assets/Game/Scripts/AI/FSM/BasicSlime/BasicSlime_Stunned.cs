@@ -10,14 +10,25 @@ public class BasicSlime_Stunned : BasicSlime_BaseState
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
+        fsm.wanderSteeringBehaviour.enabled = false;
+        fsm.wanderSteeringBehaviour.gameObject.SetActive(false);
+        if (fsm.seekSteeringBehaviour) fsm.seekSteeringBehaviour.enabled = false;
+        if (fsm.seekSteeringBehaviour) fsm.seekSteeringBehaviour.gameObject.SetActive(false);
+        fsm.slimeAgent.reachedGoal = true;
+        fsm.slimeEnemy.isInvincible = false;
+        fsm.slimeEnemy.SetEye(EnemyEye.SCARED);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        base.OnStateUpdate(animator, stateInfo, layerIndex);
-        if (!fsm.slimeEnemy.stunned)
+        // Check if there's any remaining stun effects, else leave
+        foreach (StatusEffect effect in fsm.slimeEnemy.activeEffects)
         {
-            fsm.ChangeState(fsm.WanderAroundStateName);
+            if (effect is StunEffect)
+            {
+                return;
+            }
         }
+        fsm.ChangeState(fsm.WanderAroundStateName);
     }
 }

@@ -136,11 +136,13 @@ public class InputManager : Singleton<InputManager>
         _playerActions.Attack.performed += attackQueuedAction;
         _playerActions.SpecialAttack.performed += _weaponController.SpecialAttack;
         _playerActions.CycleWeapon.performed += _weaponController.CycleWeapon;
+
         // Spells
         _playerActions.Spell1.performed += spell1Action;
         _playerActions.Spell2.performed += spell2Action;
 
         _playerActions.CastSpell.started += _spellController.AimSpell;
+        _playerActions.Attack.performed += _spellController.CancelSpell;
         _playerActions.CastSpell.canceled += _spellController.CastSpell;
     }
 
@@ -154,16 +156,17 @@ public class InputManager : Singleton<InputManager>
         _playerActions.Move.performed -= TrackMovement;
         _playerActions.Move.canceled -= StopMovement;
         _playerActions.Dash.performed -= dashQueuedAction;
-        _playerActions.Rotate.performed -= _playerController.RotateCamera;
+        if (_playerController) _playerActions.Rotate.performed -= _playerController.RotateCamera;
         _playerActions.Attack.performed -= attackQueuedAction;
-        _playerActions.SpecialAttack.performed -= _weaponController.SpecialAttack;
-        _playerActions.CycleWeapon.performed -= _weaponController.CycleWeapon;
+        if (_weaponController) _playerActions.SpecialAttack.performed -= _weaponController.SpecialAttack;
+        if (_weaponController) _playerActions.CycleWeapon.performed -= _weaponController.CycleWeapon;
 
         _playerActions.Spell1.performed -= spell1Action;
         _playerActions.Spell2.performed -= spell2Action;
 
-        _playerActions.CastSpell.started -= _spellController.AimSpell;
-        _playerActions.CastSpell.canceled -= _spellController.CastSpell;
+        if (_spellController) _playerActions.CastSpell.started -= _spellController.AimSpell;
+        if (_spellController) _playerActions.Attack.performed -= _spellController.CancelSpell;
+        if (_spellController) _playerActions.CastSpell.canceled -= _spellController.CastSpell;
     }
 
     private void _RemoveUIControls()

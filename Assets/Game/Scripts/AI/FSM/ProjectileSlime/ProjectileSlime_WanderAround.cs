@@ -14,13 +14,12 @@ public class ProjectileSlime_WanderAround : ProjectileSlime_BaseState
 
         projFSM.slimeAgent.reachedGoal = false;
         projFSM.slimeAgent.maxSpeed = projFSM.wanderSpeed;
-
-        projFSM.slimeEnemy.SetEye(EnemyEye.NORMAL);
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        BaseStunDetection(stateInfo);
+        BaseStatusDetection(stateInfo);
+        ForceBackToBase(stateInfo);
 
         // If slime sees the player, start attacking
         if (Vector3.Distance(projFSM.slimeAgent.transform.position, projFSM.GetPlayerPosition()) <= projFSM.seekDistance)

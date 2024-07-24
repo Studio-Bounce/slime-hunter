@@ -277,6 +277,69 @@ Transform:
   - {fileID: 976020910}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &226474489
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 226474490}
+  - component: {fileID: 226474492}
+  - component: {fileID: 226474491}
+  m_Layer: 0
+  m_Name: GladeVillageIntroScreen(Temp)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &226474490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226474489}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 976020910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &226474491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226474489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd40d19e9478a694f973dcb03b0d9bce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showOnStart: 0
+--- !u!114 &226474492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226474489}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 4e1433707955c884c969a50848da7077, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 223d6771a66467649aaaaadeea735d81,
+    type: 3}
+  m_SortingOrder: 0
 --- !u!1 &230785318
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,6 +767,7 @@ Transform:
   - {fileID: 1812664886}
   - {fileID: 1457945054}
   - {fileID: 1738992991}
+  - {fileID: 226474490}
   m_Father: {fileID: 146768978}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &976020911
@@ -723,7 +787,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 1179840936}
   HUDMenu: {fileID: 1498221641}
   autoSave: {fileID: 1812664888}
-  shopMenu: {fileID: 0}
+  shopMenu: {fileID: 1738992992}
+  gladeVillageIntroMenu: {fileID: 226474491}
 --- !u!1 &1031717568
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,7 +872,7 @@ MonoBehaviour:
       Data4: -420034805
     Path: event:/BackgroundMusic
   Event: 
-  PlayEvent: 1
+  PlayEvent: 11
   StopEvent: 0
   AllowFadeout: 1
   TriggerOnce: 0
@@ -1178,13 +1243,13 @@ MonoBehaviour:
   items:
   - itemRef: {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
     quantity: 1
-  - itemRef: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    quantity: 1
-  - itemRef: {fileID: 11400000, guid: fa97121a094b5134f917ca118bfc4e43, type: 2}
-    quantity: 1
-  - itemRef: {fileID: 11400000, guid: 99e37e993779f7140b18b790d7e46539, type: 2}
-    quantity: 1
-  maxWeight: 17
+  maxWeight: 999
+  equippedWeapons:
+  - {fileID: 11400000, guid: b42d147c988248e40b0ee225796aa19c, type: 2}
+  - {fileID: 0}
+  equippedSpells:
+  - {fileID: 0}
+  - {fileID: 0}
   uiDocument: {fileID: 1179840937}
 --- !u!1 &1443875820
 GameObject:

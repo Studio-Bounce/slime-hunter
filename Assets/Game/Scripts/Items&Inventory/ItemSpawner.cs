@@ -19,10 +19,10 @@ public class ItemSpawner : MonoBehaviour
         {
             GameObject go = Instantiate(droppedItemPrefab, gameObject.scene) as GameObject;
             DroppedItem droppedItem = go.GetComponent<DroppedItem>();
+            droppedItem.transform.position = transform.position;
+            droppedItem.launchDirection = transform.forward;
             droppedItem.launchAngle = launchAngle;
             droppedItem.angleRange = angleRange;
-            droppedItem.transform.position = transform.position;
-            droppedItem.transform.forward = transform.forward;
             droppedItem.ItemRef = item;
         }
     }
@@ -31,7 +31,7 @@ public class ItemSpawner : MonoBehaviour
     void OnDrawGizmos()
     {
         // Define the direction vector (initially pointing in the Z direction)
-        Vector3 direction = -transform.forward;
+        Vector3 direction = transform.forward;
 
         // Rotate the direction vector around the Y-axis by the specified angle
         Quaternion rotation = Quaternion.Euler(0, launchAngle, 0);

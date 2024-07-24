@@ -19,6 +19,7 @@ public class Notification : MonoBehaviour
 
     public List<NotificationTransitions> transitions;
     public bool playOnStart = true;
+    public bool noAlphaOnStart = false;
     public float transitionDuration = 1.0f;
 
     protected Vector2 startPosition;
@@ -34,6 +35,7 @@ public class Notification : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
         startPosition = rectTransform.pivot;
 
+        if (noAlphaOnStart) canvasGroup.alpha = 0;
         if (playOnStart) Play();
     }
 
@@ -106,7 +108,7 @@ public class Notification : MonoBehaviour
     private void FlyUp(float time)
     {
         Vector2 offset = startPosition;
-        offset.y += 5;
+        offset.y += 2;
         rectTransform.pivot = Vector3.LerpUnclamped(offset, startPosition, Easing.EaseOutCubic(time));
     }
 

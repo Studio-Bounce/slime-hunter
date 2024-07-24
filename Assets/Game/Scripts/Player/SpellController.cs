@@ -110,19 +110,26 @@ public class SpellController : MonoBehaviour
 
     IEnumerator StopCast()
     {
-        yield return new WaitForSeconds(0.4f); // TODO: Hardcoded 0.4 seconds
+        yield return new WaitForSeconds(0.4f); // TODO: Hardcoded 0.4 seconds animation
         isCasting = false;
+    }
+
+    public void CancelSpell(InputAction.CallbackContext context)
+    {
+        isCasting = false;
+        if (currentIndicator != null) currentIndicator.HideIndicator();
     }
 
     public void AimSpell(InputAction.CallbackContext context)
     {
+        if (CurrentSpell == null) return;
         ToggleIndicator();
     }
 
     public void CastSpell(InputAction.CallbackContext context)
     {
-        currentIndicator.HideIndicator();
-        if (currentIndicator != null && currentIndicator.isActiveAndEnabled && CurrentSpell.Ready)
+        if (CurrentSpell == null) return;
+        if (currentIndicator != null && currentIndicator.Active && CurrentSpell.Ready)
         {
             isCasting = true;
             CurrentSpell.Ready = false;
@@ -136,6 +143,7 @@ public class SpellController : MonoBehaviour
             transform.forward = castDirection;
             _animator.SetTrigger(castTriggerHash);
         }
+        currentIndicator.HideIndicator();
     }
 
     IEnumerator StartCooldown(int spellIndex)
