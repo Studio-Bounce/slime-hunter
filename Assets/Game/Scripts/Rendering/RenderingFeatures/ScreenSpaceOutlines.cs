@@ -10,6 +10,8 @@ public class ScreenSpaceOutlines : ScriptableRendererFeature {
     [System.Serializable]
     private class ScreenSpaceOutlineSettings {
 
+        
+
         [Header("General Outline Settings")]
         public Color outlineColor = Color.black;
         [Range(0.0f, 20.0f)]
@@ -41,6 +43,8 @@ public class ScreenSpaceOutlines : ScriptableRendererFeature {
         public PerObjectData perObjectData;
         public bool enableDynamicBatching;
         public bool enableInstancing;
+
+        public bool enableTransparents;
 
     }
 
@@ -76,7 +80,12 @@ public class ScreenSpaceOutlines : ScriptableRendererFeature {
             screenSpaceOutlineMaterial.SetFloat("_SteepAngleThreshold", settings.steepAngleThreshold);
             screenSpaceOutlineMaterial.SetFloat("_SteepAngleMultiplier", settings.steepAngleMultiplier);
             
-            filteringSettings = new FilteringSettings(RenderQueueRange.opaque, layerMask);
+            if (settings.enableTransparents){
+                filteringSettings = new FilteringSettings(RenderQueueRange.all, layerMask);
+            } else {
+                filteringSettings = new FilteringSettings(RenderQueueRange.opaque, layerMask);
+            }
+            
 
             shaderTagIdList = new List<ShaderTagId> {
                 new ShaderTagId("UniversalForward"),

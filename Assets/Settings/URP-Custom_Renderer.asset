@@ -94,10 +94,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34c4f71415ee6f2449b5b4b8cf557eb0, type: 3}
-  m_Name: ScreenSpaceOutlines
+  m_Name: ScreenSpaceOutlinesMain
   m_EditorClassIdentifier: 
   m_Active: 1
-  renderPassEvent: 600
+  renderPassEvent: 450
   outlinesLayerMask:
     serializedVersion: 2
     m_Bits: 2039
@@ -116,6 +116,7 @@ MonoBehaviour:
     perObjectData: 0
     enableDynamicBatching: 0
     enableInstancing: 0
+    enableTransparents: 0
 --- !u!114 &-1235274661820822563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +181,8 @@ MonoBehaviour:
   - {fileID: -1235274661820822563}
   - {fileID: -6603861501175270618}
   - {fileID: 2692266943840148158}
-  m_RendererFeatureMap: 0fa78ea532f7dcb26fb7e5b326cd34a1dd0b21663d6cdbee26f39114f45e5aa4be5a1e6c85da5c25
+  - {fileID: 8615301727711726622}
+  m_RendererFeatureMap: 0fa78ea532f7dcb26fb7e5b326cd34a1dd0b21663d6cdbee26f39114f45e5aa4be5a1e6c85da5c251e0c118946b38f77
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -265,3 +267,36 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
+--- !u!114 &8615301727711726622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c4f71415ee6f2449b5b4b8cf557eb0, type: 3}
+  m_Name: ScreenSpaceOutlinesSlimes
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  renderPassEvent: 500
+  outlinesLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  outlineSettings:
+    outlineColor: {r: 0, g: 0, b: 0, a: 1}
+    outlineScale: 1
+    depthThreshold: 9.3
+    robertsCrossMultiplier: 100
+    normalThreshold: 0.196
+    steepAngleThreshold: 0.2
+    steepAngleMultiplier: 25
+    colorFormat: 0
+    depthBufferBits: 0
+    filterMode: 0
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    perObjectData: 0
+    enableDynamicBatching: 0
+    enableInstancing: 0
+    enableTransparents: 1
