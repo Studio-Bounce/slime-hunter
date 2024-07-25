@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/Scripts/UI/USS/HUDStyle.uss?fileID=7433441132597879392&amp;guid=0fdab442c7ffa024e8faa0924c8217d2&amp;type=3#HUDStyle" />
+    <ui:VisualElement name="PickupListItem" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg-white.png?fileID=2800000&amp;guid=64d1a677e6f1df4489bb53508f90c137&amp;type=3#list-item-bg-white&quot;); -unity-background-image-tint-color: rgb(0, 0, 0);">
+        <ui:VisualElement name="Image" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/1_2.png?fileID=2800000&amp;guid=29b4bc3a0b491c648be33a110af4266a&amp;type=3#1_2&quot;); -unity-background-scale-mode: scale-to-fit;" />
+        <ui:Label tabindex="-1" text="Material" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemType" style="display: none;" />
+        <ui:Label tabindex="-1" text=":  " parse-escape-sequences="true" display-tooltip-when-elided="true" name="Colon" style="display: none;" />
+        <ui:Label tabindex="-1" text="Slime Gel" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemName" />
+        <ui:Label tabindex="-1" text=" x " parse-escape-sequences="true" display-tooltip-when-elided="true" name="X" style="-unity-font-style: bold; color: rgb(155, 155, 155);" />
+        <ui:Label tabindex="-1" text="1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemQuantity" />
+    </ui:VisualElement>
+</ui:UXML>

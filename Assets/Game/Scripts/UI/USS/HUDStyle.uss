@@ -1,4 +1,9 @@
-/* ## Progress Bar Indicators */
+* {
+    color: white;
+    -unity-font: resource('Assets/Fonts/Dekko-Regular.ttf');
+    -unity-font-definition: resource('Assets/Fonts/Dekko-Regular.ttf');
+    font-size: 18px;
+}
 
 .unity-progress-bar__progress {
 }
@@ -39,8 +44,6 @@
 .unity-progress-bar {
 }
 
-/* ## Spells */
-
 .spell-glyph {
     width: 100px;
     height: 100px;
@@ -70,7 +73,6 @@
     display: none;
     width: 100%;
     height: 100%;
-    color: white;
     font-size: 24px;
     -unity-text-align: middle-center;
     -unity-font-style: bold;
@@ -88,4 +90,48 @@
     font-size: 24px;
     -unity-font-style: bold;
     -unity-text-align: middle-center;
+}
+
+#ItemPickupListContainer {
+    padding-right: 10%;
+}
+
+#ItemPickupListContainer > * {
+    margin-bottom: 10px;
+}
+
+#PickupListItem {
+    width: 100%;
+    -unity-slice-left: 25;
+    -unity-slice-right: 25;
+    -unity-slice-scale: 2px;
+    flex-direction: row;
+    padding: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
+    align-items: center;
+    transition: all 0.5s ease-out-cubic;
+}
+
+.list-item-inactive {
+    opacity: 0;
+    translate: 0 25px;
+}
+
+#PickupListItem > #Image {
+    width: 100px;
+    height: 100%;
+}
+
+#PickupListItem > Label {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    font-size: 24px;
+}
+
+#PickupListItem > #ItemQuantity {
+    -unity-font-style: bold;
 }
