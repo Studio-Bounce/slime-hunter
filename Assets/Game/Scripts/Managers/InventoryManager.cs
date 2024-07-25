@@ -59,6 +59,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     public event Action OnInventoryChanged = delegate { };
     public event Action<WeaponSO[]> OnEquippedWeaponsChanged = delegate { };
     public event Action<SpellSO[]> OnEquippedSpellsChanged = delegate { };
+    public event Action<ItemSO> OnItemAdded = delegate { };
 
     public int TotalWeight { get; private set; } = 0;
     public bool IsFull { get { return TotalWeight >= maxWeight; } }
@@ -243,6 +244,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
             if (itemSO == item.itemRef)
             {
                 item.quantity += 1;
+                OnItemAdded.Invoke(itemSO);
                 OnInventoryChanged.Invoke();
                 return true;
             }
@@ -252,6 +254,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         newItem.itemRef = itemSO;
         newItem.quantity = 1;
         items.Add(newItem);
+        OnItemAdded.Invoke(itemSO);
         OnInventoryChanged.Invoke();
 
         // Autoequip if possible
