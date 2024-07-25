@@ -44,10 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad35d40559f44d8409ba7291fd21c772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uuid: 
   boundSize: {x: 25, y: 25}
-  collisionTag: Player
+  boundHeight: 3
   wallPrefab: {fileID: 2850414775290573905, guid: 16c2bd6ed417f2049bf17a60907d31d5,
     type: 3}
   wallWidth: 2
-  spawnDelay: 1
+  colliderOffset: 4.5
+  boundSpawnDelay: 0
   active: 1
+  destroyEffect: {fileID: 6003455519181501539, guid: eb9caf067ce2dae4cbc53e2ea3365f83,
+    type: 3}
+  enemyWaves: []

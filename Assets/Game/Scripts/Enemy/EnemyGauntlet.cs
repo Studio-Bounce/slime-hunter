@@ -14,6 +14,7 @@ public class EnemyGauntlet : PersistentObject
     public float colliderOffset = 4.5f;
     public float boundSpawnDelay = 0f;
     public bool active = true;
+    public ParticleSystem destroyEffect;
 
     private BoxCollider _boxCollider;
     private GameObject[] _wallObjectPool = new GameObject[4];
@@ -77,6 +78,7 @@ public class EnemyGauntlet : PersistentObject
         // Gauntlet Completed
         if (waveCounter > enemyWaves.Count - 1)
         {
+            gauntletStart = false;
             StartCoroutine(ReleaseWalls());
             return;
         }
@@ -152,6 +154,11 @@ public class EnemyGauntlet : PersistentObject
                 float timeElapsed = 0;
                 Vector3 startPosition = wall.transform.position;
                 Vector3 endPosition = wall.transform.position - new Vector3(0, boundHeight / 2, 0);
+
+                ParticleSystem particleSystem = Instantiate(destroyEffect);
+                particleSystem.transform.position = wall.transform.position;
+                particleSystem.Play();
+
                 while (timeElapsed < releaseTime)
                 {
                     float t = Easing.EaseInBack(timeElapsed / releaseTime);
