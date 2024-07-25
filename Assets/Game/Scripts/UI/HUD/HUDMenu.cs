@@ -1,11 +1,12 @@
+using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class HUDMenu : Menu
 {
+    [Header("Damage Alert")]
     [Range(1, 100)][SerializeField] int maxAlert = 50;
     [SerializeField] float damageAlertTime = 1.0f;
 
@@ -15,6 +16,21 @@ public class HUDMenu : Menu
     VisualElement healthDamageVE;
     ProgressBar healthProgressBar;
     ProgressBar specialAttackBar;
+
+    // Pickups
+    [Header("Item Pickup")]
+    [SerializeField] private VisualTreeAsset itemPickupListItem;
+    [SerializeField] private float itemPopupLifetime = 3.0f;
+    private VisualElement itemPickupContainer;
+    private VisualElement[] listItemPool = new VisualElement[5];
+
+    private struct ListItem
+    {
+        public VisualElement element;
+        public Label quantityLabel;
+        public float lifetime;
+    }
+    private Dictionary<ItemSO, ListItem> itemListMap = new Dictionary<ItemSO, ListItem>();
 
     // Weapons
     VisualElement weaponIcon;
@@ -29,12 +45,14 @@ public class HUDMenu : Menu
     Label questDescriptionLabel;
 
     // Navigation
+    [Header("Navigation")]
     [SerializeField] float compassRotationOffset = 180.0f;
     Vector3 navTarget = Vector3.zero;  // in world space
     bool navigate = false;
     VisualElement compassNeedle;
 
     // Attack combo
+    [Header("Attack Combo")]
     VisualElement attackComboVE;
     Label comboCountLabel;
     VisualElement splAttackComboKey;
@@ -71,6 +89,15 @@ public class HUDMenu : Menu
         gameManager.OnPlayerSpecialAttackChange += UpdateSpecialAttackBar;
         splAttackComboKey = statusBars.Q<VisualElement>("SplAttack_Key");
         splAttackComboKey.style.opacity = 0.0f;
+
+        // Pickups
+        InventoryManager.Instance.OnItemAdded += OnItemPickup;
+        itemPickupContainer = root.Q<VisualElement>("ItemPickupListContainer");
+        for (int i = 0; i < listItemPool.Length; i++)
+        {
+            listItemPool[i] = itemPickupListItem.CloneTree();
+        }
+
 
         // Weapons
         weaponIcon = root.Q<VisualElement>("WeaponIcon");
@@ -150,6 +177,44 @@ public class HUDMenu : Menu
             yield return new WaitForSeconds(timeDelta);
         }
         redAlertUp = false;
+    }
+
+    // ------------------------------ Pickup ------------------------------
+    private void OnItemPickup(ItemSO itemSO)
+    {
+        // Create new List Item
+        VisualElement listItem = itemPickupListItem.CloneTree();
+        Label itemImage = listItem.Q<Label>("Image");
+        Label itemType = listItem.Q<Label>("ItemType");
+        Label itemName = listItem.Q<Label>("ItemName");
+        Label itemQuantity = listItem.Q<Label>("ItemQuantity");
+
+        itemImage.style.backgroundImage = itemSO.icon.texture;
+        itemType.text = itemSO.itemType.ToString();
+        itemName.text = itemSO.itemName.ToString();
+
+        ListItem lstItem;
+        if (itemListMap.ContainsKey(itemSO))
+        {
+            lstItem = itemListMap[itemSO];
+            int.TryParse(lstItem.quantityLabel.text, out int value);
+            lstItem.quantityLabel.text = (value++).ToString();
+            lstItem.lifetime = itemPopupLifetime; // Reset Lifetime
+        }
+
+        lstItem = new ListItem
+        {
+            quantityLabel = itemQuantity,
+            lifetime = itemPopupLifetime
+        };
+
+    }
+
+    private IEnumerator AddItemToUI(ItemSO itemSO)
+    {
+        
+
+        yield return null;
     }
 
     // ------------------------------ Special Attack ------------------------------
