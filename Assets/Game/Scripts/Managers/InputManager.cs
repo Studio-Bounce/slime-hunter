@@ -86,6 +86,25 @@ public class InputManager : Singleton<InputManager>
         if (active) _playerActions.Enable(); else _playerActions.Disable();
     }
 
+    public void TogglePlayerMovement(bool active)
+    {
+        if (active) _playerActions.Move.Enable(); else _playerActions.Move.Disable();
+    }
+
+    public void TogglePlayerMeleeControls(bool active)
+    {
+        if (active) _playerActions.Attack.Enable(); else _playerActions.Attack.Disable();
+        if (active) _playerActions.SpecialAttack.Enable(); else _playerActions.SpecialAttack.Disable();
+        if (active) _playerActions.CycleWeapon.Enable(); else _playerActions.CycleWeapon.Disable();
+    }
+
+    public void TogglePlayerSpellControls(bool active)
+    {
+        if (active) _playerActions.Spell1.Enable(); else _playerActions.Spell1.Disable();
+        if (active) _playerActions.Spell2.Enable(); else _playerActions.Spell2.Disable();
+        if (active) _playerActions.CastSpell.Enable(); else _playerActions.CastSpell.Disable();
+    }
+
     public void ToggleUIControls(bool active)
     {
         if (active) _UIActions.Enable(); else _UIActions.Disable();
@@ -191,6 +210,19 @@ public class InputManager : Singleton<InputManager>
     private void TrackMovement(InputContext context)
     {
         _movement = context.ReadValue<Vector2>();
+    }
+
+    // It can be used to force move player when movement input actions are disabled
+    // To be used only for tutorial, NO WHERE ELSE
+    public void MovementOverride(Vector2 moveDelta)
+    {
+        if (_playerActions.Move.enabled)
+        {
+            Debug.LogError("Overriding movement with input actions enabled!");
+            return;
+        }
+
+        _movement = moveDelta;
     }
 
     private void StopMovement(InputContext context)
