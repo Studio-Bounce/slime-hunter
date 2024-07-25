@@ -20,9 +20,12 @@ public class HUDMenu : Menu
     // Pickups
     [Header("Item Pickup")]
     [SerializeField] private VisualTreeAsset itemPickupListItem;
-    [SerializeField] private float itemPopupLifetime = 3.0f;
+    [SerializeField] private float itemPopupLifetime = 5.0f;
+    [SerializeField] private Color weaponColor = Color.red;
+    [SerializeField] private Color spellColor = Color.magenta;
+    [SerializeField] private Color materialColor = Color.blue;
+
     private VisualElement itemPickupContainer;
-    private VisualElement[] listItemPool = new VisualElement[5];
 
     private struct ListItem
     {
@@ -93,11 +96,6 @@ public class HUDMenu : Menu
         // Pickups
         InventoryManager.Instance.OnItemAdded += OnItemPickup;
         itemPickupContainer = root.Q<VisualElement>("ItemPickupListContainer");
-        for (int i = 0; i < listItemPool.Length; i++)
-        {
-            listItemPool[i] = itemPickupListItem.CloneTree();
-        }
-
 
         // Weapons
         weaponIcon = root.Q<VisualElement>("WeaponIcon");
@@ -180,41 +178,86 @@ public class HUDMenu : Menu
     }
 
     // ------------------------------ Pickup ------------------------------
-    private void OnItemPickup(ItemSO itemSO)
-    {
-        // Create new List Item
-        VisualElement listItem = itemPickupListItem.CloneTree();
-        Label itemImage = listItem.Q<Label>("Image");
-        Label itemType = listItem.Q<Label>("ItemType");
-        Label itemName = listItem.Q<Label>("ItemName");
-        Label itemQuantity = listItem.Q<Label>("ItemQuantity");
 
+    private ListItem CreatePickupListItem(ItemSO itemSO)
+    {
+        VisualElement listElement = itemPickupListItem.CloneTree();
+        VisualElement pickupListItemElement = listElement.Q<VisualElement>(name: "PickupListItem");
+        VisualElement itemImage = listElement.Q<VisualElement>(name: "Image");  ;
+        Label itemType = listElement.Q<Label>(name: "ItemType");
+        Label itemName = listElement.Q<Label>(name: "ItemName");
+        Label itemQuantity = listElement.Q<Label>(name: "ItemQuantity");
+        pickupListItemElement.AddToClassList("list-item-inactive");
         itemImage.style.backgroundImage = itemSO.icon.texture;
         itemType.text = itemSO.itemType.ToString();
         itemName.text = itemSO.itemName.ToString();
+        itemQuantity.text = 1.ToString(); // Initial quantity is one
 
-        ListItem lstItem;
-        if (itemListMap.ContainsKey(itemSO))
+        Color tintColor = Color.black;
+        switch (itemSO.itemType)
         {
-            lstItem = itemListMap[itemSO];
-            int.TryParse(lstItem.quantityLabel.text, out int value);
-            lstItem.quantityLabel.text = (value++).ToString();
-            lstItem.lifetime = itemPopupLifetime; // Reset Lifetime
+            case ItemType.Weapon:
+                tintColor = weaponColor;
+                break;
+            case ItemType.Spell:
+                tintColor = spellColor;
+                break;
+            case ItemType.Material:
+                tintColor = materialColor;
+                break;
         }
+        pickupListItemElement.style.unityBackgroundImageTintColor = tintColor;
 
-        lstItem = new ListItem
+        ListItem lstItem = new ListItem
         {
+            element = listElement,
             quantityLabel = itemQuantity,
             lifetime = itemPopupLifetime
         };
 
+        return lstItem;
     }
 
-    private IEnumerator AddItemToUI(ItemSO itemSO)
+    private void OnItemPickup(ItemSO itemSO)
     {
-        
+        if (itemListMap.ContainsKey(itemSO))
+        {
+            ListItem lstItem = itemListMap[itemSO];
+            int.TryParse(lstItem.quantityLabel.text, out int value);
+            lstItem.quantityLabel.text = (value+1).ToString();
+            lstItem.lifetime = itemPopupLifetime; // Reset Lifetime
+            itemListMap[itemSO] = lstItem;
+            return;
+        }
+        else
+        {
+            itemListMap[itemSO] = CreatePickupListItem(itemSO);
+            VisualElement element = itemListMap[itemSO].element;
+            itemPickupContainer.Add(element);
+            StartCoroutine(TrackListItemLifetime(itemSO));
+        }
+    }
 
-        yield return null;
+    private IEnumerator TrackListItemLifetime(ItemSO itemSO)
+    {
+        ListItem lstItem = itemListMap[itemSO];
+
+        yield return new WaitForEndOfFrame();
+        lstItem.element.Q<VisualElement>(name: "PickupListItem").RemoveFromClassList("list-item-inactive");
+
+        while (lstItem.lifetime > 0)
+        {
+            lstItem = itemListMap[itemSO];
+            lstItem.lifetime = lstItem.lifetime - Time.deltaTime * GameManager.Instance.PlayerSpeedMultiplier;
+            itemListMap[itemSO] = lstItem;
+            yield return null;
+        }
+
+        lstItem.element.Q<VisualElement>(name: "PickupListItem").AddToClassList("list-item-inactive");
+        yield return new WaitForSeconds(0.3f);
+
+        itemPickupContainer.Remove(itemListMap[itemSO].element);
+        itemListMap.Remove(itemSO);
     }
 
     // ------------------------------ Special Attack ------------------------------

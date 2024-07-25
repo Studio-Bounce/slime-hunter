@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17865306, g: 0.22369696, b: 0.30563658, a: 1}
+  m_IndirectSpecularColor: {r: 0.17865337, g: 0.22369754, b: 0.30563766, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3419,7 +3419,7 @@ PrefabInstance:
     - target: {fileID: 1801944629159478169, guid: 9c92301a35fa5084bbdff9eac1000691,
         type: 3}
       propertyPath: items.Array.size
-      value: 6
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1801944629159478169, guid: 9c92301a35fa5084bbdff9eac1000691,
         type: 3}
@@ -3431,19 +3431,19 @@ PrefabInstance:
         type: 3}
       propertyPath: items.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362,
+      objectReference: {fileID: 11400000, guid: 99e37e993779f7140b18b790d7e46539,
         type: 2}
     - target: {fileID: 1801944629159478169, guid: 9c92301a35fa5084bbdff9eac1000691,
         type: 3}
       propertyPath: items.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362,
+      objectReference: {fileID: 11400000, guid: 5115ff7d84b2dbb4aa49d9e042386402,
         type: 2}
     - target: {fileID: 1801944629159478169, guid: 9c92301a35fa5084bbdff9eac1000691,
         type: 3}
       propertyPath: items.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362,
+      objectReference: {fileID: 11400000, guid: e29ae9ffac4bdf24bbf790fcb2467210,
         type: 2}
     - target: {fileID: 1801944629159478169, guid: 9c92301a35fa5084bbdff9eac1000691,
         type: 3}
@@ -3925,8 +3925,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showOnStart: 1
-  maxAlert: 5
-  damageAlertTime: 0.25
+  maxAlert: 50
+  damageAlertTime: 1
+  itemPickupListItem: {fileID: 9197481963319205126, guid: 51c48b5cd355dfb479a1b439b73030de,
+    type: 3}
+  itemPopupLifetime: 5
+  weaponColor: {r: 0.764151, g: 0.24150053, b: 0.24150053, a: 1}
+  spellColor: {r: 0.43693754, g: 0.15419191, b: 0.7264151, a: 1}
+  materialColor: {r: 0.31283376, g: 0.6981132, b: 0.6370323, a: 1}
   compassRotationOffset: 180
   specialAttackBtnTime: 0.5
 --- !u!114 &2063335824
