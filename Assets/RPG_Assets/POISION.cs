@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class POISION : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class POISION : MonoBehaviour
         // 初始化UI文本
         if (scoreText != null)
         {
-            scoreText.text = "毒素: " + score;
+            scoreText.text = "毒素: " + score + "/300 ";
         }
     }
 
@@ -45,11 +47,14 @@ public class POISION : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        // 当Player离开时，停止增加分数
+        
+    
+       // 当Player离开时，停止增加分数
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             isPlayerInContact = false;
         }
+        
     }
 
     private void FixedUpdate()
@@ -59,6 +64,14 @@ public class POISION : MonoBehaviour
         {
             IncreaseScore();
         }
+    // 每帧检测是否中毒而亡
+        if (score>300)
+        {
+            GameManager.Instance.PlayerHealth = 0;
+             score = 0;
+              isPlayerInContact = false;
+           UpdateScoreText();
+            }
     }
 
     private void IncreaseScore()
@@ -66,7 +79,7 @@ public class POISION : MonoBehaviour
         score += 1;
         if (scoreText != null)
         {
-            scoreText.text = "毒素: " + score;
+            scoreText.text = "毒素: " + score + "/300 ";
         }
     }
 
@@ -74,7 +87,11 @@ public class POISION : MonoBehaviour
 {
     if (scoreText != null)
     {
-        scoreText.text = "毒素: " + score;
+        scoreText.text = "毒素: " + score + "/300 " ;
     }
 }
+
+
+
+
 }
