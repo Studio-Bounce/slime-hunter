@@ -119,9 +119,8 @@ MonoBehaviour:
   canvasTimeout: 10
   healthCanvas: {fileID: 0}
   knockbackTime: 0.25
-  stunned: 0
-  slowDownOnHitMultiplier: 0.2
-  slowDownTime: 0.5
+  slowDownOnHitMultiplier: 0
+  slowDownTime: 0
 --- !u!114 &606331671084474555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +136,6 @@ MonoBehaviour:
   handPivot: {fileID: 866127921040074411}
   handPivotOffset: {x: 0, y: 0, z: 0}
   handPivotForward: {x: 0, y: 0, z: 1}
-  fallbackWeapon: {fileID: 11400000, guid: e29ae9ffac4bdf24bbf790fcb2467210, type: 2}
   weaponTrail: {fileID: 3997934283830900321}
   baseAttackClip: {fileID: -203655887218126122, guid: 368a8195de7259c4b90d8c64c0c4c8e2,
     type: 3}
@@ -467,6 +465,7 @@ MonoBehaviour:
     knockback: 0
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
+    forceApply: 0
   OnSuccessfulHit:
     m_PersistentCalls:
       m_Calls:
