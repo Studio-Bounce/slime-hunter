@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
+using Unity.VisualScripting;
 
 public class EnemyGauntlet : PersistentObject
 {
@@ -90,12 +91,33 @@ public class EnemyGauntlet : PersistentObject
             innerBounds.x = innerBounds.x / 2 - colliderOffset;
             innerBounds.y = innerBounds.y / 2 - colliderOffset;
             enemyWaveHandler.StartWave(CurrentWaveProp, innerBounds);
+            StartCoroutine(ShakeWalls());
         }
 
         if (enemyWaveHandler.Completed)
         {
             waveCounter++;
             enemyWaveHandler.ResetWaves(false);
+        }
+    }
+
+    IEnumerator ShakeWalls()
+    {
+        float elapsed = 0;
+        float duration = 1.0f;
+        float startEndHeight = transform.position.y;
+        while (elapsed < duration)
+        {
+            for (int i = 0; i < _wallObjectPool.Length; i++)
+            {
+                Transform trans = _wallObjectPool[i].transform;
+                Vector3 pos = trans.position;
+                float t = Easing.Shake(elapsed / duration);
+                pos.y = Utils.Lerp(startEndHeight, startEndHeight+0.3f, t);
+                trans.position = pos;
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
         }
     }
 

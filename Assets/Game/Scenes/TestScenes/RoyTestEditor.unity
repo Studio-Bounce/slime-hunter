@@ -752,6 +752,12 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
+--- !u!1 &238405659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8820871006783578033, guid: ebeca44549c3dc649ae5d937700b5dc1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1114432393}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &309385651
 GameObject:
   m_ObjectHideFlags: 0
@@ -3589,12 +3595,17 @@ PrefabInstance:
     - target: {fileID: 2394686100677720067, guid: 3f9de1230bf7a244cb595811c2f8090e,
         type: 3}
       propertyPath: enemyWaves.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2394686100677720067, guid: 3f9de1230bf7a244cb595811c2f8090e,
         type: 3}
       propertyPath: enemyWaves.Array.data[0].enemiesInWave.Array.size
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2394686100677720067, guid: 3f9de1230bf7a244cb595811c2f8090e,
+        type: 3}
+      propertyPath: enemyWaves.Array.data[1].enemiesInWave.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2394686100677720067, guid: 3f9de1230bf7a244cb595811c2f8090e,
         type: 3}
@@ -3603,10 +3614,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2394686100677720067, guid: 3f9de1230bf7a244cb595811c2f8090e,
         type: 3}
+      propertyPath: enemyWaves.Array.data[1].enemiesInWave.Array.data[0].spawnCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2394686100677720067, guid: 3f9de1230bf7a244cb595811c2f8090e,
+        type: 3}
       propertyPath: enemyWaves.Array.data[0].enemiesInWave.Array.data[0].enemyPrefab
       value: 
-      objectReference: {fileID: 8820871006783578033, guid: ebeca44549c3dc649ae5d937700b5dc1,
+      objectReference: {fileID: 238405659}
+    - target: {fileID: 2394686100677720067, guid: 3f9de1230bf7a244cb595811c2f8090e,
         type: 3}
+      propertyPath: enemyWaves.Array.data[1].enemiesInWave.Array.data[0].enemyPrefab
+      value: 
+      objectReference: {fileID: 238405659}
     - target: {fileID: 6350251942208563964, guid: 3f9de1230bf7a244cb595811c2f8090e,
         type: 3}
       propertyPath: m_Name
