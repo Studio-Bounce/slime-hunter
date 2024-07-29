@@ -17,6 +17,7 @@ public class Notification : MonoBehaviour
     protected RectTransform rectTransform;
     protected CanvasGroup canvasGroup;
 
+    [Header("Notification")]
     public List<NotificationTransitions> transitions;
     public bool playOnStart = true;
     public bool noAlphaOnStart = false;
@@ -102,14 +103,15 @@ public class Notification : MonoBehaviour
 
     private void Fade(float time)
     {
-        canvasGroup.alpha = time;
+        float t = Easing.EaseInOutCubic(time);
+        canvasGroup.alpha = t;
     }
 
     private void FlyUp(float time)
     {
         Vector2 offset = startPosition;
-        offset.y += 2;
-        rectTransform.pivot = Vector3.LerpUnclamped(offset, startPosition, Easing.EaseOutCubic(time));
+        offset.y += 1;
+        rectTransform.pivot = Vector3.LerpUnclamped(offset, startPosition, Easing.EaseOut(time));
     }
 
     private void Shake(float time)
