@@ -22,7 +22,6 @@ public class ObjectFall : MonoBehaviour
         actionPerformed = false;
         imageShown = false;
         body = GetComponent<Rigidbody>();
-        aToBMovement = GetComponent<GoFromAToB>();
     }
 
     // Used in Dash tutorial
@@ -52,6 +51,7 @@ public class ObjectFall : MonoBehaviour
         // Force move player
         Vector2 dest2D = new Vector2(destination.x, destination.z);
         Transform playerT = GameManager.Instance.PlayerRef.transform;
+        InputManager.Instance.MovementOverride(Vector2.zero);
         while (moveThePlayer)
         {
             Vector2 delta = dest2D - new Vector2(playerT.position.x, playerT.position.z);

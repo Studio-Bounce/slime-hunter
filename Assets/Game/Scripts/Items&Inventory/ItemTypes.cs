@@ -44,7 +44,8 @@ public class Item
 
     public void Write(BinaryWriter bw)
     {
-        bw.Write(itemRef.address);
+        if (itemRef != null)
+            bw.Write(itemRef.address);
         bw.Write(quantity);
     }
 }
