@@ -188,6 +188,7 @@ public class EnemyGauntlet : PersistentObject
                     spawnPos += wallRightScaled * j / spawnedParticles.Length;
                     spawnedParticles[j].transform.position = spawnPos;
                     spawnedParticles[j].Play();
+                    Destroy(spawnedParticles[j].gameObject, 1.0f); // Cleanup Particles
                 }
 
                 // Animate Release
@@ -197,12 +198,6 @@ public class EnemyGauntlet : PersistentObject
                     wall.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, t);
                     timeElapsed += Time.deltaTime;
                     yield return null;
-                }
-
-                // Clean up particles
-                for (int j = 0; j < spawnedParticles.Length; j++)
-                {
-                    Destroy(spawnedParticles[j].gameObject);
                 }
 
                 _wallObjectPool[i].SetActive(false);
