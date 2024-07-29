@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HotkeyNotification : Notification
+public class ButtonPromptManager : MonoBehaviour
 {
-    [Header("Hotkey")]
-    public Sprite image;
-
     // Start is called before the first frame update
     void Start()
     {
