@@ -49,11 +49,11 @@
                 <ui:VisualElement name="GlyphWrapper" style="flex-grow: 0; flex-direction: row; width: auto; height: auto; align-items: flex-start; flex-shrink: 0; margin-right: 58px; margin-bottom: 15px;">
                     <ui:VisualElement name="Spell1" class="spell-glyph spell-glyph-active" style="background-image: none; -unity-background-scale-mode: scale-to-fit; align-self: flex-end; -unity-slice-left: 5; -unity-slice-top: 5; -unity-slice-right: 5; -unity-slice-bottom: 5;">
                         <ui:Label tabindex="-1" text="24s" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Timer" class="cooldown-timer" />
-                        <ui:Label tabindex="-1" text="1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hotkey" class="hotkey-indicator" />
+                        <ui:Label tabindex="-1" text="1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hotkey" class="hotkey-indicator" style="color: rgb(0, 0, 0);" />
                     </ui:VisualElement>
                     <ui:VisualElement name="Spell2" class="spell-glyph" style="background-image: none; -unity-background-scale-mode: scale-to-fit; align-self: flex-end; -unity-slice-left: 5; -unity-slice-top: 5; -unity-slice-right: 5; -unity-slice-bottom: 5;">
                         <ui:Label tabindex="-1" text="24s" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Timer" class="cooldown-timer" />
-                        <ui:Label tabindex="-1" text="2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hotkey" class="hotkey-indicator" />
+                        <ui:Label tabindex="-1" text="2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hotkey" class="hotkey-indicator" style="color: rgb(0, 0, 0);" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>

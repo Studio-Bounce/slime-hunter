@@ -26,6 +26,7 @@ public class Enemy : DynamicDamageTaker
 
     [Header("Hit Feedback")]
     [SerializeField] GameObject hitVFXGO;
+    [SerializeField] private GameObject hitParticlesGO;
     [SerializeField] SkinnedMeshRenderer slimeOuterBody;
     [SerializeField] float flashDuration = 0.2f;
     [SerializeField] Material flashMat;
@@ -75,6 +76,14 @@ public class Enemy : DynamicDamageTaker
             GameObject hitVFXObj = Instantiate(hitVFXGO,
                 transform.position + hitVFXGO.transform.position, Quaternion.LookRotation(damage.direction));
             Destroy(hitVFXObj, 2.0f);
+
+            if (hitParticlesGO)
+            {
+                GameObject hitParticlesobj = Instantiate(hitParticlesGO,
+                                transform.position + hitParticlesGO.transform.position, Quaternion.LookRotation(damage.direction));
+                Destroy(hitParticlesobj, 2.0f);
+            }
+            
 
             if (!isFlashing)
                 StartCoroutine(FlashSlime());

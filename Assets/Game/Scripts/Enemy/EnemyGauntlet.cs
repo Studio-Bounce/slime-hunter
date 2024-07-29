@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
+using Unity.VisualScripting;
 
 public class EnemyGauntlet : PersistentObject
 {
@@ -14,6 +15,8 @@ public class EnemyGauntlet : PersistentObject
     public float colliderOffset = 4.5f;
     public float boundSpawnDelay = 0f;
     public bool active = true;
+    public ParticleSystem destroyEffect;
+    public int destroyEffectDensity = 10;
 
     private BoxCollider _boxCollider;
     private GameObject[] _wallObjectPool = new GameObject[4];
@@ -77,6 +80,7 @@ public class EnemyGauntlet : PersistentObject
         // Gauntlet Completed
         if (waveCounter > enemyWaves.Count - 1)
         {
+            gauntletStart = false;
             StartCoroutine(ReleaseWalls());
             return;
         }
@@ -87,12 +91,33 @@ public class EnemyGauntlet : PersistentObject
             innerBounds.x = innerBounds.x / 2 - colliderOffset;
             innerBounds.y = innerBounds.y / 2 - colliderOffset;
             enemyWaveHandler.StartWave(CurrentWaveProp, innerBounds);
+            StartCoroutine(ShakeWalls());
         }
 
         if (enemyWaveHandler.Completed)
         {
             waveCounter++;
             enemyWaveHandler.ResetWaves(false);
+        }
+    }
+
+    IEnumerator ShakeWalls()
+    {
+        float elapsed = 0;
+        float duration = 1.0f;
+        float startEndHeight = transform.position.y;
+        while (elapsed < duration)
+        {
+            for (int i = 0; i < _wallObjectPool.Length; i++)
+            {
+                Transform trans = _wallObjectPool[i].transform;
+                Vector3 pos = trans.position;
+                float t = Easing.Shake(elapsed / duration);
+                pos.y = Utils.Lerp(startEndHeight, startEndHeight+0.3f, t);
+                trans.position = pos;
+            }
+            elapsed += Time.deltaTime;
+            yield return null;
         }
     }
 
@@ -146,12 +171,27 @@ public class EnemyGauntlet : PersistentObject
     {
         if (wallsInstantiated)
         {
+            ParticleSystem[] spawnedParticles = new ParticleSystem[destroyEffectDensity];
             for (int i = 0; i < _wallObjectPool.Length; i++)
             {
                 GameObject wall = _wallObjectPool[i];
                 float timeElapsed = 0;
                 Vector3 startPosition = wall.transform.position;
                 Vector3 endPosition = wall.transform.position - new Vector3(0, boundHeight / 2, 0);
+
+                // Create and play particles
+                for (int j = 0; j < spawnedParticles.Length; j++)
+                {
+                    spawnedParticles[j] = Instantiate(destroyEffect);
+                    Vector3 wallRightScaled = wall.transform.right * wall.transform.localScale.x;
+                    Vector3 spawnPos = wall.transform.position - wallRightScaled/2;
+                    spawnPos += wallRightScaled * j / spawnedParticles.Length;
+                    spawnedParticles[j].transform.position = spawnPos;
+                    spawnedParticles[j].Play();
+                    Destroy(spawnedParticles[j].gameObject, 1.0f); // Cleanup Particles
+                }
+
+                // Animate Release
                 while (timeElapsed < releaseTime)
                 {
                     float t = Easing.EaseInBack(timeElapsed / releaseTime);

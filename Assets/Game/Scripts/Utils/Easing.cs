@@ -97,4 +97,17 @@ public static class Easing
     public static readonly Func<float, float> EaseInOutBounce = t =>
         t < 0.5f ? EaseInBounce(t * 2f) * 0.5f : EaseOutBounce(t * 2f - 1f) * 0.5f + 0.5f;
 
+    public static readonly Func<float, float> Shake = t =>
+    {
+        float baseFrequency = 25f; // Base frequency for the shake
+        float baseAmplitude = 1f - t; // Base amplitude decay over time
+        float randomness = UnityEngine.Random.Range(-0.5f, 0.5f); // Random variation factor
+
+        // Apply a random factor to both frequency and amplitude
+        float frequency = baseFrequency + randomness * 10f;
+        float amplitude = baseAmplitude + randomness * 0.5f;
+
+        return Mathf.Sin(t * Mathf.PI * frequency) * amplitude;
+    };
+
 }

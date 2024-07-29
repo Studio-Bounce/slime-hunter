@@ -738,6 +738,8 @@ MonoBehaviour:
   deathEye: {fileID: 7814854684481491757}
   hitVFXGO: {fileID: 2507012300119595446, guid: 207429efa1ee73a45845fb615dc9e278,
     type: 3}
+  hitParticlesGO: {fileID: 4747798021728289756, guid: 01df2cba46052474c8d9571ad672413d,
+    type: 3}
   slimeOuterBody: {fileID: 1381007739563146227}
   flashDuration: 0.2
   flashMat: {fileID: 2100000, guid: ece9a621dbd04e443a99354d2ec2c2fa, type: 2}
@@ -768,7 +770,6 @@ MonoBehaviour:
   animator: {fileID: 247210881314464809}
   useRootMotion: 0
   useGravity: 1
-  forceStopMovement: 0
   slimeModel: {fileID: 3894532602626332139}
 --- !u!114 &4481492702426782661
 MonoBehaviour:
