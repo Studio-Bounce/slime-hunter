@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/Scripts/UI/USS/MainMenuOptions.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainMenuOptions" />
+    <ui:VisualElement name="ShopItemContainer" style="flex-grow: 1;">
+        <ui:VisualElement name="ItemInfoContainer" class="item-info-container">
+            <ui:VisualElement name="ItemIconWrapper" style="flex-shrink: 0; width: 15%; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+                <ui:VisualElement name="ItemIcon" style="width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/thirdweapon.png?fileID=2800000&amp;guid=2e63cda403abdc845bdf0ca700093c97&amp;type=3#thirdweapon&quot;); -unity-background-scale-mode: scale-to-fit;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ItemInfoWrapper" style="flex-shrink: 0; width: 55%; padding-top: 5px; padding-right: 15px; padding-bottom: 5px; padding-left: 15px;">
+                <ui:Label tabindex="-1" text="Iron Sword" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemName" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; -unity-font-style: bold;" />
+                <ui:Label tabindex="-1" text="The Iron Sword is a reliable weapon, favored by Hunters and warriors alike for its durability and balance. " parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemDescription" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ItemRequirements" class="item-requirements-wrapper" style="flex-shrink: 0; width: 20%; padding-top: 5px; padding-right: 15px; padding-bottom: 5px; padding-left: 15px; align-items: flex-start; flex-direction: column;" />
+            <ui:VisualElement name="ItemInformation" style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; align-items: flex-end; justify-content: space-between; width: 10%;">
+                <ui:Label tabindex="-1" text="&lt;ItemType&gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemType" style="-unity-font-style: bold; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                <ui:Button text="Purchase" parse-escape-sequences="true" display-tooltip-when-elided="true" name="PurchaseBtn" style="width: 100px; color: rgb(255, 255, 255); font-size: 15px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
