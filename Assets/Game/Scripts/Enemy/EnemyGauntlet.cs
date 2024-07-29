@@ -15,6 +15,7 @@ public class EnemyGauntlet : PersistentObject
     public float boundSpawnDelay = 0f;
     public bool active = true;
     public ParticleSystem destroyEffect;
+    public int destroyEffectDensity = 10;
 
     private BoxCollider _boxCollider;
     private GameObject[] _wallObjectPool = new GameObject[4];
@@ -148,6 +149,7 @@ public class EnemyGauntlet : PersistentObject
     {
         if (wallsInstantiated)
         {
+            ParticleSystem[] spawnedParticles = new ParticleSystem[destroyEffectDensity];
             for (int i = 0; i < _wallObjectPool.Length; i++)
             {
                 GameObject wall = _wallObjectPool[i];
@@ -155,16 +157,30 @@ public class EnemyGauntlet : PersistentObject
                 Vector3 startPosition = wall.transform.position;
                 Vector3 endPosition = wall.transform.position - new Vector3(0, boundHeight / 2, 0);
 
-                ParticleSystem particleSystem = Instantiate(destroyEffect);
-                particleSystem.transform.position = wall.transform.position;
-                particleSystem.Play();
+                // Create and play particles
+                for (int j = 0; j < spawnedParticles.Length; j++)
+                {
+                    spawnedParticles[j] = Instantiate(destroyEffect);
+                    Vector3 wallRightScaled = wall.transform.right * wall.transform.localScale.x;
+                    Vector3 spawnPos = wall.transform.position - wallRightScaled/2;
+                    spawnPos += wallRightScaled * j / spawnedParticles.Length;
+                    spawnedParticles[j].transform.position = spawnPos;
+                    spawnedParticles[j].Play();
+                }
 
+                // Animate Release
                 while (timeElapsed < releaseTime)
                 {
                     float t = Easing.EaseInBack(timeElapsed / releaseTime);
                     wall.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, t);
                     timeElapsed += Time.deltaTime;
                     yield return null;
+                }
+
+                // Clean up particles
+                for (int j = 0; j < spawnedParticles.Length; j++)
+                {
+                    Destroy(spawnedParticles[j].gameObject);
                 }
 
                 _wallObjectPool[i].SetActive(false);
