@@ -9,7 +9,8 @@ public class AttackMove
     public AnimationClip clip;
     public float animationDelay; // When the attack starts in the animation
     public float animationDuration = 0.5f; // How long the attacks lasts
-    public Vector2 direction;
+    public bool flip;
+    public float rotation;
 
     [Header("Attack Attributes")]
     public float attackDuration = 0.3f; // How long to combo into next attack
