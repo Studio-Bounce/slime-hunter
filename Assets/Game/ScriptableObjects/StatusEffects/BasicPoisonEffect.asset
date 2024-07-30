@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bbd64b02b6f47743875e7742f285b98, type: 3}
+  m_Name: BasicPoisonEffect
+  m_EditorClassIdentifier: 
+  icon: {fileID: 5797711524704991487, guid: 4683f3c677031d94e963214803af8494, type: 3}
+  effectName: Basic Poison
+  duration: 5
+  tickInterval: 1
+  damage:
+    value: 5
+    knockback: 1
+    direction: {x: 0, y: 0, z: 0}
+    effect: {fileID: 0}
+    forceApply: 0

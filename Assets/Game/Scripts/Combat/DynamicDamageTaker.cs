@@ -25,7 +25,7 @@ public class DynamicDamageTaker : UIDamageTaker
         statusEffectManager = GetComponent<StatusEffectManager>();
     }
 
-    public override bool TakeDamage(Damage damage, bool detectDeath)
+    public override bool TakeDamage(Damage damage, bool detectDeath = false)
     {
         bool damageRegistered = base.TakeDamage(damage, detectDeath);
         if (!damageRegistered)
