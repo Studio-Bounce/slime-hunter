@@ -12,6 +12,7 @@ public class OpenHinge : MonoBehaviour
 
     [Header("Animation")]
     public float duration = 1.0f;
+    public float delay = 0.0f;
     public AnimationCurve curve;
 
     [Header("Event")]
@@ -38,6 +39,7 @@ public class OpenHinge : MonoBehaviour
 
     IEnumerator BeginOpen()
     {
+        yield return new WaitForSeconds(delay);
         float timer = 0;
         while (timer < duration)
         {
