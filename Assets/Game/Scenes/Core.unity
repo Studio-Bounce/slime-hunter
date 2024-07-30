@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.102909945, g: 0.24969026, b: 0.4516643, a: 1}
+  m_IndirectSpecularColor: {r: 0.10239772, g: 0.24942838, b: 0.45188403, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -384,6 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fce3e71fc2b604aadf269de4da0ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteSettings: {fileID: 11400000, guid: dfe6b1daa281994478981d5909cefe51, type: 2}
   inputQueueDelay: 0.3
 --- !u!1 &267344248
 GameObject:
@@ -635,6 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attenuationObject: {fileID: 0}
 --- !u!1 &657485086
 GameObject:
   m_ObjectHideFlags: 0
@@ -765,7 +767,6 @@ Transform:
   - {fileID: 1179840935}
   - {fileID: 1812664886}
   - {fileID: 1457945054}
-  - {fileID: 1738992991}
   - {fileID: 226474490}
   m_Father: {fileID: 146768978}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -786,7 +787,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 1179840936}
   HUDMenu: {fileID: 1498221641}
   autoSave: {fileID: 1812664888}
-  shopMenu: {fileID: 1738992992}
+  shopMenu: {fileID: 0}
   gladeVillageIntroMenu: {fileID: 226474491}
 --- !u!1 &1031717568
 GameObject:
@@ -862,6 +863,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: -1
+  OverrideMaxDistance: -1
 --- !u!4 &1063731844
 Transform:
   m_ObjectHideFlags: 0
@@ -1743,70 +1763,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showOnStart: 1
   rotationSpeed: 200
---- !u!1 &1738992990
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1738992991}
-  - component: {fileID: 1738992993}
-  - component: {fileID: 1738992992}
-  m_Layer: 0
-  m_Name: ShopMenu
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1738992991
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1738992990}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 976020910}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1738992992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1738992990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d265ab4e5c021143830c555bcbf4cb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showOnStart: 0
-  itemsForSale: []
---- !u!114 &1738992993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1738992990}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 4e1433707955c884c969a50848da7077, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 517f91ba2405675408dcfdb80e17c676,
-    type: 3}
-  m_SortingOrder: 0
 --- !u!1 &1812664885
 GameObject:
   m_ObjectHideFlags: 0

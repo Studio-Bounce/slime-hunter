@@ -1,0 +1,157 @@
+* {
+    color: white;
+    -unity-font: resource('Assets/Fonts/Dreamwood.ttf');
+    -unity-font-definition: resource('Assets/Fonts/Dreamwood.ttf');
+    font-size: 18px;
+}
+
+Button {
+    transition-property: all;
+    transition-duration: 0.2s;
+    background-color: rgb(70, 187, 202);
+    border-width: 2px;
+    border-color: white;
+    border-radius: 20px;
+    margin: 0;
+}
+
+Button:hover {
+    background-color: rgb(50, 128, 138);
+}
+
+Button:active {
+    scale: 0.95;
+}
+
+.option-slot {
+}
+
+.menu-button {
+    transition-property: all;
+    transition-duration: 0.2s;
+    color: white;
+    opacity: 0.5;
+}
+
+.option-slot:hover .menu-button {
+    color: white;
+    opacity: 1;
+}
+
+.menu-button-deco {
+    transition-property: all;
+    transition-duration: 0.2s;
+    color: white;
+    opacity: 0;
+}
+
+.option-slot:hover .menu-button-deco {
+    opacity: 1;
+}
+
+.tab {
+    transition-property: all;
+    transition-duration: 0.2s;
+    background-color: rgb(28, 44, 52);
+}
+
+.tab Label {
+    color: white;
+    opacity: 0.5;
+}
+
+.tab:hover {
+    background-color: rgb(70, 187, 202);
+}
+
+.tab:hover Label {
+    opacity: 1;
+}
+
+.selected-tab {
+    display: flex;
+    background-color: rgb(70, 187, 202);
+    color: white;
+}
+
+.selected-tab Label {
+    opacity: 1;
+}
+
+.tab-content {
+    display: none;
+}
+
+.selected-content {
+    display: flex;
+}
+
+.grid-inventory-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
+}
+
+.grid-inventory-container > * {
+    transition-property: all;
+    transition-duration: 0.2s;
+    background-color: black;
+    width: 18.6%;
+    height: 23%;
+    margin: 0.6%;
+    padding: 6px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    border-width: 3px;
+    border-radius: 21px;
+    border-color: white;
+    background-color: rgb(47, 50, 53);
+    align-items: center;
+    justify-content: center;
+}
+
+.grid-inventory-container > * > Label {
+    -unity-font-style: bold;
+    position: absolute;
+    right: 5px;
+    bottom: 0;
+    font-size: 24px;
+    color: white;
+}
+
+.grid-inventory-container > *:hover {
+    border-color: rgb(70, 187, 202);
+    scale: 0.95;
+}
+
+.slot-selected {
+    border-color: rgb(70, 187, 202);
+    scale: 0.95;
+}
+
+.hide-content > * {
+    visibility: hidden;
+}
+
+.item-info-container {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-direction: row;
+    border-color: rgb(70, 187, 202);
+    border-width: 5px;
+    border-radius: 21px;
+    background-color: rgb(47, 50, 53);
+    padding: 1%;
+}
+
+#ShopItemContainer > .item-info-container {
+    margin-bottom: 20px;
+}
+
+.item-requirements-wrapper {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-direction: column;
+}

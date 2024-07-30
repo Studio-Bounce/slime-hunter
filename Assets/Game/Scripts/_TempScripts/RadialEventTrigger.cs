@@ -9,7 +9,7 @@ public class RadialEventTrigger : MonoBehaviour
     public UnityEvent onExit;
     public LayerMask layerMask;
     public SphereCollider _collider;
-
+    [Tooltip("Enable to destroy after trigger")]
     public bool oneShot = false;
 
     void Start()

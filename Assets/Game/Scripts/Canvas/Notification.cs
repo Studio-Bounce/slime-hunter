@@ -11,12 +11,14 @@ public enum NotificationTransitions
     SHAKE
 }
 
+
+// Specifically for use with canvas
 [RequireComponent(typeof(RectTransform), typeof(CanvasGroup))]
 public class Notification : MonoBehaviour
 {
-    protected RectTransform rectTransform;
-    protected CanvasGroup canvasGroup;
-
+    [Header("Notification")]
+    public RectTransform rectTransform;
+    public CanvasGroup canvasGroup;
     public List<NotificationTransitions> transitions;
     public bool playOnStart = true;
     public bool noAlphaOnStart = false;
@@ -31,8 +33,8 @@ public class Notification : MonoBehaviour
 
     protected virtual void Start()
     {
-        rectTransform = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
+        if (rectTransform == null) rectTransform = GetComponent<RectTransform>();
+        if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
         startPosition = rectTransform.pivot;
 
         if (noAlphaOnStart) canvasGroup.alpha = 0;
@@ -102,14 +104,15 @@ public class Notification : MonoBehaviour
 
     private void Fade(float time)
     {
-        canvasGroup.alpha = time;
+        float t = Easing.EaseInOutCubic(time);
+        canvasGroup.alpha = t;
     }
 
     private void FlyUp(float time)
     {
         Vector2 offset = startPosition;
-        offset.y += 2;
-        rectTransform.pivot = Vector3.LerpUnclamped(offset, startPosition, Easing.EaseOutCubic(time));
+        offset.y += 1;
+        rectTransform.pivot = Vector3.LerpUnclamped(offset, startPosition, Easing.EaseOut(time));
     }
 
     private void Shake(float time)
