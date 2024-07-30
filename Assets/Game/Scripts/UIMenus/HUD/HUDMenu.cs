@@ -50,8 +50,11 @@ public class HUDMenu : Menu
     // Navigation
     [Header("Navigation")]
     [SerializeField] float compassRotationOffset = 180.0f;
+    [Tooltip("This value must be same as the base rotation of main camera")]
+    [SerializeField] float cameraBaseRotation = -45.0f;
     Vector3 navTarget = Vector3.zero;  // in world space
     bool navigate = false;
+    VisualElement compassContainer;
     VisualElement compassNeedle;
 
     // Attack combo
@@ -112,6 +115,7 @@ public class HUDMenu : Menu
 
         // Navigation
         VisualElement navigation = leftBg.Q<VisualElement>("NavigationContainer");
+        compassContainer = navigation.Q<VisualElement>("CompassContainer");
         compassNeedle = navigation.Q<VisualElement>("CompassNeedle");
         navigate = false;
 
@@ -367,8 +371,10 @@ public class HUDMenu : Menu
         direction.Normalize();
         float angle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
         Transform cameraT = CameraManager.ActiveCamera.transform;
-        Vector3 angleVec = new Vector3(0, 0, cameraT.eulerAngles.y - angle + compassRotationOffset);
-        compassNeedle.transform.rotation = Quaternion.Euler(angleVec);
+        // Compass rotation
+        compassContainer.transform.rotation = Quaternion.Euler(0, 0, cameraBaseRotation - cameraT.eulerAngles.y);
+        // Needle rotation
+        compassNeedle.transform.rotation = Quaternion.Euler(0, 0, cameraBaseRotation - angle + compassRotationOffset);
     }
 
     public void StartNavigation(Vector3 target)
