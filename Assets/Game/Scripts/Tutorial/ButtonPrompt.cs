@@ -31,7 +31,7 @@ public class ButtonPrompt : MonoBehaviour
 
     public void UpdateButtonSprite()
     {
-        Sprite buttonSprite = InputManager.Instance.ActionToSprite(actionString);
+        Sprite buttonSprite = InputManager.Instance.StringActionToSprite(actionString);
         if (buttonSprite != null)
         {
             spriteRenderer.sprite = buttonSprite;

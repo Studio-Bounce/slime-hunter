@@ -55,9 +55,9 @@ public class InputManager : Singleton<InputManager>
         _AddUIControls();
     }
 
-    public Sprite ActionToSprite(string actionName)
+    public Sprite StringActionToSprite(string actionName)
     {
-        // Naive solution will return gamepad controls as long as one is plugged in
+        // Naive solution: Returns gamepad controls as long as one is plugged in
         if (Gamepad.current != null)
         {
             return _spriteSettings.gamepadSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : null;
