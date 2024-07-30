@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.10239772, g: 0.24942838, b: 0.45188403, a: 1}
+  m_IndirectSpecularColor: {r: 0.10242314, g: 0.24931858, b: 0.45143697, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -667,7 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialUI: {fileID: 1577727803}
-  StartupSceneName: ArtTest
+  StartupSceneName: Poster
   InitialBootDelay: 0
 --- !u!4 &657485088
 Transform:
@@ -1186,7 +1186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   forceCorrectEntry: 1
   entryPointSceneName: Core
-  menuSceneName: ArtTest
+  menuSceneName: Poster
   gameSceneName: Gray_GladeVillage
   playerHealth: 100
   playerStamina: 3
