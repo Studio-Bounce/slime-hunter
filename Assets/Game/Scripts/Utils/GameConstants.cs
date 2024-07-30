@@ -12,4 +12,5 @@ public static class GameConstants
 
     // -------------- Unity Tags --------------
     public static string VirtualCameraTag { get; } = "MainVirtualCamera";
+    public static string MapCameraTag { get; } = "MapCamera";
 }
