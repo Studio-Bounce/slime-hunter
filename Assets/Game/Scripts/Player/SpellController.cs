@@ -64,7 +64,10 @@ public class SpellController : MonoBehaviour
 
         for (int i = 0; i < availableSpells.Length; i++)
         {
-            hudMenu?.SetSpellIcon(i + 1, availableSpells[i]?.icon);
+            if (availableSpells[i] != null)
+            {
+                hudMenu?.SetSpellIcon(i + 1, availableSpells[i].icon);
+            }
         }
         UpdateSpellUI();
     }

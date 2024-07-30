@@ -1,9 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="ShopListItem" src="project://database/Assets/Game/Scripts/UI/ShopListItem.uxml?fileID=9197481963319205126&amp;guid=4da6cbe74f0f0f843815b6de4c26b31e&amp;type=3#ShopListItem" />
-    <Style src="project://database/Assets/Game/Scripts/UI/USS/MainMenuOptions.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainMenuOptions" />
+    <ui:Template name="ShopListItem" src="project://database/Assets/Game/Scripts/UIDocuments/Shop/ShopListItem.uxml?fileID=9197481963319205126&amp;guid=4da6cbe74f0f0f843815b6de4c26b31e&amp;type=3#ShopListItem" />
+    <Style src="project://database/Assets/Game/Scripts/UIDocuments/USS/MainMenuOptions.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainMenuOptions" />
     <ui:VisualElement name="RootWrapper" style="background-color: rgba(0, 0, 0, 0.86); flex-grow: 1; padding-top: 5%; padding-right: 15%; padding-bottom: 5%; padding-left: 15%;">
-        <ui:VisualElement name="ShopItemContainer" style="flex-grow: 1;">
+        <ui:ScrollView name="ShopItemScrollView">
             <ui:Instance template="ShopListItem" name="ShopListItem" />
-        </ui:VisualElement>
+            <ui:Instance template="ShopListItem" name="ShopListItem" />
+        </ui:ScrollView>
     </ui:VisualElement>
 </ui:UXML>

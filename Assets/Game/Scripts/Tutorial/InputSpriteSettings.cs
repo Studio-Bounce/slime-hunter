@@ -22,7 +22,6 @@ public class InputSpriteSettings : ScriptableObject
     [NonSerialized] public Dictionary<string, Sprite> keyboardSpriteMap;
     [NonSerialized] public Dictionary<string, Sprite> gamepadSpriteMap;
 
-    // Method to initialize dictionaries
     public void InitializeDictionaries()
     {
         keyboardSpriteMap = new Dictionary<string, Sprite>();

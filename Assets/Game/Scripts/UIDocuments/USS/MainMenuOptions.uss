@@ -23,9 +23,8 @@ Button:active {
     scale: 0.95;
 }
 
-/* ## Tabbed Menus */
-
-.option-slot { }
+.option-slot {
+}
 
 .menu-button {
     transition-property: all;
@@ -87,8 +86,6 @@ Button:active {
     display: flex;
 }
 
-/* ## Inventory */
-
 .grid-inventory-container {
     display: flex;
     flex-direction: row;
@@ -138,21 +135,19 @@ Button:active {
     visibility: hidden;
 }
 
-/* ## Shop */
-
 .item-info-container {
     flex-shrink: 0;
     flex-grow: 0;
     flex-direction: row;
-    border-color: #46BBCA;
+    border-color: rgb(70, 187, 202);
     border-width: 5px;
     border-radius: 21px;
-    background-color: #2F3235;
+    background-color: rgb(47, 50, 53);
     padding: 1%;
 }
 
 #ShopItemContainer > .item-info-container {
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .item-requirements-wrapper {

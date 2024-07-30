@@ -11,6 +11,7 @@ public class ButtonPrompt : MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public string actionString;
     public bool autoSetSprite = true;
+    public bool oneShot = false;
 
     public UnityEvent onButtonPressed;
 
@@ -43,6 +44,10 @@ public class ButtonPrompt : MonoBehaviour
 
     private void OnActionPerformed(InputAction.CallbackContext context)
     {
-        if (enabled) onButtonPressed.Invoke();
+        if (enabled)
+        {
+            onButtonPressed.Invoke();
+            if (oneShot) gameObject.SetActive(false);
+        }
     }
 }
