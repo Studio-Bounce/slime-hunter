@@ -57,12 +57,15 @@ public class InputManager : Singleton<InputManager>
 
     public Sprite ActionToSprite(string actionName)
     {
-        if (Keyboard.current != null)
-        {
-            return _spriteSettings.keyboardSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : null;
-        } else
+        // Naive solution will return gamepad controls as long as one is plugged in
+        if (Gamepad.current != null)
         {
             return _spriteSettings.gamepadSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : null;
+
+        }
+        else
+        {
+            return _spriteSettings.keyboardSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : null;
         }
     }
 

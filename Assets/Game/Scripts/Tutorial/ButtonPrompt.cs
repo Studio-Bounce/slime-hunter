@@ -20,14 +20,22 @@ public class ButtonPrompt : MonoBehaviour
     void Start()
     {
         Debug.Assert(spriteRenderer != null, "Requires a target sprite renderer");
+        UpdateButtonSprite();
+        InitializeInputAction();
+    }
 
+    private void OnEnable()
+    {
+        UpdateButtonSprite();
+    }
+
+    public void UpdateButtonSprite()
+    {
         Sprite buttonSprite = InputManager.Instance.ActionToSprite(actionString);
-        if (buttonSprite != null )
+        if (buttonSprite != null)
         {
             spriteRenderer.sprite = buttonSprite;
         }
-
-        InitializeInputAction();
     }
 
     private void InitializeInputAction()
