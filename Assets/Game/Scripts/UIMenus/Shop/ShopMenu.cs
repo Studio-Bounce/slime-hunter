@@ -61,9 +61,10 @@ public class ShopMenu : Menu
 
             purchaseBtn.clicked += () =>
             {
-                // Purchase conditions
-                Debug.Log("Button was clicked!");
-                return;
+                if (TryPurchase(saleItem))
+                {
+                    listElement.RemoveFromHierarchy();
+                }
             };
 
             // Create elements for item costs
@@ -76,5 +77,26 @@ public class ShopMenu : Menu
 
             shopScrollView.Add(listElement);
         }
+    }
+
+    private bool TryPurchase(ItemForSale saleItem)
+    {
+        // Exit if player can't afford
+        foreach (ItemCost cost in saleItem.costs)
+        {
+            if (InventoryManager.Instance.GetItemQuantity(cost.item) < cost.quantity)
+            {
+                return false;
+            }
+        }
+
+        foreach (ItemCost cost in saleItem.costs)
+        {
+            InventoryManager.Instance.RemoveItem(cost.item, cost.quantity);
+        }
+
+        InventoryManager.Instance.AddItem(saleItem.item);
+
+        return true;
     }
 }

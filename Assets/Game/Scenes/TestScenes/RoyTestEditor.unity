@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17865306, g: 0.22369696, b: 0.30563658, a: 1}
+  m_IndirectSpecularColor: {r: 0.17865337, g: 0.22369754, b: 0.30563766, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1186,55 +1186,13 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 5115ff7d84b2dbb4aa49d9e042386402, type: 2}
     costs:
     - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 25
+      quantity: 4
   - item: {fileID: 11400000, guid: fa97121a094b5134f917ca118bfc4e43, type: 2}
     costs:
     - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 25
-  - item: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    costs:
-    - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 100
-  - item: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    costs:
-    - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 100
-  - item: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    costs:
-    - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 100
-  - item: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    costs:
-    - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 100
-  - item: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    costs:
-    - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 100
-  - item: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    costs:
-    - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 100
-  - item: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    costs:
-    - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 100
-  - item: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    costs:
-    - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 100
-  - item: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    costs:
-    - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 100
-  - item: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    costs:
-    - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 100
-  - item: {fileID: 11400000, guid: f32afa1fd9f13d948aa63edfdd3f5abc, type: 2}
-    costs:
-    - item: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-      quantity: 100
+      quantity: 2
+    - item: {fileID: 11400000, guid: e29ae9ffac4bdf24bbf790fcb2467210, type: 2}
+      quantity: 1
   listTreeAsset: {fileID: 9197481963319205126, guid: 4da6cbe74f0f0f843815b6de4c26b31e,
     type: 3}
 --- !u!114 &425513319
@@ -1244,7 +1202,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 425513317}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
