@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class WeaponController : MonoBehaviour
 {
     [Header("Positioning")]
-    [Tooltip("Assumes the weapons prefab handle is at positioned at origin (0,0,0) and point towards Z+")]
+    [Tooltip("Assumes the weapons prefab handle is positioned at origin (0,0,0) and points towards Z+")]
     public Transform handPivot;
     public Vector3 handPivotOffset;
     public Vector3 handPivotForward;
@@ -82,7 +82,7 @@ public class WeaponController : MonoBehaviour
     {
         // Spawn Initial Weapon
         InitializeHandPivot();
-        InstantiateWeapon(CurrentWeapon);
+        OnWeaponUpdate(availableWeapons);
     }
 
     private void OnDestroy()

@@ -71,6 +71,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         InitializeUIElements();
         InitializeEventHandlers();
         ClearInfoPanel();
+        UpdateEquipped();
         GameManager.Instance.OnPlayerRefChange += e => UpdateEquipped();
     }
 
