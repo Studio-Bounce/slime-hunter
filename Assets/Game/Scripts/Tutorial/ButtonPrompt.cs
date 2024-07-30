@@ -14,6 +14,7 @@ public class ButtonPrompt : MonoBehaviour
     public bool oneShot = false;
 
     public UnityEvent onButtonPressed;
+    private InputAction inputAction;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class ButtonPrompt : MonoBehaviour
 
     private void InitializeInputAction()
     {
-        InputAction inputAction = InputManager.Instance.StringToAction(actionString);
+        inputAction = InputManager.Instance.StringToAction(actionString);
 
         if (inputAction == null)
         {
@@ -49,5 +50,10 @@ public class ButtonPrompt : MonoBehaviour
             onButtonPressed.Invoke();
             if (oneShot) gameObject.SetActive(false);
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (inputAction != null) inputAction.performed -= OnActionPerformed;
     }
 }

@@ -354,17 +354,27 @@ PrefabInstance:
     - target: {fileID: 4010010256324560025, guid: 54786b348064b3a4d8a9349fbc8bf384,
         type: 3}
       propertyPath: m_Size.x
-      value: 1.5056324
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010010256324560025, guid: 54786b348064b3a4d8a9349fbc8bf384,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4010010256324560025, guid: 54786b348064b3a4d8a9349fbc8bf384,
         type: 3}
       propertyPath: m_Center.x
-      value: 0.25281656
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010010256324560025, guid: 54786b348064b3a4d8a9349fbc8bf384,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4010010256324560025, guid: 54786b348064b3a4d8a9349fbc8bf384,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5692628837883009425, guid: 54786b348064b3a4d8a9349fbc8bf384,
         type: 3}
@@ -505,31 +515,6 @@ PrefabInstance:
         type: 3}
       propertyPath: onButtonPressed.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: OpenHinge, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3250272626221456371, guid: 3b52e991460b3814f890ca65badc9947,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3250272626221456371, guid: 3b52e991460b3814f890ca65badc9947,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.36497173
-      objectReference: {fileID: 0}
-    - target: {fileID: 3250272626221456371, guid: 3b52e991460b3814f890ca65badc9947,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.11507511
-      objectReference: {fileID: 0}
-    - target: {fileID: 3250272626221456371, guid: 3b52e991460b3814f890ca65badc9947,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.8811196
-      objectReference: {fileID: 0}
-    - target: {fileID: 3250272626221456371, guid: 3b52e991460b3814f890ca65badc9947,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.2778159
       objectReference: {fileID: 0}
     - target: {fileID: 4073473114516930574, guid: 3b52e991460b3814f890ca65badc9947,
         type: 3}

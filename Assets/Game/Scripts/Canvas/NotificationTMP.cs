@@ -4,10 +4,10 @@ using TMPro;
 using UnityEngine;
 
 // This is a duplicate of Notification to use without canavs
-public class NotificationSprite : MonoBehaviour
+public class NotificationTMP : MonoBehaviour
 {
     [Header("Notification")]
-    public SpriteRenderer spriteRenderer;
+    public TextMeshPro tmp;
     public List<NotificationTransitions> transitions;
     public bool playOnStart = true;
     public bool noAlphaOnStart = false;
@@ -21,13 +21,13 @@ public class NotificationSprite : MonoBehaviour
 
     protected virtual void Start()
     {
-        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
-        Debug.Assert(spriteRenderer != null, "Sprite renderer is required");
+        if (tmp == null) tmp = GetComponent<TextMeshPro>();
+        Debug.Assert(tmp != null, "Sprite renderer is required");
 
-        startPosition = spriteRenderer.transform.localPosition;
-        Color clearColor = spriteRenderer.color;
+        startPosition = tmp.transform.localPosition;
+        Color clearColor = tmp.color;
         clearColor.a = 0;
-        if (noAlphaOnStart) spriteRenderer.color = clearColor;
+        if (noAlphaOnStart) tmp.color = clearColor;
         if (playOnStart) Play();
     }
 
@@ -95,16 +95,16 @@ public class NotificationSprite : MonoBehaviour
     private void Fade(float time)
     {
         float t = Easing.EaseInOutCubic(time);
-        Color newColor = spriteRenderer.color;
+        Color newColor = tmp.color;
         newColor.a = t;
-        spriteRenderer.color = newColor;
+        tmp.color = newColor;
     }
 
     private void FlyUp(float time)
     {
         Vector2 offset = startPosition;
         offset.y -= 1;
-        spriteRenderer.transform.localPosition = Vector3.LerpUnclamped(offset, startPosition, Easing.EaseOut(time));
+        tmp.transform.localPosition = Vector3.LerpUnclamped(offset, startPosition, Easing.EaseOut(time));
     }
 
     private void Shake(float time)
@@ -115,6 +115,6 @@ public class NotificationSprite : MonoBehaviour
         float x = Mathf.Sin(time * speed) * magnitude;
         Vector2 offset = startPosition;
         offset.x += x;
-        spriteRenderer.transform.position = Vector3.Lerp(offset, startPosition, Easing.EaseOut(time));
+        tmp.transform.position = Vector3.Lerp(offset, startPosition, Easing.EaseOut(time));
     }
 }
