@@ -1,29 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Threading;
 using UnityEngine;
 
-public enum NotificationTransitions
-{
-    FADE,
-    FLY_UP,
-    SHAKE
-}
-
-
-// Specifically for use with canvas
-[RequireComponent(typeof(RectTransform), typeof(CanvasGroup))]
-public class Notification : MonoBehaviour
+// This is a duplicate of Notification to use without canavs
+public class NotificationSprite : MonoBehaviour
 {
     [Header("Notification")]
-    public RectTransform rectTransform;
-    public CanvasGroup canvasGroup;
+    public SpriteRenderer spriteRenderer;
     public List<NotificationTransitions> transitions;
     public bool playOnStart = true;
     public bool noAlphaOnStart = false;
     public float transitionDuration = 1.0f;
-
     protected Vector2 startPosition;
 
     // For temporary in out transition
@@ -33,11 +20,13 @@ public class Notification : MonoBehaviour
 
     protected virtual void Start()
     {
-        if (rectTransform == null) rectTransform = GetComponent<RectTransform>();
-        if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
-        startPosition = rectTransform.pivot;
+        if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
+        Debug.Assert(spriteRenderer != null, "Sprite renderer is required");
 
-        if (noAlphaOnStart) canvasGroup.alpha = 0;
+        startPosition = spriteRenderer.transform.localPosition;
+        Color clearColor = spriteRenderer.color;
+        clearColor.a = 0;
+        if (noAlphaOnStart) spriteRenderer.color = clearColor;
         if (playOnStart) Play();
     }
 
@@ -105,14 +94,16 @@ public class Notification : MonoBehaviour
     private void Fade(float time)
     {
         float t = Easing.EaseInOutCubic(time);
-        canvasGroup.alpha = t;
+        Color newColor = spriteRenderer.color;
+        newColor.a = t;
+        spriteRenderer.color = newColor;
     }
 
     private void FlyUp(float time)
     {
         Vector2 offset = startPosition;
-        offset.y += 1;
-        rectTransform.pivot = Vector3.LerpUnclamped(offset, startPosition, Easing.EaseOut(time));
+        offset.y -= 1;
+        spriteRenderer.transform.localPosition = Vector3.LerpUnclamped(offset, startPosition, Easing.EaseOut(time));
     }
 
     private void Shake(float time)
@@ -123,6 +114,6 @@ public class Notification : MonoBehaviour
         float x = Mathf.Sin(time * speed) * magnitude;
         Vector2 offset = startPosition;
         offset.x += x;
-        rectTransform.pivot = Vector3.Lerp(offset, startPosition, Easing.EaseOut(time));
+        spriteRenderer.transform.position = Vector3.Lerp(offset, startPosition, Easing.EaseOut(time));
     }
 }
