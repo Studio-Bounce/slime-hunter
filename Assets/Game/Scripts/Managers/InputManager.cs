@@ -2,10 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using InputContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 
 public class InputManager : Singleton<InputManager>
 {
+    [SerializeField] private InputSpriteSettings _spriteSettings;
+
     private PlayerController _playerController;
     private WeaponController _weaponController;
     private SpellController _spellController;
@@ -29,6 +32,8 @@ public class InputManager : Singleton<InputManager>
 
     private void Awake()
     {
+        // Setup Input Sprite Settings
+        _spriteSettings.InitializeDictionaries();
         // Enable InputActions
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
@@ -48,6 +53,22 @@ public class InputManager : Singleton<InputManager>
     {
         GetControllers(GameManager.Instance.PlayerRef);
         _AddUIControls();
+    }
+
+    public Sprite ActionToSprite(string actionName)
+    {
+        if (Keyboard.current != null)
+        {
+            return _spriteSettings.keyboardSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : null;
+        } else
+        {
+            return _spriteSettings.gamepadSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : null;
+        }
+    }
+
+    public InputAction StringToAction(string actionName)
+    {
+        return _inputActions.FindAction(actionName);
     }
 
     public void UpdateInputAvailability(GameState state)

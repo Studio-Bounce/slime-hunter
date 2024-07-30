@@ -107,6 +107,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""875cdd2c-1e5b-4693-92b4-2fef2288bc4e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -169,17 +178,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""1235b353-a013-4cad-b1bc-b8844cd0ffa9"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""1b64ed95-c23f-4f3b-9c5d-761b16c73841"",
-                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -285,6 +283,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""SpecialAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e6ad0ca-afac-4206-a855-41b05f021295"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -353,6 +362,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Spell1 = m_Player.FindAction("Spell1", throwIfNotFound: true);
         m_Player_Spell2 = m_Player.FindAction("Spell2", throwIfNotFound: true);
         m_Player_CastSpell = m_Player.FindAction("CastSpell", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
@@ -426,6 +436,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Spell1;
     private readonly InputAction m_Player_Spell2;
     private readonly InputAction m_Player_CastSpell;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -439,6 +450,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Spell1 => m_Wrapper.m_Player_Spell1;
         public InputAction @Spell2 => m_Wrapper.m_Player_Spell2;
         public InputAction @CastSpell => m_Wrapper.m_Player_CastSpell;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -475,6 +487,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CastSpell.started += instance.OnCastSpell;
             @CastSpell.performed += instance.OnCastSpell;
             @CastSpell.canceled += instance.OnCastSpell;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -506,6 +521,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @CastSpell.started -= instance.OnCastSpell;
             @CastSpell.performed -= instance.OnCastSpell;
             @CastSpell.canceled -= instance.OnCastSpell;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -589,6 +607,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnSpell1(InputAction.CallbackContext context);
         void OnSpell2(InputAction.CallbackContext context);
         void OnCastSpell(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

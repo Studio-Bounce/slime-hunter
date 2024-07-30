@@ -12,3 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb5934202e38f34dbef8466c267e434, type: 3}
   m_Name: InputSpriteSettings
   m_EditorClassIdentifier: 
+  actionSpriteMaps:
+  - actionName: Attack
+    keyboardSprite: {fileID: 21300000, guid: 6db6a6082e709bf4b996538a5ea50179, type: 3}
+    gamepadSprite: {fileID: 0}
+  - actionName: Dash
+    keyboardSprite: {fileID: 21300000, guid: d971d6bd6ec672e43b127a8bc0b55154, type: 3}
+    gamepadSprite: {fileID: 0}
+  - actionName: Interact
+    keyboardSprite: {fileID: 21300000, guid: 30e74214ad1cf2f47a13e3e49d7630b5, type: 3}
+    gamepadSprite: {fileID: 0}
+  - actionName: CastSpell
+    keyboardSprite: {fileID: 21300000, guid: 9a31d5c697887fc43becf85c7d7f18c2, type: 3}
+    gamepadSprite: {fileID: 0}
