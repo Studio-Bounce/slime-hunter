@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
@@ -288,10 +289,35 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         return true;
     }
 
-    public void RemoveItem(ItemSO itemSO)
+    public int GetItemQuantity(ItemSO itemSO)
     {
-        // TODO: Unimplemented. May not need.
-        //items.Remove(item);
+        return items.Sum(item =>
+        {
+            if (item.itemRef == itemSO)
+            {
+                return item.quantity;
+            }
+            return 0;
+        });
+    }
+
+    public void RemoveItem(ItemSO itemSO, int quantity = 1)
+    {
+        foreach (Item item in items)
+        {
+            if (item.itemRef == itemSO)
+            {
+                if (item.quantity > quantity)
+                {
+                    item.quantity -= quantity;
+                    break;
+                }
+
+                quantity -= item.quantity;
+                items.Remove(item);
+                if (quantity == 0) break;
+            }
+        }
         OnInventoryChanged.Invoke();
     }
 
@@ -347,13 +373,8 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
 
         Item item = items[selectedIndex];
         item.quantity -= 1;
-
-        // Update slot UI
-        VisualElement slot = slotElements[selectedIndex];
-        Label quantityEl = slot.Q<Label>(quantityLabel);
-        quantityEl.text = item.quantity.ToString();
-
         if (item.quantity < 1) items.RemoveAt(selectedIndex);
+
         OnInventoryChanged.Invoke();
     }
 
