@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEditor.Progress;
 
 public class ShopMenu : Menu
 {
@@ -15,13 +14,13 @@ public class ShopMenu : Menu
     }
 
     [Serializable]
-    public struct ItemForSale
+    public struct SaleItem
     {
         public ItemSO item;
         public List<ItemCost> costs;
     }
 
-    public List<ItemForSale> inventory;
+    public List<SaleItem> itemsForSale;
 
     [Header("UI References")]
     public VisualTreeAsset listTreeAsset;
@@ -39,11 +38,17 @@ public class ShopMenu : Menu
         PopulateList();
     }
 
+    public override void ToggleVisible()
+    {
+        base.ToggleVisible();
+        PopulateList();
+    }
+
     private void PopulateList()
     {
         shopScrollView.Clear();
 
-        foreach (var saleItem in inventory)
+        foreach (var saleItem in itemsForSale)
         {
             // Create list visual element
             VisualElement listElement = listTreeAsset.CloneTree();
@@ -79,7 +84,7 @@ public class ShopMenu : Menu
         }
     }
 
-    private bool TryPurchase(ItemForSale saleItem)
+    private bool TryPurchase(SaleItem saleItem)
     {
         // Exit if player can't afford
         foreach (ItemCost cost in saleItem.costs)
@@ -94,8 +99,8 @@ public class ShopMenu : Menu
         {
             InventoryManager.Instance.RemoveItem(cost.item, cost.quantity);
         }
-
         InventoryManager.Instance.AddItem(saleItem.item);
+        itemsForSale.Remove(saleItem);
 
         return true;
     }
