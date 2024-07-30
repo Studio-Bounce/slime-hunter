@@ -142,6 +142,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 6028792633352656396}
   actionString: Interact
   autoSetSprite: 1
+  oneShot: 0
   onButtonPressed:
     m_PersistentCalls:
       m_Calls:
@@ -232,7 +233,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f846b5c298874134fa3222571b3d1244, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 273b9bad4cfb7b245b6a423009f9ad60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
