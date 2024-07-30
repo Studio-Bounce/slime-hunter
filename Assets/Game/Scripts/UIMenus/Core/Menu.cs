@@ -24,6 +24,11 @@ public class Menu : MonoBehaviour
         uiDocument.rootVisualElement.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
     }
 
+    public virtual void ToggleVisible()
+    {
+        SetVisible(!IsVisible);
+    }
+
     public virtual void Show()
     {
         SetVisible(true);
