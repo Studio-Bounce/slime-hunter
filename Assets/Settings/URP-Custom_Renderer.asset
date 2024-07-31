@@ -103,8 +103,8 @@ MonoBehaviour:
     m_Bits: 2039
   outlineSettings:
     outlineColor: {r: 0, g: 0, b: 0, a: 0.46666667}
-    outlineScale: 1
-    depthThreshold: 7.1
+    outlineScale: 6.8
+    depthThreshold: 12.1
     robertsCrossMultiplier: 100
     normalThreshold: 0.5
     steepAngleThreshold: 1
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c4f71415ee6f2449b5b4b8cf557eb0, type: 3}
   m_Name: ScreenSpaceOutlinesSlimes
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   renderPassEvent: 500
   outlinesLayerMask:
     serializedVersion: 2
