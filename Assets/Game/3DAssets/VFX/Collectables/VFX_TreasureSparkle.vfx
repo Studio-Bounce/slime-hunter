@@ -16,13 +16,13 @@ MonoBehaviour:
   stickyNoteInfos: []
   categories:
   - name: Sparkle Parameters
-    collapsed: 0
+    collapsed: 1
   - name: Sparkle Spacing
     collapsed: 1
   - name: Sparkle Colors
-    collapsed: 1
-  - name: Spoke Parameters
     collapsed: 0
+  - name: Spoke Parameters
+    collapsed: 1
   uiBounds:
     serializedVersion: 2
     x: 142
@@ -264,7 +264,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":1.0,"g":0.719618558883667,"b":0.34433960914611819,"a":1.0}'
+      m_SerializableObject: '{"r":1.0,"g":0.7196186184883118,"b":0.34433960914611819,"a":1.0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -2464,7 +2464,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614675}
   m_ExposedName: Min Height
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 4
   m_Category: Sparkle Spacing
   m_Min:
     m_Type:
@@ -3717,7 +3717,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614739}
   m_ExposedName: Max Size
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 5
   m_Category: Sparkle Parameters
   m_Min:
     m_Type:
@@ -4363,7 +4363,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614766}
   m_ExposedName: X Range
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 8
   m_Category: Sparkle Spacing
   m_Min:
     m_Type:
@@ -4446,7 +4446,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614768}
   m_ExposedName: Y Range
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 12
   m_Category: Sparkle Spacing
   m_Min:
     m_Type:
@@ -4719,7 +4719,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614776}
   m_ExposedName: Lifetime Average
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 9
   m_Category: Sparkle Parameters
   m_Min:
     m_Type:
@@ -4805,7 +4805,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614778}
   m_ExposedName: Lifetime Spread
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 13
   m_Category: Sparkle Parameters
   m_Min:
     m_Type:
@@ -5299,7 +5299,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614792}
   m_ExposedName: Spawn Rate
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 1
   m_Category: Sparkle Parameters
   m_Min:
     m_Type:
@@ -5379,7 +5379,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614794}
   m_ExposedName: Main Color
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 2
   m_Category: Sparkle Colors
   m_Min:
     m_Type:
@@ -5398,7 +5398,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661614794}
       inputSlot: {fileID: 8926484042661614621}
-    position: {x: 716, y: 1419}
+    position: {x: 703, y: 1411}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661614794
@@ -5430,7 +5430,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"r":1.0,"g":0.719618558883667,"b":0.34433960914611819,"a":1.0}'
+      m_SerializableObject: '{"r":1.0,"g":0.7196186184883118,"b":0.34433960914611819,"a":1.0}'
     m_Space: 2147483647
   m_Property:
     name: o
@@ -5595,7 +5595,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614800}
   m_ExposedName: Edge Color
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 6
   m_Category: Sparkle Colors
   m_Min:
     m_Type:
@@ -5811,7 +5811,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614806}
   m_ExposedName: Glow Color
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 10
   m_Category: Sparkle Colors
   m_Min:
     m_Type:
@@ -6719,7 +6719,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614860}
   m_ExposedName: Spoke Spawn Rate
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 3
   m_Category: Spoke Parameters
   m_Min:
     m_Type:
@@ -10137,7 +10137,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615343}
   m_ExposedName: Spoke Color
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 16
   m_Category: Spoke Parameters
   m_Min:
     m_Type:
@@ -10353,7 +10353,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615349}
   m_ExposedName: Peak Intensity
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 17
   m_Category: Spoke Parameters
   m_Min:
     m_Type:
@@ -10572,7 +10572,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615355}
   m_ExposedName: Spoke Lifetime
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 14
   m_Category: Spoke Parameters
   m_Min:
     m_Type:
@@ -10654,7 +10654,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615357}
   m_ExposedName: Spoke Speed
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 15
   m_Category: Spoke Parameters
   m_Min:
     m_Type:
@@ -10736,7 +10736,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615359}
   m_ExposedName: Spoke Width
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 11
   m_Category: Spoke Parameters
   m_Min:
     m_Type:
@@ -10821,7 +10821,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615361}
   m_ExposedName: Spoke Vertical Offset
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 7
   m_Category: Spoke Parameters
   m_Min:
     m_Type:
