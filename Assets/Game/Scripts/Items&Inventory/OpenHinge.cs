@@ -16,6 +16,7 @@ public class OpenHinge : MonoBehaviour
     public AnimationCurve curve;
 
     [Header("Event")]
+    public UnityEvent openStartEvent;
     public UnityEvent openEvent;
 
     public bool IsOpen { get; private set; } = false;
@@ -34,6 +35,7 @@ public class OpenHinge : MonoBehaviour
     {
         if (IsOpen) return;
         IsOpen = true;
+        openStartEvent.Invoke();
         StartCoroutine(BeginOpen());
     }
 
