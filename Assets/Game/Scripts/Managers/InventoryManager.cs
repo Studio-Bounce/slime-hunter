@@ -71,6 +71,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
         InitializeUIElements();
         InitializeEventHandlers();
         ClearInfoPanel();
+        UpdateEquipped(); // To ensure weapons are equipped when not played from core
         GameManager.Instance.OnPlayerRefChange += e => UpdateEquipped();
     }
 

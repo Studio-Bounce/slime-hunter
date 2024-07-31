@@ -196,6 +196,17 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void PlayerTriggerAnimation(string triggerString)
+    {
+        Animator animator = PlayerRef?.GetComponent<PlayerController>()?.animator;
+        if (animator == null)
+        {
+            Debug.Log("Cannot find animator");
+            return;
+        }
+        animator.SetTrigger(triggerString);
+    }
+
     void GameOver()
     {
         GameState = GameState.GAME_OVER;
@@ -261,6 +272,49 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1;
     }
 
+    #endregion
+
+    #region Helpers
+    public static IEnumerator RunEasedLerp(Vector3 start, Vector3 end, float duration, Func<float, float> Curve, Action<Vector3> UpdateSource)
+    {
+        float elapsed = 0.0f;
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            float eased = Curve(t);
+            UpdateSource(Vector3.Lerp(start, end, eased));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    public static IEnumerator RunEasedLerp(float start, float end, float duration, Func<float, float> Curve, Action<float> UpdateSource)
+    {
+        float elapsed = 0.0f;
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            float eased = Curve(t);
+            UpdateSource(Utils.Lerp(start, end, eased));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        UpdateSource(end);
+    }
+
+    public static IEnumerator RunEasedSlerp(Vector3 start, Vector3 end, float duration, Func<float, float> Curve, Action<Vector3> UpdateSource)
+    {
+        float elapsed = 0.0f;
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            float eased = Curve(t);
+            UpdateSource(Vector3.Slerp(start, end, eased));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        UpdateSource(end);
+    }
     #endregion
 
     private void OnDestroy()

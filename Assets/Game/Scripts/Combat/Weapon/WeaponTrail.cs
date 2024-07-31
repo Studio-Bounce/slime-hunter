@@ -99,17 +99,7 @@ public class WeaponTrail : DamageDealer
         SetWeaponProps(move);
 
         // Trail Effects Direction
-        trailMaterial.SetFloat(flipShaderParam, move.direction.x < 0 ? 0 : 1);
-
-        float verticalRotation = 0;
-        if (move.direction.y > 0)
-        {
-            verticalRotation = -90;
-        }
-        else if (move.direction.y < 0)
-        {
-            verticalRotation = 90;
-        }
+        trailMaterial.SetFloat(flipShaderParam, move.flip ? 0 : 1);
 
         // Trail Material
         trailMaterial.SetFloat(rotateSpeedShaderParam, move.rotateSpeed);
@@ -122,7 +112,7 @@ public class WeaponTrail : DamageDealer
         applyCameraShake = isFinalAttack;
         StopAllCoroutines();
         StartCoroutine(ActiveAttack(move.animationDuration));
-        trailRenderer.transform.rotation = Quaternion.Euler(trailRenderer.transform.rotation.eulerAngles.x, trailRenderer.transform.rotation.eulerAngles.y, verticalRotation);
+        trailRenderer.transform.rotation = Quaternion.Euler(trailRenderer.transform.rotation.eulerAngles.x, trailRenderer.transform.rotation.eulerAngles.y, move.rotation);
     }
 
     public void SetWeapon(bool _active)
