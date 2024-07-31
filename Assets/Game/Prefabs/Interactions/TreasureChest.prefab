@@ -586,12 +586,32 @@ PrefabInstance:
     - target: {fileID: 1578503557618636700, guid: 3b52e991460b3814f890ca65badc9947,
         type: 3}
       propertyPath: oneShot
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1578503557618636700, guid: 3b52e991460b3814f890ca65badc9947,
         type: 3}
       propertyPath: reposition
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578503557618636700, guid: 3b52e991460b3814f890ca65badc9947,
+        type: 3}
+      propertyPath: triggerString
+      value: Kick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578503557618636700, guid: 3b52e991460b3814f890ca65badc9947,
+        type: 3}
+      propertyPath: positionOffset.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578503557618636700, guid: 3b52e991460b3814f890ca65badc9947,
+        type: 3}
+      propertyPath: positionOffset.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578503557618636700, guid: 3b52e991460b3814f890ca65badc9947,
+        type: 3}
+      propertyPath: positionOffset.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1578503557618636700, guid: 3b52e991460b3814f890ca65badc9947,
         type: 3}
@@ -607,6 +627,11 @@ PrefabInstance:
         type: 3}
       propertyPath: positionTarget.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1578503557618636700, guid: 3b52e991460b3814f890ca65badc9947,
+        type: 3}
+      propertyPath: animationDuration
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1578503557618636700, guid: 3b52e991460b3814f890ca65badc9947,
         type: 3}

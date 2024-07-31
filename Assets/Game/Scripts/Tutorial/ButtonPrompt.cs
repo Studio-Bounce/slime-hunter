@@ -2,6 +2,7 @@ using Cinemachine.Utility;
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,13 +18,18 @@ public class ButtonPrompt : MonoBehaviour
     public bool oneShot = false;
 
     public UnityEvent onButtonPressed;
+    public UnityEvent onButtonDisabled;
     private InputAction inputAction;
 
-    [Header("Player Reposition")]
+    [Header("Player Animator Trigger")]
+    public string triggerString;
+
+    [Header("Player Orientation")]
+    public float animationDuration = 0.5f;
     public bool reposition = false;
-    public Vector3 positionTarget = Vector3.zero;
+    public Vector3 positionOffset = Vector3.zero;
     public bool lookAt = false;
-    public Vector3 lookAtTarget = Vector3.zero;
+    public Vector3 lookAtOffset = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
@@ -65,56 +71,54 @@ public class ButtonPrompt : MonoBehaviour
         if (enabled)
         {
             onButtonPressed.Invoke();
-            if (reposition) StartCoroutine(LerpPlayerPosition());
-            if (lookAt) StartCoroutine(LerpPlayerLookAt());
-            if (oneShot) gameObject.SetActive(false);
+            if (!string.IsNullOrEmpty(triggerString))
+            {
+                GameManager.Instance.PlayerTriggerAnimation(triggerString);
+            }
+            if (reposition) LerpPlayerPosition();
+            if (lookAt) SlerpPlayerLookAt();
+            if (oneShot)
+            {
+                if (inputAction != null) inputAction.performed -= OnActionPerformed;
+                onButtonDisabled.Invoke();
+            };
         }
     }
 
-    private IEnumerator LerpPlayerPosition()
+    private void LerpPlayerPosition()
     {
-        float elapsed = 0.0f;
-        float duration = 1.0f;
-        Vector3 targetPosition = transform.position + transform.TransformDirection(positionTarget);
-        while (elapsed < duration)
-        {
-            float t = elapsed / duration;
-            float eased = Easing.EaseInOut(t);
-
-            Transform playerTransform = GameManager.Instance.PlayerRef.transform;
-            playerTransform.position = Vector3.Lerp(playerTransform.position, targetPosition, eased);
-
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
+        Vector3 targetPosition = transform.position + transform.TransformDirection(positionOffset);
+        Transform playerTransform = GameManager.Instance.PlayerRef.transform;
+        StartCoroutine(GameManager.RunEasedLerp(
+            playerTransform.position,
+            targetPosition,
+            animationDuration,
+            Easing.EaseInOutCubic,
+            (Vector3 pos) => playerTransform.position = pos
+            ));
     }
 
-    private IEnumerator LerpPlayerLookAt()
+    private void SlerpPlayerLookAt()
     {
-        float elapsed = 0.0f;
-        float duration = 1.0f;
-
         Transform playerTransform = GameManager.Instance.PlayerRef.transform;
         Vector3 initialDirection = playerTransform.forward;
+        Vector3 startPos = reposition ? transform.position + transform.TransformDirection(positionOffset) : playerTransform.position;
+        Vector3 endPos = transform.position + transform.TransformDirection(lookAtOffset);
+        Vector3 targetDirection = (endPos - startPos).normalized;
 
-        Vector3 startPos = reposition ? positionTarget : playerTransform.position;
-        Vector3 endPos = transform.position + lookAtTarget;
-        Vector3 targetDirection = (startPos - endPos).normalized;
+        // Flatten the directions to the y-axis
+        initialDirection.y = 0;
+        targetDirection.y = 0;
 
-        while (elapsed < duration)
-        {
-            float t = elapsed / duration;
-            float eased = Easing.EaseInOut(t);
-
-            Vector3 currentDirection = Vector3.Slerp(initialDirection, targetDirection, eased);
-            transform.rotation = Quaternion.LookRotation(currentDirection);
-
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.rotation = Quaternion.LookRotation(targetDirection);
+        StartCoroutine(GameManager.RunEasedSlerp(
+            initialDirection,
+            targetDirection,
+            animationDuration,
+            Easing.EaseInOutCubic,
+            (Vector3 rot) => playerTransform.rotation = Quaternion.LookRotation(rot)
+            ));
     }
+
 
 
     private void OnDestroy()
@@ -128,15 +132,17 @@ public class ButtonPrompt : MonoBehaviour
         if (reposition)
         {
             Handles.color = Color.red;
-            Vector3 targetPosition = transform.position + transform.TransformDirection(positionTarget);
-            Handles.DrawSolidDisc(targetPosition, Vector3.up, 0.2f);
+            Vector3 targetPosition = transform.position + transform.TransformDirection(positionOffset);
+            Handles.DrawSolidDisc(targetPosition, Vector3.up, 0.1f);
+            Handles.DrawWireDisc(targetPosition, Vector3.up, 0.2f);
         }
 
         if (lookAt)
         {
             Gizmos.color = Color.blue;
-            Vector3 targetPosition = transform.position + transform.TransformDirection(lookAtTarget);
-            Gizmos.DrawSphere(targetPosition, 0.2f);
+            Vector3 targetPosition = transform.position + transform.TransformDirection(lookAtOffset);
+            Gizmos.DrawSphere(targetPosition, 0.1f);
+            Gizmos.DrawWireSphere(targetPosition, 0.2f);
         }
     }
 #endif
