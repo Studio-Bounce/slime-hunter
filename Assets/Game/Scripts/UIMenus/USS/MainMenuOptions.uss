@@ -110,6 +110,9 @@ Button:active {
     background-color: rgb(47, 50, 53);
     align-items: center;
     justify-content: center;
+    -unity-text-outline-color: black;
+    -unity-text-outline-width: 1px;
+    text-shadow: 0px 0px 2px #46BBCA;
 }
 
 .grid-inventory-container > * > Label {

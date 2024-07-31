@@ -49,7 +49,7 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: 517f91ba2405675408dcfdb80e17c676,
     type: 3}
-  m_SortingOrder: 0
+  m_SortingOrder: 1
 --- !u!114 &2177848265321342249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +63,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showOnStart: 1
-  inventory: []
+  itemsForSale: []
   listTreeAsset: {fileID: 9197481963319205126, guid: 4da6cbe74f0f0f843815b6de4c26b31e,
     type: 3}

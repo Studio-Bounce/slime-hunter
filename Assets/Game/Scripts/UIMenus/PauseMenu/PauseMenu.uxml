@@ -130,7 +130,7 @@
                     </ui:VisualElement>
                     <ui:VisualElement name="InventoryContainer" class="grid-inventory-container" style="display: flex;">
                         <ui:VisualElement name="InventorySlot">
-                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuantityLabel" />
+                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuantityLabel" text="1" />
                         </ui:VisualElement>
                         <ui:VisualElement name="InventorySlot">
                             <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuantityLabel" />

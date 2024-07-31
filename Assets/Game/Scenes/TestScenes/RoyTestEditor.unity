@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17865337, g: 0.22369754, b: 0.30563766, a: 1}
+  m_IndirectSpecularColor: {r: 0.17865306, g: 0.22369696, b: 0.30563658, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -656,17 +656,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MyloPlayer
       objectReference: {fileID: 0}
-    - target: {fileID: 281410272845203375, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 606331671084474555, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
-        type: 3}
-      propertyPath: fallbackWeapon
-      value: 
-      objectReference: {fileID: 11400000, guid: e29ae9ffac4bdf24bbf790fcb2467210,
-        type: 2}
     - target: {fileID: 7186318760402298026, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -716,11 +705,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8164840651267231046, guid: 8e82ab92ecee6874a9b64fd616a5a0c1,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4431,6 +4415,7 @@ MonoBehaviour:
   spellColor: {r: 0.43693754, g: 0.15419191, b: 0.7264151, a: 1}
   materialColor: {r: 0.31283376, g: 0.6981132, b: 0.6370323, a: 1}
   compassRotationOffset: 180
+  cameraBaseRotation: -45
   specialAttackBtnTime: 0.5
 --- !u!114 &2063335824
 MonoBehaviour:
