@@ -23,9 +23,15 @@ public class MainMenu : Menu
         VisualElement root = uiDocument.rootVisualElement;
         Label lblPlay = root.Q<Label>("lblPlay");
         Label lblContinue = root.Q<Label>("lblContinue");
+        Label lblSettings = root.Q<Label>("lblSettings");
         Label lblQuit = root.Q<Label>("lblQuit");
         lblPlay.RegisterCallback<ClickEvent>(ev => InitiateGame(SetStartState));
         lblContinue.RegisterCallback<ClickEvent>(ev => InitiateGame(LoadData));
+        lblSettings.RegisterCallback<ClickEvent>(ev =>
+        {
+            Hide();
+            UIManager.Instance.settingsMenu.Show();
+        });
         lblQuit.RegisterCallback<ClickEvent>(ev => QuitGame());
     }
 
