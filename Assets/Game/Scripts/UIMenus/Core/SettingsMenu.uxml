@@ -9,16 +9,20 @@
             </ui:VisualElement>
             <ui:VisualElement name="Body" style="flex-grow: 1; flex-direction: column; width: 749px;">
                 <ui:VisualElement name="Resolution" style="flex-direction: row; justify-content: space-between;">
-                    <ui:Label tabindex="-1" text="Resolution" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" style="margin-right: 32px;" />
-                    <ui:DropdownField style="width: 50%;" />
+                    <ui:Label tabindex="-1" text="Resolution" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" />
+                    <ui:DropdownField name="ResolutionDropdown" style="width: 50%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="DisplayMode" style="flex-direction: row; justify-content: space-between;">
+                    <ui:Label tabindex="-1" text="Display Mode" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" />
+                    <ui:DropdownField name="DisplayModeDropdown" style="width: 50%;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="Quality" style="flex-direction: row; justify-content: space-between;">
-                    <ui:Label tabindex="-1" text="Quality" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" style="margin-right: 32px; -unity-text-align: middle-left;" />
-                    <ui:DropdownField style="width: 50%;" />
+                    <ui:Label tabindex="-1" text="Quality" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" style="-unity-text-align: middle-left;" />
+                    <ui:DropdownField name="QualityDropdown" style="width: 50%;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="Volume" style="flex-direction: row; justify-content: space-between;">
-                    <ui:Label tabindex="-1" text="Volume" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" style="margin-right: 32px;" />
-                    <ui:SliderInt high-value="100" style="width: 50%;" />
+                    <ui:Label tabindex="-1" text="Volume" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" />
+                    <ui:SliderInt high-value="100" name="VolumeSlider" style="width: 50%;" />
                 </ui:VisualElement>
                 <ui:Label tabindex="-1" text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Back" class="h2" style="align-self: center; margin-top: 64px;" />
             </ui:VisualElement>
