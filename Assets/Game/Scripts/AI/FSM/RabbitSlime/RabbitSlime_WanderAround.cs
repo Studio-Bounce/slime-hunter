@@ -50,5 +50,9 @@ public class RabbitSlime_WanderAround : BasicSlime_BaseState
         }
 
         // If slime reached close to player, switch to chase
+        if (Vector3.Distance(rFSM.transform.position, rFSM.GetPlayerPosition()) <= rFSM.seekDistance)
+        {
+            fsm.ChangeState(rFSM.ChasePlayerStateName);
+        }
     }
 }

@@ -10,9 +10,6 @@ public class RabbitSlime_Cooldown : BasicSlime_Cooldown
         // Make it vulnerable
         fsm.slimeEnemy.isInvincible = false;
 
-        // Eye change to indicate vulnerability
-        fsm.slimeEnemy.SetEye(EnemyEye.DEATH);
-
         // Base handles cooldown timer
         base.OnStateEnter(animator, stateInfo, layerIndex);
     }
@@ -20,6 +17,5 @@ public class RabbitSlime_Cooldown : BasicSlime_Cooldown
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         fsm.slimeEnemy.isInvincible = true;
-        fsm.slimeEnemy.SetEye(EnemyEye.NORMAL);
     }
 }

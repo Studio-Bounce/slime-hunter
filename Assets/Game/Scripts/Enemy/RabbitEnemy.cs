@@ -80,9 +80,7 @@ public class RabbitEnemy : Enemy
     IEnumerator ApplyDodge(Vector3 dodgeVec)
     {
         // Turn away from dodgeDirection
-        Debug.Log(transform.gameObject.name);
-        Transform rabbitModelT = slimeAnimator.transform;
-        transform.LookAt(dodgeVec);
+        transform.LookAt(transform.position - dodgeVec);
 
         Vector3 startPosition = transform.position;
         Vector3 endPosition = startPosition + dodgeVec;
@@ -90,7 +88,7 @@ public class RabbitEnemy : Enemy
         while (timeElapsed < dodgeTime)
         {
             // Lerp knockback
-            float t = Easing.EaseOutCubic(timeElapsed / dodgeTime);
+            float t = Easing.EaseOutCirc(timeElapsed / dodgeTime);
             Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, t);
             if (characterController != null && characterController.enabled)
                 characterController.Move(newPosition - transform.position);

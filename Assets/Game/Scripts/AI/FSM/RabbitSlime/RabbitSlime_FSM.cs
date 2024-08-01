@@ -5,6 +5,7 @@ using UnityEngine;
 public class RabbitSlime_FSM : BasicSlime_FSM
 {
     public readonly int DodgeStateName = Animator.StringToHash("Dodge");
+    public readonly int MoveSpeedField = Animator.StringToHash("moveSpeed");
 
     [Tooltip("It will stay for this time in Idle state before switching to Move")]
     [SerializeField] float idleTime = 2.0f;
@@ -43,4 +44,14 @@ public class RabbitSlime_FSM : BasicSlime_FSM
         }
     }
 
+
+    public void SetChaseAnimationSpeed()
+    {
+        slimeAnimator.SetFloat(MoveSpeedField, (chaseSpeed / wanderSpeed));
+    }
+
+    public void ResetMoveAnimationSpeed()
+    {
+        slimeAnimator.SetFloat(MoveSpeedField, 1.0f);
+    }
 }
