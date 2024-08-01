@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2826567724391940602, guid: 7d6073ab3a477914c8dfbcf427b1ddf8, type: 2}
+  - {fileID: 5121009545550226088, guid: fbc5672c289013942b03dba5929e5484, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,8 +102,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Interact
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7d6073ab3a477914c8dfbcf427b1ddf8, type: 2}
-  m_sharedMaterial: {fileID: 2826567724391940602, guid: 7d6073ab3a477914c8dfbcf427b1ddf8,
+  m_fontAsset: {fileID: 11400000, guid: fbc5672c289013942b03dba5929e5484, type: 2}
+  m_sharedMaterial: {fileID: 5121009545550226088, guid: fbc5672c289013942b03dba5929e5484,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -412,6 +412,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   triggerString: 
+  animationDuration: 0.5
   reposition: 0
   positionOffset: {x: 0, y: 0, z: 0}
   lookAt: 0

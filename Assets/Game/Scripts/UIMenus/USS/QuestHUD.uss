@@ -1,3 +1,10 @@
+* {
+    color: white;
+    -unity-font: resource('Assets/Fonts/HywenHei.ttf');
+    -unity-font-definition: resource('Assets/Fonts/HywenHei.ttf');
+    font-size: 18px;
+}
+
 /* Hides the content */
 .unshowned-content {
     display: none;

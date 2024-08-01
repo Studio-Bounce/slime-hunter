@@ -1,3 +1,10 @@
+* {
+    color: white;
+    -unity-font: resource('Assets/Fonts/HywenHei.ttf');
+    -unity-font-definition: resource('Assets/Fonts/HywenHei.ttf');
+    font-size: 18px;
+}
+
 .dialogue-button {
     background-color: rgba(28, 44, 52, 0.78); /* Default color */
     transition: background-color 0.3s ease;

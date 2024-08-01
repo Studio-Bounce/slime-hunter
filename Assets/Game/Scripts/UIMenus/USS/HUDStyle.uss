@@ -1,8 +1,12 @@
 * {
     color: white;
-    -unity-font: resource('Assets/Fonts/Dekko-Regular.ttf');
-    -unity-font-definition: resource('Assets/Fonts/Dekko-Regular.ttf');
+    -unity-font: resource('Assets/Fonts/HywenHei.ttf');
+    -unity-font-definition: resource('Assets/Fonts/HywenHei.ttf');
     font-size: 18px;
+}
+
+.text-glow {
+    text-shadow: 0px 0px 20px #46BBCA;
 }
 
 .unity-progress-bar__progress {
