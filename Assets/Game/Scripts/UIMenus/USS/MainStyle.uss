@@ -11,6 +11,7 @@
     --text-glow: #46BBCA;
 
     --radius: 20px;
+    --button-radius: 10px;
 }
 
 * {
@@ -26,7 +27,7 @@ Button {
     background-color: var(--bg-accent);
     border-width: 2px;
     border-color: white;
-    border-radius: var(--radius);
+    border-radius: var( --button-radius);
     margin: 0;
 }
 
