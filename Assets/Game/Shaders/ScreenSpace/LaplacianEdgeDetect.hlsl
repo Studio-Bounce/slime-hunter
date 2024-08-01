@@ -28,8 +28,8 @@ void LaplacianEdgeDetect_float(float2 UV, float2 TexelSize, UnityTexture2D viewN
     
     [unroll(1024)]
     for (float i = 0; i < maxLoops; i++) {
-        x = floor(i % ks - hks);
-        y = floor(floor(i / ks) - hks);
+        x = floor(i % ks - hks - 1);
+        y = floor(floor(i / ks) - hks - 1);
 
         if(x*x+ y*y > hksSQ){
             continue;
