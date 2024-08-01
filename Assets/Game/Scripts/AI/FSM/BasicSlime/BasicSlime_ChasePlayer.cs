@@ -45,10 +45,10 @@ public class BasicSlime_ChasePlayer : BasicSlime_BaseState
             fsm.ChangeState(fsm.WanderAroundStateName);
         }
         // If player is within attack radius, attack him
-        //else if (playerDistance < fsm.attackRadius)
-        //{
-        //    fsm.ChangeState(fsm.AttackPlayerStateName);
-        //}
+        else if (playerDistance < fsm.attackRadius)
+        {
+            fsm.ChangeState(fsm.AttackPlayerStateName);
+        }
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
