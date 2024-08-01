@@ -21,21 +21,18 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: mat-enemy-occulsion
-  m_Shader: {fileID: -6465566751694194690, guid: d52a052ec5f449045997d4c51f84c84a,
+  m_Shader: {fileID: -6465566751694194690, guid: fc0ec48944d7186438eda2d4a7650ab3,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _SURFACE_TYPE_TRANSPARENT
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
-  disabledShaderPasses:
-  - DepthOnly
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -58,6 +55,8 @@ Material:
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
+    - _Border_Feather: 0.02
+    - _Border_Width: 0.37
     - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 10
@@ -65,10 +64,13 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
+    - _Stripe_Feather: 0.1
+    - _Stripe_Scale: 50
+    - _Stripe_Width: 0.41
     - _Surface: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 22.627415, g: 1.9688332, b: 0, a: 0.3921569}
+    - _Color: {r: 1.490809, g: 0.1332519, b: 0, a: 1}
   m_BuildTextureStacks: []
