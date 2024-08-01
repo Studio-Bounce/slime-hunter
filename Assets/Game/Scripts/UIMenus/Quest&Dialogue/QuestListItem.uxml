@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/Scripts/UIMenus/USS/MainMenuOptions.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainMenuOptions" />
     <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuestListItem" style="background-color: rgba(47, 50, 53, 0.8); flex-grow: 0; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-left-radius: 21px; border-top-right-radius: 21px; border-bottom-right-radius: 21px; border-bottom-left-radius: 21px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; height: 90px; margin-top: 3px; margin-bottom: 3px; flex-direction: row; display: flex;">
         <ui:VisualElement name="QuestStatus" style="flex-grow: 0; -unity-background-scale-mode: scale-to-fit; width: 62px; padding-top: 8px; padding-bottom: 8px; padding-right: 15px; margin-left: 2px;">
             <ui:VisualElement name="Active" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Tracking.png?fileID=2800000&amp;guid=9062a029e693f1b4d92df2106d7c32b9&amp;type=3#Tracking&quot;); -unity-background-scale-mode: scale-to-fit; display: none;" />
@@ -8,7 +9,7 @@
             <ui:Label tabindex="-1" text="Hello, Lyra!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TaskNameLabel" style="color: rgb(255, 255, 255); font-size: 20px; -unity-font-style: bold; justify-content: flex-start; align-items: flex-start; align-self: flex-start; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;);" />
         </ui:VisualElement>
         <ui:VisualElement name="TaskLevelSlot" style="flex-grow: 1; justify-content: center; align-self: center;">
-            <ui:Label tabindex="-1" text="Glade Village" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TaskLevelLabel" style="color: rgb(255, 255, 255); font-size: 15px; -unity-font-style: bold; justify-content: flex-start; align-items: flex-start; align-self: flex-end; margin-right: 20px; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;);" />
+            <ui:Label tabindex="-1" text="Glade Village" parse-escape-sequences="true" display-tooltip-when-elided="true" name="TaskLevelLabel" style="color: rgb(255, 255, 255); font-size: 15px; -unity-font-style: bold; justify-content: flex-start; align-items: flex-start; align-self: flex-end; margin-right: 20px;" />
         </ui:VisualElement>
     </ui:Button>
 </ui:UXML>
