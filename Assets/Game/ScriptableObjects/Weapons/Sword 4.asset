@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cc55e73ce4a8f4418809250d2064544, type: 3}
-  m_Name: Sword
+  m_Name: Sword 4
   m_EditorClassIdentifier: 
   address: Assets/Game/ScriptableObjects/Weapons/Sword.asset
-  itemName: Basic Sword
-  description: 'The Iron Sword is a reliable weapon, favored by Hunters alike for
-    its durability and balance. '
-  icon: {fileID: 21300000, guid: dfbf3a0ad495ee54b87d996397bc2e01, type: 3}
+  itemName: Edge of the Stars
+  description: This sword glimmers like the stars, imbued with mysterious cosmic
+    energy.
+  icon: {fileID: 21300000, guid: c7e11ca42c0dc374ab1663ca0890c22a, type: 3}
   itemType: 0
   value: 0
   weight: 7
   damage:
-    value: 10
-    knockback: 2
+    value: 21
+    knockback: 1
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
     forceApply: 0
-  range: 3
+  range: 2
   hitLayers:
     serializedVersion: 2
     m_Bits: 128
-  weaponModel: {fileID: 3440063896050905991, guid: 9ed46828caf4aac49ba8f91d74a64dc8,
+  weaponModel: {fileID: 626282352945076595, guid: 07386ea35b0703b4b860da37b73db8c3,
     type: 3}
   hitSound: {fileID: 0}
   material: {fileID: 2100000, guid: 76b12491295cfc84fb1848e4e8d655ca, type: 2}
