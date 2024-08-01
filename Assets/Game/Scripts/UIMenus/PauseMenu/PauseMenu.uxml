@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Game/Scripts/UIMenus/USS/MainMenuOptions.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainMenuOptions" />
+    <Style src="project://database/Assets/Game/Scripts/UIMenus/USS/MainStyle.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainStyle" />
     <ui:VisualElement name="RootWrapper" style="background-color: rgba(0, 0, 0, 0.86); flex-grow: 1;">
         <ui:VisualElement name="Header" style="flex-grow: 0; height: 99px; background-color: rgb(28, 44, 52); flex-direction: row; max-height: 99px; min-height: 99px;">
             <ui:VisualElement name="TabbedMenu" style="flex-grow: 0; height: 99px; background-color: rgb(28, 44, 52); flex-direction: row;">
@@ -123,14 +123,14 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="InventoryRight" style="flex-grow: 1; width: 50%; padding-top: 50px; padding-right: 50px; padding-bottom: 50px; padding-left: 50px;">
                     <ui:VisualElement name="Classify" style="flex-grow: 0; height: 64px; flex-direction: row; align-items: center;">
-                        <ui:Label tabindex="-1" text="All Item" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ALL" style="font-size: 24px; color: rgb(255, 255, 255); margin-right: 15px; margin-left: 15px; width: 100px; -unity-text-align: upper-center;" />
-                        <ui:Label tabindex="-1" text="Equip" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ALL" style="font-size: 24px; color: rgb(255, 255, 255); margin-right: 15px; margin-left: 15px; width: 100px; -unity-text-align: upper-center; opacity: 0.2;" />
-                        <ui:Label tabindex="-1" text="Spells" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ALL" style="font-size: 24px; color: rgb(255, 255, 255); margin-right: 15px; margin-left: 15px; width: 100px; -unity-text-align: upper-center; opacity: 0.2;" />
-                        <ui:Label tabindex="-1" text="Material" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ALL" style="font-size: 24px; color: rgb(255, 255, 255); margin-right: 15px; margin-left: 15px; width: 100px; -unity-text-align: upper-center; opacity: 0.2;" />
+                        <ui:Label tabindex="-1" text="All Items" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ALL" style="font-size: 24px; color: rgb(255, 255, 255); margin-right: 15px; margin-left: 15px; width: 100px; -unity-text-align: upper-center;" />
+                        <ui:Label tabindex="-1" text="Equip" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ALL" style="font-size: 24px; color: rgb(255, 255, 255); margin-right: 15px; margin-left: 15px; width: 100px; -unity-text-align: upper-center; opacity: 0.2; display: none;" />
+                        <ui:Label tabindex="-1" text="Spells" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ALL" style="font-size: 24px; color: rgb(255, 255, 255); margin-right: 15px; margin-left: 15px; width: 100px; -unity-text-align: upper-center; opacity: 0.2; display: none;" />
+                        <ui:Label tabindex="-1" text="Material" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ALL" style="font-size: 24px; color: rgb(255, 255, 255); margin-right: 15px; margin-left: 15px; width: 100px; -unity-text-align: upper-center; opacity: 0.2; display: none;" />
                     </ui:VisualElement>
                     <ui:VisualElement name="InventoryContainer" class="grid-inventory-container" style="display: flex;">
                         <ui:VisualElement name="InventorySlot">
-                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuantityLabel" text="1" />
+                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuantityLabel" />
                         </ui:VisualElement>
                         <ui:VisualElement name="InventorySlot">
                             <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuantityLabel" />
