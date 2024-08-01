@@ -10,29 +10,19 @@ public class ScreenSpaceOutlines : ScriptableRendererFeature {
     [System.Serializable]
     private class ScreenSpaceOutlineSettings {
 
-        
-
-        [Header("General Outline Settings")]
+        [Header("Outline Settings")]
         public Color outlineColor = Color.black;
-        [Range(0.0f, 20.0f)]
-        public float outlineScale = 1.0f;
         
-        [Header("Depth Settings")]
-        [Range(0.0f, 100.0f)]
-        public float depthThreshold = 1.5f;
-        [Range(0.0f, 500.0f)]
-        public float robertsCrossMultiplier = 100.0f;
+        [Range(0.0f, 10.0f)]
+        public float depthThreshold = 0.5f;
 
-        [Header("Normal Settings")]
         [Range(0.0f, 1.0f)]
-        public float normalThreshold = 0.4f;
+        public float normalThreshold = 0.5f;
 
-        [Header("Depth Normal Relation Settings")]
-        [Range(0.0f, 2.0f)]
-        public float steepAngleThreshold = 0.2f;
-        [Range(0.0f, 500.0f)]
-        public float steepAngleMultiplier = 25.0f;
+        [Range(0.0f, 0.5f)]
+        public float feather = 0.5f;
         
+
         [Header("General Scene View Space Normal Texture Settings")]
         public RenderTextureFormat colorFormat;
         public int depthBufferBits;
@@ -70,15 +60,12 @@ public class ScreenSpaceOutlines : ScriptableRendererFeature {
 
             screenSpaceOutlineMaterial = new Material(Shader.Find("Hidden/Outlines"));
             screenSpaceOutlineMaterial.SetColor("_OutlineColor", settings.outlineColor);
-            screenSpaceOutlineMaterial.SetFloat("_OutlineScale", settings.outlineScale);
 
             screenSpaceOutlineMaterial.SetFloat("_DepthThreshold", settings.depthThreshold);
-            screenSpaceOutlineMaterial.SetFloat("_RobertsCrossMultiplier", settings.robertsCrossMultiplier);
+            screenSpaceOutlineMaterial.SetFloat("_Feather", settings.feather);
 
             screenSpaceOutlineMaterial.SetFloat("_NormalThreshold", settings.normalThreshold);
 
-            screenSpaceOutlineMaterial.SetFloat("_SteepAngleThreshold", settings.steepAngleThreshold);
-            screenSpaceOutlineMaterial.SetFloat("_SteepAngleMultiplier", settings.steepAngleMultiplier);
             
             if (settings.enableTransparents){
                 filteringSettings = new FilteringSettings(RenderQueueRange.all, layerMask);
