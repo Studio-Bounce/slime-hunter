@@ -1,3 +1,18 @@
+:root {
+    --bg-primary: #2F3235;
+    --bg-secondary: #1C2C34;
+    --bg-transparent: rgba(0,0,0,0.5);
+    --bg-accent: #46BBCA;
+    --bg-accent-dark: #32808A;
+    --bg-outline: white;
+    --text-primary: white;
+    --text-secondary: #333333;
+    --text-outline: #808080;
+    --text-glow: #46BBCA;
+
+    --radius: 20px;
+}
+
 * {
     color: white;
     -unity-font: resource('Assets/Fonts/HywenHei.ttf');
@@ -8,19 +23,41 @@
 Button {
     transition-property: all;
     transition-duration: 0.2s;
-    background-color: rgb(70, 187, 202);
+    background-color: var(--bg-accent);
     border-width: 2px;
     border-color: white;
-    border-radius: 20px;
+    border-radius: var(--radius);
     margin: 0;
 }
 
 Button:hover {
-    background-color: rgb(50, 128, 138);
+    background-color: var(--bg-accent-dark);
 }
 
 Button:active {
     scale: 0.95;
+}
+
+#RootWrapper {
+    padding: 5%;
+}
+
+.h1 {
+    font-size: 64px;
+}
+
+.h2 {
+    font-size: 48px;
+}
+
+.container-full {
+    width: 100%;
+    height: 100%;
+    padding: 5%;
+    border-radius: var(--radius);   
+    background-color: var(--bg-transparent);
+    border-width: 3px;
+    align-items: center
 }
 
 .option-slot {
@@ -39,7 +76,7 @@ Button:active {
     color: white;
     -unity-text-outline-color: grey;
     -unity-text-outline-width: 1px;
-    font-size: 48px;
+    font-size: 42px;
 }
 
 .option-slot:hover .menu-button {
@@ -64,13 +101,8 @@ Button:active {
     background-color: rgb(28, 44, 52);
 }
 
-.tab Label {
-    color: white;
-    opacity: 0.5;
-}
-
 .tab:hover {
-    background-color: rgb(70, 187, 202);
+    background-color: var(--bg-accent-dark);
 }
 
 .tab:hover Label {
@@ -78,13 +110,7 @@ Button:active {
 }
 
 .selected-tab {
-    display: flex;
-    background-color: rgb(70, 187, 202);
-    color: white;
-}
-
-.selected-tab Label {
-    opacity: 1;
+    background-color: var(--bg-accent);
 }
 
 .tab-content {
@@ -114,8 +140,8 @@ Button:active {
     flex-grow: 0;
     flex-shrink: 0;
     border-width: 3px;
-    border-radius: 21px;
-    border-color: white;
+    border-radius: var(--radius);
+    border-color: var(--bg-outline);
     background-color: rgb(47, 50, 53);
     align-items: center;
     justify-content: center;
@@ -153,7 +179,7 @@ Button:active {
     flex-direction: row;
     border-color: rgb(70, 187, 202);
     border-width: 5px;
-    border-radius: 21px;
+    border-radius: var(--radius);
     background-color: rgb(47, 50, 53);
     padding: 1%;
 }
