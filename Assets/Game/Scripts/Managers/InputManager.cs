@@ -33,7 +33,8 @@ public class InputManager : Singleton<InputManager>
     private void Awake()
     {
         // Setup Input Sprite Settings
-        _spriteSettings.InitializeDictionaries();
+        if (_spriteSettings != null)
+            _spriteSettings.InitializeDictionaries();
         // Enable InputActions
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
