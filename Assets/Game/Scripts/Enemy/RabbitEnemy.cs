@@ -15,7 +15,6 @@ public class RabbitEnemy : Enemy
     [SerializeField] Animator slimeAnimator;
 
     RabbitSlime_FSM rfsm;
-    Trail slimeTrail;
 
     // Used by FSM states
     [HideInInspector] public bool isDodging = false;
@@ -24,8 +23,6 @@ public class RabbitEnemy : Enemy
     {
         base.Start();
 
-        slimeTrail = GetComponent<Trail>();
-        slimeTrail.activeTime = Mathf.Max(0.0f, dodgeTime - 0.1f);
         rfsm = GetComponent<RabbitSlime_FSM>();
     }
 
@@ -82,14 +79,16 @@ public class RabbitEnemy : Enemy
 
     IEnumerator ApplyDodge(Vector3 dodgeVec)
     {
-        slimeTrail.InitiateTrail();
+        // Turn away from dodgeDirection
+        transform.LookAt(transform.position - dodgeVec);
+
         Vector3 startPosition = transform.position;
         Vector3 endPosition = startPosition + dodgeVec;
         float timeElapsed = 0.0f;
         while (timeElapsed < dodgeTime)
         {
             // Lerp knockback
-            float t = Easing.EaseOutCubic(timeElapsed / dodgeTime);
+            float t = Easing.EaseOutCirc(timeElapsed / dodgeTime);
             Vector3 newPosition = Vector3.Lerp(startPosition, endPosition, t);
             if (characterController != null && characterController.enabled)
                 characterController.Move(newPosition - transform.position);
@@ -101,5 +100,4 @@ public class RabbitEnemy : Enemy
         }
         isDodging = false;
     }
-
 }
