@@ -51,6 +51,11 @@ Button:active {
     font-size: 48px;
 }
 
+/* Hides the content */
+.unshowned-content {
+    display: none;
+}
+
 .container-full {
     width: 100%;
     height: 100%;
