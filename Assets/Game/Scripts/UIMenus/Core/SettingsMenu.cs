@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -29,11 +28,11 @@ public class SettingsMenu : Menu
     };
 
     List<string> displayModes = new List<string>
-        {
-            "Fullscreen",
-            "Windowed",
-            "Borderless Window"
-        };
+    {
+        "Fullscreen",
+        "Windowed",
+        "Borderless Window"
+    };
 
     protected override void Awake()
     {
@@ -54,55 +53,74 @@ public class SettingsMenu : Menu
         displayModeDropdown.choices = displayModes;
         qualityDropdown.choices = new List<string>(QualitySettings.names);
 
-        // Set default values based on current settings
-        SetDefaultDropdownValues();
+        // Load saved settings or set default values
+        LoadSettings();
 
         // Register event handlers
         resolutionDropdown.RegisterValueChangedCallback(evt =>
         {
             string selectedResolution = evt.newValue;
             ApplyResolution(selectedResolution);
+            PlayerPrefs.SetString("Resolution", selectedResolution);
         });
 
         displayModeDropdown.RegisterValueChangedCallback(evt =>
         {
             string selectedMode = evt.newValue;
             ApplyDisplayMode(selectedMode);
+            PlayerPrefs.SetString("DisplayMode", selectedMode);
         });
 
         qualityDropdown.RegisterValueChangedCallback(evt =>
         {
             string selectedQuality = evt.newValue;
             ApplyQualitySetting(selectedQuality);
+            PlayerPrefs.SetString("Quality", selectedQuality);
+        });
+
+        volumeSlider.RegisterValueChangedCallback(evt =>
+        {
+            float volume = evt.newValue;
+            ApplyVolumeSetting(volume);
+            PlayerPrefs.SetFloat("Volume", volume);
         });
 
         backBtn.RegisterCallback<ClickEvent>(ev => Back());
     }
 
-    private void SetDefaultDropdownValues()
+    private void LoadSettings()
     {
-        // Set resolution dropdown to current resolution
-        string currentResolution = $"{Screen.currentResolution.width} x {Screen.currentResolution.height}";
-        if (!resolutions.Contains(currentResolution)) resolutions.Add(currentResolution);
-        resolutionDropdown.value = currentResolution;
+        // Load resolution
+        string savedResolution = PlayerPrefs.GetString("Resolution", $"{Screen.currentResolution.width} x {Screen.currentResolution.height}");
+        if (!resolutions.Contains(savedResolution)) resolutions.Add(savedResolution);
+        resolutionDropdown.value = savedResolution;
 
+        // Load display mode
+        string savedDisplayMode = PlayerPrefs.GetString("DisplayMode", GetDefaultDisplayMode());
+        displayModeDropdown.value = savedDisplayMode;
 
-        // Set display mode dropdown to current display mode
+        // Load quality setting
+        string savedQuality = PlayerPrefs.GetString("Quality", QualitySettings.names[QualitySettings.GetQualityLevel()]);
+        qualityDropdown.value = savedQuality;
+
+        // Load volume setting
+        float savedVolume = PlayerPrefs.GetFloat("Volume", 1.0f);
+        volumeSlider.value = savedVolume;
+    }
+
+    private string GetDefaultDisplayMode()
+    {
         switch (Screen.fullScreenMode)
         {
             case FullScreenMode.FullScreenWindow:
-                displayModeDropdown.value = "Fullscreen";
-                break;
+                return "Fullscreen";
             case FullScreenMode.Windowed:
-                displayModeDropdown.value = "Windowed";
-                break;
+                return "Windowed";
             case FullScreenMode.MaximizedWindow:
-                displayModeDropdown.value = "Borderless Window";
-                break;
+                return "Borderless Window";
+            default:
+                return "Windowed";
         }
-
-        // Set quality dropdown to current quality setting
-        qualityDropdown.value = QualitySettings.names[QualitySettings.GetQualityLevel()];
     }
 
     private void ApplyResolution(string resolution)
@@ -139,6 +157,12 @@ public class SettingsMenu : Menu
         {
             QualitySettings.SetQualityLevel(qualityIndex, true);
         }
+    }
+
+    private void ApplyVolumeSetting(float volume)
+    {
+        // Replace with FMOD
+        AudioListener.volume = volume;
     }
 
     private void Back()
