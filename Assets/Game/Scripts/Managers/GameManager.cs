@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -222,10 +223,10 @@ public class GameManager : Singleton<GameManager>
 
     public void ApplyTempTimeScale(float slow, float duration)
     {
-        if (!IsTimeScaled) StartCoroutine(BeginTimeScale(slow, duration));
+        if (!IsTimeScaled) StartCoroutine(_BeginTimeScale(slow, duration));
     }
 
-    IEnumerator BeginTimeScale(float slow, float duration)
+    IEnumerator _BeginTimeScale(float slow, float duration)
     {
         Time.timeScale = slow;
         yield return new WaitForSeconds(duration*slow);
@@ -234,10 +235,10 @@ public class GameManager : Singleton<GameManager>
 
     public void ApplyReflexTime(float slow, float duration)
     {
-        if (!IsTimeScaled) StartCoroutine(BeginReflexTime(slow, duration));
+        if (!IsTimeScaled) StartCoroutine(_BeginReflexTime(slow, duration));
     }
 
-    IEnumerator BeginReflexTime(float slow, float duration)
+    IEnumerator _BeginReflexTime(float slow, float duration)
     {
         PlayerSpeedMultiplier = 1 / slow;
         Time.timeScale = slow;
@@ -248,10 +249,10 @@ public class GameManager : Singleton<GameManager>
 
     public void ApplyTempTimeScaleFrames(float slow, int frameCount)
     {
-        if (!IsTimeScaled) StartCoroutine(BeginTimeScaleFrames(slow, frameCount));
+        if (!IsTimeScaled) StartCoroutine(_BeginTimeScaleFrames(slow, frameCount));
     }
 
-    IEnumerator BeginTimeScaleFrames(float slow, int frameCount)
+    IEnumerator _BeginTimeScaleFrames(float slow, int frameCount)
     {
         Time.timeScale = slow;
         for (int i = 0; i < frameCount; i++)
@@ -275,7 +276,7 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Helpers
-    public static IEnumerator RunEasedLerp(Vector3 start, Vector3 end, float duration, Func<float, float> Curve, Action<Vector3> UpdateSource)
+    public static IEnumerator RunEasedLerp(Vector3 start, Vector3 end, float duration, Func<float, float> Curve, Action<Vector3> UpdateSource, bool unscaled = false)
     {
         float elapsed = 0.0f;
         while (elapsed < duration)
@@ -283,12 +284,12 @@ public class GameManager : Singleton<GameManager>
             float t = elapsed / duration;
             float eased = Curve(t);
             UpdateSource(Vector3.Lerp(start, end, eased));
-            elapsed += Time.deltaTime;
+            elapsed += unscaled ? Time.unscaledDeltaTime : Time.deltaTime;
             yield return null;
         }
     }
 
-    public static IEnumerator RunEasedLerp(float start, float end, float duration, Func<float, float> Curve, Action<float> UpdateSource)
+    public static IEnumerator RunEasedLerp(float start, float end, float duration, Func<float, float> Curve, Action<float> UpdateSource, bool unscaled = false)
     {
         float elapsed = 0.0f;
         while (elapsed < duration)
@@ -296,13 +297,13 @@ public class GameManager : Singleton<GameManager>
             float t = elapsed / duration;
             float eased = Curve(t);
             UpdateSource(Utils.Lerp(start, end, eased));
-            elapsed += Time.deltaTime;
+            elapsed += unscaled ? Time.unscaledDeltaTime : Time.deltaTime;
             yield return null;
         }
         UpdateSource(end);
     }
 
-    public static IEnumerator RunEasedSlerp(Vector3 start, Vector3 end, float duration, Func<float, float> Curve, Action<Vector3> UpdateSource)
+    public static IEnumerator RunEasedSlerp(Vector3 start, Vector3 end, float duration, Func<float, float> Curve, Action<Vector3> UpdateSource, bool unscaled = false)
     {
         float elapsed = 0.0f;
         while (elapsed < duration)
@@ -310,7 +311,7 @@ public class GameManager : Singleton<GameManager>
             float t = elapsed / duration;
             float eased = Curve(t);
             UpdateSource(Vector3.Slerp(start, end, eased));
-            elapsed += Time.deltaTime;
+            elapsed += unscaled ? Time.unscaledDeltaTime : Time.deltaTime;
             yield return null;
         }
         UpdateSource(end);

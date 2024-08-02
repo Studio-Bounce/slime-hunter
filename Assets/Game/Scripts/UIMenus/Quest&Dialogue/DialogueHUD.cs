@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
 using UnityEngine.UIElements;
-using Unity.VisualScripting;
-using static UnityEngine.UIElements.VisualElement;
 
 public class DialogueHUD : Menu
 {
@@ -12,6 +10,7 @@ public class DialogueHUD : Menu
     VisualElement dialogOptions;
     Label dialogPersonName;
     Label dialogContent;
+    string currentDialogString; // Cache whole dialogue
 
     [SerializeField] VisualTreeAsset dialogOptionBtn;
     [SerializeField] Color dialogColor;
@@ -69,11 +68,13 @@ public class DialogueHUD : Menu
     {
         dialogPersonName.text = personName;
         dialogContent.text = "";
+        currentDialogString = dialogText;
         StartCoroutine(AddDialogue(dialogText));
     }
 
     public void AppendDialogue(string dialogText)
     {
+        currentDialogString += dialogText;
         StartCoroutine(AddDialogue(dialogText));
     }
 
@@ -85,6 +86,13 @@ public class DialogueHUD : Menu
             dialogContent.text += c;
             yield return null;
         }
+        dialogRunning = false;
+    }
+
+    public void SkipDialogue()
+    {
+        StopAllCoroutines();
+        dialogContent.text = currentDialogString;
         dialogRunning = false;
     }
 }

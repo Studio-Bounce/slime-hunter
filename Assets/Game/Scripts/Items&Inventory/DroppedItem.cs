@@ -114,7 +114,7 @@ public class DroppedItem : MonoBehaviour
         target.y += 1;
         Vector3 direction = target - transform.position;
         direction.Normalize();
-        transform.position += gm.PlayerSpeedMultiplier * gm.pickupSpeed * 2 * Time.deltaTime * direction;
+        transform.position += gm.pickupSpeed * 2 * Time.unscaledDeltaTime * direction;
 
         float dist = Vector3.Distance(transform.position, target);
         if (dist < 1)
@@ -135,8 +135,8 @@ public class DroppedItem : MonoBehaviour
             direction.Normalize();
             // Speed up magnet when closer
             float distSpeedUp = gm.pickupRange - dist;
-            float speedMultiplier = gm.PlayerSpeedMultiplier * gm.pickupSpeed * distSpeedUp;
-            transform.position += speedMultiplier * Time.deltaTime * direction;
+            float speedMultiplier = gm.pickupSpeed * distSpeedUp;
+            transform.position += speedMultiplier * Time.unscaledDeltaTime * direction;
         }
         else if (dist < 1)
         {

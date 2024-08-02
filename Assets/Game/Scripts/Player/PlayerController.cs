@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
         while (elapsedTime < dashDuration)
         {
             // Increment elapsed time
-            elapsedTime += Time.deltaTime*GameManager.Instance.PlayerSpeedMultiplier;
+            elapsedTime += Time.unscaledDeltaTime;
             float dashProgress = Mathf.Clamp01(elapsedTime / dashDuration);
             dashProgress = Easing.EaseOutCubic(dashProgress);
 

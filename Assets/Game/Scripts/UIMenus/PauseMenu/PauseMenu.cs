@@ -27,10 +27,12 @@ public class PauseMenu : Menu
 
         Button btnUnpause = root.Q<Button>("btnUnpause");
         Button btnBackMainMenu = root.Q<Button>("btnBackMainMenu");
+        Button btnSettings = root.Q<Button>("btnSettings");
         Button btnQuit = root.Q<Button>("btnQuit");
 
         btnUnpause.clicked += Unpause;
         btnBackMainMenu.clicked += ReturnMainMenu;
+        btnSettings.clicked += Settings;
         btnQuit.clicked += () => Application.Quit();
 
         characterContainer = root.Q<VisualElement>("CharacterContainer");
@@ -49,6 +51,12 @@ public class PauseMenu : Menu
         questTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
         profileTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
         menuTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
+    }
+
+    private void Settings()
+    {
+        Hide();
+        UIManager.Instance.settingsMenu.Show();
     }
 
     private void LinkInventoryStatsUIToPlayer()
@@ -80,7 +88,7 @@ public class PauseMenu : Menu
         InputManager.Instance.TogglePlayerControls(true);
         // Show HUD
         UIManager.Instance.SetHUDMenu(true);
-        ShowHideMapCamera(false);  // just to ensure map camera is not shown
+        mapCamera.depth = -1;  // just to ensure map camera is not shown
     }
 
     void MapMenuSelected()
@@ -131,10 +139,12 @@ public class PauseMenu : Menu
 
         if (show)
         {
+            CameraManager.Instance.SmoothSetBlur(0.0f, 0.3f);
             mapCamera.depth = 1;
         }
         else
         {
+            CameraManager.Instance.SmoothSetBlur(15.0f, 0.3f);
             mapCamera.depth = -1;
         }
     }

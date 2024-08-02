@@ -54,6 +54,7 @@ public class InputManager : Singleton<InputManager>
     {
         GetControllers(GameManager.Instance.PlayerRef);
         _AddUIControls();
+        TogglePauseControl(false);
     }
 
     public Sprite StringActionToSprite(string actionName)
@@ -80,6 +81,7 @@ public class InputManager : Singleton<InputManager>
         switch (state)
         {
             case GameState.MAIN_MENU:
+                TogglePauseControl(false);
                 TogglePlayerControls(false);
                 break;
 
@@ -88,6 +90,7 @@ public class InputManager : Singleton<InputManager>
                 break;
 
             case GameState.GAMEPLAY:
+                ToggleUIControls(true);
                 TogglePlayerControls(true);
                 break;
 
@@ -128,6 +131,11 @@ public class InputManager : Singleton<InputManager>
         if (active) _playerActions.Spell1.Enable(); else _playerActions.Spell1.Disable();
         if (active) _playerActions.Spell2.Enable(); else _playerActions.Spell2.Disable();
         if (active) _playerActions.CastSpell.Enable(); else _playerActions.CastSpell.Disable();
+    }
+
+    public void TogglePauseControl(bool active)
+    {
+        if (active) _UIActions.Pause.Enable(); else _UIActions.Pause.Disable();
     }
 
     public void ToggleUIControls(bool active)
@@ -193,6 +201,7 @@ public class InputManager : Singleton<InputManager>
     private void _AddUIControls()
     {
         _UIActions.Pause.performed += Pause;
+        _UIActions.SkipDialogue.performed += DialogueManager.Instance.SkipDialogue;
     }
 
     private void _RemovePlayerControls()
@@ -216,6 +225,7 @@ public class InputManager : Singleton<InputManager>
     private void _RemoveUIControls()
     {
         _UIActions.Pause.performed -= Pause;
+        _UIActions.SkipDialogue.performed -= DialogueManager.Instance.SkipDialogue;
     }
 
     private void Pause(InputContext context)
@@ -223,11 +233,13 @@ public class InputManager : Singleton<InputManager>
         if (GameManager.Instance.GameState == GameState.PAUSED)
         {
             GameManager.Instance.GameState = GameState.GAMEPLAY;
+            CameraManager.Instance.SmoothSetBlur(0.0f, 0.3f);
             UIManager.Instance.SetPauseMenu(false);
         }
         else
         {
             GameManager.Instance.GameState = GameState.PAUSED;
+            CameraManager.Instance.SmoothSetBlur(15.0f, 0.3f);
             UIManager.Instance.SetPauseMenu(true);
         }
     }

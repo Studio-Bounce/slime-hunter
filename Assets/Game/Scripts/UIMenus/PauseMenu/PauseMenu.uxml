@@ -4,19 +4,19 @@
         <ui:VisualElement name="Header" style="flex-grow: 0; height: 99px; background-color: rgba(28, 44, 52, 0.78); flex-direction: row; max-height: 99px; min-height: 99px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
             <ui:VisualElement name="TabbedMenu" style="flex-grow: 0; height: 99px; flex-direction: row; border-top-left-radius: 20px;">
                 <ui:VisualElement name="InventoryTab" class="tab selected-tab" style="flex-grow: 0; justify-content: center; width: 200px; border-top-left-radius: 20px;">
-                    <ui:Label tabindex="-1" text="Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 25px; -unity-font-style: bold; -unity-text-align: upper-center; margin-left: 15px; margin-right: 15px;" />
+                    <ui:Label tabindex="-1" text="Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 25px; -unity-text-align: upper-center; margin-left: 15px; margin-right: 15px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="QuestTab" class="tab" style="flex-grow: 0; justify-content: center; width: 200px;">
-                    <ui:Label tabindex="-1" text="Quests" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 25px; -unity-font-style: normal; -unity-text-align: upper-center; margin-left: 15px; margin-right: 15px;" />
+                    <ui:Label tabindex="-1" text="Quests" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 25px; -unity-text-align: upper-center; margin-left: 15px; margin-right: 15px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="MapTab" class="tab" style="flex-grow: 0; justify-content: center; width: 200px;">
-                    <ui:Label tabindex="-1" text="Map" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 25px; -unity-font-style: normal; -unity-text-align: upper-center; margin-left: 15px; margin-right: 15px;" />
+                    <ui:Label tabindex="-1" text="Map" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 25px; -unity-text-align: upper-center; margin-left: 15px; margin-right: 15px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="ProfileTab" class="tab" style="flex-grow: 0; justify-content: center; width: 200px; display: none;">
                     <ui:Label tabindex="-1" text="Profiles" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="font-size: 25px; -unity-font-style: normal; -unity-text-align: upper-center; margin-left: 15px; margin-right: 15px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="MenuTab" class="tab" style="flex-grow: 0; justify-content: center; width: 200px;">
-                    <ui:Label tabindex="-1" text="Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 25px; -unity-font-style: normal; -unity-text-align: upper-center; margin-right: 15px; margin-left: 15px;" />
+                    <ui:Label tabindex="-1" text="Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 25px; -unity-text-align: upper-center; margin-right: 15px; margin-left: 15px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="Currency" style="flex-grow: 1; flex-direction: row-reverse; padding-left: 25px; padding-right: 25px;">
@@ -438,13 +438,13 @@
                         <ui:Button text="Continue" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnUnpause" class="menu-button" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold;" />
                     </ui:VisualElement>
                     <ui:VisualElement class="option-slot" style="flex-grow: 0;">
-                        <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="save" class="menu-button" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold;" />
+                        <ui:Button text="Save" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnSave" class="menu-button" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold;" />
                     </ui:VisualElement>
                     <ui:VisualElement class="option-slot" style="flex-grow: 0;">
-                        <ui:Button text="Load" parse-escape-sequences="true" display-tooltip-when-elided="true" name="load" class="menu-button" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold;" />
+                        <ui:Button text="Load" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnLoad" class="menu-button" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold;" />
                     </ui:VisualElement>
                     <ui:VisualElement class="option-slot" style="flex-grow: 0;">
-                        <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting" class="menu-button" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold;" />
+                        <ui:Button text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnSettings" class="menu-button" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold;" />
                     </ui:VisualElement>
                     <ui:VisualElement class="option-slot" style="flex-grow: 0;">
                         <ui:Button text="Main Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnBackMainMenu" class="menu-button" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold;" />

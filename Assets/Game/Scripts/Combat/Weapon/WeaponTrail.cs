@@ -126,7 +126,7 @@ public class WeaponTrail : DamageDealer
         float _timer = 0.0f;
         while (_timer < duration && active)
         {
-            _timer += Time.deltaTime*GameManager.Instance.PlayerSpeedMultiplier;
+            _timer += Time.unscaledDeltaTime;
             float _normalTime = _timer / duration;
             trailMaterial.SetFloat("_Factor", _normalTime);
             yield return null;

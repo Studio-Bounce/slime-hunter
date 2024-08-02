@@ -1,10 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.Rendering;
-
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -175,6 +172,12 @@ public class SettingsMenu : Menu
     private void Back()
     {
         Hide();
-        UIManager.Instance.mainMenu.Show();
+        if (GameManager.Instance.GameState == GameState.MAIN_MENU)
+        {
+            UIManager.Instance.mainMenu.Show();
+        } else
+        {
+            UIManager.Instance.pauseMenu.Show();
+        }
     }
 }
