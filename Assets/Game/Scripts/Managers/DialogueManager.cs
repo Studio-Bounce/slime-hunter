@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Ink.Runtime;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class DialogueManager : Singleton<DialogueManager>
 {
@@ -77,7 +78,7 @@ public class DialogueManager : Singleton<DialogueManager>
                 }
                 else
                 {
-                    // Appending to running dialog, no need of updating name
+                    // Appending to running dialogue, no need of updating name
                     dialogueHUD.AppendDialogue(dialogText);
                 }
             }
@@ -101,6 +102,11 @@ public class DialogueManager : Singleton<DialogueManager>
                 StartCoroutine(DelayedClear(2.0f));
             }
         }
+    }
+
+    public void SkipDialogue(InputAction.CallbackContext context)
+    {
+        dialogueHUD.SkipDialogue();
     }
 
     IEnumerator DelayedClear(float timer)

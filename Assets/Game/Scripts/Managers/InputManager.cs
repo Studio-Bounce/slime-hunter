@@ -193,6 +193,7 @@ public class InputManager : Singleton<InputManager>
     private void _AddUIControls()
     {
         _UIActions.Pause.performed += Pause;
+        _UIActions.SkipDialogue.performed += DialogueManager.Instance.SkipDialogue;
     }
 
     private void _RemovePlayerControls()
@@ -216,6 +217,7 @@ public class InputManager : Singleton<InputManager>
     private void _RemoveUIControls()
     {
         _UIActions.Pause.performed -= Pause;
+        _UIActions.SkipDialogue.performed -= DialogueManager.Instance.SkipDialogue;
     }
 
     private void Pause(InputContext context)
