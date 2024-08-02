@@ -70,8 +70,6 @@ public class ButtonPrompt : MonoBehaviour
     {
         if (enabled)
         {
-            CameraManager.Instance.SmoothSetBlur(10.0f, 1.0f);
-
             onButtonPressed.Invoke();
             if (!string.IsNullOrEmpty(triggerString))
             {

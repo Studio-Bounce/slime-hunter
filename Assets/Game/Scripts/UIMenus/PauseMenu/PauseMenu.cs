@@ -88,7 +88,7 @@ public class PauseMenu : Menu
         InputManager.Instance.TogglePlayerControls(true);
         // Show HUD
         UIManager.Instance.SetHUDMenu(true);
-        ShowHideMapCamera(false);  // just to ensure map camera is not shown
+        mapCamera.depth = -1;  // just to ensure map camera is not shown
     }
 
     void MapMenuSelected()
@@ -139,10 +139,12 @@ public class PauseMenu : Menu
 
         if (show)
         {
+            CameraManager.Instance.SmoothSetBlur(0.0f, 0.3f);
             mapCamera.depth = 1;
         }
         else
         {
+            CameraManager.Instance.SmoothSetBlur(15.0f, 0.3f);
             mapCamera.depth = -1;
         }
     }

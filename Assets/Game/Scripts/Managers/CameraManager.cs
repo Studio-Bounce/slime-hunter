@@ -146,25 +146,24 @@ public class CameraManager : Singleton<CameraManager>
             target,
             duration,
             Easing.EaseOutCubic,
-            (float value) => _vignette.intensity.value = value
+            (float value) => _vignette.intensity.value = value,
+            true
             ));
         }
     }
 
     public void SmoothSetBlur(float target, float duration)
     {
-        Debug.Log("Start Blur");
         BlurSettings _blur;
         if (GlobalVolume.profile.TryGet(out _blur))
         {
-            Debug.Log("Blur Found");
-
             StartCoroutine(GameManager.RunEasedLerp(
             _blur.strength.value,
             target,
             duration,
             Easing.EaseOutCubic,
-            (float value) => _blur.strength.value = value
+            (float value) => _blur.strength.value = value,
+            true
             ));
         }
     }
@@ -179,7 +178,8 @@ public class CameraManager : Singleton<CameraManager>
             target,
             duration,
             Easing.EaseOutCubic,
-            (float value) => _chroma.intensity.value = value
+            (float value) => _chroma.intensity.value = value,
+            true
             ));
         }
     }
