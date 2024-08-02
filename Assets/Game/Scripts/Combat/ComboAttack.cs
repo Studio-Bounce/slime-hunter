@@ -60,7 +60,7 @@ public class ComboAttack : MonoBehaviour
         isInCombo = true;
         while (true)
         {
-            comboTimer += Time.deltaTime;
+            comboTimer += Time.unscaledDeltaTime;
             float progress = comboTimer / comboBreakTimeout;
             UIManager.Instance.SetHUDFade(1.0f - progress);
 
@@ -84,7 +84,7 @@ public class ComboAttack : MonoBehaviour
             // Decay stops if combo starts building up
             while (!isInCombo && GameManager.Instance.PlayerSpecialAttack > specialBarReserve)
             {
-                float deltaDecay = (specialBarDecayRate * Time.deltaTime);
+                float deltaDecay = (specialBarDecayRate * Time.unscaledDeltaTime);
                 GameManager.Instance.PlayerSpecialAttack -= deltaDecay;
 
                 yield return null;

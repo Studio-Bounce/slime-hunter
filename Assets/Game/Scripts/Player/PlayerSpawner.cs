@@ -78,7 +78,7 @@ public class PlayerSpawner : PersistentObject
             Vector3 position = Vector3.Lerp(startPosition, endPosition, t);
 
             playerInstance.transform.position = position;
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.unscaledDeltaTime;
 
             yield return null;
         }

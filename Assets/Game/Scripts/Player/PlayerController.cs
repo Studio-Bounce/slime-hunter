@@ -236,7 +236,7 @@ public class PlayerController : MonoBehaviour
 
         while (timeElapsed < jumpDuration)
         {
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.unscaledDeltaTime;
             float t = timeElapsed / jumpDuration;
 
             Vector3 currentPosition = Vector3.Lerp(initialPosition, target, t);

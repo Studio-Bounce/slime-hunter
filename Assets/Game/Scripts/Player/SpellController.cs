@@ -157,7 +157,7 @@ public class SpellController : MonoBehaviour
         if (spellIndex == currentSpellIndex) currentIndicator.ToggleReady(false);
         while (remainingCD > 0)
         {
-            remainingCD -= Time.deltaTime;
+            remainingCD -= Time.unscaledDeltaTime;
             hudMenu?.UpdateSpellCooldown(spellIndex+1, Mathf.CeilToInt(remainingCD));
             yield return null;
         }

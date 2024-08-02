@@ -64,7 +64,7 @@ public class DynamicDamageTaker : UIDamageTaker
             else
                 transform.Translate(newPosition - transform.position);
 
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.unscaledDeltaTime;
             yield return null;
         }
         isInKnockback = false;

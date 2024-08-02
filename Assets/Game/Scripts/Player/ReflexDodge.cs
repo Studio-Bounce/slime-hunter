@@ -56,7 +56,7 @@ public class ReflexDodge : MonoBehaviour
                     }
                 }
             }
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             yield return null;
         }
         

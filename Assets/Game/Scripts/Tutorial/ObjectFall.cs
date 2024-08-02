@@ -92,7 +92,7 @@ public class ObjectFall : MonoBehaviour
             // Scale down to 0.1 in slowDownTime seconds
             if (Time.timeScale > 0.1f)
             {
-                Time.timeScale -= ((0.5f / slowDownTime) / Time.timeScale) * Time.deltaTime;
+                Time.timeScale -= Time.unscaledDeltaTime;
             }
             else if (Time.timeScale > 0 && moveThePlayer)
             {

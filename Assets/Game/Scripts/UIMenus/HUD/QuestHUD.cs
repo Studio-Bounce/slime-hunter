@@ -143,7 +143,7 @@ public class QuestHUD : Menu
         canvas.style.opacity = opacity;
         while (opacity < 1.0f)
         {
-            opacity += Time.deltaTime;
+            opacity += Time.unscaledDeltaTime;
             canvas.style.opacity = opacity;
             yield return null;
         }
@@ -164,7 +164,7 @@ public class QuestHUD : Menu
         canvas.style.opacity = opacity;
         while (opacity > 0f)
         {
-            opacity -= Time.deltaTime;
+            opacity -= Time.unscaledDeltaTime;
             canvas.style.opacity = opacity;
             yield return null;
         }

@@ -252,7 +252,7 @@ public class HUDMenu : Menu
         while (lstItem.lifetime > 0)
         {
             lstItem = itemListMap[itemSO];
-            lstItem.lifetime = lstItem.lifetime - Time.deltaTime * GameManager.Instance.PlayerSpeedMultiplier;
+            lstItem.lifetime = lstItem.lifetime - Time.unscaledDeltaTime * GameManager.Instance.PlayerSpeedMultiplier;
             itemListMap[itemSO] = lstItem;
             yield return null;
         }
@@ -283,7 +283,7 @@ public class HUDMenu : Menu
         {
 
             // Highlight the special attack button
-            btnScale += direction * (Time.deltaTime / specialAttackBtnTime);
+            btnScale += direction * (Time.unscaledDeltaTime / specialAttackBtnTime);
             if (btnScale <= 1.0f || btnScale >= 2.0f)
                 direction *= -1;
             splAttackComboKey.transform.scale = new Vector3(btnScale, btnScale, btnScale);

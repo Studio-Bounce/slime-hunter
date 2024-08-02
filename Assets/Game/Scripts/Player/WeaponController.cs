@@ -266,7 +266,7 @@ public class WeaponController : MonoBehaviour
         float timeElapsed = 0.0f;
         while (timeElapsed < animationTime)
         {
-            timeElapsed += Time.deltaTime;
+            timeElapsed += Time.unscaledDeltaTime;
             // Update weapon direction as the player rotates
             weaponTrail.transform.forward = _animator.gameObject.transform.forward;
 

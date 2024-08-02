@@ -177,7 +177,7 @@ public class GameManager : Singleton<GameManager>
 
     private void UpdateStamina()
     {
-        _staminaTimer += Time.deltaTime;
+        _staminaTimer += Time.unscaledDeltaTime;
         if (_cooldown)
         {
             if (_staminaTimer > cooldownLength)
