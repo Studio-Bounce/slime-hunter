@@ -22,7 +22,7 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="Volume" style="flex-direction: row; justify-content: space-between;">
                     <ui:Label tabindex="-1" text="Volume" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" />
-                    <ui:SliderInt high-value="100" name="VolumeSlider" style="width: 50%;" />
+                    <ui:Slider high-value="1" name="VolumeSlider" style="width: 50%;" />
                 </ui:VisualElement>
                 <ui:Label tabindex="-1" text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Back" class="h2" style="align-self: center; margin-top: 64px;" />
             </ui:VisualElement>
