@@ -8,6 +8,7 @@ using static UnityEngine.UIElements.VisualElement;
 
 public class DialogueHUD : Menu
 {
+    VisualElement dialogBox;
     VisualElement dialogOptions;
     Label dialogPersonName;
     Label dialogContent;
@@ -21,11 +22,10 @@ public class DialogueHUD : Menu
     {
         VisualElement root = uiDocument.rootVisualElement;
 
-        dialogOptions = root.Q<VisualElement>("DialogOptions");
-        VisualElement dialogBox = root.Q<VisualElement>("DialogBox");
+        dialogBox = root.Q<VisualElement>("DialogueBox");
+        dialogOptions = root.Q<VisualElement>("DialogueOptions");
         dialogPersonName = dialogBox.Q<VisualElement>("Name").Q<Label>();
-        dialogContent = dialogBox.Q<VisualElement>("Content").Q<VisualElement>("ContentBox").Q<Label>();
-        
+        dialogContent = dialogBox.Q<Label>("DialogueText");
         Hide();
     }
 
@@ -54,7 +54,6 @@ public class DialogueHUD : Menu
                 story.ChooseChoiceIndex(choice.index);
                 DialogueManager.Instance.ContinueStoryPublic(dialogue, story);
             };
-
             dialogOptions.Add(dialogVE);
         }
     }

@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Game/Scripts/UIMenus/USS/MainStyle.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainStyle" />
-    <ui:VisualElement name="RootWrapper" style="background-color: rgba(0, 0, 0, 0.78); flex-grow: 1; opacity: 1;">
-        <ui:VisualElement name="Header" style="flex-grow: 0; height: 99px; background-color: rgba(28, 44, 52, 0.78); flex-direction: row; max-height: 99px; min-height: 99px;">
-            <ui:VisualElement name="TabbedMenu" style="flex-grow: 0; height: 99px; flex-direction: row;">
-                <ui:VisualElement name="InventoryTab" class="tab selected-tab" style="flex-grow: 0; justify-content: center; width: 200px;">
+    <ui:VisualElement name="RootWrapper" style="background-color: rgba(0, 0, 0, 0.86); flex-grow: 1; opacity: 1;">
+        <ui:VisualElement name="Header" style="flex-grow: 0; height: 99px; background-color: rgba(28, 44, 52, 0.78); flex-direction: row; max-height: 99px; min-height: 99px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
+            <ui:VisualElement name="TabbedMenu" style="flex-grow: 0; height: 99px; flex-direction: row; border-top-left-radius: 20px;">
+                <ui:VisualElement name="InventoryTab" class="tab selected-tab" style="flex-grow: 0; justify-content: center; width: 200px; border-top-left-radius: 20px;">
                     <ui:Label tabindex="-1" text="Inventory" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 25px; -unity-font-style: bold; -unity-text-align: upper-center; margin-left: 15px; margin-right: 15px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="QuestTab" class="tab" style="flex-grow: 0; justify-content: center; width: 200px;">
@@ -19,13 +19,11 @@
                     <ui:Label tabindex="-1" text="Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" style="font-size: 25px; -unity-font-style: normal; -unity-text-align: upper-center; margin-right: 15px; margin-left: 15px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="Currency" style="flex-grow: 1; flex-direction: row-reverse;">
-                <ui:Label tabindex="-1" text="545" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 75px; -unity-text-align: middle-left; color: rgb(255, 255, 255); transform-origin: right top; position: absolute; justify-content: center; align-self: center; left: 801px; font-size: 25px;">
-                    <ui:VisualElement style="flex-grow: 1; position: absolute; justify-content: center; align-self: center; height: 36px; width: 33px; left: -38px; transform-origin: right top; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Group%2030Coins.png?fileID=2800000&amp;guid=f8a11596087398343b39181ba41041b1&amp;type=3#Group 30Coins&quot;); -unity-background-scale-mode: scale-to-fit;" />
-                </ui:Label>
-                <ui:Label tabindex="-1" text="1134" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 75px; -unity-text-align: middle-left; color: rgb(255, 255, 255); transform-origin: right top; position: absolute; justify-content: center; align-self: center; left: 632px; font-size: 25px;">
-                    <ui:VisualElement style="flex-grow: 1; position: absolute; justify-content: center; align-self: center; height: 32px; width: 35px; left: -42px; transform-origin: right top; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Group%2029Coins.png?fileID=2800000&amp;guid=334061e7a891f0843b16f1194fe412f7&amp;type=3#Group 29Coins&quot;); -unity-background-scale-mode: scale-to-fit;" />
-                </ui:Label>
+            <ui:VisualElement name="Currency" style="flex-grow: 1; flex-direction: row-reverse; padding-left: 25px; padding-right: 25px;">
+                <ui:Label tabindex="-1" text="545" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="-unity-text-align: middle-left; color: rgb(255, 255, 255); transform-origin: right top; justify-content: center; align-self: center; font-size: 25px;" />
+                <ui:VisualElement name="Icon" style="justify-content: center; align-self: center; height: 36px; width: 33px; transform-origin: right top; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Group%2030Coins.png?fileID=2800000&amp;guid=f8a11596087398343b39181ba41041b1&amp;type=3#Group 30Coins&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                <ui:Label tabindex="-1" text="1134" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-left; color: rgb(255, 255, 255); transform-origin: right top; justify-content: center; align-self: center; font-size: 25px;" />
+                <ui:VisualElement name="Icon" style="justify-content: center; align-self: center; height: 32px; width: 35px; transform-origin: right top; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Group%2029Coins.png?fileID=2800000&amp;guid=334061e7a891f0843b16f1194fe412f7&amp;type=3#Group 29Coins&quot;); -unity-background-scale-mode: scale-to-fit;" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="TabContent" style="flex-grow: 1; padding-right: 100px; padding-left: 100px; padding-top: 50px; padding-bottom: 50px; display: flex;">
@@ -96,14 +94,14 @@
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="ItemInfoContainer" class="item-info-container" style="margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%; height: 18%;">
-                        <ui:VisualElement name="ItemIconWrapper" style="flex-shrink: 0; width: 20%; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+                        <ui:VisualElement name="ItemIconWrapper" style="flex-shrink: 0; width: 15%; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
                             <ui:VisualElement name="ItemIcon" style="width: 100%; height: 100%; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/thirdweapon.png?fileID=2800000&amp;guid=2e63cda403abdc845bdf0ca700093c97&amp;type=3#thirdweapon&quot;); -unity-background-scale-mode: scale-to-fit;" />
                         </ui:VisualElement>
-                        <ui:VisualElement name="ItemInfoWrapper" style="flex-shrink: 0; width: 50%; padding-top: 5px; padding-right: 15px; padding-bottom: 5px; padding-left: 15px;">
+                        <ui:VisualElement name="ItemInfoWrapper" style="flex-shrink: 0; width: 50%; padding-top: 5px; padding-right: 0; padding-bottom: 5px; padding-left: 15px;">
                             <ui:Label tabindex="-1" text="Iron Sword" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemName" style="color: rgb(255, 255, 255); font-size: 18px; -unity-text-align: upper-left; -unity-font-style: normal; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
-                            <ui:Label tabindex="-1" text="The Iron Sword is a reliable weapon, favored by Hunters and warriors alike for its durability and balance. " parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemDescription" style="white-space: normal; color: rgb(255, 255, 255); -unity-text-align: middle-left; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 12px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
+                            <ui:Label tabindex="-1" text="The Iron Sword is a reliable weapon, favored by Hunters and warriors alike for its durability and balance. " parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemDescription" style="white-space: normal; color: rgb(255, 255, 255); -unity-text-align: middle-left; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 12px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; text-overflow: ellipsis;" />
                         </ui:VisualElement>
-                        <ui:VisualElement name="ItemStatWrapper" style="flex-shrink: 0; width: 30%; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+                        <ui:VisualElement name="ItemStatWrapper" style="flex-shrink: 0; width: 35%; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
                             <ui:VisualElement name="ItemInformation" style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
                                 <ui:VisualElement name="UpperLine" style="flex-grow: 0; flex-direction: row; width: 100%; justify-content: flex-end;">
                                     <ui:Label tabindex="-1" text="&lt;ItemType&gt;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ItemType" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;" />
@@ -111,11 +109,11 @@
                                 <ui:VisualElement name="MiddleLine" style="flex-grow: 0; flex-direction: row; justify-content: space-around; align-self: center; width: 100%;" />
                                 <ui:VisualElement name="LowerLine" style="flex-grow: 0; flex-direction: row; justify-content: space-around; align-self: center; width: 100%; align-items: center;" />
                             </ui:VisualElement>
-                            <ui:VisualElement name="Action" style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; flex-direction: row; justify-content: space-around;">
-                                <ui:Button text="Equip (1)" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Equip1Btn" style="width: 100px; color: rgb(255, 255, 255); font-size: 15px; display: flex;" />
-                                <ui:Button text="Equip (2)" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Equip2Btn" style="width: 100px; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); color: rgb(255, 255, 255); font-size: 15px; display: none;" />
-                                <ui:Button text="Use" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UseBtn" style="width: 100px; -unity-font-definition: initial; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); color: rgb(255, 255, 255); font-size: 15px; display: none;" />
-                                <ui:Button text="Drop" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DropBtn" style="width: 100px; color: rgb(255, 255, 255); font-size: 15px;" />
+                            <ui:VisualElement name="Action" style="padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; flex-direction: row; justify-content: flex-end;">
+                                <ui:Button text="Equip (1)" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Equip1Btn" style="width: 100px; display: flex; font-size: 14px; margin-right: 5px;" />
+                                <ui:Button text="Equip (2)" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Equip2Btn" style="width: 100px; display: none; font-size: 14px;" />
+                                <ui:Button text="Use" parse-escape-sequences="true" display-tooltip-when-elided="true" name="UseBtn" style="width: 100px; display: none; font-size: 14px;" />
+                                <ui:Button text="Drop" parse-escape-sequences="true" display-tooltip-when-elided="true" name="DropBtn" style="width: 100px; font-size: 14px;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                     </ui:VisualElement>
@@ -457,7 +455,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="Footer" style="flex-grow: 0; height: 99px; background-color: rgb(28, 44, 52); max-height: 99px; min-height: 99px; -unity-text-align: middle-left;">
+        <ui:VisualElement name="Footer" style="flex-grow: 0; height: 99px; background-color: rgb(28, 44, 52); max-height: 99px; min-height: 99px; -unity-text-align: middle-left; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;">
             <ui:Label tabindex="-1" text="Close" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 75px; -unity-text-align: middle-left; color: rgba(255, 255, 255, 0.78); transform-origin: right top; position: absolute; justify-content: center; align-self: center; left: 86px; font-size: 20px; top: 44px; align-items: auto; -unity-font-style: bold; height: 12px;">
                 <ui:VisualElement style="flex-grow: 1; position: absolute; justify-content: center; align-self: center; height: 32px; width: 30px; left: -39px; transform-origin: right top; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Subtract.png?fileID=2800000&amp;guid=6abed2b2bab727a4ea5b574b96449066&amp;type=3#Subtract&quot;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgba(255, 255, 255, 0.78);" />
             </ui:Label>

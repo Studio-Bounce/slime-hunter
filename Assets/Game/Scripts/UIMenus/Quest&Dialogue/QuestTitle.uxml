@@ -1,6 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Game/Scripts/UIMenus/USS/QuestHUD.uss?fileID=7433441132597879392&amp;guid=4d1f28e53c7b22443b5c3ede2a880276&amp;type=3#QuestHUD" />
-    <Style src="project://database/Assets/Game/Scripts/UIMenus/USS/MainMenuOptions.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainMenuOptions" />
+    <Style src="project://database/Assets/Game/Scripts/UIMenus/USS/MainStyle.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainStyle" />
     <ui:VisualElement name="Canvas" style="flex-grow: 1; opacity: 1;">
         <ui:VisualElement name="QuestStart" style="flex-grow: 1; padding-left: 579px; padding-right: 579px; padding-top: 303px; padding-bottom: 245px;">
             <ui:VisualElement name="Box" style="flex-grow: 1; background-color: rgba(70, 187, 202, 0.4); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px;">

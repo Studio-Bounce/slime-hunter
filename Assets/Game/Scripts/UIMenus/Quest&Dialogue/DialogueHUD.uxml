@@ -1,0 +1,22 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="DialogueButton" src="project://database/Assets/Game/Scripts/UIMenus/Quest&amp;Dialogue/DialogueButton.uxml?fileID=9197481963319205126&amp;guid=48ef57632cc79984093ca28bec5edbba&amp;type=3#DialogueButton" />
+    <Style src="project://database/Assets/Game/Scripts/UIMenus/USS/MainStyle.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainStyle" />
+    <ui:VisualElement name="DialogueBox" style="flex-grow: 1; padding-right: 15%; padding-left: 15%; padding-top: 0; padding-bottom: 2%; justify-content: flex-end;">
+        <ui:VisualElement name="Top" style="flex-direction: row; margin-bottom: 10px;">
+            <ui:VisualElement name="Name" style="border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; background-color: rgba(28, 44, 52, 0.78); border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; flex-direction: row; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; flex-grow: 0; margin-right: 10px; flex-shrink: 0; align-self: flex-end;">
+                <ui:Label tabindex="-1" text="BlackSmith" parse-escape-sequences="true" display-tooltip-when-elided="true" style="align-self: center; justify-content: flex-start; align-items: auto; flex-direction: column; font-size: 25px; -unity-font-style: normal; -unity-text-align: middle-center; margin-right: 15px; margin-left: 15px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="DialogueOptions" style="flex-grow: 1; justify-content: flex-start; align-items: flex-end;">
+                <ui:Instance template="DialogueButton" name="DialogueButton" />
+                <ui:Instance template="DialogueButton" name="DialogueButton" />
+                <ui:Instance template="DialogueButton" name="DialogueButton" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Content" style="justify-content: flex-start;">
+            <ui:VisualElement name="ContentBox" style="flex-grow: 1; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; background-color: rgba(28, 44, 52, 0.78); border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; padding-left: 35px; padding-bottom: 20px; padding-right: 35px; padding-top: 20px; min-height: 10%;">
+                <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. " parse-escape-sequences="true" display-tooltip-when-elided="true" name="DialogueText" style="flex-wrap: wrap; white-space: normal; text-overflow: clip; color: rgb(255, 255, 255); -unity-text-align: upper-left; font-size: 24px; min-height: 20%;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Continue" class="flash-button" style="flex-grow: 0; height: 28px; width: 45px; -unity-background-scale-mode: scale-to-fit; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Polygon%2021.png?fileID=2800000&amp;guid=9d4c90279173bb04a8c5e2f0887a6e41&amp;type=3#Polygon 21&quot;); left: 1726px; top: auto; display: none; bottom: 45px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,7 +1,10 @@
+/* ## Globals  */
+
 :root {
     --bg-primary: #2F3235;
     --bg-secondary: #1C2C34;
-    --bg-transparent: rgba(0,0,0,0.5);
+    --bg-light: #c8c8c8;
+    --bg-transparent: rgba(0,0,0,0.8);
     --bg-accent: #46BBCA;
     --bg-accent-dark: #32808A;
     --bg-outline: white;
@@ -11,7 +14,7 @@
     --text-glow: #46BBCA;
 
     --radius: 20px;
-    --button-radius: 10px;
+    --button-radius: 12px;
 }
 
 * {
@@ -27,8 +30,7 @@ Button {
     border-width: 2px;
     border-color: white;
     border-radius: var( --button-radius);
-    margin-left: 5px;
-    margin-right: 5px;
+    margin: 0px;
 }
 
 Button:hover {
@@ -41,6 +43,8 @@ Button:active {
 
 #RootWrapper {
     padding: 4%;
+    padding-left: 8%;
+    padding-right: 8%
 }
 
 .h1 {
@@ -49,6 +53,17 @@ Button:active {
 
 .h2 {
     font-size: 48px;
+}
+
+/* Style for DropdownField element */
+
+DropdownField * {
+    color: var(--text-secondary);
+    border-radius: var(--radius);
+}
+
+.unshowned-content {
+    display: none;
 }
 
 .container-full {
@@ -60,6 +75,8 @@ Button:active {
     border-width: 3px;
     align-items: center
 }
+
+/* ## Inventory */
 
 .option-slot {
     transition-property: all;
