@@ -175,6 +175,9 @@ public class SettingsMenu : Menu
     private void Back()
     {
         Hide();
-        UIManager.Instance.mainMenu.Show();
+        if (GameManager.Instance.GameState == GameState.MAIN_MENU)
+        {
+            UIManager.Instance.mainMenu.Show();
+        }
     }
 }

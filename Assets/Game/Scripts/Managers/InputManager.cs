@@ -54,6 +54,7 @@ public class InputManager : Singleton<InputManager>
     {
         GetControllers(GameManager.Instance.PlayerRef);
         _AddUIControls();
+        TogglePauseControl(false);
     }
 
     public Sprite StringActionToSprite(string actionName)
@@ -80,6 +81,7 @@ public class InputManager : Singleton<InputManager>
         switch (state)
         {
             case GameState.MAIN_MENU:
+                TogglePauseControl(false);
                 TogglePlayerControls(false);
                 break;
 
@@ -88,6 +90,7 @@ public class InputManager : Singleton<InputManager>
                 break;
 
             case GameState.GAMEPLAY:
+                ToggleUIControls(true);
                 TogglePlayerControls(true);
                 break;
 
@@ -128,6 +131,11 @@ public class InputManager : Singleton<InputManager>
         if (active) _playerActions.Spell1.Enable(); else _playerActions.Spell1.Disable();
         if (active) _playerActions.Spell2.Enable(); else _playerActions.Spell2.Disable();
         if (active) _playerActions.CastSpell.Enable(); else _playerActions.CastSpell.Disable();
+    }
+
+    public void TogglePauseControl(bool active)
+    {
+        if (active) _UIActions.Pause.Enable(); else _UIActions.Pause.Disable();
     }
 
     public void ToggleUIControls(bool active)

@@ -27,10 +27,12 @@ public class PauseMenu : Menu
 
         Button btnUnpause = root.Q<Button>("btnUnpause");
         Button btnBackMainMenu = root.Q<Button>("btnBackMainMenu");
+        Button btnSettings = root.Q<Button>("btnSettings");
         Button btnQuit = root.Q<Button>("btnQuit");
 
         btnUnpause.clicked += Unpause;
         btnBackMainMenu.clicked += ReturnMainMenu;
+        btnSettings.clicked += Settings;
         btnQuit.clicked += () => Application.Quit();
 
         characterContainer = root.Q<VisualElement>("CharacterContainer");
@@ -49,6 +51,11 @@ public class PauseMenu : Menu
         questTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
         profileTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
         menuTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
+    }
+
+    private void Settings()
+    {
+        UIManager.Instance.settingsMenu.Show();
     }
 
     private void LinkInventoryStatsUIToPlayer()
