@@ -3,6 +3,8 @@ using UnityEngine.UIElements;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Rendering;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -106,6 +108,11 @@ public class SettingsMenu : Menu
         // Load volume setting
         float savedVolume = PlayerPrefs.GetFloat("Volume", 1.0f);
         volumeSlider.value = savedVolume;
+
+        ApplyResolution(savedResolution);
+        ApplyDisplayMode(savedDisplayMode);
+        ApplyQualitySetting(savedQuality);
+        ApplyVolumeSetting(savedVolume);
     }
 
     private string GetDefaultDisplayMode()

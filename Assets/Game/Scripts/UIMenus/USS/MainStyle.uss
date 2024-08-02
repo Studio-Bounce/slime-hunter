@@ -30,8 +30,7 @@ Button {
     border-width: 2px;
     border-color: white;
     border-radius: var( --button-radius);
-    margin-left: 5px;
-    margin-right: 5px;
+    margin: 0px;
 }
 
 Button:hover {
@@ -44,6 +43,8 @@ Button:active {
 
 #RootWrapper {
     padding: 4%;
+    padding-left: 8%;
+    padding-right: 8%
 }
 
 .h1 {
