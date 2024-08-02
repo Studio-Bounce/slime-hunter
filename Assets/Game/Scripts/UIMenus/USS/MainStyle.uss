@@ -27,7 +27,8 @@ Button {
     border-width: 2px;
     border-color: white;
     border-radius: var( --button-radius);
-    margin: 0;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 Button:hover {
@@ -98,7 +99,6 @@ Button:active {
 .tab {
     transition-property: all;
     transition-duration: 0.2s;
-    background-color: rgb(28, 44, 52);
 }
 
 .tab:hover {
