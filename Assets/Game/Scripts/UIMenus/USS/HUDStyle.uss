@@ -1,7 +1,6 @@
 * {
     color: white;
-    -unity-font: resource('Assets/Fonts/HywenHei.ttf');
-    -unity-font-definition: resource('Assets/Fonts/HywenHei.ttf');
+    -unity-font-definition: url('/Assets/Resources/Fonts/HywenHei.ttf');
     font-size: 18px;
 }
 
@@ -90,7 +89,6 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     background-color: white;
-    text-align: center;
     font-size: 24px;
     -unity-font-style: bold;
     -unity-text-align: middle-center;
@@ -130,7 +128,7 @@
 #PickupListItem > Label {
     padding: 0;
     margin: 0;
-    text-align: center;
+    -unity-text-align: middle-center;
     justify-content: center;
     align-content: center;
     font-size: 24px;
