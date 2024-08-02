@@ -2,6 +2,7 @@ using Cinemachine;
 using Ink.Runtime;
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -135,42 +136,51 @@ public class CameraManager : Singleton<CameraManager>
 
     // Ideally target would be another VolumeComponent but for simplicity, we'll only set the intensity therefore passing in just a target float
 
-    public IEnumerator SmoothSetVignette(float target, float duration)
+    public void SmoothSetVignette(float target, float duration)
     {
         Vignette _vignette;
         if (GlobalVolume.profile.TryGet(out _vignette))
         {
-            float startIntensity = _vignette.intensity.value;
-
-            float elapsedTime = 0f;
-            float t = 0;
-            while (elapsedTime < duration)
-            {
-                t = elapsedTime / duration;
-                _vignette.intensity.value = Mathf.Lerp(startIntensity, target, t);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
+            StartCoroutine(GameManager.RunEasedLerp(
+            _vignette.intensity.value,
+            target,
+            duration,
+            Easing.EaseOutCubic,
+            (float value) => _vignette.intensity.value = value
+            ));
         }
-        
     }
 
-    public IEnumerator SmoothSetChromatic(float target, float duration)
+    public void SmoothSetBlur(float target, float duration)
+    {
+        Debug.Log("Start Blur");
+        BlurSettings _blur;
+        if (GlobalVolume.profile.TryGet(out _blur))
+        {
+            Debug.Log("Blur Found");
+
+            StartCoroutine(GameManager.RunEasedLerp(
+            _blur.strength.value,
+            target,
+            duration,
+            Easing.EaseOutCubic,
+            (float value) => _blur.strength.value = value
+            ));
+        }
+    }
+
+    public void SmoothSetChromatic(float target, float duration)
     {
         ChromaticAberration _chroma;
         if (GlobalVolume.profile.TryGet(out _chroma))
         {
-            float startIntensity = _chroma.intensity.value;
-
-            float elapsedTime = 0f;
-            float t = 0;
-            while (elapsedTime < duration)
-            {
-                t = elapsedTime / duration;
-                _chroma.intensity.value = Mathf.Lerp(startIntensity, target, t);
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
+            StartCoroutine(GameManager.RunEasedLerp(
+            _chroma.intensity.value,
+            target,
+            duration,
+            Easing.EaseOutCubic,
+            (float value) => _chroma.intensity.value = value
+            ));
         }
     }
 

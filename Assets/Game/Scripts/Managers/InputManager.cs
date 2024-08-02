@@ -233,11 +233,13 @@ public class InputManager : Singleton<InputManager>
         if (GameManager.Instance.GameState == GameState.PAUSED)
         {
             GameManager.Instance.GameState = GameState.GAMEPLAY;
+            CameraManager.Instance.SmoothSetBlur(0.0f, 1.0f);
             UIManager.Instance.SetPauseMenu(false);
         }
         else
         {
             GameManager.Instance.GameState = GameState.PAUSED;
+            CameraManager.Instance.SmoothSetBlur(10.0f, 1.0f);
             UIManager.Instance.SetPauseMenu(true);
         }
     }

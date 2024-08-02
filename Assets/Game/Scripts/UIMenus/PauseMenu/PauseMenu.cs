@@ -55,6 +55,7 @@ public class PauseMenu : Menu
 
     private void Settings()
     {
+        Hide();
         UIManager.Instance.settingsMenu.Show();
     }
 
