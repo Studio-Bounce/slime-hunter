@@ -18,25 +18,15 @@ public class SettingsMenu : Menu
     private Label backBtn;
 
     List<string> resolutions = new List<string>
-        {
-            "1920 x 1080",
-            "2560 x 1440",
-            "3840 x 2160",
-            "1600 x 900",
-            "1366 x 768",
-            "1280 x 720",
-            "1920 x 1200",
-            "1680 x 1050",
-            "1440 x 900",
-            "1280 x 800",
-            "2560 x 1080",
-            "3440 x 1440",
-            "3840 x 1600",
-            "1600 x 1200",
-            "1400 x 1050",
-            "1280 x 1024",
-            "1024 x 768"
-        };
+    {
+        "3840 x 2160",
+        "3440 x 1440",
+        "2560 x 1440",
+        "1920 x 1080",
+        "1600 x 900",
+        "1366 x 768",
+        "1280 x 720"
+    };
 
     List<string> displayModes = new List<string>
         {
@@ -59,23 +49,27 @@ public class SettingsMenu : Menu
         volumeSlider = root.Q<Slider>("VolumeSlider");
         backBtn = root.Q<Label>("Back");
 
-
+        // Set the choices for dropdowns
         resolutionDropdown.choices = resolutions;
+        displayModeDropdown.choices = displayModes;
+        qualityDropdown.choices = new List<string>(QualitySettings.names);
+
+        // Set default values based on current settings
+        SetDefaultDropdownValues();
+
+        // Register event handlers
         resolutionDropdown.RegisterValueChangedCallback(evt =>
         {
             string selectedResolution = evt.newValue;
             ApplyResolution(selectedResolution);
         });
 
-        displayModeDropdown.choices = displayModes;
         displayModeDropdown.RegisterValueChangedCallback(evt =>
         {
             string selectedMode = evt.newValue;
             ApplyDisplayMode(selectedMode);
         });
 
-        List<string> qualityOptions = new List<string>(QualitySettings.names);
-        qualityDropdown.choices = qualityOptions;
         qualityDropdown.RegisterValueChangedCallback(evt =>
         {
             string selectedQuality = evt.newValue;
@@ -83,6 +77,32 @@ public class SettingsMenu : Menu
         });
 
         backBtn.RegisterCallback<ClickEvent>(ev => Back());
+    }
+
+    private void SetDefaultDropdownValues()
+    {
+        // Set resolution dropdown to current resolution
+        string currentResolution = $"{Screen.currentResolution.width} x {Screen.currentResolution.height}";
+        if (!resolutions.Contains(currentResolution)) resolutions.Add(currentResolution);
+        resolutionDropdown.value = currentResolution;
+
+
+        // Set display mode dropdown to current display mode
+        switch (Screen.fullScreenMode)
+        {
+            case FullScreenMode.FullScreenWindow:
+                displayModeDropdown.value = "Fullscreen";
+                break;
+            case FullScreenMode.Windowed:
+                displayModeDropdown.value = "Windowed";
+                break;
+            case FullScreenMode.MaximizedWindow:
+                displayModeDropdown.value = "Borderless Window";
+                break;
+        }
+
+        // Set quality dropdown to current quality setting
+        qualityDropdown.value = QualitySettings.names[QualitySettings.GetQualityLevel()];
     }
 
     private void ApplyResolution(string resolution)
