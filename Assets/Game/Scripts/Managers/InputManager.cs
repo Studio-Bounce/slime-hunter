@@ -230,18 +230,8 @@ public class InputManager : Singleton<InputManager>
 
     private void Pause(InputContext context)
     {
-        if (GameManager.Instance.GameState == GameState.PAUSED)
-        {
-            GameManager.Instance.GameState = GameState.GAMEPLAY;
-            CameraManager.Instance.SmoothSetBlur(0.0f, 0.3f);
-            UIManager.Instance.SetPauseMenu(false);
-        }
-        else
-        {
-            GameManager.Instance.GameState = GameState.PAUSED;
-            CameraManager.Instance.SmoothSetBlur(15.0f, 0.3f);
-            UIManager.Instance.SetPauseMenu(true);
-        }
+        GameManager.Instance.GameState = GameManager.Instance.GameState == GameState.PAUSED ?
+             GameState.GAMEPLAY : GameState.PAUSED;
     }
 
     private void TrackMovement(InputContext context)

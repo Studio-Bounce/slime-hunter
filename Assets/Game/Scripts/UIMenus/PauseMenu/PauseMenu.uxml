@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Game/Scripts/UIMenus/USS/MainStyle.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainStyle" />
-    <ui:VisualElement name="RootWrapper" style="background-color: rgba(0, 0, 0, 0.86); flex-grow: 1; opacity: 1;">
+    <ui:VisualElement name="RootWrapper" style="background-color: rgba(0, 0, 0, 0.86); opacity: 1;">
         <ui:VisualElement name="Header" style="flex-grow: 0; height: 99px; background-color: rgba(28, 44, 52, 0.78); flex-direction: row; max-height: 99px; min-height: 99px; border-top-left-radius: 20px; border-top-right-radius: 20px;">
             <ui:VisualElement name="TabbedMenu" style="flex-grow: 0; height: 99px; flex-direction: row; border-top-left-radius: 20px;">
                 <ui:VisualElement name="InventoryTab" class="tab selected-tab" style="flex-grow: 0; justify-content: center; width: 200px; border-top-left-radius: 20px;">
@@ -267,10 +267,10 @@
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement name="QuestContent" class="tab-content" style="flex-grow: 1; flex-direction: row;">
-                <ui:VisualElement name="QuestSelection" style="flex-grow: 0; width: 1072px;">
+                <ui:VisualElement name="QuestSelection" style="flex-grow: 0; width: 50%;">
                     <ui:VisualElement name="SubOptions" style="flex-direction: row; align-self: center;">
                         <ui:Button text="Main Journey" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MainQuestBtn" />
-                        <ui:Button text="Side Quest" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SideQuestBtn" />
+                        <ui:Button text="Side Quest" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SideQuestBtn" style="margin-right: 10px; margin-left: 10px;" />
                         <ui:Button text="Hunting" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HuntingQuestBtn" />
                     </ui:VisualElement>
                     <ui:VisualElement name="QuestList" style="flex-direction: row; margin-top: 25px; margin-right: 25px; margin-bottom: 25px; margin-left: 25px;">
@@ -366,11 +366,11 @@
                         <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hunting" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Ellipse%2014.png?fileID=2800000&amp;guid=dcad187999b267a448d564ff0717d042&amp;type=3#Ellipse 14&quot;); -unity-background-scale-mode: scale-to-fit; height: 15px; width: 15px; justify-content: center; margin-left: 7px; margin-right: 7px; background-color: rgba(188, 188, 188, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; padding-left: 5px; padding-bottom: 3px; margin-top: 0; opacity: 0.5;" />
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="QuestExplanation">
+                <ui:VisualElement name="QuestExplanation" style="flex-shrink: 0; width: 50%;">
                     <ui:VisualElement name="Content" style="background-color: rgba(47, 50, 53, 0.8); flex-grow: 1; border-left-color: rgb(70, 187, 202); border-right-color: rgb(70, 187, 202); border-top-color: rgb(70, 187, 202); border-bottom-color: rgb(70, 187, 202); border-top-left-radius: 21px; border-top-right-radius: 21px; border-bottom-right-radius: 21px; border-bottom-left-radius: 21px; border-top-width: 8px; border-right-width: 8px; border-bottom-width: 8px; border-left-width: 8px; padding-left: 65px; padding-right: 65px; padding-top: 60px; padding-bottom: 33px;">
-                        <ui:VisualElement name="QuestHeader" style="flex-grow: 0; flex-direction: row;">
-                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuestName" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold; flex-grow: 1;" />
-                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Position" style="background-color: rgba(255, 255, 255, 0); color: rgb(255, 255, 255); font-size: 20px; -unity-font-style: bold; flex-grow: 1; -unity-text-align: lower-right;" />
+                        <ui:VisualElement name="QuestHeader" style="flex-direction: row; width: 100%; flex-shrink: 0; flex-wrap: wrap;">
+                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuestName" text="A Quest" style="color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold; -unity-text-align: middle-left; white-space: normal;" />
+                            <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Position" text="Glade Village" style="font-size: 20px; -unity-text-align: middle-left; text-overflow: ellipsis; white-space: normal; max-width: 50%;" />
                         </ui:VisualElement>
                         <ui:VisualElement name="Line" style="flex-grow: 0; height: 2px; background-color: rgb(255, 255, 255); margin-top: 7px; margin-bottom: 25px;" />
                         <ui:VisualElement name="TrackInformation" style="flex-grow: 0; height: 361px;">
@@ -388,17 +388,17 @@
                         </ui:VisualElement>
                         <ui:VisualElement name="Line" style="flex-grow: 0; height: 2px; background-color: rgb(255, 255, 255); margin-top: 7px; margin-bottom: 7px;" />
                         <ui:VisualElement name="Rewards" style="flex-grow: 1; flex-direction: row; align-self: center; justify-content: flex-start; align-items: center; padding-top: 20px; padding-bottom: 30px;">
-                            <ui:VisualElement name="Weapon" style="flex-grow: 0; flex-direction: row; width: 159px; -unity-text-align: upper-left; margin-left: 20px; margin-right: 20px;">
+                            <ui:VisualElement name="Weapon" style="flex-grow: 0; flex-direction: row; width: 159px; -unity-text-align: upper-left;">
                                 <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/UnionSwordicon.png?fileID=2800000&amp;guid=c7e11ca42c0dc374ab1663ca0890c22a&amp;type=3#UnionSwordicon&quot;); -unity-background-scale-mode: scale-to-fit; width: 50px;" />
-                                <ui:Label tabindex="-1" text="Villager’s Blade" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: middle-left; font-size: 15px; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); -unity-font-style: bold; white-space: normal; width: 100px; height: 32px;" />
+                                <ui:Label tabindex="-1" text="Villager’s Blade" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-left; width: 100px; height: 32px; white-space: normal; font-size: 15px;" />
                             </ui:VisualElement>
-                            <ui:VisualElement name="Spell" style="flex-grow: 0; flex-direction: row; width: 159px; -unity-text-align: upper-left; margin-right: 20px; margin-left: 20px;">
+                            <ui:VisualElement name="Spell" style="flex-grow: 0; flex-direction: row; width: 159px; -unity-text-align: upper-left;">
                                 <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/Group%2020skill.png?fileID=2800000&amp;guid=4412fdd465f3faf43a5f209269a6925e&amp;type=3#Group 20skill&quot;); -unity-background-scale-mode: scale-to-fit; width: 50px;" />
-                                <ui:Label tabindex="-1" text="Some Cool Spell" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: middle-left; font-size: 15px; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); -unity-font-style: bold; white-space: normal; width: 100px; height: 32px;" />
+                                <ui:Label tabindex="-1" text="Some Cool Spell" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: middle-left; white-space: normal; width: 100px; height: 32px; font-size: 15px;" />
                             </ui:VisualElement>
-                            <ui:VisualElement name="Cash" style="flex-grow: 0; flex-direction: row; width: 159px; -unity-text-align: upper-left; margin-right: 20px; margin-left: 20px;">
+                            <ui:VisualElement name="Cash" style="flex-grow: 0; flex-direction: row; width: 159px; -unity-text-align: upper-left;">
                                 <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Group%2029Coins.png?fileID=2800000&amp;guid=334061e7a891f0843b16f1194fe412f7&amp;type=3#Group 29Coins&quot;); -unity-background-scale-mode: scale-to-fit; width: 50px;" />
-                                <ui:Label tabindex="-1" text="1522 G" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: middle-left; font-size: 15px; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); -unity-font-style: bold; white-space: normal; width: 100px; height: 32px;" />
+                                <ui:Label tabindex="-1" text="1522 G" parse-escape-sequences="true" display-tooltip-when-elided="true" style="color: rgb(255, 255, 255); -unity-text-align: middle-left; white-space: normal; width: 100px; height: 32px; font-size: 15px;" />
                             </ui:VisualElement>
                         </ui:VisualElement>
                         <ui:VisualElement name="Button" style="flex-grow: 0; padding-bottom: 0; padding-top: 0; width: 264px; align-self: center;">
