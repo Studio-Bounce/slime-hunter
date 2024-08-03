@@ -92,7 +92,7 @@ public class ObjectFall : MonoBehaviour
             // Scale down to 0.1 in slowDownTime seconds
             if (Time.timeScale > 0.1f)
             {
-                Time.timeScale -= Time.unscaledDeltaTime;
+                Time.timeScale -= 0.17f*Time.unscaledDeltaTime;
             }
             else if (Time.timeScale > 0 && moveThePlayer)
             {
@@ -110,6 +110,7 @@ public class ObjectFall : MonoBehaviour
                 moveThePlayer = false;
                 tutorialInProgress = false;
                 spacebarImage.SetActive(false);
+                break;
             }
             yield return null;
         }

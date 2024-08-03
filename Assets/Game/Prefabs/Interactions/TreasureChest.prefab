@@ -130,7 +130,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1727951359531044970
 Transform:
@@ -253,6 +253,11 @@ PrefabInstance:
     - target: {fileID: 928132269005643925, guid: 54786b348064b3a4d8a9349fbc8bf384,
         type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2714882185046335503, guid: 54786b348064b3a4d8a9349fbc8bf384,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2960650009149597011, guid: 54786b348064b3a4d8a9349fbc8bf384,
@@ -711,6 +716,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TreasureChest
       objectReference: {fileID: 0}
+    - target: {fileID: 8086745361472379303, guid: 54786b348064b3a4d8a9349fbc8bf384,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8693655746622807756, guid: 54786b348064b3a4d8a9349fbc8bf384,
         type: 3}
       propertyPath: activationLayers.m_Bits
@@ -801,7 +811,7 @@ PrefabInstance:
     - target: {fileID: 1578503557618636700, guid: 3b52e991460b3814f890ca65badc9947,
         type: 3}
       propertyPath: positionOffset.x
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 1578503557618636700, guid: 3b52e991460b3814f890ca65badc9947,
         type: 3}
