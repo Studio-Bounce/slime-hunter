@@ -66,12 +66,9 @@ public class PauseMenu : Menu
 
     public void Pause()
     {
-        if (GameManager.Instance.GameState != GameState.PAUSED)
-            GameManager.Instance.GameState = GameState.PAUSED;
-        SetVisible(true);
-        GameManager.Instance.TimeFreeze();
+        GameManager.Instance.GameState = GameState.PAUSED;
+        Show();
         InventoryManager.Instance.UpdateInventoryUI();
-        InputManager.Instance.TogglePlayerControls(false);
         // Hide HUD to prevent it from appearing on Map
         UIManager.Instance.SetHUDMenu(false);
 
@@ -83,12 +80,10 @@ public class PauseMenu : Menu
 
     public void Unpause()
     {
-        SetVisible(false);
-        GameManager.Instance.TimeNormal();
-        InputManager.Instance.TogglePlayerControls(true);
-        // Show HUD
-        UIManager.Instance.SetHUDMenu(true);
-        mapCamera.depth = -1;  // just to ensure map camera is not shown
+        Hide();
+        GameManager.Instance.GameState = GameState.GAMEPLAY;
+        UIManager.Instance.SetHUDMenu(true); // Show HUD
+        mapCamera.depth = -1;  // Just to ensure map camera is not shown
     }
 
     void MapMenuSelected()
