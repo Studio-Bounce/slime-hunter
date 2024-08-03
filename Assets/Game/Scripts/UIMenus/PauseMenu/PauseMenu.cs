@@ -30,7 +30,7 @@ public class PauseMenu : Menu
         Button btnSettings = root.Q<Button>("btnSettings");
         Button btnQuit = root.Q<Button>("btnQuit");
 
-        btnUnpause.clicked += Unpause;
+        btnUnpause.clicked += () => GameManager.Instance.GameState = GameState.GAMEPLAY;
         btnBackMainMenu.clicked += ReturnMainMenu;
         btnSettings.clicked += Settings;
         btnQuit.clicked += () => Application.Quit();
@@ -51,6 +51,8 @@ public class PauseMenu : Menu
         questTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
         profileTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
         menuTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
+
+        GameManager.Instance.OnGameStateChange += OnPause;
     }
 
     private void Settings()
@@ -64,26 +66,33 @@ public class PauseMenu : Menu
         GameManager.Instance.OnPlayerHealthChange += (int value) => healthValue.text = value.ToString();
     }
 
-    public void Pause()
+    public void OnPause(GameState state)
     {
-        GameManager.Instance.GameState = GameState.PAUSED;
-        Show();
-        InventoryManager.Instance.UpdateInventoryUI();
-        // Hide HUD to prevent it from appearing on Map
-        UIManager.Instance.SetHUDMenu(false);
-
-        if (isMapTabSelected) // if it was last selected in pause menu (not a clean solution)
+        switch (state)
         {
-            MapMenuSelected();
+            case GameState.PAUSED:
+                Show();
+                GameManager.Instance.TimeFreeze();
+                CameraManager.Instance.SmoothSetBlur(15.0f, 0.3f);
+                InventoryManager.Instance.UpdateInventoryUI();
+                UIManager.Instance.SetHUDMenu(false); // Hide HUD to prevent it from appearing on Map
+                if (isMapTabSelected) // if it was last selected in pause menu (not a clean solution)
+                {
+                    MapMenuSelected();
+                }
+                break;
+            case GameState.GAMEPLAY:
+                Hide();
+                UIManager.Instance.settingsMenu.Hide();
+                GameManager.Instance.TimeNormal();
+                CameraManager.Instance.SmoothSetBlur(0.0f, 0.3f);
+                UIManager.Instance.SetHUDMenu(true);
+                if (mapCamera != null) mapCamera.depth = -1;  // Just to ensure map camera is not shown
+                break;
+            default:
+                Hide();
+                break;
         }
-    }
-
-    public void Unpause()
-    {
-        Hide();
-        GameManager.Instance.GameState = GameState.GAMEPLAY;
-        UIManager.Instance.SetHUDMenu(true); // Show HUD
-        mapCamera.depth = -1;  // Just to ensure map camera is not shown
     }
 
     void MapMenuSelected()
@@ -146,8 +155,6 @@ public class PauseMenu : Menu
 
     private void ReturnMainMenu()
     {
-        Unpause();
-
         SceneLoader.Instance.UnloadScene(GameManager.Instance.GameSceneName,
             (AsyncOperation _, string _) => CanvasManager.Instance.ClearCanvas());
         UIManager.Instance.SetMainMenu(true);

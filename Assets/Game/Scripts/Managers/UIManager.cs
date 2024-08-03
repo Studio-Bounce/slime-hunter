@@ -14,18 +14,6 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] public Menu settingsMenu;
     [SerializeField] public Menu gladeVillageIntroMenu;
 
-    // ----------------- Pause -----------------
-    public void SetPauseMenu(bool active)
-    {
-        if (active)
-        {
-            (pauseMenu as PauseMenu).Pause();
-        } else
-        {
-            (pauseMenu as PauseMenu).Unpause();
-        }
-    }
-
     // ----------------- Load -----------------
     public void SetLoadMenu(bool active)
     {
