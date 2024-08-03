@@ -222,13 +222,13 @@ MonoBehaviour:
       type: 3}
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
-  - {fileID: -928922501461139769}
   - {fileID: -6830609168703572113}
   - {fileID: -1235274661820822563}
   - {fileID: -6603861501175270618}
   - {fileID: 2692266943840148158}
-  - {fileID: -7330674125250684366}
-  m_RendererFeatureMap: c79e8a14e8cd1bf36fb7e5b326cd34a1dd0b21663d6cdbee26f39114f45e5aa4be5a1e6c85da5c25321a4900b936449a
+  - {fileID: 8905653866641342964}
+  - {fileID: 8964823926157372054}
+  m_RendererFeatureMap: 6fb7e5b326cd34a1dd0b21663d6cdbee26f39114f45e5aa4be5a1e6c85da5c25f4c1bded013d977b966a88f8dc73697c
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -346,3 +346,46 @@ MonoBehaviour:
     enableDynamicBatching: 0
     enableInstancing: 0
     enableTransparents: 1
+--- !u!114 &8905653866641342964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c327e4c7600483445874d2cc3cd9324d, type: 3}
+  m_Name: Blur
+  m_EditorClassIdentifier: 
+  m_Active: 1
+--- !u!114 &8964823926157372054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f112e7da9ba928d488e96ca96340da36, type: 3}
+  m_Name: LaplacianScreenSpaceOutlines
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  renderPassEvent: 350
+  outlinesLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  outlineSettings:
+    outlineColor: {r: 0, g: 0, b: 0, a: 1}
+    depthThreshold: 0.5
+    normalThreshold: 0.5
+    feather: 0.5
+    colorFormat: 0
+    depthBufferBits: 0
+    filterMode: 0
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    perObjectData: 0
+    enableDynamicBatching: 0
+    enableInstancing: 0
+    enableTransparents: 0
