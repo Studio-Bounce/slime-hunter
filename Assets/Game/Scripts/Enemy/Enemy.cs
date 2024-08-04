@@ -114,7 +114,7 @@ public class Enemy : DynamicDamageTaker
         Destroy(deathObj, deathDelay);
 
         // Time to die
-        Destroy(gameObject);
+        Destroy(gameObject, 1.0f); // TODO: Delay so death state transition occurs
     }
 
     public void SetEye(EnemyEye enemyEye)
