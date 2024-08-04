@@ -9,5 +9,6 @@ public class BasicSlime_Dead : BasicSlime_BaseState
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
         Debug.Log("Slime Death");
+        Destroy(fsm.slimeEnemy.gameObject);
     }
 }

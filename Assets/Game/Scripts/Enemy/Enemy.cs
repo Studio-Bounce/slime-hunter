@@ -105,16 +105,13 @@ public class Enemy : DynamicDamageTaker
     {
         // Don't destroy the object yet
         base.Death(false);
-
-        fsm.ChangeState(fsm.DeadStateName);
-
         // Death particles
         GameObject deathObj = Instantiate(deathParticlesGO, transform.position, Quaternion.identity);
         deathObj.GetComponent<ParticleSystem>().Play();
         Destroy(deathObj, deathDelay);
 
-        // Time to die
-        Destroy(gameObject, 1.0f); // TODO: Delay so death state transition occurs
+        // Roy: Moved death handling to DeathState
+        fsm.ChangeState(fsm.DeadStateName);
     }
 
     public void SetEye(EnemyEye enemyEye)
