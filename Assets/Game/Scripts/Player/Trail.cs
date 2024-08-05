@@ -112,7 +112,7 @@ public class Trail : MonoBehaviour
                 Destroy(gObj, meshDestroyDelay + 0.01f);
             }
 
-            yield return new WaitForSeconds(meshfreshRate);
+            yield return new WaitForSecondsRealtime(meshfreshRate);
         
         }
 
@@ -144,7 +144,7 @@ public class Trail : MonoBehaviour
                     mat.SetFloat(shaderVarRef, valueToAnimate);
                 }
             }
-            yield return new WaitForSeconds(refreshRate);
+            yield return new WaitForSecondsRealtime(refreshRate);
         }
     }
 }

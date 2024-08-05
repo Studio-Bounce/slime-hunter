@@ -49,7 +49,7 @@ public class DodgeTutorial : MonoBehaviour
     {
         InputManager.Instance.TogglePlayerControls(false);
         CameraManager.Instance.ChangeVirtualCamera(cameraA);
-        yield return new WaitForSeconds(delayToCamA);
+        yield return new WaitForSecondsRealtime(delayToCamA);
         CameraManager.Instance.ChangeVirtualCamera(cameraB);
 
         // Fall the boulder
@@ -62,13 +62,13 @@ public class DodgeTutorial : MonoBehaviour
 
         // Dodge
         rabbitEnemy.ApplyDodgeExternal(dodgeDestination.position - transform.position);
-        yield return new WaitForSeconds(delayPostDodge);
+        yield return new WaitForSecondsRealtime(delayPostDodge);
 
         CameraManager.Instance.ChangeVirtualCamera(currentCamera);
         InputManager.Instance.TogglePlayerControls(true);
         sliAgent.UnpauseAgent();
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSecondsRealtime(2);
         rockRigidBody.freezeRotation = true;
         rockRigidBody.constraints = RigidbodyConstraints.FreezePosition;
         rockRigidBody.gameObject.layer = LayerMask.NameToLayer("Default");

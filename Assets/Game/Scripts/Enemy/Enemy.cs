@@ -38,6 +38,28 @@ public class Enemy : DynamicDamageTaker
 
     BasicSlime_FSM fsm;
 
+    private bool alerted = false;
+    public bool Alerted
+    {
+        get
+        {
+            return alerted;
+        }
+        set
+        {
+            // Update music intensity
+            if (alerted && !value)
+            {
+                AudioManager.Instance.OnEnemyUnalerted();
+            }
+            else if (!alerted && value)
+            {
+                AudioManager.Instance.OnEnemyAlerted();
+            }
+            alerted = value;
+        }
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -105,16 +127,13 @@ public class Enemy : DynamicDamageTaker
     {
         // Don't destroy the object yet
         base.Death(false);
-
-        fsm.ChangeState(fsm.DeadStateName);
-
         // Death particles
         GameObject deathObj = Instantiate(deathParticlesGO, transform.position, Quaternion.identity);
         deathObj.GetComponent<ParticleSystem>().Play();
         Destroy(deathObj, deathDelay);
 
-        // Time to die
-        Destroy(gameObject);
+        // Roy: Moved death handling to DeathState
+        fsm.ChangeState(fsm.DeadStateName);
     }
 
     public void SetEye(EnemyEye enemyEye)
@@ -140,7 +159,7 @@ public class Enemy : DynamicDamageTaker
             var newMats = new List<Material>(slimeOuterBody.materials) { flashMat };
             slimeOuterBody.materials = newMats.ToArray();
 
-            yield return new WaitForSeconds(flashDuration);
+            yield return new WaitForSecondsRealtime(flashDuration);
 
             // Revert color
             if (slimeOuterBody.materials.Length > 1)

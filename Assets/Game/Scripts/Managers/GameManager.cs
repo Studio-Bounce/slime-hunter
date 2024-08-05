@@ -229,7 +229,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator _BeginTimeScale(float slow, float duration)
     {
         Time.timeScale = slow;
-        yield return new WaitForSeconds(duration*slow);
+        yield return new WaitForSecondsRealtime(duration);
         Time.timeScale = 1;
     }
 
@@ -242,7 +242,7 @@ public class GameManager : Singleton<GameManager>
     {
         PlayerSpeedMultiplier = 1 / slow;
         Time.timeScale = slow;
-        yield return new WaitForSeconds(duration * slow);
+        yield return new WaitForSecondsRealtime(duration);
         Time.timeScale = 1;
         PlayerSpeedMultiplier = 1;
     }

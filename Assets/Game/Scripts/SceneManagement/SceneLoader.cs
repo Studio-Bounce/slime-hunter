@@ -44,7 +44,7 @@ public class SceneLoader : Singleton<SceneLoader>
 
             if (showLoadingScreen)
             {
-                yield return new WaitForSeconds(loadDelay);
+                yield return new WaitForSecondsRealtime(loadDelay);
                 UIManager.Instance.SetLoadMenu(false);
             }
         }

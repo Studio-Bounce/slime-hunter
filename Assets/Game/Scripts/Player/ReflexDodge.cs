@@ -68,7 +68,7 @@ public class ReflexDodge : MonoBehaviour
         GameManager.Instance.ApplyReflexTime(dodgeSlowMultiplier, dodgeSlowLength);
         CameraManager.Instance.SmoothSetVignette(0.2f, 0.02f);
         CameraManager.Instance.SmoothSetChromatic(0.5f, 0.02f);
-        yield return new WaitForSeconds(dodgeSlowLength*dodgeSlowMultiplier);
+        yield return new WaitForSecondsRealtime(dodgeSlowLength);
 
         // End Reflex
         _isReflex = false;

@@ -25,7 +25,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     // UI Refs
     [SerializeField] private UIDocument uiDocument;
     VisualElement root;
-    List<VisualElement> slotElements;
+    List<Button> slotElements;
 
     // IDs
     private const string inventorySlot = "InventorySlot";
@@ -86,7 +86,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     {
         root = uiDocument.rootVisualElement;
         inventoryContainer = root.Q<VisualElement>("InventoryContainer");
-        slotElements = inventoryContainer.Query<VisualElement>(name: inventorySlot).ToList();
+        slotElements = inventoryContainer.Query<Button>(name: inventorySlot).ToList();
         infoContainer = root.Q<VisualElement>("ItemInfoContainer");
         infoName = infoContainer.Q<Label>("ItemName");
         infoDescription = infoContainer.Q<Label>("ItemDescription");
@@ -136,7 +136,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     {
         for (int i = 0; i < slotElements.Count; i++)
         {
-            VisualElement slot = slotElements[i];
+            var slot = slotElements[i];
             Label quantityEl = slot.Q<Label>(quantityLabel);
             if (i < items.Count)
             {

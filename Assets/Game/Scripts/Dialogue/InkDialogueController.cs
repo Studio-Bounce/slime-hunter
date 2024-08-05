@@ -113,7 +113,7 @@ public class InkDialogueController : MonoBehaviour
     protected IEnumerator DelayedClear(float timer)
     {
         isStoryRunning = false;
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSecondsRealtime(timer);
         ClearCanvas();
     }
 }

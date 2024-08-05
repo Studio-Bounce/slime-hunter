@@ -22,7 +22,7 @@ public class CameraIntroduce : MonoBehaviour
         StartCoroutine(UIManager.Instance.gladeVillageIntroMenu.FadeIn(2.0f));
         InputManager.Instance.TogglePlayerControls(false);
         CameraManager.Instance.ChangeVirtualCamera(targetCamera);
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSecondsRealtime(duration);
         CameraManager.Instance.ChangeVirtualCamera(currentCamera);
         InputManager.Instance.TogglePlayerControls(true);
         StartCoroutine(UIManager.Instance.gladeVillageIntroMenu.FadeOut(2.0f));

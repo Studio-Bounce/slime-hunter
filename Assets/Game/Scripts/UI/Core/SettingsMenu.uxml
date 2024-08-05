@@ -1,0 +1,35 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/Scripts/UI/USS/MainStyle.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainStyle" />
+    <ui:VisualElement name="RootWrapper" style="flex-grow: 1;">
+        <ui:VisualElement class="container-full" style="flex-grow: 1;">
+            <ui:VisualElement name="Title" style="flex-direction: row; margin-bottom: 64px;">
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit; width: 200px;" />
+                <ui:Label tabindex="-1" text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" class="title h1" style="margin-left: 32px; margin-right: 32px;" />
+                <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit; width: 200px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Body" style="flex-grow: 1; flex-direction: column; width: 749px;">
+                <ui:VisualElement name="Resolution" style="flex-direction: row; justify-content: space-between;">
+                    <ui:Label tabindex="-1" text="Resolution" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" />
+                    <DropdownSH name="ResolutionDropdown" style="width: 50%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="DisplayMode" style="flex-direction: row; justify-content: space-between;">
+                    <ui:Label tabindex="-1" text="Display Mode" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" />
+                    <DropdownSH name="DisplayModeDropdown" style="width: 50%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Quality" style="flex-direction: row; justify-content: space-between;">
+                    <ui:Label tabindex="-1" text="Quality" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" style="-unity-text-align: middle-left;" />
+                    <DropdownSH name="QualityDropdown" style="width: 50%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Volume" style="flex-direction: row; justify-content: space-between;">
+                    <ui:Label tabindex="-1" text="Volume" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" />
+                    <SliderSH name="VolumeSlider" high-value="1" style="width: 50%;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="Option" class="option-slot" style="width: 70%; align-self: center; margin-top: 10%;">
+                    <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                    <ButtonSH text="Back" name="BackBtn" class="h2 menu-button" />
+                    <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

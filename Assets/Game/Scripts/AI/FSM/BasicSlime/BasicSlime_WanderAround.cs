@@ -16,6 +16,8 @@ public class BasicSlime_WanderAround : BasicSlime_BaseState
         fsm.slimeAgent.maxSpeed = fsm.wanderSpeed;
 
         fsm.slimeEnemy.SetEye(EnemyEye.NORMAL);
+
+        fsm.slimeEnemy.Alerted = false;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -25,6 +27,7 @@ public class BasicSlime_WanderAround : BasicSlime_BaseState
         // If slime reached close to player, switch to chase
         if (Vector3.Distance(fsm.transform.position, fsm.GetPlayerPosition()) <= fsm.seekDistance)
         {
+            fsm.slimeEnemy.Alerted = true;
             fsm.ChangeState(fsm.ChasePlayerStateName);
         }
     }

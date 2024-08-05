@@ -36,12 +36,12 @@ public class PersistenceManager : Singleton<PersistenceManager>
             // If loading async the AutoSaveSequence might start too quickly
             if (GameManager.Instance.GameState != GameState.GAMEPLAY) yield return null;
 
-            yield return new WaitForSeconds(autoSaveInterval - 1.0f);
+            yield return new WaitForSecondsRealtime(autoSaveInterval - 1.0f);
             if (GameManager.Instance.GameState == GameState.GAMEPLAY)
             {
                 UIManager.Instance.ShowAutoSave();
                 SaveGame();
-                yield return new WaitForSeconds(1.0f); // Ideally this should be the time taken in saving
+                yield return new WaitForSecondsRealtime(1.0f); // Ideally this should be the time taken in saving
                 UIManager.Instance.HideAutoSave();
             }
         }

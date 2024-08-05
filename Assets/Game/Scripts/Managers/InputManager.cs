@@ -59,11 +59,10 @@ public class InputManager : Singleton<InputManager>
 
     public Sprite StringActionToSprite(string actionName)
     {
-        // Naive solution: Returns gamepad controls as long as one is plugged in
+        // TODO: Naive solution - returns gamepad controls as long as one is plugged in
         if (Gamepad.current != null)
         {
             return _spriteSettings.gamepadSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : null;
-
         }
         else
         {
