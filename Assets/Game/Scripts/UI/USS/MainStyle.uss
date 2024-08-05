@@ -59,9 +59,13 @@ Button:active {
     font-size: 48px;
 }
 
+.h3 {
+    font-size: 36px;
+}
+
 /* Style for DropdownField element */
 
-DropdownField * {
+DropdownField *, DropdownSH * {
     color: var(--text-secondary);
     border-radius: var(--radius);
 }
@@ -100,7 +104,6 @@ DropdownField * {
     color: white;
     -unity-text-outline-color: grey;
     -unity-text-outline-width: 1px;
-    font-size: 42px;
 }
 
 .option-slot:hover .menu-button {
