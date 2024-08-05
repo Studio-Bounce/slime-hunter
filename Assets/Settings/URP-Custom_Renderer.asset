@@ -97,7 +97,7 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
---- !u!114 &-5558296043184019697
+--- !u!114 &-3759537482253934523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,14 +106,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c4f71415ee6f2449b5b4b8cf557eb0, type: 3}
-  m_Name: ScreenSpaceOutlinesMain
+  m_Script: {fileID: 11500000, guid: 647101f9b35c1af4aabe298240d19a4f, type: 3}
+  m_Name: ScreenSpaceOutlines
   m_EditorClassIdentifier: 
   m_Active: 1
-  renderPassEvent: 450
+  renderPassEvent: 350
   outlinesLayerMask:
     serializedVersion: 2
-    m_Bits: 2039
+    m_Bits: 0
   outlineSettings:
     outlineColor: {r: 0, g: 0, b: 0, a: 0.46666667}
     outlineScale: 1
@@ -172,39 +172,6 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
---- !u!114 &-928922501461139769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 647101f9b35c1af4aabe298240d19a4f, type: 3}
-  m_Name: ScreenSpaceOutlinesMain
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  renderPassEvent: 450
-  outlinesLayerMask:
-    serializedVersion: 2
-    m_Bits: 2039
-  outlineSettings:
-    outlineColor: {r: 0, g: 0, b: 0, a: 0.46666667}
-    outlineScale: 1
-    depthThreshold: 7.1
-    robertsCrossMultiplier: 100
-    normalThreshold: 0.5
-    steepAngleThreshold: 1
-    steepAngleMultiplier: 3.5
-    colorFormat: 0
-    depthBufferBits: 0
-    filterMode: 1
-    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-    perObjectData: 0
-    enableDynamicBatching: 0
-    enableInstancing: 0
-    enableTransparents: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,13 +189,14 @@ MonoBehaviour:
       type: 3}
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
+  - {fileID: -3759537482253934523}
+  - {fileID: 8964823926157372054}
   - {fileID: -6830609168703572113}
   - {fileID: -1235274661820822563}
   - {fileID: -6603861501175270618}
   - {fileID: 2692266943840148158}
   - {fileID: 8905653866641342964}
-  - {fileID: 8964823926157372054}
-  m_RendererFeatureMap: 6fb7e5b326cd34a1dd0b21663d6cdbee26f39114f45e5aa4be5a1e6c85da5c25f4c1bded013d977b966a88f8dc73697c
+  m_RendererFeatureMap: 45e07c2a9470d3cb966a88f8dc73697c6fb7e5b326cd34a1dd0b21663d6cdbee26f39114f45e5aa4be5a1e6c85da5c25f4c1bded013d977b
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -313,39 +281,6 @@ MonoBehaviour:
       restoreCamera: 1
       offset: {x: 0, y: 0, z: 0, w: 0}
       cameraFieldOfView: 60
---- !u!114 &8615301727711726622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34c4f71415ee6f2449b5b4b8cf557eb0, type: 3}
-  m_Name: ScreenSpaceOutlinesSlimes
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  renderPassEvent: 500
-  outlinesLayerMask:
-    serializedVersion: 2
-    m_Bits: 128
-  outlineSettings:
-    outlineColor: {r: 0, g: 0, b: 0, a: 1}
-    outlineScale: 1
-    depthThreshold: 9.3
-    robertsCrossMultiplier: 100
-    normalThreshold: 0.196
-    steepAngleThreshold: 0.2
-    steepAngleMultiplier: 25
-    colorFormat: 0
-    depthBufferBits: 0
-    filterMode: 0
-    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
-    perObjectData: 0
-    enableDynamicBatching: 0
-    enableInstancing: 0
-    enableTransparents: 1
 --- !u!114 &8905653866641342964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,7 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f112e7da9ba928d488e96ca96340da36, type: 3}
   m_Name: LaplacianScreenSpaceOutlines
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   renderPassEvent: 350
   outlinesLayerMask:
     serializedVersion: 2
