@@ -266,12 +266,12 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="QuestContent" class="tab-content" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="QuestContent" class="tab-content selected-content" style="flex-grow: 1; flex-direction: row;">
                 <ui:VisualElement name="QuestSelection" style="flex-grow: 0; width: 50%;">
                     <ui:VisualElement name="SubOptions" style="flex-direction: row; align-self: center;">
-                        <ui:Button text="Main Journey" parse-escape-sequences="true" display-tooltip-when-elided="true" name="MainQuestBtn" />
-                        <ui:Button text="Side Quest" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SideQuestBtn" style="margin-right: 10px; margin-left: 10px;" />
-                        <ui:Button text="Hunting" parse-escape-sequences="true" display-tooltip-when-elided="true" name="HuntingQuestBtn" />
+                        <ButtonSH text="Main Journey" name="MainQuestBtn" class="button" />
+                        <ButtonSH text="Side Quest" name="SideQuestBtn" class="button" style="margin-right: 10px; margin-left: 10px;" />
+                        <ButtonSH text="Hunting" name="HuntingQuestBtn" class="button" />
                     </ui:VisualElement>
                     <ui:VisualElement name="QuestList" style="flex-direction: row; margin-top: 25px; margin-right: 25px; margin-bottom: 25px; margin-left: 25px;">
                         <ui:VisualElement name="LeftArrow" style="flex-grow: 0; width: 31px; justify-content: center;">
@@ -367,7 +367,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:VisualElement name="QuestExplanation" style="flex-shrink: 0; width: 50%;">
-                    <ui:VisualElement name="Content" style="background-color: rgba(47, 50, 53, 0.8); flex-grow: 1; border-left-color: rgb(70, 187, 202); border-right-color: rgb(70, 187, 202); border-top-color: rgb(70, 187, 202); border-bottom-color: rgb(70, 187, 202); border-top-left-radius: 21px; border-top-right-radius: 21px; border-bottom-right-radius: 21px; border-bottom-left-radius: 21px; border-top-width: 8px; border-right-width: 8px; border-bottom-width: 8px; border-left-width: 8px; padding-left: 65px; padding-right: 65px; padding-top: 60px; padding-bottom: 33px;">
+                    <ui:VisualElement name="Content" style="background-color: rgba(47, 50, 53, 0.8); flex-grow: 1; border-left-color: rgb(70, 187, 202); border-right-color: rgb(70, 187, 202); border-top-color: rgb(70, 187, 202); border-bottom-color: rgb(70, 187, 202); border-top-left-radius: 21px; border-top-right-radius: 21px; border-bottom-right-radius: 21px; border-bottom-left-radius: 21px; border-top-width: 6px; border-right-width: 6px; border-bottom-width: 6px; border-left-width: 6px; padding-left: 65px; padding-right: 65px; padding-top: 60px; padding-bottom: 33px;">
                         <ui:VisualElement name="QuestHeader" style="flex-direction: row; width: 100%; flex-shrink: 0; flex-wrap: wrap;">
                             <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuestName" text="A Quest" style="color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold; -unity-text-align: middle-left; white-space: normal;" />
                             <ui:Label tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Position" text="Glade Village" style="font-size: 20px; -unity-text-align: middle-left; text-overflow: ellipsis; white-space: normal; max-width: 50%;" />
@@ -402,11 +402,11 @@
                             </ui:VisualElement>
                         </ui:VisualElement>
                         <ui:VisualElement name="Button" style="flex-grow: 0; padding-bottom: 0; padding-top: 0; width: 264px; align-self: center;">
-                            <ui:Button text="Track Quest" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Button" style="border-left-color: rgb(70, 187, 202); border-right-color: rgb(70, 187, 202); border-top-color: rgb(70, 187, 202); border-bottom-color: rgb(70, 187, 202); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; background-color: rgba(0, 0, 0, 0.2); color: rgb(255, 255, 255); -unity-font-style: normal; -unity-font: url(&quot;project://database/Assets/Game/Textures/UI/FontType/Sora-Bold.ttf?fileID=12800000&amp;guid=22798bb779d9e974db6dcf8746964727&amp;type=3#Sora-Bold&quot;); -unity-font-definition: initial; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; flex-direction: row; -unity-text-align: middle-center;">
+                            <ButtonSH text="Track Quest" class="button" style="flex-direction: row;">
                                 <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Quest.png?fileID=2800000&amp;guid=b31475e86f4d7a041b2ec8c473af350a&amp;type=3#Quest&quot;); -unity-background-scale-mode: scale-to-fit; width: 35px; height: 28px;" />
                                 <ui:VisualElement style="flex-grow: 1; font-size: 15px;" />
                                 <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Quest.png?fileID=2800000&amp;guid=b31475e86f4d7a041b2ec8c473af350a&amp;type=3#Quest&quot;); -unity-background-scale-mode: scale-to-fit; height: 28px; width: 35px;" />
-                            </ui:Button>
+                            </ButtonSH>
                         </ui:VisualElement>
                     </ui:VisualElement>
                     <ui:VisualElement name="Complete" style="flex-grow: 1; position: absolute; height: 134px; width: 260px; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Complete.png?fileID=2800000&amp;guid=7a38da851ede7b44fae1303409e87c23&amp;type=3#Complete&quot;); -unity-background-scale-mode: scale-to-fit; top: 456px; left: 431px;" />
@@ -425,41 +425,34 @@
                     <ui:VisualElement name="Questgoal" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/Group%2023.png?fileID=2800000&amp;guid=691d61749127acd44a6061c05c5ec094&amp;type=3#Group 23&quot;); position: absolute; height: 34px; width: 25px; -unity-background-scale-mode: scale-to-fit; top: 736px; left: 1222px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="ProfileContent" class="tab-content" style="flex-grow: 1;">
-                <ui:VisualElement style="flex-grow: 1; -unity-text-align: upper-center; align-self: center; justify-content: center;">
-                    <ui:VisualElement class="option-slot" style="flex-grow: 0;">
-                        <ui:Button text="PROFILE" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exampleBtn" class="menu-button" style="background-color: rgba(188, 188, 188, 0); border-left-color: rgba(149, 149, 149, 0); border-right-color: rgba(149, 149, 149, 0); border-top-color: rgba(149, 149, 149, 0); border-bottom-color: rgba(149, 149, 149, 0); color: rgb(255, 255, 255); font-size: 30px; -unity-font-style: bold;" />
-                    </ui:VisualElement>
-                </ui:VisualElement>
-            </ui:VisualElement>
-            <ui:VisualElement name="MenuContent" class="tab-content selected-content" style="width: 100%; height: 100%;">
+            <ui:VisualElement name="MenuContent" class="tab-content" style="width: 100%; height: 100%;">
                 <ui:VisualElement name="VisualElement" style="align-self: center; justify-content: center; align-items: center; max-width: 100%; width: 100%; height: 100%;">
-                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; padding-right: 20%; padding-left: 20%; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;);">
-                        <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;); width: 30%;">
+                        <ui:VisualElement name="VisualElement" class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
                         <ButtonSH text="Continue" name="btnUnpause" class="menu-button h3" />
                         <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; padding-right: 20%; padding-left: 20%; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;);">
+                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;); width: 30%;">
                         <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
                         <ButtonSH text="Save" name="btnSave" class="menu-button h3" />
                         <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; padding-right: 20%; padding-left: 20%; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;);">
+                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;); width: 30%;">
                         <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
                         <ButtonSH text="Load" name="btnLoad" class="menu-button h3" />
                         <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; padding-right: 20%; padding-left: 20%; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;);">
+                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;); width: 30%;">
                         <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
                         <ButtonSH text="Settings" name="btnSettings" class="menu-button h3" />
                         <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; padding-right: 20%; padding-left: 20%; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;);">
+                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;); width: 30%;">
                         <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
                         <ButtonSH text="Main Menu" name="btnBackMainMenu" class="menu-button h3" />
                         <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; padding-right: 20%; padding-left: 20%; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;);">
+                    <ui:VisualElement name="Option" class="option-slot" style="-unity-text-align: upper-center; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;); width: 30%;">
                         <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
                         <ButtonSH text="Quit" name="btnQuit" class="menu-button h3" />
                         <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />

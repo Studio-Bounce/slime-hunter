@@ -12,9 +12,6 @@ public class SliderSH : Slider
         this.RegisterCallback<ClickEvent>(
             ev => RuntimeManager.PlayOneShot(AudioManager.Config.buttonPressEvent)
         );
-        this.RegisterCallback<MouseOverEvent>(
-            ev => RuntimeManager.PlayOneShot(AudioManager.Config.hoverEvent)
-        );
         this.RegisterCallback<ChangeEvent<float>>(
             ev => { if (isInitialized) RuntimeManager.PlayOneShot(AudioManager.Config.sliderChangeEvent); }
         );

@@ -7,7 +7,7 @@ public class DropdownSH : DropdownField
 
     public DropdownSH()
     {
-        this.RegisterCallback<ClickEvent>(
+        this.RegisterCallback<FocusEvent>(
             ev => RuntimeManager.PlayOneShot(AudioManager.Config.buttonPressEvent)
             );
         this.RegisterCallback<MouseOverEvent>(

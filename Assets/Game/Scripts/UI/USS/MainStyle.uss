@@ -23,7 +23,7 @@
     font-size: 18px;
 }
 
-Button {
+Button, .button {
     transition-property: all;
     transition-duration: 0.2s;
     background-color: var(--bg-accent);
@@ -33,11 +33,11 @@ Button {
     margin: 0px;
 }
 
-Button:hover {
+Button:hover, .button:hover {
     background-color: var(--bg-accent-dark);
 }
 
-Button:active {
+Button:active, .button:active {
     scale: 0.95;
 }
 
@@ -94,17 +94,21 @@ DropdownField *, DropdownSH * {
 }
 
 .option-slot:hover {
-    scale: 0.95;
     text-shadow: 0px 0px 20px #46BBCA;
     -unity-background-image-tint-color: black;
 }
 
 .menu-button {
+    transition-property: all;
+    transition-duration: 0.2s;
     background-color: transparent;
     border-width: 0;
-    color: white;
     -unity-text-outline-color: grey;
     -unity-text-outline-width: 1px;
+}
+
+.menu-button:active {
+    scale: 0.95;
 }
 
 .option-slot:hover .menu-button {
