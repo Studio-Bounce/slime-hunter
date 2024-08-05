@@ -39,17 +39,15 @@ public class PauseMenu : Menu
         healthValue = root.Q<Label>("HealthValue");
         LinkInventoryStatsUIToPlayer();
 
-        VisualElement mapTabVE = root.Q<VisualElement>("MapTab");
+        Button mapTabVE = root.Q<Button>("MapTab");
         mapTabVE.RegisterCallback<ClickEvent>(evt => {
             MapMenuSelected();
         });
-        VisualElement invenTabVE = root.Q<VisualElement>("InventoryTab");
-        VisualElement questTabVE = root.Q<VisualElement>("QuestTab");
-        VisualElement profileTabVE = root.Q<VisualElement>("ProfileTab");
-        VisualElement menuTabVE = root.Q<VisualElement>("MenuTab");
+        Button invenTabVE = root.Q<Button>("InventoryTab");
+        Button questTabVE = root.Q<Button>("QuestTab");
+        Button menuTabVE = root.Q<Button>("MenuTab");
         invenTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
         questTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
-        profileTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
         menuTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
 
         GameManager.Instance.OnGameStateChange += OnPause;

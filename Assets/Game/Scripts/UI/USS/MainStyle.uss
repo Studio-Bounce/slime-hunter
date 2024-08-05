@@ -30,7 +30,7 @@ Button, .button {
     border-width: 2px;
     border-color: white;
     border-radius: var( --button-radius);
-    margin: 0px;
+    margin: 0 5px;
 }
 
 Button:hover, .button:hover {
@@ -134,8 +134,12 @@ DropdownField *, DropdownSH * {
 /* ## Inventory */
 
 .tab {
+    background-color: transparent;
+    border-width: 0;
     transition-property: all;
     transition-duration: 0.2s;
+    width: 15%;
+    margin: 0;
 }
 
 .tab:hover {
