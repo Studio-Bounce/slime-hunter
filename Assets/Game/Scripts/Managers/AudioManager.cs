@@ -13,6 +13,7 @@ public class AudioManager : Singleton<AudioManager>
     public int maxEnemyIntensity = 3;
     private int enemiesAlerted = 0;
     private PARAMETER_ID combatIntensityParamID;
+    private bool forceAlert = false;
 
     private EventInstance menuInstance;
     private EventInstance explorationInstance;
@@ -20,9 +21,6 @@ public class AudioManager : Singleton<AudioManager>
 
     private Dictionary<string, EventInstance> soundEffectInstances = new Dictionary<string, EventInstance>();
     private Dictionary<string, EventInstance> uiSoundEffectInstances = new Dictionary<string, EventInstance>();
-
-    private float combatIntensity;
-    private string currentAreaType;
 
     void Start()
     {
@@ -37,13 +35,6 @@ public class AudioManager : Singleton<AudioManager>
         combatIntensityParamID = parameterDescription.id;
 
         GameManager.Instance.OnGameStateChange += HandleBGMusic;
-    }
-
-    private void Update()
-    {
-        float val;
-        explorationInstance.getParameterByID(combatIntensityParamID, out val);
-        Debug.Log($"Desired {enemiesAlerted / maxEnemyIntensity} : Actual {val}");
     }
 
     private void HandleBGMusic(GameState state)
@@ -67,18 +58,31 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
+    public void ForceAlert(float value)
+    {
+        forceAlert = true;
+        explorationInstance.setParameterByID(combatIntensityParamID, value);
+    }
+
+    public void ReleaseAlert()
+    {
+        forceAlert = false;
+        explorationInstance.setParameterByID(combatIntensityParamID, (float)enemiesAlerted / maxEnemyIntensity);
+    }
+
     public void OnEnemyAlerted()
     {
         enemiesAlerted++;
         // FMOD will clamp intensity
+        if (forceAlert) return;
         explorationInstance.setParameterByID(combatIntensityParamID, (float)enemiesAlerted / maxEnemyIntensity);
     }
 
     public void OnEnemyUnalerted()
     {
-        enemiesAlerted--;
+        enemiesAlerted = Mathf.Max(enemiesAlerted-1, 0);
         // FMOD will clamp intensity
+        if (forceAlert) return;
         explorationInstance.setParameterByID(combatIntensityParamID, (float)enemiesAlerted / maxEnemyIntensity);
-
     }
 }

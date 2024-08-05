@@ -81,6 +81,7 @@ public class EnemyGauntlet : PersistentObject
         if (waveCounter > enemyWaves.Count - 1)
         {
             gauntletStart = false;
+            AudioManager.Instance.ReleaseAlert();
             StartCoroutine(ReleaseWalls());
             return;
         }
@@ -229,6 +230,7 @@ public class EnemyGauntlet : PersistentObject
         {
             if (active)
             {
+                AudioManager.Instance.ForceAlert(1.0f);
                 StartCoroutine(SpawnWalls()); // Will also start enemy spawning
                 _boxCollider.enabled = false;
             }
