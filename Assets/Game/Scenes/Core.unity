@@ -167,27 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e702e685be22f4393bf19be7148b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuEvent:
-    Guid:
-      Data1: 835277379
-      Data2: 1088420120
-      Data3: 650286999
-      Data4: -1051690489
-    Path: event:/MainMenuMusic
-  explorationEvent:
-    Guid:
-      Data1: 1430334228
-      Data2: 1276980401
-      Data3: -1048297056
-      Data4: -420034805
-    Path: event:/BackgroundMusic
-  villageEvent:
-    Guid:
-      Data1: 539403735
-      Data2: 1327354025
-      Data3: -1741104723
-      Data4: 1003760511
-    Path: event:/VillageMusic
+  config: {fileID: 11400000, guid: 76a1e4d4ef64dac41a06134cce440174, type: 2}
 --- !u!1 &71063978
 GameObject:
   m_ObjectHideFlags: 0

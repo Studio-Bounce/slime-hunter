@@ -5,12 +5,8 @@ using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
-    public EventReference menuEvent;
-    public EventReference explorationEvent;
-    public EventReference villageEvent;
+    [SerializeField] private AudioConfig config;
 
-    public float CombatIntensity { get; set; } = 0.0f;
-    public int maxEnemyIntensity = 3;
     private int enemiesAlerted = 0;
     private PARAMETER_ID combatIntensityParamID;
     private bool forceAlert = false;
@@ -22,11 +18,14 @@ public class AudioManager : Singleton<AudioManager>
     private Dictionary<string, EventInstance> soundEffectInstances = new Dictionary<string, EventInstance>();
     private Dictionary<string, EventInstance> uiSoundEffectInstances = new Dictionary<string, EventInstance>();
 
+    public float CombatIntensity { get { return (float)enemiesAlerted / config.maxEnemyIntensity; } }
+    public static AudioConfig Config => Instance.config;
+
     void Start()
     {
-        menuInstance = RuntimeManager.CreateInstance(menuEvent);
-        explorationInstance = RuntimeManager.CreateInstance(explorationEvent);
-        villageInstance = RuntimeManager.CreateInstance(villageEvent);
+        menuInstance = RuntimeManager.CreateInstance(config.menuEvent);
+        explorationInstance = RuntimeManager.CreateInstance(config.explorationEvent);
+        villageInstance = RuntimeManager.CreateInstance(config.villageEvent);
 
         EventDescription eventDescription;
         explorationInstance.getDescription(out eventDescription);
@@ -67,7 +66,7 @@ public class AudioManager : Singleton<AudioManager>
     public void ReleaseAlert()
     {
         forceAlert = false;
-        explorationInstance.setParameterByID(combatIntensityParamID, (float)enemiesAlerted / maxEnemyIntensity);
+        explorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
     }
 
     public void OnEnemyAlerted()
@@ -75,7 +74,7 @@ public class AudioManager : Singleton<AudioManager>
         enemiesAlerted++;
         // FMOD will clamp intensity
         if (forceAlert) return;
-        explorationInstance.setParameterByID(combatIntensityParamID, (float)enemiesAlerted / maxEnemyIntensity);
+        explorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
     }
 
     public void OnEnemyUnalerted()
@@ -83,6 +82,6 @@ public class AudioManager : Singleton<AudioManager>
         enemiesAlerted = Mathf.Max(enemiesAlerted-1, 0);
         // FMOD will clamp intensity
         if (forceAlert) return;
-        explorationInstance.setParameterByID(combatIntensityParamID, (float)enemiesAlerted / maxEnemyIntensity);
+        explorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
     }
 }
