@@ -111,7 +111,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     IEnumerator DelayedClear(float timer)
     {
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSecondsRealtime(timer);
         dialogueHUD.Hide();
         hudMenu.Show();
         // Enable controls

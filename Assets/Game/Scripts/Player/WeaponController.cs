@@ -197,14 +197,14 @@ public class WeaponController : MonoBehaviour
 
         // Start attack 
         _animator.SetTrigger(attackStartTriggerHash);
-        yield return new WaitForSeconds(move.animationDelay / GameManager.Instance.PlayerSpeedMultiplier);
+        yield return new WaitForSecondsRealtime(move.animationDelay);
 
         currentAttackState = AttackState.ACTIVE;
         weaponTrail.Attack(move, isFinalAttack);
-        yield return new WaitForSeconds(move.attackDuration / GameManager.Instance.PlayerSpeedMultiplier);
+        yield return new WaitForSecondsRealtime(move.attackDuration);
 
         currentAttackState = AttackState.WIND_DOWN;
-        yield return new WaitForSeconds(move.comboDuration / GameManager.Instance.PlayerSpeedMultiplier);
+        yield return new WaitForSecondsRealtime(move.comboDuration);
         if (currentAttackState == AttackState.WIND_DOWN)
         {
             ResetCombo();

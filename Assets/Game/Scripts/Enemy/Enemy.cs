@@ -38,6 +38,28 @@ public class Enemy : DynamicDamageTaker
 
     BasicSlime_FSM fsm;
 
+    private bool alerted = false;
+    public bool Alerted
+    {
+        get
+        {
+            return alerted;
+        }
+        set
+        {
+            // Update music intensity
+            if (alerted && !value)
+            {
+                AudioManager.Instance.OnEnemyUnalerted();
+            }
+            else if (!alerted && value)
+            {
+                AudioManager.Instance.OnEnemyAlerted();
+            }
+            alerted = value;
+        }
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -137,7 +159,7 @@ public class Enemy : DynamicDamageTaker
             var newMats = new List<Material>(slimeOuterBody.materials) { flashMat };
             slimeOuterBody.materials = newMats.ToArray();
 
-            yield return new WaitForSeconds(flashDuration);
+            yield return new WaitForSecondsRealtime(flashDuration);
 
             // Revert color
             if (slimeOuterBody.materials.Length > 1)

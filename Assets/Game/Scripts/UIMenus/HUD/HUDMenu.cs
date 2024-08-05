@@ -176,7 +176,7 @@ public class HUDMenu : Menu
             --opacity;
             healthDamageVE.style.opacity = opacity;
 
-            yield return new WaitForSeconds(timeDelta);
+            yield return new WaitForSecondsRealtime(timeDelta);
         }
         redAlertUp = false;
     }
@@ -258,7 +258,7 @@ public class HUDMenu : Menu
         }
 
         lstItem.element.Q<VisualElement>(name: "PickupListItem").AddToClassList("list-item-inactive");
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSecondsRealtime(0.3f);
 
         itemPickupContainer.Remove(itemListMap[itemSO].element);
         itemListMap.Remove(itemSO);

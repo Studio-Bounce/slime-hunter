@@ -19,7 +19,7 @@ public class Startup : MonoBehaviour
     IEnumerator BootSequence()
     {
         GameManager.Instance.GameState = GameState.LOADING;
-        yield return new WaitForSeconds(InitialBootDelay);
+        yield return new WaitForSecondsRealtime(InitialBootDelay);
         if (InitialUI != null)
         {
             GameManager.Instance.GameState = GameState.MAIN_MENU;

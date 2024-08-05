@@ -23,6 +23,8 @@ public class RabbitSlime_WanderAround : BasicSlime_BaseState
         
         isMoving = false;
         rFSM.ResetRestOnNextUpdate = true;
+
+        fsm.slimeEnemy.Alerted = false;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -52,6 +54,7 @@ public class RabbitSlime_WanderAround : BasicSlime_BaseState
         // If slime reached close to player, switch to chase
         if (Vector3.Distance(rFSM.transform.position, rFSM.GetPlayerPosition()) <= rFSM.seekDistance)
         {
+            fsm.slimeEnemy.Alerted = true;
             fsm.ChangeState(rFSM.ChasePlayerStateName);
         }
     }

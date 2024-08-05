@@ -113,7 +113,7 @@ public class SpellController : MonoBehaviour
 
     IEnumerator StopCast()
     {
-        yield return new WaitForSeconds(0.4f); // TODO: Hardcoded 0.4 seconds animation
+        yield return new WaitForSecondsRealtime(0.4f); // TODO: Hardcoded 0.4 seconds animation
         isCasting = false;
     }
 

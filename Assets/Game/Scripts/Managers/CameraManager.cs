@@ -114,7 +114,7 @@ public class CameraManager : Singleton<CameraManager>
         else
         {
             camNoise.m_AmplitudeGain = intensity;
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSecondsRealtime(time);
             camNoise.m_AmplitudeGain = 0;
         }
     }

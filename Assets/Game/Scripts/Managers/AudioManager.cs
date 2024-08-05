@@ -11,7 +11,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public float CombatIntensity { get; set; } = 0.0f;
     public int maxEnemyIntensity = 3;
-    private int enemiesInCombat = 0;
+    private int enemiesAlerted = 0;
     private PARAMETER_ID combatIntensityParamID;
 
     private EventInstance menuInstance;
@@ -39,6 +39,13 @@ public class AudioManager : Singleton<AudioManager>
         GameManager.Instance.OnGameStateChange += HandleBGMusic;
     }
 
+    private void Update()
+    {
+        float val;
+        explorationInstance.getParameterByID(combatIntensityParamID, out val);
+        Debug.Log($"Desired {enemiesAlerted / maxEnemyIntensity} : Actual {val}");
+    }
+
     private void HandleBGMusic(GameState state)
     {
         switch (state)
@@ -49,7 +56,7 @@ public class AudioManager : Singleton<AudioManager>
             case GameState.GAMEPLAY:
                 menuInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 explorationInstance.start();
-                villageInstance.start();
+                //villageInstance.start();
                 break;
             case GameState.LOADING:
                 break;
@@ -60,18 +67,18 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
-    public void OnEnemyAggroed()
+    public void OnEnemyAlerted()
     {
-        enemiesInCombat++;
+        enemiesAlerted++;
         // FMOD will clamp intensity
-        explorationInstance.setParameterByID(combatIntensityParamID, enemiesInCombat / maxEnemyIntensity);
+        explorationInstance.setParameterByID(combatIntensityParamID, (float)enemiesAlerted / maxEnemyIntensity);
     }
 
-    public void OnEnemyDeaggroed()
+    public void OnEnemyUnalerted()
     {
-        enemiesInCombat--;
+        enemiesAlerted--;
         // FMOD will clamp intensity
-        explorationInstance.setParameterByID(combatIntensityParamID, enemiesInCombat / maxEnemyIntensity);
+        explorationInstance.setParameterByID(combatIntensityParamID, (float)enemiesAlerted / maxEnemyIntensity);
 
     }
 }
