@@ -25,10 +25,10 @@ public class PauseMenu : Menu
         pauseRootWrapperVE = root.Q<VisualElement>("RootWrapper");
         cachedAlpha = pauseRootWrapperVE.resolvedStyle.backgroundColor.a;
 
-        ButtonSH btnUnpause = root.Q<ButtonSH>("btnUnpause");
-        ButtonSH btnBackMainMenu = root.Q<ButtonSH>("btnBackMainMenu");
-        ButtonSH btnSettings = root.Q<ButtonSH>("btnSettings");
-        ButtonSH btnQuit = root.Q<ButtonSH>("btnQuit");
+        Button btnUnpause = root.Q<Button>("btnUnpause");
+        Button btnBackMainMenu = root.Q<Button>("btnBackMainMenu");
+        Button btnSettings = root.Q<Button>("btnSettings");
+        Button btnQuit = root.Q<Button>("btnQuit");
 
         btnUnpause.clicked += () => GameManager.Instance.GameState = GameState.GAMEPLAY;
         btnBackMainMenu.clicked += ReturnMainMenu;

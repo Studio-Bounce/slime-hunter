@@ -27,7 +27,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="TabContent" style="flex-grow: 1; padding-right: 100px; padding-left: 100px; padding-top: 50px; padding-bottom: 50px; display: flex;">
-            <ui:VisualElement name="InventoryContent" class="tab-content" style="flex-grow: 1; flex-direction: row; margin-left: 2px;">
+            <ui:VisualElement name="InventoryContent" class="tab-content selected-content" style="flex-grow: 1; flex-direction: row; margin-left: 2px;">
                 <ui:VisualElement name="InventoryLeft" style="flex-grow: 1; width: 59%; padding-left: 50px;">
                     <ui:VisualElement name="CharacterContainer" style="flex-grow: 0; flex-direction: row; flex-shrink: 0; height: 78%;">
                         <ui:VisualElement name="Information" style="flex-grow: 1; width: 35%; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-top-left-radius: 21px; border-top-right-radius: 21px; border-bottom-right-radius: 21px; border-bottom-left-radius: 21px; background-color: rgba(47, 50, 53, 0.8); flex-shrink: 1; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;">
@@ -266,7 +266,7 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="QuestContent" class="tab-content selected-content" style="flex-grow: 1; flex-direction: row;">
+            <ui:VisualElement name="QuestContent" class="tab-content" style="flex-grow: 1; flex-direction: row;">
                 <ui:VisualElement name="QuestSelection" style="flex-grow: 0; width: 50%;">
                     <ui:VisualElement name="SubOptions" style="flex-direction: row; align-self: center;">
                         <ButtonSH text="Main Journey" name="MainQuestBtn" class="button" />

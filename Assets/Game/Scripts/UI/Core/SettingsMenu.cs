@@ -9,11 +9,11 @@ using UnityEditor;
 
 public class SettingsMenu : Menu
 {
-    private DropdownSH resolutionDropdown;
-    private DropdownSH displayModeDropdown;
-    private DropdownSH qualityDropdown;
-    private SliderSH volumeSlider;
-    private ButtonSH backBtn;
+    private DropdownField resolutionDropdown;
+    private DropdownField displayModeDropdown;
+    private DropdownField qualityDropdown;
+    private Slider volumeSlider;
+    private Button backBtn;
 
     List<string> resolutions = new List<string>
     {
@@ -41,11 +41,11 @@ public class SettingsMenu : Menu
     void Start()
     {
         VisualElement root = uiDocument.rootVisualElement;
-        resolutionDropdown = root.Q<DropdownSH>("ResolutionDropdown");
-        displayModeDropdown = root.Q<DropdownSH>("DisplayModeDropdown");
-        qualityDropdown = root.Q<DropdownSH>("QualityDropdown");
-        volumeSlider = root.Q<SliderSH>("VolumeSlider");
-        backBtn = root.Q<ButtonSH>("BackBtn");
+        resolutionDropdown = root.Q<DropdownField>("ResolutionDropdown");
+        displayModeDropdown = root.Q<DropdownField>("DisplayModeDropdown");
+        qualityDropdown = root.Q<DropdownField>("QualityDropdown");
+        volumeSlider = root.Q<Slider>("VolumeSlider");
+        backBtn = root.Q<Button>("BackBtn");
 
         // Set the choices for dropdowns
         resolutionDropdown.choices = resolutions;

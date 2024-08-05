@@ -23,10 +23,10 @@ public class MainMenu : Menu
     void Start()
     {
         VisualElement root = uiDocument.rootVisualElement;
-        ButtonSH btnPlay = root.Q<ButtonSH>("btnPlay");
-        ButtonSH btnContinue = root.Q<ButtonSH>("btnContinue");
-        ButtonSH btnSettings = root.Q<ButtonSH>("btnSettings");
-        ButtonSH btnQuit = root.Q<ButtonSH>("btnQuit");
+        Button btnPlay = root.Q<Button>("btnPlay");
+        Button btnContinue = root.Q<Button>("btnContinue");
+        Button btnSettings = root.Q<Button>("btnSettings");
+        Button btnQuit = root.Q<Button>("btnQuit");
         btnPlay.RegisterCallback<ClickEvent>(ev => InitiateGame(SetStartState));
         btnContinue.RegisterCallback<ClickEvent>(ev => InitiateGame(LoadData));
         btnSettings.RegisterCallback<ClickEvent>(ev =>
