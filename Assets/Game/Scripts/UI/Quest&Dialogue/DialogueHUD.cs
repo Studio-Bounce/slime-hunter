@@ -46,7 +46,7 @@ public class DialogueHUD : Menu
         {
             // Create a button for the choice and set the choice text
             VisualElement dialogVE = dialogOptionBtn.CloneTree();
-            Button dialogButton = dialogVE.Q<Button>();
+            ButtonSH dialogButton = dialogVE.Q<ButtonSH>();
             dialogButton.text = choice.text.Trim();
 
             dialogButton.clicked += () => {
