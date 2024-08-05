@@ -13,7 +13,7 @@ public class SettingsMenu : Menu
     private DropdownSH displayModeDropdown;
     private DropdownSH qualityDropdown;
     private SliderSH volumeSlider;
-    private Label backBtn;
+    private ButtonSH backBtn;
 
     List<string> resolutions = new List<string>
     {
@@ -45,7 +45,7 @@ public class SettingsMenu : Menu
         displayModeDropdown = root.Q<DropdownSH>("DisplayModeDropdown");
         qualityDropdown = root.Q<DropdownSH>("QualityDropdown");
         volumeSlider = root.Q<SliderSH>("VolumeSlider");
-        backBtn = root.Q<Label>("Back");
+        backBtn = root.Q<ButtonSH>("BackBtn");
 
         // Set the choices for dropdowns
         resolutionDropdown.choices = resolutions;
@@ -165,8 +165,7 @@ public class SettingsMenu : Menu
 
     private void ApplyVolumeSetting(float volume)
     {
-        // Replace with FMOD
-        AudioListener.volume = volume;
+        AudioManager.Instance.SetVolume(volume);
     }
 
     private void Back()

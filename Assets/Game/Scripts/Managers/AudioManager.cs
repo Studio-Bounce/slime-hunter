@@ -2,6 +2,7 @@ using FMOD.Studio;
 using FMODUnity;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AudioManager : Singleton<AudioManager>
 {
@@ -55,6 +56,18 @@ public class AudioManager : Singleton<AudioManager>
             default:
                 break;
         }
+    }
+
+    public void SetVolume(float value)
+    {
+        // Ensure volume is clamped between 0.0 and 1.0
+        value = Mathf.Clamp01(value);
+
+        // Retrieve the master bus
+        Bus masterBus = RuntimeManager.GetBus("bus:/"); // "bus:/" is the path to the master bus
+
+        // Set the volume on the master bus
+        masterBus.setVolume(value);
     }
 
     public void ForceAlert(float value)

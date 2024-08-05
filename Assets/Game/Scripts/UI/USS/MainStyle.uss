@@ -90,6 +90,7 @@ DropdownField *, DropdownSH * {
     transition-property: all;
     transition-duration: 0.3s;
     -unity-background-image-tint-color: transparent;
+    flex-direction: row;
 }
 
 .option-slot:hover {

@@ -22,9 +22,13 @@
                 </ui:VisualElement>
                 <ui:VisualElement name="Volume" style="flex-direction: row; justify-content: space-between;">
                     <ui:Label tabindex="-1" text="Volume" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h2" />
-                    <SliderSH name="VolumeSlider" style="width: 50%;" />
+                    <SliderSH name="VolumeSlider" high-value="1" style="width: 50%;" />
                 </ui:VisualElement>
-                <ButtonSH text="Back" name="backBtn" class="h2 menu-button" style="margin-top: 64px;" />
+                <ui:VisualElement name="Option" class="option-slot" style="width: 70%; align-self: center; margin-top: 10%;">
+                    <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                    <ButtonSH text="Back" name="BackBtn" class="h2 menu-button" />
+                    <ui:VisualElement class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

@@ -3,6 +3,8 @@ using UnityEngine.UIElements;
 
 public class SliderSH : Slider
 {
+    private bool isInitialized = false;
+
     public new class UxmlFactory : UxmlFactory<SliderSH, UxmlTraits> { }
 
     public SliderSH()
@@ -14,7 +16,16 @@ public class SliderSH : Slider
             ev => RuntimeManager.PlayOneShot(AudioManager.Config.hoverEvent)
         );
         this.RegisterCallback<ChangeEvent<float>>(
-            ev => RuntimeManager.PlayOneShot(AudioManager.Config.sliderChangeEvent)
+            ev => { if (isInitialized) RuntimeManager.PlayOneShot(AudioManager.Config.sliderChangeEvent); }
         );
+
+        // Avoid changeEvent occuring on game start
+        this.RegisterCallback<GeometryChangedEvent>(ev =>
+        {
+            if (!isInitialized)
+            {
+                isInitialized = true;
+            }
+        });
     }
 }
