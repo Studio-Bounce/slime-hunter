@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1227786061573637885}
   - component: {fileID: 2394686100677720067}
+  - component: {fileID: 4969854158719812218}
   m_Layer: 0
   m_Name: EnemyGauntlet
   m_TagString: Untagged
@@ -55,4 +56,33 @@ MonoBehaviour:
   active: 1
   destroyEffect: {fileID: 6003455519181501539, guid: eb9caf067ce2dae4cbc53e2ea3365f83,
     type: 3}
+  destroyEffectDensity: 10
   enemyWaves: []
+  OnGauntletClear:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4969854158719812218}
+        m_TargetAssemblyTypeName: PersistentDisableIfCleared, Assembly-CSharp
+        m_MethodName: MarkCleared
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4969854158719812218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6350251942208563964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10f67d6dea77b7b43a9797d40a2e80b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uuid: 

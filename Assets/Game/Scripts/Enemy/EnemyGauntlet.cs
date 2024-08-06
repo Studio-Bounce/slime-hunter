@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using System.IO;
 using Unity.VisualScripting;
+using UnityEngine.Events;
 
 public class EnemyGauntlet : PersistentObject
 {
@@ -28,6 +29,8 @@ public class EnemyGauntlet : PersistentObject
 
     private bool gauntletStart = false;
     private int waveCounter = 0;
+
+    public UnityEvent OnGauntletClear;
 
     public EnemyWaveProperties CurrentWaveProp
     {
@@ -82,6 +85,7 @@ public class EnemyGauntlet : PersistentObject
         {
             gauntletStart = false;
             AudioManager.Instance.ReleaseAlert();
+            OnGauntletClear.Invoke();
             StartCoroutine(ReleaseWalls());
             return;
         }

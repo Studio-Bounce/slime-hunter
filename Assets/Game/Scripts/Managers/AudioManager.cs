@@ -12,6 +12,12 @@ public class AudioManager : Singleton<AudioManager>
     private PARAMETER_ID combatIntensityParamID;
     private bool forceAlert = false;
 
+    // Footsteps
+    private EventInstance walkDirt;
+    private EventInstance walkGrass;
+    private EventInstance walkGravel;
+
+    // Music
     private EventInstance menuInstance;
     private EventInstance explorationInstance;
     private EventInstance villageInstance;
