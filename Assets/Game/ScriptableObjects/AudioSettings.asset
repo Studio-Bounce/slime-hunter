@@ -34,6 +34,27 @@ MonoBehaviour:
       Data4: 1003760511
     Path: event:/Music/VillageMusic
   maxEnemyIntensity: 3
+  walkDirt:
+    Guid:
+      Data1: -2114652048
+      Data2: 1106262454
+      Data3: 1495608215
+      Data4: -955883376
+    Path: event:/SoundEffects/WalkDirt
+  walkGrass:
+    Guid:
+      Data1: 1294741664
+      Data2: 1180264273
+      Data3: -990463592
+      Data4: 1528280249
+    Path: event:/SoundEffects/Movement/WalkGrass
+  walkGravel:
+    Guid:
+      Data1: 482339350
+      Data2: 1235761574
+      Data3: 714917030
+      Data4: -1570818045
+    Path: event:/SoundEffects/Movement/WalkGravel
   buttonPressEvent:
     Guid:
       Data1: -1639830083
