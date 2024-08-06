@@ -12,7 +12,12 @@ public class AudioConfig : ScriptableObject
     [Header("Combat Transitions")]
     public int maxEnemyIntensity = 3;
 
-    [Header("UI Sound Effects")]
+    [Header("SFX")]
+    public EventReference walkDirt;
+    public EventReference walkGrass;
+    public EventReference walkGravel;
+
+    [Header("UI")]
     public EventReference buttonPressEvent;
     public EventReference hoverEvent;
     public EventReference sliderChangeEvent;
