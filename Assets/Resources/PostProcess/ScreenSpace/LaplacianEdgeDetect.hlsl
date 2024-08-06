@@ -5,7 +5,7 @@ float LinearEyeDepth( float z ){
     return 1.0 / (_ZBufferParams.z * z + _ZBufferParams.w);
 }
 
-void LaplacianEdgeDetect_float(float2 UV, float2 TexelSize, UnityTexture2D viewNormals, SamplerState ss, out float3 Matte)
+void LaplacianEdgeDetect_float(float2 UV, float2 TexelSize, UnityTexture2D viewNormals, SamplerState ss, float3 ViewPos, out float4 Matte)
 {
     float hks = 2.0;
     float ks = hks * 2 + 1;
@@ -28,8 +28,8 @@ void LaplacianEdgeDetect_float(float2 UV, float2 TexelSize, UnityTexture2D viewN
     
     [unroll(1024)]
     for (float i = 0; i < maxLoops; i++) {
-        x = floor(i % ks - hks );
-        y = floor(floor(i / ks) - hks );
+        x = floor(i % ks) - hks;
+        y = floor(i / ks) - hks;
 
         if(x*x+ y*y > hksSQ){
             continue;
@@ -46,17 +46,15 @@ void LaplacianEdgeDetect_float(float2 UV, float2 TexelSize, UnityTexture2D viewN
     filteredNormals += nsam.rgb * centerWeight;
     filteredDepth += LinearEyeDepth(SHADERGRAPH_SAMPLE_SCENE_DEPTH(PixelUVs)) * centerWeight;
 
-    centerWeight--;
-
-    float alphaTest = 0.0;
-    if (nsam.a > 0.0) {
-        alphaTest = 1.0;
-    }
-    
+    centerWeight--;    
     centerWeight = 1.0 / centerWeight;
+
     filteredDepth *= centerWeight;
     filteredNormals *= centerWeight;
-    Matte = float3(max(max(filteredNormals.x,filteredNormals.y),filteredNormals.z), filteredDepth, alphaTest);
+
+    float nDotV = dot(nsam.rgb * 2.0 - 1.0, float3(0.0, 0.0,1.0));
+
+    Matte = float4(max(max(filteredNormals.x,filteredNormals.y),filteredNormals.z), filteredDepth, nsam.a, nDotV);
 }
 
 #endif

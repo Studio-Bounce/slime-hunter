@@ -13,7 +13,7 @@ public class LaplacianScreenSpaceOutlines : ScriptableRendererFeature {
         [Header("Outline Settings")]
         public Color outlineColor = Color.black;
         
-        [Range(0.0f, 10.0f)]
+        [Range(0.0f, 1.0f)]
         public float depthThreshold = 0.5f;
 
         [Range(0.0f, 1.0f)]
