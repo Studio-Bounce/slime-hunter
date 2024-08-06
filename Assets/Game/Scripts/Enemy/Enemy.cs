@@ -38,7 +38,7 @@ public class Enemy : DynamicDamageTaker
 
     BasicSlime_FSM fsm;
 
-    private bool alerted = false;
+    bool alerted = false;
     public bool Alerted
     {
         get
