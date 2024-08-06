@@ -21,23 +21,18 @@ public class TerrainFootsteps : MonoBehaviour
     public float footstepInterval = 0.5f; // Time interval between footsteps
     private float footstepTimer = 0f;
 
-    private Terrain currentTerrain;
+    public Terrain currentTerrain;
 
     private void Update()
     {
         if (InputManager.Instance.Movement != Vector2.zero)
         {
-            footstepTimer -= Time.deltaTime;
+            footstepTimer -= Time.unscaledDeltaTime;
             if (footstepTimer <= 0f)
             {
                 PlayFootstep();
                 footstepTimer = footstepInterval;
             }
-            PlayFootstep();
-        }
-        else
-        {
-            footstepTimer = 0f;
         }
     }
 
@@ -46,7 +41,7 @@ public class TerrainFootsteps : MonoBehaviour
         switch (GetGroundType(transform.position))
         {
             case GroundType.None:
-                Debug.Log("No ground detected");
+                //Debug.Log("No ground detected");
                 break;
             case GroundType.Dirt:
                 RuntimeManager.PlayOneShot(AudioManager.Config.walkDirt);

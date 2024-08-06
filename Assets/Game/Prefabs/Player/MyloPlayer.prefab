@@ -721,7 +721,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8803599993912676822}
   - component: {fileID: 854392153996028691}
-  - component: {fileID: 3574288869421385394}
+  - component: {fileID: 4068954929803745750}
+  - component: {fileID: 8003162644942240486}
   m_Layer: 8
   m_Name: Footsteps
   m_TagString: Untagged
@@ -765,7 +766,34 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3574288869421385394
+--- !u!54 &4068954929803745750
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3201892411096401537}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &8003162644942240486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -781,7 +809,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   groundTypes: 010000000200000003000000030000000300000003000000
-  footstepInterval: 0.5
+  footstepInterval: 0.35
+  currentTerrain: {fileID: 0}
 --- !u!1 &7376506924867815893
 GameObject:
   m_ObjectHideFlags: 0
