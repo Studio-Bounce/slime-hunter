@@ -176,13 +176,13 @@ MonoBehaviour:
       type: 3}
     hdrDebugViewPS: {fileID: 4800000, guid: 573620ae32aec764abd4d728906d2587, type: 3}
   m_RendererFeatures:
-  - {fileID: -5558296043184019697}
   - {fileID: -6830609168703572113}
   - {fileID: -1235274661820822563}
   - {fileID: -6603861501175270618}
   - {fileID: 2692266943840148158}
-  - {fileID: 8615301727711726622}
-  m_RendererFeatureMap: 0fa78ea532f7dcb26fb7e5b326cd34a1dd0b21663d6cdbee26f39114f45e5aa4be5a1e6c85da5c251e0c118946b38f77
+  - {fileID: 0}
+  - {fileID: 0}
+  m_RendererFeatureMap: 6fb7e5b326cd34a1dd0b21663d6cdbee26f39114f45e5aa4be5a1e6c85da5c25f4c1bded013d977b966a88f8dc73697c
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -300,3 +300,16 @@ MonoBehaviour:
     enableDynamicBatching: 0
     enableInstancing: 0
     enableTransparents: 1
+--- !u!114 &8905653866641342964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c327e4c7600483445874d2cc3cd9324d, type: 3}
+  m_Name: Blur
+  m_EditorClassIdentifier: 
+  m_Active: 1
