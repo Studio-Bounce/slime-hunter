@@ -19,7 +19,7 @@ public class AudioManager : Singleton<AudioManager>
     private Dictionary<string, EventInstance> soundEffectInstances = new Dictionary<string, EventInstance>();
     private Dictionary<string, EventInstance> uiSoundEffectInstances = new Dictionary<string, EventInstance>();
 
-    public float CombatIntensity { get { return (float)enemiesAlerted / config.maxEnemyIntensity; } }
+    public float CombatIntensity { get { return (config != null) ? (float)enemiesAlerted / config.maxEnemyIntensity : 0f; } }
     public static AudioConfig Config => Instance.config;
 
     void Start()
