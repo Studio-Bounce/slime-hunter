@@ -129,7 +129,15 @@ public class Enemy : DynamicDamageTaker
         base.Death(false);
         // Death particles
         GameObject deathObj = Instantiate(deathParticlesGO, transform.position, Quaternion.identity);
-        deathObj.GetComponent<ParticleSystem>().Play();
+
+        VisualEffect vfx = deathObj.GetComponent<VisualEffect>();
+
+        if (vfx != null) {
+            vfx.Play();
+        } else {
+            deathObj.GetComponent<ParticleSystem>().Play();
+        }
+        
         Destroy(deathObj, deathDelay);
 
         // Roy: Moved death handling to DeathState
