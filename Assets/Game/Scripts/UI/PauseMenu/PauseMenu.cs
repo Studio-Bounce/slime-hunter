@@ -156,6 +156,7 @@ public class PauseMenu : Menu
         SceneLoader.Instance.UnloadScene(GameManager.Instance.GameSceneName,
             (AsyncOperation _, string _) => CanvasManager.Instance.ClearCanvas());
         UIManager.Instance.SetMainMenu(true);
+        GameManager.Instance.GameState = GameState.MAIN_MENU;
         SceneLoader.Instance.LoadScene(GameManager.Instance.MenuSceneName);
         UIManager.Instance.SetHUDMenu(false);
     }
