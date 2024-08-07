@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Json;
 using System.Text.RegularExpressions;
 using Ink.Runtime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -106,7 +108,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void SkipDialogue(InputAction.CallbackContext context)
     {
-        dialogueHUD.SkipDialogue();
+        dialogueHUD?.SkipDialogue();
     }
 
     IEnumerator DelayedClear(float timer)

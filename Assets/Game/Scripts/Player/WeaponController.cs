@@ -24,8 +24,9 @@ public class WeaponController : MonoBehaviour
     private GameObject _currentWeaponPrefab;
     private Animator _animator;
 
-    private readonly int attackStartTriggerHash = Animator.StringToHash("AttackStart");
-    private readonly int specialAttackStartHash = Animator.StringToHash("SpecialAttack");
+    private readonly int attackComboIntHash = Animator.StringToHash("AttackCombo");
+    private readonly int specialAttackBoolHash = Animator.StringToHash("SpecialAttack");
+    private readonly int attackSubStateHash = Animator.StringToHash("AttackSubState");
     private readonly int attackStateHash = Animator.StringToHash("Attack");
     private readonly int locomotionStateHash = Animator.StringToHash("Locomotion");
     private int _attackMoveIndex = 0;
@@ -105,7 +106,7 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
-        _animator.speed = 1.0f;
+        _animator.speed = 1/Time.timeScale;
     }
 
     public void EnableAttack() { }
@@ -155,7 +156,7 @@ public class WeaponController : MonoBehaviour
         _equippedWeaponIndex = nextWeaponIndex;
 
         // Reset any existing combo
-        _attackMoveIndex = 0;
+        ResetCombo();
         if (_currentWeaponPrefab != null)
         {
             Destroy(_currentWeaponPrefab);
@@ -189,14 +190,23 @@ public class WeaponController : MonoBehaviour
 
         // Increment combo
         bool isFinalAttack = (_attackMoveIndex == CurrentWeapon.attackMoves.Count - 1);
+
+        // CLEANUP NEEDED: Drop in for new combo animator setup
+        int newAttackAnimCount = _attackMoveIndex+1;
+
         _attackMoveIndex = isFinalAttack ? 0 : _attackMoveIndex + 1;
+        
 
         // Rotate player towards attack
         transform.forward = direction;
         weaponTrail.transform.forward = direction;
 
         // Start attack 
-        _animator.SetTrigger(attackStartTriggerHash);
+        //_animator.SetTrigger(attackStartTriggerHash);
+
+        // CLEANUP NEEDED: Drop in for new combo animator setup
+        _animator.SetInteger(attackComboIntHash, newAttackAnimCount);
+
         yield return new WaitForSecondsRealtime(move.animationDelay);
 
         currentAttackState = AttackState.ACTIVE;
@@ -215,14 +225,26 @@ public class WeaponController : MonoBehaviour
     public void ResetCombo()
     {
         _attackMoveIndex = 0;
+        // CLEANUP NEEDED: Drop in for new combo animator setup
+        _animator.SetInteger(attackComboIntHash, _attackMoveIndex);
     }
 
     // Interrupt current attack animation
     public bool InterruptAttack()
     {
         if (IsInterruptable()) {
-            if (_animator.GetCurrentAnimatorStateInfo(0).shortNameHash == attackStateHash)
+            AnimatorStateInfo currentStateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+            AnimatorStateInfo nextStateInfo = _animator.GetNextAnimatorStateInfo(0);
+            //if (currentStateInfo.shortNameHash == attackStateHash)
+            //{
+            //    _animator.CrossFade(locomotionStateHash, 0.0f);
+            //}
+
+            // CLEANUP NEEDED: Drop in for new combo animator setup
+            // Check if the animator is in the attack sub-state
+            if (_animator.GetInteger(attackComboIntHash) == 3)
             {
+                Debug.Log("Attack Interrupt");
                 _animator.CrossFade(locomotionStateHash, 0.0f);
             }
             return true;
@@ -249,7 +271,7 @@ public class WeaponController : MonoBehaviour
         {
             weaponTrail.SetWeaponProps(CurrentWeapon.attackMoves[0]);
         }
-        _animator.SetTrigger(specialAttackStartHash);
+        _animator.SetTrigger(specialAttackBoolHash);
         
         // Wait for animation to finish
         float animationTime = 0.0f;
