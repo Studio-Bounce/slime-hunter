@@ -13,6 +13,9 @@ public class LaplacianScreenSpaceOutlines : ScriptableRendererFeature {
         [Header("Outline Settings")]
         public Color outlineColor = Color.black;
         
+        [Range(1, 4)]
+        public int radius = 2;
+
         [Range(0.0f, 1.0f)]
         public float depthThreshold = 0.5f;
 
@@ -65,6 +68,8 @@ public class LaplacianScreenSpaceOutlines : ScriptableRendererFeature {
             screenSpaceOutlineMaterial.SetFloat("_Feather", settings.feather);
 
             screenSpaceOutlineMaterial.SetFloat("_NormalThreshold", settings.normalThreshold);
+            screenSpaceOutlineMaterial.SetFloat("_Radius", settings.radius);
+
 
             
             if (settings.enableTransparents){

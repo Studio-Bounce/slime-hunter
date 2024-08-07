@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6020442768453419897}
   - component: {fileID: 8013597567971559187}
   - component: {fileID: 1089679982454042426}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Flower_C_Group3(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3241891539920440922}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5132960183026881561}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6020442768453419897
 MeshFilter:
@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 4792219145778654981}
   - component: {fileID: 7344832459374947431}
   - component: {fileID: 7600519888559970537}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Flower_C_Group3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,6 +129,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6791112431357685878}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -136,7 +137,6 @@ Transform:
   m_Children:
   - {fileID: 1987500980604302719}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4792219145778654981
 MeshFilter:

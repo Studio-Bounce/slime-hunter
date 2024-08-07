@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5710160970838205387}
   - component: {fileID: 3578304645483280793}
   - component: {fileID: -1916314300497389430}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Big_Grass1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,6 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285518868713536274}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -33,7 +34,6 @@ Transform:
   m_Children:
   - {fileID: 8963929810763747499}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5710160970838205387
 MeshFilter:
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 3184089877411383652}
   - component: {fileID: 5951673281925401441}
   - component: {fileID: 2414893556331175768}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Big_Grass1(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,13 +130,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4714702676469711196}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8310185663158385052}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3184089877411383652
 MeshFilter:
