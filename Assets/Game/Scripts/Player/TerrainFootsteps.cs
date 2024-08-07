@@ -108,7 +108,6 @@ public class TerrainFootsteps : MonoBehaviour
             }
         }
 
-        Debug.Log($"Standing on {groundTypes[maxIndex].ToString()}");
         return groundTypes[maxIndex];
     }
 }
