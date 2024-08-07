@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cc55e73ce4a8f4418809250d2064544, type: 3}
-  m_Name: Sword 6
+  m_Name: Wrath of the Storm
   m_EditorClassIdentifier: 
   address: Assets/Game/ScriptableObjects/Weapons/Sword.asset
-  itemName: Wave Breaker
-  description: This sword surges like a giant wave, destroying all obstacles in its
-    path, possessing immense power.
-  icon: {fileID: 21300000, guid: 45e75275519805446bd9cb1fcdee77e8, type: 3}
+  itemName: Wrath of the Storm
+  description: This sword embodies the power of storms, each swing resounding like
+    thunder.
+  icon: {fileID: 21300000, guid: 87bd2c7b588fe7d41a546ef17b227670, type: 3}
   itemType: 0
   value: 0
   weight: 7
   damage:
-    value: 25
-    knockback: 2
+    value: 20
+    knockback: 4
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
     forceApply: 0
@@ -30,7 +30,7 @@ MonoBehaviour:
   hitLayers:
     serializedVersion: 2
     m_Bits: 128
-  weaponModel: {fileID: 5096797749881093665, guid: c7349441bb611af45ad4757004d4542b,
+  weaponModel: {fileID: 5193304468136172182, guid: e33452043350ccc41aa0136cd51f6c6f,
     type: 3}
   hitSound: {fileID: 0}
   material: {fileID: 2100000, guid: 76b12491295cfc84fb1848e4e8d655ca, type: 2}

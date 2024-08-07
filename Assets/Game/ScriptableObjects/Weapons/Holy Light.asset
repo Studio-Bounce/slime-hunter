@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9cc55e73ce4a8f4418809250d2064544, type: 3}
-  m_Name: Sword 5
+  m_Name: Holy Light
   m_EditorClassIdentifier: 
   address: Assets/Game/ScriptableObjects/Weapons/Sword.asset
-  itemName: Wrath of the Storm
-  description: This sword embodies the power of storms, each swing resounding like
-    thunder.
-  icon: {fileID: 21300000, guid: 87bd2c7b588fe7d41a546ef17b227670, type: 3}
+  itemName: Holy Light
+  description: This sword is blessed with holy light, purifying all evil, shining
+    like a miracle when wielded.
+  icon: {fileID: 21300000, guid: 69413ad4cfd583547b5c3e0facc98e20, type: 3}
   itemType: 0
   value: 0
   weight: 7
   damage:
-    value: 20
-    knockback: 4
+    value: 15
+    knockback: 3
     direction: {x: 0, y: 0, z: 0}
     effect: {fileID: 0}
     forceApply: 0
-  range: 4
+  range: 2
   hitLayers:
     serializedVersion: 2
     m_Bits: 128
-  weaponModel: {fileID: 5193304468136172182, guid: e33452043350ccc41aa0136cd51f6c6f,
+  weaponModel: {fileID: 7666448512491557995, guid: 6eb18d9d451e45e4bb30bf34fdb5dbfb,
     type: 3}
   hitSound: {fileID: 0}
   material: {fileID: 2100000, guid: 76b12491295cfc84fb1848e4e8d655ca, type: 2}
