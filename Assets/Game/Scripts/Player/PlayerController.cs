@@ -67,7 +67,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // TODO: Only works on players cloned with instantiate. Strangely not on ones placed in the scene
-        animator.speed = 1 / Time.timeScale;
+        animator.speed = Mathf.Approximately(Time.timeScale, 0f) ? 1f : 1 / Time.timeScale;
 
         // Gravity simulation
         if (characterController != null && characterController.enabled && useGravity)

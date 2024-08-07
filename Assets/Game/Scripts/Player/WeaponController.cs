@@ -106,7 +106,7 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
-        _animator.speed = 1/Time.timeScale;
+        _animator.speed = Mathf.Approximately(Time.timeScale, 0f) ? 1f : 1 / Time.timeScale;
     }
 
     public void EnableAttack() { }
