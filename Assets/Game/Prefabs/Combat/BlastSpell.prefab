@@ -50,6 +50,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effect: {fileID: 3834011141473630671}
+  blastSound:
+    Guid:
+      Data1: -1122361080
+      Data2: 1188029070
+      Data3: -1596570751
+      Data4: -1313989929
+    Path: event:/SoundEffects/Spell/BlastSpell
   impactDuration: 5
 --- !u!135 &8083353152017258920
 SphereCollider:
