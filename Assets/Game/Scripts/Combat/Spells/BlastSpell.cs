@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -9,6 +10,7 @@ using UnityEngine.VFX;
 public class BlastSpell : Spell
 {
     public ParticleSystem effect;
+    public EventReference blastSound;
     private DamageDealer damageDealer;
     private SphereCollider damageCollider;
 
@@ -25,6 +27,7 @@ public class BlastSpell : Spell
 
     public override void Cast(Vector3 target = default)
     {
+        RuntimeManager.PlayOneShot(blastSound);
         StartCoroutine(RunCast());
     }
 

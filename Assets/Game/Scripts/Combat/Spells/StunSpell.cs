@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -12,6 +13,7 @@ public class StunSpell : Spell
 {
     public ParticleSystem impactEffect;
     public GameObject projectile;
+    public EventReference impactSound;
 
     [Header("Animation")]
     public float animDuration = 1.0f;
@@ -66,6 +68,7 @@ public class StunSpell : Spell
         }
 
         // Activate damage and effects on impact
+        RuntimeManager.PlayOneShot(impactSound);
         projectile.gameObject.SetActive(false);
         impactEffect.Play();
         damageDealer.Active = true;
@@ -74,6 +77,4 @@ public class StunSpell : Spell
         yield return new WaitForSeconds(impactDuration);
         Destroy(gameObject);
     }
-
-
 }
