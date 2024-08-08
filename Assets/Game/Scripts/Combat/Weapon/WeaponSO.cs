@@ -25,6 +25,9 @@ public class AttackMove
     [Range(0, 360)] public float angleStart;
     public float rotationGamma;
     [Range(0, 1)] public float voranoiPeak;
+
+    [Header("Attack Audio")]
+    public FMODUnity.EventReference audioHitEvent;
 }
 
 [CreateAssetMenu(menuName = "Weapon")]
@@ -37,7 +40,6 @@ public class WeaponSO : ItemSO
 
     [Header("Weapon References")]
     public GameObject weaponModel;
-    public AudioClip hitSound;
     public Material material;
     public List<AttackMove> attackMoves;
 }
