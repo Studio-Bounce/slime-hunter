@@ -19,13 +19,12 @@ public class CameraTransitionSequence : MonoBehaviour
         [Header("Transition")]
         public float delay;
         public float duration;
-        public AnimationCurve curve;
-        public UnityEvent onStart;
+        public CinemachineBlendDefinition.Style curve;
         public UnityEvent onComplete;
     }
 
     public List<TransitionCamera> transitions;
-    private CinemachineVirtualCamera startingCamera;
+    private CinemachineVirtualCamera _startingCamera;
 
     private void Update()
     {
@@ -42,7 +41,7 @@ public class CameraTransitionSequence : MonoBehaviour
         {
             InputManager.Instance.TogglePlayerControls(false);
         }
-        startingCamera = CameraManager.ActiveCineCamera;
+        _startingCamera = CameraManager.ActiveCineCamera;
         StartCoroutine(StartTransitions());
     }
 
@@ -50,11 +49,10 @@ public class CameraTransitionSequence : MonoBehaviour
     {
         foreach (var trans in transitions)
         {
-            trans.onStart.Invoke();
-            CameraManager.CamBlend.BlendCurve = trans.curve;
-            CameraManager.CamBlend.TimeInBlend = trans.duration;
-            CameraManager.Instance.ChangeVirtualCamera(trans.cam);
+            CameraManager.Instance.AddBlend(CameraManager.ActiveCineCamera, trans.cam, trans.curve, trans.duration);
             yield return new WaitForSecondsRealtime(trans.delay);
+            CameraManager.Instance.ChangeVirtualCamera(trans.cam);
+            yield return new WaitForSecondsRealtime(trans.duration);
             trans.onComplete.Invoke();
         }
         InputManager.Instance.TogglePlayerControls(true);

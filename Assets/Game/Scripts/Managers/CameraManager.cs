@@ -2,6 +2,7 @@ using Cinemachine;
 using Ink.Runtime;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -41,10 +42,32 @@ public class CameraManager : Singleton<CameraManager>
         }
     }
 
-    public static CinemachineBlend CamBlend {
+    public CinemachineBrain CamBrain {
         get {
-            return _activeCamera.GetComponent<CinemachineBrain>().ActiveBlend;
+            return _activeCamera.GetComponent<CinemachineBrain>();
         } 
+    }
+
+    public void AddBlend(CinemachineVirtualCamera sourceCam, CinemachineVirtualCamera targetCam, CinemachineBlendDefinition.Style curve, float duration)
+    {
+        var customBlend = new CinemachineBlenderSettings.CustomBlend
+        {
+            m_From = sourceCam.Name,
+            m_To = targetCam.Name,
+            m_Blend = new CinemachineBlendDefinition
+            {
+                m_Style = curve, // Choose a blend style
+                m_Time = duration // Duration of the blend
+            }
+        };
+
+        // Add or replace the blend in the settings
+        CinemachineBlenderSettings blenderSettings = ScriptableObject.CreateInstance<CinemachineBlenderSettings>();
+        var blendList = new List<CinemachineBlenderSettings.CustomBlend>(){ customBlend };
+        blenderSettings.m_CustomBlends = blendList.ToArray();
+
+        // Assign the modified settings back to the CinemachineBrain
+        CamBrain.m_CustomBlends = blenderSettings;
     }
 
     public void SetCameraFollow(Transform _transform)
