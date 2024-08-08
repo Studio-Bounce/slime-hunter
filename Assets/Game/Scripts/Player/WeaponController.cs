@@ -1,6 +1,8 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class WeaponController : MonoBehaviour
@@ -15,6 +17,9 @@ public class WeaponController : MonoBehaviour
     [Header("Animations/Visuals")]
     public WeaponTrail weaponTrail;
     public AnimationClip baseAttackClip;
+
+    [Header("Audio")]
+    public UnityEvent onWeaponAttack;
 
     // Weapon&Animation
     [HideInInspector, NonSerialized] public AttackState currentAttackState = AttackState.INACTIVE;
@@ -206,10 +211,10 @@ public class WeaponController : MonoBehaviour
 
         // CLEANUP NEEDED: Drop in for new combo animator setup
         _animator.SetInteger(attackComboIntHash, newAttackAnimCount);
-
         yield return new WaitForSecondsRealtime(move.animationDelay);
 
         currentAttackState = AttackState.ACTIVE;
+        RuntimeManager.PlayOneShot(move.audioHitEvent);
         weaponTrail.Attack(move, isFinalAttack);
         yield return new WaitForSecondsRealtime(move.attackDuration);
 

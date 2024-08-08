@@ -9,7 +9,7 @@ public class CameraTransitionSequence : MonoBehaviour
 {
     public bool disableControlsInTransition = true;
     [Header("Trigger Key")]
-    public KeyCode transitionKey = KeyCode.None; // Default key is 'T'
+    public KeyCode transitionKey = KeyCode.None;
 
     [Serializable]
     public struct TransitionCamera
