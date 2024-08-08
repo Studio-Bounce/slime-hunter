@@ -1,31 +1,62 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CameraTransitionSequence : MonoBehaviour
 {
-    public float duration = 5;
-    public CinemachineVirtualCamera targetCamera;
+    public bool disableControlsInTransition = true;
+    [Header("Trigger Key")]
+    public KeyCode transitionKey = KeyCode.None; // Default key is 'T'
 
-    private CinemachineVirtualCamera currentCamera;
-
-    public void Transition()
+    [Serializable]
+    public struct TransitionCamera
     {
-        currentCamera = CameraManager.ActiveCineCamera;
-        StartCoroutine(StartTransition());
+        public CinemachineVirtualCamera cam;
+
+        [Header("Transition")]
+        public float delay;
+        public float duration;
+        public AnimationCurve curve;
+        public UnityEvent onStart;
+        public UnityEvent onComplete;
     }
 
-    private IEnumerator StartTransition()
-    {
-        StartCoroutine(UIManager.Instance.gladeVillageIntroMenu.FadeIn(2.0f));
-        InputManager.Instance.TogglePlayerControls(false);
-        CameraManager.Instance.ChangeVirtualCamera(targetCamera);
-        yield return new WaitForSecondsRealtime(duration);
-        CameraManager.Instance.ChangeVirtualCamera(currentCamera);
-        InputManager.Instance.TogglePlayerControls(true);
-        StartCoroutine(UIManager.Instance.gladeVillageIntroMenu.FadeOut(2.0f));
+    public List<TransitionCamera> transitions;
+    private CinemachineVirtualCamera startingCamera;
 
+    private void Update()
+    {
+        // Check if the specified key is pressed
+        if (Input.GetKeyDown(transitionKey))
+        {
+            BeginTransitions();
+        }
+    }
+
+    public void BeginTransitions()
+    {
+        if (disableControlsInTransition)
+        {
+            InputManager.Instance.TogglePlayerControls(false);
+        }
+        startingCamera = CameraManager.ActiveCineCamera;
+        StartCoroutine(StartTransitions());
+    }
+
+    private IEnumerator StartTransitions()
+    {
+        foreach (var trans in transitions)
+        {
+            trans.onStart.Invoke();
+            CameraManager.CamBlend.BlendCurve = trans.curve;
+            CameraManager.CamBlend.TimeInBlend = trans.duration;
+            CameraManager.Instance.ChangeVirtualCamera(trans.cam);
+            yield return new WaitForSecondsRealtime(trans.delay);
+            trans.onComplete.Invoke();
+        }
+        InputManager.Instance.TogglePlayerControls(true);
     }
 }

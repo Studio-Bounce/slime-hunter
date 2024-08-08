@@ -41,6 +41,12 @@ public class CameraManager : Singleton<CameraManager>
         }
     }
 
+    public static CinemachineBlend CamBlend {
+        get {
+            return _activeCamera.GetComponent<CinemachineBrain>().ActiveBlend;
+        } 
+    }
+
     public void SetCameraFollow(Transform _transform)
     {
         if (ActiveCineCamera != null)
