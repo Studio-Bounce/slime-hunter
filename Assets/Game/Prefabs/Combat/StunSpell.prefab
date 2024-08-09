@@ -51,6 +51,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactEffect: {fileID: 7501139424761742726}
   projectile: {fileID: 234718292555556198}
+  impactSound:
+    Guid:
+      Data1: -526054138
+      Data2: 1325588949
+      Data3: 394413443
+      Data4: 123340141
+    Path: event:/SoundEffects/Spell/StunSpell
   animDuration: 1
   animHeight: 4
   animCurve:

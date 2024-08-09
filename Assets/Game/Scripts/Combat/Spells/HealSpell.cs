@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -8,6 +9,7 @@ using UnityEngine.VFX;
 public class HealSpell : Spell
 {
     public VisualEffect effect;
+    public EventReference healSound;
 
     private int healAmount = 0;
 
@@ -18,6 +20,7 @@ public class HealSpell : Spell
 
     public override void Cast(Vector3 target = default)
     {
+        RuntimeManager.PlayOneShot(healSound);
         StartCoroutine(RunCast());
     }
 
