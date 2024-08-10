@@ -276,32 +276,22 @@ public class WeaponController : MonoBehaviour
         {
             weaponTrail.SetWeaponProps(CurrentWeapon.attackMoves[0]);
         }
-        _animator.SetTrigger(specialAttackBoolHash);
-        
-        // Wait for animation to finish
-        float animationTime = 0.0f;
-        foreach (AnimationClip clip in _animator.runtimeAnimatorController.animationClips)
-        {
-            if (clip.name == "SpecialAttack")
-            {
-                animationTime = clip.length;
-                break;
-            }
-        }
-        animationTime /= GameManager.Instance.PlayerSpeedMultiplier;
+        _animator.SetBool(specialAttackBoolHash, true);
 
-        float timeElapsed = 0.0f;
-        while (timeElapsed < animationTime)
+        // TODO: Hardcoded special attack rotation and duration
+        float animationTime = 4.0f;
+        float elapsed = 0.0f;
+        while (elapsed < animationTime)
         {
-            timeElapsed += Time.unscaledDeltaTime;
-            // Update weapon direction as the player rotates
-            weaponTrail.transform.forward = _animator.gameObject.transform.forward;
-
+            elapsed += Time.unscaledDeltaTime;
+            // Animation no longer rotates the player so we manually rotate
+            gameObject.transform.Rotate(0, -Time.unscaledDeltaTime*1000, 0);
             yield return null;
         }
 
         weaponTrail.SetWeapon(false);
         isPerformingSpecialAttack = false;
+        _animator.SetBool(specialAttackBoolHash, false);
     }
 
     public bool DashInterruptAttack()
