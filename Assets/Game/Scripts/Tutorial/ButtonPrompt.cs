@@ -1,4 +1,5 @@
 using Cinemachine.Utility;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
@@ -69,6 +70,7 @@ public class ButtonPrompt : MonoBehaviour
 
     IEnumerator InvokeButton()
     {
+        RuntimeManager.PlayOneShot(AudioManager.Config.buttonPressEvent);
         yield return new WaitForSecondsRealtime(delay);
         onButtonPressed.Invoke();
     }
