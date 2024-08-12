@@ -8,8 +8,10 @@ public class AudioManager : Singleton<AudioManager>
 {
     [SerializeField] private AudioConfig config;
 
+    private Bus masterBus;
     private int enemiesAlerted = 0;
     private PARAMETER_ID combatIntensityParamID;
+    private PARAMETER_ID villagePhaseParamID;
     private bool forceAlert = false;
 
     // SFX
@@ -29,20 +31,28 @@ public class AudioManager : Singleton<AudioManager>
 
     void Start()
     {
+        // Retrieve the master bus
+        masterBus = RuntimeManager.GetBus("bus:/"); // "bus:/" is the path to the master bus
+
         // Music
         MenuInstance = RuntimeManager.CreateInstance(config.menuEvent);
         ExplorationInstance = RuntimeManager.CreateInstance(config.explorationEvent);
         VillageInstance = RuntimeManager.CreateInstance(config.villageEvent);
 
-        //SFX
+        // SFX
         SpecialAttackInstance = RuntimeManager.CreateInstance(config.specialAttack);
         InventoryManager.Instance.OnItemAdded += e => RuntimeManager.PlayOneShot(Config.itemPickup);
 
+        // Param IDs
         EventDescription eventDescription;
         ExplorationInstance.getDescription(out eventDescription);
         PARAMETER_DESCRIPTION parameterDescription;
         eventDescription.getParameterDescriptionByName("CombatIntensity", out parameterDescription);
         combatIntensityParamID = parameterDescription.id;
+
+        VillageInstance.getDescription(out eventDescription);
+        eventDescription.getParameterDescriptionByName("VillagePhase", out parameterDescription);
+        villagePhaseParamID = parameterDescription.id;
 
         GameManager.Instance.OnGameStateChange += HandleBGMusic;
     }
@@ -52,16 +62,26 @@ public class AudioManager : Singleton<AudioManager>
         switch (state)
         {
             case GameState.MAIN_MENU:
+                masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 MenuInstance.start();
                 break;
             case GameState.GAMEPLAY:
                 MenuInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                ExplorationInstance.start();
-                //villageInstance.start();
+                PLAYBACK_STATE pbState;
+                ExplorationInstance.getPlaybackState(out pbState);
+                if (pbState != PLAYBACK_STATE.PLAYING)
+                    ExplorationInstance.start();
+                ExplorationInstance.setVolume(1.0f);
+                break;
+            case GameState.PAUSED:
+                ExplorationInstance.setVolume(0.5f);
                 break;
             case GameState.LOADING:
                 break;
             case GameState.GAME_OVER:
+                masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                VillageInstance.setParameterByID(villagePhaseParamID, 1);
+                VillageInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 break;
             default:
                 break;
@@ -72,9 +92,6 @@ public class AudioManager : Singleton<AudioManager>
     {
         // Ensure volume is clamped between 0.0 and 1.0
         value = Mathf.Clamp01(value);
-
-        // Retrieve the master bus
-        Bus masterBus = RuntimeManager.GetBus("bus:/"); // "bus:/" is the path to the master bus
 
         // Set the volume on the master bus
         masterBus.setVolume(value);
