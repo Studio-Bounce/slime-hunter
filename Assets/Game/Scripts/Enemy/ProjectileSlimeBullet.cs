@@ -9,6 +9,7 @@ public class ProjectileSlimeBullet : DamageDealer
     [SerializeField] WeaponSO bulletWeapon;
     [SerializeField] private ParticleSystem effect;
     [NonSerialized] private bool markDestroy = false;
+    [SerializeField] private LayerMask destroyLayers;
 
     [Header("Slime Projectile")]
     public float speed = 0.0f;
@@ -56,6 +57,16 @@ public class ProjectileSlimeBullet : DamageDealer
         {
             damage = bulletWeapon.damage;
             hitLayers = bulletWeapon.hitLayers;
+        }
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        base.OnTriggerEnter(other);
+        if ((destroyLayers.value & (1 << other.gameObject.layer)) > 0)
+        {
+            markDestroy = true;
+            StartCoroutine(PlayImpactEffect());
         }
     }
 }

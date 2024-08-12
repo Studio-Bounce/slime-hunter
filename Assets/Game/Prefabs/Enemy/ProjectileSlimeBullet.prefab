@@ -112,6 +112,9 @@ MonoBehaviour:
   cameraShakeTime: 0.5
   bulletWeapon: {fileID: 11400000, guid: 78b69888fb0a4d645a68d0012269db52, type: 2}
   effect: {fileID: 3011156566143355497}
+  destroyLayers:
+    serializedVersion: 2
+    m_Bits: 9
   speed: 0
   direction: {x: 0, y: 0, z: 0}
   lifetime: 10
