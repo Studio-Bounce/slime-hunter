@@ -96,16 +96,8 @@ public class Enemy : DynamicDamageTaker
         {
             // Hit VFX
             GameObject hitVFXObj = Instantiate(hitVFXGO,
-                transform.position + hitVFXGO.transform.position, Quaternion.LookRotation(damage.direction));
+                transform.position, Quaternion.LookRotation(damage.direction));
             Destroy(hitVFXObj, 2.0f);
-
-            if (hitParticlesGO)
-            {
-                GameObject hitParticlesobj = Instantiate(hitParticlesGO,
-                                transform.position + hitParticlesGO.transform.position, Quaternion.LookRotation(damage.direction));
-                Destroy(hitParticlesobj, 2.0f);
-            }
-            
 
             if (!isFlashing)
                 StartCoroutine(FlashSlime());

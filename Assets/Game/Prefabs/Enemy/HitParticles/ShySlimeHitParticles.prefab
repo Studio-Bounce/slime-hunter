@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7561334915480803397
+--- !u!1 &4387272774434107089
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6984592235130864638}
-  - component: {fileID: 6323111342051671095}
-  - component: {fileID: 6292914677052869254}
+  - component: {fileID: 6362834978480220307}
+  - component: {fileID: 2467065568893039912}
+  - component: {fileID: 1964484943795676919}
   m_Layer: 7
-  m_Name: BomberSlimeDeathParticles
+  m_Name: ShySlimeHitParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6984592235130864638
+--- !u!4 &6362834978480220307
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7561334915480803397}
+  m_GameObject: {fileID: 4387272774434107089}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 5.0377483, y: 0, z: -4.9345827}
-  m_LocalScale: {x: 0.8000001, y: 0.8000001, z: 0.8000001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!2083052967 &6323111342051671095
+--- !u!2083052967 &2467065568893039912
 VisualEffect:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7561334915480803397}
+  m_GameObject: {fileID: 4387272774434107089}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 7a1a25f06dc4bf949aafedb414f9f9a2, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: e0f5acdb78139894c8540a61046ae4fd, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -50,30 +50,18 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array:
-      - m_Value: 3
-        m_Name: InitialVelocityMax
-        m_Overridden: 1
-      - m_Value: 0.2
-        m_Name: Min Size
-        m_Overridden: 1
-      - m_Value: 1
-        m_Name: Max Size
-        m_Overridden: 1
+      m_Array: []
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 0.13207549, y: 0.13159737, z: 0.111516565, w: 0}
-        m_Name: Color_1
+      - m_Value: {x: 0.18551078, y: 0.7283019, z: 0.5269438, w: 0}
+        m_Name: Base Color
         m_Overridden: 1
-      - m_Value: {x: 0.41509432, y: 0.40676093, z: 0.32306868, w: 0}
-        m_Name: Color_2
-        m_Overridden: 1
-      - m_Value: {x: 0.1981132, y: 0.1981132, z: 0.16727483, w: 0}
-        m_Name: Color_3
+      - m_Value: {x: 0.09411765, y: 0.3372549, z: 0.24705882, w: 0}
+        m_Name: Edge Color
         m_Overridden: 1
     m_Uint:
       m_Array: []
@@ -89,14 +77,14 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!73398921 &6292914677052869254
+--- !u!73398921 &1964484943795676919
 VFXRenderer:
   serializedVersion: 1
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7561334915480803397}
+  m_GameObject: {fileID: 4387272774434107089}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0

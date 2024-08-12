@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6323111342051671095}
   - component: {fileID: 6292914677052869254}
   m_Layer: 7
-  m_Name: BomberSlimeDeathParticles
+  m_Name: BomberSlimeHitParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,9 +26,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7561334915480803397}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 5.0377483, y: 0, z: -4.9345827}
-  m_LocalScale: {x: 0.8000001, y: 0.8000001, z: 0.8000001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -41,7 +41,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7561334915480803397}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: 7a1a25f06dc4bf949aafedb414f9f9a2, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: e0f5acdb78139894c8540a61046ae4fd, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -54,10 +54,10 @@ VisualEffect:
       - m_Value: 3
         m_Name: InitialVelocityMax
         m_Overridden: 1
-      - m_Value: 0.2
+      - m_Value: 0.025
         m_Name: Min Size
         m_Overridden: 1
-      - m_Value: 1
+      - m_Value: 0.5
         m_Name: Max Size
         m_Overridden: 1
     m_Vector2f:
@@ -74,6 +74,12 @@ VisualEffect:
         m_Overridden: 1
       - m_Value: {x: 0.1981132, y: 0.1981132, z: 0.16727483, w: 0}
         m_Name: Color_3
+        m_Overridden: 1
+      - m_Value: {x: 0.86415094, y: 0.86415094, z: 0.86415094, w: 0}
+        m_Name: Base Color
+        m_Overridden: 1
+      - m_Value: {x: 1, y: 0.2853878, z: 0.27735847, w: 0}
+        m_Name: Edge Color
         m_Overridden: 1
     m_Uint:
       m_Array: []

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2467065568893039912}
   - component: {fileID: 1964484943795676919}
   m_Layer: 7
-  m_Name: BasicSlimeDeathParticles
+  m_Name: DashSlimeDeathParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,13 +51,25 @@ VisualEffect:
   m_ResourceVersion: 1
   m_PropertySheet:
     m_Float:
-      m_Array: []
+      m_Array:
+      - m_Value: 1
+        m_Name: Max Size
+        m_Overridden: 1
+      - m_Value: 0.2
+        m_Name: Min Size
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0.2030971, y: 0.6150943, z: 0.5630027, w: 0.5019608}
+        m_Name: Color_2
+        m_Overridden: 1
+      - m_Value: {x: 0.45158416, y: 0.8113208, z: 0.7260381, w: 0.39607844}
+        m_Name: Color_3
+        m_Overridden: 1
     m_Uint:
       m_Array: []
     m_Int:
