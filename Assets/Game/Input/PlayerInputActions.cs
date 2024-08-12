@@ -252,6 +252,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""0766c55f-4221-4bff-a0ba-6900e57b9c10"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""1D Axis"",
                     ""id"": ""efe84235-a1bf-4359-a1ef-ae381b56d655"",
                     ""path"": ""1DAxis"",

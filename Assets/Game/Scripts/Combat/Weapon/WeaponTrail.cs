@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Timers;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.VFX;
@@ -115,9 +117,34 @@ public class WeaponTrail : DamageDealer
         trailRenderer.transform.rotation = Quaternion.Euler(trailRenderer.transform.rotation.eulerAngles.x, trailRenderer.transform.rotation.eulerAngles.y, move.rotation);
     }
 
-    public void SetWeapon(bool _active)
+    public IEnumerator RunSpecialAttack(float duration)
     {
-        active = _active;
+        active = true;
+
+        float windDownOffsetSeconds = 0.25f;
+        float elapsed = 0;
+
+        trailMaterial.SetFloat("_Factor", 0.5f);
+        // Full Swing
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        elapsed = 0;
+        // Wind Down
+        while (elapsed < windDownOffsetSeconds)
+        {
+            float t = elapsed / windDownOffsetSeconds;
+            trailMaterial.SetFloat("_Factor", t);
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        trailMaterial.SetFloat("_Factor", 0);
+
+        active = false;
     }
 
     IEnumerator ActiveAttack(float duration)
