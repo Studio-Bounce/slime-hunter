@@ -119,10 +119,6 @@ public class PlayerController : MonoBehaviour
         {
             _moveSpeed *= slowDownMultiplierOnAttack;
         }
-        else if (weaponController.isPerformingSpecialAttack)
-        {
-            _moveSpeed *= slowDownMultiplierOnSpecialAttack;
-        }
         else if (moveDirection != Vector3.zero) // Only rotate to movement when not attacking
         {
             transform.rotation = Quaternion.LookRotation(moveDirection, Vector3.up); // Snap
