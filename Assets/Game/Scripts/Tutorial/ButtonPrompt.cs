@@ -16,6 +16,7 @@ public class ButtonPrompt : MonoBehaviour
     public string actionString;
     public bool autoSetSprite = true;
     public bool oneShot = false;
+    public float delay = 0;
 
     public UnityEvent onButtonPressed;
     public UnityEvent onButtonDisabled;
@@ -66,11 +67,17 @@ public class ButtonPrompt : MonoBehaviour
         inputAction.performed += OnActionPerformed;
     }
 
+    IEnumerator InvokeButton()
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        onButtonPressed.Invoke();
+    }
+
     private void OnActionPerformed(InputAction.CallbackContext context)
     {
         if (enabled)
         {
-            onButtonPressed.Invoke();
+            StartCoroutine(InvokeButton());
             if (!string.IsNullOrEmpty(triggerString))
             {
                 GameManager.Instance.PlayerTriggerAnimation(triggerString);
