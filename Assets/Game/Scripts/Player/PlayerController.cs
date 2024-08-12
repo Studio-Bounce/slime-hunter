@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -157,6 +158,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PerformDash(Vector3 dashDirection)
     {
+        RuntimeManager.PlayOneShot(AudioManager.Config.dash);
         animator.SetBool(dashBoolash, true);
         _isDashing = true;
 
