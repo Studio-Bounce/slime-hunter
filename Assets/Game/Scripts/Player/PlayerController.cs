@@ -1,12 +1,7 @@
-using Cinemachine;
-using FMODUnity;
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XInput;
 
 [RequireComponent(typeof(CharacterController), typeof(WeaponController))]
 public class PlayerController : MonoBehaviour

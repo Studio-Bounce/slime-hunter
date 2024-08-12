@@ -12,30 +12,33 @@ public class AudioManager : Singleton<AudioManager>
     private PARAMETER_ID combatIntensityParamID;
     private bool forceAlert = false;
 
-    // Footsteps
-    private EventInstance walkDirt;
-    private EventInstance walkGrass;
-    private EventInstance walkGravel;
+    // SFX
+    public EventInstance SpecialAttackInstance { get; set; }
 
     // Music
-    private EventInstance menuInstance;
-    private EventInstance explorationInstance;
-    private EventInstance villageInstance;
+    public EventInstance MenuInstance { get; set; }
+    public EventInstance ExplorationInstance { get; set; }
+    public EventInstance VillageInstance { get; set; }
 
     private Dictionary<string, EventInstance> soundEffectInstances = new Dictionary<string, EventInstance>();
     private Dictionary<string, EventInstance> uiSoundEffectInstances = new Dictionary<string, EventInstance>();
 
+  
     public float CombatIntensity { get { return (config != null) ? (float)enemiesAlerted / config.maxEnemyIntensity : 0f; } }
     public static AudioConfig Config => Instance.config;
 
     void Start()
     {
-        menuInstance = RuntimeManager.CreateInstance(config.menuEvent);
-        explorationInstance = RuntimeManager.CreateInstance(config.explorationEvent);
-        villageInstance = RuntimeManager.CreateInstance(config.villageEvent);
+        // Music
+        MenuInstance = RuntimeManager.CreateInstance(config.menuEvent);
+        ExplorationInstance = RuntimeManager.CreateInstance(config.explorationEvent);
+        VillageInstance = RuntimeManager.CreateInstance(config.villageEvent);
+
+        //SFX
+        SpecialAttackInstance = RuntimeManager.CreateInstance(config.specialAttack);
 
         EventDescription eventDescription;
-        explorationInstance.getDescription(out eventDescription);
+        ExplorationInstance.getDescription(out eventDescription);
         PARAMETER_DESCRIPTION parameterDescription;
         eventDescription.getParameterDescriptionByName("CombatIntensity", out parameterDescription);
         combatIntensityParamID = parameterDescription.id;
@@ -48,11 +51,11 @@ public class AudioManager : Singleton<AudioManager>
         switch (state)
         {
             case GameState.MAIN_MENU:
-                menuInstance.start();
+                MenuInstance.start();
                 break;
             case GameState.GAMEPLAY:
-                menuInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                explorationInstance.start();
+                MenuInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                ExplorationInstance.start();
                 //villageInstance.start();
                 break;
             case GameState.LOADING:
@@ -79,13 +82,13 @@ public class AudioManager : Singleton<AudioManager>
     public void ForceAlert(float value)
     {
         forceAlert = true;
-        explorationInstance.setParameterByID(combatIntensityParamID, value);
+        ExplorationInstance.setParameterByID(combatIntensityParamID, value);
     }
 
     public void ReleaseAlert()
     {
         forceAlert = false;
-        explorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
+        ExplorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
     }
 
     public void OnEnemyAlerted()
@@ -93,7 +96,7 @@ public class AudioManager : Singleton<AudioManager>
         enemiesAlerted++;
         // FMOD will clamp intensity
         if (forceAlert) return;
-        explorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
+        ExplorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
     }
 
     public void OnEnemyUnalerted()
@@ -101,6 +104,6 @@ public class AudioManager : Singleton<AudioManager>
         enemiesAlerted = Mathf.Max(enemiesAlerted-1, 0);
         // FMOD will clamp intensity
         if (forceAlert) return;
-        explorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
+        ExplorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
     }
 }

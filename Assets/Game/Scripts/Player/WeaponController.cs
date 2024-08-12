@@ -18,9 +18,6 @@ public class WeaponController : MonoBehaviour
     public WeaponTrail weaponTrail;
     public AnimationClip baseAttackClip;
 
-    [Header("Audio")]
-    public UnityEvent onWeaponAttack;
-
     [Header("Weapon & Animation")]
     float specialAttackDuration = 4.0f;
     [HideInInspector, NonSerialized] public AttackState currentAttackState = AttackState.INACTIVE;
@@ -264,6 +261,7 @@ public class WeaponController : MonoBehaviour
             isPerformingSpecialAttack)
             return;
 
+        AudioManager.Instance.SpecialAttackInstance.start();
         GameManager.Instance.PlayerSpecialAttack = 0.0f;
 
         StartCoroutine(PerformSpecialAttack());
@@ -291,6 +289,7 @@ public class WeaponController : MonoBehaviour
 
         isPerformingSpecialAttack = false;
         _animator.SetBool(specialAttackBoolHash, false);
+        AudioManager.Instance.SpecialAttackInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     public bool DashInterruptAttack()
