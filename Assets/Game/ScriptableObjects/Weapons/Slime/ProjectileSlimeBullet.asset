@@ -12,17 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cc55e73ce4a8f4418809250d2064544, type: 3}
   m_Name: ProjectileSlimeBullet
   m_EditorClassIdentifier: 
-  weaponName: ProjectileSlimeBullet
+  address: 
+  itemName: 
+  description: 
+  icon: {fileID: 0}
+  itemType: 0
+  value: 0
+  weight: 0
   damage:
     value: 10
     knockback: 0
     direction: {x: 0, y: 0, z: 0}
-    effect: {fileID: 0}
-  swingSpeed: 0
+    effect: {fileID: 11400000, guid: fe890fc66ad32444a8382c33b07d4c41, type: 2}
+    forceApply: 0
   range: 0
   hitLayers:
     serializedVersion: 2
     m_Bits: 384
   weaponModel: {fileID: 0}
-  hitSound: {fileID: 0}
+  material: {fileID: 0}
   attackMoves: []
