@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -24,6 +25,10 @@ public class QuestHUD : Menu
 
     [SerializeField] float questBannerTime = 2.0f;
 
+    Queue<QuestNotifType> questNotificationQ = new Queue<QuestNotifType>();
+    readonly object notifQLock = new object();  // thread-safe
+    bool processingNotificationQ = false;
+
     void Start()
     {
         questManager = QuestManager.Instance;
@@ -37,7 +42,8 @@ public class QuestHUD : Menu
         questUpdatedVE = canvas.Q<VisualElement>("QuestUpdated");
         questCompletedVE = canvas.Q<VisualElement>("QuestCompleted");
         questCompleteClearBtn = questCompletedVE.Q<Button>("ClearButton");
-        questCompleteClearBtn.clicked += () => StartCoroutine(HideQuestNotification(QuestNotifType.COMPLETE));
+        questCompleteClearBtn.style.opacity = 0;
+        //questCompleteClearBtn.clicked += () => StartCoroutine(HideQuestNotification(QuestNotifType.COMPLETE));
 
         // Hide all
         canvas.style.opacity = 1f;
@@ -52,6 +58,15 @@ public class QuestHUD : Menu
         if (!questCompletedVE.ClassListContains(panelHideStyle))
         {
             questCompletedVE.AddToClassList(panelHideStyle);
+        }
+    }
+
+    private void Update()
+    {
+        if (!processingNotificationQ && questNotificationQ.Count > 0)
+        {
+            processingNotificationQ = true;
+            StartCoroutine(ProcessNotificationQ());
         }
     }
 
@@ -72,7 +87,11 @@ public class QuestHUD : Menu
                 break;
         }
         questName.text = quest.questName;
-        StartCoroutine(InitiateQuestNotification(QuestNotifType.ADD));
+
+        lock (notifQLock)
+        {
+            questNotificationQ.Enqueue(QuestNotifType.ADD);
+        }
     }
 
     void OnQuestUpdate(string _questObjective)
@@ -81,7 +100,11 @@ public class QuestHUD : Menu
         {
             Label questObjective = questUpdatedVE.Q<Label>("NewObjectiveName");
             questObjective.text = _questObjective;
-            StartCoroutine(InitiateQuestNotification(QuestNotifType.UPDATE));
+
+            lock (notifQLock)
+            {
+                questNotificationQ.Enqueue(QuestNotifType.UPDATE);
+            }
         }
     }
 
@@ -119,7 +142,34 @@ public class QuestHUD : Menu
         spell.style.display = (hasSpell) ? DisplayStyle.Flex : DisplayStyle.None;
         cash.style.display = (hasCash) ? DisplayStyle.Flex : DisplayStyle.None;
 
-        StartCoroutine(InitiateQuestNotification(QuestNotifType.COMPLETE, true));
+        lock (notifQLock)
+        {
+            questNotificationQ.Enqueue(QuestNotifType.COMPLETE);
+        }
+    }
+
+    IEnumerator ProcessNotificationQ()
+    {
+        while (true)
+        {
+            // Keep processing till the queue is not empty
+            int qSize = 0;
+            lock (notifQLock)
+            {
+                qSize = questNotificationQ.Count;
+            }
+            if (qSize == 0)
+                break;
+
+            QuestNotifType questNotifType = QuestNotifType.ADD;
+            lock (notifQLock)
+            {
+                questNotifType = questNotificationQ.Dequeue();
+            }
+            yield return InitiateQuestNotification(questNotifType);
+        }
+        
+        processingNotificationQ = false;
     }
 
     IEnumerator InitiateQuestNotification(QuestNotifType notifType, bool autoFade = true)
@@ -138,20 +188,36 @@ public class QuestHUD : Menu
                 break;
         }
 
+        int qSize = 0;
         // Fade in
         float opacity = 0f;
         canvas.style.opacity = opacity;
         while (opacity < 1.0f)
         {
+            // If new quest notification is waiting, exit the coroutine
+            lock (notifQLock)
+            {
+                qSize = questNotificationQ.Count;
+            }
+            if (qSize == 0)
+                break;
+
             opacity += Time.unscaledDeltaTime;
             canvas.style.opacity = opacity;
             yield return null;
         }
         canvas.style.opacity = 1f;
 
-        yield return new WaitForSeconds(questBannerTime);
+        lock (notifQLock)
+        {
+            qSize = questNotificationQ.Count;
+        }
+        if (qSize == 0)
+        {
+            yield return new WaitForSeconds(questBannerTime);
+        }
 
-        if (autoFade)
+        if (autoFade && qSize == 0)
         {
             yield return HideQuestNotification(notifType);
         }

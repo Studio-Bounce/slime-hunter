@@ -1,6 +1,7 @@
 using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -387,6 +388,7 @@ public class HUDMenu : Menu
     public void StopNavigation()
     {
         navigate = false;
+        compassNeedle.transform.rotation = Quaternion.Euler(0, 0, 0);  // North
         navTarget = Vector3.zero;
     }
 
