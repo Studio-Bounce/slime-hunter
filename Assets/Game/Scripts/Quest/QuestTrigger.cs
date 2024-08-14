@@ -18,9 +18,9 @@ public class QuestTrigger : MonoBehaviour
     [SerializeField] GameObject trackerCanvasGO;
     [SerializeField] float endProximity = 1.0f;
 
-    public UnityEvent onCompleteEvent;
-    public bool triggered = false;
+    public List<UnityEvent> onCompleteEvent = new List<UnityEvent>();
 
+    bool triggered = false;
     GameObject _prevTracker;
 
     private void Start()
@@ -96,6 +96,13 @@ public class QuestTrigger : MonoBehaviour
         if (quest != null && objectives.Length != quest.objectives.Count)
         {
             Debug.LogError("Invalid objectives! They do not match the quest.");
+        }
+
+        // Ensure there is an onCompleteEvent for each quest objective
+        onCompleteEvent ??= new List<UnityEvent>();
+        while (onCompleteEvent.Count < objectives.Length)
+        {
+            onCompleteEvent.Add(new UnityEvent());
         }
     }
 

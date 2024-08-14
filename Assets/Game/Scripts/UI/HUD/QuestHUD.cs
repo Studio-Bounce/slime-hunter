@@ -42,6 +42,7 @@ public class QuestHUD : Menu
         questUpdatedVE = canvas.Q<VisualElement>("QuestUpdated");
         questCompletedVE = canvas.Q<VisualElement>("QuestCompleted");
         questCompleteClearBtn = questCompletedVE.Q<Button>("ClearButton");
+        // Temporary: Hiding the quest complete "okay" button
         questCompleteClearBtn.style.opacity = 0;
         //questCompleteClearBtn.clicked += () => StartCoroutine(HideQuestNotification(QuestNotifType.COMPLETE));
 
