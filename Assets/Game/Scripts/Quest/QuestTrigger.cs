@@ -9,6 +9,7 @@ public struct QuestObjectiveData
     public Transform target;
     public bool showOverheadNavigation;
     public float navYOffset;
+    public float endProximity;
 }
 
 public class QuestTrigger : MonoBehaviour
@@ -16,7 +17,6 @@ public class QuestTrigger : MonoBehaviour
     [SerializeField] QuestSO quest;
     [SerializeField] QuestObjectiveData[] objectives;
     [SerializeField] GameObject trackerCanvasGO;
-    [SerializeField] float endProximity = 1.0f;
 
     public List<UnityEvent> onCompleteEvent = new List<UnityEvent>();
 
@@ -40,8 +40,10 @@ public class QuestTrigger : MonoBehaviour
             // Clear the quest objective when user reaches in proximity
             float distance = Vector3.Distance(GameManager.Instance.PlayerRef.transform.position,
                                               quest.objectives[quest.currentObjective].target.position);
-            if (distance < endProximity)
+            if (distance < objectives[quest.currentObjective].endProximity)
             {
+                // Quest Objective complete!
+                onCompleteEvent[quest.currentObjective].Invoke();
                 QuestManager.Instance.ClearQuestObjective(quest);
                 // Clear previous tracker
                 if (_prevTracker != null)
@@ -112,7 +114,7 @@ public class QuestTrigger : MonoBehaviour
         {
             foreach (QuestObjectiveData objectiveData in objectives)
             {
-                DebugExtension.DrawCircle(objectiveData.target.transform.position, Vector3.up, Color.black, endProximity);
+                DebugExtension.DrawCircle(objectiveData.target.transform.position, Vector3.up, Color.black, objectiveData.endProximity);
             }
         }
     }

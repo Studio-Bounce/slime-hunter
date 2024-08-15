@@ -26,7 +26,10 @@ public class NPCDialogue : MonoBehaviour
     [SerializeField] Dialogue dialogue;
     [SerializeField] GameObject questGameObject;
 
+    [Tooltip("Start the dialogues using box trigger")]
+    public bool useBoxTrigger = true;
     public bool isStoryComplete = false;
+    bool didStoryStart = false;
 
     private void Start()
     {
@@ -48,9 +51,29 @@ public class NPCDialogue : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isStoryComplete && other.gameObject.layer == GameConstants.PlayerLayer)
+        if (useBoxTrigger && other.gameObject.layer == GameConstants.PlayerLayer)
         {
+            StartDialogues();
+        }
+    }
+
+    public void StartDialogues()
+    {
+        if (!isStoryComplete && !didStoryStart)
+        {
+            didStoryStart = true;
             DialogueManager.Instance.StartDialogues(this, dialogue);
+        }
+    }
+
+    private void OnValidate()
+    {
+        if (useBoxTrigger)
+        {
+            if (!gameObject.TryGetComponent<BoxCollider>(out var _))
+            {
+                Debug.LogError("Need box collider to set Use Box Trigger!");
+            }
         }
     }
 }
