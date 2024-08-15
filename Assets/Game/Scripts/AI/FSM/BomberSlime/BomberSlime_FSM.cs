@@ -12,6 +12,11 @@ public class BomberSlime_FSM : BasicSlime_FSM
     [HideInInspector] public EnemyBomb enemyBomb;
     bool didExplode = false;
 
+    // Used in tutorial
+    [Header("For tutorial")]
+    public Transform targetOverride = null;
+    public bool alertTriggerOverride = false;
+
     protected override void Start()
     {
         base.Start();
@@ -41,6 +46,14 @@ public class BomberSlime_FSM : BasicSlime_FSM
         yield return new WaitForSeconds(attackEmissionTime);
 
         enemyBomb.Explode();
+    }
+
+    public override Vector3 GetPlayerPosition()
+    {
+        if (targetOverride != null)
+            return targetOverride.position;
+
+        return base.GetPlayerPosition();
     }
 
     private void OnValidate()

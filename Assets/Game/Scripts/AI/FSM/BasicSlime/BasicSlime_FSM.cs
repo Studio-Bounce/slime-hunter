@@ -82,7 +82,7 @@ public class BasicSlime_FSM : FSM
         return playerTransform.forward;
     }
 
-    public Vector3 GetPlayerPosition()
+    public virtual Vector3 GetPlayerPosition()
     {
         if (playerTransform == null)
             return Vector3.zero;

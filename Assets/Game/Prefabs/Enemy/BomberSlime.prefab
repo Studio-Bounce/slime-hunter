@@ -473,9 +473,9 @@ MonoBehaviour:
   attackEye: {fileID: 0}
   scaredEye: {fileID: 0}
   deathEye: {fileID: 0}
-  damageEyeTimer: 0.25
   hitVFXGO: {fileID: 2507012300119595446, guid: 207429efa1ee73a45845fb615dc9e278,
     type: 3}
+  hitParticlesGO: {fileID: 0}
   slimeOuterBody: {fileID: 0}
   flashDuration: 0.2
   flashMat: {fileID: 2100000, guid: ece9a621dbd04e443a99354d2ec2c2fa, type: 2}
@@ -859,6 +859,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8436900575294888671}
     m_Modifications:
+    - target: {fileID: 407462416757040918, guid: f2c26ae83a906db47bb2eb41ca1233a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1557572026923948180, guid: f2c26ae83a906db47bb2eb41ca1233a2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -918,6 +923,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: S_Explode_Vert_Card
+      objectReference: {fileID: 0}
+    - target: {fileID: 2222046122972758574, guid: f2c26ae83a906db47bb2eb41ca1233a2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
