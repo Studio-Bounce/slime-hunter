@@ -18,6 +18,17 @@ MonoBehaviour:
   levelName: Glade Village
   description: (Shaj add something)
   questType: 0
-  objectives: []
+  objectives:
+  - objective: Go to Fish Store
+    target: {fileID: 0}
+  - objective: Board the Boat
+    target: {fileID: 0}
+  - objective: Travel to Orange Island
+    target: {fileID: 0}
+  - objective: Find the Alchemist
+    target: {fileID: 0}
   currentObjective: 0
-  rewards: []
+  rewards:
+  - rewardName: Some Spell
+    rewardType: 1
+    quantity: 0

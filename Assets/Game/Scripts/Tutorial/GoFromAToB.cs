@@ -8,6 +8,7 @@ public class GoFromAToB : MonoBehaviour
     [SerializeField] Transform pointA;
     [SerializeField] Transform pointB;
     [SerializeField] float timeTaken = 3.0f;
+    [SerializeField] bool faceForward = false;
 
     public UnityEvent startMoving;
     public UnityEvent callbackOnB;
@@ -32,6 +33,10 @@ public class GoFromAToB : MonoBehaviour
     {
         float timeElapsed = 0;
 
+        if (faceForward)
+        {
+            transform.LookAt(pointB.position);
+        }
         while (timeElapsed < timeTaken)
         {
             timeElapsed += Time.deltaTime;

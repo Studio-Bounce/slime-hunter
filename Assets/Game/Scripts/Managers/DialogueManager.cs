@@ -120,7 +120,7 @@ public class DialogueManager : Singleton<DialogueManager>
         InputManager.Instance.TogglePlayerControls(true);
     }
 
-    void ParseDialogue(string dialogText, out string actualDialog, out int participantIdx)
+    bool ParseDialogue(string dialogText, out string actualDialog, out int participantIdx)
     {
         // {number}: "{dialogue}"
         string pattern = @"(\d+): ""(.*)""";
@@ -135,6 +135,9 @@ public class DialogueManager : Singleton<DialogueManager>
             actualDialog = "";
             participantIdx = 0;
             Debug.LogError($"Following dialogue could not be parsed: {dialogText}");
+
+            return false;
         }
+        return true;
     }
 }

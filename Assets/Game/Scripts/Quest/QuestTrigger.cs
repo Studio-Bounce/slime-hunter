@@ -70,18 +70,25 @@ public class QuestTrigger : MonoBehaviour
     {
         if (!triggered && other.CompareTag("Player"))
         {
-            triggered = true;
-            QuestManager.Instance.AddQuest(quest);
+            StartQuest();
+        }
+    }
 
-            // TEMPORARY for testing
-            QuestManager.Instance.SetQuestAsActive(quest);
+    public void StartQuest()
+    {
+        if (triggered) return;
 
+        triggered = true;
+        QuestManager.Instance.AddQuest(quest);
+
+        // TEMPORARY for testing
+        QuestManager.Instance.SetQuestAsActive(quest);
+
+        // Add tracker if required
+        if (objectives[quest.currentObjective].showOverheadNavigation)
+        {
             // Add tracker if required
-            if (objectives[quest.currentObjective].showOverheadNavigation)
-            {
-                // Add tracker if required
-                AddTracker();
-            }
+            AddTracker();
         }
     }
 
@@ -95,16 +102,12 @@ public class QuestTrigger : MonoBehaviour
 
     private void OnValidate()
     {
+        if (objectives == null)
+            return;
+
         if (quest != null && objectives.Length != quest.objectives.Count)
         {
             Debug.LogError("Invalid objectives! They do not match the quest.");
-        }
-
-        // Ensure there is an onCompleteEvent for each quest objective
-        onCompleteEvent ??= new List<UnityEvent>();
-        while (onCompleteEvent.Count < objectives.Length)
-        {
-            onCompleteEvent.Add(new UnityEvent());
         }
     }
 
