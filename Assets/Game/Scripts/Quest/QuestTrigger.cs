@@ -110,11 +110,14 @@ public class QuestTrigger : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (objectives.Length > 0)
+        if (objectives != null && objectives.Length > 0)
         {
             foreach (QuestObjectiveData objectiveData in objectives)
             {
-                DebugExtension.DrawCircle(objectiveData.target.transform.position, Vector3.up, Color.black, objectiveData.endProximity);
+                if (objectiveData.target != null)
+                {
+                    DebugExtension.DrawCircle(objectiveData.target.transform.position, Vector3.up, Color.black, objectiveData.endProximity);
+                }
             }
         }
     }

@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 
 public enum Character
 {
     MYLO,
     BLACKSMITH,
     ALCHEMIST,
-    GUARD
+    GUARD,
+    STRANGER
 }
 
 
@@ -31,6 +32,9 @@ public class NPCDialogue : MonoBehaviour
     public bool isStoryComplete = false;
     bool didStoryStart = false;
 
+    public UnityEvent OnDialoguesStart;
+    public UnityEvent OnDialoguesFinish;
+
     private void Start()
     {
         isStoryComplete = false;
@@ -42,6 +46,7 @@ public class NPCDialogue : MonoBehaviour
     {
         if (isStoryComplete)
         {
+            OnDialoguesFinish.Invoke();
             // Start the quest
             if (questGameObject != null)
                 questGameObject.SetActive(true);
@@ -62,6 +67,7 @@ public class NPCDialogue : MonoBehaviour
         if (!isStoryComplete && !didStoryStart)
         {
             didStoryStart = true;
+            OnDialoguesStart.Invoke();
             DialogueManager.Instance.StartDialogues(this, dialogue);
         }
     }
@@ -72,6 +78,7 @@ public class NPCDialogue : MonoBehaviour
         {
             if (!gameObject.TryGetComponent<BoxCollider>(out var _))
             {
+                useBoxTrigger = false;
                 Debug.LogError("Need box collider to set Use Box Trigger!");
             }
         }
