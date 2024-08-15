@@ -123,6 +123,7 @@ MonoBehaviour:
   knockbackTime: 0.25
   slowDownOnHitMultiplier: 0.2
   slowDownTime: 0.5
+  playerModel: {fileID: 7701449603010986479}
 --- !u!114 &606331671084474555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,9 +142,6 @@ MonoBehaviour:
   weaponTrail: {fileID: 3997934283830900321}
   baseAttackClip: {fileID: -203655887218126122, guid: 368a8195de7259c4b90d8c64c0c4c8e2,
     type: 3}
-  onWeaponAttack:
-    m_PersistentCalls:
-      m_Calls: []
   isPerformingSpecialAttack: 0
 --- !u!114 &1400482589994016055
 MonoBehaviour:
@@ -1370,6 +1368,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2060816974720686853, guid: df73b435349f1af468544ef5646d233f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2219538228296975080, guid: df73b435349f1af468544ef5646d233f,
         type: 3}
       propertyPath: m_Layer
@@ -1439,6 +1442,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5035536756386941763, guid: df73b435349f1af468544ef5646d233f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5323166717128445436, guid: df73b435349f1af468544ef5646d233f,
         type: 3}
@@ -1621,6 +1629,12 @@ Animator:
 --- !u!4 &2921253829874527559 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: df73b435349f1af468544ef5646d233f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3386946183868369580}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7701449603010986479 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5035536756386941763, guid: df73b435349f1af468544ef5646d233f,
     type: 3}
   m_PrefabInstance: {fileID: 3386946183868369580}
   m_PrefabAsset: {fileID: 0}

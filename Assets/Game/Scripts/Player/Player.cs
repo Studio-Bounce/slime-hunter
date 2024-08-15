@@ -11,6 +11,8 @@ public class Player : DynamicDamageTaker
     PlayerController playerController;
     WeaponController weaponController;
 
+    [SerializeField] GameObject playerModel;
+
     protected override void Start()
     {
         base.Start();
@@ -56,5 +58,18 @@ public class Player : DynamicDamageTaker
             Death(false);
         }
         return true;
+    }
+
+
+    // Used in boat sequence
+    public void HideVisuals()
+    {
+        playerModel.SetActive(false);
+    }
+
+    // Used in boat sequence
+    public void ShowVisuals()
+    {
+        playerModel.SetActive(true);
     }
 }

@@ -60,6 +60,15 @@ public class PlayerSpawner : PersistentObject
         }
         StartCoroutine(PlayPlayerSpawnVFXWithDelay(spawnVFXDelay));
     }
+    
+    // Just for the boat sequence
+    public void MovePlayerTEMP(Vector3 target)
+    {
+        if (playerInstance.TryGetComponent<CharacterController>(out var playerCC))
+        {
+            StartCoroutine(MovePlayerSmoothly(0.2f, target, playerCC));
+        }
+    }
 
     IEnumerator MovePlayerSmoothly(float delay, Vector3 target, CharacterController playerCC = null)
     {
