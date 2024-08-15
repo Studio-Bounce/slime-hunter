@@ -1,9 +1,9 @@
 -> blacksmith_greetings
 
 === blacksmith_greetings ===
-0: "Hello Mylo, I hope you're doing well, the village is not by the way."
+0: "Hello Mylo, I hope you're doing well."
 * [Continue]
-0: "The slimes really destroyed a lot of the property in the village."
+0: "Are you looking for something?"
 -> next
 
 === next ===
@@ -11,14 +11,14 @@
   -> mylo
   
 === mylo ===
-1: "Yes I am doing well. I was fighting against the slimes at the Main gate but"
+1: "Yes I am doing well. I was looking for Kuro"
 * [Continue]
 -> mylo2
 
 === mylo2 ===
-1: "I got knocked out, Thanks to Lyra and Kuro they both took good care of me."
+1: "Do you know where is he?."
 * [Continue]
-1: "Speaking of which, have you seen Kuro around? I am not able to find him."
+1: "I have not seen him. I came back with the boat couldnt find him in the Forest."
     -> next2
     
 === next2 ===
@@ -27,7 +27,7 @@
   
 === blacksmith ===
 
-0: "No. I have not seen him since the devastation of this village."
+0: "Yes. He went towards Nord Forest. But the boat dock is covered with the Gel. You might want to find the Alchemist to help you out with that."
 * [Continue]
 -> blacksmith2
 

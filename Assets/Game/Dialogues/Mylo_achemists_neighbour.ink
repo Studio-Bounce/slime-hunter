@@ -9,10 +9,10 @@
 === alchemist_location ===
 0: "Hmm.. I have not seen him since morning."
 * [Continue]
-0: "Last I saw, he went to the old fish store. Maybe check there?"
+0: "He was talking about going to the Orn Island to do some research. Maybe check there?"
 -> mylo_response
 
 === mylo_response ===
-* ["Okay"]1: "Sure, thank you! Have a good day."
+* ["Okay"]1: "Sure, Need to take the boat from the Fish Store to go there. Thank you! Have a good day."
 
 -> DONE
