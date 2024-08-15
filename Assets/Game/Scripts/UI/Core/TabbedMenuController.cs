@@ -26,6 +26,29 @@ public class TabbedMenuController
         });
     }
 
+    public void SwitchTab(string tabName)
+    {
+        VisualElement clickedTab = root.Query<VisualElement>(name: tabName);
+        if (!TabIsCurrentlySelected(clickedTab))
+        {
+            GetAllTabs().Where(
+                (tab) => tab != clickedTab && TabIsCurrentlySelected(tab)
+            ).ForEach(UnselectTab);
+            SelectTab(clickedTab);
+        }
+    }
+
+    public string CurrentTab()
+    {
+        foreach (var tab in GetAllTabs().ToList()) {
+            if (TabIsCurrentlySelected(tab))
+            {
+                return tab.name;
+            }
+        }
+        return "";
+    }
+
     private void TabOnClick(ClickEvent evt)
     {
         VisualElement clickedTab = evt.currentTarget as VisualElement;
@@ -38,7 +61,7 @@ public class TabbedMenuController
         }
     }
 
-    //Method that returns a Boolean indicating whether a tab is currently selected
+    // Method that returns a Boolean indicating whether a tab is currently selected
     private static bool TabIsCurrentlySelected(VisualElement tab)
     {
         return tab.ClassListContains(selectedTabClassName);

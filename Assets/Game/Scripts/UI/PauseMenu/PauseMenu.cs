@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.UIElements;
 
-public class PauseMenu : Menu
+public class PauseMenu : TabbedMenu
 {
     VisualElement pauseRootWrapperVE;
+    TabbedMenu tabbedMenu;
     float cachedAlpha;
     bool isMapTabSelected = false;
 
@@ -93,7 +95,28 @@ public class PauseMenu : Menu
         }
     }
 
-    void MapMenuSelected()
+    public override void SwitchTab(string tabName)
+    {
+        if (IsVisible && controller.CurrentTab() == tabName)
+        {
+            NonMapMenuSelected();
+            Hide();
+            GameManager.Instance.GameState = GameState.GAMEPLAY;
+            return;
+        }
+
+        GameManager.Instance.GameState = GameState.PAUSED;
+        controller.SwitchTab(tabName);
+        if (tabName == "MapTab")
+        {
+            MapMenuSelected();
+        } else
+        {
+            NonMapMenuSelected();
+        }
+    }
+
+    public void MapMenuSelected()
     {
         isMapTabSelected = true;
         ToggleBackgroundAlpha(false);
@@ -102,7 +125,7 @@ public class PauseMenu : Menu
         ShowHideMapCamera(true);
     }
 
-    void NonMapMenuSelected()
+    public void NonMapMenuSelected()
     {
         isMapTabSelected = false;
         ToggleBackgroundAlpha(true);

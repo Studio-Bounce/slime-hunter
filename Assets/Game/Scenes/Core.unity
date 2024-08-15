@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.10278612, g: 0.24971983, b: 0.45206016, a: 1}
+  m_IndirectSpecularColor: {r: 0.10280571, g: 0.24960491, b: 0.451602, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -683,6 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
+  ListenerNumber: -1
 --- !u!1 &657485086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,7 +1040,6 @@ GameObject:
   - component: {fileID: 1179840937}
   - component: {fileID: 1179840936}
   - component: {fileID: 1179840939}
-  - component: {fileID: 1179840938}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -1092,18 +1092,6 @@ MonoBehaviour:
   sourceAsset: {fileID: 9197481963319205126, guid: 5de63fb7533f3f547a34bf09b8ed41de,
     type: 3}
   m_SortingOrder: 3
---- !u!114 &1179840938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179840934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27d1a38f44913024f96b7ca9ea8cad9d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1179840939
 MonoBehaviour:
   m_ObjectHideFlags: 0
