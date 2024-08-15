@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Recorder.OutputPath;
 
-public class TabbedMenu : MonoBehaviour
+public class TabbedMenu : Menu
 {
-    private TabbedMenuController controller;
+    protected TabbedMenuController controller;
 
     private void OnEnable()
     {
@@ -11,7 +12,11 @@ public class TabbedMenu : MonoBehaviour
         VisualElement root = menu.rootVisualElement;
 
         controller = new(root);
-
         controller.RegisterTabCallbacks();
+    }
+
+    public virtual void SwitchTab(string tabName)
+    {
+        controller.SwitchTab(tabName);
     }
 }

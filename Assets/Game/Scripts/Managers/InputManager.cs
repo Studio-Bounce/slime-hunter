@@ -80,7 +80,7 @@ public class InputManager : Singleton<InputManager>
         switch (state)
         {
             case GameState.MAIN_MENU:
-                TogglePauseControl(false);
+                ToggleUIControls(false);
                 TogglePlayerControls(false);
                 break;
 
@@ -200,6 +200,8 @@ public class InputManager : Singleton<InputManager>
     private void _AddUIControls()
     {
         _UIActions.Pause.performed += Pause;
+        _UIActions.Inventory.performed += Inventory;
+        _UIActions.Map.performed += Map;
         _UIActions.SkipDialogue.performed += DialogueManager.Instance.SkipDialogue;
     }
 
@@ -224,13 +226,28 @@ public class InputManager : Singleton<InputManager>
     private void _RemoveUIControls()
     {
         _UIActions.Pause.performed -= Pause;
+        _UIActions.Inventory.performed -= Inventory;
+        _UIActions.Map.performed -= Map;
         _UIActions.SkipDialogue.performed -= DialogueManager.Instance.SkipDialogue;
     }
 
     private void Pause(InputContext context)
     {
-        GameManager.Instance.GameState = GameManager.Instance.GameState == GameState.PAUSED ?
-             GameState.GAMEPLAY : GameState.PAUSED;
+        PauseMenu pauseMenu = UIManager.Instance.pauseMenu as PauseMenu;
+        pauseMenu.SwitchTab("MenuTab");
+
+    }
+
+    private void Inventory(InputContext context)
+    {
+        PauseMenu pauseMenu = UIManager.Instance.pauseMenu as PauseMenu;
+        pauseMenu.SwitchTab("InventoryTab");
+    }
+
+    private void Map(InputContext context)
+    {
+        PauseMenu pauseMenu = UIManager.Instance.pauseMenu as PauseMenu;
+        pauseMenu.SwitchTab("MapTab");
     }
 
     private void TrackMovement(InputContext context)
