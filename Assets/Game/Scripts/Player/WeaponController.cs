@@ -247,7 +247,6 @@ public class WeaponController : MonoBehaviour
             // Check if the animator is in the attack sub-state
             if (_animator.GetInteger(attackComboIntHash) == 3)
             {
-                Debug.Log("Attack Interrupt");
                 _animator.CrossFade(locomotionStateHash, 0.0f);
             }
             return true;

@@ -32,8 +32,6 @@ public class InputManager : Singleton<InputManager>
     // Used for dash tutorial
     public Action<InputContext> OnDashAction;
 
-    public event Action exitEvent = delegate { };
-
     public Vector2 Movement { get { return _movement; } }
 
     private void Awake()
@@ -264,7 +262,6 @@ public class InputManager : Singleton<InputManager>
         // TODO: Hacky way to allow ESC to open pause while also being the close button
         if (exitEvent.GetInvocationList().Length > 1)
         {
-            Debug.Log(exitEvent.GetInvocationList().Length);
             exitEvent?.Invoke();
             return;
         }

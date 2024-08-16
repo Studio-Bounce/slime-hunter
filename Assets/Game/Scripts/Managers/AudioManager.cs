@@ -71,9 +71,6 @@ public class AudioManager : Singleton<AudioManager>
                 ExplorationInstance.getPlaybackState(out pbState);
                 if (pbState != PLAYBACK_STATE.PLAYING)
                     ExplorationInstance.start();
-                VillageInstance.getPlaybackState(out pbState);
-                if (pbState != PLAYBACK_STATE.PLAYING)
-                    VillageInstance.start();
                 break;
             case GameState.PAUSED:
                 break;
@@ -92,6 +89,10 @@ public class AudioManager : Singleton<AudioManager>
     public void ExploreToVillage()
     {
         VillageInstance.setParameterByID(villagePhaseParamID, 3);
+        PLAYBACK_STATE pbState;
+        VillageInstance.getPlaybackState(out pbState);
+        if (pbState != PLAYBACK_STATE.PLAYING)
+            VillageInstance.start();
         ExplorationInstance.setParameterByName("Fade", 1);
         VillageInstance.setParameterByName("Fade", 0);
     }
