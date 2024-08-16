@@ -13,6 +13,8 @@ public class BomberSlime_FSM : BasicSlime_FSM
     [HideInInspector] public EnemyBomb enemyBomb;
     bool didExplode = false;
 
+    [HideInInspector] public bool gotHitByPlayer = false;
+
     // Used in tutorial
     [Header("For tutorial")]
     public Transform targetOverride = null;
@@ -26,6 +28,7 @@ public class BomberSlime_FSM : BasicSlime_FSM
         base.Start();
 
         didExplode = false;
+        gotHitByPlayer = false;
         enemyBomb = GetComponentInChildren<EnemyBomb>();
     }
 
@@ -39,15 +42,21 @@ public class BomberSlime_FSM : BasicSlime_FSM
         if (!didExplode)
         {
             didExplode = true;
-            Emit(10);
+            if (!gotHitByPlayer)
+            {
+                Emit(10);
+            }
             StartCoroutine(ExplosionSequence());
         }
     }
 
     IEnumerator ExplosionSequence()
     {
-        // wait for glow
-        yield return new WaitForSeconds(attackEmissionTime);
+        if (!gotHitByPlayer)
+        {
+            // wait for glow
+            yield return new WaitForSeconds(attackEmissionTime);
+        }
         onDetonationStart.Invoke();
         enemyBomb.Explode();
     }

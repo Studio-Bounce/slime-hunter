@@ -24,16 +24,19 @@ public class ComboAttack : MonoBehaviour
     int attackCount = 0;
     float comboTimer = 0.0f;
 
+    WeaponController weaponController;
+
     private void Start()
     {
         isInCombo = false;
         attackCount = -startIndex;
         GameManager.Instance.PlayerSpecialAttack = 0.0f;
+        weaponController = GetComponent<WeaponController>();
     }
 
     public void OnPlayerHit(int targetLayer)
     {
-        if ((comboMask.value & (1 << targetLayer)) > 0)
+        if ((comboMask.value & (1 << targetLayer)) > 0 && !weaponController.isPerformingSpecialAttack)
         {
             ++attackCount;
             comboTimer = 0.0f;
@@ -51,8 +54,11 @@ public class ComboAttack : MonoBehaviour
 
     public void OnPlayerMiss()
     {
-        // Destroy combo
-        comboTimer = comboBreakTimeout;
+        if (!weaponController.isPerformingSpecialAttack)
+        {
+            // Destroy combo
+            comboTimer = comboBreakTimeout;
+        }
     }
 
     IEnumerator ComboSequence()

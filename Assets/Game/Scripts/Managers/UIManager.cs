@@ -14,6 +14,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] public Menu autoSave;
     [SerializeField] public Menu settingsMenu;
     [SerializeField] public Menu gladeVillageIntroMenu;
+    [SerializeField] public Menu endScreen;
 
     // ----------------- Load -----------------
     public void SetLoadMenu(bool active)
@@ -66,6 +67,17 @@ public class UIManager : Singleton<UIManager>
     public void HideAutoSave()
     {
         autoSave.Hide();
+    }
+
+    // ----------------- End screen -----------------
+    public void ShowEndScreen()
+    {
+        ((EndScreen)endScreen).RollCredits();
+    }
+
+    public void ResetEndScreen()
+    {
+        ((EndScreen)endScreen).NewGame();
     }
 
     // ----------------- Generic -----------------
