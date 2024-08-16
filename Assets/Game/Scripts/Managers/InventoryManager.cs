@@ -62,6 +62,18 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     public event Action<SpellSO[]> OnEquippedSpellsChanged = delegate { };
     public event Action<ItemSO> OnItemAdded = delegate { };
 
+    public int TotalSlimeGel { get
+        {
+            int total = 0;
+            foreach (Item item in items)
+            {
+                if (item.itemRef.itemType == ItemType.Material) {
+                    total += item.quantity;
+                }
+            }
+            return total;
+        } 
+    }
     public int TotalWeight { get; private set; } = 0;
     public bool IsFull { get { return TotalWeight >= maxWeight; } }
 

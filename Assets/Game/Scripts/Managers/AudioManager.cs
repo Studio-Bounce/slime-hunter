@@ -42,6 +42,7 @@ public class AudioManager : Singleton<AudioManager>
         // SFX
         SpecialAttackInstance = RuntimeManager.CreateInstance(config.specialAttack);
         InventoryManager.Instance.OnItemAdded += e => RuntimeManager.PlayOneShot(Config.itemPickup);
+        InputManager.Instance.exitEvent += () => RuntimeManager.PlayOneShot(Config.errorEvent);
 
         // Param IDs
         EventDescription eventDescription;

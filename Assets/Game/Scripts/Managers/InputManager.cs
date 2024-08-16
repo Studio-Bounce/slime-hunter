@@ -260,7 +260,7 @@ public class InputManager : Singleton<InputManager>
     private void Exit(InputContext context)
     {
         // TODO: Hacky way to allow ESC to open pause while also being the close button
-        if (exitEvent.GetInvocationList().Length > 1)
+        if (exitEvent.GetInvocationList().Length > 2)
         {
             exitEvent?.Invoke();
             return;

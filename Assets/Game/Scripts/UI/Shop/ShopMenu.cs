@@ -26,16 +26,19 @@ public class ShopMenu : Menu
     [Header("UI References")]
     public VisualTreeAsset listTreeAsset;
     private ScrollView shopScrollView;
+    private Label slimeGelCount;
 
     private void Start()
     {
         VisualElement root = uiDocument.rootVisualElement;
         shopScrollView = root.Q<ScrollView>("ShopItemScrollView");
+        slimeGelCount = root.Q<Label>("SlimeGelCount");
     }
 
     public override void Show()
     {
         base.Show();
+        slimeGelCount.text = InventoryManager.Instance.TotalSlimeGel.ToString();
         PopulateList();
         InputManager.Instance.exitEvent += Hide;
     }
