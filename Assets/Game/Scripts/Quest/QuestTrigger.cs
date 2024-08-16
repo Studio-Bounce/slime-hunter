@@ -21,6 +21,7 @@ public class QuestTrigger : MonoBehaviour
     public List<UnityEvent> onCompleteEvent = new List<UnityEvent>();
 
     bool triggered = false;
+    bool triggerObjectiveComplete = false;
     GameObject _prevTracker;
 
     private void Start()
@@ -37,11 +38,16 @@ public class QuestTrigger : MonoBehaviour
     {
         if (triggered)
         {
-            // Clear the quest objective when user reaches in proximity
-            float distance = Vector3.Distance(GameManager.Instance.PlayerRef.transform.position,
-                                              quest.objectives[quest.currentObjective].target.position);
-            if (distance < objectives[quest.currentObjective].endProximity)
+            float distance = 0;
+            if (quest.objectives[quest.currentObjective].target)
             {
+                // Clear the quest objective when user reaches in proximity
+                distance = Vector3.Distance(GameManager.Instance.PlayerRef.transform.position,
+                                            quest.objectives[quest.currentObjective].target.position);
+            }
+            if (distance < objectives[quest.currentObjective].endProximity || triggerObjectiveComplete)
+            {
+                triggerObjectiveComplete = false;
                 // Quest Objective complete!
                 onCompleteEvent[quest.currentObjective].Invoke();
                 QuestManager.Instance.ClearQuestObjective(quest);
@@ -64,6 +70,11 @@ public class QuestTrigger : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void ManualQuestObjectiveCompleteOverride()
+    {
+        triggerObjectiveComplete = true;
     }
 
     private void OnTriggerEnter(Collider other)

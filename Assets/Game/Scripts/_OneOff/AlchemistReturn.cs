@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine.Events;
 
 public class AlchemistReturn : MonoBehaviour
 {
+    [SerializeField] CinemachineVirtualCamera bridgeCamera;
     [SerializeField] Transform bridgeLocation;
     [SerializeField] float moveSpeed = 5.0f;
     [SerializeField] float turnSpeed = 2.0f;
@@ -14,6 +16,7 @@ public class AlchemistReturn : MonoBehaviour
     public UnityEvent onReachShop;
 
     Animator animator;
+    CinemachineVirtualCamera currentCamera;
     bool goingToBridge = false;
     bool loweringBridge = false;
     bool _startedLowering = false;
@@ -52,11 +55,18 @@ public class AlchemistReturn : MonoBehaviour
         {
             if (!_startedLowering)
             {
+                currentCamera = CameraManager.ActiveCineCamera;
+                InputManager.Instance.TogglePlayerControls(false);
+                CameraManager.Instance.ChangeVirtualCamera(bridgeCamera);
+
                 _startedLowering = true;
-                bridge.MoveTheBridge();
+                bridge.MoveTheBridgeWithDelay(1.0f);
             }
             else if (bridge.IsBridgeDown())
             {
+                CameraManager.Instance.ChangeVirtualCamera(currentCamera);
+                InputManager.Instance.TogglePlayerControls(true);
+
                 loweringBridge = false;
                 // Walk towards shop now
                 goingToShop = true;

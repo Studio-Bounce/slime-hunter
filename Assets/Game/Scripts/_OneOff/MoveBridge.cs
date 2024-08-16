@@ -20,6 +20,19 @@ public class MoveBridge : MonoBehaviour
         isItDown = false;
     }
 
+    public void MoveTheBridgeWithDelay(float delay)
+    {
+        isItDown = false;
+        StartCoroutine(MoveBridgeDelay(delay));
+    }
+
+    IEnumerator MoveBridgeDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        MoveTheBridge();
+    }
+
     public void MoveTheBridge()
     {
         isItDown = false;
