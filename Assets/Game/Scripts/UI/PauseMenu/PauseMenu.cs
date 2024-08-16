@@ -10,7 +10,6 @@ using UnityEngine.UIElements;
 public class PauseMenu : TabbedMenu
 {
     VisualElement pauseRootWrapperVE;
-    TabbedMenu tabbedMenu;
     float cachedAlpha;
     bool isMapTabSelected = false;
 
@@ -20,7 +19,6 @@ public class PauseMenu : TabbedMenu
     // Inventory Stats
     VisualElement characterContainer;
     Label healthValue;
-    Label levelValue;
     Label spValue;
 
     void Start()
@@ -41,6 +39,7 @@ public class PauseMenu : TabbedMenu
 
         characterContainer = root.Q<VisualElement>("CharacterContainer");
         healthValue = root.Q<Label>("HealthValue");
+        spValue = root.Q<Label>("SPValue");
         LinkInventoryStatsUIToPlayer();
 
         Button mapTabVE = root.Q<Button>("MapTab");
@@ -79,6 +78,32 @@ public class PauseMenu : TabbedMenu
     private void LinkInventoryStatsUIToPlayer()
     {
         GameManager.Instance.OnPlayerHealthChange += (int value) => healthValue.text = value.ToString();
+        GameManager.Instance.OnPlayerSpecialAttackChange += (float value) => spValue.text = value.ToString();
+
+        InventoryManager.Instance.OnEquippedWeaponsChanged += e => _UpdateWeaponStatsUI();
+    }
+
+    private void _UpdateWeaponStatsUI()
+    {
+        for (int i = 0; i < 2; i++) 
+        {
+            Label weaponName = pauseRootWrapperVE.Q<Label>($"Weapon{i+1}Name");
+            Label damageLabel = pauseRootWrapperVE.Q<Label>($"Weapon{i+1}Damage");
+            Label rangeLabel = pauseRootWrapperVE.Q<Label>($"Weapon{i+1}Range");
+
+            WeaponSO weaponSO = InventoryManager.Instance.equippedWeapons[i];
+            if (weaponSO != null)
+            {
+                weaponName.text = weaponSO.name;
+                damageLabel.text = weaponSO.damage.value.ToString();
+                rangeLabel.text = weaponSO.range.ToString();
+            } else
+            {
+                weaponName.text = "Unequipped";
+                damageLabel.text = "N/A";
+                rangeLabel.text = "N/A";
+            }
+        }
     }
 
     public void ExitPause()
