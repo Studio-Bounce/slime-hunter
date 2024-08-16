@@ -14,6 +14,7 @@ public class DialogueManager : Singleton<DialogueManager>
 
     NPCDialogue storyOwner = null;
     bool isStoryRunning = false;
+    public bool IsAStoryRunning { get { return isStoryRunning; } }
 
     private void Start()
     {
