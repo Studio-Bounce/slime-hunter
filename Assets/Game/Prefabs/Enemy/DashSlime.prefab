@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 3485420396888111605}
   - component: {fileID: 8404974557503158798}
   - component: {fileID: 8725401992870138708}
-  - component: {fileID: 5819089781366667348}
+  - component: {fileID: 2094540476382353687}
   m_Layer: 7
   m_Name: DashSlime
   m_TagString: Untagged
@@ -590,7 +590,7 @@ MonoBehaviour:
   onHitEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5819089781366667348}
+      - m_Target: {fileID: 2094540476382353687}
         m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
         m_MethodName: Play
         m_Mode: 1
@@ -919,7 +919,7 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
---- !u!114 &5819089781366667348
+--- !u!114 &2094540476382353687
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

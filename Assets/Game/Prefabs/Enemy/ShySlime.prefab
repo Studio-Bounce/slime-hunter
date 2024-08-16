@@ -607,6 +607,8 @@ GameObject:
   - component: {fileID: 4347139268971403823}
   - component: {fileID: 984750678147540403}
   - component: {fileID: 3472640905637783965}
+  - component: {fileID: 3297499863038635125}
+  - component: {fileID: 6894562573078338547}
   m_Layer: 7
   m_Name: ShySlime
   m_TagString: Untagged
@@ -727,7 +729,34 @@ MonoBehaviour:
   isInvincible: 0
   onDeathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3297499863038635125}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6894562573078338547}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   healthSlider: {fileID: 3093743597393084328}
   canvasTimeout: 10
   healthCanvas: {fileID: 7627680177218896917}
@@ -770,6 +799,7 @@ MonoBehaviour:
   useRootMotion: 0
   useGravity: 1
   slimeModel: {fileID: 3894532602626332139}
+  pauseOverride: 0
 --- !u!114 &4481492702426782661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -807,6 +837,9 @@ MonoBehaviour:
   attackEmissionTime: 0.1
   attackProximity: 1
   slimeAnimator: {fileID: 247210881314464809}
+  onHopEvent:
+    m_PersistentCalls:
+      m_Calls: []
   fleeSteeringBehaviour: {fileID: 1860402855733763571}
   playerProximityDistance: 5
   fleeSpeed: 5
@@ -868,6 +901,68 @@ MonoBehaviour:
     type: 3}
   launchAngle: 0
   angleRange: 0
+--- !u!114 &3297499863038635125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8820871006783578033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -452441319
+      Data2: 1269893004
+      Data3: -1474604137
+      Data4: -753636597
+    Path: event:/SoundEffects/Slime/SlimeDissolve
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &6894562573078338547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8820871006783578033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1103281620
+      Data2: 1297960723
+      Data3: 383964818
+      Data4: 1722911570
+    Path: event:/SoundEffects/Slime/SlimeImpact
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &8843669738811188421
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,6 +1242,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3927154856804207530}
     - targetCorrespondingSourceObject: {fileID: -552784701103934427, guid: 772ae3dc15e833f40999ac3cb2013fa2,
         type: 3}
       insertIndex: -1
@@ -1230,6 +1329,43 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5910078775740897720}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6829067289243002089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 772ae3dc15e833f40999ac3cb2013fa2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5910078775740897720}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3927154856804207530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6829067289243002089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1483790367
+      Data2: 1123595808
+      Data3: -246490971
+      Data4: 1228969960
+    Path: event:/SoundEffects/Slime/SlimeMovement
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!137 &7814854684481491757 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 4501103441120955029, guid: 772ae3dc15e833f40999ac3cb2013fa2,
