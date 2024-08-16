@@ -47,6 +47,7 @@ public class MainMenu : Menu
         SceneLoader.Instance.LoadScene(GameManager.Instance.GameSceneName, callback: sceneLoadCallback);
         UIManager.Instance.SetMainMenu(false);
         UIManager.Instance.SetHUDMenu(true);
+        UIManager.Instance.ResetEndScreen();
     }
 
     void SetStartState(AsyncOperation _, string _s)
