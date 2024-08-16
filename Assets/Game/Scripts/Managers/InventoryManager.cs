@@ -57,7 +57,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     VisualElement spell2Icon;
 
     // Events
-    public event Action OnInventoryChanged = delegate { };
+    private event Action OnInventoryChanged = delegate { };
     public event Action<WeaponSO[]> OnEquippedWeaponsChanged = delegate { };
     public event Action<SpellSO[]> OnEquippedSpellsChanged = delegate { };
     public event Action<ItemSO> OnItemAdded = delegate { };
