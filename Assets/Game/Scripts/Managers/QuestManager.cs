@@ -126,6 +126,7 @@ public class QuestManager : Singleton<QuestManager>
             quest.isActive = false;
 
             // Notification that quest is complete
+            OnQuestObjectiveComplete.Invoke("");
             OnQuestComplete.Invoke(quest);
 
             foreach (QuestReward questReward in quest.rewards)

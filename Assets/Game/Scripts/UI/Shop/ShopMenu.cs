@@ -39,20 +39,10 @@ public class ShopMenu : Menu
         PopulateList();
     }
 
-    // Hacky way of starting final quest when shop closes for the first time
-    bool shopOpenedFirstTime = true;
-    public UnityEvent OnShopClose;
-
     public override void ToggleVisible()
     {
         base.ToggleVisible();
         PopulateList();
-
-        if (!IsVisible && shopOpenedFirstTime)
-        {
-            shopOpenedFirstTime = false;
-            OnShopClose.Invoke();
-        }
     }
 
     private void PopulateList()

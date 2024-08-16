@@ -97,11 +97,11 @@ public class QuestHUD : Menu
 
     void OnQuestUpdate(string _questObjective)
     {
+        Label questObjective = questUpdatedVE.Q<Label>("NewObjectiveName");
+        questObjective.text = _questObjective;
+
         if (_questObjective != "")
         {
-            Label questObjective = questUpdatedVE.Q<Label>("NewObjectiveName");
-            questObjective.text = _questObjective;
-
             lock (notifQLock)
             {
                 questNotificationQ.Enqueue(QuestNotifType.UPDATE);

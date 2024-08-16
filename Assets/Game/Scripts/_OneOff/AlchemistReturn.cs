@@ -16,11 +16,15 @@ public class AlchemistReturn : MonoBehaviour
     public UnityEvent onReachShop;
 
     Animator animator;
+    readonly int MoveSpeed = Animator.StringToHash("blendSpeed");
+    public float animatorMoveBlend = 0.5f;
+
     CinemachineVirtualCamera currentCamera;
-    bool goingToBridge = false;
-    bool loweringBridge = false;
+    [Header("For debugging")]
+    public  bool goingToBridge = false;
+    public bool loweringBridge = false;
     bool _startedLowering = false;
-    bool goingToShop = false;
+    public bool goingToShop = false;
 
     void Start()
     {
@@ -49,6 +53,7 @@ public class AlchemistReturn : MonoBehaviour
                 goingToBridge = false;
                 // Lower the bridge
                 loweringBridge = true;
+                animator.SetFloat(MoveSpeed, 0);
             }
         }
         else if (loweringBridge)
@@ -66,6 +71,7 @@ public class AlchemistReturn : MonoBehaviour
             {
                 CameraManager.Instance.ChangeVirtualCamera(currentCamera);
                 InputManager.Instance.TogglePlayerControls(true);
+                animator.SetFloat(MoveSpeed, animatorMoveBlend);
 
                 loweringBridge = false;
                 // Walk towards shop now
@@ -101,5 +107,6 @@ public class AlchemistReturn : MonoBehaviour
     public void MoveToBridge()
     {
         goingToBridge = true;
+        animator.SetFloat(MoveSpeed, animatorMoveBlend);
     }
 }
