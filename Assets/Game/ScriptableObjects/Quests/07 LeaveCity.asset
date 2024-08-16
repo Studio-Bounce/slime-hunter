@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1c006a0e414ba84b838ac6b19a74a66, type: 3}
+  m_Name: 07 LeaveCity
+  m_EditorClassIdentifier: 
+  isComplete: 0
+  isActive: 0
+  questName: Leave Glade Village
+  levelName: Glade Village
+  description: (Shaj add something)
+  questType: 0
+  objectives:
+  - objective: Go to City door
+    target: {fileID: 0}
+  - objective: Use spell to destory Slime Wall
+    target: {fileID: 0}
+  - objective: Board the Boat
+    target: {fileID: 0}
+  currentObjective: 0
+  rewards: []

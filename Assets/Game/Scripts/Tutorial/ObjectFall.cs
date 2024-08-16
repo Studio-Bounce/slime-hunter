@@ -14,6 +14,8 @@ public class ObjectFall : MonoBehaviour
     bool tutorialInProgress = false;
     bool moveThePlayer = false;
 
+    bool spacePressed = false;
+
     [SerializeField] float cameraShakeIntensity = 0.3f;
 
     private void Start()
@@ -22,6 +24,13 @@ public class ObjectFall : MonoBehaviour
         actionPerformed = false;
         imageShown = false;
         body = GetComponent<Rigidbody>();
+
+        InputManager.Instance.OnDashAction = e => RegisterDash();
+    }
+
+    void RegisterDash()
+    {
+        spacePressed = true;
     }
 
     // Used in Dash tutorial
@@ -80,6 +89,8 @@ public class ObjectFall : MonoBehaviour
     IEnumerator WaitForSpace()
     {
         Time.timeScale = 0.6f;
+        spacePressed = false;
+
         while (tutorialInProgress)
         {
             // Show image in 0.5 seconds
@@ -104,7 +115,7 @@ public class ObjectFall : MonoBehaviour
                 body.angularVelocity = Vector3.zero;
             }
 
-            if (imageShown && Input.GetKeyDown(KeyCode.Space))
+            if (imageShown && spacePressed)
             {
                 body.useGravity = true;
                 moveThePlayer = false;

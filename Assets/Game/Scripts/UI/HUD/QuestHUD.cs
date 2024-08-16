@@ -97,11 +97,11 @@ public class QuestHUD : Menu
 
     void OnQuestUpdate(string _questObjective)
     {
+        Label questObjective = questUpdatedVE.Q<Label>("NewObjectiveName");
+        questObjective.text = _questObjective;
+
         if (_questObjective != "")
         {
-            Label questObjective = questUpdatedVE.Q<Label>("NewObjectiveName");
-            questObjective.text = _questObjective;
-
             lock (notifQLock)
             {
                 questNotificationQ.Enqueue(QuestNotifType.UPDATE);
@@ -167,7 +167,14 @@ public class QuestHUD : Menu
             {
                 questNotifType = questNotificationQ.Dequeue();
             }
-            yield return InitiateQuestNotification(questNotifType);
+            if (DialogueManager.Instance.IsAStoryRunning)
+            {
+                yield return null;
+            }
+            else
+            {
+                yield return InitiateQuestNotification(questNotifType);
+            }
         }
         
         processingNotificationQ = false;
@@ -189,18 +196,13 @@ public class QuestHUD : Menu
                 break;
         }
 
-        int qSize = 0;
         // Fade in
         float opacity = 0f;
         canvas.style.opacity = opacity;
         while (opacity < 1.0f)
         {
-            // If new quest notification is waiting, exit the coroutine
-            lock (notifQLock)
-            {
-                qSize = questNotificationQ.Count;
-            }
-            if (qSize == 0)
+            // If a story is running, exit the coroutine
+            if (DialogueManager.Instance.IsAStoryRunning)
                 break;
 
             opacity += Time.unscaledDeltaTime;
@@ -209,16 +211,19 @@ public class QuestHUD : Menu
         }
         canvas.style.opacity = 1f;
 
+        int qSize = 0;
         lock (notifQLock)
         {
             qSize = questNotificationQ.Count;
         }
-        if (qSize == 0)
+        // We can wait if there's no quest notification pending in queue & no story is running
+        if (qSize == 0 && !DialogueManager.Instance.IsAStoryRunning)
         {
             yield return new WaitForSeconds(questBannerTime);
         }
 
-        if (autoFade && qSize == 0)
+        // If a story is running, hide the quest HUD
+        if (autoFade || DialogueManager.Instance.IsAStoryRunning)
         {
             yield return HideQuestNotification(notifType);
         }

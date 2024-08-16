@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class CameraIntroduce : PersistentObject
 {
+    public float transitionDelay = 2.0f;
     public float duration = 5;
     public CinemachineVirtualCamera targetCamera;
 
@@ -26,6 +27,8 @@ public class CameraIntroduce : PersistentObject
 
     private IEnumerator StartTransition()
     {
+        yield return new WaitForSeconds(transitionDelay);
+
         InputManager.Instance.TogglePlayerControls(false);
         CameraManager.Instance.ChangeVirtualCamera(targetCamera);
         yield return UIManager.Instance.gladeVillageIntroMenu.FadeIn(2.0f);
