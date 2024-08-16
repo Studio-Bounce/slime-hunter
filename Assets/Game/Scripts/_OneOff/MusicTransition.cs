@@ -12,6 +12,5 @@ public class MusicTransition : MonoBehaviour
     public void VillageToExplore()
     {
         AudioManager.Instance.VillageToExplore();
-
     }
 }

@@ -95,6 +95,7 @@ public class DashSlime_AttackPlayer : BasicSlime_BaseState
                     // Make the weapon active
                     fsm.weapon.ActivateWeapon();
                     dashDirection = (target - fsm.transform.position).normalized;
+                    dfsm.onDash.Invoke();
                     fsm.currentAttackState = SlimeAttackState.DASH;
                 }
 

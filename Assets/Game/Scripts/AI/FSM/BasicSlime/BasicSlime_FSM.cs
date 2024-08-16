@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BasicSlime_FSM : FSM
 {
@@ -47,6 +48,9 @@ public class BasicSlime_FSM : FSM
     [Tooltip("How far can the slime hit while on rest?")]
     public float attackProximity = 0.5f;
     public Animator slimeAnimator;
+
+    // Events
+    public UnityEvent onHopEvent;
 
     protected override void Awake()
     {

@@ -26,6 +26,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
     // Events
     public UnityEvent onDeathEvent;
+    public UnityEvent onHitEvent;
 
     protected virtual void Start()
     {
@@ -54,6 +55,7 @@ public class DamageTaker : MonoBehaviour, ITakeDamage
 
         if (!isInvincible || damage.forceApply)
         {
+            onHitEvent.Invoke();
             health -= (int)damage.value;
         }
 
