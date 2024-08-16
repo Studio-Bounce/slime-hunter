@@ -345,6 +345,8 @@ GameObject:
   - component: {fileID: 2332900764898418253}
   - component: {fileID: 2849705061723360114}
   - component: {fileID: 2297129878814743923}
+  - component: {fileID: 153098118267754399}
+  - component: {fileID: 7393472139899777747}
   m_Layer: 7
   m_Name: BomberSlime
   m_TagString: Untagged
@@ -464,6 +466,21 @@ MonoBehaviour:
   isInvincible: 0
   onDeathEvent:
     m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 153098118267754399}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHitEvent:
+    m_PersistentCalls:
       m_Calls: []
   healthSlider: {fileID: 389511234081299262}
   canvasTimeout: 10
@@ -507,6 +524,7 @@ MonoBehaviour:
   useRootMotion: 0
   useGravity: 1
   slimeModel: {fileID: 0}
+  pauseOverride: 0
 --- !u!114 &2849705061723360114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,10 +559,27 @@ MonoBehaviour:
   wanderSpeed: 1
   backToBaseSpeed: 10
   backToBaseLockedDuration: 3
-  attackEmissionTime: 1
+  attackEmissionTime: 0.7
   attackProximity: 0
   slimeAnimator: {fileID: 515339334372171353}
   enemyBomb: {fileID: 0}
+  targetOverride: {fileID: 0}
+  alertTriggerOverride: 0
+  onDetonationStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7393472139899777747}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2297129878814743923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -559,6 +594,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusBar: {fileID: 2911015006279786545}
   activeEffects: []
+--- !u!114 &153098118267754399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5799752166503753409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -2118935970
+      Data2: 1195199843
+      Data3: -1838921552
+      Data4: -784003960
+    Path: event:/SoundEffects/Slime/BomberSlimeExplode
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &7393472139899777747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5799752166503753409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1475249000
+      Data2: 1338453783
+      Data3: 685079736
+      Data4: -105787333
+    Path: event:/SoundEffects/Slime/BomberSlimeGround
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &6187095216556813335
 GameObject:
   m_ObjectHideFlags: 0

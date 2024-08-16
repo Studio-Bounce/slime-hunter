@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BomberSlime_FSM : BasicSlime_FSM
 {
@@ -16,6 +17,9 @@ public class BomberSlime_FSM : BasicSlime_FSM
     [Header("For tutorial")]
     public Transform targetOverride = null;
     public bool alertTriggerOverride = false;
+
+    // Events
+    public UnityEvent onDetonationStart;
 
     protected override void Start()
     {
@@ -44,7 +48,7 @@ public class BomberSlime_FSM : BasicSlime_FSM
     {
         // wait for glow
         yield return new WaitForSeconds(attackEmissionTime);
-
+        onDetonationStart.Invoke();
         enemyBomb.Explode();
     }
 
