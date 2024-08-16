@@ -21,6 +21,10 @@ public class QuestTrigger : MonoBehaviour
     public UnityEvent onQuestStart;
     public List<UnityEvent> onCompleteEvent = new List<UnityEvent>();
 
+    // Delay in starting quest if its supposed to start right after another quest
+    public bool artificalDelay = false;
+    public float delayTime = 2.0f;
+
     bool triggered = false;
     bool triggerObjectiveComplete = false;
     GameObject _prevTracker;
@@ -91,6 +95,17 @@ public class QuestTrigger : MonoBehaviour
         if (triggered) return;
 
         triggered = true;
+        StartCoroutine(StartQuestSequence());
+    }
+
+    IEnumerator StartQuestSequence()
+    {
+        if (artificalDelay)
+        {
+            yield return new WaitForSeconds(delayTime);
+        }
+        yield return null;
+
         onQuestStart.Invoke();
         QuestManager.Instance.AddQuest(quest);
 

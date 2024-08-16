@@ -14,6 +14,6 @@ public class GameOverSequence : MonoBehaviour
     {
         yield return new WaitForSeconds(10);
 
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
 }
