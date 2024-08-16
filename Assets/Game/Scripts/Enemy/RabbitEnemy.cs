@@ -74,6 +74,11 @@ public class RabbitEnemy : Enemy
     // Must be used only in tutorial. DO NOT USE ANYWHERE ELSE!
     public void ApplyDodgeExternal(Vector3 dodgeVec)
     {
+        slimeAnimator.SetTrigger(DodgeTrigger);
+        // Dodge animation length is 1 seconds, so the scaling works perfectly
+        slimeAnimator.SetFloat(DodgeSpeedField, (1 / dodgeTime));
+        isDodging = true;
+
         StartCoroutine(ApplyDodge(dodgeVec));
     }
 
