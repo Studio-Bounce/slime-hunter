@@ -123,8 +123,11 @@ public class GameManager : Singleton<GameManager>
         }
         set
         {
-            _gameState = value;
-            OnGameStateChange?.Invoke(value);
+            if (value != _gameState)
+            {
+                _gameState = value;
+                OnGameStateChange?.Invoke(value);
+            }
         }
     }
 

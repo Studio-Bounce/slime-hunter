@@ -71,21 +71,35 @@ public class AudioManager : Singleton<AudioManager>
                 ExplorationInstance.getPlaybackState(out pbState);
                 if (pbState != PLAYBACK_STATE.PLAYING)
                     ExplorationInstance.start();
-                ExplorationInstance.setVolume(1.0f);
+                VillageInstance.getPlaybackState(out pbState);
+                if (pbState != PLAYBACK_STATE.PLAYING)
+                    VillageInstance.start();
                 break;
             case GameState.PAUSED:
-                ExplorationInstance.setVolume(0.5f);
                 break;
             case GameState.LOADING:
                 break;
             case GameState.GAME_OVER:
                 masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 VillageInstance.setParameterByID(villagePhaseParamID, 1);
-                VillageInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                VillageInstance.start();
                 break;
             default:
                 break;
         }
+    }
+
+    public void ExploreToVillage()
+    {
+        VillageInstance.setParameterByID(villagePhaseParamID, 3);
+        ExplorationInstance.setParameterByName("Fade", 1);
+        VillageInstance.setParameterByName("Fade", 0);
+    }
+
+    public void VillageToExplore()
+    {
+        ExplorationInstance.setParameterByName("Fade", 0);
+        VillageInstance.setParameterByName("Fade", 1);
     }
 
     public void SetVolume(float value)
