@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Game/Scripts/UI/USS/MainStyle.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainStyle" />
     <ui:VisualElement name="Death" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; opacity: 1; display: flex; justify-content: center; -unity-text-align: middle-center;">
-        <ui:Label tabindex="-1" text="You got slimed!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Slimed" enable-rich-text="true" class="h1" style="height: 106px; margin-bottom: 48px; font-size: 96px;" />
+        <ui:Label tabindex="-1" text="You got slimed!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Slimed" enable-rich-text="true" class="h1" style="height: 106px; margin-bottom: 48px; font-size: 96px; -unity-text-outline-width: 2px; -unity-text-outline-color: rgb(0, 0, 0);" />
         <ButtonSH text="Try Again" name="TryAgain" class="button" style="font-size: 25px; display: flex; width: 160px; align-self: center; margin-bottom: 24px;" />
         <ButtonSH text="Main Menu" name="MainMenu" class="button" style="font-size: 25px; display: flex; width: 160px; align-self: center;" />
     </ui:VisualElement>
