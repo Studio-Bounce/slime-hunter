@@ -179,4 +179,16 @@ public class SettingsMenu : Menu
             UIManager.Instance.pauseMenu.Show();
         }
     }
+
+    public override void Show()
+    {
+        base.Show();
+        InputManager.Instance.exitEvent += Back;
+    }
+
+    public override void Hide()
+    {
+        base.Hide();
+        InputManager.Instance.exitEvent -= Back;
+    }
 }

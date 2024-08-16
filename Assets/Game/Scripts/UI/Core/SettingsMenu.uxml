@@ -31,5 +31,9 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:VisualElement name="InputHint" style="flex-grow: 1; position: absolute; flex-direction: row; right: 10%; bottom: 10%;">
+            <InputGlyph action-name="Exit" style="width: 64px; height: 64px;" />
+            <ui:Label tabindex="-1" text="Close" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h3" style="transform-origin: right top; -unity-text-align: middle-left;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

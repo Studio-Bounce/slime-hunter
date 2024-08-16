@@ -28,6 +28,8 @@ public class InputManager : Singleton<InputManager>
     Action<InputContext> spell1Action;
     Action<InputContext> spell2Action;
 
+    public event Action exitEvent = delegate { };
+
     public Vector2 Movement { get { return _movement; } }
 
     private void Awake()
@@ -94,7 +96,7 @@ public class InputManager : Singleton<InputManager>
         switch (state)
         {
             case GameState.MAIN_MENU:
-                ToggleUIControls(false);
+                TogglePauseControl(false);
                 TogglePlayerControls(false);
                 break;
 
@@ -103,7 +105,7 @@ public class InputManager : Singleton<InputManager>
                 break;
 
             case GameState.GAMEPLAY:
-                ToggleUIControls(true);
+                TogglePauseControl(true);
                 TogglePlayerControls(true);
                 break;
 
@@ -213,6 +215,7 @@ public class InputManager : Singleton<InputManager>
 
     private void _AddUIControls()
     {
+        _UIActions.Exit.performed += Exit;
         _UIActions.Pause.performed += Pause;
         _UIActions.Inventory.performed += Inventory;
         _UIActions.Map.performed += Map;
@@ -245,11 +248,27 @@ public class InputManager : Singleton<InputManager>
         _UIActions.SkipDialogue.performed -= DialogueManager.Instance.SkipDialogue;
     }
 
+    private void Exit(InputContext context)
+    {
+        // TODO: Hacky way to allow ESC to open pause while also being the close button
+        if (exitEvent.GetInvocationList().Length > 1)
+        {
+            Debug.Log(exitEvent.GetInvocationList().Length);
+            exitEvent?.Invoke();
+            return;
+        }
+
+        if (GameManager.Instance.GameState == GameState.GAMEPLAY)
+        {
+            PauseMenu pauseMenu = UIManager.Instance.pauseMenu as PauseMenu;
+            pauseMenu.SwitchTab("MenuTab");
+        }
+    }
+
     private void Pause(InputContext context)
     {
         PauseMenu pauseMenu = UIManager.Instance.pauseMenu as PauseMenu;
         pauseMenu.SwitchTab("MenuTab");
-
     }
 
     private void Inventory(InputContext context)

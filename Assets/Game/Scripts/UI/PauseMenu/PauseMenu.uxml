@@ -444,8 +444,8 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="Footer" style="flex-grow: 0; height: 99px; background-color: rgb(28, 44, 52); max-height: 99px; min-height: 99px; -unity-text-align: middle-left; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; flex-direction: row; border-top-right-radius: 0; border-top-left-radius: 0; padding-right: 25px; padding-left: 25px; align-items: center;">
-            <InputGlyph action-name="Pause" style="width: 48px; height: 48px;" />
+        <ui:VisualElement name="Footer" style="flex-grow: 0; height: 99px; background-color: rgb(28, 44, 52); max-height: 99px; min-height: 99px; -unity-text-align: middle-left; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; flex-direction: row; border-top-right-radius: 0; border-top-left-radius: 0; padding-right: 25px; padding-left: 25px; align-items: center; justify-content: flex-end;">
+            <InputGlyph action-name="Exit" style="width: 48px; height: 48px;" />
             <ui:Label tabindex="-1" text="Close" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-left; color: rgba(255, 255, 255, 0.78); transform-origin: right top; font-size: 20px; -unity-font-style: bold;" />
         </ui:VisualElement>
     </ui:VisualElement>

@@ -36,6 +36,13 @@ public class ShopMenu : Menu
     {
         base.Show();
         PopulateList();
+        InputManager.Instance.exitEvent += Hide;
+    }
+
+    public override void Hide()
+    {
+        base.Hide();
+        InputManager.Instance.exitEvent -= Hide;
     }
 
     public override void ToggleVisible()

@@ -26,7 +26,7 @@ public class Menu : MonoBehaviour
 
     public virtual void ToggleVisible()
     {
-        SetVisible(!IsVisible);
+        if (IsVisible) Hide(); else Show();
     }
 
     public virtual void Show()

@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -53,6 +54,19 @@ public class PauseMenu : TabbedMenu
         menuTabVE.RegisterCallback<ClickEvent>(evt => { NonMapMenuSelected(); });
 
         GameManager.Instance.OnGameStateChange += OnPause;
+        InputManager.Instance.exitEvent += ExitPause;
+    }
+
+    public override void Show()
+    {
+        base.Show();
+        InputManager.Instance.exitEvent += ExitPause;
+    }
+
+    public override void Hide()
+    {
+        base.Hide();
+        InputManager.Instance.exitEvent -= ExitPause;
     }
 
     private void Settings()
@@ -64,6 +78,14 @@ public class PauseMenu : TabbedMenu
     private void LinkInventoryStatsUIToPlayer()
     {
         GameManager.Instance.OnPlayerHealthChange += (int value) => healthValue.text = value.ToString();
+    }
+
+    public void ExitPause()
+    {
+        if (GameManager.Instance.GameState == GameState.PAUSED)
+        {
+            GameManager.Instance.GameState = GameState.GAMEPLAY;
+        }
     }
 
     public void OnPause(GameState state)
