@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c7bcc00ed2029743a440f1357795007, type: 3}
+  m_Name: StunSpell_Toxic
+  m_EditorClassIdentifier: 
+  address: Assets/Game/ScriptableObjects/Spells/StunSpell_Toxic.asset
+  itemName: ' Stun Spell - Toxic Effect'
+  description: A disruptive magical ability that releases a burst of energy that
+    paralyzes the target for a short duration and applies Toxin damage over time.
+  icon: {fileID: 21300000, guid: 95eeb2d1c5537024db1cd4e0870a00ab, type: 3}
+  itemType: 1
+  value: 1
+  weight: 1
+  damage:
+    value: 1
+    knockback: 5
+    direction: {x: 0, y: 0, z: 0}
+    effect: {fileID: 11400000, guid: 71c406b49a8453146b81083e457feba0, type: 2}
+    forceApply: 1
+  castRange: 7
+  areaOfEffect: 3
+  cooldown: 12
+  spellPrefab: {fileID: 6701679911909493986, guid: eac53cdb1db0c5d4c91caebb5f404b18,
+    type: 3}
+  spellIndicator: 0

@@ -49,5 +49,5 @@
   -> completion
 
 === completion ===
-0: "Okay, Thank you Mylo, Oh also here are some spells which will help you, see you around!"
+0: "Okay, Thank you Mylo, see you around!"
 -> DONE
