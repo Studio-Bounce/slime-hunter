@@ -18,6 +18,7 @@ public class QuestTrigger : MonoBehaviour
     [SerializeField] QuestObjectiveData[] objectives;
     [SerializeField] GameObject trackerCanvasGO;
 
+    public UnityEvent onQuestStart;
     public List<UnityEvent> onCompleteEvent = new List<UnityEvent>();
 
     bool triggered = false;
@@ -90,6 +91,7 @@ public class QuestTrigger : MonoBehaviour
         if (triggered) return;
 
         triggered = true;
+        onQuestStart.Invoke();
         QuestManager.Instance.AddQuest(quest);
 
         // TEMPORARY for testing

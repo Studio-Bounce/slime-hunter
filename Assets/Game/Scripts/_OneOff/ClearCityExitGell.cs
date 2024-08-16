@@ -27,7 +27,7 @@ public class ClearCityExitGell : MonoBehaviour
         while (timeElapsed < timeTaken)
         {
             timeElapsed += Time.deltaTime;
-            transform.Translate(vel * Time.deltaTime * Vector3.down);
+            transform.Translate(vel * Time.deltaTime * Vector3.forward);
 
             yield return null;
         }
