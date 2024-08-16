@@ -11,7 +11,6 @@ public class ProjectileSlime_AttackPlayer : ProjectileSlime_BaseState
         projFSM.wanderSteeringBehaviour.gameObject.SetActive(false);
         projFSM.slimeAgent.reachedGoal = true;
         projFSM.slimeAgent.velocity = Vector3.zero;
-
         projFSM.Attack();
     }
 

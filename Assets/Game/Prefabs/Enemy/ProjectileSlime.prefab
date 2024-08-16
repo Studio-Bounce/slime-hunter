@@ -346,6 +346,9 @@ GameObject:
   - component: {fileID: 3777895731377175427}
   - component: {fileID: 1582668792982206064}
   - component: {fileID: 7743835302399944005}
+  - component: {fileID: 619748360020472503}
+  - component: {fileID: 6899360702306638934}
+  - component: {fileID: 451239820781093506}
   m_Layer: 7
   m_Name: ProjectileSlime
   m_TagString: Untagged
@@ -464,7 +467,34 @@ MonoBehaviour:
   isInvincible: 0
   onDeathEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 619748360020472503}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6899360702306638934}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   healthSlider: {fileID: 8867921501791441766}
   canvasTimeout: 10
   healthCanvas: {fileID: 3707239540979927053}
@@ -507,6 +537,7 @@ MonoBehaviour:
   useRootMotion: 0
   useGravity: 1
   slimeModel: {fileID: 0}
+  pauseOverride: 0
 --- !u!114 &1582668792982206064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,6 +584,21 @@ MonoBehaviour:
   rotationTime: 0.2
   isAttacking: 0
   spitterTimeSync: 0.6
+  onAttackEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 451239820781093506}
+        m_TargetAssemblyTypeName: FMODUnity.StudioEventEmitter, FMODUnity
+        m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7743835302399944005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,6 +613,99 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statusBar: {fileID: 2516426872180764127}
   activeEffects: []
+--- !u!114 &619748360020472503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5550856846267920840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -452441319
+      Data2: 1269893004
+      Data3: -1474604137
+      Data4: -753636597
+    Path: event:/SoundEffects/Slime/SlimeDissolve
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &6899360702306638934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5550856846267920840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -1103281620
+      Data2: 1297960723
+      Data3: 383964818
+      Data4: 1722911570
+    Path: event:/SoundEffects/Slime/SlimeImpact
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!114 &451239820781093506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5550856846267920840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -628657475
+      Data2: 1327579517
+      Data3: 993129151
+      Data4: 1337165830
+    Path: event:/SoundEffects/Slime/SpitterSlimeAttack
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &5970235024015135861
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,6 +1104,10 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5783969802f4364418a7525d7a027817,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2930988134803518962}
     - targetCorrespondingSourceObject: {fileID: 1172021126988582180, guid: 5783969802f4364418a7525d7a027817,
         type: 3}
       insertIndex: -1
@@ -1018,6 +1161,43 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!1 &1630228239207484178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5783969802f4364418a7525d7a027817,
+    type: 3}
+  m_PrefabInstance: {fileID: 1900187144199665219}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2930988134803518962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630228239207484178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1823165357
+      Data2: 1227131613
+      Data3: 1925026961
+      Data4: -1519830344
+    Path: event:/SoundEffects/Slime/SpitterSlimeMovement
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  AllowNonRigidbodyDoppler: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!4 &2149460976426389928 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5783969802f4364418a7525d7a027817,

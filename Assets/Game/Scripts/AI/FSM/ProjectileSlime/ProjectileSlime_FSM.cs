@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ProjectileSlime_FSM : BasicSlime_FSM
 {
@@ -22,6 +23,8 @@ public class ProjectileSlime_FSM : BasicSlime_FSM
     public readonly int ShootTrigger = Animator.StringToHash("shoot");
     [Tooltip("Delay after triggering attack animation")]
     [SerializeField] float spitterTimeSync = 1.0f;
+
+    public UnityEvent onAttackEvent;
 
     Coroutine attackCoroutine;
 
@@ -77,7 +80,7 @@ public class ProjectileSlime_FSM : BasicSlime_FSM
 
             slimeAnimator.SetTrigger(ShootTrigger);
             yield return new WaitForSeconds(spitterTimeSync);  // Animation time
-
+            onAttackEvent.Invoke();
             Vector3 position = transform.position + transform.forward;
             position.y += characterController.height / 2.0f;
             GameObject projectileGO = Instantiate(projectile, position, Quaternion.identity);
