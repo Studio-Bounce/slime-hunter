@@ -32,6 +32,8 @@ public class InputManager : Singleton<InputManager>
     // Used for dash tutorial
     public Action<InputContext> OnDashAction;
     public event Action exitEvent = delegate { };
+    // Used for dash tutorial
+    public Action<InputContext> OnDashAction;
 
     public Vector2 Movement { get { return _movement; } }
 
