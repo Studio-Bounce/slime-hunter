@@ -1,4 +1,5 @@
 using FMOD.Studio;
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -129,6 +130,7 @@ public class PauseMenu : TabbedMenu
 
         GameManager.Instance.GameState = GameState.PAUSED;
         controller.SwitchTab(tabName);
+        RuntimeManager.PlayOneShot(AudioManager.Config.buttonPressEvent);
         if (tabName == "MapTab")
         {
             MapMenuSelected();
