@@ -28,6 +28,9 @@ public class InputManager : Singleton<InputManager>
     Action<InputContext> spell1Action;
     Action<InputContext> spell2Action;
 
+    // Used for dash tutorial
+    public Action<InputContext> OnDashAction;
+
     public Vector2 Movement { get { return _movement; } }
 
     private void Awake()
@@ -176,12 +179,18 @@ public class InputManager : Singleton<InputManager>
         QueuedInputMap.Remove(inputCallback);
     }
 
+    void OnDash(InputContext inputContext)
+    {
+        OnDashAction.Invoke(inputContext);
+    }
+
     private void _AddPlayerControls()
     {
         // Player
         _playerActions.Move.performed += TrackMovement;
         _playerActions.Move.canceled += StopMovement;
         _playerActions.Dash.performed += dashQueuedAction;
+        _playerActions.Dash.performed += OnDash;
         _playerActions.Rotate.performed += _playerController.RotateCamera;
         // Weapon
         _playerActions.Attack.performed += attackQueuedAction;
@@ -208,6 +217,7 @@ public class InputManager : Singleton<InputManager>
         _playerActions.Move.performed -= TrackMovement;
         _playerActions.Move.canceled -= StopMovement;
         _playerActions.Dash.performed -= dashQueuedAction;
+        _playerActions.Dash.performed -= OnDash;
         if (_playerController) _playerActions.Rotate.performed -= _playerController.RotateCamera;
         _playerActions.Attack.performed -= attackQueuedAction;
         if (_weaponController) _playerActions.SpecialAttack.performed -= _weaponController.SpecialAttack;
