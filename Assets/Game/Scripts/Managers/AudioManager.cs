@@ -21,6 +21,7 @@ public class AudioManager : Singleton<AudioManager>
     public EventInstance MenuInstance { get; set; }
     public EventInstance ExplorationInstance { get; set; }
     public EventInstance VillageInstance { get; set; }
+    public EventInstance DeathInstance { get; set; }
 
     private Dictionary<string, EventInstance> soundEffectInstances = new Dictionary<string, EventInstance>();
     private Dictionary<string, EventInstance> uiSoundEffectInstances = new Dictionary<string, EventInstance>();
@@ -38,6 +39,7 @@ public class AudioManager : Singleton<AudioManager>
         MenuInstance = RuntimeManager.CreateInstance(config.menuEvent);
         ExplorationInstance = RuntimeManager.CreateInstance(config.explorationEvent);
         VillageInstance = RuntimeManager.CreateInstance(config.villageEvent);
+        DeathInstance = RuntimeManager.CreateInstance(config.villageEvent);
 
         // SFX
         SpecialAttackInstance = RuntimeManager.CreateInstance(config.specialAttack);
@@ -68,6 +70,7 @@ public class AudioManager : Singleton<AudioManager>
                 break;
             case GameState.GAMEPLAY:
                 MenuInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+                DeathInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 PLAYBACK_STATE pbState;
                 ExplorationInstance.getPlaybackState(out pbState);
                 if (pbState != PLAYBACK_STATE.PLAYING)
@@ -79,8 +82,7 @@ public class AudioManager : Singleton<AudioManager>
                 break;
             case GameState.GAME_OVER:
                 masterBus.stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-                VillageInstance.setParameterByID(villagePhaseParamID, 1);
-                VillageInstance.start();
+                DeathInstance.start();
                 break;
             default:
                 break;
