@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.10280571, g: 0.24960491, b: 0.451602, a: 1}
+  m_IndirectSpecularColor: {r: 0.10278612, g: 0.24971983, b: 0.45206016, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -481,6 +481,69 @@ MonoBehaviour:
   questDistance: {fileID: 1443875822}
   edgeBuffer: 80
   questMenu: {fileID: 0}
+--- !u!1 &343157735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 343157736}
+  - component: {fileID: 343157737}
+  - component: {fileID: 343157738}
+  m_Layer: 0
+  m_Name: DeathMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &343157736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343157735}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 976020910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &343157737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343157735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 4e1433707955c884c969a50848da7077, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 298ab76ec21a0fd4c9bb8a5afef32060,
+    type: 3}
+  m_SortingOrder: 2
+--- !u!114 &343157738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 343157735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14402f375632c1b47b5fd1b492db565d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showOnStart: 0
 --- !u!1 &436524884
 GameObject:
   m_ObjectHideFlags: 0
@@ -683,7 +746,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
-  ListenerNumber: -1
 --- !u!1 &657485086
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +870,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1666288460}
+  - {fileID: 343157736}
   - {fileID: 1687697182}
   - {fileID: 1498221638}
   - {fileID: 1577727800}
@@ -834,6 +897,7 @@ MonoBehaviour:
   mainMenu: {fileID: 1577727803}
   pauseMenu: {fileID: 1179840936}
   HUDMenu: {fileID: 1498221641}
+  deathMenu: {fileID: 343157738}
   autoSave: {fileID: 1812664888}
   settingsMenu: {fileID: 2126814227}
   gladeVillageIntroMenu: {fileID: 226474491}

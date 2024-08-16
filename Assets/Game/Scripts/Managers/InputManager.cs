@@ -112,6 +112,7 @@ public class InputManager : Singleton<InputManager>
                 break;
 
             case GameState.GAME_OVER:
+                TogglePauseControl(false);
                 TogglePlayerControls(false);
                 break;
         }

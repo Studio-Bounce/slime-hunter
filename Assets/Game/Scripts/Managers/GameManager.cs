@@ -213,13 +213,8 @@ public class GameManager : Singleton<GameManager>
 
     void GameOver()
     {
+        UIManager.Instance.deathMenu.Show();
         GameState = GameState.GAME_OVER;
-        // TODO: Show game over screen
-
-        // Reload game data from the saved file
-        PersistenceManager.Instance.LoadGame();
-        PlayerHealth = PlayerMaxHealth;
-        GameState = GameState.GAMEPLAY;
     }
 
     #region TimeScaling

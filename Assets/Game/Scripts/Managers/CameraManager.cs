@@ -213,5 +213,21 @@ public class CameraManager : Singleton<CameraManager>
         }
     }
 
+    public void SmoothSetSaturation(float target, float duration)
+    {
+        ColorAdjustments adjust;
+        if (GlobalVolume.profile.TryGet(out adjust))
+        {
+            StartCoroutine(GameManager.RunEasedLerp(
+            adjust.saturation.value,
+            target,
+            duration,
+            Easing.EaseOutCubic,
+            (float value) => adjust.saturation.value = value,
+            true
+            ));
+        }
+    }
+
     #endregion
 }
