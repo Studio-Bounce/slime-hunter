@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb5934202e38f34dbef8466c267e434, type: 3}
   m_Name: InputSpriteSettings
   m_EditorClassIdentifier: 
+  defaultSprite: {fileID: 21300000, guid: 273b9bad4cfb7b245b6a423009f9ad60, type: 3}
   actionSpriteMaps:
   - actionName: Attack
     keyboardSprite: {fileID: 21300000, guid: 6db6a6082e709bf4b996538a5ea50179, type: 3}
@@ -34,6 +35,6 @@ MonoBehaviour:
   - actionName: Inventory
     keyboardSprite: {fileID: 21300000, guid: 1617add69648e2546878459be40ecbcf, type: 3}
     gamepadSprite: {fileID: 0}
-  - actionName: Inventory
-    keyboardSprite: {fileID: 21300000, guid: 1617add69648e2546878459be40ecbcf, type: 3}
+  - actionName: Mao
+    keyboardSprite: {fileID: 21300000, guid: d228086e27c40b4438d14f7011a06ff5, type: 3}
     gamepadSprite: {fileID: 0}

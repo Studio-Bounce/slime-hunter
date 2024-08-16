@@ -444,10 +444,9 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="Footer" style="flex-grow: 0; height: 99px; background-color: rgb(28, 44, 52); max-height: 99px; min-height: 99px; -unity-text-align: middle-left; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;">
-            <ui:Label tabindex="-1" text="Close" parse-escape-sequences="true" display-tooltip-when-elided="true" style="width: 75px; -unity-text-align: middle-left; color: rgba(255, 255, 255, 0.78); transform-origin: right top; position: absolute; justify-content: center; align-self: center; left: 86px; font-size: 20px; top: 44px; align-items: auto; -unity-font-style: bold; height: 12px;">
-                <ui:VisualElement style="flex-grow: 1; position: absolute; justify-content: center; align-self: center; height: 32px; width: 30px; left: -39px; transform-origin: right top; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Subtract.png?fileID=2800000&amp;guid=6abed2b2bab727a4ea5b574b96449066&amp;type=3#Subtract&quot;); -unity-background-scale-mode: scale-to-fit; -unity-background-image-tint-color: rgba(255, 255, 255, 0.78);" />
-            </ui:Label>
+        <ui:VisualElement name="Footer" style="flex-grow: 0; height: 99px; background-color: rgb(28, 44, 52); max-height: 99px; min-height: 99px; -unity-text-align: middle-left; border-bottom-right-radius: 20px; border-bottom-left-radius: 20px; flex-direction: row; border-top-right-radius: 0; border-top-left-radius: 0; padding-right: 25px; padding-left: 25px; align-items: center;">
+            <InputGlyph action-name="Pause" style="width: 48px; height: 48px;" />
+            <ui:Label tabindex="-1" text="Close" parse-escape-sequences="true" display-tooltip-when-elided="true" style="-unity-text-align: middle-left; color: rgba(255, 255, 255, 0.78); transform-origin: right top; font-size: 20px; -unity-font-style: bold;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

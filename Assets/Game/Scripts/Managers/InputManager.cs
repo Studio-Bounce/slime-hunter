@@ -33,8 +33,7 @@ public class InputManager : Singleton<InputManager>
     private void Awake()
     {
         // Setup Input Sprite Settings
-        if (_spriteSettings != null)
-            _spriteSettings.InitializeDictionaries();
+        _spriteSettings?.InitializeDictionaries();
         // Enable InputActions
         _inputActions = new PlayerInputActions();
         _inputActions.Enable();
@@ -57,16 +56,31 @@ public class InputManager : Singleton<InputManager>
         TogglePauseControl(false);
     }
 
+    // For slow access when dictionaries may not be available;
+    public Sprite FindSpriteByAction(string actionName)
+    {
+        ActionSpriteMap map = _spriteSettings.FindMapByName(actionName);
+
+        if (Gamepad.current != null)
+        {
+            return map.gamepadSprite != null ? map.gamepadSprite : _spriteSettings.defaultSprite;
+        }
+        else
+        {
+            return map.keyboardSprite != null ? map.keyboardSprite : _spriteSettings.defaultSprite;
+        }
+    }
+
     public Sprite StringActionToSprite(string actionName)
     {
         // TODO: Naive solution - returns gamepad controls as long as one is plugged in
         if (Gamepad.current != null)
         {
-            return _spriteSettings.gamepadSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : null;
+            return _spriteSettings.gamepadSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : _spriteSettings.defaultSprite;
         }
         else
         {
-            return _spriteSettings.keyboardSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : null;
+            return _spriteSettings.keyboardSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : _spriteSettings.defaultSprite;
         }
     }
 
