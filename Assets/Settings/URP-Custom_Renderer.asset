@@ -112,9 +112,9 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: EnemyOccluded
-    Event: 300
+    Event: 500
     filterSettings:
-      RenderQueueType: 0
+      RenderQueueType: 1
       LayerMask:
         serializedVersion: 2
         m_Bits: 128
@@ -264,9 +264,9 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: EnemyNotOccluded
-    Event: 300
+    Event: 500
     filterSettings:
-      RenderQueueType: 0
+      RenderQueueType: 1
       LayerMask:
         serializedVersion: 2
         m_Bits: 128
