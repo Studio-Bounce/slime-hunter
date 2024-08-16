@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 public class PlayerCheckpoint : PersistentObject
 {
     [SerializeField] PlayerSpawner spawner;
+    [SerializeField] SaveRock saveRock;
+
     public bool isCheckpointCleared = false;
 
     private void Start()
@@ -22,6 +24,7 @@ public class PlayerCheckpoint : PersistentObject
         if (!isCheckpointCleared && other.gameObject.layer == GameConstants.PlayerLayer)
         {
             isCheckpointCleared = true;
+            if (saveRock != null) saveRock.emitLight = isCheckpointCleared;
             spawner.ModifyRecentCheckpoint(this);
         }
     }
@@ -34,6 +37,7 @@ public class PlayerCheckpoint : PersistentObject
             using (var reader = new BinaryReader(stream))
             {
                 isCheckpointCleared = reader.ReadBoolean();
+                if (saveRock != null) saveRock.emitLight = isCheckpointCleared;
             }
         }
     }
