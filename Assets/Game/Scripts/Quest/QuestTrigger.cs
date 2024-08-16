@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,6 +56,7 @@ public class QuestTrigger : MonoBehaviour
                 triggerObjectiveComplete = false;
                 // Quest Objective complete!
                 onCompleteEvent[quest.currentObjective].Invoke();
+                RuntimeManager.PlayOneShot(AudioManager.Config.questEnd);
                 QuestManager.Instance.ClearQuestObjective(quest);
                 // Clear previous tracker
                 if (_prevTracker != null)
@@ -107,6 +109,7 @@ public class QuestTrigger : MonoBehaviour
         yield return null;
 
         onQuestStart.Invoke();
+        RuntimeManager.PlayOneShot(AudioManager.Config.questStart);
         QuestManager.Instance.AddQuest(quest);
 
         // TEMPORARY for testing

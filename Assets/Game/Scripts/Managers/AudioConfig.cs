@@ -19,6 +19,8 @@ public class AudioConfig : ScriptableObject
     public EventReference dash;
     public EventReference specialAttack;
     public EventReference itemPickup;
+    public EventReference questStart;
+    public EventReference questEnd;
 
     [Header("UI")]
     public EventReference buttonPressEvent;
