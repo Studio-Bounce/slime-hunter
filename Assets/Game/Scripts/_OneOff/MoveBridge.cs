@@ -50,7 +50,10 @@ public class MoveBridge : MonoBehaviour
             transform.rotation = Quaternion.Lerp(initialRotation, finalTransform.rotation, t);
             transform.localScale = Vector3.Lerp(initialScale, finalTransform.localScale, t);
 
-            rotateWheel.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+            if (rotateWheel != null)
+            {
+                rotateWheel.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+            }
 
             yield return null;
         }
