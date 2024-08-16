@@ -15,6 +15,7 @@ public class BomberEnemy : Enemy
 
     public override bool TakeDamage(Damage damage, bool detectDeath)
     {
+        slimeBombFSM.gotHitByPlayer = true;
         // Explode
         slimeBombFSM.GotHit();
 
