@@ -110,4 +110,8 @@ public static class Easing
         return Mathf.Sin(t * Mathf.PI * frequency) * amplitude;
     };
 
+    public static float PingPong(float t)
+    {
+        return Mathf.Pow(Mathf.PingPong(t*2, 1), 2);
+    }
 }

@@ -81,18 +81,21 @@ public class PlayerController : MonoBehaviour
 
         float rotateDir = context.ReadValue<float>();
 
-        if (rotateDir < 0 && _currentRotation > rotationRange.x)
-        {
-            _currentRotation -= rotationIncrement;
-            StartCoroutine(PerformCameraRotate(rotationIncrement));
-        }
-        else if (rotateDir > 0 && _currentRotation < rotationRange.y)
-        {
-            _currentRotation += rotationIncrement;
-            StartCoroutine(PerformCameraRotate(-rotationIncrement));
-        }
+        if (rotateDir == 0) return;
 
+        float newRotation = _currentRotation + rotateDir * rotationIncrement;
+
+        if (newRotation >= rotationRange.x && newRotation <= rotationRange.y)
+        {
+            _currentRotation = newRotation;
+            StartCoroutine(PerformCameraRotate(-rotateDir * rotationIncrement));
+        }
+        else
+        {
+            StartCoroutine(PerformCameraRotateError(-rotateDir * 10));
+        }
     }
+
 
     // -------------------- Movement Mechanism --------------------
     public void MovePlayer()
@@ -251,20 +254,42 @@ public class PlayerController : MonoBehaviour
         _isJumping = false;
     }
 
+    IEnumerator PerformCameraRotateError(float angle)
+    {
+        _isRotating = true;
+        float elapsed = 0;
+        float duration = rotationDuration/2;
+        Transform cameraTransform = CameraManager.ActiveCineCamera.transform;
+        Quaternion startRotation = cameraTransform.localRotation;
+        Quaternion targetRotation = Quaternion.Euler(startRotation.eulerAngles.x, startRotation.eulerAngles.y + angle, startRotation.eulerAngles.z);
+
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            t = Easing.PingPong(t);
+            cameraTransform.localRotation = Quaternion.Lerp(startRotation, targetRotation, t);
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        cameraTransform.localRotation = startRotation;
+
+        _isRotating = false;
+    }
+
     IEnumerator PerformCameraRotate(float angle)
     {
         _isRotating = true;
-        float startTime = Time.time;
+        float elapsed = 0;
         Transform cameraTransform = CameraManager.ActiveCineCamera.transform;
         Quaternion startRotation =  cameraTransform.localRotation;
         Quaternion targetRotation = Quaternion.Euler(startRotation.eulerAngles.x, startRotation.eulerAngles.y + angle, startRotation.eulerAngles.z);
 
-        while (Time.time < startTime + rotationDuration)
+        while (elapsed < rotationDuration)
         {
-
-            float t = (Time.time - startTime) / rotationDuration;
+            float t = elapsed / rotationDuration;
             t = Easing.EaseOutCubic(t);
             cameraTransform.localRotation = Quaternion.Lerp(startRotation, targetRotation, t);
+            elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
         cameraTransform.localRotation = targetRotation;
