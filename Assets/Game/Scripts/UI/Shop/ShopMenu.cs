@@ -33,6 +33,10 @@ public class ShopMenu : Menu
         VisualElement root = uiDocument.rootVisualElement;
         shopScrollView = root.Q<ScrollView>("ShopItemScrollView");
         slimeGelCount = root.Q<Label>("SlimeGelCount");
+        InventoryManager.Instance.OnInventoryChanged += () =>
+        {
+            slimeGelCount.text = InventoryManager.Instance.TotalSlimeGel.ToString();
+        };
     }
 
     public override void Show()

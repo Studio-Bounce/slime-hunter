@@ -37,7 +37,7 @@ public class MainMenu : Menu
         btnQuit.RegisterCallback<ClickEvent>(ev => QuitGame());
     }
 
-    void InitiateGame(Action<AsyncOperation, string> sceneLoadCallback = null)
+    public void InitiateGame(Action<AsyncOperation, string> sceneLoadCallback = null)
     {
         RuntimeManager.PlayOneShot(AudioManager.Config.startGameEvent);
         GameManager.Instance.GameState = GameState.LOADING;

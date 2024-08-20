@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 public class InventoryManager : PersistentSingleton<InventoryManager>
 {
     // Saving
-    private bool hasChanged = false; // TODO: Only autosave if there has been a change to the inventory
+    // private bool hasChanged = false; // TODO: Only autosave if there has been a change to the inventory
 
     // Inventory
     public List<Item> items = new List<Item>();
@@ -57,7 +57,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
     VisualElement spell2Icon;
 
     // Events
-    private event Action OnInventoryChanged = delegate { };
+    public event Action OnInventoryChanged = delegate { };
     public event Action<WeaponSO[]> OnEquippedWeaponsChanged = delegate { };
     public event Action<SpellSO[]> OnEquippedSpellsChanged = delegate { };
     public event Action<ItemSO> OnItemAdded = delegate { };
@@ -395,7 +395,7 @@ public class InventoryManager : PersistentSingleton<InventoryManager>
 
     public override byte[] GetSaveData()
     {
-        hasChanged = false;
+        // hasChanged = false;
         using (var stream = new MemoryStream())
         using (var writer = new BinaryWriter(stream))
         {
