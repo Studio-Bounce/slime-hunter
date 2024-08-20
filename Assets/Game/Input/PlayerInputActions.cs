@@ -525,6 +525,134 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Debug"",
+            ""id"": ""df0a0dc3-24c5-4b6d-9bd4-0b00d4e100fb"",
+            ""actions"": [
+                {
+                    ""name"": ""Continue"",
+                    ""type"": ""Button"",
+                    ""id"": ""05c36491-6994-46ef-a77a-53f003746283"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Save"",
+                    ""type"": ""Button"",
+                    ""id"": ""cdd49aa8-b07c-4db8-be5b-3eaf0d9ca8d4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Load"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e5b95ba-5504-458e-93d9-f6955c5574f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FullHealth"",
+                    ""type"": ""Button"",
+                    ""id"": ""d1e95f5c-6936-4644-bd68-cb9b14541ed8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FullSpecial"",
+                    ""type"": ""Button"",
+                    ""id"": ""905a7336-6451-4ce9-ae1d-d83464f8e044"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SlimeGel"",
+                    ""type"": ""Button"",
+                    ""id"": ""97f4bcdb-646d-4c60-9e33-acdd2b3f8f06"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2f828d4f-4a20-476d-b887-9208b727b106"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FullHealth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a23e044-c070-4dd6-8253-2d5f2bd083d1"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FullSpecial"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""16760621-4ccd-463f-9fcf-cb67d284948d"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SlimeGel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fbd0d563-5e76-435c-be18-87be7b2dac81"",
+                    ""path"": ""<Keyboard>/f7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Load"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f935173c-9b52-4816-b2fb-ee6d1d67c72c"",
+                    ""path"": ""<Keyboard>/f5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Continue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b5be8258-087b-4a52-915b-8291930049b3"",
+                    ""path"": ""<Keyboard>/f6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Save"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -560,6 +688,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI_Map = m_UI.FindAction("Map", throwIfNotFound: true);
         m_UI_Inventory = m_UI.FindAction("Inventory", throwIfNotFound: true);
         m_UI_Exit = m_UI.FindAction("Exit", throwIfNotFound: true);
+        // Debug
+        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
+        m_Debug_Continue = m_Debug.FindAction("Continue", throwIfNotFound: true);
+        m_Debug_Save = m_Debug.FindAction("Save", throwIfNotFound: true);
+        m_Debug_Load = m_Debug.FindAction("Load", throwIfNotFound: true);
+        m_Debug_FullHealth = m_Debug.FindAction("FullHealth", throwIfNotFound: true);
+        m_Debug_FullSpecial = m_Debug.FindAction("FullSpecial", throwIfNotFound: true);
+        m_Debug_SlimeGel = m_Debug.FindAction("SlimeGel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -813,6 +949,92 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public UIActions @UI => new UIActions(this);
+
+    // Debug
+    private readonly InputActionMap m_Debug;
+    private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
+    private readonly InputAction m_Debug_Continue;
+    private readonly InputAction m_Debug_Save;
+    private readonly InputAction m_Debug_Load;
+    private readonly InputAction m_Debug_FullHealth;
+    private readonly InputAction m_Debug_FullSpecial;
+    private readonly InputAction m_Debug_SlimeGel;
+    public struct DebugActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public DebugActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Continue => m_Wrapper.m_Debug_Continue;
+        public InputAction @Save => m_Wrapper.m_Debug_Save;
+        public InputAction @Load => m_Wrapper.m_Debug_Load;
+        public InputAction @FullHealth => m_Wrapper.m_Debug_FullHealth;
+        public InputAction @FullSpecial => m_Wrapper.m_Debug_FullSpecial;
+        public InputAction @SlimeGel => m_Wrapper.m_Debug_SlimeGel;
+        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
+        public void AddCallbacks(IDebugActions instance)
+        {
+            if (instance == null || m_Wrapper.m_DebugActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Add(instance);
+            @Continue.started += instance.OnContinue;
+            @Continue.performed += instance.OnContinue;
+            @Continue.canceled += instance.OnContinue;
+            @Save.started += instance.OnSave;
+            @Save.performed += instance.OnSave;
+            @Save.canceled += instance.OnSave;
+            @Load.started += instance.OnLoad;
+            @Load.performed += instance.OnLoad;
+            @Load.canceled += instance.OnLoad;
+            @FullHealth.started += instance.OnFullHealth;
+            @FullHealth.performed += instance.OnFullHealth;
+            @FullHealth.canceled += instance.OnFullHealth;
+            @FullSpecial.started += instance.OnFullSpecial;
+            @FullSpecial.performed += instance.OnFullSpecial;
+            @FullSpecial.canceled += instance.OnFullSpecial;
+            @SlimeGel.started += instance.OnSlimeGel;
+            @SlimeGel.performed += instance.OnSlimeGel;
+            @SlimeGel.canceled += instance.OnSlimeGel;
+        }
+
+        private void UnregisterCallbacks(IDebugActions instance)
+        {
+            @Continue.started -= instance.OnContinue;
+            @Continue.performed -= instance.OnContinue;
+            @Continue.canceled -= instance.OnContinue;
+            @Save.started -= instance.OnSave;
+            @Save.performed -= instance.OnSave;
+            @Save.canceled -= instance.OnSave;
+            @Load.started -= instance.OnLoad;
+            @Load.performed -= instance.OnLoad;
+            @Load.canceled -= instance.OnLoad;
+            @FullHealth.started -= instance.OnFullHealth;
+            @FullHealth.performed -= instance.OnFullHealth;
+            @FullHealth.canceled -= instance.OnFullHealth;
+            @FullSpecial.started -= instance.OnFullSpecial;
+            @FullSpecial.performed -= instance.OnFullSpecial;
+            @FullSpecial.canceled -= instance.OnFullSpecial;
+            @SlimeGel.started -= instance.OnSlimeGel;
+            @SlimeGel.performed -= instance.OnSlimeGel;
+            @SlimeGel.canceled -= instance.OnSlimeGel;
+        }
+
+        public void RemoveCallbacks(IDebugActions instance)
+        {
+            if (m_Wrapper.m_DebugActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IDebugActions instance)
+        {
+            foreach (var item in m_Wrapper.m_DebugActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_DebugActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public DebugActions @Debug => new DebugActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -842,5 +1064,14 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnMap(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnExit(InputAction.CallbackContext context);
+    }
+    public interface IDebugActions
+    {
+        void OnContinue(InputAction.CallbackContext context);
+        void OnSave(InputAction.CallbackContext context);
+        void OnLoad(InputAction.CallbackContext context);
+        void OnFullHealth(InputAction.CallbackContext context);
+        void OnFullSpecial(InputAction.CallbackContext context);
+        void OnSlimeGel(InputAction.CallbackContext context);
     }
 }

@@ -1,3 +1,4 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using InputContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 public class InputManager : Singleton<InputManager>
 {
     [SerializeField] private InputSpriteSettings _spriteSettings;
+    [SerializeField] private ItemSO _debugSlimeGel;
 
     private PlayerController _playerController;
     private WeaponController _weaponController;
@@ -16,6 +18,7 @@ public class InputManager : Singleton<InputManager>
     private PlayerInputActions _inputActions;
     private PlayerInputActions.PlayerActions _playerActions;
     private PlayerInputActions.UIActions _UIActions;
+    private PlayerInputActions.DebugActions _DebugActions;
 
     private Vector2 _movement = Vector2.zero;
 
@@ -43,6 +46,7 @@ public class InputManager : Singleton<InputManager>
         _inputActions.Enable();
         _playerActions = _inputActions.Player;
         _UIActions = _inputActions.UI;
+        _DebugActions = _inputActions.Debug;
         // Assign actions
         attackQueuedAction = e => QueueInput(_weaponController.Attack, e);
         dashQueuedAction = e => QueueInput(_playerController.Dash, e);
@@ -57,6 +61,7 @@ public class InputManager : Singleton<InputManager>
     {
         GetControllers(GameManager.Instance.PlayerRef);
         _AddUIControls();
+        _AddDebugControls();
         TogglePauseControl(false);
     }
 
@@ -229,6 +234,39 @@ public class InputManager : Singleton<InputManager>
         _UIActions.Inventory.performed += Inventory;
         _UIActions.Map.performed += Map;
         _UIActions.SkipDialogue.performed += DialogueManager.Instance.SkipDialogue;
+    }
+
+    private void _AddDebugControls()
+    {
+        _DebugActions.Continue.performed += evt =>
+        {
+            (UIManager.Instance.mainMenu as MainMenu).InitiateGame();
+        };
+
+        _DebugActions.Load.performed += evt =>
+        {
+            PersistenceManager.Instance.LoadGame();
+        };
+
+        _DebugActions.Save.performed += evt =>
+        {
+            PersistenceManager.Instance.SaveGame();
+        };
+
+        _DebugActions.FullHealth.performed += evt =>
+        {
+            GameManager.Instance.PlayerHealth = GameManager.Instance.PlayerMaxHealth;
+        };
+
+        _DebugActions.FullSpecial.performed += evt =>
+        {
+            GameManager.Instance.PlayerSpecialAttack = GameManager.Instance.PlayerMaxSpecialAttack;
+        };
+
+        _DebugActions.SlimeGel.performed += evt =>
+        {
+            InventoryManager.Instance.AddItem(_debugSlimeGel, true);
+        };
     }
 
     private void _RemovePlayerControls()
