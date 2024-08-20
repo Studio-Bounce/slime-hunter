@@ -284,8 +284,6 @@ public class WeaponController : MonoBehaviour
             elapsed += Time.unscaledDeltaTime;
             // Animation no longer rotates the player so we manually rotate
             // TODO: Hardcoded special attack rotation
-            float yRotate = transform.rotation.eulerAngles.y;
-            transform.rotation = Quaternion.Euler(0, yRotate, 0);
             transform.Rotate(0, -Time.unscaledDeltaTime*1000, 0);
             yield return null;
         }

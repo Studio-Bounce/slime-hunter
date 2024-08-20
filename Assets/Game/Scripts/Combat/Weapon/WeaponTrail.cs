@@ -119,6 +119,8 @@ public class WeaponTrail : DamageDealer
 
     public IEnumerator RunSpecialAttack(float duration)
     {
+        StopAllCoroutines();
+        trailRenderer.transform.rotation = Quaternion.identity;
         active = true;
 
         float windDownOffsetSeconds = 0.25f;
