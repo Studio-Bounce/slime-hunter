@@ -17,6 +17,7 @@ public class DeathMenu : Menu
         {
             Hide();
             PersistenceManager.Instance.LoadGame();
+            AudioManager.Instance.ReleaseAlert();
             GameManager.Instance.GameState = GameState.GAMEPLAY;
             GameManager.Instance.PlayerHealth = GameManager.Instance.PlayerMaxHealth;
         });

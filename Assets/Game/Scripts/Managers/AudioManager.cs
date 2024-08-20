@@ -69,6 +69,7 @@ public class AudioManager : Singleton<AudioManager>
                 MenuInstance.start();
                 break;
             case GameState.GAMEPLAY:
+                ReleaseAlert();
                 MenuInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 DeathInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
                 PLAYBACK_STATE pbState;
