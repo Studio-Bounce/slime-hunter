@@ -52,7 +52,7 @@ public class EndScreen : Menu
     {
         if (rollingFrame == null)
             return;
-
+        AudioManager.Instance.CreditsMusic();
         Show();
         rollCredits = true;
         timeElapsed = 0;

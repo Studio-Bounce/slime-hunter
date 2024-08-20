@@ -10,8 +10,7 @@ public class AudioManager : Singleton<AudioManager>
 
     private Bus masterBus;
     private int enemiesAlerted = 0;
-    private PARAMETER_ID combatIntensityParamID;
-    private PARAMETER_ID villagePhaseParamID;
+
     private bool forceAlert = false;
 
     // SFX
@@ -21,6 +20,7 @@ public class AudioManager : Singleton<AudioManager>
     public EventInstance MenuInstance { get; set; }
     public EventInstance ExplorationInstance { get; set; }
     public EventInstance VillageInstance { get; set; }
+    public EventInstance CreditsInstance { get; set; }
     public EventInstance DeathInstance { get; set; }
 
     private Dictionary<string, EventInstance> soundEffectInstances = new Dictionary<string, EventInstance>();
@@ -39,24 +39,15 @@ public class AudioManager : Singleton<AudioManager>
         MenuInstance = RuntimeManager.CreateInstance(config.menuEvent);
         ExplorationInstance = RuntimeManager.CreateInstance(config.explorationEvent);
         VillageInstance = RuntimeManager.CreateInstance(config.villageEvent);
+        VillageInstance.setParameterByName("VillagePhase", 3);
+        CreditsInstance = RuntimeManager.CreateInstance(config.villageEvent);
+        CreditsInstance.setParameterByName("VillagePhase", 2);
         DeathInstance = RuntimeManager.CreateInstance(config.villageEvent);
 
         // SFX
         SpecialAttackInstance = RuntimeManager.CreateInstance(config.specialAttack);
         InventoryManager.Instance.OnItemAdded += e => RuntimeManager.PlayOneShot(Config.itemPickup);
         InputManager.Instance.exitEvent += () => RuntimeManager.PlayOneShot(Config.errorEvent);
-
-        // Param IDs
-        EventDescription eventDescription;
-        ExplorationInstance.getDescription(out eventDescription);
-        PARAMETER_DESCRIPTION parameterDescription;
-        eventDescription.getParameterDescriptionByName("CombatIntensity", out parameterDescription);
-        combatIntensityParamID = parameterDescription.id;
-
-        VillageInstance.getDescription(out eventDescription);
-        eventDescription.getParameterDescriptionByName("VillagePhase", out parameterDescription);
-        villagePhaseParamID = parameterDescription.id;
-
         GameManager.Instance.OnGameStateChange += HandleBGMusic;
     }
 
@@ -90,9 +81,15 @@ public class AudioManager : Singleton<AudioManager>
         }
     }
 
+    public void CreditsMusic()
+    {
+        CreditsInstance.start();
+        ExplorationInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        VillageInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
     public void ExploreToVillage()
     {
-        VillageInstance.setParameterByID(villagePhaseParamID, 3);
         PLAYBACK_STATE pbState;
         VillageInstance.getPlaybackState(out pbState);
         if (pbState != PLAYBACK_STATE.PLAYING)
@@ -119,13 +116,13 @@ public class AudioManager : Singleton<AudioManager>
     public void ForceAlert(float value)
     {
         forceAlert = true;
-        ExplorationInstance.setParameterByID(combatIntensityParamID, value);
+        ExplorationInstance.setParameterByName("CombatIntensity", value);
     }
 
     public void ReleaseAlert()
     {
         forceAlert = false;
-        ExplorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
+        ExplorationInstance.setParameterByName("CombatIntensity", CombatIntensity);
     }
 
     public void OnEnemyAlerted()
@@ -133,7 +130,7 @@ public class AudioManager : Singleton<AudioManager>
         enemiesAlerted++;
         // FMOD will clamp intensity
         if (forceAlert) return;
-        ExplorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
+        ExplorationInstance.setParameterByName("CombatIntensity", CombatIntensity);
     }
 
     public void OnEnemyUnalerted()
@@ -141,6 +138,6 @@ public class AudioManager : Singleton<AudioManager>
         enemiesAlerted = Mathf.Max(enemiesAlerted-1, 0);
         // FMOD will clamp intensity
         if (forceAlert) return;
-        ExplorationInstance.setParameterByID(combatIntensityParamID, CombatIntensity);
+        ExplorationInstance.setParameterByName("CombatIntensity", CombatIntensity);
     }
 }
