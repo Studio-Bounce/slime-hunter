@@ -47,7 +47,7 @@ public class Menu : MonoBehaviour
         while (timer < duration)
         {
             root.style.opacity = timer;
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             yield return null;
         }
         root.style.opacity = 1.0f;
@@ -60,7 +60,7 @@ public class Menu : MonoBehaviour
         while (timer > 0)
         {
             root.style.opacity = timer;
-            timer -= Time.deltaTime;
+            timer -= Time.unscaledDeltaTime;
             yield return null;
         }
         root.style.opacity = 0f;

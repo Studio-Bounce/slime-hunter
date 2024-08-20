@@ -1,5 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="position: relative; height: 100%;">
-        <ui:VisualElement name="loadSpinner" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/Waiting.png?fileID=2800000&amp;guid=1e909fc9fa935384295c84a705e4b00d&amp;type=3#Waiting&quot;); width: 75px; height: 75px; rotate: 0; -unity-background-scale-mode: stretch-to-fill; transform-origin: center; align-self: auto; bottom: auto; top: 90%; left: 94%;" />
+    <Style src="project://database/Assets/Game/Scripts/UI/USS/MainStyle.uss?fileID=7433441132597879392&amp;guid=b0c956474f1f4434188091520e9b7bdd&amp;type=3#MainStyle" />
+    <ui:VisualElement style="position: relative; height: 100%; justify-content: flex-end; align-items: center; margin-top: 2%; margin-right: 2%; margin-bottom: 2%; margin-left: 2%;">
+        <ui:VisualElement name="loadSpinner" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/loading/Loading.png?fileID=2800000&amp;guid=db6be505e7b55874c82aebdeb72fddb0&amp;type=3#Loading&quot;); width: 75px; height: 75px; rotate: 0; -unity-background-scale-mode: stretch-to-fill; transform-origin: center; align-self: auto; bottom: auto; top: 0; left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+        <ui:Label tabindex="-1" text="Saving" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Saving" />
     </ui:VisualElement>
 </ui:UXML>

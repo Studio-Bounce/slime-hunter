@@ -62,11 +62,11 @@ public class UIManager : Singleton<UIManager>
     // ----------------- Auto-save -----------------
     public void ShowAutoSave()
     {
-        autoSave.Show();
+        StartCoroutine(autoSave.FadeIn(0.3f));
     }
     public void HideAutoSave()
     {
-        autoSave.Hide();
+        StartCoroutine(autoSave.FadeOut(0.3f));
     }
 
     // ----------------- End screen -----------------

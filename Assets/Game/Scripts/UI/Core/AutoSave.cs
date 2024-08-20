@@ -18,7 +18,7 @@ public class AutoSave : Menu
     {
         if (spinner != null)
         {
-            Vector3 rotation = spinner.transform.rotation.eulerAngles + new Vector3(0, 0, rotationSpeed * Time.deltaTime);
+            Vector3 rotation = spinner.transform.rotation.eulerAngles + new Vector3(0, 0, rotationSpeed * Time.unscaledDeltaTime);
             spinner.transform.rotation = Quaternion.Euler(rotation);
         }
     }

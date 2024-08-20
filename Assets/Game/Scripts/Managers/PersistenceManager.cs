@@ -52,9 +52,17 @@ public class PersistenceManager : Singleton<PersistenceManager>
         StopAllCoroutines();
     }
 
+    IEnumerator ShowSavePopup()
+    {
+        UIManager.Instance.ShowAutoSave();
+        yield return new WaitForSecondsRealtime(2.0f);
+        UIManager.Instance.HideAutoSave();
+    }
+
     // ---------------------- Save / Load ----------------------
     public void SaveGame()
     {
+        StartCoroutine(ShowSavePopup());
         foreach (PersistentObject obj in persistentGameObjects)
         {
             byte[] data = obj.GetSaveData();
