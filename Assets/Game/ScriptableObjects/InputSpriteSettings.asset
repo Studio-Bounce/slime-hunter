@@ -34,10 +34,13 @@ MonoBehaviour:
     gamepadSprite: {fileID: 21300000, guid: eb1a73e6bd0a7694eae6d6f14af09804, type: 3}
   - actionName: Inventory
     keyboardSprite: {fileID: 21300000, guid: 1617add69648e2546878459be40ecbcf, type: 3}
-    gamepadSprite: {fileID: 0}
+    gamepadSprite: {fileID: 21300000, guid: 93ef77cb12184d14eb51ec87cea01c97, type: 3}
   - actionName: Map
     keyboardSprite: {fileID: 21300000, guid: d228086e27c40b4438d14f7011a06ff5, type: 3}
-    gamepadSprite: {fileID: 0}
+    gamepadSprite: {fileID: 21300000, guid: 93ef77cb12184d14eb51ec87cea01c97, type: 3}
   - actionName: Exit
     keyboardSprite: {fileID: 21300000, guid: 51f08da89c51192408cc2078d8ae70c2, type: 3}
-    gamepadSprite: {fileID: 0}
+    gamepadSprite: {fileID: 21300000, guid: 93ef77cb12184d14eb51ec87cea01c97, type: 3}
+  - actionName: SpecialAttack
+    keyboardSprite: {fileID: 21300000, guid: 78d11c4967980354e9ecd11920a4482f, type: 3}
+    gamepadSprite: {fileID: 21300000, guid: 93ef77cb12184d14eb51ec87cea01c97, type: 3}
