@@ -54,6 +54,11 @@ public static class Utils
         }
     }
 
+    public static Vector2 PlayerToScreenPoint()
+    {
+        return CameraManager.ActiveCamera.WorldToScreenPoint(GameManager.Instance.PlayerRef.transform.position);
+    }
+
     public static bool IsWorldPositionOffScreen(Vector3 worldPosition, out Vector3 screenPosition)
     {
         screenPosition = CameraManager.ActiveCamera.WorldToScreenPoint(worldPosition);

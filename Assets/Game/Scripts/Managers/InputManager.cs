@@ -21,6 +21,7 @@ public class InputManager : Singleton<InputManager>
     private PlayerInputActions.DebugActions _DebugActions;
 
     private Vector2 _movement = Vector2.zero;
+    public float joystickSpeed = 1000.0f;
 
     public float inputQueueDelay = .3f;
     private Dictionary<Func<InputContext, bool>, InputContext> QueuedInputMap = new Dictionary<Func<InputContext, bool>, InputContext>();
@@ -37,6 +38,9 @@ public class InputManager : Singleton<InputManager>
     public Action<InputContext> OnDashAction;
 
     public Vector2 Movement { get { return _movement; } }
+
+    public static Vector2 PointerPosition { get; private set; } = Vector2.zero;
+    public static Vector2 JoystickDelta { get; private set; } = Vector2.zero;
 
     public static bool IsGamepad { get { return Gamepad.current != null; } }
 
@@ -69,7 +73,7 @@ public class InputManager : Singleton<InputManager>
         TogglePauseControl(false);
     }
 
-    // For slow access when dictionaries may not be available;
+    // For slow access when dictionaries may not be available
     public Sprite FindSpriteByAction(string actionName)
     {
         ActionSpriteMap map = _spriteSettings.FindMapByName(actionName);
@@ -217,6 +221,9 @@ public class InputManager : Singleton<InputManager>
         _playerActions.Dash.performed += dashQueuedAction;
         _playerActions.Dash.performed += OnDash;
         _playerActions.Rotate.performed += rotateCameraAction;
+        _playerActions.Pointer.performed += OnPointer;
+        _playerActions.Joystick.performed += OnJoystick;
+        _playerActions.Joystick.canceled += OffJoystick;
         // Weapon
         _playerActions.Attack.performed += attackQueuedAction;
         _playerActions.SpecialAttack.performed += _weaponController.SpecialAttack;
@@ -229,6 +236,21 @@ public class InputManager : Singleton<InputManager>
         _playerActions.CastSpell.started += _spellController.AimSpell;
         _playerActions.Attack.performed += _spellController.CancelSpell;
         _playerActions.CastSpell.canceled += _spellController.CastSpell;
+    }
+
+    private void OnJoystick(InputContext context)
+    {
+        JoystickDelta = joystickSpeed * Time.deltaTime * context.ReadValue<Vector2>();
+    }
+
+    private void OffJoystick(InputContext context)
+    {
+        JoystickDelta = Vector2.zero;
+    }
+
+    private void OnPointer(InputContext context)
+    {
+        PointerPosition = context.ReadValue<Vector2>();
     }
 
     private void _AddUIControls()
@@ -283,6 +305,9 @@ public class InputManager : Singleton<InputManager>
         _playerActions.Attack.performed -= attackQueuedAction;
         if (_weaponController) _playerActions.SpecialAttack.performed -= _weaponController.SpecialAttack;
         if (_weaponController) _playerActions.CycleWeapon.performed -= _weaponController.CycleWeapon;
+        _playerActions.Pointer.performed -= OnPointer;
+        _playerActions.Joystick.performed -= OnJoystick;
+        _playerActions.Joystick.canceled -= OffJoystick;
 
         _playerActions.Spell1.performed -= spell1Action;
         _playerActions.Spell2.performed -= spell2Action;

@@ -177,7 +177,7 @@ public class WeaponController : MonoBehaviour
         weaponTrail.SetupWeaponSettings(CurrentWeapon); // TODO: Bandaid Fix Ensure Trail Is Setup
 
         // Get vector from player to mouse click
-        Vector2 clickPosition = Mouse.current.position.ReadValue();
+        Vector2 clickPosition = InputManager.PointerPosition;
         Vector2 currentScreenPos = Camera.main.WorldToScreenPoint(transform.position);
         Vector2 clickDirection = (clickPosition - currentScreenPos).normalized;
 

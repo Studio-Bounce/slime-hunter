@@ -14,6 +14,9 @@ public class RadialIndicator : SpellIndicator
     [SerializeField] private Renderer sourceRenderer;
     [SerializeField] private Renderer targetRenderer;
 
+    private Vector2 gamepadSource = Vector2.zero;
+    private Vector2 gamepadTarget = Vector2.zero;
+
     public override Vector3 GetTarget {  get { return targetIndicator.transform.position; } }
 
     private void Start()
@@ -39,7 +42,18 @@ public class RadialIndicator : SpellIndicator
 
     private void Update()
     {
-        Ray ray = CameraManager.ActiveCamera.ScreenPointToRay(Input.mousePosition);
+        if (InputManager.IsGamepad)
+        {
+            AimIndicator_Gamepad();
+        } else
+        {
+            AimIndicator_Keyboard();
+        }
+    }
+
+    private void AimIndicator_Keyboard()
+    {
+        Ray ray = CameraManager.ActiveCamera.ScreenPointToRay(InputManager.PointerPosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitLayers))
         {
@@ -54,6 +68,28 @@ public class RadialIndicator : SpellIndicator
         }
     }
 
+    private void AimIndicator_Gamepad()
+    {
+        gamepadTarget += InputManager.JoystickDelta;
+        Vector2 gamepadDelta = gamepadTarget - gamepadSource;
+        gamepadTarget = gamepadSource + gamepadDelta;
+
+        Ray ray = CameraManager.ActiveCamera.ScreenPointToRay(gamepadTarget);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, hitLayers))
+        {
+            Vector3 direction = hit.point - sourceIndicator.position;
+
+            if (direction.magnitude > castRange)
+            {
+                direction = direction.normalized * castRange;
+                gamepadTarget -= InputManager.JoystickDelta;
+            }
+
+            targetIndicator.position = sourceIndicator.position + direction;
+        }
+    }
+
     public override void ShowIndicator(SpellSO spellSO)
     {
         Active = true;
@@ -62,6 +98,13 @@ public class RadialIndicator : SpellIndicator
         sourceRenderer.enabled = (castRange > 0) ? true : false;
         targetRenderer.enabled = true;
         InitializeScaleMaterial();
+
+        if (InputManager.IsGamepad)
+        {
+            InputManager.Instance.TogglePlayerMovement(false);
+            gamepadSource = CameraManager.ActiveCamera.WorldToScreenPoint(sourceIndicator.position);
+            gamepadTarget = gamepadSource;
+        }
     }
 
     public override void HideIndicator()
@@ -69,6 +112,8 @@ public class RadialIndicator : SpellIndicator
         Active = false;
         sourceRenderer.enabled = false;
         targetRenderer.enabled = false;
+
+        if (InputManager.IsGamepad) InputManager.Instance.TogglePlayerMovement(true);
     }
 
     public override void ToggleReady(bool ready)
