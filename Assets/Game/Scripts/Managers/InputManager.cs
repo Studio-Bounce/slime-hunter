@@ -30,6 +30,7 @@ public class InputManager : Singleton<InputManager>
     Action<InputContext> dashQueuedAction;
     Action<InputContext> spell1Action;
     Action<InputContext> spell2Action;
+    Action<InputContext> rotateCameraAction;
 
     public event Action exitEvent = delegate { };
     // Used for dash tutorial
@@ -54,6 +55,7 @@ public class InputManager : Singleton<InputManager>
         dashQueuedAction = e => QueueInput(_playerController.Dash, e);
         spell1Action = e => _spellController.ChangeSpell(0);
         spell2Action = e => _spellController.ChangeSpell(1);
+        rotateCameraAction = e => QueueInput(_playerController.RotateCamera, e);
         // Enables/disables inputs based on game state
         GameManager.Instance.OnGameStateChange += UpdateInputAvailability;
         GameManager.Instance.OnPlayerRefChange += GetControllers;
@@ -214,7 +216,7 @@ public class InputManager : Singleton<InputManager>
         _playerActions.Move.canceled += StopMovement;
         _playerActions.Dash.performed += dashQueuedAction;
         _playerActions.Dash.performed += OnDash;
-        _playerActions.Rotate.performed += _playerController.RotateCamera;
+        _playerActions.Rotate.performed += rotateCameraAction;
         // Weapon
         _playerActions.Attack.performed += attackQueuedAction;
         _playerActions.SpecialAttack.performed += _weaponController.SpecialAttack;
@@ -277,7 +279,7 @@ public class InputManager : Singleton<InputManager>
         _playerActions.Move.canceled -= StopMovement;
         _playerActions.Dash.performed -= dashQueuedAction;
         _playerActions.Dash.performed -= OnDash;
-        if (_playerController) _playerActions.Rotate.performed -= _playerController.RotateCamera;
+        if (_playerController) _playerActions.Rotate.performed -= rotateCameraAction;
         _playerActions.Attack.performed -= attackQueuedAction;
         if (_weaponController) _playerActions.SpecialAttack.performed -= _weaponController.SpecialAttack;
         if (_weaponController) _playerActions.CycleWeapon.performed -= _weaponController.CycleWeapon;

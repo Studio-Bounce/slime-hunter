@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 rotationRange = Vector2.zero;
     private float _currentRotation = 0;
     private bool _isRotating = false;
+    private float rotateDir = 0; // To cache readvalue input for queued input
 
     // Used for jump, dash, and gravity
     CharacterController characterController;
@@ -75,16 +76,14 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
     }
 
-    public void RotateCamera(InputAction.CallbackContext context)
+    public bool RotateCamera(InputAction.CallbackContext context)
     {
-        if (_isRotating) return;
+        if (_isRotating) return false;
 
-        float rotateDir = context.ReadValue<float>();
-
-        if (rotateDir == 0) return;
+        float newDir = context.ReadValue<float>();
+        if (newDir != 0f) rotateDir = newDir;
 
         float newRotation = _currentRotation + rotateDir * rotationIncrement;
-
         if (newRotation >= rotationRange.x && newRotation <= rotationRange.y)
         {
             _currentRotation = newRotation;
@@ -94,6 +93,7 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(PerformCameraRotateError(-rotateDir * 10));
         }
+        return true;
     }
 
 
