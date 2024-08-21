@@ -183,6 +183,12 @@ public class WeaponController : MonoBehaviour
 
         // Align to camera forward
         Vector3 attackDirection = CameraManager.Instance.DirectionToCameraForward(transform.position, clickDirection);
+
+        if (InputManager.IsGamepad)
+        {
+            attackDirection = transform.forward;
+        }
+
         StartCoroutine(PerformAttack(CurrentWeapon.attackMoves[_attackMoveIndex], attackDirection));
 
         return true;

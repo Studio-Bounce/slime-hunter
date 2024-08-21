@@ -37,6 +37,8 @@ public class InputManager : Singleton<InputManager>
 
     public Vector2 Movement { get { return _movement; } }
 
+    public static bool IsGamepad { get { return Gamepad.current != null; } }
+
     private void Awake()
     {
         // Setup Input Sprite Settings
@@ -70,7 +72,7 @@ public class InputManager : Singleton<InputManager>
     {
         ActionSpriteMap map = _spriteSettings.FindMapByName(actionName);
 
-        if (Gamepad.current != null)
+        if (IsGamepad)
         {
             return map.gamepadSprite != null ? map.gamepadSprite : _spriteSettings.defaultSprite;
         }
@@ -83,7 +85,7 @@ public class InputManager : Singleton<InputManager>
     public Sprite StringActionToSprite(string actionName)
     {
         // TODO: Naive solution - returns gamepad controls as long as one is plugged in
-        if (Gamepad.current != null)
+        if (IsGamepad)
         {
             return _spriteSettings.gamepadSpriteMap.TryGetValue(actionName, out var sprite) ? sprite : _spriteSettings.defaultSprite;
         }
