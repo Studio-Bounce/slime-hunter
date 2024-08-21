@@ -51,15 +51,15 @@ public abstract class FSM : MonoBehaviour
         lockState = false;
     }
 
-    public bool ChangeState(string _stateName)
+    public bool ChangeState(string _stateName, bool _force = false)
     {
-        if (lockState) return false;
+        if (!_force && lockState) return false;
         return ChangeState(Animator.StringToHash(_stateName));
     }
 
-    public bool ChangeState(int _stateName)
+    public bool ChangeState(int _stateName, bool _force = false)
     {
-        if (lockState) return false;
+        if (!_force && lockState) return false;
         bool hasState = true;
 #if UNITY_EDITOR
         //hasState = fsmAnimator.HasState(-1, _stateName);

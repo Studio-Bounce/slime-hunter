@@ -133,7 +133,7 @@ public class Enemy : DynamicDamageTaker
         Destroy(deathObj, deathDelay);
 
         // Roy: Moved death handling to DeathState
-        fsm.ChangeState(fsm.DeadStateName);
+        fsm.ChangeState(fsm.DeadStateName, true);
     }
 
     public void SetEye(EnemyEye enemyEye)
