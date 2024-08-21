@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StunSpell_Toxic
   m_EditorClassIdentifier: 
   address: Assets/Game/ScriptableObjects/Spells/StunSpell_Toxic.asset
-  itemName: ' Stun Spell - Toxic Effect'
+  itemName: Toxin Bomb
   description: A disruptive magical ability that releases a burst of energy that
     paralyzes the target for a short duration and applies Toxin damage over time.
   icon: {fileID: 21300000, guid: 95eeb2d1c5537024db1cd4e0870a00ab, type: 3}
@@ -24,7 +24,7 @@ MonoBehaviour:
     value: 1
     knockback: 5
     direction: {x: 0, y: 0, z: 0}
-    effect: {fileID: 11400000, guid: 71c406b49a8453146b81083e457feba0, type: 2}
+    effect: {fileID: 11400000, guid: fe890fc66ad32444a8382c33b07d4c41, type: 2}
     forceApply: 1
   castRange: 7
   areaOfEffect: 3

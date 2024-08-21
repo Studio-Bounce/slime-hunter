@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlastSpell_Stun
   m_EditorClassIdentifier: 
   address: Assets/Game/ScriptableObjects/Spells/BlastSpell_Stun.asset
-  itemName: Blast Spell - Stun Effect
+  itemName: Blast Spell II
   description: A powerful spell that unleashes a concussive wave of force, knocking
     away all nearby enemies and Stuns them for certain duration
   icon: {fileID: 21300000, guid: 59100be7fada38842967817d43926fe2, type: 3}
@@ -24,7 +24,7 @@ MonoBehaviour:
     value: 20
     knockback: 25
     direction: {x: 0, y: 0, z: 0}
-    effect: {fileID: 11400000, guid: fe890fc66ad32444a8382c33b07d4c41, type: 2}
+    effect: {fileID: 11400000, guid: 71c406b49a8453146b81083e457feba0, type: 2}
     forceApply: 0
   castRange: 0
   areaOfEffect: 4
