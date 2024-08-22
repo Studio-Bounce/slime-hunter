@@ -1,5 +1,5 @@
+using FMODUnity;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ComboAttack : MonoBehaviour
@@ -45,6 +45,9 @@ public class ComboAttack : MonoBehaviour
                 if (!isInCombo)
                 {
                     StartCoroutine(ComboSequence());
+                } else
+                {
+                    AudioManager.Instance.ComboHitSound(attackCount * 0.01f);
                 }
                 UIManager.Instance.UpdateCombo(attackCount);
                 GameManager.Instance.PlayerSpecialAttack += specialBarFillRate;
@@ -57,6 +60,10 @@ public class ComboAttack : MonoBehaviour
         if (!weaponController.isPerformingSpecialAttack)
         {
             // Destroy combo
+            if (isInCombo)
+            {
+                RuntimeManager.PlayOneShot(AudioManager.Config.comboMiss);
+            }
             comboTimer = comboBreakTimeout;
         }
     }

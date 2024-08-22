@@ -15,6 +15,8 @@ public class AudioManager : Singleton<AudioManager>
 
     // SFX
     public EventInstance SpecialAttackInstance { get; set; }
+    public EventInstance ComboInstance { get; set; }
+
 
     // Music
     public EventInstance MenuInstance { get; set; }
@@ -46,6 +48,7 @@ public class AudioManager : Singleton<AudioManager>
 
         // SFX
         SpecialAttackInstance = RuntimeManager.CreateInstance(config.specialAttack);
+        ComboInstance = RuntimeManager.CreateInstance(config.comboHit);
         InventoryManager.Instance.OnItemAdded += e => RuntimeManager.PlayOneShot(Config.itemPickup);
         InputManager.Instance.exitEvent += () => RuntimeManager.PlayOneShot(Config.errorEvent);
         GameManager.Instance.OnGameStateChange += HandleBGMusic;
@@ -111,6 +114,12 @@ public class AudioManager : Singleton<AudioManager>
 
         // Set the volume on the master bus
         masterBus.setVolume(value);
+    }
+
+    public void ComboHitSound(float pitch)
+    {
+        ComboInstance.setParameterByName("Pitch", pitch);
+        ComboInstance.start();
     }
 
     public void ForceAlert(float value)

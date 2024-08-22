@@ -21,6 +21,8 @@ public class AudioConfig : ScriptableObject
     public EventReference itemPickup;
     public EventReference questStart;
     public EventReference questEnd;
+    public EventReference comboHit;
+    public EventReference comboMiss;
 
     [Header("UI")]
     public EventReference buttonPressEvent;
