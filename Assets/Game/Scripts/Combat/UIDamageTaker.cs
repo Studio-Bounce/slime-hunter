@@ -66,13 +66,13 @@ public class UIDamageTaker : DamageTaker
         base.Death(killObject);
     }
 
-    IEnumerator UpdateHealth(float delay)
+    protected IEnumerator UpdateHealth(float delay)
     {
         yield return new WaitForSeconds(delay);
         healthSlider.value = ((float)health / maxHealth);
     }
 
-    IEnumerator DisableCanvasAfterTimeout()
+    protected IEnumerator DisableCanvasAfterTimeout()
     {
         float timeElapsed = 0.0f;
         while (timeElapsed < canvasTimeout)

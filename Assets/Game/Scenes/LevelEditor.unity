@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17865337, g: 0.22369754, b: 0.30563766, a: 1}
+  m_IndirectSpecularColor: {r: 0.17865306, g: 0.22369696, b: 0.30563658, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1830,6 +1830,12 @@ MonoBehaviour:
   - itemRef: {fileID: 11400000, guid: 99e37e993779f7140b18b790d7e46539, type: 2}
     quantity: 1
   maxWeight: 30
+  equippedWeapons:
+  - {fileID: 0}
+  - {fileID: 0}
+  equippedSpells:
+  - {fileID: 0}
+  - {fileID: 0}
   uiDocument: {fileID: 1460808474}
 --- !u!4 &763777267
 Transform:
@@ -3213,6 +3219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9fce3e71fc2b604aadf269de4da0ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteSettings: {fileID: 0}
+  _debugSlimeGel: {fileID: 0}
+  joystickSpeed: 1000
   inputQueueDelay: 0.3
 --- !u!1001 &1192252725
 PrefabInstance:
@@ -3592,6 +3601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27d1a38f44913024f96b7ca9ea8cad9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showOnStart: 1
 --- !u!114 &1460808473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4091,8 +4101,11 @@ MonoBehaviour:
   mainMenu: {fileID: 337204238}
   pauseMenu: {fileID: 1460808471}
   HUDMenu: {fileID: 2063335823}
+  deathMenu: {fileID: 0}
   autoSave: {fileID: 846260619}
-  shopMenu: {fileID: 0}
+  settingsMenu: {fileID: 0}
+  gladeVillageIntroMenu: {fileID: 0}
+  endScreen: {fileID: 0}
 --- !u!4 &1999015382
 Transform:
   m_ObjectHideFlags: 0
@@ -4148,7 +4161,13 @@ MonoBehaviour:
   showOnStart: 1
   maxAlert: 5
   damageAlertTime: 0.25
+  itemPickupListItem: {fileID: 0}
+  itemPopupLifetime: 5
+  weaponColor: {r: 1, g: 0, b: 0, a: 1}
+  spellColor: {r: 1, g: 0, b: 1, a: 1}
+  materialColor: {r: 0, g: 0, b: 1, a: 1}
   compassRotationOffset: 180
+  cameraBaseRotation: -45
   specialAttackBtnTime: 0.5
 --- !u!114 &2063335824
 MonoBehaviour:

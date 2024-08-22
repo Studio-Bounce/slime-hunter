@@ -104,7 +104,7 @@ public class GameManager : Singleton<GameManager>
         get { return playerSpecialAttack; }
         set
         {
-            if (value == playerSpecialAttack || value > PlayerMaxSpecialAttack) return;
+            if (playerSpecialAttack == PlayerMaxSpecialAttack && value > PlayerMaxSpecialAttack) return;
             playerSpecialAttack = Mathf.Clamp01(value);
             OnPlayerSpecialAttackChange?.Invoke(playerSpecialAttack);
         }
