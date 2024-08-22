@@ -76,7 +76,7 @@ public class EnemyBomb : DamageDealer
 
             yield return null;
         }
-
+        CameraManager.Instance.ShakeCamera(2.0f, 0.6f);
         // Self destruct
         onExplosion.Invoke();
     }

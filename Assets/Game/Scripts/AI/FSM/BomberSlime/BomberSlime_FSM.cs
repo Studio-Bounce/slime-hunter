@@ -42,10 +42,7 @@ public class BomberSlime_FSM : BasicSlime_FSM
         if (!didExplode)
         {
             didExplode = true;
-            if (!gotHitByPlayer)
-            {
-                Emit(10);
-            }
+            if (!gotHitByPlayer) Emit(10);
             StartCoroutine(ExplosionSequence());
         }
     }
@@ -55,9 +52,12 @@ public class BomberSlime_FSM : BasicSlime_FSM
         if (!gotHitByPlayer)
         {
             // wait for glow
+            // TODO: Inconsistent timing to depend on due to animator transition lengths
+            // Ex. depending on how fast player enters into attack range, bomber may be late or early due to transition times
             yield return new WaitForSeconds(attackEmissionTime);
         }
         onDetonationStart.Invoke();
+        CameraManager.Instance.ShakeCamera(0.5f, 0.3f);
         enemyBomb.Explode();
     }
 
