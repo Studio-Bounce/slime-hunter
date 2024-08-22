@@ -26,7 +26,7 @@ public class WeaponTrail : DamageDealer
 
     private WeaponSO currentWeaponSO;
 
-    // Trail Shader Effects
+    // Trail Shader Params
     private readonly string flipShaderParam = "_Flip";
     private readonly string rotateSpeedShaderParam = "_RotateSpeed";
     private readonly string startAngleShaderParam = "_StartAngle";
@@ -114,7 +114,8 @@ public class WeaponTrail : DamageDealer
         applyCameraShake = isFinalAttack;
         StopAllCoroutines();
         StartCoroutine(ActiveAttack(move.animationDuration));
-        trailRenderer.transform.rotation = Quaternion.Euler(trailRenderer.transform.rotation.eulerAngles.x, trailRenderer.transform.rotation.eulerAngles.y, move.rotation);
+
+        trailRenderer.transform.localRotation = Quaternion.Euler(0, 0, move.rotation);
     }
 
     public IEnumerator RunSpecialAttack(float duration)
