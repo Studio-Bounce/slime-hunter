@@ -266,7 +266,7 @@ public class HUDMenu : Menu
 
         if (value == gameManager.PlayerMaxSpecialAttack)
         {
-            StartCoroutine(SpecialAttackReadyPopup());
+            StartCoroutine(SpecialAttackReadyPopup(2));
             StartCoroutine(SpecialAttackReadyNotification(true));
         }
         else
@@ -283,7 +283,7 @@ public class HUDMenu : Menu
         yield return GameManager.RunEasedLerp(
             ready ? 0 : 1,
             ready ? 1 : 0,
-            0.3f,
+            0.2f,
             Easing.EaseInCubic,
             val =>
             {
@@ -305,7 +305,7 @@ public class HUDMenu : Menu
         );
 
         yield return GameManager.RunEasedLerp(
-            2,
+            1.5f,
             1,
             1.0f,
             Easing.EaseOutQuart,
@@ -326,7 +326,7 @@ public class HUDMenu : Menu
             Easing.EaseInQuart,
             val =>
             {
-                splAttackPopup.style.opacity = Mathf.Clamp01(val*20f);
+                splAttackPopup.style.opacity = Mathf.Clamp01(val*500f);
                 splAttackPopup.style.translate = new Translate(0, (1 - val) * 50, 0);
             }
         );

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ObjectFall : MonoBehaviour
 {
-    public GameObject spacebarImage;
     public Transform target;
     public float slowDownTime = 5.0f;
 
@@ -20,7 +19,6 @@ public class ObjectFall : MonoBehaviour
 
     private void Start()
     {
-        spacebarImage.SetActive(false);
         actionPerformed = false;
         imageShown = false;
         body = GetComponent<Rigidbody>();
@@ -98,7 +96,6 @@ public class ObjectFall : MonoBehaviour
             {
                 imageShown = true;
                 CameraManager.Instance.ShakeCamera(cameraShakeIntensity);
-                spacebarImage.SetActive(true);
             }
             // Scale down to 0.1 in slowDownTime seconds
             if (Time.timeScale > 0.1f)
@@ -120,7 +117,6 @@ public class ObjectFall : MonoBehaviour
                 body.useGravity = true;
                 moveThePlayer = false;
                 tutorialInProgress = false;
-                spacebarImage.SetActive(false);
                 break;
             }
             yield return null;
