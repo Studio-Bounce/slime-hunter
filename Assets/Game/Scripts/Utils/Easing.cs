@@ -112,6 +112,6 @@ public static class Easing
 
     public static float PingPong(float t)
     {
-        return Mathf.Pow(Mathf.PingPong(t*2, 1), 2);
+        return Mathf.Pow(Mathf.PingPong(t, 0.5f), 2);
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.Rendering.DebugUI;
 
 public class HUDMenu : Menu
 {
@@ -62,7 +63,9 @@ public class HUDMenu : Menu
     [Header("Attack Combo")]
     VisualElement attackComboVE;
     Label comboCountLabel;
-    VisualElement splAttackComboKey;
+    VisualElement splAttackPopup;
+    VisualElement splAttackNotification;
+
     bool isComboHUDUp = false;
     bool canDoSpecialAttack = false;
     [SerializeField] float specialAttackBtnTime = 0.5f;
@@ -86,16 +89,20 @@ public class HUDMenu : Menu
         VisualElement leftStatusArea = leftBg.Q<VisualElement>("StatusArea");
         VisualElement statusBars = leftStatusArea.Q<VisualElement>("Bars");
 
+        // Health
         VisualElement healthVE = statusBars.Q<VisualElement>("Health");
         healthProgressBar = healthVE.Q<ProgressBar>("HealthBar");
         gameManager.OnPlayerHealthChange += UpdateHealthBar;
         UpdateHealthBar(gameManager.PlayerHealth);
 
+        // Special Attack
         VisualElement splAttackVE = statusBars.Q<VisualElement>("SpecialAttack");
         specialAttackBar = splAttackVE.Q<ProgressBar>("SplAttackBar");
         gameManager.OnPlayerSpecialAttackChange += UpdateSpecialAttackBar;
-        splAttackComboKey = statusBars.Q<VisualElement>("SplAttack_Key");
-        splAttackComboKey.style.opacity = 0.0f;
+        splAttackPopup = root.Q<VisualElement>("SplAttackPopup");
+        splAttackPopup.style.opacity = 0.0f;
+        splAttackNotification = statusBars.Q<VisualElement>("SplAttackNotification");
+        splAttackNotification.style.opacity = 0.0f;
 
         // Pickups
         InventoryManager.Instance.OnItemAdded += OnItemPickup;
@@ -130,19 +137,6 @@ public class HUDMenu : Menu
     private void FixedUpdate()
     {
         UpdateCompass();
-
-        if (gameManager.PlayerSpecialAttack == 1.0f)
-        {
-            if (!canDoSpecialAttack)
-            {
-                canDoSpecialAttack = true;
-                StartCoroutine(SpecialAttackIndicator());
-            }
-        }
-        else
-        {
-            canDoSpecialAttack = false;
-        }
     }
 
     // ------------------------------ Health ------------------------------
@@ -264,31 +258,91 @@ public class HUDMenu : Menu
 
     // ------------------------------ Special Attack ------------------------------
 
-    void UpdateSpecialAttackBar(float splAttackStatus)
+    void UpdateSpecialAttackBar(float value)
     {
         if (specialAttackBar != null)
         {
-            specialAttackBar.value = splAttackStatus;
+            specialAttackBar.value = value;
+        }
+
+        if (value == gameManager.PlayerMaxSpecialAttack)
+        {
+            StartCoroutine(SpecialAttackReadyPopup());
+            StartCoroutine(SpecialAttackReadyNotification(true));
+        }
+        else
+        {
+            StartCoroutine(SpecialAttackReadyNotification(false));
         }
     }
 
-    IEnumerator SpecialAttackIndicator()
+    IEnumerator SpecialAttackReadyNotification(bool ready = true)
     {
-        float btnScale = 1.0f;
-        float direction = 1;
-        splAttackComboKey.style.opacity = 1.0f;
-        while (canDoSpecialAttack)
-        {
+        // Don't run remove aniamtion if already removed
+        if (!ready && splAttackNotification.style.opacity == 0) yield break;
 
-            // Highlight the special attack button
-            btnScale += direction * (Time.unscaledDeltaTime / specialAttackBtnTime);
-            if (btnScale <= 1.0f || btnScale >= 2.0f)
-                direction *= -1;
-            splAttackComboKey.transform.scale = new Vector3(btnScale, btnScale, btnScale);
+        yield return GameManager.RunEasedLerp(
+            ready ? 0 : 1,
+            ready ? 1 : 0,
+            0.3f,
+            Easing.EaseInCubic,
+            val =>
+            {
+                splAttackNotification.style.opacity = val;
+            },
+            true
+        );
 
-            yield return null;
-        }
-        splAttackComboKey.style.opacity = 0.0f;
+        yield return GameManager.RunEasedLerp(
+            1,
+            1.5f,
+            1.0f,
+            Easing.EaseInQuart,
+            val =>
+            {
+                splAttackNotification.style.scale = new Scale(Vector2.one * val);
+            },
+            true
+        );
+
+        yield return GameManager.RunEasedLerp(
+            2,
+            1,
+            1.0f,
+            Easing.EaseOutQuart,
+            val =>
+            {
+                splAttackNotification.style.scale = new Scale(Vector2.one * val);
+            },
+            true
+        );
+    }
+
+    IEnumerator SpecialAttackReadyPopup(float duration = 1.0f)
+    {
+        yield return GameManager.RunEasedLerp(
+            0,
+            1,
+            duration,
+            Easing.EaseInQuart,
+            val =>
+            {
+                splAttackPopup.style.opacity = Mathf.Clamp01(val*20f);
+                splAttackPopup.style.translate = new Translate(0, (1 - val) * 50, 0);
+            }
+        );
+
+        yield return GameManager.RunEasedLerp(
+            1,
+            0,
+            1.0f,
+            Easing.EaseOut,
+            val =>
+            {
+                splAttackPopup.style.opacity = val;
+                splAttackPopup.style.translate = new Translate(0, -(1-val) * 50, 0);
+            }
+        );
     }
 
     // ------------------------------ Weapons ------------------------------

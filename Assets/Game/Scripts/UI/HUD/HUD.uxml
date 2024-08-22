@@ -21,7 +21,11 @@
                         <ui:ProgressBar name="SplAttackBar" high-value="1" class="stamina-progressbar" style="align-self: center; width: 262px; position: absolute; top: 11px; left: 20px; height: 20px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgb(0, 0, 0); border-left-color: rgba(142, 142, 142, 0); border-right-color: rgba(142, 142, 142, 0); border-top-color: rgba(142, 142, 142, 0); border-bottom-color: rgba(142, 142, 142, 0); scale: 1 0.8;" />
                         <ui:VisualElement name="SplAttack_Deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/Group%2018.png?fileID=2800000&amp;guid=b5494845e8ab7a449bd9568703f2a209&amp;type=3#Group 18&quot;); position: absolute; height: 20px; width: 280px; top: 13px; left: 14px;" />
                         <ui:VisualElement name="SplAttack_Icon" style="flex-grow: 0; width: 38px; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/Stamina.png?fileID=2800000&amp;guid=05186b8933707184f951e94fa38454d7&amp;type=3#Stamina&quot;); -unity-background-scale-mode: scale-to-fit; position: absolute; height: 34px; top: 4px; left: -1px;" />
-                        <InputGlyph name="SplAttack_Key" action-name="SpecialAttack" style="width: 48px; height: 48px; position: absolute; top: 4px; right: -45px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="SplAttackNotification" style="flex-grow: 1; position: absolute; flex-direction: row; bottom: 104px; align-items: center;">
+                        <ui:VisualElement name="IconBg" style="flex-grow: 1; width: 32px; height: 32px; background-color: rgb(244, 147, 49); position: absolute; right: 203px;" />
+                        <InputGlyph name="SplAttack_Key" action-name="SpecialAttack" style="width: 64px; height: 64px;" />
+                        <ui:Label tabindex="-1" text="Special Attack&#10;Ready" parse-escape-sequences="true" display-tooltip-when-elided="true" class="p" style="white-space: normal; -unity-text-align: middle-left; text-shadow: 0 0 100px rgb(244, 147, 49);" />
                     </ui:VisualElement>
                     <ui:VisualElement name="Health" style="flex-grow: 1;">
                         <ui:ProgressBar name="HealthBar" usage-hints="None" high-value="1" value="0" class="health-progressbar" style="align-self: center; width: 297px; position: absolute; top: 11px; left: 20px; height: 20px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; scale: 1 0.8;" />
@@ -32,7 +36,11 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Red_Alert" class="redalert" style="flex-grow: 1; position: absolute; -unity-background-scale-mode: stretch-to-fill; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Rectangle%2047playersttacked.png?fileID=21300000&amp;guid=000297ea16efd484185e1cd60150cb9f&amp;type=3#Rectangle 47playersttacked&quot;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.49); opacity: 0; width: 100%; height: 100%; display: flex;" />
-        <ui:VisualElement name="Blank_Centre" style="flex-grow: 0; width: 40%; display: flex; opacity: 1;" />
+        <ui:VisualElement name="Blank_Centre" style="flex-grow: 0; width: 40%; display: flex; opacity: 1; align-items: center; justify-content: center;">
+            <ui:VisualElement name="SplAttackPopup" style="flex-grow: 0; align-items: center; justify-content: center; flex-shrink: 0; margin-bottom: 300px;">
+                <ui:Label tabindex="-1" text="Special Attack&#10;Ready" parse-escape-sequences="true" display-tooltip-when-elided="true" style="white-space: normal; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
         <ui:VisualElement name="Right" style="flex-grow: 0; width: 30%; flex-direction: column;">
             <ui:VisualElement name="QuestContainer" style="flex-grow: 0; height: 50%; margin-right: 40px; margin-top: 15px;">
                 <ui:VisualElement name="Header" style="flex-grow: 0; flex-direction: row-reverse; -unity-text-align: lower-right; align-self: flex-end; margin-right: 15px;">
@@ -49,11 +57,11 @@
                 <ui:VisualElement name="GlyphWrapper" style="flex-grow: 0; flex-direction: row; width: auto; height: auto; align-items: flex-start; flex-shrink: 0; margin-right: 58px; margin-bottom: 15px;">
                     <ui:VisualElement name="Spell1" class="spell-glyph spell-glyph-active" style="background-image: none; -unity-background-scale-mode: scale-to-fit; align-self: flex-end; -unity-slice-left: 5; -unity-slice-top: 5; -unity-slice-right: 5; -unity-slice-bottom: 5;">
                         <ui:Label tabindex="-1" text="24s" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Timer" class="cooldown-timer" />
-                        <ui:Label tabindex="-1" text="1" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hotkey" class="hotkey-indicator" style="color: rgb(86, 86, 86);" />
+                        <InputGlyph action-name="Spell1" view-data-key="Hotkey" name="Hotkey" class="hotkey-indicator" />
                     </ui:VisualElement>
                     <ui:VisualElement name="Spell2" class="spell-glyph" style="background-image: none; -unity-background-scale-mode: scale-to-fit; align-self: flex-end; -unity-slice-left: 5; -unity-slice-top: 5; -unity-slice-right: 5; -unity-slice-bottom: 5;">
                         <ui:Label tabindex="-1" text="24s" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Timer" class="cooldown-timer" />
-                        <ui:Label tabindex="-1" text="2" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Hotkey" class="hotkey-indicator" style="color: rgb(86, 86, 86);" />
+                        <InputGlyph action-name="Spell2" name="Hotkey" class="hotkey-indicator" />
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>

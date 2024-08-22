@@ -104,6 +104,7 @@ public class GameManager : Singleton<GameManager>
         get { return playerSpecialAttack; }
         set
         {
+            if (value == playerSpecialAttack || value > PlayerMaxSpecialAttack) return;
             playerSpecialAttack = Mathf.Clamp01(value);
             OnPlayerSpecialAttackChange?.Invoke(playerSpecialAttack);
         }
@@ -281,10 +282,24 @@ public class GameManager : Singleton<GameManager>
         {
             float t = elapsed / duration;
             float eased = Curve(t);
-            UpdateSource(Vector3.Lerp(start, end, eased));
+            UpdateSource(Vector3.LerpUnclamped(start, end, eased));
             elapsed += unscaled ? Time.unscaledDeltaTime : Time.deltaTime;
             yield return null;
         }
+    }
+
+    public static IEnumerator RunEasedLerp(Vector2 start, Vector2 end, float duration, Func<float, float> Curve, Action<Vector2> UpdateSource, bool unscaled = false)
+    {
+        float elapsed = 0.0f;
+        while (elapsed < duration)
+        {
+            float t = elapsed / duration;
+            float eased = Curve(t);
+            UpdateSource(Vector2.LerpUnclamped(start, end, eased));
+            elapsed += unscaled ? Time.unscaledDeltaTime : Time.deltaTime;
+            yield return null;
+        }
+        UpdateSource(end);
     }
 
     public static IEnumerator RunEasedLerp(float start, float end, float duration, Func<float, float> Curve, Action<float> UpdateSource, bool unscaled = false)

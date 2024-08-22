@@ -30,6 +30,7 @@
 }
 
 .stamina-progressbar.unity-progress-bar {
+
 }
 
 .stamina-progressbar .unity-progress-bar__progress {
@@ -54,7 +55,7 @@
     align-items: center;
     justify-content: center;
     margin: 10px;
-    border-width: 6px;
+    border-width: 8px;
     border-radius: 50%;
     border-color: rgb(255, 255, 255);
     transition: all 0.3s ease-in-out-cubic;
@@ -84,15 +85,11 @@
 
 .hotkey-indicator {
     position: absolute;
-    bottom: -36px;
-    width: 32px;
-    height: 32px;
+    bottom: -42.5px;
+    width: 48px;
+    height: 48px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    background-color: white;
-    font-size: 24px;
-    -unity-font-style: bold;
-    -unity-text-align: middle-center;
 }
 
 #ItemPickupListContainer {
