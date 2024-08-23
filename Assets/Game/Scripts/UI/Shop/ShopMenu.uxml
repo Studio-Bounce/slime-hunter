@@ -8,11 +8,11 @@
             <ui:Instance template="ShopListItem" name="ShopListItem" />
         </ui:ScrollView>
     </ui:VisualElement>
-    <ui:VisualElement name="ResourceDisplay" style="flex-grow: 1; position: absolute; flex-direction: row-reverse; right: 2%; top: 5%;">
+    <ui:VisualElement name="ResourceDisplay" style="flex-grow: 1; position: absolute; flex-direction: row-reverse; right: 5%; top: 5%;">
         <ui:Label tabindex="-1" text="0&#10;" parse-escape-sequences="true" display-tooltip-when-elided="true" name="SlimeGelCount" class="h3" style="transform-origin: right top; -unity-text-align: middle-left;" />
         <ui:VisualElement name="Icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Group%2030Coins.png?fileID=2800000&amp;guid=f8a11596087398343b39181ba41041b1&amp;type=3#Group 30Coins&quot;); width: 32px; height: 54px; -unity-background-scale-mode: scale-and-crop; margin-right: 20px;" />
     </ui:VisualElement>
-    <ui:VisualElement name="InputHint" style="flex-grow: 1; position: absolute; flex-direction: row-reverse; right: 2%; bottom: 5%;">
+    <ui:VisualElement name="InputHint" style="flex-grow: 1; position: absolute; flex-direction: row-reverse; right: 5%; bottom: 5%;">
         <ui:Label tabindex="-1" text="Close" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h3" style="transform-origin: right top; -unity-text-align: middle-left;" />
         <InputGlyph action-name="Exit" style="width: 64px; height: 64px;" />
     </ui:VisualElement>

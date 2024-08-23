@@ -54,7 +54,7 @@ public class Menu : MonoBehaviour
 
     public virtual void Show()
     {
-        root.Q<Button>().Focus();
+        root.Q<VisualElement>().Focus();
         SetVisible(true);
     }
 

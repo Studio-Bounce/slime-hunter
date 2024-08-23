@@ -36,6 +36,7 @@ public class DeathMenu : Menu
     public override void Show()
     {
         base.Show();
+        if (InputManager.IsGamepad) root.Q<Button>().Focus(); // Hacky way to focus
         GameManager.Instance.TimeFreeze();
         CameraManager.Instance.SmoothSetVignette(0.5f, 1.0f);
         CameraManager.Instance.SmoothSetSaturation(-100, 0.3f);

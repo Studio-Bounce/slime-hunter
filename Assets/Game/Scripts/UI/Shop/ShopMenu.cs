@@ -36,11 +36,13 @@ public class ShopMenu : Menu
         {
             slimeGelCount.text = InventoryManager.Instance.TotalSlimeGel.ToString();
         };
+        UIManager.Instance.onSelect += OnSelect;
     }
 
     public override void Show()
     {
         base.Show();
+        InputManager.Instance.TogglePlayerMovement(false);
         slimeGelCount.text = InventoryManager.Instance.TotalSlimeGel.ToString();
         PopulateList();
         InputManager.Instance.exitEvent += Hide;
@@ -49,6 +51,7 @@ public class ShopMenu : Menu
     public override void Hide()
     {
         base.Hide();
+        InputManager.Instance.TogglePlayerMovement(true);
         InputManager.Instance.exitEvent -= Hide;
     }
 

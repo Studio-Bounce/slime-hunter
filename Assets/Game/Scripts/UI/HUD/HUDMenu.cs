@@ -280,7 +280,7 @@ public class HUDMenu : Menu
         StartCoroutine(GameManager.RunEasedLerp(
             ready ? 0 : 1,
             ready ? 1 : 0,
-            0.2f,
+            0.3f,
             Easing.EaseInCubic,
             val =>
             {
@@ -292,8 +292,8 @@ public class HUDMenu : Menu
         yield return GameManager.RunEasedLerp(
             1,
             1.5f,
-            1.0f,
-            Easing.EaseInQuart,
+            0.5f,
+            Easing.EaseOutCubic,
             val =>
             {
                 splAttackNotification.style.scale = new Scale(Vector2.one * val);
@@ -304,8 +304,8 @@ public class HUDMenu : Menu
         yield return GameManager.RunEasedLerp(
             1.5f,
             1,
-            1.0f,
-            Easing.EaseOutQuart,
+            0.5f,
+            Easing.EaseOutCubic,
             val =>
             {
                 splAttackNotification.style.scale = new Scale(Vector2.one * val);

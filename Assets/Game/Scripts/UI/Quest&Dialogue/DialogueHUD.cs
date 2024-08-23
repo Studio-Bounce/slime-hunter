@@ -15,6 +15,7 @@ public class DialogueHUD : Menu
     [SerializeField] VisualTreeAsset dialogOptionBtn;
     [SerializeField] Color dialogColor;
     [SerializeField] Color dialogHoverColor;
+    private Button dialogButton;
     [HideInInspector] public bool dialogRunning = false;
 
     private void Start()
@@ -23,6 +24,7 @@ public class DialogueHUD : Menu
         dialogOptions = root.Q<VisualElement>("DialogueOptions");
         dialogPersonName = dialogBox.Q<VisualElement>("Name").Q<Label>();
         dialogContent = dialogBox.Q<Label>("DialogueText");
+        UIManager.Instance.onSelect += OnSelect;
         Hide();
     }
 
@@ -44,7 +46,7 @@ public class DialogueHUD : Menu
         {
             // Create a button for the choice and set the choice text
             VisualElement dialogVE = dialogOptionBtn.CloneTree();
-            Button dialogButton = dialogVE.Q<Button>();
+            dialogButton = dialogVE.Q<Button>();
             dialogButton.text = choice.text.Trim();
 
             dialogButton.RegisterCallback<ClickEvent>(evt => {
@@ -85,6 +87,7 @@ public class DialogueHUD : Menu
             yield return null;
         }
         dialogRunning = false;
+        dialogButton?.Focus();
     }
 
     public void SkipDialogue()
@@ -92,5 +95,6 @@ public class DialogueHUD : Menu
         StopAllCoroutines();
         dialogContent.text = currentDialogString;
         dialogRunning = false;
+        dialogButton?.Focus();
     }
 }

@@ -59,6 +59,7 @@ public class PauseMenu : TabbedMenu
     public override void Show()
     {
         base.Show();
+        if (InputManager.IsGamepad) root.Q<Button>().Focus(); // Hacky way to focus pause menu
         InputManager.Instance.exitEvent += ExitPause;
     }
 
