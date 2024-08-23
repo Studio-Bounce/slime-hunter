@@ -30,7 +30,6 @@ public class ShopMenu : Menu
 
     private void Start()
     {
-        VisualElement root = uiDocument.rootVisualElement;
         shopScrollView = root.Q<ScrollView>("ShopItemScrollView");
         slimeGelCount = root.Q<Label>("SlimeGelCount");
         InventoryManager.Instance.OnInventoryChanged += () =>
@@ -79,13 +78,13 @@ public class ShopMenu : Menu
             itemDescription.text = saleItem.item.description;
             itemType.text = saleItem.item.itemType.ToString();
 
-            purchaseBtn.clicked += () =>
+            purchaseBtn.RegisterCallback<ClickEvent>(evt =>
             {
                 if (TryPurchase(saleItem))
                 {
                     listElement.RemoveFromHierarchy();
                 }
-            };
+            });
 
             // Create elements for item costs
             foreach (var itemCost in saleItem.costs)

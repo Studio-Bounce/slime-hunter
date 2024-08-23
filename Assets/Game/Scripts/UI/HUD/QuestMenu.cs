@@ -51,21 +51,21 @@ public class QuestMenu : Menu
         huntingQuestBtn = questTypes.Q<Button>("HuntingQuestBtn");
 
         selectedQuestTypeBtn = mainQuestBtn;  // Main quest is active by default
-        mainQuestBtn.clicked += () => QuestTypeSelected(QuestType.MAIN);
-        sideQuestBtn.clicked += () => QuestTypeSelected(QuestType.SIDE);
-        huntingQuestBtn.clicked += () => QuestTypeSelected(QuestType.HUNTING);
+        mainQuestBtn.RegisterCallback<ClickEvent>(evt => QuestTypeSelected(QuestType.MAIN));
+        sideQuestBtn.RegisterCallback<ClickEvent>(evt => QuestTypeSelected(QuestType.SIDE));
+        huntingQuestBtn.RegisterCallback<ClickEvent>(evt => QuestTypeSelected(QuestType.HUNTING));
 
         VisualElement questList = root.Q<VisualElement>("QuestList");
         VisualElement questListLeft = questList.Q<VisualElement>("LeftArrow");
         VisualElement questListRight = questList.Q<VisualElement>("RightArrow");
-        questListLeft.Q<Button>().clicked += () => {
+        questListLeft.Q<Button>().RegisterCallback<ClickEvent>(evt => {
             currentTab = (numTabs + currentTab - 1) % numTabs;
             QuestTypeSelectById();
-        };
-        questListRight.Q<Button>().clicked += () => {
+        });
+        questListRight.Q<Button>().RegisterCallback<ClickEvent>(evt => {
             currentTab = (currentTab + 1) % numTabs;
             QuestTypeSelectById();
-        };
+        });
 
         questListContent = questList.Q<VisualElement>("Content");
 
@@ -150,7 +150,7 @@ public class QuestMenu : Menu
     {
         Button questItemParent = questItemVE.Q<Button>("QuestListItem");
         questItemParent.style.display = DisplayStyle.Flex;
-        questItemParent.clicked += () => QuestSelected(questItemParent, quest);
+        questItemParent.RegisterCallback<ClickEvent>(evt => QuestSelected(questItemParent, quest));
         // Auto-select the first quest
         if (isFirst)
         {

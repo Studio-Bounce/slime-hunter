@@ -8,7 +8,6 @@ public class DeathMenu : Menu
     // Start is called before the first frame update
     void Start()
     {
-        VisualElement root = uiDocument.rootVisualElement;
         Button tryAgainBtn = root.Q<Button>("TryAgain");
         Button mainMenuBtn = root.Q<Button>("MainMenu");
 

@@ -22,7 +22,6 @@ public class MainMenu : Menu
 
     void Start()
     {
-        VisualElement root = uiDocument.rootVisualElement;
         Button btnPlay = root.Q<Button>("btnPlay");
         //Button btnContinue = root.Q<Button>("btnContinue");
         Button btnSettings = root.Q<Button>("btnSettings");

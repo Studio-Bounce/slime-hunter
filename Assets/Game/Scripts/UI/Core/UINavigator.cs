@@ -85,8 +85,8 @@ public class UINavigator : MonoBehaviour
                 break;
         }
 
-        Debug.Log(focusedNavigable);
         focusedNavigable.ve.Focus();
+        Debug.Log(focusedNavigable);
         Debug.Log((focusController.focusedElement as VisualElement).name);
     }
 

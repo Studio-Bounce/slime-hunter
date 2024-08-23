@@ -59,6 +59,7 @@ public class GameManager : Singleton<GameManager>
     public float pickupRange = 5.0f;
     public float pickupSpeed = 5.0f;
 
+    public static void Log(string text) { Debug.Log(text); }
 
     public Player PlayerRef
     {

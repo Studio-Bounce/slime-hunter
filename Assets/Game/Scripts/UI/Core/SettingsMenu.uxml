@@ -25,9 +25,9 @@
                     <SliderSH name="VolumeSlider" high-value="1" style="width: 50%;" />
                 </ui:VisualElement>
                 <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="BackBtn" class="menu-button" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;); margin-top: 100px;">
-                    <ui:VisualElement name="Decoration" class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                    <ui:VisualElement name="Decoration" class="menu-button-deco" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
                     <ui:Label tabindex="-1" text="Back" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="h2" />
-                    <ui:VisualElement name="Decoration" class="menu-button-deco" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
+                    <ui:VisualElement name="Decoration" class="menu-button-deco" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
                 </ui:Button>
             </ui:VisualElement>
         </ui:VisualElement>

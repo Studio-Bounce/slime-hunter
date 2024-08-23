@@ -40,7 +40,6 @@ public class SettingsMenu : Menu
 
     void Start()
     {
-        VisualElement root = uiDocument.rootVisualElement;
         resolutionDropdown = root.Q<DropdownField>("ResolutionDropdown");
         displayModeDropdown = root.Q<DropdownField>("DisplayModeDropdown");
         qualityDropdown = root.Q<DropdownField>("QualityDropdown");

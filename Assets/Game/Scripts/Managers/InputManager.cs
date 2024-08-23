@@ -260,6 +260,7 @@ public class InputManager : Singleton<InputManager>
         _UIActions.Inventory.performed += Inventory;
         _UIActions.Map.performed += Map;
         _UIActions.SkipDialogue.performed += DialogueManager.Instance.SkipDialogue;
+        _UIActions.Select.performed += UIManager.Instance.InvokeSelect;
     }
 
     private void _AddDebugControls()
@@ -323,6 +324,7 @@ public class InputManager : Singleton<InputManager>
         _UIActions.Inventory.performed -= Inventory;
         _UIActions.Map.performed -= Map;
         _UIActions.SkipDialogue.performed -= DialogueManager.Instance.SkipDialogue;
+        _UIActions.Select.performed -= UIManager.Instance.InvokeSelect;
     }
 
     private void Exit(InputContext context)

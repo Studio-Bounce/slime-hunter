@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class UIManager : Singleton<UIManager>
@@ -15,6 +16,21 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] public Menu settingsMenu;
     [SerializeField] public Menu gladeVillageIntroMenu;
     [SerializeField] public Menu endScreen;
+
+    public event Action onSelect = delegate { };
+
+    private void Start()
+    {
+        onSelect += mainMenu.OnSelect;
+        onSelect += deathMenu.OnSelect;
+        onSelect += settingsMenu.OnSelect;
+        onSelect += pauseMenu.OnSelect;
+    }
+
+    public void InvokeSelect(InputAction.CallbackContext context)
+    {
+        onSelect?.Invoke();
+    }
 
     // ----------------- Load -----------------
     public void SetLoadMenu(bool active)

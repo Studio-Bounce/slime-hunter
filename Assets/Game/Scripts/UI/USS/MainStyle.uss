@@ -30,16 +30,8 @@
     margin: 0 5px;
 }
 
-.button:hover {
+.button:hover, .button:focus, .button:active {
     background-color: var(--bg-accent-dark);
-}
-
-.button:focus {
-    background-color: var(--bg-accent-dark);
-}
-
-.button:active {
-    scale: 0.95;
 }
 
 #RootWrapper {
@@ -92,50 +84,44 @@ DropdownSH * {
     align-items: center;
 }
 
-.option-slot {
-    transition-property: all;
-    transition-duration: 0.3s;
-    -unity-background-image-tint-color: transparent;
-    flex-direction: row;
-}
-
-.menu-button:hover {
-    text-shadow: 0 0 20px rgb(70, 187, 202);
-    -unity-background-image-tint-color: black;
-}
-
-.menu-button:focus {
-    text-shadow: 0 0 20px rgb(70, 187, 202);
-    -unity-background-image-tint-color: black;
-}
-
 .menu-button {
     flex-direction: row;
     justify-content: center;
     transition-property: all;
     transition-duration: 0.2s;
     background-color: transparent;
-    -unity-background-image-tint-color: transparent;
     border-width: 0;
+    -unity-background-image-tint-color: transparent;
     -unity-text-outline-color: grey;
     -unity-text-outline-width: 1px;
 }
 
+.menu-button:hover, .menu-button:focus {
+    text-shadow: 0 0 20px rgb(70, 187, 202);
+    -unity-background-image-tint-color: black;
+    scale: 0.95;
+}
+
 .menu-button > Label {
-    margin-left: 20px;
-    margin-right: 20px;
+    transition-property: all;
+    transition-duration: 0.2s;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.menu-button:hover > Label {
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .menu-button:hover .menu-button-deco {
     color: white;
     opacity: 1;
-    scale: 0.95;
 }
 
 .menu-button:focus .menu-button-deco {
     color: white;
     opacity: 1;
-    scale: 0.95;
 }
 
 .menu-button-deco {
@@ -155,11 +141,11 @@ DropdownSH * {
     margin: 0;
 }
 
-.tab:hover {
+.tab:hover, .tab:focus {
     background-color: var(--bg-accent-dark);
 }
 
-.tab:hover Label {
+.tab:hover Label, .tab:focus Label {
     opacity: 1;
 }
 
@@ -213,7 +199,7 @@ DropdownSH * {
     color: white;
 }
 
-.grid-inventory-container > *:hover {
+.grid-inventory-container > *:hover, .grid-inventory-container > *:focus {
     border-color: rgb(70, 187, 202);
     scale: 0.95;
 }

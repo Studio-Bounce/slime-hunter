@@ -13,5 +13,8 @@ public class ButtonSH : Button
         this.RegisterCallback<MouseOverEvent>(
             ev => RuntimeManager.PlayOneShot(AudioManager.Config.hoverEvent)
             );
+        this.RegisterCallback<FocusEvent>(
+            ev => RuntimeManager.PlayOneShot(AudioManager.Config.hoverEvent)
+        );
     }
 }

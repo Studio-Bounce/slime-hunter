@@ -23,7 +23,6 @@ public class PauseMenu : TabbedMenu
 
     void Start()
     {
-        VisualElement root = uiDocument.rootVisualElement;
         pauseRootWrapperVE = root.Q<VisualElement>("RootWrapper");
         cachedAlpha = pauseRootWrapperVE.resolvedStyle.backgroundColor.a;
 
@@ -32,10 +31,10 @@ public class PauseMenu : TabbedMenu
         Button btnSettings = root.Q<Button>("btnSettings");
         Button btnQuit = root.Q<Button>("btnQuit");
 
-        btnUnpause.clicked += () => GameManager.Instance.GameState = GameState.GAMEPLAY;
-        btnBackMainMenu.clicked += ReturnMainMenu;
-        btnSettings.clicked += Settings;
-        btnQuit.clicked += () => Application.Quit();
+        btnUnpause.RegisterCallback<ClickEvent>(evt => GameManager.Instance.GameState = GameState.GAMEPLAY);
+        btnBackMainMenu.RegisterCallback<ClickEvent>(evt => ReturnMainMenu());
+        btnSettings.RegisterCallback<ClickEvent>(evt => Settings());
+        btnQuit.RegisterCallback<ClickEvent>(evt => Application.Quit());
 
         characterContainer = root.Q<VisualElement>("CharacterContainer");
         healthValue = root.Q<Label>("HealthValue");

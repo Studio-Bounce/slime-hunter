@@ -5,7 +5,6 @@ using UnityEngine.UIElements;
 
 public class EndScreen : Menu
 {
-    VisualElement root;
     VisualElement rollingFrame;
 
     public float rollSpeed = 300f;
@@ -16,7 +15,6 @@ public class EndScreen : Menu
 
     private void Start()
     {
-        root = uiDocument.rootVisualElement;
         rollingFrame = root.Q<VisualElement>("Frame1");
         rollCredits = false;
     }

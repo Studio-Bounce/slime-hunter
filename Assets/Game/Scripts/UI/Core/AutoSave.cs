@@ -10,7 +10,6 @@ public class AutoSave : Menu
 
     void Start()
     {
-        VisualElement root = uiDocument.rootVisualElement;
         spinner = root.Q<VisualElement>("loadSpinner");
     }
 

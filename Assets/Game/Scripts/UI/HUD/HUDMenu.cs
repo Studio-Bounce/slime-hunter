@@ -12,8 +12,6 @@ public class HUDMenu : Menu
     [Range(1, 100)][SerializeField] int maxAlert = 50;
     [SerializeField] float damageAlertTime = 1.0f;
 
-    VisualElement root;
-
     // Player
     VisualElement healthDamageVE;
     ProgressBar healthProgressBar;
@@ -77,7 +75,6 @@ public class HUDMenu : Menu
 
     void Start()
     {
-        root = uiDocument.rootVisualElement;
         gameManager = GameManager.Instance;
         questManager = QuestManager.Instance;
 

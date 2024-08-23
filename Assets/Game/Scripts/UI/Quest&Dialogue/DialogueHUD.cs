@@ -19,8 +19,6 @@ public class DialogueHUD : Menu
 
     private void Start()
     {
-        VisualElement root = uiDocument.rootVisualElement;
-
         dialogBox = root.Q<VisualElement>("DialogueBox");
         dialogOptions = root.Q<VisualElement>("DialogueOptions");
         dialogPersonName = dialogBox.Q<VisualElement>("Name").Q<Label>();
@@ -49,10 +47,10 @@ public class DialogueHUD : Menu
             Button dialogButton = dialogVE.Q<Button>();
             dialogButton.text = choice.text.Trim();
 
-            dialogButton.clicked += () => {
+            dialogButton.RegisterCallback<ClickEvent>(evt => {
                 story.ChooseChoiceIndex(choice.index);
                 DialogueManager.Instance.ContinueStoryPublic(dialogue, story);
-            };
+            });
             dialogOptions.Add(dialogVE);
         }
     }

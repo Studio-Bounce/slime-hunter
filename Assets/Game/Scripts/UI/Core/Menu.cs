@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,7 +8,10 @@ using UnityEngine.UIElements;
 public class Menu : MonoBehaviour
 {
     protected UIDocument uiDocument;
+    protected VisualElement root;
+
     public bool showOnStart = true;
+    protected FocusController focusController;
 
     public bool IsVisible { get { return uiDocument.rootVisualElement.style.display == DisplayStyle.Flex; } }
 
@@ -16,7 +20,26 @@ public class Menu : MonoBehaviour
     {
         uiDocument = GetComponent<UIDocument>();
         uiDocument.enabled = true;
+        root = uiDocument.rootVisualElement;
+        focusController = root.focusController;
         SetVisible(showOnStart);
+    }
+
+    public void OnSelect()
+    {
+        if (!IsVisible) return;
+
+        VisualElement focusedElement = focusController.focusedElement as VisualElement;
+        Debug.Log($"Select: {focusedElement?.name}");
+        if (focusedElement != null && focusedElement is Button button)
+        {
+            using (var clickEvent = ClickEvent.GetPooled())
+            {
+                Debug.Log("Send Event");
+                clickEvent.target = button;
+                button.SendEvent(clickEvent);
+            }
+        }
     }
 
     public void SetVisible(bool visible)
