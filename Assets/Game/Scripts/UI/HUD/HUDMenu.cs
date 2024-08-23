@@ -65,8 +65,6 @@ public class HUDMenu : Menu
     VisualElement splAttackNotification;
 
     bool isComboHUDUp = false;
-    [SerializeField] float specialAttackBtnTime = 0.5f;
-
     bool redAlertUp = false;
 
     // Cached as they're getting called in OnDestroy

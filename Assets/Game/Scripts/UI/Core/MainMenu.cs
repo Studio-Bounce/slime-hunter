@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using System;
 using FMODUnity;
+using System.Collections;
+
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -26,7 +28,7 @@ public class MainMenu : Menu
         //Button btnContinue = root.Q<Button>("btnContinue");
         Button btnSettings = root.Q<Button>("btnSettings");
         Button btnQuit = root.Q<Button>("btnQuit");
-        btnPlay.RegisterCallback<ClickEvent>(ev => InitiateGame(SetStartState));
+        btnPlay.RegisterCallback<ClickEvent>(ev => InitiateGame(OnNewGame));
         //btnContinue.RegisterCallback<ClickEvent>(ev => InitiateGame(LoadData));
         btnSettings.RegisterCallback<ClickEvent>(ev =>
         {
@@ -47,6 +49,12 @@ public class MainMenu : Menu
         UIManager.Instance.SetMainMenu(false);
         UIManager.Instance.SetHUDMenu(true);
         UIManager.Instance.ResetEndScreen();
+    }
+
+    void OnNewGame(AsyncOperation _, string _s)
+    {
+        GameManager.Instance.GameState = GameState.GAMEPLAY;
+        (UIManager.Instance.introMenu as IntroMenu).Show();
     }
 
     void SetStartState(AsyncOperation _, string _s)

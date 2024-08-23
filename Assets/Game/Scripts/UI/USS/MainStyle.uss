@@ -30,7 +30,15 @@
     margin: 0 5px;
 }
 
-.button:hover, .button:focus, .button:active {
+.button:hover {
+    background-color: var(--bg-accent-dark);
+}
+
+.button:focus {
+    background-color: var(--bg-accent-dark);
+}
+
+.button:active {
     background-color: var(--bg-accent-dark);
 }
 
@@ -74,6 +82,15 @@ DropdownSH * {
     display: none;
 }
 
+.hidden {
+    opacity: 0;
+}
+
+.slow-transition {
+    transition-property: all;
+    transition-duration: 1s;
+}
+
 .container-full {
     width: 100%;
     height: 100%;
@@ -91,13 +108,19 @@ DropdownSH * {
     transition-duration: 0.2s;
     background-color: transparent;
     border-width: 0;
-    background-image: url("project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png");
+    background-image: url("project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=21300000&guid=cc0d50ac1c3613b4c976b882d6c0fc17&type=3#list-item-bg");
     -unity-background-image-tint-color: transparent;
     -unity-text-outline-color: grey;
     -unity-text-outline-width: 1px;
 }
 
-.menu-button:hover, .menu-button:focus {
+.menu-button:hover {
+    text-shadow: 0 0 20px rgb(70, 187, 202);
+    -unity-background-image-tint-color: black;
+    scale: 0.95;
+}
+
+.menu-button:focus {
     text-shadow: 0 0 20px rgb(70, 187, 202);
     -unity-background-image-tint-color: black;
     scale: 0.95;
@@ -142,11 +165,19 @@ DropdownSH * {
     margin: 0;
 }
 
-.tab:hover, .tab:focus {
+.tab:hover {
     background-color: var(--bg-accent-dark);
 }
 
-.tab:hover Label, .tab:focus Label {
+.tab:focus {
+    background-color: var(--bg-accent-dark);
+}
+
+.tab:hover Label {
+    opacity: 1;
+}
+
+.tab:focus Label {
     opacity: 1;
 }
 
@@ -200,7 +231,12 @@ DropdownSH * {
     color: white;
 }
 
-.grid-inventory-container > *:hover, .grid-inventory-container > *:focus {
+.grid-inventory-container > *:hover {
+    border-color: rgb(70, 187, 202);
+    scale: 0.95;
+}
+
+.grid-inventory-container > *:focus {
     border-color: rgb(70, 187, 202);
     scale: 0.95;
 }

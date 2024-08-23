@@ -12,6 +12,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] public Menu pauseMenu;
     [SerializeField] public Menu HUDMenu;
     [SerializeField] public Menu deathMenu;
+    [SerializeField] public Menu introMenu;
     [SerializeField] public Menu autoSave;
     [SerializeField] public Menu settingsMenu;
     [SerializeField] public Menu gladeVillageIntroMenu;

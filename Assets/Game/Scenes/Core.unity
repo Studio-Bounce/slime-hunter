@@ -432,7 +432,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteSettings: {fileID: 11400000, guid: dfe6b1daa281994478981d5909cefe51, type: 2}
   _debugSlimeGel: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
-  joystickSpeed: 1000
   inputQueueDelay: 0.3
 --- !u!1 &267344248
 GameObject:
@@ -882,6 +881,7 @@ Transform:
   - {fileID: 1457945054}
   - {fileID: 226474490}
   - {fileID: 1557150710}
+  - {fileID: 1198731799}
   m_Father: {fileID: 146768978}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &976020911
@@ -901,6 +901,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 1179840936}
   HUDMenu: {fileID: 1498221641}
   deathMenu: {fileID: 343157738}
+  introMenu: {fileID: 1198731800}
   autoSave: {fileID: 1812664888}
   settingsMenu: {fileID: 2126814227}
   gladeVillageIntroMenu: {fileID: 226474491}
@@ -1180,6 +1181,69 @@ MonoBehaviour:
   selectedQuestBorderWidth: 5
   questBorderWidth: 2
   questObjectiveFont: {fileID: 12800000, guid: 92bc8bfa57ebf3f40b4600d3f3352193, type: 3}
+--- !u!1 &1198731798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1198731799}
+  - component: {fileID: 1198731801}
+  - component: {fileID: 1198731800}
+  m_Layer: 0
+  m_Name: IntroMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1198731799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198731798}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 976020910}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1198731800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198731798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bb16ce0c8895f149a14926e918be119, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showOnStart: 0
+--- !u!114 &1198731801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198731798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 4e1433707955c884c969a50848da7077, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 5c314664b3c7f424dbc922a33f908f54,
+    type: 3}
+  m_SortingOrder: 3
 --- !u!1 &1222843758
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,7 +1675,6 @@ MonoBehaviour:
   materialColor: {r: 0, g: 0.27410713, b: 0.3882353, a: 1}
   compassRotationOffset: 180
   cameraBaseRotation: -45
-  specialAttackBtnTime: 0.5
 --- !u!1 &1557150709
 GameObject:
   m_ObjectHideFlags: 0

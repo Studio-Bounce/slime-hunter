@@ -165,6 +165,22 @@ public class CameraManager : Singleton<CameraManager>
 
     // Ideally target would be another VolumeComponent but for simplicity, we'll only set the intensity therefore passing in just a target float
 
+    public void SmoothSetVignette(float source, float target, float duration)
+    {
+        Vignette _vignette;
+        if (GlobalVolume.profile.TryGet(out _vignette))
+        {
+            StartCoroutine(GameManager.RunEasedLerp(
+            source,
+            target,
+            duration,
+            Easing.EaseOutCubic,
+            (float value) => _vignette.intensity.value = value,
+            true
+            ));
+        }
+    }
+
     public void SmoothSetVignette(float target, float duration)
     {
         Vignette _vignette;
@@ -176,6 +192,22 @@ public class CameraManager : Singleton<CameraManager>
             duration,
             Easing.EaseOutCubic,
             (float value) => _vignette.intensity.value = value,
+            true
+            ));
+        }
+    }
+
+    public void SmoothSetBlur(float source, float target, float duration)
+    {
+        BlurSettings _blur;
+        if (GlobalVolume.profile.TryGet(out _blur))
+        {
+            StartCoroutine(GameManager.RunEasedLerp(
+            source,
+            target,
+            duration,
+            Easing.EaseOutCubic,
+            (float value) => _blur.strength.value = value,
             true
             ));
         }
@@ -208,6 +240,22 @@ public class CameraManager : Singleton<CameraManager>
             duration,
             Easing.EaseOutCubic,
             (float value) => _chroma.intensity.value = value,
+            true
+            ));
+        }
+    }
+
+    public void SmoothSetSaturation(float source, float target, float duration)
+    {
+        ColorAdjustments adjust;
+        if (GlobalVolume.profile.TryGet(out adjust))
+        {
+            StartCoroutine(GameManager.RunEasedLerp(
+            source,
+            target,
+            duration,
+            Easing.EaseOutCubic,
+            (float value) => adjust.saturation.value = value,
             true
             ));
         }
