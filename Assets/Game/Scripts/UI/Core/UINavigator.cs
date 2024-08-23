@@ -25,6 +25,16 @@ public class UINavigator : MonoBehaviour
         public Navigable right;
         public Navigable up;
         public Navigable down;
+
+        public override string ToString()
+        {
+            return $"ve: {(ve != null ? ve.name : "null")}(" +
+               $"  left: {(left != null ? left.ve.name : "null")}," +
+               $"  right: {(right != null ? right.ve.name : "null")}," +
+               $"  up: {(up != null ? up.ve.name : "null")}," +
+               $"  down: {(down != null ? down.ve.name : "null")}" +
+               $")";
+        }
     }
 
     void Start()
@@ -57,7 +67,6 @@ public class UINavigator : MonoBehaviour
         // If no element is focused, focus the first one
         if (focusedNavigable == null)
             focusedNavigable = navigables[0];
-        Navigable newNav;
         switch (GetDirection())
         {
             case Direction.None:
@@ -76,23 +85,36 @@ public class UINavigator : MonoBehaviour
                 break;
         }
 
-        Debug.Log($"Focused: {focusedNavigable.ve.name}");
+        Debug.Log(focusedNavigable);
         focusedNavigable.ve.Focus();
+        Debug.Log((focusController.focusedElement as VisualElement).name);
     }
 
     private Direction GetDirection()
     {
         Vector2 dir = InputManager.JoystickDelta;
-        if (dir.y > 0.5f)
+        if (Input.GetKeyDown(KeyCode.UpArrow))
             return Direction.Up;
-        else if (dir.y < -0.5f)
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
             return Direction.Down;
-        else if (dir.x > 0.5f)
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
             return Direction.Right;
-        else if (dir.x < -0.5f)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
             return Direction.Left;
         else
             return Direction.None;
+
+        //Vector2 dir = InputManager.JoystickDelta;
+        //if (dir.y > 0.5f)
+        //    return Direction.Up;
+        //else if (dir.y < -0.5f)
+        //    return Direction.Down;
+        //else if (dir.x > 0.5f)
+        //    return Direction.Right;
+        //else if (dir.x < -0.5f)
+        //    return Direction.Left;
+        //else
+        //    return Direction.None;
     }
 
     // Recursively get all visual elements
@@ -136,7 +158,7 @@ public class UINavigator : MonoBehaviour
 
     private Navigable GetClosestElementInDirection(Navigable sourceNav, Direction dir)
     {
-        Vector2 sourcePos = sourceNav.ve.localBound.center;
+        Vector2 sourcePos = sourceNav.ve.worldBound.center;
         Navigable closestNavigable = null;
         float closestDist = Mathf.Infinity;
 
@@ -154,7 +176,7 @@ public class UINavigator : MonoBehaviour
         foreach(var nav in navigables)
         {
             if (nav == sourceNav) continue;
-            Vector2 targetPos = nav.ve.localBound.center;
+            Vector2 targetPos = nav.ve.worldBound.center;
 
             switch (dir)
             {

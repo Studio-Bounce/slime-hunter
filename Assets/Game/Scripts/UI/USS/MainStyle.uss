@@ -1,43 +1,44 @@
-/* ## Globals  */
-
 :root {
-    --bg-primary: #2F3235;
-    --bg-secondary: #1C2C34;
-    --bg-light: #c8c8c8;
-    --bg-transparent: rgba(0,0,0,0.8);
-    --bg-accent: #46BBCA;
-    --bg-accent-dark: #32808A;
+    --bg-primary: rgb(47, 50, 53);
+    --bg-secondary: rgb(28, 44, 52);
+    --bg-light: rgb(200, 200, 200);
+    --bg-transparent: rgba(0, 0, 0, 0.8);
+    --bg-accent: rgb(70, 187, 202);
+    --bg-accent-dark: rgb(50, 128, 138);
     --bg-outline: white;
     --text-primary: white;
-    --text-secondary: #333333;
-    --text-outline: #808080;
-    --text-glow: #46BBCA;
-
+    --text-secondary: rgb(51, 51, 51);
+    --text-outline: rgb(128, 128, 128);
+    --text-glow: rgb(70, 187, 202);
     --radius: 20px;
     --button-radius: 12px;
 }
 
 * {
     color: white;
-    -unity-font-definition: url('/Assets/Resources/Fonts/HywenHei.ttf');
+    -unity-font-definition: url("project://database/Assets/Resources/Fonts/HywenHei.ttf?fileID=12800000&guid=92bc8bfa57ebf3f40b4600d3f3352193&type=3#HywenHei");
     font-size: 18px;
 }
 
-Button, .button {
+.button {
     transition-property: all;
     transition-duration: 0.2s;
     background-color: var(--bg-accent);
     border-width: 2px;
     border-color: white;
-    border-radius: var( --button-radius);
+    border-radius: var(--button-radius);
     margin: 0 5px;
 }
 
-Button:hover, .button:hover, .button:focus {
+.button:hover {
     background-color: var(--bg-accent-dark);
 }
 
-Button:active, .button:active {
+.button:focus {
+    background-color: var(--bg-accent-dark);
+}
+
+.button:active {
     scale: 0.95;
 }
 
@@ -48,7 +49,7 @@ Button:active, .button:active {
     height: 100%;
     padding: 4%;
     padding-left: 8%;
-    padding-right: 8%
+    padding-right: 8%;
 }
 
 .h1 {
@@ -67,9 +68,12 @@ Button:active, .button:active {
     font-size: 24px;
 }
 
-/* Style for DropdownField element */
+DropdownField * {
+    color: var(--text-secondary);
+    border-radius: var(--radius);
+}
 
-DropdownField *, DropdownSH * {
+DropdownSH * {
     color: var(--text-secondary);
     border-radius: var(--radius);
 }
@@ -82,13 +86,11 @@ DropdownField *, DropdownSH * {
     width: 100%;
     height: 100%;
     padding: 5%;
-    border-radius: var(--radius);   
+    border-radius: var(--radius);
     background-color: var(--bg-transparent);
     border-width: 3px;
-    align-items: center
+    align-items: center;
 }
-
-/* ## Main Menu */
 
 .option-slot {
     transition-property: all;
@@ -97,27 +99,43 @@ DropdownField *, DropdownSH * {
     flex-direction: row;
 }
 
-.option-slot:hover {
-    text-shadow: 0px 0px 20px #46BBCA;
+.menu-button:hover {
+    text-shadow: 0 0 20px rgb(70, 187, 202);
+    -unity-background-image-tint-color: black;
+}
+
+.menu-button:focus {
+    text-shadow: 0 0 20px rgb(70, 187, 202);
     -unity-background-image-tint-color: black;
 }
 
 .menu-button {
+    flex-direction: row;
+    justify-content: center;
     transition-property: all;
     transition-duration: 0.2s;
     background-color: transparent;
+    -unity-background-image-tint-color: transparent;
     border-width: 0;
     -unity-text-outline-color: grey;
     -unity-text-outline-width: 1px;
 }
 
-.menu-button:active {
+.menu-button > Label {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.menu-button:hover .menu-button-deco {
+    color: white;
+    opacity: 1;
     scale: 0.95;
 }
 
-.option-slot:hover .menu-button {
+.menu-button:focus .menu-button-deco {
     color: white;
     opacity: 1;
+    scale: 0.95;
 }
 
 .menu-button-deco {
@@ -125,13 +143,8 @@ DropdownField *, DropdownSH * {
     transition-duration: 0.2s;
     color: white;
     opacity: 0;
+    width: 100px;
 }
-
-.option-slot:hover .menu-button-deco {
-    opacity: 1;
-}
-
-/* ## Inventory */
 
 .tab {
     background-color: transparent;
@@ -188,7 +201,7 @@ DropdownField *, DropdownSH * {
     justify-content: center;
     -unity-text-outline-color: black;
     -unity-text-outline-width: 1px;
-    text-shadow: 0px 0px 2px #46BBCA;
+    text-shadow: 0 0 2px rgb(70, 187, 202);
 }
 
 .grid-inventory-container > * > Label {
