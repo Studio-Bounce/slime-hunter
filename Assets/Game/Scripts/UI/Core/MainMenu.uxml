@@ -12,21 +12,21 @@
                 <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Component%2025%20%E2%80%93%204.png?fileID=2800000&amp;guid=1b316c3bd03d4454a86060360d1d1a6e&amp;type=3#Component 25 – 4&quot;); align-self: auto; -unity-background-scale-mode: scale-to-fit; margin-top: 0; margin-bottom: 0;" />
             </ui:VisualElement>
             <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: column; align-items: center; justify-content: center;">
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnPlay" class="menu-button" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;);">
+                <ButtonSH name="btnPlay" class="menu-button">
                     <ui:VisualElement name="Decoration" class="menu-button-deco" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
                     <ui:Label tabindex="-1" text="New Game" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="h2" />
                     <ui:VisualElement name="Decoration" class="menu-button-deco" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
-                </ui:Button>
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnSettings" class="menu-button" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;);">
+                </ButtonSH>
+                <ButtonSH name="btnSettings" class="menu-button">
                     <ui:VisualElement name="Decoration" class="menu-button-deco" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
                     <ui:Label tabindex="-1" text="Settings" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="h2" />
                     <ui:VisualElement name="Decoration" class="menu-button-deco" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
-                </ui:Button>
-                <ui:Button parse-escape-sequences="true" display-tooltip-when-elided="true" name="btnQuit" class="menu-button" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/list-item-bg.png?fileID=2800000&amp;guid=cc0d50ac1c3613b4c976b882d6c0fc17&amp;type=3#list-item-bg&quot;);">
+                </ButtonSH>
+                <ButtonSH name="btnQuit" class="menu-button">
                     <ui:VisualElement name="Decoration" class="menu-button-deco" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupleft.png?fileID=2800000&amp;guid=17a3138083532c84b810ddeee97cdd82&amp;type=3#Groupleft&quot;); -unity-background-scale-mode: scale-to-fit;" />
                     <ui:Label tabindex="-1" text="Quit" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="h2" />
                     <ui:VisualElement name="Decoration" class="menu-button-deco" style="background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit;" />
-                </ui:Button>
+                </ButtonSH>
             </ui:VisualElement>
             <ui:VisualElement style="flex-grow: 0; padding-right: 0; padding-bottom: 0; flex-direction: row-reverse;">
                 <ui:Label tabindex="-1" text="Version: Capstone 1.0" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" style="align-self: flex-end; font-size: 30px; color: rgb(255, 255, 255); -unity-font-style: bold; justify-content: flex-end; flex-direction: column; -unity-text-align: upper-right; white-space: nowrap; flex-grow: 0; flex-shrink: 0; flex-basis: auto; -unity-background-scale-mode: scale-to-fit; transform-origin: right bottom; margin-right: 16px; margin-bottom: 8px; align-items: auto; -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(70, 70, 70); -unity-font-definition: initial;" />
