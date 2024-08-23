@@ -20,6 +20,20 @@
     font-size: 18px;
 }
 
+/* Style for focused DropdownField */
+.unity-base-field {
+    transition-property: all;
+    transition-duration: 0.2s;
+}
+
+.unity-base-popup-field:focus {
+    scale: 0.95;
+}
+
+.unity-base-slider:focus {
+    scale: 0.95;
+}
+
 .button {
     transition-property: all;
     transition-duration: 0.2s;
