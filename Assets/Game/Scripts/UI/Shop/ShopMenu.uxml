@@ -15,5 +15,7 @@
     <ui:VisualElement name="InputHint" style="flex-grow: 1; position: absolute; flex-direction: row-reverse; right: 5%; bottom: 5%;">
         <ui:Label tabindex="-1" text="Close" parse-escape-sequences="true" display-tooltip-when-elided="true" class="h3" style="transform-origin: right top; -unity-text-align: middle-left;" />
         <InputGlyph action-name="Exit" style="width: 64px; height: 64px;" />
+        <ui:Label tabindex="-1" text="Select" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Label" class="h3" style="transform-origin: right top; -unity-text-align: middle-left;" />
+        <InputGlyph action-name="Select" style="width: 64px; height: 64px;" />
     </ui:VisualElement>
 </ui:UXML>

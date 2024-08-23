@@ -17,6 +17,9 @@
                 <ui:Label tabindex="-1" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. " parse-escape-sequences="true" display-tooltip-when-elided="true" name="DialogueText" class="p" style="flex-wrap: wrap; white-space: normal; text-overflow: ellipsis; color: rgb(255, 255, 255); -unity-text-align: upper-left; min-height: 20%; font-size: 35px;" />
             </ui:VisualElement>
             <ui:VisualElement name="Continue" class="flash-button" style="flex-grow: 0; height: 28px; width: 45px; -unity-background-scale-mode: scale-to-fit; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/Polygon%2021.png?fileID=2800000&amp;guid=9d4c90279173bb04a8c5e2f0887a6e41&amp;type=3#Polygon 21&quot;); left: 1726px; top: auto; display: none; bottom: 45px;" />
+            <ui:VisualElement name="Hints" style="position: absolute; align-items: center; right: 20px; flex-direction: row; bottom: 20px;">
+                <InputGlyph action-name="Select" style="width: 48px; height: 48px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
