@@ -432,6 +432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteSettings: {fileID: 11400000, guid: dfe6b1daa281994478981d5909cefe51, type: 2}
   _debugSlimeGel: {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
+  joystickSpeed: 1000
   inputQueueDelay: 0.3
 --- !u!1 &267344248
 GameObject:
@@ -1687,6 +1688,7 @@ GameObject:
   - component: {fileID: 1577727800}
   - component: {fileID: 1577727802}
   - component: {fileID: 1577727803}
+  - component: {fileID: 1577727804}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -1740,6 +1742,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   showOnStart: 0
   coreCamera: {fileID: 0}
+--- !u!114 &1577727804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577727799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0d9e011f778aa449e92740c792ea76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1666288459
 GameObject:
   m_ObjectHideFlags: 0

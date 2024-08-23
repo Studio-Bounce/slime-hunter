@@ -33,7 +33,7 @@ Button, .button {
     margin: 0 5px;
 }
 
-Button:hover, .button:hover {
+Button:hover, .button:hover, .button:focus {
     background-color: var(--bg-accent-dark);
 }
 

@@ -592,7 +592,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Move"",
+                    ""name"": ""Navigate"",
                     ""type"": ""Value"",
                     ""id"": ""901e886d-2b63-4601-919e-b32d978a5f0f"",
                     ""expectedControlType"": ""Vector2"",
@@ -752,7 +752,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Navigate"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -763,7 +763,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -774,7 +774,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -785,7 +785,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -796,7 +796,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Move"",
+                    ""action"": ""Navigate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -968,7 +968,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_UI_Exit = m_UI.FindAction("Exit", throwIfNotFound: true);
         m_UI_TabLeft = m_UI.FindAction("TabLeft", throwIfNotFound: true);
         m_UI_TabRight = m_UI.FindAction("TabRight", throwIfNotFound: true);
-        m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
+        m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_Continue = m_Debug.FindAction("Continue", throwIfNotFound: true);
@@ -1179,7 +1179,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Exit;
     private readonly InputAction m_UI_TabLeft;
     private readonly InputAction m_UI_TabRight;
-    private readonly InputAction m_UI_Move;
+    private readonly InputAction m_UI_Navigate;
     public struct UIActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1191,7 +1191,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Exit => m_Wrapper.m_UI_Exit;
         public InputAction @TabLeft => m_Wrapper.m_UI_TabLeft;
         public InputAction @TabRight => m_Wrapper.m_UI_TabRight;
-        public InputAction @Move => m_Wrapper.m_UI_Move;
+        public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1222,9 +1222,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @TabRight.started += instance.OnTabRight;
             @TabRight.performed += instance.OnTabRight;
             @TabRight.canceled += instance.OnTabRight;
-            @Move.started += instance.OnMove;
-            @Move.performed += instance.OnMove;
-            @Move.canceled += instance.OnMove;
+            @Navigate.started += instance.OnNavigate;
+            @Navigate.performed += instance.OnNavigate;
+            @Navigate.canceled += instance.OnNavigate;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -1250,9 +1250,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @TabRight.started -= instance.OnTabRight;
             @TabRight.performed -= instance.OnTabRight;
             @TabRight.canceled -= instance.OnTabRight;
-            @Move.started -= instance.OnMove;
-            @Move.performed -= instance.OnMove;
-            @Move.canceled -= instance.OnMove;
+            @Navigate.started -= instance.OnNavigate;
+            @Navigate.performed -= instance.OnNavigate;
+            @Navigate.canceled -= instance.OnNavigate;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -1389,7 +1389,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnExit(InputAction.CallbackContext context);
         void OnTabLeft(InputAction.CallbackContext context);
         void OnTabRight(InputAction.CallbackContext context);
-        void OnMove(InputAction.CallbackContext context);
+        void OnNavigate(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {
