@@ -9,7 +9,7 @@ using InputContext = UnityEngine.InputSystem.InputAction.CallbackContext;
 public class InputManager : Singleton<InputManager>
 {
     [SerializeField] private InputSpriteSettings _spriteSettings;
-    [SerializeField] private ItemSO _debugSlimeGel;
+    [SerializeField] private ItemSO _debugItem;
 
     private PlayerController _playerController;
     private WeaponController _weaponController;
@@ -265,34 +265,25 @@ public class InputManager : Singleton<InputManager>
     private void _AddDebugControls()
     {
         _DebugActions.Continue.performed += evt =>
-        {
             (UIManager.Instance.mainMenu as MainMenu).InitiateGame();
-        };
 
         _DebugActions.Load.performed += evt =>
-        {
             PersistenceManager.Instance.LoadGame();
-        };
 
         _DebugActions.Save.performed += evt =>
-        {
             PersistenceManager.Instance.SaveGame();
-        };
 
         _DebugActions.FullHealth.performed += evt =>
-        {
             GameManager.Instance.PlayerHealth = GameManager.Instance.PlayerMaxHealth;
-        };
 
         _DebugActions.FullSpecial.performed += evt =>
-        {
             GameManager.Instance.PlayerSpecialAttack = GameManager.Instance.PlayerMaxSpecialAttack;
-        };
 
-        _DebugActions.SlimeGel.performed += evt =>
-        {
-            InventoryManager.Instance.AddItem(_debugSlimeGel, true);
-        };
+        _DebugActions.DebugItem.performed += evt =>
+            InventoryManager.Instance.AddItem(_debugItem, true);
+
+        _DebugActions.Die.performed += evt =>
+            GameManager.Instance.PlayerHealth = 0;
     }
 
     private void _RemovePlayerControls()

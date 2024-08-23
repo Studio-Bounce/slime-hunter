@@ -53,6 +53,7 @@ public class MainMenu : Menu
 
     void OnNewGame(AsyncOperation _, string _s)
     {
+        AudioManager.Instance.ExplorationInstance.setParameterByName("Intro", 1);
         GameManager.Instance.GameState = GameState.GAMEPLAY;
         (UIManager.Instance.introMenu as IntroMenu).Show();
     }

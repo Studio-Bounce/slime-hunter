@@ -883,9 +883,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SlimeGel"",
+                    ""name"": ""DebugItem"",
                     ""type"": ""Button"",
                     ""id"": ""97f4bcdb-646d-4c60-9e33-acdd2b3f8f06"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Die"",
+                    ""type"": ""Button"",
+                    ""id"": ""2cf75cec-7a6e-41bd-b930-9fc3cb1eefea"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -922,7 +931,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""SlimeGel"",
+                    ""action"": ""DebugItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -956,6 +965,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Save"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21246861-adbd-453c-ab21-2d6530648dff"",
+                    ""path"": ""<Keyboard>/f4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Die"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1008,7 +1028,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Debug_Load = m_Debug.FindAction("Load", throwIfNotFound: true);
         m_Debug_FullHealth = m_Debug.FindAction("FullHealth", throwIfNotFound: true);
         m_Debug_FullSpecial = m_Debug.FindAction("FullSpecial", throwIfNotFound: true);
-        m_Debug_SlimeGel = m_Debug.FindAction("SlimeGel", throwIfNotFound: true);
+        m_Debug_DebugItem = m_Debug.FindAction("DebugItem", throwIfNotFound: true);
+        m_Debug_Die = m_Debug.FindAction("Die", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1319,7 +1340,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Debug_Load;
     private readonly InputAction m_Debug_FullHealth;
     private readonly InputAction m_Debug_FullSpecial;
-    private readonly InputAction m_Debug_SlimeGel;
+    private readonly InputAction m_Debug_DebugItem;
+    private readonly InputAction m_Debug_Die;
     public struct DebugActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -1329,7 +1351,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Load => m_Wrapper.m_Debug_Load;
         public InputAction @FullHealth => m_Wrapper.m_Debug_FullHealth;
         public InputAction @FullSpecial => m_Wrapper.m_Debug_FullSpecial;
-        public InputAction @SlimeGel => m_Wrapper.m_Debug_SlimeGel;
+        public InputAction @DebugItem => m_Wrapper.m_Debug_DebugItem;
+        public InputAction @Die => m_Wrapper.m_Debug_Die;
         public InputActionMap Get() { return m_Wrapper.m_Debug; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1354,9 +1377,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @FullSpecial.started += instance.OnFullSpecial;
             @FullSpecial.performed += instance.OnFullSpecial;
             @FullSpecial.canceled += instance.OnFullSpecial;
-            @SlimeGel.started += instance.OnSlimeGel;
-            @SlimeGel.performed += instance.OnSlimeGel;
-            @SlimeGel.canceled += instance.OnSlimeGel;
+            @DebugItem.started += instance.OnDebugItem;
+            @DebugItem.performed += instance.OnDebugItem;
+            @DebugItem.canceled += instance.OnDebugItem;
+            @Die.started += instance.OnDie;
+            @Die.performed += instance.OnDie;
+            @Die.canceled += instance.OnDie;
         }
 
         private void UnregisterCallbacks(IDebugActions instance)
@@ -1376,9 +1402,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @FullSpecial.started -= instance.OnFullSpecial;
             @FullSpecial.performed -= instance.OnFullSpecial;
             @FullSpecial.canceled -= instance.OnFullSpecial;
-            @SlimeGel.started -= instance.OnSlimeGel;
-            @SlimeGel.performed -= instance.OnSlimeGel;
-            @SlimeGel.canceled -= instance.OnSlimeGel;
+            @DebugItem.started -= instance.OnDebugItem;
+            @DebugItem.performed -= instance.OnDebugItem;
+            @DebugItem.canceled -= instance.OnDebugItem;
+            @Die.started -= instance.OnDie;
+            @Die.performed -= instance.OnDie;
+            @Die.canceled -= instance.OnDie;
         }
 
         public void RemoveCallbacks(IDebugActions instance)
@@ -1439,6 +1468,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnLoad(InputAction.CallbackContext context);
         void OnFullHealth(InputAction.CallbackContext context);
         void OnFullSpecial(InputAction.CallbackContext context);
-        void OnSlimeGel(InputAction.CallbackContext context);
+        void OnDebugItem(InputAction.CallbackContext context);
+        void OnDie(InputAction.CallbackContext context);
     }
 }

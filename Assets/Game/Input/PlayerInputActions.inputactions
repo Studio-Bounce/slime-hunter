@@ -861,9 +861,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SlimeGel",
+                    "name": "DebugItem",
                     "type": "Button",
                     "id": "97f4bcdb-646d-4c60-9e33-acdd2b3f8f06",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Die",
+                    "type": "Button",
+                    "id": "2cf75cec-7a6e-41bd-b930-9fc3cb1eefea",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -900,7 +909,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SlimeGel",
+                    "action": "DebugItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -934,6 +943,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Save",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21246861-adbd-453c-ab21-2d6530648dff",
+                    "path": "<Keyboard>/f4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Die",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -69,6 +69,7 @@ public class Menu : MonoBehaviour
         SetVisible(true);
         float timer = 0;
         VisualElement root = uiDocument.rootVisualElement;
+        root.style.opacity = 0.0f;
         while (timer < duration)
         {
             root.style.opacity = timer;
@@ -88,7 +89,7 @@ public class Menu : MonoBehaviour
             timer -= Time.unscaledDeltaTime;
             yield return null;
         }
-        root.style.opacity = 0f;
+        root.style.opacity = 1.0f;
         SetVisible(false);
     }
 }
