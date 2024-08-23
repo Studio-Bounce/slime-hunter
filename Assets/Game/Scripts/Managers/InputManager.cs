@@ -21,7 +21,6 @@ public class InputManager : Singleton<InputManager>
     private PlayerInputActions.DebugActions _DebugActions;
 
     private Vector2 _movement = Vector2.zero;
-    public float joystickSpeed = 1000.0f;
 
     public float inputQueueDelay = .3f;
     private Dictionary<Func<InputContext, bool>, InputContext> QueuedInputMap = new Dictionary<Func<InputContext, bool>, InputContext>();
@@ -240,7 +239,7 @@ public class InputManager : Singleton<InputManager>
 
     private void OnJoystick(InputContext context)
     {
-        JoystickDelta = joystickSpeed * Time.deltaTime * context.ReadValue<Vector2>();
+        JoystickDelta = Time.deltaTime * context.ReadValue<Vector2>();
     }
 
     private void OffJoystick(InputContext context)

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -30,12 +31,11 @@ public class Menu : MonoBehaviour
         if (!IsVisible) return;
 
         VisualElement focusedElement = focusController.focusedElement as VisualElement;
-        Debug.Log($"Select: {focusedElement?.name}");
+        // Debug.Log($"Select: {focusedElement?.name}");
         if (focusedElement != null && focusedElement is Button button)
         {
             using (var clickEvent = ClickEvent.GetPooled())
             {
-                Debug.Log("Send Event");
                 clickEvent.target = button;
                 button.SendEvent(clickEvent);
             }
@@ -54,11 +54,13 @@ public class Menu : MonoBehaviour
 
     public virtual void Show()
     {
+        root.Q<Button>().Focus();
         SetVisible(true);
     }
 
     public virtual void Hide()
     {
+        root.Blur();
         SetVisible(false);
     }
 

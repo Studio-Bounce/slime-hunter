@@ -494,7 +494,7 @@
                     "id": "21a682e8-fbd1-433e-a77a-95975d0cf1a9",
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "StickDeadzone",
+                    "processors": "StickDeadzone,ScaleVector2(x=1000,y=1000)",
                     "groups": "",
                     "action": "Joystick",
                     "isComposite": false,
