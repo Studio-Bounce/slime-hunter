@@ -1,9 +1,9 @@
 -> blacksmith_greetings
 
 === blacksmith_greetings ===
-0: "Hello Mylo, I hope you're doing well."
+0: "Ah, Mylo! Good to see you. How have you been since our last encounter?"
 * [Continue]
-0: "Are you looking for something?"
+0: "What brings you here today? Looking for something special, perhaps?"
 -> next
 
 === next ===
@@ -11,14 +11,14 @@
   -> mylo
   
 === mylo ===
-1: "Yes I am doing well. I was looking for Kuro"
+1: "I'm doing well, thanks. I was actually hoping to find Kuro."
 * [Continue]
 -> mylo2
 
 === mylo2 ===
-1: "Do you know where is he?."
+1: "Do you have any idea where he might be?"
 * [Continue]
-1: "I have not seen him. I came back with the boat couldnt find him in the Forest."
+1: "I haven't crossed paths with him recently. I returned from the forest by boat, but Kuro was nowhere to be found."
     -> next2
     
 === next2 ===
@@ -27,21 +27,21 @@
   
 === blacksmith ===
 
-0: "Yes. He went towards Nord Forest. But the boat dock is covered with the Gel. You might want to find the Alchemist to help you out with that."
+0: "Ah, I see. Kuro ventured towards the Nord Forest. But beware—the dock is swarmed with Gel. You might need the Alchemist's help to clear a path."
 * [Continue]
 -> blacksmith2
 
 === blacksmith2 ===
-0: "Although, I need some help from you Mylo, can you go to the Gooey Forest and"
+0: "Before you go, though, there's something I need from you. Can you venture into the Gooey Forest and fetch my gear?"
 * [Continue]
 -> blacksmith3
 
 === blacksmith3 ===
-0: "bring my gear? I will make sure your efforts dont go in vain!"
+0: "I'll make sure your efforts are well rewarded. What do you say, Mylo?"
 -> myloresponse
     
 === myloresponse ===
-* ["Sure!"]1: "Yes I would like to help you! Just keep my reward ready"
+* ["Sure!"]1: "Absolutely, I'll take care of it. Just make sure you have my reward ready when I return."
 -> next3
 
 === next3 ===
@@ -49,5 +49,5 @@
   -> completion
 
 === completion ===
-0: "Okay, Thank you Mylo, see you around!"
+0: "Thank you, Mylo. I'll be waiting for your return. Safe travels!"
 -> DONE

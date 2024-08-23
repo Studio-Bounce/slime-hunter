@@ -23,7 +23,6 @@ public class IntroMenu : Menu
     {
         StopAllCoroutines();
         StartCoroutine(EndIntroSequence());
-        inputAction.performed -= Skip;
     }
 
     public override void Show()
@@ -61,6 +60,7 @@ public class IntroMenu : Menu
 
     IEnumerator EndIntroSequence()
     {
+        inputAction.performed -= Skip;
         InputManager.Instance.TogglePlayerControls(true);
         CameraManager.Instance.SmoothSetVignette(1.0f, 0.0f, 5.0f);
         CameraManager.Instance.SmoothSetBlur(15.0f, 0.0f, 4.0f);
