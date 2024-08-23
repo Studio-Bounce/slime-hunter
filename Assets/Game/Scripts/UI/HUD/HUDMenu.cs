@@ -280,7 +280,7 @@ public class HUDMenu : Menu
         // Don't run remove aniamtion if already removed
         if (!ready && splAttackNotification.style.opacity == 0) yield break;
 
-        yield return GameManager.RunEasedLerp(
+        StartCoroutine(GameManager.RunEasedLerp(
             ready ? 0 : 1,
             ready ? 1 : 0,
             0.2f,
@@ -290,7 +290,7 @@ public class HUDMenu : Menu
                 splAttackNotification.style.opacity = val;
             },
             true
-        );
+        ));
 
         yield return GameManager.RunEasedLerp(
             1,
