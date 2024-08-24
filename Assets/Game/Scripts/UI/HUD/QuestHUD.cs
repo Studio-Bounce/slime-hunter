@@ -21,7 +21,6 @@ public class QuestHUD : Menu
     VisualElement questStartVE;
     VisualElement questUpdatedVE;
     VisualElement questCompletedVE;
-    Button questCompleteClearBtn;
 
     [SerializeField] float questBannerTime = 2.0f;
 
@@ -41,10 +40,6 @@ public class QuestHUD : Menu
         questStartVE = canvas.Q<VisualElement>("QuestStart");
         questUpdatedVE = canvas.Q<VisualElement>("QuestUpdated");
         questCompletedVE = canvas.Q<VisualElement>("QuestCompleted");
-        questCompleteClearBtn = questCompletedVE.Q<Button>("ClearButton");
-        // Temporary: Hiding the quest complete "okay" button
-        questCompleteClearBtn.style.opacity = 0;
-        //questCompleteClearBtn.clicked += () => StartCoroutine(HideQuestNotification(QuestNotifType.COMPLETE));
 
         // Hide all
         canvas.style.opacity = 1f;

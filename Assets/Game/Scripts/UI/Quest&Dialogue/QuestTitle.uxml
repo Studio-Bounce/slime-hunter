@@ -3,7 +3,7 @@
     <ui:VisualElement name="Canvas" style="flex-grow: 1; opacity: 1; align-items: center; justify-content: center;">
         <ui:VisualElement name="QuestStart" style="width: auto; height: auto;">
             <ui:VisualElement name="Box" style="background-color: rgba(70, 187, 202, 0.4); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
-                <ui:VisualElement name="QuestTypeIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/MainJourney.png?fileID=2800000&amp;guid=9171dd3575743bc419e80f50a24d0716&amp;type=3#MainJourney&quot;); -unity-background-scale-mode: scale-to-fit; height: 64px; margin-top: 56px;" />
+                <ui:VisualElement name="QuestTypeIcon" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Game/Textures/UI/PauseMenu/MainJourney.png?fileID=2800000&amp;guid=9171dd3575743bc419e80f50a24d0716&amp;type=3#MainJourney&quot;); -unity-background-scale-mode: scale-to-fit; height: 64px; margin-top: 24px; margin-right: 24px; margin-bottom: 24px; margin-left: 24px;" />
                 <ui:Label tabindex="-1" text="Main Journey" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuestType" style="align-self: center; font-size: 30px; -unity-font-style: bold; color: rgb(255, 255, 255); margin-bottom: 25px;" />
                 <ui:Label tabindex="-1" text="Help The BlackSmith" parse-escape-sequences="true" display-tooltip-when-elided="true" name="QuestName" style="-unity-text-align: upper-center; font-size: 40px; -unity-font-style: normal; color: rgb(255, 255, 255);" />
                 <ui:VisualElement name="QuestReceived" style="flex-grow: 1; flex-direction: row; align-self: center;">
@@ -12,11 +12,19 @@
                     <ui:VisualElement style="flex-grow: 0; align-self: center; height: 20px; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Groupright.png?fileID=2800000&amp;guid=70ee0e63b3aff624dbdb576310141d2e&amp;type=3#Groupright&quot;); -unity-background-scale-mode: scale-to-fit; -unity-text-align: upper-center; justify-content: flex-start; align-items: flex-start; margin-right: 50px; width: 180px;" />
                 </ui:VisualElement>
             </ui:VisualElement>
+            <ui:VisualElement name="Hint" style="flex-direction: row; align-items: center; justify-content: center;">
+                <InputGlyph action-name="Exit" style="width: 64px; height: 64px;" />
+                <ui:Label tabindex="-1" text="Open Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" />
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="QuestUpdated" class="unshowned-content" style="flex-grow: 1;">
+        <ui:VisualElement name="QuestUpdated" class="unshowned-content">
             <ui:VisualElement name="Box" style="background-color: rgba(70, 187, 202, 0.4); border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 25px; border-top-right-radius: 25px; border-bottom-right-radius: 25px; border-bottom-left-radius: 25px; padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
                 <ui:Label tabindex="-1" text="Quest Objective Updated" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Objective_Updated" style="align-self: center; font-size: 25px; -unity-font-style: bold; color: rgb(255, 255, 255); margin-top: 15px;" />
                 <ui:Label tabindex="-1" text="Find The BlackSmith" parse-escape-sequences="true" display-tooltip-when-elided="true" name="NewObjectiveName" style="-unity-text-align: upper-center; font-size: 40px; -unity-font-style: normal; color: rgb(255, 255, 255);" />
+            </ui:VisualElement>
+            <ui:VisualElement name="Hint" style="flex-direction: row; align-items: center; justify-content: center;">
+                <InputGlyph action-name="Exit" style="width: 64px; height: 64px;" />
+                <ui:Label tabindex="-1" text="Open Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" />
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="QuestCompleted" class="unshowned-content">
@@ -42,8 +50,9 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:VisualElement>
-            <ui:VisualElement name="VisualElement" style="padding-left: 180px; padding-right: 180px; padding-top: 60px;">
-                <ui:Button text="Got it" parse-escape-sequences="true" display-tooltip-when-elided="true" name="ClearButton" style="border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; font-size: 20px; -unity-font-style: bold; color: rgb(255, 255, 255); border-top-left-radius: 21px; border-top-right-radius: 21px; border-bottom-right-radius: 21px; border-bottom-left-radius: 21px; background-color: rgba(70, 187, 202, 0.4);" />
+            <ui:VisualElement name="Hint" style="flex-direction: row; align-items: center; justify-content: center;">
+                <InputGlyph action-name="Exit" style="width: 64px; height: 64px;" />
+                <ui:Label tabindex="-1" text="Open Menu" parse-escape-sequences="true" display-tooltip-when-elided="true" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
