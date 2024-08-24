@@ -15,6 +15,7 @@
             <ui:VisualElement name="StatusArea" style="flex-grow: 1; flex-direction: row; margin-left: 30px; height: 20%;">
                 <ui:VisualElement name="weaponSwitchArea" style="flex-grow: 0; width: 138px; opacity: 1; padding-top: 50px; padding-bottom: 37px;">
                     <ui:VisualElement name="WeaponIcon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Game/Textures/UI/HUD_Elements/thirdweapon.png?fileID=2800000&amp;guid=2e63cda403abdc845bdf0ca700093c97&amp;type=3#thirdweapon&quot;); -unity-background-scale-mode: scale-to-fit; align-self: auto;" />
+                    <InputGlyph action-name="CycleWeapon" style="position: absolute; width: 48px; height: 48px; opacity: 1; left: -15px; top: 25px;" />
                 </ui:VisualElement>
                 <ui:VisualElement name="Bars" style="flex-grow: 1; padding-top: 20%; padding-right: 17%; padding-bottom: 6%; padding-left: 2%;">
                     <ui:VisualElement name="SpecialAttack" style="flex-grow: 1; flex-direction: row;">
@@ -35,7 +36,7 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="Red_Alert" class="redalert" style="flex-grow: 1; position: absolute; -unity-background-scale-mode: stretch-to-fill; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Rectangle%2047playersttacked.png?fileID=21300000&amp;guid=000297ea16efd484185e1cd60150cb9f&amp;type=3#Rectangle 47playersttacked&quot;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.49); opacity: 0; width: 100%; height: 100%; display: flex;" />
+        <ui:VisualElement name="Red_Alert" class="redalert" style="flex-grow: 1; position: absolute; -unity-background-scale-mode: stretch-to-fill; background-image: url(&quot;project://database/Assets/Game/Textures/UI/Rectangle%2047playersttacked.png?fileID=21300000&amp;guid=000297ea16efd484185e1cd60150cb9f&amp;type=3#Rectangle 47playersttacked&quot;); -unity-background-image-tint-color: rgba(255, 255, 255, 0.49); opacity: 0; width: 100%; height: 100%; display: flex; top: 2px; left: 0;" />
         <ui:VisualElement name="Blank_Centre" style="flex-grow: 0; width: 40%; display: flex; opacity: 1; align-items: center; justify-content: center;">
             <ui:VisualElement name="SplAttackPopup" style="flex-grow: 0; align-items: center; justify-content: center; flex-shrink: 0; margin-bottom: 400px;">
                 <ui:Label tabindex="-1" text="Special Attack&#10;Ready" parse-escape-sequences="true" display-tooltip-when-elided="true" style="white-space: normal; -unity-text-align: middle-center;" />
