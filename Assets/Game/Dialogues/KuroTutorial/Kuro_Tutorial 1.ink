@@ -8,18 +8,18 @@
 
 === b ===
 
-1: "That really gave me a scare there. I almost bit the dust."
+1: "That gave me a real scare. I was almost done for."
 * [Continue]
     -> c
 
 === c ===
 
-0: "Don't be so dramatic—you handled it well. Up ahead, there are some shy slimes. They should be harmless, but you might want to practice a few swings on them."
+0: "Don't be so dramatic, you handled it well. Up ahead, there are some shy slimes and dash slimes. The shy slimes are harmless but the dash slimes can be tricky. Maybe practice a few swings on the small ones first."
 * [Continue]
     -> d
 
 === d ===
 
-0: "I also spotted an old chest by the shoreline. Always remember to check your corners."
+0: "I also spotted an old chest by the shoreline. Always remember to check your corners. I'll meet you up ahead"
     
 -> DONE

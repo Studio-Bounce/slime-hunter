@@ -2,30 +2,36 @@
 
 === alchemist ===
 
-0: "Mylo, thank you so much! You’ve saved me from a dire situation!"
+0: "Mylo, you’ve saved me from a dire situation! I can't thank you enough."
 * [Continue]
 
 -> mylo1
 
 === mylo1 ===
 
-1: "You're welcome. I’m actually here to get the potion that clears the gel blocking the dock"
+1: "I’m just glad you’re safe. I actually need the potion to clear the gel blocking the dock."
 * [Continue]
 
 -> alchemist1
 
 === alchemist1 ===
 
-0: "Ah, I see. But why do you need that particular potion? It's typically reserved for seasoned Slime Hunters!"
+0: "Ah, I understand. But why do you need that potion? It’s usually reserved for experienced Slime Hunters!"
 * [Continue]
 
 -> need_spells
 
 === need_spells ===
 
-1: "I’m on a quest to find Kuro. I need to clear the Gel to continue my search."
+1: "I’m need to head to Nord Forest to find Master Kuro. The docks are my only way forward."
 * [Continue]
 
-0: "Understood. We should head to my alchemy shop. I’ll prepare the potion for you and provide some useful spells. Follow me."
+0: "Nord Forest is dangerous, I hope you're not in over your head here... Then again, I can't say much with you saving me and all.
+
+--> end
+
+=== end ===
+
+0: "Let’s head to my alchemy shop. I’ll prepare the potion for you and equip you with some helpful spells. Follow me."
 
 -> DONE

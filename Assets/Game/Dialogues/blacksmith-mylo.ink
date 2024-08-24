@@ -11,14 +11,14 @@
   -> mylo
   
 === mylo ===
-1: "I'm doing well, thanks. I was actually hoping to find Kuro."
+1: "I'm doing well, thanks. I was actually hoping to find Master Kuro."
 * [Continue]
 -> mylo2
 
 === mylo2 ===
 1: "Do you have any idea where he might be?"
 * [Continue]
-1: "I haven't crossed paths with him recently. I returned from the forest by boat, but Kuro was nowhere to be found."
+1: "I just arrived with Master Kuro by boat but he rushed ahead of me. Master said you would know where he is."
     -> next2
     
 === next2 ===
@@ -27,7 +27,7 @@
   
 === blacksmith ===
 
-0: "Ah, I see. Kuro ventured towards the Nord Forest. But beware—the dock is swarmed with Gel. You might need the Alchemist's help to clear a path."
+0: "Classic Kuro, leaving his disciple to fend for themselves. Kuro just left for the Nord Forest. But beware—the dock is swarmed with Gel. You might need the Alchemist's help to clear a path."
 * [Continue]
 -> blacksmith2
 
@@ -41,7 +41,7 @@
 -> myloresponse
     
 === myloresponse ===
-* ["Sure!"]1: "Absolutely, I'll take care of it. Just make sure you have my reward ready when I return."
+* ["Sure!"]1: "Absolutely, I'll take care of it."
 -> next3
 
 === next3 ===
