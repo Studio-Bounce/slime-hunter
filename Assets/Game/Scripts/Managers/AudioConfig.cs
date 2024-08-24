@@ -8,6 +8,7 @@ public class AudioConfig : ScriptableObject
     public EventReference menuEvent;
     public EventReference explorationEvent;
     public EventReference villageEvent;
+    public EventReference bossEvent;
 
     [Header("Combat Transitions")]
     public int maxEnemyIntensity = 3;

@@ -1,5 +1,6 @@
 using FMOD.Studio;
 using FMODUnity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -24,6 +25,8 @@ public class AudioManager : Singleton<AudioManager>
     public EventInstance VillageInstance { get; set; }
     public EventInstance CreditsInstance { get; set; }
     public EventInstance DeathInstance { get; set; }
+    public EventInstance BossInstance { get; set; }
+
 
     private Dictionary<string, EventInstance> soundEffectInstances = new Dictionary<string, EventInstance>();
     private Dictionary<string, EventInstance> uiSoundEffectInstances = new Dictionary<string, EventInstance>();
@@ -45,6 +48,7 @@ public class AudioManager : Singleton<AudioManager>
         CreditsInstance = RuntimeManager.CreateInstance(config.villageEvent);
         CreditsInstance.setParameterByName("VillagePhase", 2);
         DeathInstance = RuntimeManager.CreateInstance(config.villageEvent);
+        BossInstance = RuntimeManager.CreateInstance(config.bossEvent);
 
         // SFX
         SpecialAttackInstance = RuntimeManager.CreateInstance(config.specialAttack);
@@ -120,6 +124,24 @@ public class AudioManager : Singleton<AudioManager>
     {
         ComboInstance.setParameterByName("Pitch", pitch);
         ComboInstance.start();
+    }
+
+    public void StartBossMusic(int level)
+    {
+        ExplorationInstance.setParameterByName("Fade", 1);
+        BossInstance.setParameterByName("MiniBoss", level);
+        BossInstance.start();
+    }
+
+    public void SetBossMusicLevel(int level)
+    {
+        BossInstance.setParameterByName("MiniBoss", level);
+    }
+
+    public void EndBossMusic()
+    {
+        ExplorationInstance.setParameterByName("Fade", 0);
+        BossInstance.setParameterByName("MiniBoss", 2);
     }
 
     public void ForceAlert(float value)
