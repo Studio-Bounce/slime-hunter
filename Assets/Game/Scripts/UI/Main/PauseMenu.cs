@@ -213,11 +213,13 @@ public class PauseMenu : TabbedMenu
 
         if (show)
         {
+            mapCamera.enabled = true;
             CameraManager.Instance.SmoothSetBlur(0.0f, 0.3f);
             mapCamera.depth = 1;
         }
         else
         {
+            mapCamera.enabled = false;
             CameraManager.Instance.SmoothSetBlur(15.0f, 0.3f);
             mapCamera.depth = -1;
         }
