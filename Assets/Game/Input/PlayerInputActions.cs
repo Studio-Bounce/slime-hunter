@@ -865,6 +865,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Teleport"",
+                    ""type"": ""Button"",
+                    ""id"": ""791faee1-da40-4e44-89a3-af20c487452c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""FullHealth"",
                     ""type"": ""Button"",
                     ""id"": ""d1e95f5c-6936-4644-bd68-cb9b14541ed8"",
@@ -978,6 +987,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Die"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8618dfb1-cbdd-4bed-b938-cdd70c6f875a"",
+                    ""path"": ""<Keyboard>/f8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Teleport"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -1026,6 +1046,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Debug_Continue = m_Debug.FindAction("Continue", throwIfNotFound: true);
         m_Debug_Save = m_Debug.FindAction("Save", throwIfNotFound: true);
         m_Debug_Load = m_Debug.FindAction("Load", throwIfNotFound: true);
+        m_Debug_Teleport = m_Debug.FindAction("Teleport", throwIfNotFound: true);
         m_Debug_FullHealth = m_Debug.FindAction("FullHealth", throwIfNotFound: true);
         m_Debug_FullSpecial = m_Debug.FindAction("FullSpecial", throwIfNotFound: true);
         m_Debug_DebugItem = m_Debug.FindAction("DebugItem", throwIfNotFound: true);
@@ -1338,6 +1359,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Debug_Continue;
     private readonly InputAction m_Debug_Save;
     private readonly InputAction m_Debug_Load;
+    private readonly InputAction m_Debug_Teleport;
     private readonly InputAction m_Debug_FullHealth;
     private readonly InputAction m_Debug_FullSpecial;
     private readonly InputAction m_Debug_DebugItem;
@@ -1349,6 +1371,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Continue => m_Wrapper.m_Debug_Continue;
         public InputAction @Save => m_Wrapper.m_Debug_Save;
         public InputAction @Load => m_Wrapper.m_Debug_Load;
+        public InputAction @Teleport => m_Wrapper.m_Debug_Teleport;
         public InputAction @FullHealth => m_Wrapper.m_Debug_FullHealth;
         public InputAction @FullSpecial => m_Wrapper.m_Debug_FullSpecial;
         public InputAction @DebugItem => m_Wrapper.m_Debug_DebugItem;
@@ -1371,6 +1394,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Load.started += instance.OnLoad;
             @Load.performed += instance.OnLoad;
             @Load.canceled += instance.OnLoad;
+            @Teleport.started += instance.OnTeleport;
+            @Teleport.performed += instance.OnTeleport;
+            @Teleport.canceled += instance.OnTeleport;
             @FullHealth.started += instance.OnFullHealth;
             @FullHealth.performed += instance.OnFullHealth;
             @FullHealth.canceled += instance.OnFullHealth;
@@ -1396,6 +1422,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Load.started -= instance.OnLoad;
             @Load.performed -= instance.OnLoad;
             @Load.canceled -= instance.OnLoad;
+            @Teleport.started -= instance.OnTeleport;
+            @Teleport.performed -= instance.OnTeleport;
+            @Teleport.canceled -= instance.OnTeleport;
             @FullHealth.started -= instance.OnFullHealth;
             @FullHealth.performed -= instance.OnFullHealth;
             @FullHealth.canceled -= instance.OnFullHealth;
@@ -1466,6 +1495,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnContinue(InputAction.CallbackContext context);
         void OnSave(InputAction.CallbackContext context);
         void OnLoad(InputAction.CallbackContext context);
+        void OnTeleport(InputAction.CallbackContext context);
         void OnFullHealth(InputAction.CallbackContext context);
         void OnFullSpecial(InputAction.CallbackContext context);
         void OnDebugItem(InputAction.CallbackContext context);

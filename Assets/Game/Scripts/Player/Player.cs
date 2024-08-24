@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.AddressableAssets.Build;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,19 @@ public class Player : DynamicDamageTaker
         
         // Don't use DamageTaker's health system
         isInvincible = true;
+    }
+
+    public IEnumerator Teleport(Vector3 dest)
+    {
+        CharacterController cc = playerController?.GetComponent<CharacterController>();
+        if (cc == null) yield break;
+
+        cc.enabled = false;
+
+        yield return new WaitForSeconds(0.3f);
+
+        transform.position = dest;
+        cc.enabled = true;
     }
 
     public void Heal(int value)

@@ -843,6 +843,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Teleport",
+                    "type": "Button",
+                    "id": "791faee1-da40-4e44-89a3-af20c487452c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "FullHealth",
                     "type": "Button",
                     "id": "d1e95f5c-6936-4644-bd68-cb9b14541ed8",
@@ -954,6 +963,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Die",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8618dfb1-cbdd-4bed-b938-cdd70c6f875a",
+                    "path": "<Keyboard>/f8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Teleport",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -10,6 +10,7 @@ public class InputManager : Singleton<InputManager>
 {
     [SerializeField] private InputSpriteSettings _spriteSettings;
     [SerializeField] private ItemSO _debugItem;
+    [SerializeField] private Vector3 _debugTeleport;
 
     private PlayerController _playerController;
     private WeaponController _weaponController;
@@ -272,6 +273,9 @@ public class InputManager : Singleton<InputManager>
 
         _DebugActions.Save.performed += evt =>
             PersistenceManager.Instance.SaveGame();
+
+        _DebugActions.Teleport.performed += evt =>
+            StartCoroutine(GameManager.Instance.PlayerRef.Teleport(_debugTeleport));
 
         _DebugActions.FullHealth.performed += evt =>
             GameManager.Instance.PlayerHealth = GameManager.Instance.PlayerMaxHealth;
