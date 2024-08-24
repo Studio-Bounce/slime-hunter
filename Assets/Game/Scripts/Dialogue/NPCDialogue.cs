@@ -9,7 +9,8 @@ public enum Character
     BLACKSMITH,
     ALCHEMIST,
     GUARD,
-    STRANGER
+    STRANGER,
+    KURO
 }
 
 
