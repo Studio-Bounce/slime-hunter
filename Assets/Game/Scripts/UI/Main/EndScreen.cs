@@ -50,8 +50,10 @@ public class EndScreen : Menu
     {
         if (rollingFrame == null)
             return;
+        Debug.Log("Test");
         AudioManager.Instance.CreditsMusic();
-        Show();
+        CameraManager.Instance.SmoothSetVignette(0.3f, 2.0f);
+        StartCoroutine(FadeIn(2.0f));
         rollCredits = true;
         timeElapsed = 0;
     }
