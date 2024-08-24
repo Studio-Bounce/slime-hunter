@@ -15,20 +15,14 @@
 
 === Mylo_Greetings ===
 
-1: "Hi Erika, yes, I’m on my way to the forest."
-* [Continue]
-
-1: "I need to retrieve some gear for the Blacksmith."
--> next2
-
-=== next2 ===
+1: "Hey Erika! That's right. I'm heading to the forest to gather some gear for the Blacksmith."
 
 * [Continue]
   -> Guard
 
 === Guard ===
 
-0: "That fat bastard, always sending someone else into danger. You’re braver than I thought."
+0: "That fat bastard, always sending someone else into danger. You're braver than I thought."
 -> next3
 
 === next3 ===
@@ -38,10 +32,10 @@
 
 === Mylo ===
 
-1: "It’s fine. I need his help, and he promised a reward."
+1: "I'll be fine. I need his help, and he promised me a reward."
 * [Continue]
 
-1: "Besides, I’m not a kid anymore. I can handle a few slimes on my own."
+1: "Besides, I'm not a kid anymore. I can handle a few slimes on my own."
 -> next4
 
 === next4 ===

@@ -15,7 +15,7 @@
 === c ===
 
 0: "Let me tell you, there's nothing like a proper Slimerian Spa. One day, I'll take you there, Mylo. Maybe when you become a seasoned hunter like me."
-* [I’ll look forward to it]
+* [I look forward to it]
     -> d
 
 === d ===

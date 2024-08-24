@@ -2,7 +2,7 @@
 
 === a ===
 
-0: "You seem to be doing well on your own. At this rate you'll be Slime Hunting in the big leagues in no time."
+0: "You seem to be doing well on your own. At this rate you'll be slime hunting in the big leagues in no time."
 * [Continue]
     -> b
     
