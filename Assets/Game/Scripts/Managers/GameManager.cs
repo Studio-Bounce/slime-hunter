@@ -270,6 +270,7 @@ public class GameManager : Singleton<GameManager>
 
     public void TimeNormal()
     {
+        StopAllCoroutines();
         Time.timeScale = 1;
     }
 

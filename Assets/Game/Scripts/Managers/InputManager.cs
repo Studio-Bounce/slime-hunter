@@ -240,7 +240,7 @@ public class InputManager : Singleton<InputManager>
 
     private void OnJoystick(InputContext context)
     {
-        JoystickDelta = Time.deltaTime * context.ReadValue<Vector2>();
+        JoystickDelta = Time.unscaledDeltaTime * context.ReadValue<Vector2>();
     }
 
     private void OffJoystick(InputContext context)

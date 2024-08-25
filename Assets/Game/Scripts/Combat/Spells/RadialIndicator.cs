@@ -98,6 +98,9 @@ public class RadialIndicator : SpellIndicator
         sourceRenderer.enabled = (castRange > 0) ? true : false;
         targetRenderer.enabled = true;
         InitializeScaleMaterial();
+        GameManager.Instance.ApplyTempTimeScale(0.3f, 2.0f);
+        CameraManager.Instance.SetSaturation(-20);
+        CameraManager.Instance.SetChromatic(0.5f);
 
         if (InputManager.IsGamepad)
         {
@@ -112,6 +115,9 @@ public class RadialIndicator : SpellIndicator
         Active = false;
         sourceRenderer.enabled = false;
         targetRenderer.enabled = false;
+        GameManager.Instance.TimeNormal();
+        CameraManager.Instance.SetSaturation(8);
+        CameraManager.Instance.SetChromatic(0.0f);
 
         if (InputManager.IsGamepad) InputManager.Instance.TogglePlayerMovement(true);
     }

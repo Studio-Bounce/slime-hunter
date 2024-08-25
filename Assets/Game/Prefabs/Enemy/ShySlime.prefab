@@ -837,9 +837,6 @@ MonoBehaviour:
   attackEmissionTime: 0.1
   attackProximity: 1
   slimeAnimator: {fileID: 247210881314464809}
-  onHopEvent:
-    m_PersistentCalls:
-      m_Calls: []
   fleeSteeringBehaviour: {fileID: 1860402855733763571}
   playerProximityDistance: 5
   fleeSpeed: 5
@@ -896,11 +893,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e9386f50c094e243a4fd2658c9e5c70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - {fileID: 11400000, guid: 0a3ff79e851e8e148a519caf60b3f362, type: 2}
   droppedItemPrefab: {fileID: 5271803406887303148, guid: fb226ce21fa4d4f4092706fc0a907e9b,
     type: 3}
   launchAngle: 0
-  angleRange: 0
+  angleRange: 360
 --- !u!114 &3297499863038635125
 MonoBehaviour:
   m_ObjectHideFlags: 0
