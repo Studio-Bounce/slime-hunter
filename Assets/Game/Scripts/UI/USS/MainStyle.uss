@@ -46,10 +46,13 @@
 
 .button:hover {
     background-color: var(--bg-accent-dark);
+    scale: 0.95;
 }
 
 .button:focus {
     background-color: var(--bg-accent-dark);
+    scale: 0.95;
+
 }
 
 .button:active {
