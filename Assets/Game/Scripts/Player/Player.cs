@@ -31,7 +31,8 @@ public class Player : DynamicDamageTaker
 
         cc.enabled = false;
 
-        yield return new WaitForSeconds(0.3f);
+        yield return null;
+        yield return null;
 
         transform.position = dest;
         cc.enabled = true;
