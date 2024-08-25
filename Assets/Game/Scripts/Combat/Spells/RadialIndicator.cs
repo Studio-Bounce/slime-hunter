@@ -98,7 +98,7 @@ public class RadialIndicator : SpellIndicator
         sourceRenderer.enabled = (castRange > 0) ? true : false;
         targetRenderer.enabled = true;
         InitializeScaleMaterial();
-        GameManager.Instance.ApplyTempTimeScale(0.3f, 2.0f);
+        GameManager.Instance.ApplyTempTimeScale(0.15f, 2.0f);
         CameraManager.Instance.SetSaturation(-20);
         CameraManager.Instance.SetChromatic(0.5f);
 
