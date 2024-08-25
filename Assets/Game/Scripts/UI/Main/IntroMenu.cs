@@ -15,7 +15,8 @@ public class IntroMenu : Menu
     {
         intro1 = root.Q<Label>("Intro1");
         intro2 = root.Q<Label>("Intro2");
-        
+        intro1.AddToClassList("hidden");
+        intro2.AddToClassList("hidden");
         inputAction = InputManager.Instance.StringToAction("Select");
     }
 
