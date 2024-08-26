@@ -138,12 +138,12 @@ public class HUDMenu : Menu
         UpdateCompass();
     }
 
-    public void HighlightCompass()
+    public void HighlightCompass(bool showTrail = true)
     {
-        HighlightHUDElement(compassContainer);
+        HighlightHUDElement(compassContainer, showTrail);
     }
 
-    private void HighlightHUDElement(VisualElement ve)
+    private void HighlightHUDElement(VisualElement ve, bool showTrail = true)
     {
         if (highlightEffect == null) return;
 
@@ -157,6 +157,7 @@ public class HUDMenu : Menu
         target.z = 1;
 
         // Play effect
+        highlightEffect.SetBool("showTrail", showTrail);
         highlightEffect.SetVector3("endPos", target);
         highlightEffect.Play();
     }
@@ -266,7 +267,7 @@ public class HUDMenu : Menu
         while (lstItem.lifetime > 0)
         {
             lstItem = itemListMap[itemSO];
-            lstItem.lifetime = lstItem.lifetime - Time.unscaledDeltaTime * GameManager.Instance.PlayerSpeedMultiplier;
+            lstItem.lifetime = lstItem.lifetime - Time.unscaledDeltaTime;
             itemListMap[itemSO] = lstItem;
             yield return null;
         }

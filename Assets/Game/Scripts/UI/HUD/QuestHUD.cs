@@ -237,21 +237,23 @@ public class QuestHUD : Menu
         }
         canvas.style.opacity = 0f;
 
+        HUDMenu hudMenu = UIManager.Instance.HUDMenu as HUDMenu;
         // Hide the relevant visual element
         switch (notifType)
         {
             case QuestNotifType.ADD:
                 questStartVE.AddToClassList(panelHideStyle);
+                hudMenu.HighlightCompass(true);
                 break;
             case QuestNotifType.UPDATE:
                 questUpdatedVE.AddToClassList(panelHideStyle);
+                hudMenu.HighlightCompass(false);
                 break;
             case QuestNotifType.COMPLETE:
                 questCompletedVE.AddToClassList(panelHideStyle);
+                hudMenu.HighlightCompass(false);
                 break;
         }
-
-        (UIManager.Instance.HUDMenu as HUDMenu).HighlightCompass();
     }
 
     void OnDestroy()
