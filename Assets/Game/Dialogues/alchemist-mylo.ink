@@ -29,6 +29,8 @@
 === saved ===
 
 0: "Nord Forest is dangerous, I hope you're not in over your head here... Then again, I can't say much with you saving me and all.
+* [Continue]
+
 --> end
 
 === end ===
