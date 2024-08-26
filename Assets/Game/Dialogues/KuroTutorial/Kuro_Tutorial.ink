@@ -8,7 +8,7 @@
 
 === b ===
 
-1: "That's because Master Kuro is always at the Capital City"
+1: "I wonder if Master Kuro has become too accustomed to the Capital City?"
 * [Continue]
     -> c
 

@@ -1,7 +1,7 @@
 -> blacksmith_greetings
 
 === blacksmith_greetings ===
-0: "Ah, Mylo! Good to see you. How have you been since our last encounter?"
+0: "Ah, Mylo! Good to see you've made it back."
 * [Continue]
 0: "What brings you here today? Looking for something special, perhaps?"
 -> next
@@ -27,7 +27,7 @@
   
 === blacksmith ===
 
-0: "Classic Kuro, leaving his disciple to fend for themselves. Kuro just left for the Nord Forest. But beware—the dock is swarmed with Gel. You might need the Alchemist's help to clear a path."
+0: "Classic Kuro, leaving his disciple to fend for themselves. Kuro just left for the Nord Forest. But beware—the dock is swarmed with slime gel. You might need the Alchemist's help to clear a path."
 * [Continue]
 -> blacksmith2
 

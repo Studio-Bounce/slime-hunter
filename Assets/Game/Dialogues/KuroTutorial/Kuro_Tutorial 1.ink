@@ -20,6 +20,6 @@
 
 === d ===
 
-0: "I also spotted an old chest by the shoreline. Always remember to check your corners. I'll meet you up ahead"
+0: "I also spotted an old chest by the shoreline. Always remember to check your corners. I'll meet you up ahead."
     
 -> DONE
