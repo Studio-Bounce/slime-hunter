@@ -259,18 +259,21 @@ public class GameManager : Singleton<GameManager>
         {
             yield return new WaitForEndOfFrame();
         }
+        PlayerSpeedMultiplier = 1.0f;
         Time.timeScale = 1;
     }
 
     public void TimeFreeze()
     {
         StopAllCoroutines();
+        PlayerSpeedMultiplier = 1.0f;
         Time.timeScale = 0;
     }
 
     public void TimeNormal()
     {
         StopAllCoroutines();
+        PlayerSpeedMultiplier = 1.0f;
         Time.timeScale = 1;
     }
 

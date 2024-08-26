@@ -125,6 +125,12 @@ public class HUDMenu : Menu
         comboCountLabel = attackComboVE.Q<Label>("ComboLabel");
         isComboHUDUp = false;
         attackComboVE.style.opacity = 0;
+
+        // TODO: Hardcode effect onto main camera
+        CameraManager.Instance.MainCameraChanged += (Camera c) =>
+        {
+            highlightEffect = c.GetComponent<VisualEffect>();
+        };
     }
 
     private void FixedUpdate()
@@ -139,6 +145,8 @@ public class HUDMenu : Menu
 
     private void HighlightHUDElement(VisualElement ve)
     {
+        if (highlightEffect == null) return;
+
         // Get the center of element and UI size
         Vector2 pos = ve.worldBound.center;
         Vector2 parentSize = root.contentRect.size;

@@ -18,6 +18,8 @@ public class CameraManager : Singleton<CameraManager>
 
     private static Volume _globalVolume;
 
+    public event Action<Camera> MainCameraChanged;
+
     // Look for a global volume in the scene if isn't already set
     public static Volume GlobalVolume
     {
@@ -96,6 +98,8 @@ public class CameraManager : Singleton<CameraManager>
         {
             _activeVCamera = cam.GetComponent<CinemachineBrain>()?.ActiveVirtualCamera as CinemachineVirtualCamera;
         }
+
+        MainCameraChanged.Invoke(_activeCamera);
     }
     
     public void ChangeVirtualCamera(CinemachineVirtualCamera vCam)
