@@ -1,16 +1,15 @@
-using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEngine.Rendering.DebugUI;
+using UnityEngine.VFX;
 
 public class HUDMenu : Menu
 {
     [Header("Damage Alert")]
     [Range(1, 100)][SerializeField] int maxAlert = 50;
     [SerializeField] float damageAlertTime = 1.0f;
+    public VisualEffect highlightEffect;
 
     // Player
     VisualElement healthDamageVE;
@@ -131,6 +130,27 @@ public class HUDMenu : Menu
     private void FixedUpdate()
     {
         UpdateCompass();
+    }
+
+    public void HighlightCompass()
+    {
+        HighlightHUDElement(compassContainer);
+    }
+
+    private void HighlightHUDElement(VisualElement ve)
+    {
+        // Get the center of element and UI size
+        Vector2 pos = ve.worldBound.center;
+        Vector2 parentSize = root.contentRect.size;
+
+        // Calculate the position as a value between 0 and 1
+        Vector3 target = (pos / parentSize);
+        target.y = 1 - target.y;
+        target.z = 1;
+
+        // Play effect
+        highlightEffect.SetVector3("endPos", target);
+        highlightEffect.Play();
     }
 
     // ------------------------------ Health ------------------------------

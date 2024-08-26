@@ -250,6 +250,8 @@ public class QuestHUD : Menu
                 questCompletedVE.AddToClassList(panelHideStyle);
                 break;
         }
+
+        (UIManager.Instance.HUDMenu as HUDMenu).HighlightCompass();
     }
 
     void OnDestroy()
