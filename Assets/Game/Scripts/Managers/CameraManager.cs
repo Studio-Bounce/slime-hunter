@@ -18,7 +18,7 @@ public class CameraManager : Singleton<CameraManager>
 
     private static Volume _globalVolume;
 
-    public event Action<Camera> MainCameraChanged;
+    public event Action<Camera> MainCameraChanged = delegate { };
 
     // Look for a global volume in the scene if isn't already set
     public static Volume GlobalVolume
