@@ -1,5 +1,7 @@
 # Slime Hunter
 
+![](https://img.itch.zone/aW1nLzE3NTExMTE2LnBuZw==/original/MIHxmP.png)
+
 ## Getting Started
 
 ### Installation
